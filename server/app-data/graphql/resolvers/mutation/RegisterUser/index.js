@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs');
 
-const User = require('../../../db/models/User');
-const modError = require('../utils/error');
+const User = require('../../../../db/models/User');
+const modError = require('../../utils/error');
 
 const registerUser = async (root, { userRegInput }, ctx) => {
   try {

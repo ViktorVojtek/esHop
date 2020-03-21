@@ -2,6 +2,7 @@ const { gql } = require('apollo-server-express');
 
 const rootTypeDefs = gql`
   type Query {
+    categories: [Category]
     users: [User]
   }
 

@@ -1,9 +1,9 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-const { superSecret } = require('../../../config');
-const User = require('../../../db/models/User');
-const modError = require('../utils/error');
+const { superSecret } = require('../../../../config');
+const User = require('../../../../db/models/User');
+const modError = require('../../utils/error');
 
 const loginUser = async (root, { userLoginInput }, ctx) => {
   try {

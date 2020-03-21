@@ -1,8 +1,12 @@
-const Category = require('../../../db/models/Category');
-const modError = require('../utils/error');
+const { superSecret } = require('../../../../config');
+const Category = require('../../../../db/models/Category');
+const modError = require('../../utils/error');
+const { verifyToken } = require('../../utils');
 
 const createCategory = async (root, { title }, ctx) => {
   try {
+    await verifyToken(ctx, superSecret);
+
     const categoryExist = await Category.findOne({ title });
 
     if (categoryExist) {

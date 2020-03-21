@@ -1,17 +1,16 @@
-const createCategory = require('./CreateCategory');
-const loginUser = require('./LoginUser');
-const registerUser = require('./RegisterUser');
-const updateCategory = require('./UpdateCategory');
+// queries
+const categories = require('./query/Categories');
+const users = require('./query/Users');
+// mutations
+const createCategory = require('./mutation/CreateCategory');
+const loginUser = require('./mutation/LoginUser');
+const registerUser = require('./mutation/RegisterUser');
+const updateCategory = require('./mutation/UpdateCategory');
 
 const resolvers = {
   Query: {
-    users: async () => {
-      try {
-        return await User.find() || [];
-      } catch (err) {
-        throw new Error(err);
-      }
-    },
+    categories: async () => categories(),
+    users: async () => users(),
   },
   Mutation: {
     createCategory: async (root, { title }, ctx) => createCategory(root, { title }, ctx),

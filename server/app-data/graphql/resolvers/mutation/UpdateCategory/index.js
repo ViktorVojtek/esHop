@@ -1,9 +1,12 @@
 const mongoose = require('mongoose');
-const Category = require('../../../db/models/Category');
-const modError = require('../utils/error');
+const Category = require('../../../../db/models/Category');
+const modError = require('../../utils/error');
+const { verifyToken } = require('../../utils');
 
 const updateCategory = async (root, { _id, title }, ctx) => {
   try {
+    await verifyToken(ctx, superSecret);
+
     const categoryExist = await Category.findOne({ _id: mongoose.Types.ObjectId(_id) });
 
     if (!categoryExist) {
