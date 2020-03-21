@@ -35,7 +35,6 @@ const App = async () => {
       context: async ({ req }) => {
         if (req) {
           const token = req.headers['x-access-token'];
-          console.log(token);
 
           return { token };
         }

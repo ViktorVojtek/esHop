@@ -6,8 +6,10 @@ const rootTypeDefs = gql`
   }
 
   type Mutation {
+    createCategory(title: String!): Category
     loginUser(userLoginInput: UserLoginInput!): UserLogged
     registerUser(userRegInput: UserRegInput!): User
+    updateCategory(_id: String!, title: String!): Category
   }
 
   schema {
