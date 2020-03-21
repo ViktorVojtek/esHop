@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  displey: flex;
+  display: flex;
   width: 100vw;
   height: 100vh;
   align-items: center;
@@ -15,4 +15,8 @@ export const Form = styled.form`
 
 export const Input = styled.input`
   width: 100%;
+  border-radius: .25rem;
+  border: 1px solid #ececec;
+  padding: .5rem .25rem;
+  margin-bottom: .5rem;
 `;

@@ -12,3 +12,16 @@ export const LOGIN_USER_MUTATION = gql`
     }
   }
 `;
+
+export const REGISTER_USER_MUTATION = gql`
+  mutation registerUser($userRegInput: UserRegInput!) {
+    registerUser(userRegInput: $userRegInput) {
+      _id
+      admin
+      email
+      firstName
+      lastName
+      role
+    }
+  }
+`;

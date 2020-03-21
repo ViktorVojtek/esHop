@@ -11,6 +11,8 @@ const Product = mongoose.Schema({
   dateModified: Date,
   description: String,
   deleted: Boolean,
+  discount: Number,
+  inStock: Number,
   modifiedByUserId: String,
   shortDescription: String,
   subCategory: String

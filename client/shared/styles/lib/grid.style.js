@@ -1,44 +1,40 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  @media (max-width: 576px){
-    padding-left: ${({ fluid }) => (fluid ? '0' : '1.5rem')};
-    padding-right: ${({ fluid }) => (fluid ? '0' : '1.5rem')};
-  }
   @media only screen and (min-width: 36em) {  /* 576px */
     margin-left: ${({ fluid }) => (fluid ? '-15px' : 'auto')};
     margin-right: ${({ fluid }) => (fluid ? '-15px' : 'auto')};
     padding-left: 15px;
     padding-right: 15px;
-    width: ${({ fluid }) => (fluid ? '100%' : '460px')};
+    width: ${({ fluid }) => (fluid ? 'auto' : '460px')};
   }
   @media only screen and (min-width: 48em) {  /* 768px */
     margin-left: ${({ fluid }) => (fluid ? '-15px' : 'auto')};
     margin-right: ${({ fluid }) => (fluid ? '-15px' : 'auto')};
     padding-left: 15px;
     padding-right: 15px;
-    width: ${({ fluid }) => (fluid ? '100%' : '650px')};
+    width: ${({ fluid }) => (fluid ? 'auto' : '650px')};
   }
   @media only screen and (min-width: 62em) { /* 992px */
-    margin-left: ${({ fluid }) => (fluid ? '0px' : 'auto')};
-    margin-right: ${({ fluid }) => (fluid ? '0px' : 'auto')};
+    margin-left: ${({ fluid }) => (fluid ? '-15px' : 'auto')};
+    margin-right: ${({ fluid }) => (fluid ? '-15px' : 'auto')};
     padding-left: 15px;
     padding-right: 15px;
-    width: ${({ fluid }) => (fluid ? '100%' : '770px')};
+    width: ${({ fluid }) => (fluid ? 'auto' : '770px')};
   }
   @media only screen and (min-width: 75em) { /* 1200px */
-    margin-left: ${({ fluid }) => (fluid ? '0px' : 'auto')};
-    margin-right: ${({ fluid }) => (fluid ? '0px' : 'auto')};
-    padding-left: ${({ fluid }) => (fluid ? '0px' : '15px')};
-    padding-right: 0px;
-    width: ${({ fluid }) => (fluid ? '100%' : '980px')};
+    margin-left: ${({ fluid }) => (fluid ? '-15px' : 'auto')};
+    margin-right: ${({ fluid }) => (fluid ? '-15px' : 'auto')};
+    padding-left: 15px;
+    padding-right: 15px;
+    width: ${({ fluid }) => (fluid ? 'auto' : '980px')};
   }
   @media only screen and (min-width: 90em) { /* 1440px */
-    margin-left: ${({ fluid }) => (fluid ? '0px' : 'auto')};
-    margin-right: ${({ fluid }) => (fluid ? '0px' : 'auto')};
-    padding-left: ${({ fluid }) => (fluid ? '0px' : '15px')};
-    padding-right: 0px;
-    width: ${({ fluid }) => (fluid ? '100%' : '1200px')};
+    margin-left: ${({ fluid }) => (fluid ? '-15px' : 'auto')};
+    margin-right: ${({ fluid }) => (fluid ? '-15px' : 'auto')};
+    padding-left: 15px;
+    padding-right: 15px;
+    width: ${({ fluid }) => (fluid ? 'auto' : '1200px')};
   }
 `;
 

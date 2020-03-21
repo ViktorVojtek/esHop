@@ -1,10 +1,12 @@
 import React from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { LOGIN_USER_MUTATION } from '../../../client/app-data/graphql/mutation';
+
 import Layout from '../../../client/shared/components/Layout';
 
 import { Row, Col } from '../../../client/shared/styles/global.style';
-import { Wrapper, Form, Input } from './styles';
+import { Wrapper, Form, Input } from '../../../client/shared/styles/components/Auth';
+import Button from '../../../client/shared/styles/components/Button';
 
 import { login } from '../../../client/app-data/lib/auth';
 
@@ -38,12 +40,14 @@ const LogIn = () => {
       <Wrapper>
         <Form onSubmit={handleSubmitLogin}>
           <Row>
+            <label htmlFor="email">Email</label>
             <Input id="email" name="email" type="email" />
           </Row>
           <Row>
+            <label htmlFor="password">Password</label>
             <Input id="password" name="password" type="password" />
           </Row>
-          <button type="submit">Send</button>
+          <Button type="submit">Send</Button>
         </Form>
       </Wrapper>
     </Layout>
