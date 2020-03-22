@@ -17,6 +17,7 @@ const removeCurrency = require('./mutation/RemoveCurrency');
 
 const createProduct = require('./mutation/CreateProduct');
 const updateProduct = require('./mutation/UpdateCategory');
+const removeProduct = require('./mutation/RemoveCategory');
 
 const resolvers = {
   Query: {
@@ -38,6 +39,7 @@ const resolvers = {
 
     loginUser: async (root, { userLoginInput }, ctx) => loginUser(root, { userLoginInput }, ctx),
     registerUser: async (root, { userRegInput }, ctx) => registerUser(root, { userRegInput }, ctx),
+    removeProduct: async (root, { _id }, ctx) => removeProduct(root, { _id }, ctx),
   },
 };
 
