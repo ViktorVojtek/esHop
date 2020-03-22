@@ -1,9 +1,12 @@
-import { useEffect } from 'react';
+/* eslint-disable react/jsx-props-no-spreading */
+import React, { useEffect } from 'react';
 import Router from 'next/router';
 import nextCookie from 'next-cookies';
 import cookie from 'js-cookie';
 
-export const login = ({ _id, firstName, lastName, token }) => {
+export const login = ({
+  _id, firstName, lastName, token,
+}) => {
   cookie.set('token', token, { expires: 0.33 }); // 1 stands for a day (24h), 0.33 stands aprox. for 8h
   cookie.set('userId', _id);
   cookie.set('firstName', firstName);
@@ -29,7 +32,7 @@ export const auth = (ctx) => {
 };
 
 export const logout = () => {
-  cookie.remove('token')
+  cookie.remove('token');
   cookie.remove('userId');
   cookie.remove('firstName');
   cookie.remove('lastName');
@@ -42,7 +45,6 @@ export const withAuthSync = (WrappedComponent) => {
   const Wrapper = (props) => {
     const syncLogout = (event) => {
       if (event.key === 'logout') {
-        console.log('logged out from storage!');
         Router.push('/auth/login');
       }
     };
@@ -53,7 +55,7 @@ export const withAuthSync = (WrappedComponent) => {
       return () => {
         window.removeEventListener('storage', syncLogout);
         window.localStorage.removeItem('logout');
-      }
+      };
     }, []);
 
     return <WrappedComponent {...props} />;
@@ -62,9 +64,8 @@ export const withAuthSync = (WrappedComponent) => {
   Wrapper.getInitialProps = async (ctx) => {
     const token = auth(ctx);
 
-    const componentProps =
-      WrappedComponent.getInitialProps &&
-      (await WrappedComponent.getInitialProps(ctx));
+    const componentProps = WrappedComponent.getInitialProps
+      && (await WrappedComponent.getInitialProps(ctx));
 
     return { ...componentProps, token };
   };
