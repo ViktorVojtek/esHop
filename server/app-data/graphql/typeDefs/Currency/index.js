@@ -1,19 +1,30 @@
-const { gql } = required('apollo-server-express');
+const { gql } = require('apollo-server-express');
 
 const Currency = gql`
   input CurrencyInput {
-    default: Boolean
+    defaultCurrency: Boolean!
     modifiedByUserId: String
-    sign: String
+    sign: String!
+    value: Float
+    title: String!
+  }
+
+  input CurrencyUpdateInput {
+    _id: String
+    defaultCurrency: Boolean
+    modifiedByUserId: String
     value: Float
   }
 
   type Currency {
-    default: Boolean
+    _id: String
+    defaultCurrency: Boolean
+    flag: String
     modifiedByUserId: String
     sign: String
     valueSetDate: String
     value: Float
+    title: String
   }
 `;
 

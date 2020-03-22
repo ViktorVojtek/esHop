@@ -1,11 +1,15 @@
 const mongoose = require('mongoose');
 
 const Currency = mongoose.Schema({
-  default: Boolean,
+  defaultCurrency: Boolean,
   modifiedByUserId: String,
   sign: String,
   valueSetDate: Date,
-  value: Number,
+  value: {
+    default: 1,
+    type: Number,
+  },
+  title: String,
 });
 
 module.exports = mongoose.model('Currency', Currency);

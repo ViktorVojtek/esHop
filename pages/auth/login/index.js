@@ -21,7 +21,7 @@ const LogIn = () => {
       const email = form.email.value;
       const password = form.password.value;
 
-      const { data: { loginUser: { token } } } = await loginUserMutate({
+      const { data: { loginUser: { _id, firstName, lastName, token } } } = await loginUserMutate({
         variables: {
           userLoginInput: {
             email, password,
@@ -29,7 +29,7 @@ const LogIn = () => {
         },
       });
 
-      await login({ token });
+      await login({ _id, firstName, lastName, token });
     } catch (err) {
       console.log(err);
     }

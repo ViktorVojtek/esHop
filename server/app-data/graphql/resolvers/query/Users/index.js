@@ -1,8 +1,14 @@
 const User = require('../../../../db/models/User');
+const { superSecret } = require('../../../../config');
+const { verifyToken } = require('../../utils');
 
-const users = async () => {
+const users = async (root, args, ctx) => {
   try {
-    return await User.find() || [];
+    await verifyToken(ctx, superSecret);
+  
+    const result = await User.find() || [];
+
+    return result;
   } catch (err) {
     throw new Error(err);
   }

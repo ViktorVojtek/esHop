@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
 
 const Product = mongoose.Schema({
-  category: Object,
-  currency: String,
+  category: String,
   dateCreated: {
     type: Date,
     default: Date.now,
@@ -10,14 +9,18 @@ const Product = mongoose.Schema({
   dateDeleted: Date,
   dateModified: Date,
   description: String,
-  deleted: Boolean,
+  deleted: {
+    default: false,
+    type: Boolean,
+  },
   discount: Number,
   inStock: Number,
   modifiedByUserId: String,
   shortDescription: String,
-  subCategory: String
+  subCategory: String,
   images: [Object],
   note: String,
+  price: Object,
   title: String,
 });
 
