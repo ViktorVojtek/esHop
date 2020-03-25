@@ -6,11 +6,27 @@ import {
 } from 'reactstrap';
 
 import { SET_CURRENCY_MUTATION } from '../../app-data/graphql/mutation';
+import { CURRENCIES_QUERY } from '../../app-data/graphql/query';
 
 const CurrencySubmitForm = () => {
   const currencyValRef = useRef();
   const [isDefCurrency, setDefCurrency] = useState(false);
-  const [setCurrencyMutation] = useMutation(SET_CURRENCY_MUTATION);
+
+  const [setCurrencyMutation] = useMutation(
+    SET_CURRENCY_MUTATION,
+    {
+      update: (cache, { data: { setCurrency: newCurrency } }) => {
+        const { currencies } = cache.readQuery({ query: CURRENCIES_QUERY });
+
+        cache.writeQuery({
+          query: CURRENCIES_QUERY,
+          data: {
+            currencies: [...currencies, newCurrency],
+          },
+        });
+      },
+    },
+  );
 
   const handleDefCurrency = (event) => {
     const { checked } = event.currentTarget;

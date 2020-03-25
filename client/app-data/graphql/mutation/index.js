@@ -1,5 +1,15 @@
 import gql from 'graphql-tag';
 
+export const CREATE_CATEGORY_MUTATION = gql`
+  mutation createCategory($title: String!) {
+    createCategory(title: $title) {
+      _id
+      signFlag
+      title
+    }
+  }
+`;
+
 export const LOGIN_USER_MUTATION = gql`
   mutation loginUser($userLoginInput: UserLoginInput!) {
     loginUser(userLoginInput: $userLoginInput) {

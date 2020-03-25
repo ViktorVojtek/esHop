@@ -1,6 +1,6 @@
 const { superSecret } = require('../../../../config');
 const Category = require('../../../../db/models/Category');
-const modError = require('../../utils/error');
+const ModError = require('../../utils/error');
 const { verifyToken } = require('../../utils');
 
 const createCategory = async (root, { title }, ctx) => {
@@ -10,12 +10,12 @@ const createCategory = async (root, { title }, ctx) => {
     const categoryExist = await Category.findOne({ title });
 
     if (categoryExist) {
-      throw new modError(403, 'Category allready exist');
+      throw new ModError(403, 'Category allready exist');
     }
 
     const categoryData = {
       title,
-      sign: title.toUpperCase().replace(/ /g, '_'),
+      signFlag: title.toUpperCase().replace(/ /g, '_'),
     };
 
     const newCategory = new Category(categoryData);

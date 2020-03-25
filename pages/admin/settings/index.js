@@ -5,8 +5,11 @@ import { Col, Row } from 'reactstrap';
 import Layout from '../../../client/shared/components/Layout';
 import NavHeader from '../../../client/shared/components/NavHeader';
 import LhsNav from '../../../client/shared/components/LhsNav';
+
 import CurrencySubmitForm from '../../../client/components/CurrencySubmitForm';
 import Currencies from '../../../client/components/Currencies';
+import CagegorySubmitForm from '../../../client/components/CategorySubmitForm';
+import Categories from '../../../client/components/Categories';
 
 import { withAuthSync } from '../../../client/app-data/lib/auth';
 import { WrapperFlex } from '../../../client/shared/styles/global.style';
@@ -29,6 +32,14 @@ const SettingsPage = () => (
           </Col>
           <Col>
             <Currencies />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <CagegorySubmitForm />
+          </Col>
+          <Col>
+            <Categories />
           </Col>
         </Row>
       </div>

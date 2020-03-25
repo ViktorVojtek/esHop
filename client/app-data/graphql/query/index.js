@@ -1,7 +1,17 @@
 import gql from 'graphql-tag';
 
-const CURRENCIES_QUERY = gql`
-  query {
+export const CATEGORIES_QUERY = gql`
+  query categories {
+    categories {
+      _id
+      signFlag
+      title
+    }
+  }
+`;
+
+export const CURRENCIES_QUERY = gql`
+  query currencies {
     currencies {
       _id
       defaultCurrency
@@ -12,5 +22,3 @@ const CURRENCIES_QUERY = gql`
     }
   }
 `;
-
-export default CURRENCIES_QUERY;

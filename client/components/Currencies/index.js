@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { Table } from 'reactstrap';
-import CURRENCIES_QUERY from '../../app-data/graphql/query';
+import { CURRENCIES_QUERY } from '../../app-data/graphql/query';
 
 const Currencies = () => {
   const { error, loading, data } = useQuery(CURRENCIES_QUERY);
@@ -40,7 +40,7 @@ const Currencies = () => {
                   <td>{defaultCurrency === true ? 'true' : 'false'}</td>
                 </tr>
               ))
-            ) : <p>No currencies has been set yet.</p>
+            ) : <tr><td colSpan={5}>No currencies has been set yet.</td></tr>
         }
       </tbody>
     </Table>
