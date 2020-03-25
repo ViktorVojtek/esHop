@@ -31,4 +31,16 @@ export const Nav = styled.ul`
 
 export const NavItem = styled.li`
   color: #FBFCFC;
+  font-size: ${({ heading }) => (heading ? '1.1rem' : '.95rem')};
+  margin-bottom: ${({ heading }) => (heading ? '.5rem' : '.25rem')};
+`;
+
+export const A = styled.a`
+  color: #FBFCFC;
+  cursor: pointer;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;

@@ -8,7 +8,7 @@ const verifyToken = (ctx, secret) => (
   new Promise((resolve, reject) => {
     const { token } = ctx;
 
-    jwt.verify(token, secret, (err, decoded) => {
+    jwt.verify(token, secret, { algorithms: ['HS256'] }, (err, decoded) => {
       if (err) {
         reject(err);
       }
@@ -21,6 +21,7 @@ const verifyToken = (ctx, secret) => (
         const tokenExpired = new Error('Token has expired');
 
         tokenExpired.code = 401;
+
         reject(tokenExpired);
       }
 
@@ -53,7 +54,7 @@ const removeFile = (filePath) => (
   })
 );
 
-const storeFile = (fileData, modelTexture) => (
+const storeFile = (fileData) => (
   new Promise((resolve, reject) => {
     const {
       fileName,

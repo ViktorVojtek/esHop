@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const WrapperFlex = styled.div`
+const WrapperFlex = styled.div`
   display: flex;
   justify-content: flex-start;
 
@@ -12,3 +12,5 @@ export const WrapperFlex = styled.div`
     }
   }
 `;
+
+export default WrapperFlex;

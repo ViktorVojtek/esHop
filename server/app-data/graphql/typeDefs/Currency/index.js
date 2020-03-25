@@ -17,7 +17,7 @@ const Currency = gql`
   }
 
   type Currency {
-    _id: String
+    _id: String!
     defaultCurrency: Boolean
     flag: String
     modifiedByUserId: String

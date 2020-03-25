@@ -36,6 +36,7 @@ export const logout = () => {
   cookie.remove('userId');
   cookie.remove('firstName');
   cookie.remove('lastName');
+  cookie.remove('userEmail');
   // to support logging out from all windows
   window.localStorage.setItem('logout', Date.now());
   Router.push('/auth/login');

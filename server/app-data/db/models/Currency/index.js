@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const Currency = mongoose.Schema({
   defaultCurrency: Boolean,
+  flag: String,
   modifiedByUserId: String,
   sign: String,
   valueSetDate: Date,

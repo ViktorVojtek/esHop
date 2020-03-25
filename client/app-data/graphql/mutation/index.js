@@ -25,3 +25,17 @@ export const REGISTER_USER_MUTATION = gql`
     }
   }
 `;
+
+export const SET_CURRENCY_MUTATION = gql`
+  mutation setCurrency($currencyInput: CurrencyInput!) {
+    setCurrency(currencyInput: $currencyInput) {
+      _id
+      defaultCurrency
+      flag
+      sign
+      valueSetDate
+      value
+      title
+    }
+  }
+`;

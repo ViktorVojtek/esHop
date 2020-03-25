@@ -1,10 +1,11 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { LOGIN_USER_MUTATION } from '../../../client/app-data/graphql/mutation';
 
 import Layout from '../../../client/shared/components/Layout';
 
-import { Row, Col } from '../../../client/shared/styles/global.style';
+import { Row } from '../../../client/shared/styles/global.style';
 import { Wrapper, Form, Input } from '../../../client/shared/styles/components/Auth';
 import Button from '../../../client/shared/styles/components/Button';
 
@@ -16,12 +17,18 @@ const LogIn = () => {
   const handleSubmitLogin = async (event) => {
     try {
       event.preventDefault();
-      
+
       const form = event.currentTarget;
       const email = form.email.value;
       const password = form.password.value;
 
-      const { data: { loginUser: { _id, firstName, lastName, token } } } = await loginUserMutate({
+      const {
+        data: {
+          loginUser: {
+            _id, firstName, lastName, token,
+          },
+        },
+      } = await loginUserMutate({
         variables: {
           userLoginInput: {
             email, password,
@@ -29,7 +36,9 @@ const LogIn = () => {
         },
       });
 
-      await login({ _id, firstName, lastName, token });
+      await login({
+        _id, firstName, lastName, token,
+      });
     } catch (err) {
       console.log(err);
     }
