@@ -4,6 +4,7 @@ const rootTypeDefs = gql`
   type Query {
     categories: [Category]
     currencies: [Currency]
+    subCategories: [SubCategory]
     users: [User]
   }
 
@@ -22,6 +23,8 @@ const rootTypeDefs = gql`
     createProduct(productInput: ProductInput!): Product
     updateProduct(_id: String!, productInput: ProductInput!): Product
     removeProduct(_id: String!): String
+
+    createSubCategory(title: String!): SubCategory
   }
 
   schema {

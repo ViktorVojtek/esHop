@@ -1,25 +1,24 @@
+/* eslint-disable no-underscore-dangle */
 const mongoose = require('mongoose');
 const Product = require('../../../../db/models/Product');
 const { superSecret } = require('../../../../config');
 const { verifyToken, storeFile } = require('../../utils');
-const modError = require('../../utils/error');
+const ModError = require('../../utils/error');
 
 const updateProduct = async (root, { _id, productInput }, ctx) => {
   try {
     await verifyToken(ctx, superSecret);
 
-    const { title } = productInput;
-
     const productExist = await Product.findOne({ _id: mongoose.Types.ObjectId(_id) });
 
     if (!productExist) {
-      throw new modError(404, 'Product not exist.');
+      throw new ModError(404, 'Product not exist.');
     }
 
     const {
       images,
       ...prodRawDataWithOutImgs
-    } = productInput; 
+    } = productInput;
 
     const productData = new Product(prodRawDataWithOutImgs);
 
@@ -27,9 +26,9 @@ const updateProduct = async (root, { _id, productInput }, ctx) => {
     const imagesDataArr = [];
     let resultImagesDataArr = [];
     const updateImagesArr = [];
-    const existingImagesArr = []
+    const existingImagesArr = [];
     let imagePaths = [];
-    
+
     if (images && images.length > 0) {
       while (i < images.length) {
         if (images[i].base64) {
@@ -70,7 +69,7 @@ const updateProduct = async (root, { _id, productInput }, ctx) => {
 
         j += 1;
       }
-     
+
       resultImagesDataArr = updateImagesArr.concat(existingImagesArr);
     }
 

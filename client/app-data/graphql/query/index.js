@@ -22,3 +22,13 @@ export const CURRENCIES_QUERY = gql`
     }
   }
 `;
+
+export const SUBCATEGORIES_QUERY = gql`
+  query subCategories {
+    subCategories {
+      _id
+      signFlag
+      title
+    }
+  }
+`;

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const SubCategory = mongoose.Schema({
-  sign: String,
+  signFlag: String,
   title: String,
 });
 
