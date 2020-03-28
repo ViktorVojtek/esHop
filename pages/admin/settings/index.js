@@ -11,6 +11,9 @@ import Currencies from '../../../client/components/Currencies';
 import CagegorySubmitForm from '../../../client/components/CategorySubmitForm';
 import Categories from '../../../client/components/Categories';
 
+import SubCategorySubmitForm from '../../../client/components/SubCategorySubmitForm';
+import SubCategories from '../../../client/components/SubCategories';
+
 import { withAuthSync } from '../../../client/app-data/lib/auth';
 import { WrapperFlex } from '../../../client/shared/styles/global.style';
 
@@ -40,6 +43,14 @@ const SettingsPage = () => (
           </Col>
           <Col>
             <Categories />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <SubCategorySubmitForm />
+          </Col>
+          <Col>
+            <SubCategories />
           </Col>
         </Row>
       </div>
