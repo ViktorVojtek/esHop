@@ -9,6 +9,7 @@ const cors = require('cors');
 const typeDefs = require('./app-data/graphql/typeDefs');
 const resolvers = require('./app-data/graphql/resolvers');
 const db = require('./app-data/db');
+
 const dev = process.env.NODE_ENV !== 'production';
 const nextApp = nextjsApp({ dev });
 const handle = nextApp.getRequestHandler();
@@ -32,15 +33,7 @@ const App = async () => {
     );
 
     const server = new ApolloServer({
-      context: async ({ req }) => {
-        if (req) {
-          const token = req.headers['x-access-token'];
-
-          return { token };
-        }
-
-        return null;
-      },
+      context: async ({ req }) => ({ token: req.headers['x-access-token'] }),
       typeDefs,
       resolvers,
       introspection: true,

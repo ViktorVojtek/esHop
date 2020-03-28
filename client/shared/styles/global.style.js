@@ -11,7 +11,8 @@ export const WrapperFlex = styled.div`
     margin-right: .5rem;
 
     &:last-child {
-      margin-right: 0;
+      margin-right: .5rem;
+      width: 100%;
     }
   }
 `;
