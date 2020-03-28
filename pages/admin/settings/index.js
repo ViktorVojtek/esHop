@@ -15,47 +15,52 @@ import SubCategorySubmitForm from '../../../client/components/SubCategorySubmitF
 import SubCategories from '../../../client/components/SubCategories';
 
 import { withAuthSync } from '../../../client/app-data/lib/auth';
-import { WrapperFlex } from '../../../client/shared/styles/global.style';
 
 const SettingsPage = () => (
-  <Layout>
+  <>
     <Head>
       <title>esHop App | Settings</title>
       <link rel="icon" href="/favicon.ico" />
     </Head>
+    {' '}
     <NavHeader />
-    <WrapperFlex>
-      <LhsNav />
-      <div>
-        <h3>e-Commerce settings</h3>
-        {' '}
-        <Row>
-          <Col>
-            <CurrencySubmitForm />
-          </Col>
-          <Col>
-            <Currencies />
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <CagegorySubmitForm />
-          </Col>
-          <Col>
-            <Categories />
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <SubCategorySubmitForm />
-          </Col>
-          <Col>
-            <SubCategories />
-          </Col>
-        </Row>
-      </div>
-    </WrapperFlex>
-  </Layout>
+    {' '}
+    <Layout>
+      <Row>
+        <Col xs="6" sm="3">
+          <LhsNav />
+        </Col>
+        <Col xm="6" sm="9">
+          <h3>e-Commerce settings</h3>
+          {' '}
+          <Row>
+            <Col>
+              <CurrencySubmitForm />
+            </Col>
+            <Col>
+              <Currencies />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <CagegorySubmitForm />
+            </Col>
+            <Col>
+              <Categories />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <SubCategorySubmitForm />
+            </Col>
+            <Col>
+              <SubCategories />
+            </Col>
+          </Row>
+        </Col>
+      </Row>
+    </Layout>
+  </>
 );
 
 export default withAuthSync(SettingsPage);

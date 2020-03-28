@@ -1,11 +1,11 @@
 import React from 'react';
+import { Container } from 'reactstrap';
 import PropTypes from 'prop-types';
 
-import Styles, { Container /* , Reset */ } from '../../styles/global.style';
+import Styles from '../../styles/global.style';
 
 const Layout = ({ children }) => (
   <>
-    {/* <Reset /> */}
     <Styles />
     {/* */}
     <Container fluid>

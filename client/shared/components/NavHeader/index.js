@@ -1,16 +1,31 @@
-import React from 'react';
-import { logout } from '../../../../client/app-data/lib/auth';
-import { Nav, NavItem, NavWrapper } from './styles';
+import React, { useState } from 'react';
+import {
+  Button,
+  Collapse,
+  Navbar,
+  NavbarBrand,
+  Nav,
+  NavItem,
+} from 'reactstrap';
+import { logout } from '../../../app-data/lib/auth';
 
-const NavHeader = () => (
-  <NavWrapper>
-    <Nav>
-      <NavItem>esHop</NavItem>
-      <NavItem>
-        <button type="button" onClick={() => logout()}>Log Out</button>
-      </NavItem>
-    </Nav>
-  </NavWrapper>
-);
+const NavHeader = () => {
+  const [isOpen, toggle] = useState(false);
+
+  const handleToggle = () => toggle(!isOpen);
+
+  return (
+    <Navbar className="position-sticky" expand="md">
+      <NavbarBrand href="/">es&times;Hop</NavbarBrand>
+      <Collapse isOpen={isOpen} navbar>
+        <Nav className="ml-auto" navbar>
+          <NavItem>
+            <Button onClick={() => logout()}>Log Out</Button>
+          </NavItem>
+        </Nav>
+      </Collapse>
+    </Navbar>
+  );
+};
 
 export default NavHeader;
