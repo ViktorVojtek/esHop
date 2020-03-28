@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Category = require('../../../../db/models/Category');
 const { superSecret } = require('../../../../config');
 const { verifyToken } = require('../../utils');
-const modError = require('../../utils/error');
+const ModError = require('../../utils/error');
 
 const removeCategory = async (root, { _id }, ctx) => {
   try {
@@ -11,7 +11,7 @@ const removeCategory = async (root, { _id }, ctx) => {
     const categoryExist = await Category.findOne({ _id: mongoose.Types.ObjectId(_id) });
 
     if (!categoryExist) {
-      throw new modError(404, 'Category not exist');
+      throw new ModError(404, 'Category not exist');
     }
 
     await Category.remove({ _id: mongoose.Types.ObjectId(_id) });

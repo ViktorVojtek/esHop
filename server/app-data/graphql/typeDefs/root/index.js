@@ -25,6 +25,7 @@ const rootTypeDefs = gql`
     removeProduct(_id: String!): String
 
     createSubCategory(title: String!): SubCategory
+    removeSubCategory(_id: String!): String
   }
 
   schema {

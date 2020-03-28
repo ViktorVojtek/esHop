@@ -59,3 +59,21 @@ export const SET_CURRENCY_MUTATION = gql`
     }
   }
 `;
+
+export const REMOVE_CATEGORY_MUTATION = gql`
+  mutation removeCategory($_id: String!) {
+    removeCategory(_id: $_id)
+  }
+`;
+
+export const REMOVE_CURRENCY_MUTATION = gql`
+  mutation removeCurrency($_id: String!) {
+    removeCurrency(_id: $_id)
+  }
+`;
+
+export const REMOVE_SUBCATEGORY_MUTATION = gql`
+  mutation removeSubCategory($_id: String!) {
+    removeSubCategory(_id: $_id)
+  }
+`;

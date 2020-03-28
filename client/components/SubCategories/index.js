@@ -1,10 +1,17 @@
 import React from 'react';
-import { useQuery } from '@apollo/react-hooks';
-import { Table } from 'reactstrap';
+import { useQuery, useMutation } from '@apollo/react-hooks';
+import { Button, Table } from 'reactstrap';
 import { SUBCATEGORIES_QUERY } from '../../app-data/graphql/query';
+import { REMOVE_SUBCATEGORY_MUTATION } from '../../app-data/graphql/mutation';
 
 const SubCategories = () => {
   const { error, loading, data } = useQuery(SUBCATEGORIES_QUERY);
+  const [removeSubcategory] = useMutation(
+    REMOVE_SUBCATEGORY_MUTATION,
+    {
+      refetchQueries: [{ query: SUBCATEGORIES_QUERY }],
+    },
+  );
 
   if (error) {
     return <>{error.message}</>;
@@ -13,6 +20,14 @@ const SubCategories = () => {
     return <>loading</>;
   }
 
+  const handleRemoveItem = async (_id) => {
+    try {
+      await removeSubcategory({ variables: { _id } });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const { subCategories } = data;
 
   return (
@@ -20,7 +35,7 @@ const SubCategories = () => {
       <thead>
         <tr>
           <th>#</th>
-          <th>Subcategory title</th>
+          <th colSpan={2}>Subcategory title</th>
         </tr>
       </thead>
       <tbody>
@@ -31,9 +46,17 @@ const SubCategories = () => {
                 <tr key={_id}>
                   <td>{i + 1}</td>
                   <td>{title}</td>
+                  <td>
+                    <Button
+                      color="danger"
+                      onClick={() => handleRemoveItem(_id)}
+                    >
+                      Remove
+                    </Button>
+                  </td>
                 </tr>
               ))
-            ) : <tr><td colSpan={2}>No subcategories has been set yet.</td></tr>
+            ) : <tr><td colSpan={3}>No subcategories has been set yet.</td></tr>
         }
       </tbody>
     </Table>

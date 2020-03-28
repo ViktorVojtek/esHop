@@ -21,6 +21,7 @@ const updateProduct = require('./mutation/UpdateProduct');
 const removeProduct = require('./mutation/RemoveCategory');
 
 const createSubCategory = require('./mutation/CreateSubCategory');
+const removeSubCategory = require('./mutation/RemoveSubCategory');
 
 const resolvers = {
   Query: {
@@ -42,6 +43,7 @@ const resolvers = {
     updateProduct: async (root, { _id, productInput }, ctx) => updateProduct(root, { _id, productInput }, ctx),
 
     createSubCategory: async (root, { title }, ctx) => createSubCategory(root, { title }, ctx),
+    removeSubCategory: async (root, { _id }, ctx) => removeSubCategory(root, { _id }, ctx),
 
     loginUser: async (root, { userLoginInput }, ctx) => loginUser(root, { userLoginInput }, ctx),
     registerUser: async (root, { userRegInput }, ctx) => registerUser(root, { userRegInput }, ctx),
