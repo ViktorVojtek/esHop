@@ -14,7 +14,7 @@ const removeCategory = async (root, { _id }, ctx) => {
       throw new ModError(404, 'Category not exist');
     }
 
-    await Category.remove({ _id: mongoose.Types.ObjectId(_id) });
+    await Category.deleteOne({ _id: mongoose.Types.ObjectId(_id) });
 
     return `Category with _id: ${_id} has been successfuly removed.`;
   } catch (err) {

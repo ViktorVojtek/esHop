@@ -14,7 +14,7 @@ const removeSubCategory = async (root, { _id }, ctx) => {
       throw new ModError(404, 'Subcategory not exist');
     }
 
-    await SubCategory.remove({ _id: mongoose.Types.ObjectId(_id) });
+    await SubCategory.deleteOne({ _id: mongoose.Types.ObjectId(_id) });
 
     return `Subcategory with _id: ${_id} has been successfuly removed.`;
   } catch (err) {
