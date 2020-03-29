@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import {
   Button, Form, FormGroup, Label, Input,
@@ -7,7 +7,10 @@ import {
 import { CREATE_CATEGORY_MUTATION } from '../../app-data/graphql/mutation';
 import { CATEGORIES_QUERY } from '../../app-data/graphql/query';
 
+import { Context } from '../../app-data/StateManagement/Store';
+
 const CategorySubmitForm = () => {
+  const [state, dispatch] = useContext(Context);
   const [createCategory] = useMutation(
     CREATE_CATEGORY_MUTATION,
     {
@@ -23,6 +26,8 @@ const CategorySubmitForm = () => {
 
     try {
       await createCategory({ variables: { title } });
+
+      dispatch({ type: 'SET_MODAL', payload: true });
     } catch (err) {
       console.log(err);
     }

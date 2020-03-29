@@ -5,6 +5,7 @@ import { Col, Row } from 'reactstrap';
 import Layout from '../../../client/shared/components/Layout';
 import NavHeader from '../../../client/shared/components/NavHeader';
 import LhsNav from '../../../client/shared/components/LhsNav';
+import Modal from '../../../client/shared/components/Modal';
 
 import CurrencySubmitForm from '../../../client/components/CurrencySubmitForm';
 import Currencies from '../../../client/components/Currencies';
@@ -22,6 +23,8 @@ const SettingsPage = () => (
       <title>esHop App | Settings</title>
       <link rel="icon" href="/favicon.ico" />
     </Head>
+    {' '}
+    <Modal />
     {' '}
     <NavHeader />
     {' '}
