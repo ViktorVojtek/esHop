@@ -1,34 +1,30 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import Document, {
-  Head, Main, NextScript,
-} from 'next/document';
+import Document from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 
 export default class MyDocument extends Document {
-  static getInitialProps({ renderPage }) {
+  static async getInitialProps(ctx) {
     const sheet = new ServerStyleSheet();
+    const originalRenderPage = ctx.renderPage;
 
-    const page = renderPage((App) => (props) => (sheet.collectStyles(<App {...props} />)));
-    const styleTags = sheet.getStyleElement();
+    try {
+      ctx.renderPage = () => originalRenderPage({
+        enhanceApp: (App) => (props) => sheet.collectStyles(<App {...props} />),
+      });
 
-    return { ...page, styleTags };
-  }
-
-  render() {
-    const { styleTags } = this.props;
-
-    return (
-      <html lang="en">
-        <Head>
-          <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap" rel="stylesheet" />
-          {styleTags}
-        </Head>
-        <body>
-          <Main />
-          <NextScript />
-        </body>
-      </html>
-    );
+      const initialProps = await Document.getInitialProps(ctx);
+      return {
+        ...initialProps,
+        styles: (
+          <>
+            {initialProps.styles}
+            {sheet.getStyleElement()}
+          </>
+        ),
+      };
+    } finally {
+      sheet.seal();
+    }
   }
 }

@@ -2,7 +2,9 @@
 import React from 'react';
 import Head from 'next/head';
 import { ApolloProvider } from 'react-apollo';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Style from '../client/shared/styles/global.style';
 
 import withApollo from '../client/app-data/graphql/withApollo';
 import Store from '../client/app-data/StateManagement/Store';
@@ -20,6 +22,7 @@ const MyApp = (props) => {
       </Head>
       <ApolloProvider client={apollo}>
         <Store>
+          <Style />
           <Component {...pageProps} />
         </Store>
       </ApolloProvider>
