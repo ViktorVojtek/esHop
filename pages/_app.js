@@ -16,7 +16,7 @@ const MyApp = (props) => {
   return (
     <>
       <Head>
-        <title>{pageTitle || 'esHop'}</title>
+        <title>{pageTitle || 'Červený kláštor shop'}</title>
       </Head>
       <ApolloProvider client={apollo}>
         <Store>

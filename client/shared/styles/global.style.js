@@ -17,4 +17,9 @@ export const WrapperFlex = styled.div`
   }
 `;
 
-export default createGlobalStyle``;
+export default createGlobalStyle`
+  *{
+    font-family: 'Open Sans', sans-serif;
+    color:red;
+  }
+`;
