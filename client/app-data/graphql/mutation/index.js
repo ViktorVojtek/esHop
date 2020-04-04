@@ -20,6 +20,30 @@ export const CREATE_SUBCATEGORY_MUTATION = gql`
   }
 `;
 
+export const CREATE_PRODUCT_MUTATION = gql`
+  mutation createProduct($productInput: ProductInput!) {
+    createProduct(productInput: $productInput) {
+      category
+      dateCreated
+      dateModified
+      description
+      discount
+      inStock
+      modifiedByUserId
+      shortDescription
+      subCategory
+      images {
+        path
+        size
+        title
+      }
+      note
+      price
+      title
+    }
+  }
+`;
+
 export const LOGIN_USER_MUTATION = gql`
   mutation loginUser($userLoginInput: UserLoginInput!) {
     loginUser(userLoginInput: $userLoginInput) {

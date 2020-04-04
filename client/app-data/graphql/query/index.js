@@ -23,6 +23,30 @@ export const CURRENCIES_QUERY = gql`
   }
 `;
 
+export const PRODUCT_QUERY = gql`
+  query products {
+    products {
+      category
+      dateCreated
+      dateModified
+      description
+      discount
+      inStock
+      modifiedByUserId
+      shortDescription
+      subCategory
+      images {
+        path
+        size
+        title
+      }
+      note
+      price
+      title
+    }
+  }
+`;
+
 export const SUBCATEGORIES_QUERY = gql`
   query subCategories {
     subCategories {

@@ -4,6 +4,7 @@ const rootTypeDefs = gql`
   type Query {
     categories: [Category]
     currencies: [Currency]
+    products: [Product]
     subCategories: [SubCategory]
     users: [User]
   }

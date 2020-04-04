@@ -1,6 +1,7 @@
 // queries
 const categories = require('./query/Categories');
 const currencies = require('./query/Currencies');
+const products = require('./query/Products');
 const subCategories = require('./query/SubCategories');
 const users = require('./query/Users');
 
@@ -27,6 +28,7 @@ const resolvers = {
   Query: {
     categories: async (root, args, ctx) => categories(root, args, ctx),
     currencies: async (root, args, ctx) => currencies(root, args, ctx),
+    products: async (root, args, ctx) => products(root, args, ctx),
     subCategories: async (root, args, ctx) => subCategories(root, args, ctx),
     users: async (root, args, ctx) => users(root, args, ctx),
   },
