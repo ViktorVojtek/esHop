@@ -31,22 +31,22 @@ const Categories = () => {
   const { categories } = data;
 
   return (
-    <Table>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th colSpan={2}>Category title</th>
-        </tr>
-      </thead>
-      <tbody>
-        {
-          categories && categories.length > 0
-            ? (
+    categories && categories.length > 0
+      ? (
+        <Table>
+          <thead>
+            <tr>
+              <th className="border-top-0">#</th>
+              <th colSpan={2} className="border-top-0">Category title</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
               categories.map(({ _id, title }, i) => (
                 <tr key={_id}>
                   <td>{i + 1}</td>
                   <td>{title}</td>
-                  <td>
+                  <td className="text-right">
                     <Button
                       color="danger"
                       onClick={() => handleRemoveItem(_id)}
@@ -56,10 +56,14 @@ const Categories = () => {
                   </td>
                 </tr>
               ))
-            ) : <tr><td colSpan={3}>No categories has been set yet.</td></tr>
-        }
-      </tbody>
-    </Table>
+            }
+          </tbody>
+        </Table>
+      ) : (
+        <div className="d-flex justify-content-center align-items-center h-100">
+          <p className="text-center">No categories has been set yet.</p>
+        </div>
+      )
   );
 };
 

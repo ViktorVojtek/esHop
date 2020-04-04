@@ -5,9 +5,8 @@ import {
 
 import { Context } from '../../../app-data/StateManagement/Store';
 
-// TODO: Finish modal component
 const ModalComponent = () => {
-  const [{ modal }, dispatch] = useContext(Context);
+  const [{ error, modal }, dispatch] = useContext(Context);
 
   const toggle = () => {
     dispatch({ type: 'SET_MODAL', payload: !modal });
@@ -15,13 +14,11 @@ const ModalComponent = () => {
 
   return (
     <Modal isOpen={modal} toggle={toggle}>
-      <ModalHeader toggle={toggle}>Modal title</ModalHeader>
+      <ModalHeader toggle={toggle}>Modal</ModalHeader>
       <ModalBody>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        {error}
       </ModalBody>
       <ModalFooter>
-        <Button color="primary" onClick={toggle}>Do Something</Button>
-        {' '}
         <Button color="secondary" onClick={toggle}>Cancel</Button>
       </ModalFooter>
     </Modal>

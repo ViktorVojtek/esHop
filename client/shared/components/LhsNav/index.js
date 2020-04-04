@@ -8,10 +8,34 @@ const LhsNav = () => (
   <Wrapper className="position-sticky">
     <Nav vertical>
       <NavItem>e-Commerce</NavItem>
-      <NavItem>Products</NavItem>
-      <NavItem>Orders</NavItem>
-      <NavItem>Customers</NavItem>
-      <NavItem>Reviews</NavItem>
+      <NavItem>
+        <Link href="/admin/products">
+          <NavLink href="/admin/products">
+            Products
+          </NavLink>
+        </Link>
+      </NavItem>
+      <NavItem>
+        <Link href="/admin/orders">
+          <NavLink href="/admin/orders">
+            Orders
+          </NavLink>
+        </Link>
+      </NavItem>
+      <NavItem>
+        <Link href="/admin/customers">
+          <NavLink href="/admin/custoers">
+            Customers
+          </NavLink>
+        </Link>
+      </NavItem>
+      <NavItem>
+        <Link href="/admin/reviews">
+          <NavLink href="/admin/reviews">
+            Reviews
+          </NavLink>
+        </Link>
+      </NavItem>
       <NavItem>
         <Link href="/admin/settings">
           <NavLink href="/admin/settings">

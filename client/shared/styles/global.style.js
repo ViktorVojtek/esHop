@@ -16,6 +16,7 @@ export const WrapperFlex = styled.div`
     }
   }
 `;
+
 export const LinkButton = styled.a`
   color: white;
   text-transform: uppercase;

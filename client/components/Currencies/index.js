@@ -31,30 +31,30 @@ const Currencies = () => {
   const { currencies } = data;
 
   return (
-    <Table>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Currency title</th>
-          <th>Sign</th>
-          <th>Value</th>
-          <th colSpan={2}>Default currency</th>
-        </tr>
-      </thead>
-      <tbody>
-        {
-          currencies && currencies.length > 0
-            ? (
+    (currencies && currencies.length > 0)
+      ? (
+        <Table>
+          <thead>
+            <tr>
+              <th className="border-top-0">#</th>
+              <th className="border-top-0">Currency title</th>
+              <th className="border-top-0">Sign</th>
+              <th className="border-top-0">Value</th>
+              <th colSpan={2} className="border-top-0">Default currency</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
               currencies.map(({
                 _id, defaultCurrency, sign, value, title,
               }, i) => (
                 <tr key={_id}>
-                  <td>{i + 1}</td>
+                  <th scope="row">{i + 1}</th>
                   <td>{title}</td>
                   <td>{sign}</td>
                   <td>{value}</td>
                   <td>{defaultCurrency === true ? 'true' : 'false'}</td>
-                  <td>
+                  <td className="text-right">
                     <Button
                       color="danger"
                       onClick={() => handleRemoveItem(_id)}
@@ -64,10 +64,14 @@ const Currencies = () => {
                   </td>
                 </tr>
               ))
-            ) : <tr><td colSpan={6}>No currencies has been set yet.</td></tr>
-        }
-      </tbody>
-    </Table>
+            }
+          </tbody>
+        </Table>
+      ) : (
+        <div className="d-flex justify-content-center align-items-center h-100">
+          <p className="text-center">No currencies has been set yet.</p>
+        </div>
+      )
   );
 };
 

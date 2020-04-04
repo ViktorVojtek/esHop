@@ -26,10 +26,9 @@ const CategorySubmitForm = () => {
 
     try {
       await createCategory({ variables: { title } });
-
+    } catch ({ message }) {
+      dispatch({ type: 'SET_ERROR', payload: message });
       dispatch({ type: 'SET_MODAL', payload: true });
-    } catch (err) {
-      console.log(err);
     }
   };
 

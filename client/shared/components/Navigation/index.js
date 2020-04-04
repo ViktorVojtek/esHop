@@ -1,24 +1,24 @@
 import React, { useState } from 'react';
 import {
-    Collapse,
-    Navbar,
-    NavbarToggler,
-    NavbarBrand,
-    Nav,
-    NavItem,
-    NavLink,
-    Container,
-    Row, 
-    Col
-  } from 'reactstrap';
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink,
+  Container,
+  Row,
+  Col,
+} from 'reactstrap';
 import { Logo, Wrapper } from './styles';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
-  
-  return(
+
+  return (
     <Wrapper>
       <Navbar className="bg-white" expand="md">
         <Container fluid>

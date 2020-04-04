@@ -2,6 +2,8 @@ import React from 'react';
 import Head from 'next/head';
 import { Col, Row } from 'reactstrap';
 
+import BoxWrapper, { H3 } from '../../../client/shared/styles/admin/UI';
+
 import Layout from '../../../client/shared/components/Layout';
 import NavHeader from '../../../client/shared/components/NavHeader';
 import LhsNav from '../../../client/shared/components/LhsNav';
@@ -30,36 +32,42 @@ const SettingsPage = () => (
     {' '}
     <Layout>
       <Row>
-        <Col xs="6" sm="3">
+        <Col xs="6" sm="3" md="2">
           <LhsNav />
         </Col>
-        <Col xm="6" sm="9">
-          <h3>e-Commerce settings</h3>
+        <Col xm="6" sm="9" md="10">
+          <H3>e-Commerce settings</H3>
           {' '}
-          <Row>
-            <Col>
-              <CurrencySubmitForm />
-            </Col>
-            <Col>
-              <Currencies />
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <CagegorySubmitForm />
-            </Col>
-            <Col>
-              <Categories />
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <SubCategorySubmitForm />
-            </Col>
-            <Col>
-              <SubCategories />
-            </Col>
-          </Row>
+          <BoxWrapper className="border-bottom">
+            <Row>
+              <Col>
+                <CurrencySubmitForm />
+              </Col>
+              <Col>
+                <Currencies />
+              </Col>
+            </Row>
+          </BoxWrapper>
+          <BoxWrapper className="border-bottom">
+            <Row>
+              <Col>
+                <CagegorySubmitForm />
+              </Col>
+              <Col>
+                <Categories />
+              </Col>
+            </Row>
+          </BoxWrapper>
+          <BoxWrapper className="border-bottom">
+            <Row>
+              <Col>
+                <SubCategorySubmitForm />
+              </Col>
+              <Col>
+                <SubCategories />
+              </Col>
+            </Row>
+          </BoxWrapper>
         </Col>
       </Row>
     </Layout>

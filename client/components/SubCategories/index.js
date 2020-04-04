@@ -31,22 +31,22 @@ const SubCategories = () => {
   const { subCategories } = data;
 
   return (
-    <Table>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th colSpan={2}>Subcategory title</th>
-        </tr>
-      </thead>
-      <tbody>
-        {
-          subCategories && subCategories.length > 0
-            ? (
+    subCategories && subCategories.length > 0
+      ? (
+        <Table>
+          <thead>
+            <tr>
+              <th className="border-top-0">#</th>
+              <th colSpan={2} className="border-top-0">Subcategory title</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
               subCategories.map(({ _id, title }, i) => (
                 <tr key={_id}>
                   <td>{i + 1}</td>
                   <td>{title}</td>
-                  <td>
+                  <td className="text-right">
                     <Button
                       color="danger"
                       onClick={() => handleRemoveItem(_id)}
@@ -56,10 +56,14 @@ const SubCategories = () => {
                   </td>
                 </tr>
               ))
-            ) : <tr><td colSpan={3}>No subcategories has been set yet.</td></tr>
-        }
-      </tbody>
-    </Table>
+            }
+          </tbody>
+        </Table>
+      ) : (
+        <div className="d-flex justify-content-center align-items-center h-100">
+          <p className="text-center">No subcategorie has been set yet.</p>
+        </div>
+      )
   );
 };
 

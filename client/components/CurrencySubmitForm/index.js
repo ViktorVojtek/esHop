@@ -5,6 +5,8 @@ import {
   Button, Form, FormGroup, Label, Input,
 } from 'reactstrap';
 
+import { H5 } from '../../shared/styles/admin/UI';
+
 import { SET_CURRENCY_MUTATION } from '../../app-data/graphql/mutation';
 import { CURRENCIES_QUERY } from '../../app-data/graphql/query';
 
@@ -60,7 +62,7 @@ const CurrencySubmitForm = () => {
 
   return (
     <Form onSubmit={handleSubmitCurrencyData}>
-      <h5>Currency</h5>
+      <H5>Currency</H5>
       <FormGroup>
         <Label for="title">Title</Label>
         <Input
@@ -88,17 +90,20 @@ const CurrencySubmitForm = () => {
           step="any"
         />
       </FormGroup>
-      <FormGroup check>
-        <Label check>
-          <Input
-            id="defaultCurrency"
-            type="checkbox"
-            onChange={handleDefCurrency}
-          />
-          {' '}
-          Default currency
-        </Label>
+      <FormGroup>
+        <FormGroup check>
+          <Label check>
+            <Input
+              id="defaultCurrency"
+              type="checkbox"
+              onChange={handleDefCurrency}
+            />
+            {' '}
+            Default currency
+          </Label>
+        </FormGroup>
       </FormGroup>
+      {' '}
       <FormGroup>
         <Button>Submit</Button>
       </FormGroup>
