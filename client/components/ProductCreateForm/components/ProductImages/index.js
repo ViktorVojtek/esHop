@@ -22,19 +22,52 @@ const ProductImages = ({ productData, handleProductData }) => {
   const handleImageData = async (event) => {
     const { files } = event.currentTarget;
     const filesPromises = [];
+    const filesObjsArr = [];
+    const imagesObjArr = [];
     let i = 0;
+    let j = 0;
+
+    const bytesToSize = (bytes) => {
+      const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+
+      if (bytes === 0) {
+        return '0 Byte';
+      }
+
+      const c = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)), 10);
+
+      return `${Math.round(bytes / (1024 ** c), 2)} ${sizes[c]}`;
+    };
 
     while (i < files.length) {
       const promFn = toBase64(files[i]);
+
+      filesObjsArr.push({
+        ext: files[i].type.replace('image/', ''),
+        size: bytesToSize(files[i].size),
+        title: files[i].name,
+      });
       filesPromises.push(promFn);
 
       i += 1;
     }
 
     const base64Files = await Promise.all(filesPromises);
+
+    while (j < filesObjsArr.length) {
+      imagesObjArr.push({
+        ...filesObjsArr[j],
+        base64: base64Files[j],
+      });
+
+      j += 1;
+    }
+  
     const newImagesArr = images.concat(
-      base64Files.filter((item) => images.indexOf(item) < 0)
+      imagesObjArr.filter((item) => images.indexOf(item.base64) < 0)
     );
+
+    console.log(newImagesArr);
 
     setImages(newImagesArr);
 
@@ -54,14 +87,19 @@ const ProductImages = ({ productData, handleProductData }) => {
 
   return (
     <FormGroup>
-      <Input type="file" multiple onChange={handleImageData} />
+      <Input
+        type="file"
+        multiple
+        onChange={handleImageData}
+        accept="image/x-png,image/gif,image/jpeg"
+      />
       {images && images.length > 0 && (
         <Carousel slidesPerPage={images.length > 1 ? 2 : 1} arrows>
-          {images.map((item, i) => (
+          {images.map(({ base64 }, i) => (
             <ImagePreview
               key={i}
               idx={i}
-              srcImg={item}
+              srcImg={base64}
               removeImage={handleRemoveImage}
             />
           ))}
