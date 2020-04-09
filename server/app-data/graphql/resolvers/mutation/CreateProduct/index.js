@@ -1,7 +1,7 @@
 const Product = require('../../../../db/models/Product');
 const { superSecret } = require('../../../../config');
 const { verifyToken, storeFile } = require('../../utils');
-const modError = require('../../utils/error');
+const ModError = require('../../utils/error');
 
 const createProduct = async (root, { productInput }, ctx) => {
   try {
@@ -12,7 +12,7 @@ const createProduct = async (root, { productInput }, ctx) => {
     const productExist = await Product.findOne({ title });
 
     if (productExist) {
-      throw new modError(403, 'Product already exist.');
+      throw new ModError(403, 'Product already exist.');
     }
 
     const {

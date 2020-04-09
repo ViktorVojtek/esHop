@@ -45,7 +45,7 @@ const ProductImages = ({ productData, handleProductData }) => {
       filesObjsArr.push({
         ext: files[i].type.replace('image/', ''),
         size: bytesToSize(files[i].size),
-        title: files[i].name,
+        title: files[i].name.split('.')[files[i].name.split('.').length - 2],
       });
       filesPromises.push(promFn);
 
