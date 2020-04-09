@@ -44,7 +44,7 @@ const ProductCreateForm = () => {
     console.log(newProduct);
 
     try {
-      // await createProduct({ variables: { productInput: newProduct } });
+      await createProduct({ variables: { productInput: newProduct } });
     } catch (err) {
       console.log(err);
     }

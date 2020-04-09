@@ -41,7 +41,11 @@ export const PRODUCT_QUERY = gql`
         title
       }
       note
-      price
+      price {
+        currency
+        currencySign
+        value
+      }
       title
     }
   }

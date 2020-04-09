@@ -36,7 +36,7 @@ const ProductImages = ({ productData, handleProductData }) => {
 
       const c = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)), 10);
 
-      return `${Math.round(bytes / (1024 ** c), 2)} ${sizes[c]}`;
+      return `${Math.round(bytes / 1024 ** c, 2)} ${sizes[c]}`;
     };
 
     while (i < files.length) {
@@ -62,16 +62,14 @@ const ProductImages = ({ productData, handleProductData }) => {
 
       j += 1;
     }
-  
+
     const newImagesArr = images.concat(
       imagesObjArr.filter((item) => images.indexOf(item.base64) < 0)
     );
 
-    console.log(newImagesArr);
-
     setImages(newImagesArr);
 
-    handleProductData({ ...productData, newImagesArr });
+    handleProductData({ ...productData, images: newImagesArr });
   };
 
   const handleRemoveImage = async (idx) => {
@@ -82,7 +80,7 @@ const ProductImages = ({ productData, handleProductData }) => {
 
     setImages(newImagesArr);
 
-    handleProductData({ ...productData, newImagesArr });
+    handleProductData({ ...productData, images: newImagesArr });
   };
 
   return (
