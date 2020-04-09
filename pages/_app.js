@@ -4,6 +4,7 @@ import Head from 'next/head';
 import { ApolloProvider } from 'react-apollo';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '@brainhubeu/react-carousel/lib/style.css';
 import Style from '../client/shared/styles/global.style';
 
 import withApollo from '../client/app-data/graphql/withApollo';
