@@ -8,7 +8,7 @@ import Layout from '../../../../client/shared/components/Layout';
 import NavHeader from '../../../../client/shared/components/NavHeader';
 import LhsNav from '../../../../client/shared/components/LhsNav';
 
-import ProductCreateForm from '../../../../client/components/ProductCreateForm';
+import ProductCreateForm from '../../../../client/components/pages/admin/products/create/ProductCreateForm';
 
 const ProductCreate = () => (
   <>

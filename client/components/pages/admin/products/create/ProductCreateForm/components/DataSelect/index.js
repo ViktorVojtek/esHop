@@ -5,9 +5,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { Input, FormGroup } from 'reactstrap';
 import PropTypes from 'prop-types';
 
-const DynamicSelect = ({
-  query, category, onSelect, productData,
-}) => {
+const DynamicSelect = ({ query, category, onSelect, productData }) => {
   const { loading, error, data } = useQuery(query);
 
   if (loading) {
@@ -19,7 +17,9 @@ const DynamicSelect = ({
   }
 
   const handleOnChange = (event) => {
-    const { id } = event.currentTarget.options[event.currentTarget.selectedIndex];
+    const { id } = event.currentTarget.options[
+      event.currentTarget.selectedIndex
+    ];
     let selectorData;
 
     if (category) {
@@ -35,19 +35,15 @@ const DynamicSelect = ({
 
   return (
     <FormGroup>
-      <Input
-        type="select"
-        onChange={handleOnChange}
-      >
+      <Input type="select" onChange={handleOnChange}>
         <option>Select</option>
-        {
-          dataArr && dataArr.length > 0
-            ? (
-              dataArr.map(({ _id, title }) => (
-                <option key={_id} id={_id}>{title}</option>
-              ))
-            ) : null
-        }
+        {dataArr && dataArr.length > 0
+          ? dataArr.map(({ _id, title }) => (
+            <option key={_id} id={_id}>
+              {title}
+            </option>
+            ))
+          : null}
       </Input>
     </FormGroup>
   );

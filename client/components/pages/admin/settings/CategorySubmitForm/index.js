@@ -4,10 +4,10 @@ import {
   Button, Form, FormGroup, Label, Input,
 } from 'reactstrap';
 
-import { CREATE_CATEGORY_MUTATION } from '../../app-data/graphql/mutation';
-import { CATEGORIES_QUERY } from '../../app-data/graphql/query';
+import { CREATE_CATEGORY_MUTATION } from '../../../../../app-data/graphql/mutation';
+import { CATEGORIES_QUERY } from '../../../../../app-data/graphql/query';
 
-import { Context } from '../../app-data/StateManagement/Store';
+import { Context } from '../../../../../app-data/StateManagement/Store';
 
 const CategorySubmitForm = () => {
   const [state, dispatch] = useContext(Context);

@@ -4,8 +4,8 @@ import {
   Button, Form, FormGroup, Label, Input,
 } from 'reactstrap';
 
-import { CREATE_SUBCATEGORY_MUTATION } from '../../app-data/graphql/mutation';
-import { SUBCATEGORIES_QUERY } from '../../app-data/graphql/query';
+import { CREATE_SUBCATEGORY_MUTATION } from '../../../../../app-data/graphql/mutation';
+import { SUBCATEGORIES_QUERY } from '../../../../../app-data/graphql/query';
 
 const SubCategorySubmitForm = () => {
   const [createSubCategory] = useMutation(

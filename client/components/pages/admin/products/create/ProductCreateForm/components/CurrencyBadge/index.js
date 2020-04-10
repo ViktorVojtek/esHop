@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { InputGroupText } from 'reactstrap';
 import PropTypes from 'prop-types';
 
-import { CURRENCIES_QUERY } from '../../../../app-data/graphql/query';
+import { CURRENCIES_QUERY } from '../../../../../../../../app-data/graphql/query';
 
 const CurrencyBadge = ({ productData, handleProductData }) => {
   const { loading, error, data } = useQuery(CURRENCIES_QUERY);

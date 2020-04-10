@@ -9,13 +9,12 @@ import NavHeader from '../../../client/shared/components/NavHeader';
 import LhsNav from '../../../client/shared/components/LhsNav';
 import Modal from '../../../client/shared/components/Modal';
 
-import CurrencySubmitForm from '../../../client/components/CurrencySubmitForm';
-import Currencies from '../../../client/components/Currencies';
-import CagegorySubmitForm from '../../../client/components/CategorySubmitForm';
-import Categories from '../../../client/components/Categories';
-
-import SubCategorySubmitForm from '../../../client/components/SubCategorySubmitForm';
-import SubCategories from '../../../client/components/SubCategories';
+import CurrencySubmitForm from '../../../client/components/pages/admin/settings/CurrencySubmitForm';
+import Currencies from '../../../client/components/pages/admin/settings/Currencies';
+import CategorySubmitForm from '../../../client/components/pages/admin/settings/CategorySubmitForm';
+import Categories from '../../../client/components/pages/admin/settings/Categories';
+import SubCategorySubmitForm from '../../../client/components/pages/admin/settings/SubCategorySubmitForm';
+import SubCategories from '../../../client/components/pages/admin/settings/SubCategories';
 
 import { withAuthSync } from '../../../client/app-data/lib/auth';
 
@@ -51,7 +50,7 @@ const SettingsPage = () => (
           <BoxWrapper className="border-bottom">
             <Row>
               <Col>
-                <CagegorySubmitForm />
+                <CategorySubmitForm />
               </Col>
               <Col>
                 <Categories />

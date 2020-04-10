@@ -1,15 +1,21 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import {
-  Button, Form, FormGroup, Label, Input, InputGroup, InputGroupAddon, InputGroupText
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  InputGroup,
+  InputGroupAddon,
 } from 'reactstrap';
 
-import { CREATE_PRODUCT_MUTATION } from '../../app-data/graphql/mutation';
+import { CREATE_PRODUCT_MUTATION } from '../../../../../../app-data/graphql/mutation';
 import {
   PRODUCT_QUERY,
   CATEGORIES_QUERY,
   SUBCATEGORIES_QUERY,
-} from '../../app-data/graphql/query';
+} from '../../../../../../app-data/graphql/query';
 
 import DynamicSelect from './components/DataSelect';
 import ProductImages from './components/ProductImages';
@@ -38,7 +44,7 @@ const ProductCreateForm = () => {
       price: {
         ...productData.price,
         value: +form.priceValue.value,
-      }
+      },
     };
 
     console.log(newProduct);
