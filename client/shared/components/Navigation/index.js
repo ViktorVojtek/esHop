@@ -31,13 +31,16 @@ const Navigation = () => {
               <Collapse isOpen={isOpen} navbar>
                 <Nav className="mr-auto" navbar>
                   <NavItem>
-                    <NavLink className="text-uppercase letter-spacing-1" href="/">Domov</NavLink>
+                    <NavLink className="text-uppercase letter-spacing-1" href="/">Produkty</NavLink>
                   </NavItem>
                   <NavItem>
-                    <NavLink className="text-uppercase letter-spacing-1" href="/">Produkty a služby</NavLink>
+                    <NavLink className="text-uppercase letter-spacing-1" href="/">Služby</NavLink>
                   </NavItem>
                   <NavItem>
-                    <NavLink className="text-uppercase letter-spacing-1" href="/">Kontakt</NavLink>
+                    <NavLink className="text-uppercase letter-spacing-1" href="/">Pobyty</NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink className="text-uppercase letter-spacing-1" href="/">o nás</NavLink>
                   </NavItem>
                   <NavItem>
                     <NavLink className="text-uppercase letter-spacing-1" href="/">FAQ</NavLink>

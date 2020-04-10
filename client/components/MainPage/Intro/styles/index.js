@@ -3,8 +3,8 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
   max-width: 1920px;
   margin: 0 auto;
-  padding-left: 120px;
-  padding-right: 120px;
+  padding-left: 100px;
+  padding-right: 100px;
 `;
 export const Left = styled.div`
   margin-left: .5rem;
@@ -17,6 +17,7 @@ export const H1 = styled.h1`
   line-height: 1.2;
   font-weight: 600;
   letter-spacing: -1px;
+  margin-top: 1.5rem;
 `;
 export const H3 = styled.h3`
   color: rgb(150, 158, 172);
@@ -28,4 +29,6 @@ export const H4 = styled.h4`
   line-height: 1.5;
   margin-top: 40px;
   margin-bottom: 40px;
+  font-size: 1.2rem;
+  padding-right: 3rem;
 `;
