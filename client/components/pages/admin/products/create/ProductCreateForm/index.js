@@ -6,8 +6,8 @@ import {
   FormGroup,
   Label,
   Input,
-  InputGroup,
-  InputGroupAddon,
+  // InputGroup,
+  // InputGroupAddon,
 } from 'reactstrap';
 
 import { CREATE_PRODUCT_MUTATION } from '../../../../../../app-data/graphql/mutation';
@@ -19,7 +19,8 @@ import {
 
 import DynamicSelect from './components/DataSelect';
 import ProductImages from './components/ProductImages';
-import CurrencyBadge from './components/CurrencyBadge';
+// import CurrencyBadge from './components/CurrencyBadge';
+import ProductVariant from './components/ProductVariant';
 
 const ProductCreateForm = () => {
   const [productData, setProductData] = useState({});
@@ -93,9 +94,13 @@ const ProductCreateForm = () => {
       <FormGroup>
         <Input type="textarea" id="note" name="note" placeholder="Note" />
       </FormGroup>
-      <FormGroup>
+      <ProductVariant
+        productData={productData}
+        handleProductData={setProductData}
+      />
+      {/* <FormGroup>
         <InputGroup>
-          <Input type="number" id="priceValue" name="priceValue" default={0} />
+          <Input type="number" id="priceValue" name="priceValue" default={0} step="0.01" placeholder="Enter price" />
           <InputGroupAddon addonType="append">
             <CurrencyBadge
               productData={productData}
@@ -103,7 +108,7 @@ const ProductCreateForm = () => {
             />
           </InputGroupAddon>
         </InputGroup>
-      </FormGroup>
+      </FormGroup> */}
       <ProductImages
         productData={productData}
         handleProductData={setProductData}

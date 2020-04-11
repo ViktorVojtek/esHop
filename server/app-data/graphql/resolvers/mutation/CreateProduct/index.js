@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 const Product = require('../../../../db/models/Product');
 const { superSecret } = require('../../../../config');
 const { verifyToken, storeFile } = require('../../utils');
@@ -15,10 +16,7 @@ const createProduct = async (root, { productInput }, ctx) => {
       throw new ModError(403, 'Product already exist.');
     }
 
-    const {
-      images,
-      ...prodRawDataWithOutImgs
-    } = productInput; 
+    const { images, ...prodRawDataWithOutImgs } = productInput;
 
     const productData = new Product(prodRawDataWithOutImgs);
 
@@ -26,13 +24,13 @@ const createProduct = async (root, { productInput }, ctx) => {
     const imagesDataArr = [];
     const resultImagesDataArr = [];
     let imagePaths = [];
-    
+
     if (images && images.length > 0) {
       while (i < images.length) {
-        const { base64, title, ext } = images[i];
+        const { base64, title: imageTitle, ext } = images[i];
 
         const fileData = {
-          fileName: title,
+          fileName: imageTitle,
           fileBase64Data: base64,
           dirName: productData._id,
           extension: ext,
@@ -50,10 +48,7 @@ const createProduct = async (root, { productInput }, ctx) => {
       let j = 0;
 
       while (j < imagePaths.length) {
-        const {
-          base64,
-          ...restImageData
-        } = images[j];
+        const { base64, ...restImageData } = images[j];
         const imageData = {
           ...restImageData,
           path: imagePaths[j],
@@ -72,10 +67,7 @@ const createProduct = async (root, { productInput }, ctx) => {
 
     const newProduct = await Product.create(newProductData);
 
-    const {
-      __v,
-      ...result
-    } = newProduct.toObject();
+    const { __v, ...result } = newProduct.toObject();
 
     return result;
   } catch (err) {

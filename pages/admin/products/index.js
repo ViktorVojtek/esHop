@@ -9,6 +9,8 @@ import Layout from '../../../client/shared/components/Layout';
 import NavHeader from '../../../client/shared/components/NavHeader';
 import LhsNav from '../../../client/shared/components/LhsNav';
 
+import ProductList from '../../../client/components/pages/admin/products/ProductList';
+
 const Products = () => (
   <>
     <Head>
@@ -25,10 +27,10 @@ const Products = () => (
         </Col>
         <Col xs="6" sm="9">
           <Link href="/admin/products/create">
-            <Button color="primary">Create product</Button>
+            <Button color="primary" className="mb-3">Create product</Button>
           </Link>
-
-          <p>Products content.</p>
+          {' '}
+          <ProductList />
         </Col>
       </Row>
     </Layout>

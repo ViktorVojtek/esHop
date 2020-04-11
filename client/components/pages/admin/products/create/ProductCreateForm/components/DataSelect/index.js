@@ -36,7 +36,7 @@ const DynamicSelect = ({ query, category, onSelect, productData }) => {
   return (
     <FormGroup>
       <Input type="select" onChange={handleOnChange}>
-        <option>Select</option>
+        <option>{category ? 'Select category' : 'Select sub category'}</option>
         {dataArr && dataArr.length > 0
           ? dataArr.map(({ _id, title }) => (
             <option key={_id} id={_id}>

@@ -10,8 +10,12 @@ const CurrencyBadge = ({ productData, handleProductData }) => {
 
   useEffect(() => {
     if (data && data.currencies) {
-      const newProductData = {
+      /* const newProductData = {
         ...productData,
+        variant: {
+          ...productData.variant,
+          price: 
+        },
         price: {
           ...productData.price,
           currency: data.currencies
@@ -23,9 +27,9 @@ const CurrencyBadge = ({ productData, handleProductData }) => {
             .map(({ sign }) => sign)
             .pop(),
         },
-      };
+      }; */
 
-      handleProductData(newProductData);
+      // handleProductData(newProductData);
     }
   }, [data]);
 
@@ -60,11 +64,17 @@ CurrencyBadge.propTypes = {
     images: PropTypes.arrayOf(PropTypes.object),
     note: PropTypes.string,
     title: PropTypes.string,
-    price: PropTypes.shape({
-      currency: PropTypes.string,
-      currencySign: PropTypes.string,
-      value: PropTypes.number,
-    }),
+    variant: PropTypes.arrayOf(
+      PropTypes.shape({
+        default: PropTypes.bool,
+        title: PropTypes.string,
+        price: PropTypes.shape({
+          currency: PropTypes.string,
+          currencySign: PropTypes.string,
+          value: PropTypes.number,
+        }),
+      })
+    ),
   }).isRequired,
   handleProductData: PropTypes.func.isRequired,
 };

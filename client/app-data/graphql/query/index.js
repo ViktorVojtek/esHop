@@ -26,6 +26,7 @@ export const CURRENCIES_QUERY = gql`
 export const PRODUCT_QUERY = gql`
   query products {
     products {
+      _id
       category
       dateCreated
       dateModified
@@ -41,12 +42,16 @@ export const PRODUCT_QUERY = gql`
         title
       }
       note
-      price {
-        currency
-        currencySign
-        value
-      }
       title
+      variant {
+        default
+        price {
+          currency
+          currencySign
+          value
+        }
+        title
+      }
     }
   }
 `;

@@ -20,8 +20,8 @@ const Product = mongoose.Schema({
   subCategory: String,
   images: [Object],
   note: String,
-  price: Object,
   title: String,
+  variant: [Object],
 });
 
 module.exports = mongoose.model('Product', Product);

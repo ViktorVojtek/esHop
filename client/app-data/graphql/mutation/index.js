@@ -38,12 +38,16 @@ export const CREATE_PRODUCT_MUTATION = gql`
         title
       }
       note
-      price {
-        currency
-        currencySign
-        value
-      }
       title
+      variant {
+        default
+        price {
+          currency
+          currencySign
+          value
+        }
+        title
+      }
     }
   }
 `;
