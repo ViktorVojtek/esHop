@@ -76,7 +76,7 @@ const Register = () => {
           </FormGroup>
           <FormGroup>
             <Label htmlFor="password">Password</Label>
-            <Input id="password" name="password" type="password" ref={passwordRef} required />
+            <Input id="password" name="password" type="password" innerRef={passwordRef} required />
           </FormGroup>
           <FormGroup>
             <Label htmlFor="retypePassword">Retype Password</Label>
