@@ -43,21 +43,14 @@ const CarouselProducts = ({ setActiveItem }) => {
     setActiveItem(nextIndex);
   }
 
-  const goToIndex = (newIndex) => {
-    if (animating) return;
-    setActiveIndex(newIndex);
-    setActiveItem(nextIndex);
-  }
-
-  const slides = items.map((item,i) => {
+  const slides = items.map((item) => {
     return (
       <CarouselItem
         onExiting={() => setAnimating(true)}
         onExited={() => setAnimating(false)}
-        key={i}
+        key={item.altText}
       >
         <img className="carousel-image" src={item.src} alt={item.altText} />
-        <CarouselCaption captionText={item.caption} captionHeader={item.caption} />
       </CarouselItem>
     );
   });
@@ -68,7 +61,6 @@ const CarouselProducts = ({ setActiveItem }) => {
       previous={previous}
       interval={5000}
     >
-      <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={goToIndex} />
       {slides}
       <CarouselControl direction="prev" directionText="Previous" onClickHandler={previous} />
       <CarouselControl direction="next" directionText="Next" onClickHandler={next} />

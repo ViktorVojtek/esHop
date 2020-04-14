@@ -1,12 +1,12 @@
 import React from 'react';
 import {
   Wrapper, H2, Text, LeftItem, RightItem, Items,
-  ItemPhotoLeft, ItemPhotoRight, TextArea, ProductHeader, Gradient, Gradient2,
+  ItemPhotoLeft, ItemPhotoRight, TextArea, ProductHeader, Gradient, Gradient2, TextLeft,
 } from './styles';
 
 const ProductItem = ({
   title, about, headerLeft, headerRight, textLeft, textRight, imageUrlL, imageUrlR,
-  width, height, top, right, gradient1,
+  width, height, top, right, gradient1, 
 }) => (
   <Wrapper>
     <H2>{title}</H2>
@@ -21,15 +21,15 @@ const ProductItem = ({
       />
       <LeftItem>
         <ItemPhotoLeft imageUrlL={imageUrlL}>
-          <TextArea>
+          <TextArea className="card-item">
             <ProductHeader>{headerLeft}</ProductHeader>
-            <Text>{textLeft}</Text>
+            <TextLeft>{textLeft}</TextLeft>
           </TextArea>
         </ItemPhotoLeft>
       </LeftItem>
       <RightItem>
         <ItemPhotoRight imageUrlR={imageUrlR}>
-          <TextArea>
+          <TextArea className="card-item">
             <ProductHeader>{headerRight}</ProductHeader>
             <Text>{textRight}</Text>
           </TextArea>

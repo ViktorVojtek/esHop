@@ -6,6 +6,13 @@ export const Wrapper = styled.div`
   padding-left: 100px;
   padding-right: 100px;
   margin-top: 6rem;
+  @media(max-width: 1550px){
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+  @media(max-width: 992px){
+    margin-top: 4rem;
+  }
 `;
 export const H2 = styled.h2`
   margin-top: 3rem;
@@ -17,6 +24,25 @@ export const Text = styled.p`
   width: 400px;
   margin-top: 1rem;
   letter-spacing: 1px;
+  @media(max-width: 1440px){
+    width: 350px;
+  }
+  @media(max-width: 1200px){
+    width: 300px;
+    font-size: 0.75rem;
+  }
+`;
+export const TextLeft = styled.p`
+  font-size: 0.8rem;
+  color: rgb(120, 125, 136);
+  line-height: 1.2;
+  width: 400px;
+  margin-top: 1rem;
+  letter-spacing: 1px;
+  @media(max-width: 1200px){
+    width: 360px;
+    font-size: 0.75rem;
+  }
 `;
 export const Items = styled.div`
   display: flex;
@@ -24,16 +50,25 @@ export const Items = styled.div`
   height: 100%;
   margin-top: 4rem;
   position: relative;
+  @media(max-width: 992px){
+    flex-direction: column;
+  }
 `;
 
 export const LeftItem = styled.div`
   width: 60%;
   position: relative;
+  @media(max-width: 992px){
+    width: 100%;
+  }
 `;
 
 export const RightItem = styled.div`
   width: 40%;
   position: relative;
+  @media(max-width: 992px){
+    width: 100%;
+  }
 `;
 
 export const ItemPhotoLeft = styled.div`
@@ -55,6 +90,13 @@ export const ItemPhotoRight = styled.div`
   background-size: cover;
   background-position: 50%;
   border-radius: 4px;
+  @media(max-width: 1200px){
+    margin-left: 0px;
+  }
+  @media(max-width: 992px){
+    padding-top: 60%;
+    margin-top: 200px;
+  }
 `;
 
 export const TextArea = styled.div`
@@ -65,6 +107,9 @@ export const TextArea = styled.div`
   margin-left: 50%;
   transform: translate(-50%, 50%);
   border-radius: 4px;
+  @media(max-width: 1550px){
+    padding: 2rem;
+  }
 `;
 
 export const ProductHeader = styled.h4`

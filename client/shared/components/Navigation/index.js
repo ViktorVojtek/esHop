@@ -19,31 +19,31 @@ const Navigation = () => {
   const toggle = () => setIsOpen(!isOpen);
 
   return (
-    <Wrapper>
+    <Wrapper id="navigation">
       <Navbar className="bg-white" expand="md">
         <Container fluid>
           <Row className="w-100">
-            <Col lg="4" md="12">
-              <NavbarBrand href="/"><Logo src="./images/logo.png" alt="Červený kláštor"/></NavbarBrand>
+            <Col md="4" xs="12">
+              <NavbarBrand href="/"><Logo src="./images/logo.png" alt="Červený kláštor" /></NavbarBrand>
             </Col>
-            <Col lg="8" md="12" className="d-flex align-items-center" >
+            <Col md="8" xs="12" className="d-flex align-items-center" >
               <NavbarToggler onClick={toggle} />
               <Collapse isOpen={isOpen} navbar>
                 <Nav className="mr-auto" navbar>
                   <NavItem>
-                    <NavLink className="text-uppercase letter-spacing-1" href="/">Produkty</NavLink>
+                    <NavLink className="text-uppercase letter-spacing-1 nav-link-main" href="/">Produkty</NavLink>
                   </NavItem>
                   <NavItem>
-                    <NavLink className="text-uppercase letter-spacing-1" href="/">Služby</NavLink>
+                    <NavLink className="text-uppercase letter-spacing-1 nav-link-main" href="/">Služby</NavLink>
                   </NavItem>
                   <NavItem>
-                    <NavLink className="text-uppercase letter-spacing-1" href="/">Pobyty</NavLink>
+                    <NavLink className="text-uppercase letter-spacing-1 nav-link-main" href="/">Pobyty</NavLink>
                   </NavItem>
                   <NavItem>
-                    <NavLink className="text-uppercase letter-spacing-1" href="/">o nás</NavLink>
+                    <NavLink className="text-uppercase letter-spacing-1 nav-link-main" href="/">o nás</NavLink>
                   </NavItem>
                   <NavItem>
-                    <NavLink className="text-uppercase letter-spacing-1" href="/">FAQ</NavLink>
+                    <NavLink className="text-uppercase letter-spacing-1 nav-link-main" href="/">FAQ</NavLink>
                   </NavItem>
                 </Nav>
               </Collapse>

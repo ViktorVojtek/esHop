@@ -6,6 +6,10 @@ export const Wrapper = styled.div`
   padding-left: 100px;
   padding-right: 100px;
   margin-top: 10rem;
+  @media(max-width: 1550px){
+    padding-left: 40px;
+    padding-right: 40px;
+  }
 `;
 export const H2 = styled.h2`
   margin-top: 3rem;
@@ -17,6 +21,12 @@ export const Text = styled.p`
   width: 500px;
   margin-top: 1rem;
   letter-spacing: 1px;
+  @media(max-width: 1200px){
+    font-size: 0.75rem;
+  }
+  @media(max-width: 992px){
+    width:100%;
+  }
 `;
 export const Items = styled.div`
   display: flex;
@@ -24,16 +34,35 @@ export const Items = styled.div`
   height: 100%;
   margin-top: 4rem;
   position: relative;
+  @media(max-width: 1200px){
+    margin-top: 6rem;
+  }
+  @media(max-width: 992px){
+    flex-direction: column;
+    margin-top: 2rem;
+  }
 `;
 
 export const LeftItem = styled.div`
   width: 40%;
   position: relative;
+  @media(max-width: 992px){
+    width: 100%;
+  }
 `;
 
 export const RightItem = styled.div`
   width: 60%;
   position: relative;
+  @media(max-width: 992px){
+    width: 75%;
+  }
+  @media(max-width: 992px){
+    flex-direction: column;
+    margin-top: 5rem;
+    width: 100%;
+    margin-bottom: 5rem;
+  }
 `;
 
 
@@ -55,6 +84,13 @@ export const TextArea = styled.div`
   border-radius: 4px;
   right: 0;
   transform: translateY(50%);
+  @media(max-width: 1550px){
+    padding: 2rem;
+  }
+  @media(max-width: 992px){
+    transform: translateY(55%);
+    margin: 2rem;
+  }
 `;
 
 export const ProductHeader = styled.h4`
@@ -68,6 +104,11 @@ export const Gradient = styled.div`;
   height: 100%;
   top: 6%;
   right: 10%;
+  @media(max-width: 992px){
+    height: 85%;
+    right:-80px;
+    top: 21%;
+  }
 `;
 
 export const Button = styled.button`
@@ -96,10 +137,20 @@ export const Button = styled.button`
       width: 40px;
     }
   }
+  @media(max-width: 1200px){
+    font-size: 1.2rem;
+  }
+  @media(max-width: 992px){
+    width: 33%;
+  }
   
 `;
 export const ButtonsHolder = styled.div`
   display: flex;
   flex-direction: column;
   align-items: start;
+  @media(max-width: 992px){
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 `;

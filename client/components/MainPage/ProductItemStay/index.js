@@ -64,7 +64,7 @@ const ProductItemStay = ({
         </LeftItem>
         <RightItem>
           <ItemPhotoRight imageUrl={actualStay.url}>
-            <TextArea>
+            <TextArea className="stay-item">
               <ProductHeader>{actualStay.header}</ProductHeader>
               <Text>{actualStay.text}</Text>
             </TextArea>

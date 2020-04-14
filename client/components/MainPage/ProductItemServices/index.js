@@ -15,7 +15,7 @@ const ProductItemServices = ({
       <Gradient />
       <LeftItem>
         <ItemPhotoLeft imageUrlL="./images/index/sluzby.jpg">
-          <TextArea>
+          <TextArea className="card-item">
             <ProductHeader>Darčekové poukážky</ProductHeader>
             <Text>
               Naše darčekové poukážky prinášajú na prednej strane veľký priestor
@@ -28,7 +28,7 @@ const ProductItemServices = ({
       </LeftItem>
       <RightItem>
         <ItemPhotoRight imageUrlR="./images/index/sluzby2.jpg">
-          <TextArea>
+          <TextArea className="card-item">
             <ProductHeader>Permanentky</ProductHeader>
             <Text>
               Tešíme sa z každej Vašej návštevy a preto Vám prinášame extra zľavy
@@ -43,7 +43,7 @@ const ProductItemServices = ({
       <Gradient2 />
       <LeftItem2>
         <ItemPhotoLeft2 imageUrl="./images/index/sluzby3.jpg">
-          <TextArea>
+          <TextArea className="card-item">
             <ProductHeader>Lekárske konzultácie a vyšetrenia</ProductHeader>
             <Text>
               Dokonalý oddych je zabezpečený prostredníctvom bohatej ponuky
@@ -56,7 +56,7 @@ const ProductItemServices = ({
       </LeftItem2>
       <RightItem2>
         <ItemPhotoRight2 imageUrl="./images/index/sluzby4.jpg">
-          <TextArea>
+          <TextArea className="card-item">
             <ProductHeader>Liečebné, relaxačné a kozmetické procedúry</ProductHeader>
             <Text>
               Dokonalý oddych je zabezpečený prostredníctvom bohatej ponuky

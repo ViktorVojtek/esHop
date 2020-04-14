@@ -16,7 +16,7 @@ const Intro = () => {
     <Wrapper>
       <Container fluid>
         <Row>
-          <Col lg="4" md="12">
+          <Col lg={{size: 4, order: 1}} md={{size: 12, order: 2}}>
             <Left>
               <H3>Červený Kláštor</H3>
               <H1>Zdravie až na prvom mieste.</H1>
@@ -25,13 +25,13 @@ const Intro = () => {
                 odneste si nezabudnuteľné zážitky,
                 ktoré Vás prijmú k návratu.
               </H4>
-              <LinkButton href="#products">Viac o nás</LinkButton>
+              <LinkButton className="button-link" href="#products">Viac o nás</LinkButton>
             </Left>
           </Col>
-          <Col lg="8" md="12">
+          <Col lg={{size: 8, order: 2}} md={{size: 12, order: 1}}>
             <Right>
               <CarouselProducts
-                setActiveItem = {setActiveItem}
+                setActiveItem={setActiveItem}
               />
               <Row className="mt-4">
                 <Col md="4" xs="12" className={activeItem === 0 ? 'active-text' : ''}>

@@ -14,4 +14,7 @@ export const Text = styled.span`
   font-size: 0.875rem;
   color: rgb(120, 125, 136);
   line-height: 1.2;
+  @media(max-width: 1200px){
+    font-size: .75rem;
+  }
 `;
