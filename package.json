@@ -6,6 +6,7 @@
     "dev": "nodemon ./server/eshop.js",
     "build": "next build",
     "start": "next start",
+    "production": "NODE_ENV=production forever start ./server/eshop.js",
     "prettier-watch": "onchange '**/*.js' -- prettier --write {{changed}}"
   },
   "dependencies": {
