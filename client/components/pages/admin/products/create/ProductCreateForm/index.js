@@ -42,10 +42,7 @@ const ProductCreateForm = () => {
       shortDescription: form.shortDescription.value,
       description: form.description.value,
       note: form.note.value,
-      price: {
-        ...productData.price,
-        value: +form.priceValue.value,
-      },
+      inStock: form.inStock.checked,
     };
 
     console.log(newProduct);
@@ -56,6 +53,8 @@ const ProductCreateForm = () => {
       console.log(err);
     }
   };
+
+  // console.log(productData);
 
   return (
     <Form onSubmit={handleSubmitProductData}>
@@ -98,21 +97,22 @@ const ProductCreateForm = () => {
         productData={productData}
         handleProductData={setProductData}
       />
-      {/* <FormGroup>
-        <InputGroup>
-          <Input type="number" id="priceValue" name="priceValue" default={0} step="0.01" placeholder="Enter price" />
-          <InputGroupAddon addonType="append">
-            <CurrencyBadge
-              productData={productData}
-              handleProductData={setProductData}
-            />
-          </InputGroupAddon>
-        </InputGroup>
-      </FormGroup> */}
       <ProductImages
         productData={productData}
         handleProductData={setProductData}
       />
+      <FormGroup>
+        <FormGroup check>
+          <Label check>
+            <Input
+              type="checkbox"
+              id="inStock"
+              name="inStock"
+            />
+            Is product in stock?
+          </Label>
+        </FormGroup>
+      </FormGroup>
       <FormGroup>
         <Button>Submit</Button>
       </FormGroup>
