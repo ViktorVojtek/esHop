@@ -5,7 +5,7 @@ import nextCookie from 'next-cookies';
 // import data from './state';
 // import typeDefs from './typeDefs';
 
-const domain = process.env.NODE_ENV === 'production' ? '' : 'localhost';
+const domain = process.env.NODE_ENV === 'production' ? 'ckshop.codebrothers.sk' : 'localhost';
 const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
 const port = 3012;
 const uri = process.env.NODE_ENV === 'production' ? `${protocol}://${domain}/api` : `${protocol}://${domain}:${port}/api`;
