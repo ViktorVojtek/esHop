@@ -119,11 +119,18 @@ ProductImages.propTypes = {
     images: PropTypes.arrayOf(PropTypes.object),
     note: PropTypes.string,
     title: PropTypes.string,
-    price: PropTypes.shape({
-      currency: PropTypes.string,
-      currencySign: PropTypes.string,
-      value: PropTypes.number,
-    }),
+    variant: PropTypes.arrayOf(
+      PropTypes.shape({
+        default: PropTypes.bool,
+        title: PropTypes.string,
+        price: PropTypes.shape({
+          currency: PropTypes.string,
+          currencySign: PropTypes.string,
+          discount: PropTypes.number,
+          value: PropTypes.number,
+        }),
+      })
+    ),
   }).isRequired,
   handleProductData: PropTypes.func.isRequired,
 };

@@ -11,6 +11,7 @@ const Product = gql`
   input ProductPriceInput {
     currency: String!
     currencySign: String!
+    discount: Int
     value: Float!
   }
 
@@ -23,7 +24,6 @@ const Product = gql`
   input ProductInput {
     category: String
     description: String
-    discount: Float
     inStock: Int
     modifiedByUserId: String
     shortDescription: String
@@ -44,6 +44,7 @@ const Product = gql`
   type ProductPrice {
     currency: String
     currencySign: String
+    discount: Int
     value: Float
   }
 
@@ -61,7 +62,6 @@ const Product = gql`
     dateModified: String
     description: String
     deleted: Boolean
-    discount: Float
     inStock: Int
     modifiedByUserId: String
     shortDescription: String
