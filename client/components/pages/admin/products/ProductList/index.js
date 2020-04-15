@@ -1,12 +1,14 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
+import Link from 'next/link';
 import { useQuery } from '@apollo/react-hooks';
 
-import { ListGroup, ListGroupItem } from 'reactstrap';
+import { Button, ListGroup, ListGroupItem, Col, Row } from 'reactstrap';
 
-import { PRODUCT_QUERY } from '../../../../../app-data/graphql/query';
+import { PRODUCTS_QUERY } from '../../../../../app-data/graphql/query';
 
 const ProductList = () => {
-  const { loading, error, data } = useQuery(PRODUCT_QUERY);
+  const { loading, error, data } = useQuery(PRODUCTS_QUERY);
 
   if (loading) {
     return <>loading</>;
@@ -21,7 +23,23 @@ const ProductList = () => {
   return products && products.length > 0 ? (
     <ListGroup>
       {products.map(({ title, _id }) => (
-        <ListGroupItem key={_id}>{title}</ListGroupItem>
+        <ListGroupItem key={_id}>
+          <Row>
+            <Col>{title}</Col>
+            <Col className="text-right">
+              <Button color="primary">
+                <Link
+                  href={{
+                    pathname: '/admin/products/update',
+                    query: { id: _id },
+                  }}
+                >
+                  <a>Update</a>
+                </Link>
+              </Button>
+            </Col>
+          </Row>
+        </ListGroupItem>
       ))}
     </ListGroup>
   ) : (

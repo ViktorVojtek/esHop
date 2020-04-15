@@ -4,6 +4,7 @@ const Product = gql`
   input ProductImageInput {
     base64: String
     ext: String
+    path: String
     size: String
     title: String
   }
@@ -24,7 +25,7 @@ const Product = gql`
   input ProductInput {
     category: String
     description: String
-    inStock: Int
+    inStock: Boolean
     modifiedByUserId: String
     shortDescription: String
     subCategory: String
@@ -62,7 +63,7 @@ const Product = gql`
     dateModified: String
     description: String
     deleted: Boolean
-    inStock: Int
+    inStock: Boolean
     modifiedByUserId: String
     shortDescription: String
     subCategory: String

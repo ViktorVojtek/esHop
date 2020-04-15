@@ -27,7 +27,6 @@ export const CREATE_PRODUCT_MUTATION = gql`
       dateCreated
       dateModified
       description
-      discount
       inStock
       modifiedByUserId
       shortDescription
@@ -44,6 +43,39 @@ export const CREATE_PRODUCT_MUTATION = gql`
         price {
           currency
           currencySign
+          discount
+          value
+        }
+        title
+      }
+    }
+  }
+`;
+
+export const UPDATE_PRODUCT_MUTATION = gql`
+  mutation updateProduct($_id: String!, $productInput: ProductInput!) {
+    updateProduct(_id: $_id, productInput: $productInput) {
+      category
+      dateCreated
+      dateModified
+      description
+      inStock
+      modifiedByUserId
+      shortDescription
+      subCategory
+      images {
+        path
+        size
+        title
+      }
+      note
+      title
+      variant {
+        default
+        price {
+          currency
+          currencySign
+          discount
           value
         }
         title

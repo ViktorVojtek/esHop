@@ -1,4 +1,4 @@
-class modError extends Error {
+class ModError extends Error {
   constructor(code, message) {
     super(code, message);
 
@@ -7,4 +7,4 @@ class modError extends Error {
   }
 }
 
-module.exports = modError;
+module.exports = ModError;

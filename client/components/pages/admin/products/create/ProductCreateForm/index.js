@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import {
   Button,
@@ -6,11 +6,10 @@ import {
   FormGroup,
   Label,
   Input,
-  // InputGroup,
-  // InputGroupAddon,
 } from 'reactstrap';
+import PropTypes from 'prop-types';
 
-import { CREATE_PRODUCT_MUTATION } from '../../../../../../app-data/graphql/mutation';
+import { CREATE_PRODUCT_MUTATION, UPDATE_PRODUCT_MUTATION} from '../../../../../../app-data/graphql/mutation';
 import {
   PRODUCT_QUERY,
   CATEGORIES_QUERY,
@@ -19,12 +18,20 @@ import {
 
 import DynamicSelect from './components/DataSelect';
 import ProductImages from './components/ProductImages';
-// import CurrencyBadge from './components/CurrencyBadge';
 import ProductVariant from './components/ProductVariant';
 
-const ProductCreateForm = () => {
-  const [productData, setProductData] = useState({});
+const ProductCreateForm = ({ productDataProp }) => {
+  const [productData, setProductData] = useState(productDataProp || {});
+  
+  useEffect(() => {
+    setProductData(productDataProp);
+  }, [productDataProp]);
+
   const [createProduct] = useMutation(CREATE_PRODUCT_MUTATION, {
+    refetchQueries: [{ query: PRODUCT_QUERY }],
+  });
+
+  const [updateProduct] = useMutation(UPDATE_PRODUCT_MUTATION, {
     refetchQueries: [{ query: PRODUCT_QUERY }],
   });
 
@@ -34,34 +41,41 @@ const ProductCreateForm = () => {
 
   const handleSubmitProductData = async (event) => {
     event.preventDefault();
-
-    const form = event.currentTarget;
-    const newProduct = {
-      ...productData,
-      title: form.title.value,
-      shortDescription: form.shortDescription.value,
-      description: form.description.value,
-      note: form.note.value,
-      inStock: form.inStock.checked,
-    };
-
-    console.log(newProduct);
+    console.log(productData);
 
     try {
-      await createProduct({ variables: { productInput: newProduct } });
+      if (Object.keys(productDataProp).length === 0) {
+        await createProduct({ variables: { productInput: productData } });
+      } else {
+        const { _id } = productDataProp;
+
+        // TODO: REMOVE __typename from images object array and from productData
+
+        await updateProduct({ variables: { _id, productInput: productData  } });
+      }
     } catch (err) {
       console.log(err);
     }
   };
 
-  // console.log(productData);
+  console.log(productData);
 
   return (
     <Form onSubmit={handleSubmitProductData}>
-      <h5>Products</h5>
       <FormGroup>
         <Label for="title">Title</Label>
-        <Input id="title" type="text" placeholder="Insert product title" />
+        <Input
+          id="title"
+          type="text"
+          placeholder="Insert product title"
+          onChange={(event) => {
+            handleSetProductData({
+              ...productData,
+              title: event.currentTarget.value,
+            });
+          }}
+          value={productData.title || ''}
+        />
       </FormGroup>
       <DynamicSelect
         category
@@ -80,6 +94,13 @@ const ProductCreateForm = () => {
           id="shortDescription"
           name="shortDescription"
           placeholder="Short description"
+          onChange={(event) => {
+            handleSetProductData({
+              ...productData,
+              shortDescription: event.currentTarget.value,
+            });
+          }}
+          value={productData.shortDescription || ''}
         />
       </FormGroup>
       <FormGroup>
@@ -88,10 +109,29 @@ const ProductCreateForm = () => {
           id="description"
           name="description"
           placeholder="Description"
+          onChange={(event) => {
+            handleSetProductData({
+              ...productData,
+              description: event.currentTarget.value,
+            });
+          }}
+          value={productData.description || ''}
         />
       </FormGroup>
       <FormGroup>
-        <Input type="textarea" id="note" name="note" placeholder="Note" />
+        <Input
+          type="textarea"
+          id="note"
+          name="note"
+          placeholder="Note"
+          onChange={(event) => {
+            handleSetProductData({
+              ...productData,
+              note: event.currentTarget.value,
+            });
+          }}
+          value={productData.note || ''}
+        />
       </FormGroup>
       <ProductVariant
         productData={productData}
@@ -108,6 +148,13 @@ const ProductCreateForm = () => {
               type="checkbox"
               id="inStock"
               name="inStock"
+              onChange={(event) => {
+                handleSetProductData({
+                  ...productData,
+                  inStock: event.currentTarget.checked,
+                });
+              }}
+              checked={productData.inStock || false}
             />
             Is product in stock?
           </Label>
@@ -119,5 +166,36 @@ const ProductCreateForm = () => {
     </Form>
   );
 };
+
+ProductCreateForm.defaultProps = {
+  productDataProp: {},
+};
+ProductCreateForm.propTypes = {
+  productDataProp: PropTypes.shape({
+    _id: PropTypes.string,
+    category: PropTypes.string,
+    description: PropTypes.string,
+    discount: PropTypes.number,
+    inStock: PropTypes.bool,
+    modifiedByUserId: PropTypes.string,
+    shortDescription: PropTypes.string,
+    subCategory: PropTypes.string,
+    images: PropTypes.arrayOf(PropTypes.object),
+    note: PropTypes.string,
+    title: PropTypes.string,
+    variant: PropTypes.arrayOf(
+      PropTypes.shape({
+        default: PropTypes.bool,
+        title: PropTypes.string,
+        price: PropTypes.shape({
+          currency: PropTypes.string,
+          currencySign: PropTypes.string,
+          discount: PropTypes.number,
+          value: PropTypes.number,
+        }),
+      })
+    ),
+  }),
+}; 
 
 export default ProductCreateForm;

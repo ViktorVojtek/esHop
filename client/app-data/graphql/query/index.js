@@ -24,14 +24,13 @@ export const CURRENCIES_QUERY = gql`
 `;
 
 export const PRODUCT_QUERY = gql`
-  query products {
-    products {
+  query product($id: String!) {
+    product(id: $id) {
       _id
       category
       dateCreated
       dateModified
       description
-      discount
       inStock
       modifiedByUserId
       shortDescription
@@ -48,6 +47,40 @@ export const PRODUCT_QUERY = gql`
         price {
           currency
           currencySign
+          discount
+          value
+        }
+        title
+      }
+    }
+  }
+`;
+
+export const PRODUCTS_QUERY = gql`
+  query products {
+    products {
+      _id
+      category
+      dateCreated
+      dateModified
+      description
+      inStock
+      modifiedByUserId
+      shortDescription
+      subCategory
+      images {
+        path
+        size
+        title
+      }
+      note
+      title
+      variant {
+        default
+        price {
+          currency
+          currencySign
+          discount
           value
         }
         title

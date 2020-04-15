@@ -29,7 +29,7 @@ const App = async () => {
       createLocaleMiddleware({
         priority: ['default', 'accept-language'],
         default: 'sk-SK',
-      }),
+      })
     );
 
     const server = new ApolloServer({
@@ -37,12 +37,14 @@ const App = async () => {
       typeDefs,
       resolvers,
       introspection: true,
-      playground: dev ? ({
-        endpoint: 'api',
-        settings: {
-          'editor.theme': 'light',
-        },
-      }) : true,
+      playground: dev
+        ? {
+            endpoint: 'api',
+            settings: {
+              'editor.theme': 'light',
+            },
+          }
+        : true,
     });
 
     server.applyMiddleware({ app, path: '/api' });
@@ -50,11 +52,20 @@ const App = async () => {
     await db();
     // await setup();
 
+    /* app.get('/admin/products/update', (req, res) => {
+      console.log(req.params);
+      console.log('\n');
+      console.log(req.query);
+
+      return handle(req, res);
+    }); */
     app.get('*', (req, res) => handle(req, res));
 
     app.listen({ port });
 
-    console.log(`🚀 Server ready at http://localhost:${port}${server.graphqlPath}`);
+    console.log(
+      `🚀 Server ready at http://localhost:${port}${server.graphqlPath}`
+    );
   } catch (err) {
     console.log(err);
     process.exit(1);

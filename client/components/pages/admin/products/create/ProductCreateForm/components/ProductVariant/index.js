@@ -210,7 +210,7 @@ ProductVariant.propTypes = {
     category: PropTypes.string,
     description: PropTypes.string,
     discount: PropTypes.number,
-    inStock: PropTypes.number,
+    inStock: PropTypes.bool,
     modifiedByUserId: PropTypes.string,
     shortDescription: PropTypes.string,
     subCategory: PropTypes.string,

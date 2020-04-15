@@ -57,7 +57,7 @@ CurrencyBadge.propTypes = {
     category: PropTypes.string,
     description: PropTypes.string,
     discount: PropTypes.number,
-    inStock: PropTypes.number,
+    inStock: PropTypes.bool,
     modifiedByUserId: PropTypes.string,
     shortDescription: PropTypes.string,
     subCategory: PropTypes.string,
@@ -71,6 +71,7 @@ CurrencyBadge.propTypes = {
         price: PropTypes.shape({
           currency: PropTypes.string,
           currencySign: PropTypes.string,
+          discount: PropTypes.number,
           value: PropTypes.number,
         }),
       })

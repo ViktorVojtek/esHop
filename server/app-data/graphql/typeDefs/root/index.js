@@ -5,6 +5,7 @@ const rootTypeDefs = gql`
     categories: [Category]
     currencies: [Currency]
     products: [Product]
+    product(id: String!): Product
     subCategories: [SubCategory]
     users: [User]
   }

@@ -1,5 +1,5 @@
 /* eslint-disable react/no-array-index-key */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { Input, FormGroup } from 'reactstrap';
@@ -8,7 +8,11 @@ import Carousel from '@brainhubeu/react-carousel';
 import ImagePreview from './components/ImagePreview';
 
 const ProductImages = ({ productData, handleProductData }) => {
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState(productData.images || []);
+
+  useEffect(() => {
+    setImages(productData.images);
+  }, [productData]);
 
   const toBase64 = (file) =>
     new Promise((resolve, reject) => {
@@ -93,11 +97,11 @@ const ProductImages = ({ productData, handleProductData }) => {
       />
       {images && images.length > 0 && (
         <Carousel slidesPerPage={images.length > 1 ? 2 : 1} arrows>
-          {images.map(({ base64 }, i) => (
+          {images.map(({ base64, path }, i) => (
             <ImagePreview
               key={i}
               idx={i}
-              srcImg={base64}
+              srcImg={base64 || path}
               removeImage={handleRemoveImage}
             />
           ))}
@@ -112,7 +116,7 @@ ProductImages.propTypes = {
     category: PropTypes.string,
     description: PropTypes.string,
     discount: PropTypes.number,
-    inStock: PropTypes.number,
+    inStock: PropTypes.bool,
     modifiedByUserId: PropTypes.string,
     shortDescription: PropTypes.string,
     subCategory: PropTypes.string,
