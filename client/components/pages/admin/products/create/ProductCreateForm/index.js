@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import {
@@ -41,7 +43,7 @@ const ProductCreateForm = ({ productDataProp }) => {
 
   const handleSubmitProductData = async (event) => {
     event.preventDefault();
-    console.log(productData);
+    // console.log(productData);
 
     try {
       if (Object.keys(productDataProp).length === 0) {
@@ -49,16 +51,22 @@ const ProductCreateForm = ({ productDataProp }) => {
       } else {
         const { _id } = productDataProp;
 
-        // TODO: REMOVE __typename from images object array and from productData
+        const {
+          dateCreated,
+          dateModified,
+          ...productInput
+        } = productData;
 
-        await updateProduct({ variables: { _id, productInput: productData  } });
+        console.log(productInput);
+
+        // await updateProduct({ variables: { _id, productInput  } });
       }
     } catch (err) {
       console.log(err);
     }
   };
 
-  console.log(productData);
+  // console.log(productData);
 
   return (
     <Form onSubmit={handleSubmitProductData}>

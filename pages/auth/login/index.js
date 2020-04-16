@@ -14,6 +14,14 @@ import { login } from '../../../client/app-data/lib/auth';
 const LogIn = () => {
   const [loginUserMutate, { error, loading }] = useMutation(LOGIN_USER_MUTATION);
 
+  if (error) {
+    return <>{error}</>;
+  }
+
+  if (loading) {
+    return <>Loading</>;
+  }
+
   const handleSubmitLogin = async (event) => {
     try {
       event.preventDefault();

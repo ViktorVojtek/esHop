@@ -11,7 +11,7 @@ const ProductImages = ({ productData, handleProductData }) => {
   const [images, setImages] = useState(productData.images || []);
 
   useEffect(() => {
-    setImages(productData.images);
+    setImages(productData.images || []);
   }, [productData]);
 
   const toBase64 = (file) =>

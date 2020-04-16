@@ -25,7 +25,9 @@ const customFetch = (url, options, ctx) => {
 
 const client = (ctx) => (
   new ApolloClient({
-    cache: new InMemoryCache(),
+    cache: new InMemoryCache({
+      addTypename: false
+    }),
     credentials: 'include',
     uri,
     fetch: (url, options) => customFetch(url, options, ctx),
