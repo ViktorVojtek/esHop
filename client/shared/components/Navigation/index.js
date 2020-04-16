@@ -26,7 +26,7 @@ const Navigation = () => {
             <Col md="4" xs="12">
               <NavbarBrand href="/"><Logo src="./images/logo.png" alt="Červený kláštor" /></NavbarBrand>
             </Col>
-            <Col md="8" xs="12" className="d-flex align-items-center" >
+            <Col md="8" xs="12" className="d-flex align-items-center">
               <NavbarToggler onClick={toggle} />
               <Collapse isOpen={isOpen} navbar>
                 <Nav className="mr-auto" navbar>

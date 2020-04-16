@@ -15,6 +15,20 @@ export const H2 = styled.h2`
   margin-top: 3rem;
 `;
 export const Text = styled.p`
+  font-size: 1rem;
+  color: rgb(120, 125, 136);
+  line-height: 1.2;
+  width: 500px;
+  margin-top: 1rem;
+  letter-spacing: 1px;
+  @media(max-width: 1200px){
+    font-size: 0.75rem;
+  }
+  @media(max-width: 992px){
+    width:100%;
+  }
+`;
+export const Text2 = styled.p`
   font-size: 0.8rem;
   color: rgb(120, 125, 136);
   line-height: 1.2;

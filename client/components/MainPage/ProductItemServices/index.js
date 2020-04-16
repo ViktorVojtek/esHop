@@ -2,7 +2,7 @@ import React from 'react';
 import {
   Wrapper, H2, Text, LeftItem, RightItem, Items,
   ItemPhotoLeft, ItemPhotoRight, TextArea, ProductHeader, Gradient, Gradient2, LeftItem2,
-  ItemPhotoLeft2, ItemsBottom, RightItem2, ItemPhotoRight2,
+  ItemPhotoLeft2, ItemsBottom, RightItem2, ItemPhotoRight2, Text2,
 } from './styles/productItemServices.style';
 
 const ProductItemServices = ({
@@ -10,7 +10,7 @@ const ProductItemServices = ({
 }) => (
   <Wrapper>
     <H2>{title}</H2>
-    <Text>{about}</Text>
+    <Text2>{about}</Text2>
     <Items>
       <Gradient />
       <LeftItem>

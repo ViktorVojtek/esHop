@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {
   Wrapper, H2, Text, LeftItem, RightItem, Items, Button, ButtonsHolder,
-  ItemPhotoRight, TextArea, ProductHeader, Gradient,
+  ItemPhotoRight, TextArea, ProductHeader, Gradient, Text2,
 } from './styles';
 
 const stays = [
@@ -66,7 +66,7 @@ const ProductItemStay = ({
           <ItemPhotoRight imageUrl={actualStay.url}>
             <TextArea className="stay-item">
               <ProductHeader>{actualStay.header}</ProductHeader>
-              <Text>{actualStay.text}</Text>
+              <Text2>{actualStay.text}</Text2>
             </TextArea>
           </ItemPhotoRight>
         </RightItem>

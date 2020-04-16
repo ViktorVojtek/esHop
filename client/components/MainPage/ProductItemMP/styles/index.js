@@ -32,6 +32,21 @@ export const Text = styled.p`
     font-size: 0.75rem;
   }
 `;
+export const Text2 = styled.p`
+  font-size: 1rem;
+  color: rgb(120, 125, 136);
+  line-height: 1.2;
+  width: 400px;
+  margin-top: 1rem;
+  letter-spacing: 1px;
+  @media(max-width: 1440px){
+    width: 350px;
+  }
+  @media(max-width: 1200px){
+    width: 300px;
+    font-size: 0.75rem;
+  }
+`;
 export const TextLeft = styled.p`
   font-size: 0.8rem;
   color: rgb(120, 125, 136);

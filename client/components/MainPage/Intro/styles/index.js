@@ -22,11 +22,12 @@ export const H1 = styled.h1`
   font-weight: 600;
   letter-spacing: -1px;
   margin-top: 1.5rem;
+  padding-right: 2rem;
 `;
 export const H3 = styled.h3`
   color: rgb(150, 158, 172);
   line-height: 1.25;
-  margin-top: 120px;
+  margin-top: 140px;
   @media(max-width: 1550px){
     margin-top: 80px;
   }

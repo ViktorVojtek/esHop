@@ -1,16 +1,16 @@
 import React from 'react';
 import {
   Wrapper, H2, Text, LeftItem, RightItem, Items,
-  ItemPhotoLeft, ItemPhotoRight, TextArea, ProductHeader, Gradient, Gradient2, TextLeft,
+  ItemPhotoLeft, ItemPhotoRight, TextArea, ProductHeader, Gradient, Gradient2, TextLeft, Text2,
 } from './styles';
 
 const ProductItem = ({
   title, about, headerLeft, headerRight, textLeft, textRight, imageUrlL, imageUrlR,
-  width, height, top, right, gradient1, 
+  width, height, top, right, gradient1,  
 }) => (
   <Wrapper>
     <H2>{title}</H2>
-    <Text>{about}</Text>
+    <Text2>{about}</Text2>
     <Items>
       <Gradient
         gradient1={gradient1}

@@ -35,7 +35,7 @@ export const LinkButton = styled.a`
 
 export default createGlobalStyle`
   * {
-    font-family: 'Open Sans', sans-serif;
+    font-family:MuseoSans-Normal;
   }
   #__next{
     overflow: hidden;
@@ -75,8 +75,15 @@ export default createGlobalStyle`
       font-weight: bold;
     }
   }
+  .active{
+    color: rgb(255,77,125) !important;
+  }
+  .not-active{
+    color: rgb(170,174,184) !important;
+  }
   .navbar{
-    padding: .75rem 1rem !important;
+    padding: 0.75rem 1rem !important;
+    background-color: #FFFFFF !important;
   }
   .card-item{
     cursor: pointer;
@@ -128,7 +135,7 @@ export default createGlobalStyle`
   }
   .nav-link-main{
     position: relative;
-    transition: all .5s cubic-bezier(1,.25,0,.75) 0s;
+    transition: transform .5s cubic-bezier(1,.25,0,.75) 0s;
     &:before {
       content: "";
       position: absolute;
@@ -151,6 +158,42 @@ export default createGlobalStyle`
     &:hover{
       color: rgb(101,106,119) !important;
       transform: translateY(-2px);
+    }
+  }
+  .product-item{
+    cursor: pointer;
+    margin-bottom: 30px;
+    transition: all 300ms linear 0s;
+    &:hover{
+      .card-title{
+        color: rgb(255,77,125) !important;
+      }
+      .p_icon{
+        bottom: 0px;
+      }
+    }
+    img{
+      height: 250px;
+    }
+    .card-body{
+      border-top: 1px solid rgba(0,0,0,.125);
+    }
+    .card-title{
+      font-weight: 500;
+      font-size: 1.2rem;
+      color: #4a4a4a;
+      user-select: none;
+      transition: all 300ms linear 0s;
+    }
+  }
+  .p_icon{
+    a{
+      &:hover{
+        background: rgb(255,77,125);
+        svg{
+          color: white;
+        }
+      }
     }
   }
 `;
