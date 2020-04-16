@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 
 import { CREATE_PRODUCT_MUTATION, UPDATE_PRODUCT_MUTATION} from '../../../../../../app-data/graphql/mutation';
 import {
-  PRODUCT_QUERY,
+  PRODUCTS_QUERY,
   CATEGORIES_QUERY,
   SUBCATEGORIES_QUERY,
 } from '../../../../../../app-data/graphql/query';
@@ -30,11 +30,11 @@ const ProductCreateForm = ({ productDataProp }) => {
   }, [productDataProp]);
 
   const [createProduct] = useMutation(CREATE_PRODUCT_MUTATION, {
-    refetchQueries: [{ query: PRODUCT_QUERY }],
+    refetchQueries: [{ query: PRODUCTS_QUERY }],
   });
 
   const [updateProduct] = useMutation(UPDATE_PRODUCT_MUTATION, {
-    refetchQueries: [{ query: PRODUCT_QUERY }],
+    refetchQueries: [{ query: PRODUCTS_QUERY }],
   });
 
   const handleSetProductData = (data) => {
