@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Currency = require('../../../../db/models/Currency');
 const { superSecret } = require('../../../../config');
 const { verifyToken } = require('../../utils');
-const modError = require('../../utils/error');
+const ModError = require('../../utils/error');
 
 const updateCurrency = async (root, { updateCurrencyInput }, ctx) => {
   try {
@@ -15,7 +15,7 @@ const updateCurrency = async (root, { updateCurrencyInput }, ctx) => {
     const currencyExist = await Currency.findOne({ _id: mongoose.Types.ObjectId(_id) });
 
     if (!currencyExist) {
-      throw new modError(404, 'Currency not exist');
+      throw new ModError(404, 'Currency not exist');
     }
 
     const updatedCurrency = await Currency.findOneAndUpdate(

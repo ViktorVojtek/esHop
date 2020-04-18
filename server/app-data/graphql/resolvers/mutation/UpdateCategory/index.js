@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Category = require('../../../../db/models/Category');
-const modError = require('../../utils/error');
+const ModError = require('../../utils/error');
+const { superSecret } = require('../../../../config');
 const { verifyToken } = require('../../utils');
 
 const updateCategory = async (root, { _id, title }, ctx) => {
@@ -10,7 +11,7 @@ const updateCategory = async (root, { _id, title }, ctx) => {
     const categoryExist = await Category.findOne({ _id: mongoose.Types.ObjectId(_id) });
 
     if (!categoryExist) {
-      throw new modError(404, 'Category not exist');
+      throw new ModError(404, 'Category not exist');
     }
 
     const sign = title.toUpperCase().replace(/ /g, '_');

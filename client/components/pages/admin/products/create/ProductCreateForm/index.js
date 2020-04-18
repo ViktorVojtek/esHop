@@ -60,7 +60,7 @@ const ProductCreateForm = ({ productDataProp }) => {
 
         console.log(productInput);
 
-        // await updateProduct({ variables: { _id, productInput  } });
+        await updateProduct({ variables: { _id, productInput  } });
       }
     } catch (err) {
       console.log(err);

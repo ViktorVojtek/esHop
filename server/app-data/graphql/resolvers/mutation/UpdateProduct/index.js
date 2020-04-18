@@ -20,7 +20,7 @@ const updateProduct = async (root, { _id, productInput }, ctx) => {
       ...prodRawDataWithOutImgs
     } = productInput;
 
-    const productData = new Product(prodRawDataWithOutImgs);
+    const productData = prodRawDataWithOutImgs;
 
     let i = 0;
     const imagesDataArr = [];
@@ -74,13 +74,26 @@ const updateProduct = async (root, { _id, productInput }, ctx) => {
     }
 
     const newProductData = {
-      ...productData.toObject(),
+      ...productData,
       images: resultImagesDataArr,
     };
 
     const updatedProduct = await Product.findOneAndUpdate(
       { _id: mongoose.Types.ObjectId(_id) },
-      { $set: newProductData },
+      {
+        $set: {
+          category: newProductData.category,
+          description: newProductData.description,
+          inStock: newProductData.inStock,
+          modifiedByUserId: newProductData.modifiedByUserId,
+          shortDescription: newProductData.shortDescription,
+          subCategory: newProductData.subCategory,
+          images: newProductData.images,
+          note: newProductData.note,
+          title: newProductData.title,
+          variant: newProductData.variant
+        }
+      },
       { new: true },
     );
 

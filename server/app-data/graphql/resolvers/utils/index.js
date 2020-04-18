@@ -1,10 +1,8 @@
 const jwt = require('jsonwebtoken');
 const path = require('path');
-const {
-  writeFile, mkdirp, unlink, remove,
-} = require('fs-extra');
+const { writeFile, mkdirp, unlink, remove } = require('fs-extra');
 
-const verifyToken = (ctx, secret) => (
+const verifyToken = (ctx, secret) =>
   new Promise((resolve, reject) => {
     const { token } = ctx;
 
@@ -27,10 +25,9 @@ const verifyToken = (ctx, secret) => (
 
       resolve(true);
     });
-  })
-);
+  });
 
-const removeDir = (dirPath) => (
+const removeDir = (dirPath) =>
   new Promise((resolve, reject) => {
     remove(dirPath, (err) => {
       if (err) {
@@ -39,10 +36,9 @@ const removeDir = (dirPath) => (
 
       resolve();
     });
-  })
-);
+  });
 
-const removeFile = (filePath) => (
+const removeFile = (filePath) =>
   new Promise((resolve, reject) => {
     unlink(filePath, (err) => {
       if (err) {
@@ -51,17 +47,11 @@ const removeFile = (filePath) => (
 
       resolve();
     });
-  })
-);
+  });
 
-const storeFile = (fileData) => (
+const storeFile = (fileData) =>
   new Promise((resolve, reject) => {
-    const {
-      fileName,
-      fileBase64Data,
-      dirName,
-      extension,
-    } = fileData;
+    const { fileName, fileBase64Data, dirName, extension } = fileData;
 
     const base64Data = fileBase64Data.split(';base64,')[1];
     const ext = extension;
@@ -69,7 +59,8 @@ const storeFile = (fileData) => (
     const extNorm = ext === 'jpeg' ? 'jpg' : ext;
 
     const dir = path.resolve(
-      __dirname, `../../../../../public/products/${dirName}`,
+      __dirname,
+      `../../../../../public/products/${dirName}`
     );
     const filePath = `${dir}/${fileName.toLowerCase()}.${extNorm}`;
 
@@ -83,13 +74,14 @@ const storeFile = (fileData) => (
           reject(wFerr);
         }
 
-        const resultFilePath = `${(filePath.split('public')[1]).replace(/\\/g, '/')}`;
+        const resultFilePath = `${filePath
+          .split('public')[1]
+          .replace(/\\/g, '/')}`;
 
         resolve(resultFilePath);
       });
     });
-  })
-);
+  });
 
 module.exports = {
   removeDir,
