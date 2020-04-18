@@ -1,11 +1,7 @@
 const Category = require('../../../../db/models/Category');
-const { superSecret } = require('../../../../config');
-const { verifyToken } = require('../../utils');
 
-const categories = async (root, args, ctx) => {
+const categories = async () => {
   try {
-    await verifyToken(ctx, superSecret);
-
     const result = await Category.find() || [];
 
     return result;

@@ -27,11 +27,11 @@ const removeSubCategory = require('./mutation/RemoveSubCategory');
 
 const resolvers = {
   Query: {
-    categories: async (root, args, ctx) => categories(root, args, ctx),
-    currencies: async (root, args, ctx) => currencies(root, args, ctx),
-    products: async (root, args, ctx) => products(root, args, ctx),
+    categories: async () => categories(),
+    currencies: async () => currencies(),
+    products: async () => products(),
     product: async (root, args, ctx) => product(root, args, ctx),
-    subCategories: async (root, args, ctx) => subCategories(root, args, ctx),
+    subCategories: async () => subCategories(),
     users: async (root, args, ctx) => users(root, args, ctx),
   },
   Mutation: {

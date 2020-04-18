@@ -1,11 +1,7 @@
 const Product = require('../../../../db/models/Product');
-const { superSecret } = require('../../../../config');
-const { verifyToken } = require('../../utils');
 
-const categories = async (root, args, ctx) => {
+const Products = async () => {
   try {
-    await verifyToken(ctx, superSecret);
-
     const result = await Product.find() || [];
 
     return result;
@@ -14,4 +10,4 @@ const categories = async (root, args, ctx) => {
   }
 };
 
-module.exports = categories;
+module.exports = Products;

@@ -1,11 +1,7 @@
 const Currency = require('../../../../db/models/Currency');
-const { superSecret } = require('../../../../config');
-const { verifyToken } = require('../../utils');
 
-const currencies = async (root, args, ctx) => {
+const currencies = async () => {
   try {
-    await verifyToken(ctx, superSecret);
-
     const result = await Currency.find() || [];
 
     return result;
