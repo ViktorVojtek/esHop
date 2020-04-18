@@ -1,11 +1,15 @@
 /* eslint-disable react/forbid-prop-types */
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 
 import { Input, FormGroup } from 'reactstrap';
 import PropTypes from 'prop-types';
 
 const DynamicSelect = ({ query, category, onSelect, productData }) => {
+  console.log(productData);
+  const [dataSelected, setDataSelected] = useState(
+    (category ? productData.category : productData.subCategory) || ''
+  );
   const { loading, error, data } = useQuery(query);
 
   if (loading) {
@@ -33,6 +37,8 @@ const DynamicSelect = ({ query, category, onSelect, productData }) => {
 
   const dataArr = category ? data.categories : data.subCategories;
 
+  console.log(dataSelected);
+
   return (
     <FormGroup>
       <Input type="select" onChange={handleOnChange}>
@@ -57,6 +63,7 @@ DynamicSelect.propTypes = {
   category: PropTypes.bool,
   onSelect: PropTypes.func.isRequired,
   productData: PropTypes.shape({
+    _id: PropTypes.string,
     category: PropTypes.string,
     description: PropTypes.string,
     discount: PropTypes.number,

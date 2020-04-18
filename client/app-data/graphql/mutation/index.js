@@ -84,6 +84,12 @@ export const UPDATE_PRODUCT_MUTATION = gql`
   }
 `;
 
+export const REMOVE_PRODUCT_MUTATION = gql`
+  mutation removeProduct($_id: String!) {
+    removeProduct(_id: $_id)
+  }
+`;
+
 export const LOGIN_USER_MUTATION = gql`
   mutation loginUser($userLoginInput: UserLoginInput!) {
     loginUser(userLoginInput: $userLoginInput) {

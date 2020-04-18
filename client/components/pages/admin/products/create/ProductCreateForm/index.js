@@ -23,6 +23,7 @@ import ProductImages from './components/ProductImages';
 import ProductVariant from './components/ProductVariant';
 
 const ProductCreateForm = ({ productDataProp }) => {
+  // console.log(productDataProp);
   const [productData, setProductData] = useState(productDataProp || {});
   
   useEffect(() => {
@@ -43,7 +44,6 @@ const ProductCreateForm = ({ productDataProp }) => {
 
   const handleSubmitProductData = async (event) => {
     event.preventDefault();
-    // console.log(productData);
 
     try {
       if (Object.keys(productDataProp).length === 0) {
@@ -52,6 +52,7 @@ const ProductCreateForm = ({ productDataProp }) => {
         const { _id } = productDataProp;
 
         const {
+          _id: strippedID,
           dateCreated,
           dateModified,
           ...productInput
@@ -65,8 +66,6 @@ const ProductCreateForm = ({ productDataProp }) => {
       console.log(err);
     }
   };
-
-  // console.log(productData);
 
   return (
     <Form onSubmit={handleSubmitProductData}>

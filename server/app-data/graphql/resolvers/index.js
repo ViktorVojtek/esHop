@@ -20,7 +20,7 @@ const removeCurrency = require('./mutation/RemoveCurrency');
 
 const createProduct = require('./mutation/CreateProduct');
 const updateProduct = require('./mutation/UpdateProduct');
-const removeProduct = require('./mutation/RemoveCategory');
+const removeProduct = require('./mutation/RemoveProduct');
 
 const createSubCategory = require('./mutation/CreateSubCategory');
 const removeSubCategory = require('./mutation/RemoveSubCategory');
