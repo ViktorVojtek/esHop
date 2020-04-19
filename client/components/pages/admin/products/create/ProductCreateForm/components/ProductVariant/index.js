@@ -17,10 +17,45 @@ import {
   ListGroup,
   ListGroupItem,
 } from 'reactstrap';
+import styled, { css, keyframes } from 'styled-components';
 
 import CurrencyBadge from '../CurrencyBadge';
 
 import { CURRENCIES_QUERY } from '../../../../../../../../app-data/graphql/query';
+
+const pulseAnim = keyframes`
+  0% {
+    -moz-box-shadow: 0 0 0 0 rgba(255, 30, 0, 0.4);
+    box-shadow: 0 0 0 0 rgba(255, 30, 0, 0.4);
+  }
+  70% {
+      -moz-box-shadow: 0 0 0 15px rgba(255, 30, 0, 0);
+      box-shadow: 0 0 0 15px rgba(255, 30, 0, 0);
+  }
+  100% {
+      -moz-box-shadow: 0 0 0 0 rgba(255, 30, 0, 0);
+      box-shadow: 0 0 0 0 rgba(255, 30, 0, 0);
+  }
+`;
+const PulseButton = styled.button`
+  color: #fff;
+  background-color: #6c757d;
+  border-color: #6c757d;
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: .25rem;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  animation: ${({ pulse }) => pulse ? css`${pulseAnim} 1.5s infinite` : ''};
+`;
+
 
 const useCheckDefaultExist = (arr) => {
   const [exist, toggleExist] = useState(false);
@@ -38,7 +73,7 @@ const useCheckDefaultExist = (arr) => {
   return exist;
 };
 
-const ProductVariant = ({ productData, handleProductData }) => {
+const ProductVariant = ({ productData, handleProductData, noVariant }) => {
   const [inChecked, toggleInCheck] = useState(false);
   const defaultExist = useCheckDefaultExist(productData.variant || []);
 
@@ -66,6 +101,8 @@ const ProductVariant = ({ productData, handleProductData }) => {
   const currency = currencies
     .filter(({ defaultCurrency }) => defaultCurrency)
     .pop();
+
+  console.log(noVariant);
 
   const handleAddVariant = () => {
     const { title: currencyTitle, sign: currencySign } = currency;
@@ -162,7 +199,12 @@ const ProductVariant = ({ productData, handleProductData }) => {
           </FormGroup>
         </Col>
         <Col>
-          <Button onClick={() => handleAddVariant()}>Add variant</Button>
+          <PulseButton
+            onClick={() => handleAddVariant()}
+            pulse={noVariant}
+          >
+            Add variant
+          </PulseButton>
         </Col>
       </Row>
       {productData.variant && productData.variant.length > 0 ? (
@@ -231,6 +273,7 @@ ProductVariant.propTypes = {
     ),
   }).isRequired,
   handleProductData: PropTypes.func.isRequired,
+  noVariant: PropTypes.bool.isRequired,
 };
 
 export default ProductVariant;

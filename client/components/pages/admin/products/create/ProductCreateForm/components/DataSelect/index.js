@@ -1,16 +1,23 @@
 /* eslint-disable react/forbid-prop-types */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 
 import { Input, FormGroup } from 'reactstrap';
 import PropTypes from 'prop-types';
 
 const DynamicSelect = ({ query, category, onSelect, productData }) => {
-  console.log(productData);
   const [dataSelected, setDataSelected] = useState(
     (category ? productData.category : productData.subCategory) || ''
   );
   const { loading, error, data } = useQuery(query);
+
+  useEffect(() => {
+    setDataSelected(
+      category
+        ? productData.category
+        : productData.subCategory
+    );
+  }, [category, productData]);
 
   if (loading) {
     return <>loading</>;
@@ -37,15 +44,17 @@ const DynamicSelect = ({ query, category, onSelect, productData }) => {
 
   const dataArr = category ? data.categories : data.subCategories;
 
-  console.log(dataSelected);
-
   return (
     <FormGroup>
-      <Input type="select" onChange={handleOnChange}>
+      <Input type="select" onChange={handleOnChange} value={dataSelected}>
         <option>{category ? 'Select category' : 'Select sub category'}</option>
         {dataArr && dataArr.length > 0
           ? dataArr.map(({ _id, title }) => (
-            <option key={_id} id={_id}>
+            <option
+              key={_id}
+              id={_id}
+              value={_id}
+            >
               {title}
             </option>
             ))

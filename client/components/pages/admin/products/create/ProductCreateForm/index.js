@@ -23,8 +23,8 @@ import ProductImages from './components/ProductImages';
 import ProductVariant from './components/ProductVariant';
 
 const ProductCreateForm = ({ productDataProp }) => {
-  // console.log(productDataProp);
   const [productData, setProductData] = useState(productDataProp || {});
+  const [noVariant, setNoVariant] = useState(false);
   
   useEffect(() => {
     setProductData(productDataProp);
@@ -45,32 +45,41 @@ const ProductCreateForm = ({ productDataProp }) => {
   const handleSubmitProductData = async (event) => {
     event.preventDefault();
 
-    try {
-      if (Object.keys(productDataProp).length === 0) {
-        await createProduct({ variables: { productInput: productData } });
-      } else {
-        const { _id } = productDataProp;
+    const { variant } = productData;
 
-        const {
-          _id: strippedID,
-          dateCreated,
-          dateModified,
-          ...productInput
-        } = productData;
-
-        console.log(productInput);
-
-        await updateProduct({ variables: { _id, productInput  } });
+    if (!variant || variant.length < 1) {
+      setNoVariant(true);
+    } else {
+      if (noVariant) {
+        setNoVariant(false);
       }
-    } catch (err) {
-      console.log(err);
+
+      try {
+        if (Object.keys(productDataProp).length === 0) {
+          await createProduct({ variables: { productInput: productData } });
+        } else {
+          const { _id } = productDataProp;
+
+          const {
+            _id: strippedID,
+            dateCreated,
+            dateModified,
+            ...productInput
+          } = productData;
+
+          console.log(productInput);
+
+          await updateProduct({ variables: { _id, productInput  } });
+        }
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 
   return (
     <Form onSubmit={handleSubmitProductData}>
       <FormGroup>
-        <Label for="title">Title</Label>
         <Input
           id="title"
           type="text"
@@ -141,6 +150,7 @@ const ProductCreateForm = ({ productDataProp }) => {
         />
       </FormGroup>
       <ProductVariant
+        noVariant={noVariant}
         productData={productData}
         handleProductData={setProductData}
       />
