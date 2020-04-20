@@ -12,7 +12,7 @@ import Layout from '../../../../client/shared/components/Layout';
 import NavHeader from '../../../../client/shared/components/NavHeader';
 import LhsNav from '../../../../client/shared/components/LhsNav';
 
-import ProductForm from '../../../../client/components/pages/admin/products/create/ProductCreateForm';
+import ProductForm from '../../../../client/components/pages/admin/products/ProductForm';
 
 const UpdateProduct = () => {
   const router = useRouter();

@@ -7,7 +7,7 @@ import { Button, ListGroup, ListGroupItem, Col, Row } from 'reactstrap';
 import { Context } from '../../../../../app-data/StateManagement/Store';
 import { REMOVE_PRODUCT_MUTATION } from '../../../../../app-data/graphql/mutation';
 import { PRODUCTS_QUERY } from '../../../../../app-data/graphql/query';
-import Modal from '../../../../../shared/components/Modal'
+import Modal from '../../../../../shared/components/Modal';
 
 const ProductList = () => {
   const [idState, setIdState] = useState('');
@@ -51,9 +51,13 @@ const ProductList = () => {
         <p className="text-center">
           Do you really want to delete this item?
           <br />
-          <Button color="danger" onClick={() => handleDeleteProduct()}>Yes</Button>
+          <Button color="danger" onClick={() => handleDeleteProduct()}>
+            Yes
+          </Button>
           {' '}
-          <Button color="secondary" onClick={() => handleHideModal()}>Cancel</Button>
+          <Button color="secondary" onClick={() => handleHideModal()}>
+            Cancel
+          </Button>
         </p>
       </Modal>
       <ListGroup>
@@ -69,9 +73,7 @@ const ProductList = () => {
                   }}
                 >
                   <a>
-                    <Button color="primary">
-                      Update
-                    </Button>
+                    <Button color="primary">Update</Button>
                   </a>
                 </Link>
                 {' '}

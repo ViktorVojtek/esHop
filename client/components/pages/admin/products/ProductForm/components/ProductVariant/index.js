@@ -21,7 +21,7 @@ import styled, { css, keyframes } from 'styled-components';
 
 import CurrencyBadge from '../CurrencyBadge';
 
-import { CURRENCIES_QUERY } from '../../../../../../../../app-data/graphql/query';
+import { CURRENCIES_QUERY } from '../../../../../../../app-data/graphql/query';
 
 const pulseAnim = keyframes`
   0% {
@@ -48,14 +48,19 @@ const PulseButton = styled.button`
   cursor: pointer;
   user-select: none;
   border: 1px solid transparent;
-  padding: .375rem .75rem;
+  padding: 0.375rem 0.75rem;
   font-size: 1rem;
   line-height: 1.5;
-  border-radius: .25rem;
-  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-  animation: ${({ pulse }) => pulse ? css`${pulseAnim} 1.5s infinite` : ''};
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+  border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  animation: ${({ pulse }) =>
+    pulse
+      ? css`
+          ${pulseAnim} 1.5s infinite
+        `
+      : ''};
 `;
-
 
 const useCheckDefaultExist = (arr) => {
   const [exist, toggleExist] = useState(false);
@@ -101,8 +106,6 @@ const ProductVariant = ({ productData, handleProductData, noVariant }) => {
   const currency = currencies
     .filter(({ defaultCurrency }) => defaultCurrency)
     .pop();
-
-  console.log(noVariant);
 
   const handleAddVariant = () => {
     const { title: currencyTitle, sign: currencySign } = currency;
@@ -199,10 +202,7 @@ const ProductVariant = ({ productData, handleProductData, noVariant }) => {
           </FormGroup>
         </Col>
         <Col>
-          <PulseButton
-            onClick={() => handleAddVariant()}
-            pulse={noVariant}
-          >
+          <PulseButton onClick={() => handleAddVariant()} pulse={noVariant}>
             Add variant
           </PulseButton>
         </Col>

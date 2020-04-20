@@ -12,11 +12,7 @@ const DynamicSelect = ({ query, category, onSelect, productData }) => {
   const { loading, error, data } = useQuery(query);
 
   useEffect(() => {
-    setDataSelected(
-      category
-        ? productData.category
-        : productData.subCategory
-    );
+    setDataSelected(category ? productData.category : productData.subCategory);
   }, [category, productData]);
 
   if (loading) {
@@ -50,11 +46,7 @@ const DynamicSelect = ({ query, category, onSelect, productData }) => {
         <option>{category ? 'Select category' : 'Select sub category'}</option>
         {dataArr && dataArr.length > 0
           ? dataArr.map(({ _id, title }) => (
-            <option
-              key={_id}
-              id={_id}
-              value={_id}
-            >
+            <option key={_id} id={_id} value={_id}>
               {title}
             </option>
             ))

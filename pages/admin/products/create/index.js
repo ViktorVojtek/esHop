@@ -8,7 +8,7 @@ import Layout from '../../../../client/shared/components/Layout';
 import NavHeader from '../../../../client/shared/components/NavHeader';
 import LhsNav from '../../../../client/shared/components/LhsNav';
 
-import ProductCreateForm from '../../../../client/components/pages/admin/products/create/ProductCreateForm';
+import ProductForm from '../../../../client/components/pages/admin/products/ProductForm';
 
 const ProductCreate = () => (
   <>
@@ -26,7 +26,7 @@ const ProductCreate = () => (
         </Col>
         <Col xs="6" sm="9">
           <p>Product create content.</p>
-          <ProductCreateForm />
+          <ProductForm />
         </Col>
       </Row>
     </Layout>
