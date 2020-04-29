@@ -2,8 +2,9 @@ import styled from 'styled-components';
 
 export const Aside = styled.div`
   width: 100%;
-  border: 1px solid #ececec;
-  padding: 1rem;
+  background-color: rgb(0, 174, 239);
+  border-radius: 4px;
+  padding: 2.4em;
 `;
 export const Buttons = styled.div`
   width: 100%;
@@ -13,11 +14,10 @@ export const Buttons = styled.div`
 `;
 
 export const Button = styled.a`
-  color: rgb(170,174,184);
-  text-transform: uppercase;
-  font-size: 1rem;
+  color: white;
+  font-size: 1.25rem;
   font-weight: bold;
-  padding: .5rem 1rem;
+  padding: .25rem 0rem;
   cursor:pointer;
   &:hover{
     color: rgb(255,77,125) !important;
@@ -26,16 +26,9 @@ export const Button = styled.a`
 
 export const H3 = styled.h2`
   text-align: left;
-  color: black;
+  color: #ffffff;
   position: relative;
-  margin-top: 1rem !important;
-  font-size: 1.75rem !important;
-  &:before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 1px;
-    bottom: -2px;
-    background-color: rgb(255,77,125);
+  font-size: 1.5em !important;
+  font-weight: 400;
   }
 `; 

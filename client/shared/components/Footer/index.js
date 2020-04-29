@@ -8,10 +8,10 @@ const Footer = () => (
   <Wrapper>
     <NavigationBottom />
     <BottomDiv>
-      <Logo src="./images/logo.png" alt="Červený Kláštor" />
+      <Logo src="/images/logo.png" alt="Červený Kláštor" />
       <CreatedBy>&copy; 2020 Designed and Created by CodeBrothers s.r.o.</CreatedBy>
       <AnchorLink href="#navigation">
-        <ScrollTop src="./icons/home.png" alt="home" className="button-icon-white" />
+        <ScrollTop src="/icons/home.png" alt="home" className="button-icon-white" />
       </AnchorLink>
     </BottomDiv>
   </Wrapper>

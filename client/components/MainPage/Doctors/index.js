@@ -14,21 +14,21 @@ const items = [
   {
     text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry`s standard dummy text ever since the 1550s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
     caption: 'Slide 1',
-    photo: './images/index/doctor.jpg',
+    photo: '/images/index/doctor.jpg',
     name: 'Janko Hrasko',
     position: 'Doktor'
   },
   {
     text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry`s standard dummy text ever since the 1550s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
     caption: 'Slide 2',
-    photo: './images/index/doctor.jpg',
+    photo: '/images/index/doctor.jpg',
     name: 'John Doe',
     position: 'Maser'
   },
   {
     text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry`s standard dummy text ever since the 1550s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
     caption: 'Slide 3',
-    photo: './images/index/doctor.jpg',
+    photo: '/images/index/doctor.jpg',
     name: 'Esteban Hrasko',
     position: 'Barman'
   },

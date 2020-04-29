@@ -7,8 +7,8 @@ import { Container } from 'reactstrap';
 const ProductsMP = () => (
   <Container fluid>
     <ProductItemMP
-      imageUrlL="./images/index/products.jpg"
-      imageUrlR="./images/index/products2.jpg"
+      imageUrlL="/images/index/products.jpg"
+      imageUrlR="/images/index/products2.jpg"
       gradient1
       width="70"
       height="70"

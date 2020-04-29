@@ -1,13 +1,14 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { useQuery } from '@apollo/react-hooks';
 import Proptypes from 'prop-types';
 import {
   Row, Col, Card, CardImg, CardBody, CardTitle, 
 } from 'reactstrap';
 import {
-  PriceHolder, Price, ProductImg, Icons, IconCart, IconLink, IconFavorite, IconDetail,
+  PriceHolder, Price, ProductImg, ProductItem, ProductBody,
 } from './styles/products.style';
 
 import { PRODUCTS_QUERY } from '../../../../app-data/graphql/query';
@@ -35,29 +36,24 @@ const Products = ({ categoryID }) => {
 
   const productsToShow = filteredProducts.map((item) => {
     return (
-      <Col sm="4" xs="12" key={item._id}>
-        <Card className="product-item" key={item._id}>
-          <ProductImg>
-            <CardImg top width="100%" src={item.images[0].path} alt={item.title} /> 
-            <Icons className="p_icon">
-              <IconLink>
-                <IconDetail />
-              </IconLink>
-              <IconLink>
-                <IconFavorite />
-              </IconLink>
-              <IconLink>
-                <IconCart />
-              </IconLink>
-            </Icons>
-          </ProductImg>
-          <CardBody>
-            <CardTitle>{item.title}</CardTitle>
+      <Col className="col-12" key={item._id}>
+        <ProductItem>
+          <Link
+            href={{
+              pathname: '/eshop/product/',
+              query: { id: item._id },
+            }}
+          >
+            <ProductImg src={item.images[0].path} alt={item.title} />
+          </Link>
+          <ProductBody>
+            <p>{item.title}</p>
+            <p>{item.shortDescription}</p>
             <PriceHolder>
               <Price>{item.variant.length > 0 ? `${item.variant[0].price.value} ${item.variant[0].price.currencySign}` : 'Produkt neexistuje'}</Price>
             </PriceHolder>
-          </CardBody>
-        </Card>
+          </ProductBody>
+        </ProductItem>
       </Col>
     );
   });

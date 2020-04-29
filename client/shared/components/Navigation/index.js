@@ -24,7 +24,7 @@ const Navigation = () => {
         <Container fluid>
           <Row className="w-100">
             <Col md="4" xs="12">
-              <NavbarBrand href="/"><Logo src="./images/logo.png" alt="Červený kláštor" /></NavbarBrand>
+              <NavbarBrand href="/"><Logo src="/images/logo.png" alt="Červený kláštor" /></NavbarBrand>
             </Col>
             <Col md="8" xs="12" className="d-flex align-items-center">
               <NavbarToggler onClick={toggle} />

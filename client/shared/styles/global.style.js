@@ -76,10 +76,10 @@ export default createGlobalStyle`
     }
   }
   .active{
-    color: rgb(255,77,125) !important;
+    color: red !important;
   }
   .not-active{
-    color: rgb(170,174,184) !important;
+    color: white!important;
   }
   .navbar{
     padding: 0.75rem 1rem !important;
@@ -158,42 +158,6 @@ export default createGlobalStyle`
     &:hover{
       color: rgb(101,106,119) !important;
       transform: translateY(-2px);
-    }
-  }
-  .product-item{
-    cursor: pointer;
-    margin-bottom: 30px;
-    transition: all 300ms linear 0s;
-    &:hover{
-      .card-title{
-        color: rgb(255,77,125) !important;
-      }
-      .p_icon{
-        bottom: 0px;
-      }
-    }
-    img{
-      height: 250px;
-    }
-    .card-body{
-      border-top: 1px solid rgba(0,0,0,.125);
-    }
-    .card-title{
-      font-weight: 500;
-      font-size: 1.2rem;
-      color: #4a4a4a;
-      user-select: none;
-      transition: all 300ms linear 0s;
-    }
-  }
-  .p_icon{
-    a{
-      &:hover{
-        background: rgb(255,77,125);
-        svg{
-          color: white;
-        }
-      }
     }
   }
 `;

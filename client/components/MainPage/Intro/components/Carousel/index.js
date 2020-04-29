@@ -9,17 +9,17 @@ import {
 
 const items = [
   {
-    src: './images/sluzby.png',
+    src: '/images/sluzby.png',
     altText: 'Produkty',
     caption: 'Produkty caption'
   },
   {
-    src: './images/sluzby.png',
+    src: '/images/sluzby.png',
     altText: 'Sluzby',
     caption: 'Sluzby caption'
   },
   {
-    src: './images/sluzby.png',
+    src: '/images/sluzby.png',
     altText: 'Pobyty',
     caption: 'Pobyty'
   }
