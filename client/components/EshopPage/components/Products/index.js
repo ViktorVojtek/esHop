@@ -1,8 +1,10 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable no-underscore-dangle */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/react-hooks';
+import Proptypes from 'prop-types';
 import {
-  Row, Col, Card, CardImg, CardBody, CardTitle, CardSubtitle, 
+  Row, Col, Card, CardImg, CardBody, CardTitle, 
 } from 'reactstrap';
 import {
   PriceHolder, Price, ProductImg, Icons, IconCart, IconLink, IconFavorite, IconDetail,
@@ -10,20 +12,30 @@ import {
 
 import { PRODUCTS_QUERY } from '../../../../app-data/graphql/query';
 
-const Products = () => {
+const Products = ({ categoryID }) => {
   const {error, loading, data} = useQuery(PRODUCTS_QUERY);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  useEffect(() => {
+    if(data !== undefined){
+      const { products } = data;
+      const newProducts = products.filter(function(product){
+        return product.category === categoryID;
+      });
+      setFilteredProducts(newProducts);
+    }
+  }, [categoryID, data]);
+
   if (error) {
     return <>{error.message}</>;
   }
   if (loading) {
     return <>loading</>;
   }
-  const { products } = data;
-  console.log(products);
+  console.log(filteredProducts);
 
-  const productsToShow = products.map((item) => {
+  const productsToShow = filteredProducts.map((item) => {
     return (
-      <Col sm="4" xs="12">
+      <Col sm="4" xs="12" key={item._id}>
         <Card className="product-item" key={item._id}>
           <ProductImg>
             <CardImg top width="100%" src={item.images[0].path} alt={item.title} /> 
@@ -54,6 +66,14 @@ const Products = () => {
       {productsToShow}
     </Row>
   );
+};
+
+Products.defaultProps = {
+  categoryID: '',
+};
+
+Products.propTypes = {
+  categoryID: Proptypes.string,
 };
 
 export default Products;

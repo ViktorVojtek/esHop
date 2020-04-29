@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { Aside, H3, Button, Buttons } from './style/categories.style';
 import { CATEGORIES_QUERY } from '../../../../app-data/graphql/query';
@@ -7,7 +7,13 @@ import { CATEGORIES_QUERY } from '../../../../app-data/graphql/query';
 const CategoriesAside = ({ getCategory }) => {
   const { error, loading, data } = useQuery(CATEGORIES_QUERY);
   const [activeCategory, setActiveCategory] = useState('');
-
+  useEffect(() => {
+    if(data !== undefined){
+      const { categories } = data;
+      setActiveCategory(categories[0]._id);
+      getCategory(categories[0]._id);
+    }
+  },[data, getCategory]);
   if (error) {
     return <>{error.message}</>;
   }

@@ -1,4 +1,4 @@
-import React from  'react';
+import React, { useState } from  'react';
 
 import { Container, Row, Col } from 'reactstrap';
 import CategoriesAside from './components/Categories';
@@ -9,25 +9,17 @@ import { Wrapper } from './styles/eshoppage.style';
 
 const EshopPage = () => {
 
-  let categoryID;
-
-  function getCategory(category){
-    categoryID = category;
-    console.log(categoryID);
-  }
-
-
-  
+  const [categoryID, setCategoryID] = useState('');
 
   return (
     <Wrapper>
       <Container>
         <Row>
           <Col sm="3" xs="12">
-            <CategoriesAside getCategory={getCategory} />
+            <CategoriesAside getCategory={setCategoryID} />
           </Col>
           <Col sm="9" xs="12">
-            <Products />
+            <Products categoryID={categoryID} />
           </Col>
         </Row>
       </Container>
