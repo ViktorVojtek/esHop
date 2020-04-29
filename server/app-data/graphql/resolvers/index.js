@@ -1,6 +1,8 @@
 // queries
 const categories = require('./query/Categories');
 const currencies = require('./query/Currencies');
+const order = require('./query/Order');
+const orders = require('./query/Orders');
 const products = require('./query/Products');
 const product = require('./query/Product');
 const subCategories = require('./query/SubCategories');
@@ -10,6 +12,8 @@ const users = require('./query/Users');
 const createCategory = require('./mutation/CreateCategory');
 const updateCategory = require('./mutation/UpdateCategory');
 const removeCategory = require('./mutation/RemoveCategory');
+
+const createOrder = require('./mutation/CreateOrder');
 
 const loginUser = require('./mutation/LoginUser');
 const registerUser = require('./mutation/RegisterUser');
@@ -29,6 +33,8 @@ const resolvers = {
   Query: {
     categories: async () => categories(),
     currencies: async () => currencies(),
+    order: async (root, args, ctx) => order(root, args, ctx),
+    orders: async () => orders(),
     products: async () => products(),
     product: async (root, args, ctx) => product(root, args, ctx),
     subCategories: async () => subCategories(),
@@ -38,6 +44,8 @@ const resolvers = {
     createCategory: async (root, { title }, ctx) => createCategory(root, { title }, ctx),
     updateCategory: async (root, { _id, title }, ctx) => updateCategory(root, { _id, title }, ctx),
     removeCategory: async (root, { _id }, ctx) => removeCategory(root, { _id }, ctx),
+
+    createOrder: async (root, args, ctx) => createOrder(root, args, ctx),
 
     setCurrency: async (root, { currencyInput }, ctx) => setCurrency(root, { currencyInput }, ctx),
     updateCurrency: async (root, { updateCurrencyInput }, ctx) => updateCurrency(root, { updateCurrencyInput }, ctx),

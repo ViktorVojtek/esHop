@@ -4,6 +4,8 @@ const rootTypeDefs = gql`
   type Query {
     categories: [Category]
     currencies: [Currency]
+    orders: [Order]
+    order: Order
     products: [Product]
     product(id: String!): Product
     subCategories: [SubCategory]
@@ -14,6 +16,8 @@ const rootTypeDefs = gql`
     createCategory(title: String!): Category
     updateCategory(_id: String!, title: String!): Category
     removeCategory(_id: String!): String
+
+    createOrder(data: OrderInput!): Order
 
     setCurrency(currencyInput: CurrencyInput!): Currency
     updateCurrency(currencyUpdateInput: CurrencyUpdateInput!): Currency
