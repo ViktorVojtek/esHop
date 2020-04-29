@@ -202,7 +202,7 @@ const ProductVariant = ({ productData, handleProductData, noVariant }) => {
           </FormGroup>
         </Col>
         <Col>
-          <PulseButton onClick={() => handleAddVariant()} pulse={noVariant}>
+          <PulseButton type="button" onClick={() => handleAddVariant()} pulse={noVariant}>
             Add variant
           </PulseButton>
         </Col>
@@ -233,7 +233,7 @@ const ProductVariant = ({ productData, handleProductData, noVariant }) => {
                     )}
                   </Col>
                   <Col>
-                    <Button onClick={() => handleRemoveVariant(i)}>
+                    <Button type="button" onClick={() => handleRemoveVariant(i)}>
                       Remove
                     </Button>
                   </Col>
