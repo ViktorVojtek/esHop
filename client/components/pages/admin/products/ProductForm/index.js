@@ -92,7 +92,7 @@ const ProductCreateForm = ({ productDataProp }) => {
         }
       </Modal>
       {' '}
-      <Form onSubmit={handleSubmitProductData}>
+      <Form onSubmit={(e) => handleSubmitProductData(e)}>
         <FormGroup>
           <Input
             id="title"
@@ -166,11 +166,11 @@ const ProductCreateForm = ({ productDataProp }) => {
         <ProductVariant
           noVariant={noVariant}
           productData={productData}
-          handleProductData={setProductData}
+          handleProductData={handleSetProductData}
         />
         <ProductImages
           productData={productData}
-          handleProductData={setProductData}
+          handleProductData={handleSetProductData}
         />
         <FormGroup>
           <FormGroup check>
@@ -192,7 +192,7 @@ const ProductCreateForm = ({ productDataProp }) => {
           </FormGroup>
         </FormGroup>
         <FormGroup>
-          <Button color="primary">
+          <Button color="primary" type="submit">
             {Object.keys(productDataProp).length > 0 ? 'Update product' : 'Create product'}
           </Button>
         </FormGroup>

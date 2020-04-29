@@ -37,7 +37,7 @@ const updateProduct = async (root, { _id, productInput }, ctx) => {
           const fileData = {
             fileName: title,
             fileBase64Data: base64,
-            dirName: productData._id,
+            dirName: _id,
             extension: ext,
           };
 
