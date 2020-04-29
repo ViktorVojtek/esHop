@@ -5,7 +5,6 @@ export const Aside = styled.div`
   background-color: rgb(0, 174, 239);
   border-radius: 4px;
   padding: 2.4em;
-  margin-bottom: 2rem;
 `;
 export const Buttons = styled.div`
   width: 100%;

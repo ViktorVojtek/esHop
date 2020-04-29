@@ -5,15 +5,15 @@ import Link from 'next/link';
 import { useQuery } from '@apollo/react-hooks';
 import Proptypes from 'prop-types';
 import {
-  Row, Col, Card, CardImg, CardBody, CardTitle, 
+  Row, Col
 } from 'reactstrap';
 import {
-  PriceHolder, Price, ProductImg, ProductItem, ProductBody,
+  PriceHolder, Price, ProductImg, ProductItem, ProductBody, ProductTitle,
 } from './styles/products.style';
 
 import { PRODUCTS_QUERY } from '../../../../app-data/graphql/query';
 
-const Products = ({ categoryID }) => {
+const Products = ({ subCategoryID, categoryID }) => {
   const {error, loading, data} = useQuery(PRODUCTS_QUERY);
   const [filteredProducts, setFilteredProducts] = useState([]);
   useEffect(() => {
@@ -24,7 +24,7 @@ const Products = ({ categoryID }) => {
       });
       setFilteredProducts(newProducts);
     }
-  }, [categoryID, data]);
+  }, [subCategoryID, categoryID, data]);
 
   if (error) {
     return <>{error.message}</>;
@@ -47,7 +47,16 @@ const Products = ({ categoryID }) => {
             <ProductImg src={item.images[0].path} alt={item.title} />
           </Link>
           <ProductBody>
-            <p>{item.title}</p>
+            <ProductTitle>
+              <Link
+                href={{
+                  pathname: '/eshop/product/',
+                  query: { id: item._id },
+                }}
+              >
+                {item.title}
+              </Link>
+            </ProductTitle>
             <p>{item.shortDescription}</p>
             <PriceHolder>
               <Price>{item.variant.length > 0 ? `${item.variant[0].price.value} ${item.variant[0].price.currencySign}` : 'Produkt neexistuje'}</Price>
@@ -65,10 +74,12 @@ const Products = ({ categoryID }) => {
 };
 
 Products.defaultProps = {
+  subCategoryID: '',
   categoryID: '',
 };
 
 Products.propTypes = {
+  subCategoryID: Proptypes.string,
   categoryID: Proptypes.string,
 };
 
