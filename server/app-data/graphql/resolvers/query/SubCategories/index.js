@@ -1,8 +1,10 @@
 const SubCategory = require('../../../../db/models/SubCategory');
 
-const subCategories = async () => {
+const subCategories = async (root, { categoryId }, ctx) => {
   try {
-    const result = await SubCategory.find() || [];
+    const result = categoryId
+      ? await SubCategory.find({ categoryId }) || []
+      : await SubCategory.find() || [];
 
     return result;
   } catch (err) {

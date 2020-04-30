@@ -1,4 +1,5 @@
 import React from 'react';
+import Error from 'next/error';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/react-hooks';
 
@@ -14,12 +15,12 @@ const ProductDetail = () => {
     variables: { id: query.id },
   });
 
-  if (error) {
-    return <>{error.message}</>;
-  }
-
   if (loading) {
     return <>loading</>;
+  }
+
+  if (error) {
+    return <Error statusCode={error.statusCode || 404} />;
   }
 
   const { product } = data;

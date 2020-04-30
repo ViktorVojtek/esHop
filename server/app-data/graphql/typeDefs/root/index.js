@@ -8,7 +8,7 @@ const rootTypeDefs = gql`
     order: Order
     products: [Product]
     product(id: String!): Product
-    subCategories: [SubCategory]
+    subCategories(categoryId: String): [SubCategory]
     users: [User]
   }
 
@@ -30,7 +30,7 @@ const rootTypeDefs = gql`
     updateProduct(_id: String!, productInput: ProductInput!): Product
     removeProduct(_id: String!): String
 
-    createSubCategory(title: String!): SubCategory
+    createSubCategory(categoryId: String!, title: String!): SubCategory
     removeSubCategory(_id: String!): String
   }
 

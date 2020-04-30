@@ -37,7 +37,7 @@ const resolvers = {
     orders: async () => orders(),
     products: async () => products(),
     product: async (root, args, ctx) => product(root, args, ctx),
-    subCategories: async () => subCategories(),
+    subCategories: async (root, args, ctx) => subCategories(root, args, ctx),
     users: async (root, args, ctx) => users(root, args, ctx),
   },
   Mutation: {
@@ -54,7 +54,7 @@ const resolvers = {
     createProduct: async (root, { productInput }, ctx) => createProduct(root, { productInput }, ctx),
     updateProduct: async (root, { _id, productInput }, ctx) => updateProduct(root, { _id, productInput }, ctx),
 
-    createSubCategory: async (root, { title }, ctx) => createSubCategory(root, { title }, ctx),
+    createSubCategory: async (root, { categoryId, title }, ctx) => createSubCategory(root, { categoryId, title }, ctx),
     removeSubCategory: async (root, { _id }, ctx) => removeSubCategory(root, { _id }, ctx),
 
     loginUser: async (root, { userLoginInput }, ctx) => loginUser(root, { userLoginInput }, ctx),

@@ -90,9 +90,10 @@ export const PRODUCTS_QUERY = gql`
 `;
 
 export const SUBCATEGORIES_QUERY = gql`
-  query subCategories {
-    subCategories {
+  query subCategories($categoryId: String) {
+    subCategories(categoryId: $categoryId) {
       _id
+      categoryId
       signFlag
       title
     }

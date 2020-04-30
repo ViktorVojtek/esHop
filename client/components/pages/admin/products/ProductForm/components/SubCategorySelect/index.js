@@ -5,15 +5,19 @@ import { useQuery } from '@apollo/react-hooks';
 import { Input, FormGroup } from 'reactstrap';
 import PropTypes from 'prop-types';
 
-const DynamicSelect = ({ query, category, onSelect, productData }) => {
+import { SUBCATEGORIES_QUERY } from '../../../../../../../app-data/graphql/query';
+
+const SubCategorySelect = ({ onSelect, productData }) => {
   const [dataSelected, setDataSelected] = useState(
-    (category ? productData.category : productData.subCategory) || ''
+    (productData.subCategory) || ''
   );
-  const { loading, error, data } = useQuery(query);
+  const { loading, error, data } = useQuery(SUBCATEGORIES_QUERY, {
+    variables: { categoryId: productData.category || '' }
+  });
 
   useEffect(() => {
-    setDataSelected(category ? productData.category : productData.subCategory);
-  }, [category, productData]);
+    setDataSelected(productData.subCategory);
+  }, [productData]);
 
   if (loading) {
     return <>loading</>;
@@ -27,41 +31,38 @@ const DynamicSelect = ({ query, category, onSelect, productData }) => {
     const { id } = event.currentTarget.options[
       event.currentTarget.selectedIndex
     ];
-    let selectorData;
-
-    if (category) {
-      selectorData = { ...productData, category: id };
-    } else {
-      selectorData = { ...productData, subCategory: id };
-    }
+    const selectorData = { ...productData, subCategory: id };
 
     onSelect(selectorData);
   };
 
-  const dataArr = category ? data.categories : data.subCategories;
+  const dataArr = data.subCategories;
 
   return (
-    <FormGroup>
-      <Input type="select" onChange={(e) => handleOnChange(e)} value={dataSelected}>
-        <option>{category ? 'Select category' : 'Select sub category'}</option>
-        {dataArr && dataArr.length > 0
-          ? dataArr.map(({ _id, title }) => (
-            <option key={_id} id={_id} value={_id}>
-              {title}
-            </option>
-            ))
-          : null}
-      </Input>
-    </FormGroup>
+    productData && productData.category
+      ? (
+        <FormGroup>
+          <Input
+            type="select"
+            onChange={(e) => handleOnChange(e)}
+            value={dataSelected}
+            required
+          >
+            <option value="">Select subcategory</option>
+            {dataArr && dataArr.length > 0
+              ? dataArr.map(({ _id, title }) => (
+                <option key={_id} id={_id} value={_id}>
+                  {title}
+                </option>
+                ))
+              : null}
+          </Input>
+        </FormGroup>
+      ) : null
   );
 };
 
-DynamicSelect.defaultProps = {
-  category: false,
-};
-DynamicSelect.propTypes = {
-  query: PropTypes.object.isRequired,
-  category: PropTypes.bool,
+SubCategorySelect.propTypes = {
   onSelect: PropTypes.func.isRequired,
   productData: PropTypes.shape({
     _id: PropTypes.string,
@@ -90,4 +91,4 @@ DynamicSelect.propTypes = {
   }).isRequired,
 };
 
-export default DynamicSelect;
+export default SubCategorySelect;

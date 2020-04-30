@@ -21,6 +21,7 @@ import {
 import Modal from '../../../../../shared/components/Modal';
 
 import DynamicSelect from './components/DataSelect';
+import SubCategorySelect from './components/SubCategorySelect';
 import ProductImages from './components/ProductImages';
 import ProductVariant from './components/ProductVariant';
 
@@ -113,7 +114,7 @@ const ProductCreateForm = ({ productDataProp }) => {
           onSelect={handleSetProductData}
           productData={productData}
         />
-        <DynamicSelect
+        <SubCategorySelect
           query={SUBCATEGORIES_QUERY}
           onSelect={handleSetProductData}
           productData={productData}

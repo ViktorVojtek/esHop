@@ -11,9 +11,10 @@ export const CREATE_CATEGORY_MUTATION = gql`
 `;
 
 export const CREATE_SUBCATEGORY_MUTATION = gql`
-  mutation createSubCategory($title: String!) {
-    createSubCategory(title: $title) {
+  mutation createSubCategory($categoryId: String!, $title: String!) {
+    createSubCategory(categoryId: $categoryId, title: $title) {
       _id
+      categoryId
       signFlag
       title
     }
