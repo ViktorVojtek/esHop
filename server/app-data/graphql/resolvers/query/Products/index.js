@@ -1,8 +1,15 @@
+/* eslint-disable no-nested-ternary */
 const Product = require('../../../../db/models/Product');
 
-const Products = async () => {
+const Products = async (root, { categoryId, subCategoryId }, ctx) => {
   try {
-    const result = await Product.find() || [];
+    const result = subCategoryId
+      ? await Product.find({ subCategory: subCategoryId }) || []
+      : (
+        categoryId
+          ? await Product.find({ category: categoryId }) || []
+          : await Product.find() || []
+      );
 
     return result;
   } catch (err) {

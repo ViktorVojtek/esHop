@@ -57,8 +57,8 @@ export const PRODUCT_QUERY = gql`
 `;
 
 export const PRODUCTS_QUERY = gql`
-  query products {
-    products {
+  query products($categoryId: String, $subCategoryId: String) {
+    products(categoryId: $categoryId, subCategoryId: $subCategoryId) {
       _id
       category
       dateCreated

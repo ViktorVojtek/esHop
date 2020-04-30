@@ -6,7 +6,7 @@ const rootTypeDefs = gql`
     currencies: [Currency]
     orders: [Order]
     order: Order
-    products: [Product]
+    products(categoryId: String, subCategoryId: String): [Product]
     product(id: String!): Product
     subCategories(categoryId: String): [SubCategory]
     users: [User]
