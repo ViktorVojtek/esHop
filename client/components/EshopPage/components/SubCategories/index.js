@@ -4,16 +4,12 @@ import { useQuery } from '@apollo/react-hooks';
 import { Aside, H3, Button, Buttons } from './style/subCategories.style';
 import { SUBCATEGORIES_QUERY } from '../../../../app-data/graphql/query';
 
-const SubCategoriesAside = ({ getSubCategory }) => {
-  const { error, loading, data } = useQuery(SUBCATEGORIES_QUERY);
+const SubCategoriesAside = ({ getSubCategory, categoryID }) => {
+  const { loading, error, data } = useQuery(SUBCATEGORIES_QUERY, {
+    variables: { categoryId: categoryID || '' }
+  });
   const [activeSubCategory, setActiveSubCategory] = useState('');
-  useEffect(() => {
-    if(data !== undefined){
-      const { subCategories } = data;
-      setActiveSubCategory(subCategories[0]._id);
-      getSubCategory(subCategories[0]._id);
-    }
-  },[data, getSubCategory]);
+  
   if (error) {
     return <>{error.message}</>;
   }
@@ -21,14 +17,16 @@ const SubCategoriesAside = ({ getSubCategory }) => {
     return <>loading</>;
   }
 
-  const { subCategories } = data;
+  console.log(data);
+
+  const subCategoriesArray = data.subCategories;
 
   const handleSetActiveCategory = (id) => {
     setActiveSubCategory(id);
     getSubCategory(id);
   }
 
-  const categoryButtons = subCategories.map((item) => {
+  const categoryButtons = subCategoriesArray.map((item) => {
     return (
       <Button 
         key={item.signFlag} 
