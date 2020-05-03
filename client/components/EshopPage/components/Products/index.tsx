@@ -1,6 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable no-use-before-define */
-/* eslint-disable no-underscore-dangle */
 import React, { useContext, useEffect, useState, ReactChildren } from 'react';
 import Link from 'next/link';
 import { useQuery } from '@apollo/react-hooks';
