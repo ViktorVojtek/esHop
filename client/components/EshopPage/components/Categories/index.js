@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { Aside, H3, Button, Buttons } from './style/categories.style';
 import { CATEGORIES_QUERY } from '../../../../app-data/graphql/query';
 
-const CategoriesAside = ({ getCategory }) => {
+const CategoriesAside = ({ getCategory, getSubCategory }) => {
   const { error, loading, data } = useQuery(CATEGORIES_QUERY);
   const [activeCategory, setActiveCategory] = useState('');
   useEffect(() => {
@@ -26,6 +26,7 @@ const CategoriesAside = ({ getCategory }) => {
   const handleSetActiveCategory = (id) => {
     setActiveCategory(id);
     getCategory(id);
+    getSubCategory('');
   }
 
   const categoryButtons = categories.map((item) => {

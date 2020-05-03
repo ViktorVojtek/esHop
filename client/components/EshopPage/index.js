@@ -18,7 +18,10 @@ const EshopPage = () => {
       <Container>
         <Row>
           <Col sm="3" xs="12">
-            <CategoriesAside getCategory={setCategoryID} />
+            <CategoriesAside
+              getCategory={setCategoryID}
+              getSubCategory={setSubCategoryID}
+            />
             <SubCategoriesAside
               getSubCategory={setSubCategoryID}
               categoryID={categoryID}
