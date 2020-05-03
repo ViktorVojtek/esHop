@@ -17,8 +17,6 @@ const SubCategoriesAside = ({ getSubCategory, categoryID }) => {
     return <>loading</>;
   }
 
-  console.log(data);
-
   const subCategoriesArray = data.subCategories;
 
   const handleSetActiveCategory = (id) => {

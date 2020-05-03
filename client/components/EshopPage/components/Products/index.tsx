@@ -107,9 +107,16 @@ const Products = ({ subCategoryID, categoryID }) => {
   useEffect(() => {
     if(data !== undefined){
       const { products } = data;
-      const newProducts = products.filter((product) => {
-        return product.category === categoryID;
-      });
+      let newProducts = [];
+      if(subCategoryID ===''){
+        newProducts = products.filter((product) => {
+          return product.category === categoryID;
+        });
+      }else{
+        newProducts = products.filter((product) => {
+          return product.subCategory === subCategoryID;
+        });
+      }
       setFilteredProducts(newProducts);
     }
   }, [subCategoryID, categoryID, data]);
