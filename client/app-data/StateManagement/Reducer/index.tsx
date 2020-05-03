@@ -9,7 +9,7 @@ const Reducer = (state, action) => {
     case 'REMOVE_FROM_CART':
       return {
         ...state,
-        cart: state.cart.filter((cartItem) => cartItem.id !== action.payload),
+        cart: state.cart.filter((cartItem) => (cartItem as any).id !== action.payload),
       };
     case 'SET_CART':
       return {
