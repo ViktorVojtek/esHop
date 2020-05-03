@@ -56,7 +56,6 @@ const Products: React.FC<IProductsProps> = ({ subCategoryID, categoryID }) => {
       <ProductFill
         products={filteredProducts}
         addProduct={handleAddProductToCart}
-        removeProduct={handleRemoveProductFromCart}
       />
     </Row>
   );

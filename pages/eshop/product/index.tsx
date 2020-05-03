@@ -7,7 +7,7 @@ import Navigation from '../../../client/shared/components/Navigation';
 import Footer from '../../../client/shared/components/Footer';
 import { PRODUCT_QUERY } from '../../../client/app-data/graphql/query';
 
-const ProductDetail = () => {
+const ProductDetail: React.FC = () => {
   const router = useRouter();
   const { query } = router;
 
@@ -20,7 +20,7 @@ const ProductDetail = () => {
   }
 
   if (error) {
-    return <Error statusCode={error.statusCode || 404} />;
+    return <Error statusCode={404} />;
   }
 
   const { product } = data;

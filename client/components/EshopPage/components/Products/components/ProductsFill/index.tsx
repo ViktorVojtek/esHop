@@ -4,7 +4,18 @@ import { Col } from 'reactstrap';
 
 // Styled Components
 import {
-  PriceHolder, Price, ProductImg, ProductItem, ProductBody, StyledProductTitle,
+  ImageWrap,
+  IconCart,
+  PriceHolder, 
+  Price, 
+  ProductImg, 
+  ProductItem, 
+  ProductBody, 
+  StyledProductTitle,
+  StyledShortDescription,
+  StyledCartLink,
+  StyledDescription,
+  StyledCartBtn
 } from './styles/products.style';
 
 // type Product
@@ -12,77 +23,98 @@ import Product from '../../types/Products.type';
 
 interface IProductsFillProps {
   products: Product[],
-  addProduct: (id: string, count: Number) => void,
-  removeProduct: (id: string) => void
+  addProduct: (id: string, count: Number) => void
 }
 
 interface IProductTitle {
   id: string,
   title: string
 }
+
+interface IProductUI extends Omit<IProductsFillProps, 'products'> {
+  product: Product
+}
 const ProductTitle: React.FC<IProductTitle> = ({ id, title }) => (
-  <StyledProductTitle>
-    <Link href={{ pathname: '/eshop/product/', query: { id } }}>
-      <a>{title}</a>
-    </Link>
-  </StyledProductTitle>
+  <Link href={{ pathname: '/eshop/product/', query: { id } }}>
+    <a>
+      <StyledProductTitle>{title}</StyledProductTitle>
+    </a>
+  </Link>
+);
+
+const ProductUI: React.FC<IProductUI> = ({
+  product: {
+    _id,
+    description,
+    images,
+    title,
+    shortDescription,
+    variant
+  },
+  addProduct
+}) => (
+  <Col className="col-12" key={_id}>
+    <ProductItem>
+      <ImageWrap>
+      {
+        images.length > 0
+          ? (
+            <Link href={{ pathname: '/eshop/product/', query: { id: _id } }}>
+              <a>
+                <ProductImg src={images[0].path} alt={title} />
+              </a>
+            </Link>
+          ) : null
+      }
+      </ImageWrap>
+
+      <ProductBody>
+        <ProductTitle id={_id} title={title} />
+        <StyledShortDescription>{shortDescription}</StyledShortDescription>
+        <StyledDescription>{description}</StyledDescription>
+        <PriceHolder>
+          <Price>
+            {
+              variant.length > 0
+                ? `${variant[0].price.value} ${variant[0].price.currencySign}`
+                : 'Produkt neexistuje'
+            }
+          </Price>
+        </PriceHolder>
+        {
+          variant.length > 1
+            ? (
+              <Link href={{ pathname: '/eshop/product/', query: { id: _id } }}>
+                <StyledCartLink>
+                  Vložiť do košíka
+                </StyledCartLink>
+              </Link>
+            ) : (
+              <StyledCartBtn
+                type="button"
+                onClick={() => addProduct(_id,  1)}
+              >
+                Vložiť do košíka
+              </StyledCartBtn>
+            )
+        }
+      </ProductBody>
+    </ProductItem>
+  </Col>
 );
 const ProductsFill: React.FC<IProductsFillProps> = ({
   products,
   addProduct,
-  removeProduct
 }) => {
   const elements = products.map((item: Product) => {
-    const {
-      _id,
-      description,
-      images,
-      shortDescription,
-      title,
-      variant,
-    } = item;
+    const { _id } = item;
   
     return (
-      <Col className="col-12" key={_id}>
-        <ProductItem>
-          {
-            images.length > 0
-              ? (
-                <Link href={{ pathname: '/eshop/product/', query: { id: _id } }}>
-                  <a>
-                    <ProductImg src={images[0].path} alt={title} />
-                  </a>
-                </Link>
-              ) : null
-          }
-          <ProductBody>
-            <ProductTitle id={_id} title={title} />
-            <p>{shortDescription}</p>
-            <PriceHolder>
-              <Price>
-                {
-                  variant.length > 0
-                    ? `${variant[0].price.value} ${variant[0].price.currencySign}`
-                    : 'Produkt neexistuje'
-                }
-              </Price>
-              {/* TODO: Style it by following graphic design */}
-              <button
-                type="button"
-                onClick={() => addProduct(_id,  1)}
-              >
-                Add to cart
-              </button>
-              <button
-                type="button"
-                onClick={() => removeProduct(_id)}
-              >
-                Remove from cart
-              </button>
-            </PriceHolder>
-          </ProductBody>
-        </ProductItem>
-      </Col>
+      <ProductUI
+        product={item}
+        addProduct={addProduct}
+        key={_id}
+      />
     );
   });
 
