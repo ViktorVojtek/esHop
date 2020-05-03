@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, ReactChildren } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { Row } from 'reactstrap';
 import Proptypes from 'prop-types';

@@ -22,16 +22,11 @@ interface IProductTitle {
 }
 const ProductTitle: React.FC<IProductTitle> = ({ id, title }) => (
   <StyledProductTitle>
-    <Link
-      href={{
-        pathname: '/eshop/product/',
-        query: { id },
-      }}
-    >
+    <Link href={{ pathname: '/eshop/product/', query: { id } }}>
       <a>{title}</a>
     </Link>
   </StyledProductTitle>
-)
+);
 const ProductsFill: React.FC<IProductsFillProps> = ({
   products,
   addProduct,
@@ -51,15 +46,12 @@ const ProductsFill: React.FC<IProductsFillProps> = ({
       <Col className="col-12" key={_id}>
         <ProductItem>
           {
-            images?.length > 0
+            images.length > 0
               ? (
-                <Link
-                  href={{
-                    pathname: '/eshop/product/',
-                    query: { id: _id },
-                  }}
-                >
-                  <ProductImg src={images[0].path} alt={title} />
+                <Link href={{ pathname: '/eshop/product/', query: { id: _id } }}>
+                  <a>
+                    <ProductImg src={images[0].path} alt={title} />
+                  </a>
                 </Link>
               ) : null
           }
@@ -70,8 +62,8 @@ const ProductsFill: React.FC<IProductsFillProps> = ({
               <Price>
                 {
                   variant.length > 0
-                  ? `${variant[0].price.value} ${variant[0].price.currencySign}`
-                  : 'Produkt neexistuje'
+                    ? `${variant[0].price.value} ${variant[0].price.currencySign}`
+                    : 'Produkt neexistuje'
                 }
               </Price>
               {/* TODO: Style it by following graphic design */}
