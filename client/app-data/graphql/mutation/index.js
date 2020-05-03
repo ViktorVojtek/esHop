@@ -41,6 +41,7 @@ export const CREATE_PRODUCT_MUTATION = gql`
       title
       variant {
         default
+        itemsInStock
         price {
           currency
           currencySign

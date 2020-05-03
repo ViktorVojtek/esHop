@@ -49,14 +49,19 @@ const Products = ({ subCategoryID, categoryID }) => {
     return (
       <Col className="col-12" key={item._id}>
         <ProductItem>
-          <Link
-            href={{
-              pathname: '/eshop/product/',
-              query: { id: item._id },
-            }}
-          >
-            <ProductImg src={item.images[0].path} alt={item.title} />
-          </Link>
+          {
+            item.images && item.images.length > 0
+              ? (
+                <Link
+                  href={{
+                    pathname: '/eshop/product/',
+                    query: { id: item._id },
+                  }}
+                >
+                  <ProductImg src={item.images[0].path} alt={item.title} />
+                </Link>
+              ) : null
+          }
           <ProductBody>
             <ProductTitle>
               <Link

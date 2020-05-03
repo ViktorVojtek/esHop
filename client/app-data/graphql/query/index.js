@@ -44,6 +44,7 @@ export const PRODUCT_QUERY = gql`
       title
       variant {
         default
+        itemsInStock
         price {
           currency
           currencySign
@@ -77,6 +78,7 @@ export const PRODUCTS_QUERY = gql`
       title
       variant {
         default
+        itemsInStock
         price {
           currency
           currencySign

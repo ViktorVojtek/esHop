@@ -114,6 +114,7 @@ const ProductVariant = ({ productData, handleProductData, noVariant }) => {
 
     const variantData = {
       default: variantDefaultRef.current.checked,
+      itemsInStock: +variantCountInStockRef.current.value,
       title: variantTitleRef.current.value,
       price: {
         currency: currencyTitle,
@@ -189,7 +190,7 @@ const ProductVariant = ({ productData, handleProductData, noVariant }) => {
         </Col>
       </Row>
       {' '}
-      <Row form>
+      <Row form className="border-bottom mb-3">
         <Col>
           <FormGroup>
             <Input
