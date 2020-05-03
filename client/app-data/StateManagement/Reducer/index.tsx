@@ -2,9 +2,25 @@
 const Reducer = (state, action) => {
   switch (action.type) {
     case 'ADD_TO_CART':
+      const temp = [];
+
+      if (state.cart.length > 0) {
+        for(const item of state.cart) {
+          if (item.id === action.payload.id) {
+            const updatedItem = { ...item, count: action.payload.count + 1 };
+            temp.push(updatedItem);
+          } else {
+            temp.push(item);
+          }
+        }
+      } else {
+        temp.push(action.payload);
+      }
+      console.log(temp);
+
       return {
         ...state,
-        cart: state.cart.concat([action.payload]),
+        cart: temp,
       };
     case 'REMOVE_FROM_CART':
       return {

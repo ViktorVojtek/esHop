@@ -23,7 +23,7 @@ export const IconCart = styled(Cart)`
   color: #2a2a2a; 
   width: 20px;
 `;
-export const ProductTitle = styled.h2`
+export const StyledProductTitle = styled.h2`
   font-weight: 600;
   color: rgb(40, 40, 40) !important;
   font-size: 1.15rem;
