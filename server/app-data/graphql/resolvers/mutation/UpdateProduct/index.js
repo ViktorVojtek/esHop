@@ -1,5 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 const mongoose = require('mongoose');
+const uniqid = require('uniqid');
 const Product = require('../../../../db/models/Product');
 const { superSecret } = require('../../../../config');
 const { verifyToken, storeFile } = require('../../utils');
@@ -29,6 +30,20 @@ const updateProduct = async (root, { _id, productInput }, ctx) => {
     const existingImagesArr = [];
     let imagePaths = [];
 
+    const oldImagesArr = productExist.images;
+    let imagesToDelete = [];
+
+    console.log(oldImagesArr);
+
+    imagesToDelete = oldImagesArr.filter((oldItem) => {
+      return !images.some((cItem) => {
+        return oldItem.imageId !== cItem.imageId;
+      });
+    });
+    
+    console.log('images to delete');
+    console.log(imagesToDelete);
+
     if (images && images.length > 0) {
       while (i < images.length) {
         if (images[i].base64) {
@@ -53,6 +68,8 @@ const updateProduct = async (root, { _id, productInput }, ctx) => {
 
       imagePaths = await Promise.all(imagesDataArr);
 
+      console.log(imagePaths);
+
       let j = 0;
 
       while (j < imagePaths.length) {
@@ -62,6 +79,7 @@ const updateProduct = async (root, { _id, productInput }, ctx) => {
         } = images[j];
         const imageData = {
           ...restImageData,
+          imageId: uniqid('img-'),
           path: imagePaths[j],
         };
 
@@ -70,6 +88,8 @@ const updateProduct = async (root, { _id, productInput }, ctx) => {
         j += 1;
       }
 
+      console.log(updateImagesArr);
+
       resultImagesDataArr = updateImagesArr.concat(existingImagesArr);
     }
 
@@ -77,6 +97,9 @@ const updateProduct = async (root, { _id, productInput }, ctx) => {
       ...productData,
       images: resultImagesDataArr,
     };
+
+    console.log('\n');
+    console.log(newProductData);
 
     const updatedProduct = await Product.findOneAndUpdate(
       { _id: mongoose.Types.ObjectId(_id) },

@@ -92,6 +92,7 @@ const ProductVariant = ({ productData, handleProductData, noVariant }) => {
   const variantPriceRef = useRef(null);
   const variantDefaultRef = useRef(null);
   const variantDiscountRef = useRef(null);
+  const variantCountInStockRef = useRef(null);
 
   const { error, loading, data } = useQuery(CURRENCIES_QUERY);
 
@@ -186,6 +187,18 @@ const ProductVariant = ({ productData, handleProductData, noVariant }) => {
             </InputGroup>
           </FormGroup>
         </Col>
+      </Row>
+      {' '}
+      <Row form>
+        <Col>
+          <FormGroup>
+            <Input
+              type="number"
+              placeholder="How many is in stock?"
+              innerRef={variantCountInStockRef}
+            />
+          </FormGroup>
+        </Col>
         <Col>
           <FormGroup check>
             <Label check>
@@ -201,6 +214,7 @@ const ProductVariant = ({ productData, handleProductData, noVariant }) => {
             </Label>
           </FormGroup>
         </Col>
+        
         <Col>
           <PulseButton type="button" onClick={() => handleAddVariant()} pulse={noVariant}>
             Add variant

@@ -1,6 +1,7 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable no-use-before-define */
 /* eslint-disable no-underscore-dangle */
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useQuery } from '@apollo/react-hooks';
 import Proptypes from 'prop-types';
@@ -13,13 +14,16 @@ import {
 
 import { PRODUCTS_QUERY } from '../../../../app-data/graphql/query';
 
+import { Context } from '../../../../app-data/StateManagement/Store';
+
 const Products = ({ subCategoryID, categoryID }) => {
   const {error, loading, data} = useQuery(PRODUCTS_QUERY);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [state, dispatch] = useContext(Context);
   useEffect(() => {
     if(data !== undefined){
       const { products } = data;
-      const newProducts = products.filter(function(product){
+      const newProducts = products.filter((product) => {
         return product.category === categoryID;
       });
       setFilteredProducts(newProducts);
@@ -32,7 +36,14 @@ const Products = ({ subCategoryID, categoryID }) => {
   if (loading) {
     return <>loading</>;
   }
-  console.log(filteredProducts);
+  // console.log(filteredProducts);
+
+  const handleAddProductToCart = (id) => {
+    dispatch({ type: 'ADD_TO_CART', payload: { id, count: 1 } });
+  };
+  const handleRemoveProductFromCart = (id) => {
+    dispatch({ type: 'REMOVE_FROM_CART', payload: id });
+  }
 
   const productsToShow = filteredProducts.map((item) => {
     return (
@@ -54,18 +65,42 @@ const Products = ({ subCategoryID, categoryID }) => {
                   query: { id: item._id },
                 }}
               >
-                {item.title}
+                <a>
+                  {item.title}
+                </a>
               </Link>
             </ProductTitle>
             <p>{item.shortDescription}</p>
             <PriceHolder>
-              <Price>{item.variant.length > 0 ? `${item.variant[0].price.value} ${item.variant[0].price.currencySign}` : 'Produkt neexistuje'}</Price>
+              <Price>
+                {
+                  item.variant.length > 0
+                  ? `${item.variant[0].price.value} ${item.variant[0].price.currencySign}`
+                  : 'Produkt neexistuje'
+                }
+              </Price>
+              {/* TODO: Style it by following graphic design */}
+              <button
+                type="button"
+                onClick={() => handleAddProductToCart(item._id)}
+              >
+                Add to cart
+              </button>
+              <button
+                type="button"
+                onClick={() => handleRemoveProductFromCart(item._id)}
+              >
+                Remove from cart
+              </button>
             </PriceHolder>
           </ProductBody>
         </ProductItem>
       </Col>
     );
   });
+
+  console.log(state);
+
   return (
     <Row>
       {productsToShow}

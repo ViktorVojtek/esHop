@@ -4,11 +4,14 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import {
   Button,
-  Form,
+  // Form,
   FormGroup,
   Label,
   Input,
 } from 'reactstrap';
+
+import styled from 'styled-components';
+
 import PropTypes from 'prop-types';
 
 import { CREATE_PRODUCT_MUTATION, UPDATE_PRODUCT_MUTATION} from '../../../../../app-data/graphql/mutation';
@@ -26,6 +29,20 @@ import ProductImages from './components/ProductImages';
 import ProductVariant from './components/ProductVariant';
 
 import { Context } from '../../../../../app-data/StateManagement/Store';
+
+const Form = styled.form`
+  background-color: #FCFDFF;
+`;
+
+const TitleInput = styled.input`
+  background: transparent;
+  outline: none;
+  border: 0;
+  font-size: 1.5em;
+  margin: 1em .5em;
+  color: #3F4B79;
+  font-weight: 600;
+`;
 
 const ProductCreateForm = ({ productDataProp }) => {
   const [productData, setProductData] = useState(productDataProp || {});
@@ -50,6 +67,7 @@ const ProductCreateForm = ({ productDataProp }) => {
 
   const handleSubmitProductData = async (event) => {
     event.preventDefault();
+    console.log('Submit form');
 
     const { variant } = productData;
 
@@ -93,21 +111,19 @@ const ProductCreateForm = ({ productDataProp }) => {
         }
       </Modal>
       {' '}
-      <Form onSubmit={(e) => handleSubmitProductData(e)}>
-        <FormGroup>
-          <Input
-            id="title"
-            type="text"
-            placeholder="Insert product title"
-            onChange={(event) => {
-              handleSetProductData({
-                ...productData,
-                title: event.currentTarget.value,
-              });
-            }}
-            value={productData.title || ''}
-          />
-        </FormGroup>
+      <Form onSubmit={(e) => { handleSubmitProductData(e); }}>
+        <TitleInput
+          id="title"
+          type="text"
+          placeholder="Insert product title"
+          onChange={(event) => {
+            handleSetProductData({
+              ...productData,
+              title: event.currentTarget.value,
+            });
+          }}
+          value={productData.title || ''}
+        />
         <DynamicSelect
           category
           query={CATEGORIES_QUERY}
@@ -193,7 +209,10 @@ const ProductCreateForm = ({ productDataProp }) => {
           </FormGroup>
         </FormGroup>
         <FormGroup>
-          <Button color="primary" type="submit">
+          <Button
+            color="primary"
+            type="submit"
+          >
             {Object.keys(productDataProp).length > 0 ? 'Update product' : 'Create product'}
           </Button>
         </FormGroup>

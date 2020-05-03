@@ -18,6 +18,7 @@ const Product = gql`
 
   input ProductVariantInput {
     default: Boolean
+    itemsInStock: Int
     title: String!
     price: ProductPriceInput!
   }
@@ -38,6 +39,7 @@ const Product = gql`
   type ProductImage {
     path: String
     ext: String
+    imgId: String
     size: String
     title: String
   }
@@ -51,6 +53,7 @@ const Product = gql`
 
   type ProductVariant {
     default: Boolean
+    itemsInStock: Int
     title: String
     price: ProductPrice
   }

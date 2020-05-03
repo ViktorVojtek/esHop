@@ -1,24 +1,25 @@
+/* eslint-disable no-underscore-dangle */
 const Reducer = (state, action) => {
   switch (action.type) {
+    case 'ADD_TO_CART':
+      return {
+        ...state,
+        cart: state.cart.concat([action.payload]),
+      };
+    case 'REMOVE_FROM_CART':
+      return {
+        ...state,
+        cart: state.cart.filter((cartItem) => cartItem.id !== action.payload),
+      };
+    case 'SET_CART':
+      return {
+        ...state,
+        cart: action.payload,
+      };
     case 'SET_MODAL':
       return {
         ...state,
         modal: action.payload,
-      };
-    case 'SET_POSTS':
-      return {
-        ...state,
-        posts: action.payload,
-      };
-    case 'ADD_POST':
-      return {
-        ...state,
-        posts: state.posts.concat(action.payload),
-      };
-    case 'REMOVE_POST':
-      return {
-        ...state,
-        posts: state.posts.filter((post) => post.id !== action.payload),
       };
     case 'SET_ERROR':
       return {

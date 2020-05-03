@@ -1,4 +1,5 @@
 /* eslint-disable no-underscore-dangle */
+const uniqid = require('uniqid');
 const Product = require('../../../../db/models/Product');
 const { superSecret } = require('../../../../config');
 const { verifyToken, storeFile } = require('../../utils');
@@ -51,6 +52,7 @@ const createProduct = async (root, { productInput }, ctx) => {
         const { base64, ...restImageData } = images[j];
         const imageData = {
           ...restImageData,
+          imageId: uniqid('img-'),
           path: imagePaths[j],
         };
 

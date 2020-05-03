@@ -37,6 +37,9 @@ export default createGlobalStyle`
   * {
     font-family:MuseoSans-Normal;
   }
+  .admin * {
+    font-family:Roboto;
+  }
   #__next{
     overflow: hidden;
   }

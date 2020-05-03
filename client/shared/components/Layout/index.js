@@ -6,9 +6,7 @@ import PropTypes from 'prop-types';
 
 const Layout = ({ children }) => (
   <>
-    {/*  <Styles /> */}
-    {/* */}
-    <Container fluid>
+    <Container fluid className="admin">
       {children}
     </Container>
   </>
