@@ -35,7 +35,7 @@ interface IProductUI extends Omit<IProductsFillProps, 'products'> {
   product: Product
 }
 const ProductTitle: React.FC<IProductTitle> = ({ id, title }) => (
-  <Link href={{ pathname: '/eshop/product/', query: { id } }}>
+  <Link href={{ pathname: '/eshop/product', query: { id } }}>
     <a>
       <StyledProductTitle>{title}</StyledProductTitle>
     </a>
@@ -59,7 +59,7 @@ const ProductUI: React.FC<IProductUI> = ({
       {
         images.length > 0
           ? (
-            <Link href={{ pathname: '/eshop/product/', query: { id: _id } }}>
+            <Link href={{ pathname: '/eshop/product', query: { id: _id } }}>
               <a>
                 <ProductImg src={images[0].path} alt={title} />
               </a>
@@ -84,7 +84,7 @@ const ProductUI: React.FC<IProductUI> = ({
         {
           variant.length > 1
             ? (
-              <Link href={{ pathname: '/eshop/product/', query: { id: _id } }}>
+              <Link href={{ pathname: '/eshop/product', query: { id: _id } }}>
                 <StyledCartLink>
                   Vložiť do košíka
                 </StyledCartLink>
