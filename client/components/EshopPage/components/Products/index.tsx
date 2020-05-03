@@ -106,6 +106,7 @@ const Products = ({ subCategoryID, categoryID }) => {
   const {error, loading, data} = useQuery(PRODUCTS_QUERY);
   const [filteredProducts, setFilteredProducts] = useState([]);
   // const [state, dispatch] = useContext(Context);
+  const { state, dispatch } = useContext(Context);
   useEffect(() => {
     if(data !== undefined){
       const { products } = data;
@@ -124,23 +125,22 @@ const Products = ({ subCategoryID, categoryID }) => {
   }
   // console.log(filteredProducts);
 
-  const handleAddProductToCart = (id) => {
-    // dispatch({ type: 'ADD_TO_CART', payload: { id, count: 1 } });
+  const handleAddProductToCart = (id: string) => {
+    dispatch({ type: 'ADD_TO_CART', payload: { id, count: 1 } });
   };
-  const handleRemoveProductFromCart = (id) => {
-    // dispatch({ type: 'REMOVE_FROM_CART', payload: id });
+  const handleRemoveProductFromCart = (id: string) => {
+    dispatch({ type: 'REMOVE_FROM_CART', payload: id });
   }
 
-  // console.log(state);
+  console.log(state);
 
   return (
     <Row>
-      {/* <ProductFill
+      <ProductFill
         products={filteredProducts}
         addProduct={handleAddProductToCart}
         removeProduct={handleRemoveProductFromCart}
       />
-      */}
     </Row>
   );
 };
