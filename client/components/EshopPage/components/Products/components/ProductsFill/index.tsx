@@ -71,7 +71,6 @@ const ProductUI: React.FC<IProductUI> = ({
       <ProductBody>
         <ProductTitle id={_id} title={title} />
         <StyledShortDescription>{shortDescription}</StyledShortDescription>
-        <StyledDescription>{description}</StyledDescription>
         <PriceHolder>
           <Price>
             {

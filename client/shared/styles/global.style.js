@@ -57,6 +57,9 @@ export default createGlobalStyle`
   .letter-spacing-1{
     letter-spacing: 1px;
   }
+  a{
+    text-decoration: none !important;
+  }
   h1{
     font-size: 3.75rem;
     @media(max-width: 1550px){

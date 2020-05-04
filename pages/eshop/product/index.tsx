@@ -6,7 +6,10 @@ import {  } from 'reactstrap';
 
 import Navigation from '../../../client/shared/components/Navigation';
 import Footer from '../../../client/shared/components/Footer';
+import ProductDetailBody from '../../../client/components/EshopPage/components/ProductDetail';
 import { PRODUCT_QUERY } from '../../../client/app-data/graphql/query';
+import Product from '../../../client/components/EshopPage/components/Products/types/Products.type';
+
 
 const ProductDetail: React.FC = () => {
   const router = useRouter();
@@ -33,7 +36,9 @@ const ProductDetail: React.FC = () => {
   return (
     <>
       <Navigation />
-      <p>Product detail</p>
+      <ProductDetailBody
+        product={product}
+      />
       <Footer />
     </>
   );
