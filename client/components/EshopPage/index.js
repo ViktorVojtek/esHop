@@ -12,6 +12,7 @@ const EshopPage = () => {
 
   const [subCategoryID, setSubCategoryID] = useState('');
   const [categoryID, setCategoryID] = useState('');
+  const [productsCount, setProductsCount] = useState(0);
 
   return (
     <Wrapper>
@@ -31,6 +32,7 @@ const EshopPage = () => {
             <Products
               categoryID={categoryID}
               subCategoryID={subCategoryID}
+              setProductsCount={setProductsCount}
             />
           </Col>
         </Row>

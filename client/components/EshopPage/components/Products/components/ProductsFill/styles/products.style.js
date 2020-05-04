@@ -25,7 +25,7 @@ export const ProductImg = styled.img`
 `;
 
 export const ImageWrap = styled.aside`
-  max-width: 180px;
+  width:33%;
 `;
 
 export const IconCart = styled(Cart)`
