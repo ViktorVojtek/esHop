@@ -15,7 +15,8 @@ import {
   StyledShortDescription,
   StyledCartLink,
   StyledDescription,
-  StyledCartBtn
+  StyledCartBtn,
+  EyeDetail
 } from './styles/products.style';
 
 // type Product
@@ -61,7 +62,12 @@ const ProductUI: React.FC<IProductUI> = ({
           ? (
             <Link href={{ pathname: '/eshop/product', query: { id: _id } }}>
               <a>
-                <ProductImg className="product-image" src={images[0].path} alt={title} />
+                <div className="product-image">
+                  <ProductImg src={images[0].path} alt={title} />
+                  <div className="detail">
+                    <EyeDetail />
+                  </div>
+                </div>
               </a>
             </Link>
           ) : null

@@ -167,14 +167,22 @@ export default createGlobalStyle`
     }
   }
   .product-image{
-    box-shadow: rgba(255, 77, 125, 0.54) 0px 0px 1px;
-    backface-visibility: hidden;
-    transform: translate3d(0px, 0px, 0px);
-    background: rgb(255, 255, 255);
-    transition: all 0.5s ease 0s;
-    border-radius: 6px;
-    &:hover{
-      box-shadow: rgb(255, 232, 241) 0px 0px 10px;
+    position: relative;
+    .detail{
+      position: absolute;
+      width: 100%;
+      height: 100%; 
+      top: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .4s ease-out;
+      &:hover{
+        background-color: rgba(255, 255, 255, 0.4);
+        svg{
+          transform: scale(1);
+        }
+      }
     }
   }
 `;
