@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Cart } from '@styled-icons/boxicons-regular';
+import { Eye } from '@styled-icons/evaicons-solid';
 
 export const PriceHolder = styled.div``;
 
@@ -32,6 +33,12 @@ export const ImageWrap = styled.aside`
 export const IconCart = styled(Cart)`
   color: #2a2a2a; 
   width: 20px;
+`;
+export const EyeDetail = styled(Eye)`
+  color: rgb(0,174,239);
+  width: 60px;
+  transform: scale(0);
+  transition: all .4s;
 `;
 
 export const StyledProductTitle = styled.h2`
