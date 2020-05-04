@@ -166,4 +166,15 @@ export default createGlobalStyle`
       transform: translateY(-2px);
     }
   }
+  .product-image{
+    box-shadow: rgba(255, 77, 125, 0.54) 0px 0px 1px;
+    backface-visibility: hidden;
+    transform: translate3d(0px, 0px, 0px);
+    background: rgb(255, 255, 255);
+    transition: all 0.5s ease 0s;
+    border-radius: 6px;
+    &:hover{
+      box-shadow: rgb(255, 232, 241) 0px 0px 10px;
+    }
+  }
 `;

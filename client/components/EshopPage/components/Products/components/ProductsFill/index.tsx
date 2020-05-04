@@ -61,7 +61,7 @@ const ProductUI: React.FC<IProductUI> = ({
           ? (
             <Link href={{ pathname: '/eshop/product', query: { id: _id } }}>
               <a>
-                <ProductImg src={images[0].path} alt={title} />
+                <ProductImg className="product-image" src={images[0].path} alt={title} />
               </a>
             </Link>
           ) : null
