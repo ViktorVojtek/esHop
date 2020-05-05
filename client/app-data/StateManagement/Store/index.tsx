@@ -2,33 +2,27 @@
 import React, { createContext, useReducer } from 'react';
 import Reducer from '../Reducer';
 
-interface IAppContext {
-  cart: Object[],
-  modal: Boolean,
-  error: Boolean
-}
+import { IState } from '../../types/Store.types';
 
-const initialState: IAppContext = {
+const initialState: IState = {
   cart: [],
   modal: false,
   error: false,
 };
 
 export const Context = createContext<{
-  state: IAppContext;
+  state: IState;
   dispatch: React.Dispatch<any>;
 }>({
   state: initialState,
-  dispatch: () => null
+  dispatch: () => null,
 });
 
 const Store = ({ children }) => {
   const [state, dispatch] = useReducer(Reducer, initialState);
 
   return (
-    <Context.Provider value={{state, dispatch}}>
-      {children}
-    </Context.Provider>
+    <Context.Provider value={{ state, dispatch }}>{children}</Context.Provider>
   );
 };
 

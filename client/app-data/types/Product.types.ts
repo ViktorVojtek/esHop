@@ -9,13 +9,13 @@ export type ProductImage = {
 export type ProductPrice = {
   currency: string;
   currencySign: string;
-  discount: Number;
-  value: Number;
+  discount: number;
+  value: number;
 };
 
 export type ProductVariant = {
-  default: Boolean;
-  itemsInStock: Number;
+  default: boolean;
+  itemsInStock: number;
   title: string;
   price: ProductPrice;
 };
@@ -27,15 +27,15 @@ type Product = {
   dateDeleted: string;
   dateModified: string;
   description: string;
-  deleted: Boolean;
-  inStock: Boolean;
+  deleted: boolean;
+  inStock: boolean;
   modifiedByUserId: string;
   shortDescription: string;
   subCategory: string;
-  images: Array<ProductImage>;
+  images: ProductImage[];
   note: string;
   title: string;
-  variant: Array<ProductVariant>;
+  variant: ProductVariant[];
 };
 
 export default Product;

@@ -2,7 +2,7 @@ import React from 'react';
 import Error from 'next/error';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/react-hooks';
-import {  } from 'reactstrap';
+import {} from 'reactstrap';
 
 import Navigation from '../../../client/shared/components/Navigation';
 import Footer from '../../../client/shared/components/Footer';
@@ -10,12 +10,9 @@ import ProductDetailBody from '../../../client/components/EshopPage/components/P
 import { PRODUCT_QUERY } from '../../../client/app-data/graphql/query';
 import Product from '../../../client/components/EshopPage/components/Products/types/Products.type';
 
-
 const ProductDetail: React.FC = () => {
   const router = useRouter();
   const { query } = router;
-
-  console.log(query);
 
   const { error, loading, data } = useQuery(PRODUCT_QUERY, {
     variables: { id: query.id },
@@ -25,9 +22,9 @@ const ProductDetail: React.FC = () => {
     return <>loading</>;
   }
 
-  /* if (error) {
+  if (error) {
     return <Error statusCode={404} />;
-  } */
+  }
 
   const { product } = data;
 
@@ -36,9 +33,7 @@ const ProductDetail: React.FC = () => {
   return (
     <>
       <Navigation />
-      <ProductDetailBody
-        product={product}
-      />
+      <ProductDetailBody product={product} />
       <Footer />
     </>
   );
