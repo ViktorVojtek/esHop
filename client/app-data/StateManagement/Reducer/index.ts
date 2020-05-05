@@ -3,38 +3,41 @@ import { IAction, IState } from '../../types/Store.types';
 const Reducer = (state: IState, action: IAction) => {
   switch (action.type) {
     case 'ADD_TO_CART':
-      const temp: any[] = [];
+      console.log(action.payload);
+      let newCart = [];
 
       if (state.cart.length > 0) {
-        for (const product of state.cart) {
-          console.log(product);
+        for (let i: number = 0; i < state.cart.length; i += 1) {
+          if (state.cart[i].id === action.payload.id) {
+            newCart = [...state.cart];
 
-          if (product.id === action.payload.id) {
-            const updatedItem = {
-              ...product,
-            };
-
-            /* for (const variantItem of variant) {
-
-            } */
-
-            if (action.payload.variant) {
-              updatedItem.variant = action.payload.variant;
+            for (let j: number = 0; j < state.cart[i].variant.length; j += 1) {
+              console.log(state.cart[i].variant[j]);
+              console.log(action.payload.variant[0]);
+              if (
+                state.cart[i].variant[j].title ===
+                action.payload.variant[0].title
+              ) {
+                newCart[i].variant[j].count = action.payload.variant[0].count;
+              } else {
+                newCart[i].variant.push(action.payload.variant[0]);
+              }
             }
-
-            temp.push(updatedItem);
           } else {
-            temp.push(product);
+            newCart = [...state.cart, action.payload];
           }
         }
-      } else {
-        temp.push(action.payload);
-      }
 
-      return {
-        ...state,
-        cart: temp,
-      };
+        return {
+          ...state,
+          cart: newCart,
+        };
+      } else {
+        return {
+          ...state,
+          cart: [action.payload],
+        };
+      }
     case 'REMOVE_FROM_CART':
       return {
         ...state,
@@ -63,3 +66,43 @@ const Reducer = (state: IState, action: IAction) => {
 };
 
 export default Reducer;
+
+/* let updatedCart = [];
+        const oldCartData = [...state.cart];
+        let itemExist: boolean = false;
+        let itemExistIdx: number[] = [0, 0];
+
+        let i: number = 0;
+        let j: number = 0;
+
+        while (i < oldCartData.length) {
+          if (oldCartData[i].id === action.payload.id) {
+            while (j < oldCartData[i].variant.length) {
+              if (
+                oldCartData[i].variant[j].title ===
+                action.payload.variant[0].title
+              ) {
+                itemExist = true;
+                itemExistIdx = [i, j];
+              }
+
+              j += 1;
+            }
+          }
+
+          i += 1;
+        }
+
+        if (itemExist) {
+          console.log('items exist');
+          oldCartData[itemExistIdx[0]].variant[itemExistIdx[1]].count =
+            action.payload.variant[0].count;
+
+          console.log(oldCartData);
+
+          updatedCart = [...oldCartData];
+        } else {
+          updatedCart = [...state.cart, action.payload];
+        }
+
+        console.log(updatedCart); */

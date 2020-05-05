@@ -23,7 +23,7 @@ interface IProductDetailProps {
 interface IProductToCartData {
   id: string;
   count?: number;
-  variant?: VariantOfProduct;
+  variant?: VariantOfProduct[];
 }
 
 const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
@@ -55,11 +55,13 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
 
     handleAddProductToCart({
       id: _id,
-      variant: {
-        count,
-        price,
-        title,
-      },
+      variant: [
+        {
+          count,
+          price,
+          title,
+        },
+      ],
     });
   };
 
