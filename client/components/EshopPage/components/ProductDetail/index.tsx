@@ -36,9 +36,9 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
   const { state, dispatch } = useContext(Context);
 
   const handleAddProductToCart: (data: IProductToCartData) => void = (data) => {
-    const { id, count, variant } = data;
+    const { id, variant } = data;
 
-    dispatch({ type: 'ADD_TO_CART', payload: { id, count, variant } });
+    dispatch({ type: 'ADD_TO_CART', payload: { id, variant } });
   };
 
   const handleSetActiveVariant: (i: number) => void = (i) => {
@@ -55,7 +55,6 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
 
     handleAddProductToCart({
       id: _id,
-      count,
       variant: {
         count,
         price,

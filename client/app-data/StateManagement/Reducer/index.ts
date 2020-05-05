@@ -5,8 +5,6 @@ const Reducer = (state: IState, action: IAction) => {
     case 'ADD_TO_CART':
       const temp: any[] = [];
 
-      console.log(action.payload);
-
       if (state.cart.length > 0) {
         for (const product of state.cart) {
           console.log(product);
@@ -16,10 +14,12 @@ const Reducer = (state: IState, action: IAction) => {
               ...product,
             };
 
+            /* for (const variantItem of variant) {
+
+            } */
+
             if (action.payload.variant) {
               updatedItem.variant = action.payload.variant;
-            } else {
-              updatedItem.count = action.payload.count + 1;
             }
 
             temp.push(updatedItem);
