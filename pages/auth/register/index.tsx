@@ -50,6 +50,7 @@ const Register: FC = () => {
       });
     } catch (err) {
       console.log(err);
+      handleSetErrorMessage(err.message);
     }
   };
   const checkPassword: (event: React.ChangeEvent<HTMLInputElement>) => void = (
