@@ -5,7 +5,7 @@ import { useQuery } from '@apollo/react-hooks';
 
 import Navigation from '../../../app-data/shared/components/Navigation/Site';
 import Footer from '../../../app-data/shared/components/Footer';
-import ProductDetailBody from '../../../app-data/components/pages/EshopPage/components/ProductDetail';
+import ProductDetailBody from '../../../app-data/components/pages/eshop/components/ProductDetail';
 import { PRODUCT_QUERY } from '../../../app-data/graphql/query';
 import Product from '../../../app-data/shared/types/Product.types';
 
