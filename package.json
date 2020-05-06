@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon ./server/eshop.js",
-    "build": "next build",
+    "dev": "nodemon",
+    "build": "next build tsc --project tsconfig.server.json",
     "start": "next start",
-    "production": "NODE_ENV=production forever start ./server/eshop.js",
+    "production": "NODE_ENV=production forever start ./server/eshop.ts",
     "prettier-watch": "onchange '**/*.js' -- prettier --write {{changed}}"
   },
   "dependencies": {
@@ -46,14 +46,21 @@
     "uniqid": "^5.2.0"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
     "@types/brainhubeu__react-carousel": "^1.13.0",
     "@types/core-js": "^2.5.3",
+    "@types/fs-extra": "^8.1.0",
     "@types/graphql": "^14.5.0",
+    "@types/helmet": "^0.0.46",
+    "@types/jsonwebtoken": "^8.3.9",
+    "@types/mongoose": "^5.7.15",
     "@types/node": "^13.13.5",
     "@types/react": "^16.9.34",
     "@types/reactstrap": "^8.4.2",
     "@types/styled-components": "^5.1.0",
+    "@types/uniqid": "^4.1.3",
     "babel-plugin-transform-class-properties": "^6.24.1",
+    "cross-env": "^7.0.2",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.1.0",
     "eslint-config-prettier": "^6.10.1",
@@ -62,6 +69,7 @@
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^3.0.0",
     "prettier": "^2.0.4",
+    "ts-node": "^8.10.1",
     "typescript": "^3.8.3"
   }
 }

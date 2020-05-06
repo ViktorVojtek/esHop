@@ -5,7 +5,6 @@ import { Col } from 'reactstrap';
 // Styled Components
 import {
   ImageWrap,
-  IconCart,
   PriceHolder,
   Price,
   ProductImg,
@@ -14,7 +13,6 @@ import {
   StyledProductTitle,
   StyledShortDescription,
   StyledCartLink,
-  StyledDescription,
   StyledCartBtn,
   EyeDetail,
 } from './styles/products.style';

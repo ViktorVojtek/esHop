@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import { Container } from 'reactstrap';
 import PropTypes from 'prop-types';
 
 import { ILayout } from './TS/layout.interface';

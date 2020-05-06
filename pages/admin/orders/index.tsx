@@ -12,7 +12,6 @@ const Orders: () => JSX.Element = () => (
       <title>esHop App | Orders</title>
       <link rel="icon" href="/favicon.ico" />
     </Head>{' '}
-    <NavHeader />{' '}
     <Layout>
       <Row>
         <Col xs="6" sm="3">
