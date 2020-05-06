@@ -23,7 +23,7 @@ interface IProductDetailProps {
 interface IProductToCartData {
   id: string;
   count?: number;
-  variant?: VariantOfProduct[];
+  variant?: VariantOfProduct;
 }
 
 const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
@@ -35,14 +35,14 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
   const [activeVariant, setActiveVariant] = useState(0);
   const { state, dispatch } = useContext(Context);
 
+  const handleSetActiveVariant: (i: number) => void = (i) => {
+    setActiveVariant(i);
+  };
+
   const handleAddProductToCart: (data: IProductToCartData) => void = (data) => {
     const { id, variant } = data;
 
     dispatch({ type: 'ADD_TO_CART', payload: { id, variant } });
-  };
-
-  const handleSetActiveVariant: (i: number) => void = (i) => {
-    setActiveVariant(i);
   };
 
   const handleSubmitProductToCart: (
@@ -55,13 +55,11 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
 
     handleAddProductToCart({
       id: _id,
-      variant: [
-        {
-          count,
-          price,
-          title,
-        },
-      ],
+      variant: {
+        count,
+        price,
+        title,
+      },
     });
   };
 

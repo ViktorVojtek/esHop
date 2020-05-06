@@ -8,7 +8,7 @@ export type VariantOfProduct = {
 
 export type CartProduct = {
   id: string;
-  variant: VariantOfProduct[];
+  variant: VariantOfProduct;
 };
 
 export interface IState {

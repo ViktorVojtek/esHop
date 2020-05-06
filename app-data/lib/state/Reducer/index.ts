@@ -1,41 +1,40 @@
-import { IAction, IState } from '../../../shared/types/Store.types';
+import {
+  CartProduct,
+  IAction,
+  IState,
+} from '../../../shared/types/Store.types';
 
 const Reducer = (state: IState, action: IAction) => {
   switch (action.type) {
     case 'ADD_TO_CART':
-      console.log(action.payload);
-      let newCart = [];
+      let newCart: CartProduct[] = [];
 
       if (state.cart.length > 0) {
-        for (let i: number = 0; i < state.cart.length; i += 1) {
-          if (state.cart[i].id === action.payload.id) {
-            newCart = [...state.cart];
+        newCart = [...state.cart];
+        let productExist = false;
 
-            for (let j: number = 0; j < state.cart[i].variant.length; j += 1) {
-              if (
-                state.cart[i].variant[j].title ===
-                action.payload.variant[0].title
-              ) {
-                newCart[i].variant[j].count = action.payload.variant[0].count;
-              } else {
-                newCart[i].variant.push(action.payload.variant[0]);
-              }
-            }
-          } else {
-            newCart = [...state.cart, action.payload];
+        for (let i: number = 0; i < newCart.length; i += 1) {
+          if (
+            newCart[i].id === action.payload.id &&
+            newCart[i].variant.title === action.payload.variant.title
+          ) {
+            newCart[i].variant.count = action.payload.variant.count;
+            productExist = true;
+            break;
           }
         }
 
-        return {
-          ...state,
-          cart: newCart,
-        };
+        if (!productExist) {
+          newCart = [...state.cart, action.payload];
+        }
       } else {
-        return {
-          ...state,
-          cart: [action.payload],
-        };
+        newCart = [...state.cart, action.payload];
       }
+
+      return {
+        ...state,
+        cart: newCart,
+      };
     case 'REMOVE_FROM_CART':
       return {
         ...state,

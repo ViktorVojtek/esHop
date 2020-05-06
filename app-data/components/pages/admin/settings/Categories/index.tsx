@@ -34,7 +34,7 @@ const Categories: FC = () => {
         <tr>
           <th className="border-top-0">#</th>
           <th colSpan={2} className="border-top-0">
-            Category title
+            Category
           </th>
         </tr>
       </thead>

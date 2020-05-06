@@ -46,10 +46,6 @@ const SubCategories: FC = () => {
 
   const { subCategories } = data;
 
-  if (categoriesData) {
-    console.log(categoriesData);
-  }
-
   const categoriesAndSubsTable: JSX.Element[] =
     categoriesData && subCategories
       ? categoriesData.categories.map((categoryItem, i: number) => {

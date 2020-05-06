@@ -27,8 +27,6 @@ const ProductDetail: React.FC = () => {
 
   const { product } = data;
 
-  console.log(product);
-
   return (
     <Layout>
       <ProductDetailBody product={product as Product} />

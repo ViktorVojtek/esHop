@@ -12,9 +12,16 @@ import { Context } from '../../../../../lib/state/Store';
 // Component fullfill the filtered products
 import ProductFill from './components/ProductsFill';
 
+import { VariantOfProduct } from '../../../../../shared/types/Store.types';
+
 interface IProductsProps {
   subCategoryID: string;
   categoryID: string;
+}
+interface IProductToCartData {
+  id: string;
+  count?: number;
+  variant?: VariantOfProduct;
 }
 const Products: React.FC<IProductsProps> = ({ subCategoryID, categoryID }) => {
   const { error, loading, data } = useQuery(PRODUCTS_QUERY, {
@@ -48,15 +55,16 @@ const Products: React.FC<IProductsProps> = ({ subCategoryID, categoryID }) => {
     return <>loading</>;
   }
 
-  const handleAddProductToCart = (id: string, count: Number) => {
-    dispatch({ type: 'ADD_TO_CART', payload: { id, count } });
+  const handleAddProductToCart: (data: IProductToCartData) => void = (data) => {
+    const { id, variant } = data;
+
+    dispatch({ type: 'ADD_TO_CART', payload: { id, variant } });
   };
   const handleRemoveProductFromCart = (id: string) => {
     dispatch({ type: 'REMOVE_FROM_CART', payload: id });
   };
 
   console.log(state);
-
   return (
     <Row>
       <ProductFill
