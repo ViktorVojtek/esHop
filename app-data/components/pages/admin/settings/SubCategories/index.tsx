@@ -48,39 +48,44 @@ const SubCategories: FC = () => {
 
   const categoriesAndSubsTable: JSX.Element[] =
     categoriesData && subCategories
-      ? categoriesData.categories.map((categoryItem, i: number) => {
-          const subs = subCategories
-            .map(
-              (subItem, j: number) =>
-                subItem.categoryId === categoryItem._id && (
-                  <tr key={subItem._id}>
-                    <td>{i < 1 ? i + j + 1 : j + 1}</td>
-                    <td></td>
-                    <td>{subItem.title}</td>
-                    <td className="text-right">
-                      <Button
-                        color="danger"
-                        onClick={() => handleRemoveItem(subItem._id)}
-                      >
-                        Remove
-                      </Button>
-                    </td>
-                  </tr>
-                )
-            )
-            .filter((genericItem) => genericItem);
+      ? categoriesData.categories
+          .map((categoryItem, i: number) => {
+            const subs = subCategories
+              .map(
+                (subItem, j: number) =>
+                  subItem.categoryId === categoryItem._id && (
+                    <tr key={subItem._id}>
+                      <td>{i < 1 ? i + j + 1 : j + 1}</td>
+                      <td></td>
+                      <td>{subItem.title}</td>
+                      <td className="text-right">
+                        <Button
+                          color="danger"
+                          onClick={() => handleRemoveItem(subItem._id)}
+                        >
+                          Remove
+                        </Button>
+                      </td>
+                    </tr>
+                  )
+              )
+              .filter((genericItem) => genericItem);
 
-          const result = [
-            <tr key={categoryItem._id}>
-              <td>&nbsp;</td>
-              <td>{categoryItem.title}</td>
-              <td></td>
-              <td className="text-right"></td>
-            </tr>,
-          ].concat(subs);
+            const result =
+              subs.length > 0
+                ? [
+                    <tr key={categoryItem._id}>
+                      <td>&nbsp;</td>
+                      <td>{categoryItem.title}</td>
+                      <td></td>
+                      <td className="text-right"></td>
+                    </tr>,
+                  ].concat(subs)
+                : null;
 
-          return result;
-        })
+            return result;
+          })
+          .filter((item) => item)
       : [];
 
   return subCategories && subCategories.length > 0 ? (
