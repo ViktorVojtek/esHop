@@ -48,6 +48,7 @@
   "devDependencies": {
     "@types/brainhubeu__react-carousel": "^1.13.0",
     "@types/core-js": "^2.5.3",
+    "@types/graphql": "^14.5.0",
     "@types/node": "^13.13.5",
     "@types/react": "^16.9.34",
     "@types/reactstrap": "^8.4.2",

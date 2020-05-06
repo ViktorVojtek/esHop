@@ -52,7 +52,7 @@ const Currencies: FC = () => {
       <thead>
         <tr>
           <th className="border-top-0">#</th>
-          <th className="border-top-0">Currency title</th>
+          <th className="border-top-0">Title</th>
           <th className="border-top-0">Sign</th>
           <th className="border-top-0">Value</th>
           <th colSpan={2} className="border-top-0">

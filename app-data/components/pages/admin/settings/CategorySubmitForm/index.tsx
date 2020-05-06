@@ -8,7 +8,7 @@ import { CATEGORIES_QUERY } from '../../../../../graphql/query';
 import { Context } from '../../../../../lib/state/Store';
 
 const CategorySubmitForm: FC = () => {
-  const { state, dispatch } = useContext(Context);
+  const { dispatch } = useContext(Context);
   const [createCategory] = useMutation(CREATE_CATEGORY_MUTATION, {
     refetchQueries: [{ query: CATEGORIES_QUERY }],
   });
@@ -18,7 +18,8 @@ const CategorySubmitForm: FC = () => {
   ) => Promise<void> = async (event) => {
     event.preventDefault();
 
-    const title = (document.getElementById('title') as HTMLInputElement).value;
+    const title = (document.getElementById('categoryTitle') as HTMLInputElement)
+      .value;
 
     try {
       await createCategory({ variables: { title } });
@@ -30,13 +31,17 @@ const CategorySubmitForm: FC = () => {
 
   return (
     <Form onSubmit={handleSubmitCategoryData}>
-      <h5>Category</h5>
+      <h4>Create Category</h4>
       <FormGroup>
-        <Label for="title">Title</Label>
-        <Input id="title" type="text" placeholder="Insert category title" />
+        <Label for="categoryTitle">Title</Label>
+        <Input
+          id="categoryTitle"
+          type="text"
+          placeholder="Insert category title"
+        />
       </FormGroup>
       <FormGroup>
-        <Button>Submit</Button>
+        <Button type="submit">Submit</Button>
       </FormGroup>
     </Form>
   );

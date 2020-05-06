@@ -1,10 +1,28 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { Button, Table } from 'reactstrap';
-import { SUBCATEGORIES_QUERY } from '../../../../../graphql/query';
+import {
+  CATEGORIES_QUERY,
+  SUBCATEGORIES_QUERY,
+} from '../../../../../graphql/query';
 import { REMOVE_SUBCATEGORY_MUTATION } from '../../../../../graphql/mutation';
 
+const useCategories = (QUERY) => {
+  const [categories, setCategories] = useState(null);
+  const { data } = useQuery(QUERY);
+
+  useEffect(() => {
+    if (data) {
+      setCategories(data);
+    }
+  }, [data]);
+
+  return categories;
+};
+
 const SubCategories: FC = () => {
+  const categoriesData = useCategories(CATEGORIES_QUERY);
+
   const { error, loading, data } = useQuery(SUBCATEGORIES_QUERY);
   const [removeSubcategory] = useMutation(REMOVE_SUBCATEGORY_MUTATION, {
     refetchQueries: [{ query: SUBCATEGORIES_QUERY }],
@@ -28,6 +46,43 @@ const SubCategories: FC = () => {
 
   const { subCategories } = data;
 
+  if (categoriesData) {
+    console.log(categoriesData);
+  }
+
+  /* const categoriesAndSubsTable: JSX.Element[] =
+  categoriesData && subCategories
+    ? (
+      categoriesData.categories.map((category, i) => {
+
+        return (
+          <tr key={_id}>
+            <td>{i + 1}</td>
+            <td>{title}</td>
+            <td className="text-right">
+              <Button color="danger" onClick={() => handleRemoveItem(_id)}>
+                Remove
+              </Button>
+            </td>
+          </tr>
+        );
+      })
+    ) : [] */
+  const categoriesAndSubsTable: JSX.Element[] =
+    subCategories && subCategories.length > 0
+      ? subCategories.map(({ _id, title }, i: number) => (
+          <tr key={_id}>
+            <td>{i + 1}</td>
+            <td>{title}</td>
+            <td className="text-right">
+              <Button color="danger" onClick={() => handleRemoveItem(_id)}>
+                Remove
+              </Button>
+            </td>
+          </tr>
+        ))
+      : [];
+
   return subCategories && subCategories.length > 0 ? (
     <Table>
       <thead>
@@ -38,19 +93,7 @@ const SubCategories: FC = () => {
           </th>
         </tr>
       </thead>
-      <tbody>
-        {subCategories.map(({ _id, title }, i: number) => (
-          <tr key={_id}>
-            <td>{i + 1}</td>
-            <td>{title}</td>
-            <td className="text-right">
-              <Button color="danger" onClick={() => handleRemoveItem(_id)}>
-                Remove
-              </Button>
-            </td>
-          </tr>
-        ))}
-      </tbody>
+      <tbody>{categoriesAndSubsTable}</tbody>
     </Table>
   ) : (
     <div className="d-flex justify-content-center align-items-center h-100">

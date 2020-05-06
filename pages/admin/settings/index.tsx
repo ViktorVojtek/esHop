@@ -2,7 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import { Col, Row } from 'reactstrap';
 
-import BoxWrapper, { H3 } from '../../../app-data/shared/styles/admin/UI';
+import BoxWrapper from '../../../app-data/shared/styles/admin/UI';
 
 import Layout from '../../../app-data/shared/components/Layout/Admin.layout';
 import LhsNav from '../../../app-data/shared/components/LhsNav';
@@ -32,33 +32,33 @@ const SettingsPage: () => JSX.Element = () => (
           <LhsNav />
         </Col>
         <Col xm="6" sm="9" md="10">
-          <H3>e-Commerce settings</H3>{' '}
+          <h2>e-Commerce settings</h2>{' '}
           <BoxWrapper className="border-bottom">
             <Row>
-              <Col>
+              <Col md={4}>
                 <CurrencySubmitForm />
               </Col>
-              <Col>
+              <Col md={8}>
                 <Currencies />
               </Col>
             </Row>
           </BoxWrapper>
           <BoxWrapper className="border-bottom">
             <Row>
-              <Col>
+              <Col md={4}>
                 <CategorySubmitForm />
               </Col>
-              <Col>
+              <Col md={8}>
                 <Categories />
               </Col>
             </Row>
           </BoxWrapper>
           <BoxWrapper className="border-bottom">
             <Row>
-              <Col>
+              <Col md={4}>
                 <SubCategorySubmitForm />
               </Col>
-              <Col>
+              <Col md={8}>
                 <SubCategories />
               </Col>
             </Row>

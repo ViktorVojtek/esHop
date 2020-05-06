@@ -3,8 +3,6 @@ import { useMutation } from '@apollo/react-hooks';
 
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
-import { H5 } from '../../../../../shared/styles/admin/UI';
-
 import { SET_CURRENCY_MUTATION } from '../../../../../graphql/mutation';
 import { CURRENCIES_QUERY } from '../../../../../graphql/query';
 
@@ -69,7 +67,7 @@ const CurrencySubmitForm: FC = () => {
 
   return (
     <Form onSubmit={handleSubmitCurrencyData}>
-      <H5>Currency</H5>
+      <h4>Create Currency</h4>
       <FormGroup>
         <Label for="currencyTitle">Title</Label>
         <Input
@@ -110,7 +108,7 @@ const CurrencySubmitForm: FC = () => {
         </FormGroup>
       </FormGroup>{' '}
       <FormGroup>
-        <Button>Submit</Button>
+        <Button type="submit">Submit</Button>
       </FormGroup>
     </Form>
   );

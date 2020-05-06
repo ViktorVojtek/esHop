@@ -28,7 +28,9 @@ const SubCategorySubmitForm: FC = () => {
   ) => Promise<void> = async (event) => {
     event.preventDefault();
 
-    const title = (document.getElementById('title') as HTMLInputElement).value;
+    const title = (document.getElementById(
+      'subCategoryTitle'
+    ) as HTMLInputElement).value;
     const categoryEl = document.getElementById(
       'categoryForSubCategorySelect'
     ) as HTMLSelectElement;
@@ -68,11 +70,15 @@ const SubCategorySubmitForm: FC = () => {
         </Input>
       </FormGroup>
       <FormGroup>
-        <Label for="title">Title</Label>
-        <Input id="title" type="text" placeholder="Insert category title" />
+        <Label for="subCategoryTitle">Title</Label>
+        <Input
+          id="subCategoryTitle"
+          type="text"
+          placeholder="Insert category title"
+        />
       </FormGroup>
       <FormGroup>
-        <Button>Submit</Button>
+        <Button type="submit">Submit</Button>
       </FormGroup>
     </Form>
   );
