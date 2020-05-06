@@ -4,7 +4,6 @@ import { Row, Col } from 'reactstrap';
 
 import { withAuthSync } from '../../../app-data/lib/auth';
 import Layout from '../../../app-data/shared/components/Layout/Admin.layout';
-import NavHeader from '../../../app-data/shared/components/Navigation/Admin';
 import LhsNav from '../../../app-data/shared/components/LhsNav';
 
 const Orders: () => JSX.Element = () => (

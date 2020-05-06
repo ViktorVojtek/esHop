@@ -4,7 +4,6 @@ import { Row, Col } from 'reactstrap';
 
 import { withAuthSync } from '../../../app-data/lib/auth';
 import Layout from '../../../app-data/shared/components/Layout/Admin.layout';
-import NavHeader from '../../../app-data/shared/components/Navigation/Admin';
 import LhsNav from '../../../app-data/shared/components/LhsNav';
 
 const Reviews: () => JSX.Element = () => (
@@ -13,7 +12,6 @@ const Reviews: () => JSX.Element = () => (
       <title>esHop App | Reviews</title>
       <link rel="icon" href="/favicon.ico" />
     </Head>{' '}
-    <NavHeader />{' '}
     <Layout>
       <Row>
         <Col xs="6" sm="3">

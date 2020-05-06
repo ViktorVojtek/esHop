@@ -5,7 +5,6 @@ import { Col, Row } from 'reactstrap';
 import BoxWrapper, { H3 } from '../../../app-data/shared/styles/admin/UI';
 
 import Layout from '../../../app-data/shared/components/Layout/Admin.layout';
-import NavHeader from '../../../app-data/shared/components/Navigation/Admin';
 import LhsNav from '../../../app-data/shared/components/LhsNav';
 import Modal from '../../../app-data/shared/components/Modal';
 
@@ -27,7 +26,6 @@ const SettingsPage: () => JSX.Element = () => (
     <Modal>
       <>Modal?</>
     </Modal>
-    <NavHeader />{' '}
     <Layout>
       <Row>
         <Col xs="6" sm="3" md="2">

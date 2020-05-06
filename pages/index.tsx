@@ -1,14 +1,12 @@
 import React from 'react';
-import Navigation from '../app-data/shared/components/Navigation/Site';
+
+import Layout from '../app-data/shared/components/Layout/Site.layout';
 import MainPage from '../app-data/components/pages/index';
-import Footer from '../app-data/shared/components/Footer';
 
 const Home: () => JSX.Element = () => (
-  <>
-    <Navigation />
+  <Layout>
     <MainPage />
-    <Footer />
-  </>
+  </Layout>
 );
 
 export default Home;

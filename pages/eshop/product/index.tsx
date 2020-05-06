@@ -3,8 +3,7 @@ import Error from 'next/error';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/react-hooks';
 
-import Navigation from '../../../app-data/shared/components/Navigation/Site';
-import Footer from '../../../app-data/shared/components/Footer';
+import Layout from '../../../app-data/shared/components/Layout/Site.layout';
 import ProductDetailBody from '../../../app-data/components/pages/eshop/components/ProductDetail';
 import { PRODUCT_QUERY } from '../../../app-data/graphql/query';
 import Product from '../../../app-data/shared/types/Product.types';
@@ -31,11 +30,9 @@ const ProductDetail: React.FC = () => {
   console.log(product);
 
   return (
-    <>
-      <Navigation />
+    <Layout>
       <ProductDetailBody product={product as Product} />
-      <Footer />
-    </>
+    </Layout>
   );
 };
 

@@ -1,14 +1,12 @@
 import React from 'react';
-import Navigation from '../../app-data/shared/components/Navigation/Site';
-import Footer from '../../app-data/shared/components/Footer';
+
+import Layout from '../../app-data/shared/components/Layout/Site.layout';
 import EshopPage from '../../app-data/components/pages/eshop';
 
 const Eshop: () => JSX.Element = () => (
-  <>
-    <Navigation />
+  <Layout>
     <EshopPage />
-    <Footer />
-  </>
+  </Layout>
 );
 
 export default Eshop;

@@ -4,13 +4,15 @@ import PropTypes from 'prop-types';
 
 import { ILayout } from './TS/layout.interface';
 
-import NavHeader from '../Navigation/Admin';
+import Navigation from '../Navigation/Site';
+import Footer from '../Footer';
 
 const Layout: FC<ILayout> = ({ children }) => (
-  <div className="admin">
-    <NavHeader />
-    <Container fluid>{children}</Container>
-  </div>
+  <>
+    <Navigation />
+    <div>{children}</div>
+    <Footer />
+  </>
 );
 
 Layout.propTypes = {
