@@ -82,7 +82,7 @@ export const storeFile: (fileData: any) => Promise<string | Error> = (
         }
 
         const resultFilePath = `${filePath
-          .split('public')[1]
+          .split('static')[1]
           .replace(/\\/g, '/')}`;
 
         resolve(resultFilePath);

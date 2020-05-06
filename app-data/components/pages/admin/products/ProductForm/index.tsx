@@ -8,7 +8,7 @@ import {
   CREATE_PRODUCT_MUTATION,
   UPDATE_PRODUCT_MUTATION,
 } from '../../../../../graphql/mutation';
-import { PRODUCTS_QUERY, CATEGORIES_QUERY } from '../../../../../graphql/query';
+import { PRODUCTS_QUERY } from '../../../../../graphql/query';
 
 import Modal from '../../../../../shared/components/Modal';
 
@@ -48,7 +48,7 @@ const ProductCreateForm: FC<IProductCreateForm> = ({ productDataProp }) => {
     productDataProp ? productDataProp : initialProductDataState
   );
   const [noVariant, setNoVariant] = useState(false);
-  const { state, dispatch } = useContext(Context);
+  const { dispatch } = useContext(Context);
 
   useEffect(() => {
     setProductData(productDataProp ? productDataProp : initialProductDataState);
@@ -99,6 +99,7 @@ const ProductCreateForm: FC<IProductCreateForm> = ({ productDataProp }) => {
         }
 
         dispatch({ type: 'SET_MODAL', payload: true });
+        setProductData(initialProductDataState);
       } catch (err) {
         console.log(err);
       }

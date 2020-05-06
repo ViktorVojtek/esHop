@@ -29,7 +29,7 @@ const createProduct: (
     let i = 0;
     const imagesDataArr = [];
     const resultImagesDataArr = [];
-    let imagePaths = [];
+    let imagePaths: string[] = [];
 
     if (images && images.length > 0) {
       while (i < images.length) {

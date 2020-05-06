@@ -16,8 +16,8 @@
 /build
 
 # product images
-/public/products/*
-!/public/products/.gitkeep
+/static/products/*
+!/static/products/.gitkeep
 
 # misc
 .DS_Store
