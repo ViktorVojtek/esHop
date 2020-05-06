@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react';
+import Link from 'next/link';
 import {
   Collapse,
   Navbar,
@@ -17,12 +18,14 @@ import { ILinkItem } from './TS/Navigation.interface';
 
 const LinkItem: FC<ILinkItem> = ({ href, title }) => (
   <NavItem>
-    <NavLink
-      className="text-uppercase letter-spacing-1 nav-link-main"
-      href={href}
-    >
-      {title}
-    </NavLink>
+    <Link href={href}>
+      <NavLink
+        className="text-uppercase letter-spacing-1 nav-link-main"
+        href={href}
+      >
+        {title}
+      </NavLink>
+    </Link>
   </NavItem>
 );
 const Navigation: FC = () => {
