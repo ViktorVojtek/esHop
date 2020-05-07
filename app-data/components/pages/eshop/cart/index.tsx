@@ -4,6 +4,7 @@ import { Container } from 'reactstrap';
 
 import { Context } from '../../../../lib/state/Store';
 import Wrapper from '../../../../shared/styles/components/Wrapper/Wrapper.style';
+import CartContent from './components/CartContent';
 
 interface ICartBodyProps {
   children?: ReactNode;
@@ -21,6 +22,7 @@ const CartEmpty: () => JSX.Element = () => (
     </p>
   </div>
 );
+
 const CartBodyComponent: FC<ICartBodyProps> = ({ children }) => {
   const { state, dispatch } = useContext(Context);
   const { cart } = state;
@@ -30,14 +32,7 @@ const CartBodyComponent: FC<ICartBodyProps> = ({ children }) => {
   return (
     <Wrapper>
       <Container>
-        {cart.length > 0 ? (
-          <>
-            <h2>This is cart page</h2>
-            <p>Here you will see items added to cart.</p>
-          </>
-        ) : (
-          <CartEmpty />
-        )}
+        {cart.length > 0 ? <CartContent data={cart} /> : <CartEmpty />}
       </Container>
     </Wrapper>
   );

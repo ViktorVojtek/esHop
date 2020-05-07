@@ -1,4 +1,4 @@
-import React, { FC, useState, useContext } from 'react';
+import React, { FC, ReactNode, useState, useContext, forwardRef } from 'react';
 import Link from 'next/link';
 import {
   Collapse,
@@ -20,6 +20,14 @@ const CartIcon = styled(ShoppingCartOutline)`
   color: red;
 `;
 
+type FWRCBrand = {
+  href: string;
+  children: ReactNode;
+};
+
+const CustomNavbarBrand = forwardRef(({ href, children }: FWRCBrand, ref) => (
+  <NavbarBrand href={href}>{children}</NavbarBrand>
+));
 const LinkItem: FC<ILinkItem> = ({ href, title }) => (
   <NavItem>
     <Link href={href}>
@@ -43,9 +51,9 @@ const Navigation: FC = () => {
     <Wrapper id="navigation">
       <Navbar color="light" light expand="md">
         <Link href="/">
-          <NavbarBrand href="/">
+          <CustomNavbarBrand href="/">
             <Logo src="/images/logo.png" alt="Červený kláštor" />
-          </NavbarBrand>
+          </CustomNavbarBrand>
         </Link>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
