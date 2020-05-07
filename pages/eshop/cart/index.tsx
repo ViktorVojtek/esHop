@@ -5,10 +5,7 @@ import CartBodyComponent from '../../../app-data/components/pages/eshop/cart';
 
 const CartPage: () => JSX.Element = () => (
   <Layout>
-    <CartBodyComponent>
-      <h2>This is cart page</h2>
-      <p>Here you will see items added to cart.</p>
-    </CartBodyComponent>
+    <CartBodyComponent />
   </Layout>
 );
 

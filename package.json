@@ -43,6 +43,7 @@
     "react-dom": "16.13.1",
     "reactstrap": "^8.4.1",
     "styled-components": "^4.4.1",
+    "styled-icons": "^10.2.1",
     "uniqid": "^5.2.0"
   },
   "devDependencies": {

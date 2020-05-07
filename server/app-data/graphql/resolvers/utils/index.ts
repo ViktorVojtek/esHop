@@ -81,7 +81,7 @@ export const storeFile: (fileData: any) => Promise<string | Error> = (
           reject(wFerr);
         }
 
-        const resultFilePath = `${filePath
+        const resultFilePath = `/static${filePath
           .split('static')[1]
           .replace(/\\/g, '/')}`;
 

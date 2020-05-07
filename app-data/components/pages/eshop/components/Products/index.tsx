@@ -60,9 +60,9 @@ const Products: React.FC<IProductsProps> = ({ subCategoryID, categoryID }) => {
 
     dispatch({ type: 'ADD_TO_CART', payload: { id, variant } });
   };
-  const handleRemoveProductFromCart = (id: string) => {
+  /* const handleRemoveProductFromCart = (id: string) => {
     dispatch({ type: 'REMOVE_FROM_CART', payload: id });
-  };
+  }; */
 
   console.log(state);
   return (

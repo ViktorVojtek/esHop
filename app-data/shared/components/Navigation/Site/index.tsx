@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useContext } from 'react';
 import Link from 'next/link';
 import {
   Collapse,
@@ -8,13 +8,17 @@ import {
   Nav,
   NavItem,
   NavLink,
-  Container,
-  Row,
-  Col,
 } from 'reactstrap';
-import { Logo, Wrapper } from './styles';
+import styled from 'styled-components';
+import { ShoppingCartOutline } from 'styled-icons/evaicons-outline';
+import { CartWrapper, Logo, Wrapper } from './styles';
+import { Context } from '../../../../lib/state/Store';
 
 import { ILinkItem } from './TS/Navigation.interface';
+
+const CartIcon = styled(ShoppingCartOutline)`
+  color: red;
+`;
 
 const LinkItem: FC<ILinkItem> = ({ href, title }) => (
   <NavItem>
@@ -30,34 +34,37 @@ const LinkItem: FC<ILinkItem> = ({ href, title }) => (
 );
 const Navigation: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { state } = useContext(Context);
 
+  const { cart } = state;
   const toggle: () => void = () => setIsOpen(!isOpen);
 
   return (
     <Wrapper id="navigation">
-      <Navbar className="bg-white" expand="md">
-        <Container fluid>
-          <Row className="w-100">
-            <Col md="4" xs="12">
-              <NavbarBrand href="/">
-                <Logo src="/images/logo.png" alt="Červený kláštor" />
-              </NavbarBrand>
-            </Col>
-            <Col md="8" xs="12" className="d-flex align-items-center">
-              <NavbarToggler onClick={toggle} />
-              <Collapse isOpen={isOpen} navbar>
-                <Nav className="mr-auto" navbar>
-                  <LinkItem href="/" title="Domov" />
-                  <LinkItem href="/eshop" title="Produkty" />
-                  <LinkItem href="/" title="Služby" />
-                  <LinkItem href="/" title="O nás" />
-                  <LinkItem href="/" title="FAQ" />
-                </Nav>
-              </Collapse>
-            </Col>
-          </Row>
-        </Container>
-      </Navbar>
+      <Navbar color="light" light expand="md">
+        <Link href="/">
+          <NavbarBrand href="/">
+            <Logo src="/images/logo.png" alt="Červený kláštor" />
+          </NavbarBrand>
+        </Link>
+        <NavbarToggler onClick={toggle} />
+        <Collapse isOpen={isOpen} navbar>
+          <Nav className="mr-auto" navbar>
+            <LinkItem href="/" title="Domov" />
+            <LinkItem href="/eshop" title="Produkty" />
+            <LinkItem href="/" title="Služby" />
+            <LinkItem href="/" title="O nás" />
+            <LinkItem href="/" title="FAQ" />
+          </Nav>
+          <CartWrapper>
+            <Link href="/eshop/cart">
+              <a>
+                <CartIcon width={30} height={30} /> <span>{cart.length}</span>
+              </a>
+            </Link>
+          </CartWrapper>
+        </Collapse>
+      </Navbar>{' '}
     </Wrapper>
   );
 };
