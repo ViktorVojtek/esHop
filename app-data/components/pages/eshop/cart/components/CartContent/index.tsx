@@ -1,8 +1,19 @@
 import React, { FC } from 'react';
 import { useQuery } from '@apollo/react-hooks';
+import {
+  Col,
+  Container,
+  Form,
+  FormGroup,
+  Input,
+  Label,
+  Row,
+  Table,
+} from 'reactstrap';
 
 import { PRODUCT_QUERY } from '../../../../../../graphql/query';
 import H2 from '../../styles/cart.style';
+import BillingForm from './components/BillingForm';
 
 interface ICartProductTableRow {
   id: string;
@@ -42,9 +53,9 @@ const CartProductTableRow: FC<ICartProductTableRow> = ({
       <tr>
         <td>{title}</td>
         <td>{prodVariantTitle}</td>
-        <td>{`${price} ${currency}`}</td>
+        <td>{`${price},-${currency}`}</td>
         <td>{count}</td>
-        <td>{`${count * price} ${currency}`}</td>
+        <td>{`${count * price},-${currency}`}</td>
       </tr>
     );
   }
@@ -56,10 +67,10 @@ interface ICartContent {
   data: any[];
 }
 const CartContent: FC<ICartContent> = ({ data }) => (
-  <>
+  <Container>
     <H2>Shopping cart</H2>
     <h4>1. Products in cart</h4>
-    <table>
+    <Table className="mt-5" hover>
       <thead>
         <tr>
           <th>Product title</th>
@@ -79,8 +90,10 @@ const CartContent: FC<ICartContent> = ({ data }) => (
           />
         ))}
       </tbody>
-    </table>
-  </>
+    </Table>
+    <h4 className="mt-5">2. Billing information</h4>
+    <BillingForm />
+  </Container>
 );
 
 export default CartContent;
