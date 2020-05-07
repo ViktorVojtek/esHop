@@ -70,7 +70,9 @@ const BillingForm: FC = () => (
       >
         <option value={0}>Select country</option>
         {countryData.map((item) => (
-          <option value={item.value}>{item.text}</option>
+          <option value={item.value} key={item.value}>
+            {item.text}
+          </option>
         ))}
       </Input>
     </FormGroup>
