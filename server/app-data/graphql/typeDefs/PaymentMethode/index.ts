@@ -1,16 +1,16 @@
 import { gql } from 'apollo-server-express';
 
-const Delivery = gql`
-  input DeliveryInput {
+const PaymentMethode = gql`
+  input PaymentInput {
     title: String
     value: Int
   }
 
-  type Delivery {
+  type Payment {
     _id: String
     title: String
     value: Int
   }
 `;
 
-export default Delivery;
+export default PaymentMethode;

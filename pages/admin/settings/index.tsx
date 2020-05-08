@@ -124,7 +124,7 @@ const SettingsPage: () => JSX.Element = () => (
             <Row>
               <Col>
                 <h4 className="mb-4">
-                  Delivey methods <DeliveryIcon />
+                  Delivery methods <DeliveryIcon />
                 </h4>
               </Col>
             </Row>
