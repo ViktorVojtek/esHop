@@ -1,19 +1,12 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import { useQuery } from '@apollo/react-hooks';
-import {
-  Col,
-  Container,
-  Form,
-  FormGroup,
-  Input,
-  Label,
-  Row,
-  Table,
-} from 'reactstrap';
+import { Button, Container, Table } from 'reactstrap';
 
 import { PRODUCT_QUERY } from '../../../../../../graphql/query';
 import H2 from '../../styles/cart.style';
 import BillingForm from './components/BillingForm';
+
+import { Context } from '../../../../../../lib/state/Store';
 
 interface ICartProductTableRow {
   id: string;
@@ -25,6 +18,10 @@ const CartProductTableRow: FC<ICartProductTableRow> = ({
   count,
   variantTitle,
 }) => {
+  const {
+    state: { cart },
+    dispatch,
+  } = useContext(Context);
   const { data } = useQuery(PRODUCT_QUERY, {
     variables: { id },
   });
@@ -49,13 +46,42 @@ const CartProductTableRow: FC<ICartProductTableRow> = ({
       )
       .pop();
 
+    const handleAddProduct: (id: string) => void = (id) => {
+      console.log(`Add product with id: ${id}`);
+      const cartItemData = cart
+        .filter(
+          (item: any) =>
+            item.id === id && item.variant.title === prodVariantTitle
+        )
+        .pop();
+
+      const prodItemVariant = {
+        ...cartItemData.variant,
+        count: cartItemData.variant.count + 1,
+      };
+
+      dispatch({
+        type: 'ADD_TO_CART',
+        payload: { id, variant: prodItemVariant },
+      });
+    };
+
+    const handleRemoveProduct: (id: string) => void = (id) => {
+      console.log(`Remove product with id: ${id}`);
+      console.log(cart);
+    };
+
     return (
       <tr>
         <td>{title}</td>
         <td>{prodVariantTitle}</td>
         <td>{`${price},-${currency}`}</td>
         <td>{count}</td>
-        <td>{`${count * price},-${currency}`}</td>
+        <td>
+          {`${count * price},-${currency}`}{' '}
+          <Button onClick={() => handleRemoveProduct(id)}>-</Button>{' '}
+          <Button onClick={() => handleAddProduct(id)}>+</Button>
+        </td>
       </tr>
     );
   }
@@ -69,8 +95,8 @@ interface ICartContent {
 const CartContent: FC<ICartContent> = ({ data }) => (
   <Container>
     <H2>Shopping cart</H2>
-    <h4>1. Products in cart</h4>
-    <Table className="mt-5" hover>
+    <h4 className="mb-5">1. Products in cart</h4>
+    <Table className="mb-5" hover>
       <thead>
         <tr>
           <th>Product title</th>
@@ -90,8 +116,7 @@ const CartContent: FC<ICartContent> = ({ data }) => (
           />
         ))}
       </tbody>
-    </Table>
-    <h4 className="mt-5">2. Billing information</h4>
+    </Table>{' '}
     <BillingForm />
   </Container>
 );

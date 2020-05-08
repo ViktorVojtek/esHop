@@ -11,6 +11,7 @@ const BillingForm: FC = () => (
   >
     <Row>
       <Col md={6}>
+        <h4 className="mb-5">2. Billing information</h4>
         <Row form>
           <Col md={6}>
             <FormGroup>
@@ -92,16 +93,16 @@ const BillingForm: FC = () => (
         </FormGroup>{' '}
       </Col>
       <Col md={6}>
-        <h4 className="mt-5">3. Cart Summary</h4>
+        <h4 className="mb-5">3. Cart Summary</h4>
         <Row form>
-          <Col md={6}>
+          <Col md={6} className="border-top border-bottom pt-3 pb-1 mb-3">
             <p>Total:</p>
           </Col>
-          <Col md={6}>
+          <Col md={6} className="border-top border-bottom pt-3 pb-1 mb-3">
             <p className="text-right">0.00,-€</p>
           </Col>
         </Row>
-        <h5>Choose delivery method</h5>
+        <h5 className="mb-4">Choose delivery method</h5>
         <Row form>
           <Col md={6}>
             <FormGroup>
@@ -135,7 +136,7 @@ const BillingForm: FC = () => (
             <p className="text-right">FREE</p>
           </Col>
         </Row>{' '}
-        <h5>Choose payment method</h5>
+        <h5 className="mb-4">Choose payment method</h5>
         <Row form>
           <Col md={6}>
             <FormGroup>
@@ -180,8 +181,10 @@ const BillingForm: FC = () => (
           </Col>
         </Row>{' '}
         <Row form>
-          <Col md={6}>Use discount code:</Col>
-          <Col md={6}>
+          <Col md={6} className="mt-3 mb-3">
+            Use discount code:
+          </Col>
+          <Col md={6} className="mt-3 mb-3">
             <Row>
               <Col>
                 <Input type="text" name="discountCode" id="discountCode" />
@@ -199,10 +202,10 @@ const BillingForm: FC = () => (
           </Col>
         </Row>
         <Row form>
-          <Col md={6}>
+          <Col md={6} className="border-top border-bottom pt-3">
             <p>Total price with VAT:</p>
           </Col>
-          <Col md={6}>
+          <Col md={6} className="border-top border-bottom pt-3">
             <p className="text-right">12.5,-€</p>
           </Col>
         </Row>
