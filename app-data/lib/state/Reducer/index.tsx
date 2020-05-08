@@ -44,11 +44,11 @@ const Reducer = (state: IState, action: IAction) => {
         cart: newCart,
       };
     case 'REMOVE_FROM_CART':
+      // TODO: add remove item by variant and by id from cart
+
       return {
         ...state,
-        cart: state.cart.filter(
-          (cartItem: any) => cartItem.id !== action.payload
-        ),
+        cart: state.cart,
       };
     case 'SET_CART':
       const cart: CartProduct[] = storage
