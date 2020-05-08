@@ -87,7 +87,121 @@ const BillingForm: FC = () => (
     <FormGroup>
       <Label htmlFor="message">Message</Label>
       <Input type="textarea" name="message" id="message" />
-    </FormGroup>
+    </FormGroup>{' '}
+    <h4 className="mt-5">3. Cart Summary</h4>
+    <Row form>
+      <Col md={6}>
+        <p>Total:</p>
+      </Col>
+      <Col md={6}>
+        <p className="text-right">0.00,-€</p>
+      </Col>
+    </Row>
+    <h5>Choose delivery method</h5>
+    <Row form>
+      <Col md={6}>
+        <FormGroup>
+          <FormGroup check>
+            <Label htmlFor="courier">
+              <Input type="radio" name="courier" id="courier" /> Kurier
+            </Label>
+          </FormGroup>
+        </FormGroup>
+      </Col>
+      <Col md={6}>
+        <p className="text-right">3.9,-€</p>
+      </Col>
+    </Row>{' '}
+    <Row form>
+      <Col md={6}>
+        <FormGroup>
+          <FormGroup check>
+            <Label htmlFor="personalCollection">
+              <Input
+                type="radio"
+                name="personalCollection"
+                id="personalCollection"
+              />{' '}
+              Personal collection
+            </Label>
+          </FormGroup>
+        </FormGroup>
+      </Col>
+      <Col md={6}>
+        <p className="text-right">FREE</p>
+      </Col>
+    </Row>{' '}
+    <h5>Choose payment method</h5>
+    <Row form>
+      <Col md={6}>
+        <FormGroup>
+          <FormGroup check>
+            <Label htmlFor="card">
+              <Input type="radio" name="card" id="card" /> Card payment
+            </Label>
+          </FormGroup>
+        </FormGroup>
+      </Col>
+      <Col md={6}>
+        <p className="text-right">FREE</p>
+      </Col>
+    </Row>{' '}
+    <Row form>
+      <Col md={6}>
+        <FormGroup>
+          <FormGroup check>
+            <Label htmlFor="cod">
+              <Input type="radio" name="cod" id="cod" /> Cash on delivery
+            </Label>
+          </FormGroup>
+        </FormGroup>
+      </Col>
+      <Col md={6}>
+        <p className="text-right">1,-€</p>
+      </Col>
+    </Row>{' '}
+    <Row form>
+      <Col md={6}>
+        <FormGroup>
+          <FormGroup check>
+            <Label htmlFor="pcc">
+              <Input type="radio" name="pcc" id="pcc" /> Personal collection in
+              cash
+            </Label>
+          </FormGroup>
+        </FormGroup>
+      </Col>
+      <Col md={6}>
+        <p className="text-right">FREE</p>
+      </Col>
+    </Row>{' '}
+    <Row form>
+      <Col md={6}>Use discount code:</Col>
+      <Col md={6}>
+        <Row>
+          <Col>
+            <Input type="text" name="discountCode" id="discountCode" />
+          </Col>
+          <Col>
+            <Button
+              type="button"
+              onClick={() => console.log('Discount')}
+              className="w-100"
+            >
+              Use
+            </Button>
+          </Col>
+        </Row>
+      </Col>
+    </Row>
+    <Row form>
+      <Col md={6}>
+        <p>Total price with VAT:</p>
+      </Col>
+      <Col md={6}>
+        <p className="text-right">12.5,-€</p>
+      </Col>
+    </Row>
     <FormGroup>
       <Button type="submit" color="primary">
         Submit

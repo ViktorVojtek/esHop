@@ -24,10 +24,9 @@ const CartEmpty: () => JSX.Element = () => (
 );
 
 const CartBodyComponent: FC<ICartBodyProps> = ({ children }) => {
-  const { state, dispatch } = useContext(Context);
-  const { cart } = state;
-
-  console.log(cart);
+  const {
+    state: { cart },
+  } = useContext(Context);
 
   return (
     <Wrapper>

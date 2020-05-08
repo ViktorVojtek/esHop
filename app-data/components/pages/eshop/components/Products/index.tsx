@@ -25,10 +25,10 @@ interface IProductToCartData {
 }
 const Products: React.FC<IProductsProps> = ({ subCategoryID, categoryID }) => {
   const { error, loading, data } = useQuery(PRODUCTS_QUERY, {
-    fetchPolicy: 'network-only',
+    // fetchPolicy: 'network-only',
   });
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const { state, dispatch } = useContext(Context);
+  const { dispatch } = useContext(Context);
   useEffect(() => {
     if (data) {
       const { products } = data;
@@ -64,7 +64,6 @@ const Products: React.FC<IProductsProps> = ({ subCategoryID, categoryID }) => {
     dispatch({ type: 'REMOVE_FROM_CART', payload: id });
   }; */
 
-  console.log(state);
   return (
     <Row>
       <ProductFill

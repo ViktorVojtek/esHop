@@ -33,7 +33,7 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
   // hooks used in components
   const productCountRef = useRef(null);
   const [activeVariant, setActiveVariant] = useState(0);
-  const { state, dispatch } = useContext(Context);
+  const { dispatch } = useContext(Context);
 
   const handleSetActiveVariant: (i: number) => void = (i) => {
     setActiveVariant(i);
@@ -68,8 +68,6 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
       {title}
     </VariantOption>
   ));
-
-  console.log(state);
 
   return (
     <Wrapper>
