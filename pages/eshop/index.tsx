@@ -2,6 +2,7 @@ import React from 'react';
 
 import Layout from '../../app-data/shared/components/Layout/Site.layout';
 import EshopPage from '../../app-data/components/pages/eshop';
+import { withSetCart } from '../../app-data/lib/state/Reducer';
 
 const Eshop: () => JSX.Element = () => (
   <Layout>
@@ -9,4 +10,4 @@ const Eshop: () => JSX.Element = () => (
   </Layout>
 );
 
-export default Eshop;
+export default withSetCart(Eshop);

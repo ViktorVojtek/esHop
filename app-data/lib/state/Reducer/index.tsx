@@ -1,9 +1,13 @@
+import React, { FC, ReactNode, useContext, useEffect } from 'react';
 import {
   CartProduct,
   IAction,
   IState,
 } from '../../../shared/types/Store.types';
+import { Context } from '../Store';
+import { useStorage } from '../../util/app.util';
 
+const storage: Storage = useStorage();
 const Reducer = (state: IState, action: IAction) => {
   switch (action.type) {
     case 'ADD_TO_CART':
@@ -31,6 +35,10 @@ const Reducer = (state: IState, action: IAction) => {
         newCart = [...state.cart, action.payload];
       }
 
+      if (storage) {
+        storage.setItem('cart', JSON.stringify(newCart));
+      }
+
       return {
         ...state,
         cart: newCart,
@@ -43,9 +51,15 @@ const Reducer = (state: IState, action: IAction) => {
         ),
       };
     case 'SET_CART':
+      const cart: CartProduct[] = storage
+        ? storage.getItem('cart')
+          ? JSON.parse(storage.getItem('cart'))
+          : []
+        : [];
+
       return {
         ...state,
-        cart: action.payload,
+        cart,
       };
     case 'SET_MODAL':
       return {
@@ -60,6 +74,18 @@ const Reducer = (state: IState, action: IAction) => {
     default:
       return state;
   }
+};
+
+export const withSetCart = <P extends object>(
+  Component: React.ComponentType<P>
+): FC<P> => ({ ...props }) => {
+  const { dispatch } = useContext(Context);
+
+  useEffect(() => {
+    dispatch({ type: 'SET_CART', payload: null });
+  }, []);
+
+  return <Component {...props} />;
 };
 
 export default Reducer;

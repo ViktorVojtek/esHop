@@ -1,6 +1,7 @@
-import * as React from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { Col } from 'reactstrap';
+import { useIsClient } from '../../../../../../../lib/util/app.util';
 
 // Styled Components
 import {
@@ -19,27 +20,11 @@ import {
 
 // type Product
 import Product from '../../../../../../../shared/types/Product.types';
-import { VariantOfProduct } from '../../../../../../../shared/types/Store.types';
-
-interface IProductToCartData {
-  id: string;
-  count?: number;
-  variant?: VariantOfProduct;
-}
-
-interface IProductsFillProps {
-  products: Product[];
-  addProduct: (data: IProductToCartData) => void;
-}
-
-interface IProductTitle {
-  id: string;
-  title: string;
-}
-
-interface IProductUI extends Omit<IProductsFillProps, 'products'> {
-  product: Product;
-}
+import {
+  IProductsFillProps,
+  IProductTitle,
+  IProductUI,
+} from './types/ProductFill.types';
 const ProductTitle: React.FC<IProductTitle> = ({ id, title }) => (
   <Link href={{ pathname: '/eshop/product', query: { id } }}>
     <a>
@@ -52,6 +37,7 @@ const ProductUI: React.FC<IProductUI> = ({
   product: { _id, description, images, title, shortDescription, variant },
   addProduct,
 }) => {
+  const isClient = useIsClient();
   const handleAddProductToCart = () => {
     const {
       default: variantDefault,
@@ -78,8 +64,7 @@ const ProductUI: React.FC<IProductUI> = ({
               </a>
             </Link>
           ) : null}
-        </ImageWrap>
-
+        </ImageWrap>{' '}
         <ProductBody>
           <ProductTitle id={_id} title={title} />
           <StyledShortDescription>{shortDescription}</StyledShortDescription>
@@ -95,7 +80,10 @@ const ProductUI: React.FC<IProductUI> = ({
               <StyledCartLink>Vložiť do košíka</StyledCartLink>
             </Link>
           ) : (
-            <StyledCartBtn type="button" onClick={handleAddProductToCart}>
+            <StyledCartBtn
+              type="button"
+              onClick={() => (isClient ? handleAddProductToCart() : null)}
+            >
               Vložiť do košíka
             </StyledCartBtn>
           )}

@@ -7,6 +7,7 @@ import Layout from '../../../app-data/shared/components/Layout/Site.layout';
 import ProductDetailBody from '../../../app-data/components/pages/eshop/components/ProductDetail';
 import { PRODUCT_QUERY } from '../../../app-data/graphql/query';
 import Product from '../../../app-data/shared/types/Product.types';
+import { withSetCart } from '../../../app-data/lib/state/Reducer';
 
 const ProductDetail: React.FC = () => {
   const router = useRouter();
@@ -34,4 +35,4 @@ const ProductDetail: React.FC = () => {
   );
 };
 
-export default ProductDetail;
+export default withSetCart(ProductDetail);
