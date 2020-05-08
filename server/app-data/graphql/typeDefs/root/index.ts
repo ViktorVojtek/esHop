@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server-express');
+import { gql } from 'apollo-server-express';
 
 const rootTypeDefs = gql`
   type Query {
@@ -40,4 +40,4 @@ const rootTypeDefs = gql`
   }
 `;
 
-module.exports = rootTypeDefs;
+export default rootTypeDefs;

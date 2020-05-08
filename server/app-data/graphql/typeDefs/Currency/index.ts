@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server-express');
+import { gql } from 'apollo-server-express';
 
 const Currency = gql`
   input CurrencyInput {
@@ -28,4 +28,4 @@ const Currency = gql`
   }
 `;
 
-module.exports = Currency;
+export default Currency;

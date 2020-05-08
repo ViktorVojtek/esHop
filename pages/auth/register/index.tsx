@@ -5,7 +5,7 @@ import { useMutation } from '@apollo/react-hooks';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { REGISTER_USER_MUTATION } from '../../../app-data/graphql/mutation';
 
-import Layout from '../../../app-data/shared/components/Layout/Admin.layout';
+// import Layout from '../../../app-data/shared/components/Layout/Admin.layout';
 import { Wrapper } from '../../../app-data/shared/styles/components/Auth';
 import { Context } from '../../../app-data/lib/state/Store';
 
@@ -76,53 +76,51 @@ const Register: FC = () => {
       <Modal>
         <p>{errorMessage}</p>
       </Modal>
-      <Layout>
-        <Wrapper>
-          <Form onSubmit={handleSubmitRegister}>
-            <FormGroup>
-              <Label htmlFor="firstName">First Name</Label>
-              <Input id="firstName" name="firstName" type="text" required />
-            </FormGroup>
-            <FormGroup>
-              <Label htmlFor="lastName">Last Name</Label>
-              <Input id="lastName" name="lastName" type="text" required />
-            </FormGroup>
-            <FormGroup>
-              <Label htmlFor="email">Email</Label>
-              <Input id="email" name="email" type="email" required />
-            </FormGroup>
-            <FormGroup>
-              <Label htmlFor="password">Password</Label>
-              <Input
-                id="password"
-                name="password"
-                type="password"
-                innerRef={passwordRef}
-                required
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label htmlFor="retypePassword">Retype Password</Label>
-              <Input
-                id="retypePassword"
-                name="retypePassword"
-                type="password"
-                onChange={checkPassword}
-              />
-            </FormGroup>
-            <Button type="submit">Send</Button>
-            <p>
-              <small>
-                You allready have an account? Please{' '}
-                <Link href="/auth/login">
-                  <a>log in</a>
-                </Link>
-                .
-              </small>
-            </p>
-          </Form>
-        </Wrapper>
-      </Layout>
+      <Wrapper>
+        <Form onSubmit={handleSubmitRegister}>
+          <FormGroup>
+            <Label htmlFor="firstName">First Name</Label>
+            <Input id="firstName" name="firstName" type="text" required />
+          </FormGroup>
+          <FormGroup>
+            <Label htmlFor="lastName">Last Name</Label>
+            <Input id="lastName" name="lastName" type="text" required />
+          </FormGroup>
+          <FormGroup>
+            <Label htmlFor="email">Email</Label>
+            <Input id="email" name="email" type="email" required />
+          </FormGroup>
+          <FormGroup>
+            <Label htmlFor="password">Password</Label>
+            <Input
+              id="password"
+              name="password"
+              type="password"
+              innerRef={passwordRef}
+              required
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label htmlFor="retypePassword">Retype Password</Label>
+            <Input
+              id="retypePassword"
+              name="retypePassword"
+              type="password"
+              onChange={checkPassword}
+            />
+          </FormGroup>
+          <Button type="submit">Send</Button>
+          <p>
+            <small>
+              You allready have an account? Please{' '}
+              <Link href="/auth/login">
+                <a>log in</a>
+              </Link>
+              .
+            </small>
+          </p>
+        </Form>
+      </Wrapper>
     </>
   );
 };

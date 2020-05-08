@@ -31,7 +31,6 @@ const CategorySubmitForm: FC = () => {
 
   return (
     <Form onSubmit={handleSubmitCategoryData}>
-      <h4>Create Category</h4>
       <FormGroup>
         <Label for="categoryTitle">Title</Label>
         <Input

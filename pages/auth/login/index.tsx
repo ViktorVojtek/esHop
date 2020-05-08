@@ -4,7 +4,7 @@ import { Button, Form, FormGroup, Input } from 'reactstrap';
 import { useMutation } from '@apollo/react-hooks';
 import { LOGIN_USER_MUTATION } from '../../../app-data/graphql/mutation';
 
-import Layout from '../../../app-data/shared/components/Layout/Admin.layout';
+// import Layout from '../../../app-data/shared/components/Layout/Admin.layout';
 
 import { Wrapper } from '../../../app-data/shared/styles/components/Auth';
 import { login } from '../../../app-data/lib/auth';
@@ -68,21 +68,19 @@ const LogIn: FC = () => {
       <Modal>
         <p>{errorMessage}</p>
       </Modal>
-      <Layout>
-        <Wrapper>
-          <Form onSubmit={handleSubmitLogin}>
-            <FormGroup>
-              <label htmlFor="email">Email</label>
-              <Input id="email" name="email" type="email" />
-            </FormGroup>
-            <FormGroup>
-              <label htmlFor="password">Password</label>
-              <Input id="password" name="password" type="password" />
-            </FormGroup>
-            <Button type="submit">Send</Button>
-          </Form>
-        </Wrapper>
-      </Layout>
+      <Wrapper>
+        <Form onSubmit={handleSubmitLogin}>
+          <FormGroup>
+            <label htmlFor="email">Email</label>
+            <Input id="email" name="email" type="email" />
+          </FormGroup>
+          <FormGroup>
+            <label htmlFor="password">Password</label>
+            <Input id="password" name="password" type="password" />
+          </FormGroup>
+          <Button type="submit">Send</Button>
+        </Form>
+      </Wrapper>
     </>
   );
 };

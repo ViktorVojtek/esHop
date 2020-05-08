@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server-express');
+import { gql } from 'apollo-server-express';
 
 const Order = gql`
   enum PaymentMethodEnum {
@@ -23,10 +23,9 @@ const Order = gql`
 
   input OrderInput {
     customer: OrderCustomerInput
-    paymentMethod: PaymentMethodEnum,
-    products: [ProductInput],
+    paymentMethod: PaymentMethodEnum
+    products: [ProductInput]
   }
-
 
   type OrderCustomerAddress {
     city: String
@@ -45,9 +44,9 @@ const Order = gql`
 
   type Order {
     customer: OrderCustomer
-    paymentMethod: PaymentMethodEnum,
-    products: [Product],
+    paymentMethod: PaymentMethodEnum
+    products: [Product]
   }
 `;
 
-module.exports = Order;
+export default Order;

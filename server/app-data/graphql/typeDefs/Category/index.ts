@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server-express');
+import { gql } from 'apollo-server-express';
 
 const Category = gql`
   type Category {
@@ -8,4 +8,4 @@ const Category = gql`
   }
 `;
 
-module.exports = Category;
+export default Category;

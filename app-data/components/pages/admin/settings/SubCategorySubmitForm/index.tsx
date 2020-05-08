@@ -49,7 +49,6 @@ const SubCategorySubmitForm: FC = () => {
 
   return (
     <Form onSubmit={(e) => handleSubmitSubCategoryData(e)}>
-      <h5>Create Subcategory</h5>
       <FormGroup>
         <Input
           type="select"

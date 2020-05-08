@@ -67,7 +67,6 @@ const CurrencySubmitForm: FC = () => {
 
   return (
     <Form onSubmit={handleSubmitCurrencyData}>
-      <h4>Create Currency</h4>
       <FormGroup>
         <Label for="currencyTitle">Title</Label>
         <Input

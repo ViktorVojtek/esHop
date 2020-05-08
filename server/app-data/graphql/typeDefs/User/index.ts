@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server-express');
+import { gql } from 'apollo-server-express';
 
 const User = gql`
   input UserLoginInput {
@@ -36,4 +36,4 @@ const User = gql`
   }
 `;
 
-module.exports = User;
+export default User;

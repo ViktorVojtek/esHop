@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server-express');
+import { gql } from 'apollo-server-express';
 
 const SubCategory = gql`
   type SubCategory {
@@ -9,4 +9,4 @@ const SubCategory = gql`
   }
 `;
 
-module.exports = SubCategory;
+export default SubCategory;

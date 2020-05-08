@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server-express');
+import { gql } from 'apollo-server-express';
 
 const Product = gql`
   input ProductImageInput {
@@ -77,4 +77,4 @@ const Product = gql`
   }
 `;
 
-module.exports = Product;
+export default Product;
