@@ -8,11 +8,11 @@ import { Context } from '../Store';
 import { useStorage } from '../../util/app.util';
 
 const storage: Storage = useStorage();
+let newCart: CartProduct[] = [];
+
 const Reducer = (state: IState, action: IAction) => {
   switch (action.type) {
     case 'ADD_TO_CART':
-      let newCart: CartProduct[] = [];
-
       if (state.cart.length > 0) {
         newCart = [...state.cart];
         let productExist = false;
@@ -44,11 +44,30 @@ const Reducer = (state: IState, action: IAction) => {
         cart: newCart,
       };
     case 'REMOVE_FROM_CART':
-      // TODO: add remove item by variant and by id from cart
+      if (state.cart.length > 0) {
+        newCart = [...state.cart];
+
+        for (let i: number = 0; i < newCart.length; i += 1) {
+          if (
+            newCart[i].id === action.payload.id &&
+            newCart[i].variant.title === action.payload.variant.title &&
+            newCart[i].variant.count > 1
+          ) {
+            newCart[i].variant.count = action.payload.variant.count;
+            break;
+          } else {
+            newCart = [...newCart.slice(0, i), ...newCart.slice(i + 1)];
+          }
+        }
+      }
+
+      if (storage) {
+        storage.setItem('cart', JSON.stringify(newCart));
+      }
 
       return {
         ...state,
-        cart: state.cart,
+        cart: newCart,
       };
     case 'SET_CART':
       const cart: CartProduct[] = storage
