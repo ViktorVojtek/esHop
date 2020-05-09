@@ -14,10 +14,6 @@ import Layout from '../../../app-data/shared/components/Layout/Admin.layout';
 import LhsNav from '../../../app-data/shared/components/LhsNav';
 import Modal from '../../../app-data/shared/components/Modal';
 
-import CurrencySubmitForm from '../../../app-data/components/pages/admin/settings/CurrencySubmitForm';
-import Currencies from '../../../app-data/components/pages/admin/settings/Currencies';
-import CategorySubmitForm from '../../../app-data/components/pages/admin/settings/CategorySubmitForm';
-import Categories from '../../../app-data/components/pages/admin/settings/Categories';
 import SubCategorySubmitForm from '../../../app-data/components/pages/admin/settings/SubCategorySubmitForm';
 import SubCategories from '../../../app-data/components/pages/admin/settings/SubCategories';
 
@@ -64,45 +60,6 @@ const SettingsPage: () => JSX.Element = () => (
           <LhsNav />
         </Col>
         <Col xm="6" sm="9" md="10">
-          <BoxWrapper className="border-bottom">
-            <Row>
-              <Col>
-                <h2 className="mb-5 border-bottom">e-Commerce settings</h2>{' '}
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <h4 className="mb-4">
-                  Currency <CurrencyIcon />
-                </h4>
-              </Col>
-            </Row>
-            <Row>
-              <Col md={4}>
-                <CurrencySubmitForm />
-              </Col>
-              <Col md={8}>
-                <Currencies />
-              </Col>
-            </Row>
-          </BoxWrapper>{' '}
-          <BoxWrapper className="border-bottom">
-            <Row>
-              <Col>
-                <h4 className="mb-4">
-                  Category <CategoryIcon />
-                </h4>
-              </Col>
-            </Row>
-            <Row>
-              <Col md={4}>
-                <CategorySubmitForm />
-              </Col>
-              <Col md={8}>
-                <Categories />
-              </Col>
-            </Row>
-          </BoxWrapper>{' '}
           <BoxWrapper className="border-bottom">
             <Row>
               <Col>

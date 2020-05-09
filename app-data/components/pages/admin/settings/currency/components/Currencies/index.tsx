@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { Button, Table } from 'reactstrap';
-import { CURRENCIES_QUERY } from '../../../../../graphql/query';
-import { REMOVE_CURRENCY_MUTATION } from '../../../../../graphql/mutation';
+import { CURRENCIES_QUERY } from '../../../../../../../graphql/query';
+import { REMOVE_CURRENCY_MUTATION } from '../../../../../../../graphql/mutation';
 
 const Currencies: FC = () => {
   const { error, loading, data } = useQuery(CURRENCIES_QUERY);

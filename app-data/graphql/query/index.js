@@ -23,6 +23,26 @@ export const CURRENCIES_QUERY = gql`
   }
 `;
 
+export const DELIVERY_METHODE_QUERY = gql`
+  query deliveryMethode($id: String!) {
+    deliveryMethode(id: $id) {
+      _id
+      title
+      value
+    }
+  }
+`;
+
+export const DELIVERY_METHODS_QUERY = gql`
+  query deliveryMethods {
+    deliveryMethods {
+      _id
+      title
+      value
+    }
+  }
+`;
+
 export const PRODUCT_QUERY = gql`
   query product($id: String!) {
     product(id: $id) {

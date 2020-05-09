@@ -1,11 +1,10 @@
 import React, { FC, useContext } from 'react';
 import { useMutation } from '@apollo/react-hooks';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 
-import { CREATE_CATEGORY_MUTATION } from '../../../../../graphql/mutation';
-import { CATEGORIES_QUERY } from '../../../../../graphql/query';
-
-import { Context } from '../../../../../lib/state/Store';
+import { CREATE_CATEGORY_MUTATION } from '../../../../../../../graphql/mutation';
+import { CATEGORIES_QUERY } from '../../../../../../../graphql/query';
+import { Context } from '../../../../../../../lib/state/Store';
 
 const CategorySubmitForm: FC = () => {
   const { dispatch } = useContext(Context);
@@ -24,24 +23,26 @@ const CategorySubmitForm: FC = () => {
     try {
       await createCategory({ variables: { title } });
     } catch ({ message }) {
-      dispatch({ type: 'SET_ERROR', payload: message });
+      console.log(message);
       dispatch({ type: 'SET_MODAL', payload: true });
     }
   };
 
   return (
-    <Form onSubmit={handleSubmitCategoryData}>
-      <FormGroup>
-        <Label for="categoryTitle">Title</Label>
+    <Form onSubmit={handleSubmitCategoryData} inline>
+      <FormGroup className="mr-sm-2">
+        <Label for="categoryTitle" className="mr-sm-3">
+          Category Title
+        </Label>
         <Input
           id="categoryTitle"
           type="text"
           placeholder="Insert category title"
         />
       </FormGroup>
-      <FormGroup>
-        <Button type="submit">Submit</Button>
-      </FormGroup>
+      <Button type="submit" color="primary" className="ml-auto mr-3">
+        Submit
+      </Button>
     </Form>
   );
 };

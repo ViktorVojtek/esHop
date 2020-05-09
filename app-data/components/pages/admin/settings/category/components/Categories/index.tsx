@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { Button, Table } from 'reactstrap';
-import { CATEGORIES_QUERY } from '../../../../../graphql/query';
-import { REMOVE_CATEGORY_MUTATION } from '../../../../../graphql/mutation';
+import { CATEGORIES_QUERY } from '../../../../../../../graphql/query';
+import { REMOVE_CATEGORY_MUTATION } from '../../../../../../../graphql/mutation';
 
 const Categories: FC = () => {
   const { error, loading, data } = useQuery(CATEGORIES_QUERY);
@@ -29,27 +29,29 @@ const Categories: FC = () => {
   const { categories } = data;
 
   return categories && categories.length > 0 ? (
-    <Table>
+    <Table responsive striped>
       <thead>
         <tr>
           <th className="border-top-0">#</th>
           <th colSpan={2} className="border-top-0">
-            Category
+            Category title
           </th>
         </tr>
       </thead>
       <tbody>
-        {categories.map(({ _id, title }, i) => (
-          <tr key={_id}>
-            <td>{i + 1}</td>
-            <td>{title}</td>
-            <td className="text-right">
-              <Button color="danger" onClick={() => handleRemoveItem(_id)}>
-                Remove
-              </Button>
-            </td>
-          </tr>
-        ))}
+        {categories.map(
+          ({ _id, title }: { _id: string; title: string }, i: number) => (
+            <tr key={_id}>
+              <th scope="row">{i + 1}</th>
+              <td>{title}</td>
+              <td className="text-right">
+                <Button color="danger" onClick={() => handleRemoveItem(_id)}>
+                  Remove
+                </Button>
+              </td>
+            </tr>
+          )
+        )}
       </tbody>
     </Table>
   ) : (

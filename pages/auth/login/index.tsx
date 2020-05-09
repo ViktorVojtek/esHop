@@ -15,11 +15,7 @@ import Modal from '../../../app-data/shared/components/Modal';
 const LogIn: FC = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const { dispatch } = useContext(Context);
-  const [loginUserMutate, { loading }] = useMutation(LOGIN_USER_MUTATION);
-
-  if (loading) {
-    return <>Loading</>;
-  }
+  const [loginUserMutate] = useMutation(LOGIN_USER_MUTATION);
 
   const handleSetErrorMessage: (message: string) => void = (message) => {
     const parsedMessage: string = message.replace('GraphQL error:', ' ').trim();

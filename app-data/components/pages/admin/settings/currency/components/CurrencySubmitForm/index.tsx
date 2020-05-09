@@ -3,8 +3,8 @@ import { useMutation } from '@apollo/react-hooks';
 
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
-import { SET_CURRENCY_MUTATION } from '../../../../../graphql/mutation';
-import { CURRENCIES_QUERY } from '../../../../../graphql/query';
+import { SET_CURRENCY_MUTATION } from '../../../../../../../graphql/mutation';
+import { CURRENCIES_QUERY } from '../../../../../../../graphql/query';
 
 const CurrencySubmitForm: FC = () => {
   const currencyValRef = useRef(null);

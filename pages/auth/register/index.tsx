@@ -15,7 +15,7 @@ const Register: FC = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const { dispatch } = useContext(Context);
   const passwordRef = useRef(null);
-  const [registerUserMutate, { loading }] = useMutation(REGISTER_USER_MUTATION);
+  const [registerUserMutate] = useMutation(REGISTER_USER_MUTATION);
 
   const handleSetErrorMessage: (message: string) => void = (message) => {
     const parsedMessage: string = message.replace('GraphQL error:', ' ').trim();
@@ -66,10 +66,6 @@ const Register: FC = () => {
       event.currentTarget.setCustomValidity('');
     }
   };
-
-  if (loading) {
-    return <>loading</>;
-  }
 
   return (
     <>
