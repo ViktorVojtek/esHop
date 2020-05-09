@@ -1,6 +1,7 @@
 // queries
 import categories from './query/Categories';
 import currencies from './query/Currencies';
+import deliveryMethode from './query/DeliveryMethode';
 import order from './query/Order';
 import orders from './query/Orders';
 import products from './query/Products';
@@ -12,6 +13,8 @@ import users from './query/Users';
 import createCategory from './mutation/CreateCategory';
 import updateCategory from './mutation/UpdateCategory';
 import removeCategory from './mutation/RemoveCategory';
+
+import createDeliveryMethode from './mutation/CreateDeliveryMethode';
 
 import createOrder from './mutation/CreateOrder';
 
@@ -33,6 +36,8 @@ const resolvers = {
   Query: {
     categories: async () => categories(),
     currencies: async () => currencies(),
+    deliveryMethode: async (root: any, args: any, ctx: any) =>
+      deliveryMethode(root, args, ctx),
     order: async (root: any, args: any, ctx: any) => order(root, args, ctx),
     orders: async () => orders(),
     products: async (root: any, args: any, ctx: any) =>
@@ -50,6 +55,8 @@ const resolvers = {
     removeCategory: async (root: any, args: any, ctx: any) =>
       removeCategory(root, args, ctx),
 
+    createDeliveryMethode: async (root: any, args: any, ctx: any) =>
+      createDeliveryMethode(root, args, ctx),
     createOrder: async (root: any, args: any, ctx: any) =>
       createOrder(root, args, ctx),
 

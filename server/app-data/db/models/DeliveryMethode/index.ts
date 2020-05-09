@@ -1,6 +1,6 @@
 import mongoose, { Document } from 'mongoose';
 
-interface IDeliveryMethode extends Document {
+export interface IDeliveryMethode extends Document {
   title: string;
   value: number;
 }
