@@ -3,6 +3,10 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
   margin-top: 4rem;
   padding: 2rem;
+  @media (max-width: 768px) {
+    padding-left: 0;
+    padding-right: 0;
+  }
 `;
 
 export const H3 = styled.h3`

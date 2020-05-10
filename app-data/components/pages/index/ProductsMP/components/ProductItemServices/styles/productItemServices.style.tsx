@@ -12,6 +12,13 @@ export const Wrapper = styled.div`
   @media (max-width: 992px) {
     margin-top: 10rem;
   }
+  @media (max-width: 768px) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  @media (max-width: 576px) {
+    margin-top: 2rem;
+  }
 `;
 
 export const H2 = styled.h2`
@@ -31,6 +38,9 @@ export const Text = styled.p`
   @media (max-width: 1200px) {
     font-size: 0.75rem;
   }
+  @media (max-width: 576px) {
+    width: 100%;
+  }
 `;
 
 export const Text2 = styled.p`
@@ -45,6 +55,10 @@ export const Text2 = styled.p`
   }
   @media (max-width: 1200px) {
     font-size: 0.75rem;
+  }
+  @media (max-width: 768px) {
+    width: 100%;
+    font-size: 1rem;
   }
 `;
 
@@ -98,6 +112,10 @@ export const ItemPhotoLeft = styled.div<IPhotoLeftItem>`
   @media (max-width: 992px) {
     padding-top: 60%;
   }
+  @media (max-width: 576px) {
+    margin-left: 0rem;
+    padding-top: 60%;
+  }
 `;
 
 interface IPhotoRightItem {
@@ -118,6 +136,11 @@ export const ItemPhotoRight = styled.div<IPhotoRightItem>`
     padding-top: 60%;
     margin-top: 200px;
   }
+  @media (max-width: 576px) {
+    margin-left: 0rem;
+    padding-top: 60%;
+    margin-top: 40px;
+  }
 `;
 
 export const TextArea = styled.div`
@@ -131,6 +154,12 @@ export const TextArea = styled.div`
   @media (max-width: 1550px) {
     padding: 2rem;
   }
+  @media (max-width: 576px) {
+    position: relative;
+    margin-left: 0;
+    transform: none;
+    padding: 2rem .5rem;
+  }
 `;
 
 export const ProductHeader = styled.h4``;
@@ -142,6 +171,9 @@ export const Gradient = styled.div`
   height: 80%;
   top: 10%;
   left: 0;
+  @media (max-width: 576px) {
+    height: 100%;
+  }
 `;
 
 export const Gradient2 = styled.div`
@@ -213,6 +245,9 @@ export const ItemPhotoRight2 = styled.div<IPhotoLeftItem2>`
     padding-top: 60%;
     margin-left: 0px;
   }
+  @media (max-width: 576px) {
+    margin-top: 40px;
+  }
 `;
 
 export const ItemsBottom = styled.div`
@@ -224,5 +259,8 @@ export const ItemsBottom = styled.div`
   @media (max-width: 992px) {
     flex-direction: column;
     margin-top: 3rem;
+  }
+  @media (max-width: 576px) {
+    margin-top: 0rem;
   }
 `;

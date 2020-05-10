@@ -57,20 +57,20 @@ const Navigation: FC = () => {
         </Link>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
-          <Nav className="mr-auto" navbar>
+          <Nav navbar>
             <LinkItem href="/" title="Domov" />
             <LinkItem href="/eshop" title="Produkty" />
             <LinkItem href="/" title="Služby" />
             <LinkItem href="/" title="O nás" />
             <LinkItem href="/" title="FAQ" />
+            <CartWrapper>
+              <Link href="/eshop/cart">
+                <a>
+                  <CartIcon width={30} height={30} /> <span>{cart.length}</span>
+                </a>
+              </Link>
+            </CartWrapper>
           </Nav>
-          <CartWrapper>
-            <Link href="/eshop/cart">
-              <a>
-                <CartIcon width={30} height={30} /> <span>{cart.length}</span>
-              </a>
-            </Link>
-          </CartWrapper>
         </Collapse>
       </Navbar>{' '}
     </Wrapper>

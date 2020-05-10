@@ -9,6 +9,10 @@ export const Wrapper = styled.div`
     padding-left: 40px;
     padding-right: 40px;
   }
+  @media (max-width: 768px) {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
 `;
 
 export const Logo = styled.img`
@@ -19,6 +23,11 @@ export const Logo = styled.img`
 `;
 
 export const CartWrapper = styled.div`
+  margin-left: 60px;
+  @media(max-width: 768px){
+    margin-left: 0;
+    margin-top: 1rem;
+  }
   span {
     background-color: #01aeef;
     border-radius: 0.25rem;

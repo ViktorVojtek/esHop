@@ -10,6 +10,13 @@ export const Wrapper = styled.div`
     padding-left: 40px;
     padding-right: 40px;
   }
+  @media (max-width: 768px) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  @media (max-width: 576px) {
+    margin-top: 2rem;
+  }
 `;
 
 export const H2 = styled.h2`
@@ -29,6 +36,9 @@ export const Text = styled.p`
   @media (max-width: 992px) {
     width: 100%;
   }
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
 `;
 
 export const Text2 = styled.p`
@@ -43,6 +53,10 @@ export const Text2 = styled.p`
   }
   @media (max-width: 992px) {
     width: 100%;
+  }
+  @media (max-width: 768px) {
+    width: 100%;
+    font-size: 1rem;
   }
 `;
 
@@ -81,6 +95,10 @@ export const RightItem = styled.div`
     width: 100%;
     margin-bottom: 5rem;
   }
+  @media (max-width: 576px) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 `;
 
 interface IPhotoItemRight {
@@ -95,6 +113,13 @@ export const ItemPhotoRight = styled.div<IPhotoItemRight>`
   background-position: 50%;
   border-radius: 4px;
   top: -15%;
+  @media (max-width: 576px) {
+    margin-left: 0;
+    padding-top: 60%;
+    margin-top: 40px;
+    max-height: 300px;
+    margin-bottom: 200px;
+  }
 `;
 
 export const TextArea = styled.div`
@@ -111,6 +136,13 @@ export const TextArea = styled.div`
   @media (max-width: 992px) {
     transform: translateY(55%);
     margin: 2rem;
+  }
+  @media (max-width: 576px) {
+    position: relative;
+    margin-left: 0;
+    transform: none;
+    margin:0;
+    padding: 2rem .5rem;
   }
 `;
 
@@ -161,6 +193,9 @@ export const Button = styled.button`
   }
   @media (max-width: 992px) {
     width: 33%;
+  }
+  @media (max-width: 576px) {
+    width: 50%;
   }
 `;
 export const ButtonsHolder = styled.div`

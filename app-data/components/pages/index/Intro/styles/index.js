@@ -9,11 +9,18 @@ export const Wrapper = styled.div`
     padding-left: 40px;
     padding-right: 40px;
   }
+  @media (max-width: 768px) {
+    padding-left: 0;
+    padding-right: 0;
+  }
 `;
 export const Left = styled.div`
   margin-left: .5rem;
 `;
 export const Right = styled.div`
+  @media(max-width: 768px){
+    margin-top: 2rem;
+  }
 `;
 
 export const H1 = styled.h1`
@@ -31,6 +38,9 @@ export const H3 = styled.h3`
   @media(max-width: 1550px){
     margin-top: 80px;
   }
+  @media(max-width: 768px){
+    margin-top: 40px;
+  }
 `;
 export const H4 = styled.h4`
   color: rgb(101, 106, 119);
@@ -41,5 +51,9 @@ export const H4 = styled.h4`
   padding-right: 3rem;
   @media(max-width: 1550px){
     font-size: 1rem;
+  }
+  @media(max-width: 768px){
+    margin-top: 32px;
+    margin-bottom: 32px;
   }
 `;

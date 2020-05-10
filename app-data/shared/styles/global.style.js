@@ -50,6 +50,10 @@ export default createGlobalStyle`
     &:hover{
       color: rgb(24, 28, 39);
     }
+    @media(max-width: 768px){
+      font-size: 2rem;
+      text-align: center;
+    }
   }
   .carousel-image{
     width: 100%;
@@ -80,6 +84,14 @@ export default createGlobalStyle`
       color:#ff4d7d;
       font-weight: bold;
     }
+    @media(max-width: 768px){
+      display: block;
+    }
+  }
+  .innactive-text{
+    @media(max-width: 768px){
+      display: none;
+    }
   }
   .active{
     color: red !important;
@@ -90,6 +102,24 @@ export default createGlobalStyle`
   .navbar{
     padding: 0.75rem 1rem !important;
     background-color: #FFFFFF !important;
+  }
+  .navbar-collapse{
+    justify-content: flex-end;
+    @media(max-width: 768px){
+      justify-content: none;
+      position: absolute;
+      width: 100%;
+      background: white;
+      z-index: 1000;
+      top: 100px;
+      left: 0px;
+    }
+  }
+  .navbar-nav{
+    @media(max-width: 768px){
+      height: 100vh;
+      align-items: center;
+    }
   }
   .card-item{
     cursor: pointer;
@@ -102,6 +132,11 @@ export default createGlobalStyle`
       box-shadow: 0 6px 7px 0 rgba(0,0,0,.15), 0 0 5px 0 rgba(0,0,0,.1) !important;
       transform: translate(-50%,50%) translateY(-4px);
     }
+    @media(max-width: 576px){
+      box-shadow: none !important;
+      border: none !important;
+      border-radius: 0px;
+    }
   }
   .stay-item{
     cursor: pointer;
@@ -113,6 +148,11 @@ export default createGlobalStyle`
     &:hover{
       box-shadow: 0 6px 7px 0 rgba(0,0,0,.15), 0 0 5px 0 rgba(0,0,0,.1) !important;
       transform: translateY(calc(50% - 4px));
+    }
+    @media(max-width: 576px){
+      box-shadow: none !important;
+      border: none !important;
+      border-radius: 0px;
     }
   }
   .button-link{
@@ -184,5 +224,8 @@ export default createGlobalStyle`
         }
       }
     }
+  }
+  .navbar-toggler{
+    outline: none !important;
   }
 `;

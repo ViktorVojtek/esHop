@@ -32,7 +32,7 @@ const Intro: FC = () => {
                 <Col
                   md="4"
                   xs="12"
-                  className={activeItem === 0 ? 'active-text' : ''}
+                  className={activeItem === 0 ? 'active-text' : 'innactive-text'}
                 >
                   <CarouselTextItem
                     number="01"
@@ -44,7 +44,7 @@ const Intro: FC = () => {
                 <Col
                   md="4"
                   xs="12"
-                  className={activeItem === 1 ? 'active-text' : ''}
+                  className={activeItem === 1 ? 'active-text' : 'innactive-text'}
                 >
                   <CarouselTextItem
                     number="02"
@@ -56,7 +56,7 @@ const Intro: FC = () => {
                 <Col
                   md="4"
                   xs="12"
-                  className={activeItem === 2 ? 'active-text' : ''}
+                  className={activeItem === 2 ? 'active-text' : 'innactive-text'}
                 >
                   <CarouselTextItem
                     number="03"
