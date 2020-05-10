@@ -1,6 +1,6 @@
 import mongoose, { Document } from 'mongoose';
 
-interface IDiscount extends Document {
+export interface IDiscount extends Document {
   code: string;
   value: number;
 }
