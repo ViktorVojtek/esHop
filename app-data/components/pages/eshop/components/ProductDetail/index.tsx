@@ -99,6 +99,7 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
               </VariantsSelect>
               <Input
                 type="number"
+                className="mt-4 mb-4"
                 defaultValue={1}
                 step={1}
                 innerRef={productCountRef}

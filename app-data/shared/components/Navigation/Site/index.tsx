@@ -60,7 +60,7 @@ const Navigation: FC = () => {
           <Nav navbar>
             <LinkItem href="/" title="Domov" />
             <LinkItem href="/eshop" title="Produkty" />
-            <LinkItem href="/" title="Služby" />
+            <LinkItem href="/eshop" title="Služby" />
             <LinkItem href="/" title="O nás" />
             <LinkItem href="/" title="FAQ" />
             <CartWrapper>
