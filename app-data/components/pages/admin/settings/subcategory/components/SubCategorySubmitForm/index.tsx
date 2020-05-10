@@ -3,11 +3,11 @@ import React, { FC } from 'react';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
-import { CREATE_SUBCATEGORY_MUTATION } from '../../../../../graphql/mutation';
+import { CREATE_SUBCATEGORY_MUTATION } from '../../../../../../../graphql/mutation';
 import {
   SUBCATEGORIES_QUERY,
   CATEGORIES_QUERY,
-} from '../../../../../graphql/query';
+} from '../../../../../../../graphql/query';
 
 const SubCategorySubmitForm: FC = () => {
   const [createSubCategory] = useMutation(CREATE_SUBCATEGORY_MUTATION, {

@@ -6,6 +6,8 @@ const rootTypeDefs = gql`
     currencies: [Currency]
     deliveryMethode(id: String!): Delivery
     deliveryMethods: [Delivery]
+    discount(id: String!): Discount
+    discounts: [Discount]
     orders: [Order]
     order: Order
     products(categoryId: String, subCategoryId: String): [Product]
@@ -21,6 +23,9 @@ const rootTypeDefs = gql`
 
     createDeliveryMethode(title: String!, value: String!): Delivery
     removeDeliveryMethode(id: String): String
+
+    createDiscount(code: String!, value: Int): Discount
+    removeDiscount(id: String!): String
 
     createOrder(data: OrderInput!): Order
 

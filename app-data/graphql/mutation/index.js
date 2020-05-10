@@ -20,6 +20,16 @@ export const CREATE_DELIVERY_METHODE = gql`
   }
 `;
 
+export const CREATE_DISCOUNT_MUTATION = gql`
+  mutation createDiscount($code: String!, $value: Int!) {
+    createDiscount(code: $code, value: $value) {
+      _id
+      code
+      value
+    }
+  }
+`;
+
 export const CREATE_SUBCATEGORY_MUTATION = gql`
   mutation createSubCategory($categoryId: String!, $title: String!) {
     createSubCategory(categoryId: $categoryId, title: $title) {
@@ -105,6 +115,12 @@ export const REMOVE_PRODUCT_MUTATION = gql`
 export const REMOVE_DELIVERY_METHODE_MUTATION = gql`
   mutation removeDeliveryMethode($id: String!) {
     removeDeliveryMethode(id: $id)
+  }
+`;
+
+export const REMOVE_DISCOUNT_MUTATION = gql`
+  mutation removeDiscount($id: String!) {
+    removeDiscount(id: $id)
   }
 `;
 

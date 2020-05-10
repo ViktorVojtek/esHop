@@ -43,6 +43,26 @@ export const DELIVERY_METHODS_QUERY = gql`
   }
 `;
 
+export const DISCOUNT_QUERY = gql`
+  query discount($id: String!) {
+    discount(id: $id) {
+      _id
+      code
+      value
+    }
+  }
+`;
+
+export const DISCOUNTS_QUERY = gql`
+  query discounts {
+    discounts {
+      _id
+      code
+      value
+    }
+  }
+`;
+
 export const PRODUCT_QUERY = gql`
   query product($id: String!) {
     product(id: $id) {
