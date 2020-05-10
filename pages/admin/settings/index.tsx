@@ -14,8 +14,8 @@ import Layout from '../../../app-data/shared/components/Layout/Admin.layout';
 import LhsNav from '../../../app-data/shared/components/LhsNav';
 import Modal from '../../../app-data/shared/components/Modal';
 
-import SubCategorySubmitForm from '../../../app-data/components/pages/admin/settings/SubCategorySubmitForm';
-import SubCategories from '../../../app-data/components/pages/admin/settings/SubCategories';
+import SubCategorySubmitForm from '../../../app-data/components/pages/admin/settings/subcategory/components/SubCategorySubmitForm';
+import SubCategories from '../../../app-data/components/pages/admin/settings/subcategory/components/SubCategories';
 
 import { withAuthSync } from '../../../app-data/lib/auth';
 

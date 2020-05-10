@@ -26,6 +26,8 @@ const LhsNav: () => JSX.Element = () => (
       <LinkItem href="/admin/settings/currency" title="Currency" />
       <LinkItem href="/admin/settings/delivery" title="Delivery" />
       <LinkItem href="/admin/settings/discount" title="Discount" />
+      <LinkItem href="/admin/settings/payment" title="Payment" />
+      <LinkItem href="/admin/settings/subcategory" title="Subcategory" />
     </Nav>
   </Wrapper>
 );

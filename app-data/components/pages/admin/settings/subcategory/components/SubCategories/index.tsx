@@ -4,8 +4,8 @@ import { Button, Table } from 'reactstrap';
 import {
   CATEGORIES_QUERY,
   SUBCATEGORIES_QUERY,
-} from '../../../../../graphql/query';
-import { REMOVE_SUBCATEGORY_MUTATION } from '../../../../../graphql/mutation';
+} from '../../../../../../../graphql/query';
+import { REMOVE_SUBCATEGORY_MUTATION } from '../../../../../../../graphql/mutation';
 
 const useCategories = (QUERY) => {
   const [categories, setCategories] = useState(null);
