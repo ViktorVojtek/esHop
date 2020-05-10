@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "nodemon",
-    "build": "next build tsc --project tsconfig.server.json",
+    "build": "next build && tsc --project tsconfig.server.json",
     "start": "next start",
-    "production": "NODE_ENV=production forever start ./server/eshop.ts",
+    "production": "NODE_ENV=production forever start ./dist/eshop.js",
     "prettier-watch": "onchange '**/*.js' -- prettier --write {{changed}}"
   },
   "dependencies": {

@@ -145,6 +145,8 @@ const ProductVariantComponent: FC<IProductVariant> = ({
         ))
       : [];
 
+  console.log(productData);
+
   return (
     <>
       <h5>Variant</h5>

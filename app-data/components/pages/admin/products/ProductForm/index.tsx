@@ -99,7 +99,11 @@ const ProductCreateForm: FC<IProductCreateForm> = ({ productDataProp }) => {
         }
 
         dispatch({ type: 'SET_MODAL', payload: true });
-        setProductData(initialProductDataState);
+        setProductData({
+          ...initialProductDataState,
+          images: [],
+          variant: [],
+        });
       } catch (err) {
         console.log(err);
       }

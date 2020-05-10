@@ -24,7 +24,8 @@ const App: () => Promise<void> = async () => {
     app.use(
       helmet(),
       cors(),
-      express.urlencoded({ extended: true })
+      express.urlencoded({ extended: true, limit: '10mb' }),
+      express.json({ limit: '10mb' })
       // bodyParser.json({ limit: '50mb', extended: true }),
       // bodyParser.urlencoded({ limit: '50mb' })
       /* createLocaleMiddleware({

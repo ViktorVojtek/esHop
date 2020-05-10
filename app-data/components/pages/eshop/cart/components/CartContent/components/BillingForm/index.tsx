@@ -213,7 +213,7 @@ const BillingForm: FC = () => (
     </Row>
 
     <FormGroup>
-      <Button type="submit" color="primary">
+      <Button type="submit" color="primary" disabled>
         Submit
       </Button>
     </FormGroup>

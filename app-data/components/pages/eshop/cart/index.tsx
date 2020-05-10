@@ -6,10 +6,6 @@ import { Context } from '../../../../lib/state/Store';
 import Wrapper from '../../../../shared/styles/components/Wrapper/Wrapper.style';
 import CartContent from './components/CartContent';
 
-interface ICartBodyProps {
-  children?: ReactNode;
-}
-
 const CartEmpty: () => JSX.Element = () => (
   <div className="mx-auto w-50">
     <h2 className="text-center">Shopping cart is empty</h2>
@@ -23,7 +19,7 @@ const CartEmpty: () => JSX.Element = () => (
   </div>
 );
 
-const CartBodyComponent: FC<ICartBodyProps> = ({ children }) => {
+const CartBodyComponent: FC = () => {
   const {
     state: { cart },
   } = useContext(Context);
