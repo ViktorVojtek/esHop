@@ -62,8 +62,6 @@ const DiscountSubmitForm: FC = () => {
     return result;
   };
 
-  console.log(codex);
-
   return (
     <Form onSubmit={handleSubmitData} inline>
       <Button type="button" onClick={handleRandomString} className="mr-3">
