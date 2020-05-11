@@ -53,7 +53,7 @@ const CartProductTableRow: FC<ICartProductTableRow> = ({
 
       const prodItemVariant = {
         ...cartItemData.variant,
-        count: cartItemData.variant.count + 1,
+        count: 1,
       };
 
       dispatch({
