@@ -24,6 +24,7 @@ export const Price = styled.p`
 
 export const ProductImg = styled.img`
   width: 100%;
+  border-radius: 4px;
 `;
 
 export const ImageWrap = styled.aside`

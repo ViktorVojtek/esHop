@@ -7,6 +7,7 @@ export const Wrapper = styled.div`
 
 export const Image = styled.img`
   width: 100%;
+  border-radius: 4px;
 `;
 
 export const Title = styled.h2`
@@ -58,6 +59,8 @@ background-clip: padding-box;
 border: 1px solid #ced4da;
 border-radius: .25rem;
 transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+font-family: 'Open Sans',sans-serif;
+outline: none;
 `;
 export const Input = styled.input`
 display: block;
@@ -74,6 +77,8 @@ background-clip: padding-box;
 border: 1px solid #ced4da;
 border-radius: .25rem;
 transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+font-family: 'Open Sans',sans-serif;
+outline: none;
 `;
 
 
