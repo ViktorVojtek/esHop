@@ -1,10 +1,15 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { Button, Col, Row, FormGroup, Input, Label } from 'reactstrap';
 
+import { Context } from '../../../../../../../../../../lib/state/Store';
 import { DELIVERY_METHODS_QUERY } from '../../../../../../../../../../graphql/query';
 
 const CartSummary: FC = () => {
+  const {
+    state: { cart, cartTotalSum },
+    dispatch,
+  } = useContext(Context);
   const { error, loading, data } = useQuery(DELIVERY_METHODS_QUERY);
 
   if (error) {
@@ -18,6 +23,9 @@ const CartSummary: FC = () => {
   const handleChangeDelivery: (
     event: React.ChangeEvent<HTMLInputElement>
   ) => void = (event) => {
+    const currentValue: number = parseFloat(
+      event.currentTarget.getAttribute('data-value')
+    );
     const deliveryEls: NodeListOf<HTMLInputElement> = document.querySelectorAll(
       '.delivery-data-input'
     );
@@ -27,6 +35,17 @@ const CartSummary: FC = () => {
     });
 
     event.currentTarget.checked = true;
+
+    let sum: number = 0;
+
+    cart.forEach((item: any) => {
+      sum += item.variant.count * item.variant.price.value;
+    });
+
+    dispatch({
+      type: 'SET_TOTAL_SUM',
+      payload: currentValue === 0 ? sum : cartTotalSum + currentValue,
+    });
   };
 
   const { deliveryMethods } = data;
@@ -57,8 +76,8 @@ const CartSummary: FC = () => {
                         name={title.toLowerCase()}
                         id={title.toLowerCase()}
                         className="delivery-data-input"
-                        defaultChecked={i === 0}
                         onChange={handleChangeDelivery}
+                        data-value={value}
                       />{' '}
                       {title}
                     </Label>
@@ -88,7 +107,10 @@ const CartSummary: FC = () => {
           <p>Total:</p>
         </Col>
         <Col md={6} className="border-top border-bottom pt-3 pb-1 mb-3">
-          <p className="text-right">0.00,-€</p>
+          <p className="text-right">
+            {cartTotalSum.toFixed(2)}
+            ,-€
+          </p>
         </Col>
       </Row>
       <h5 className="mb-4">Choose delivery method</h5>
@@ -163,7 +185,7 @@ const CartSummary: FC = () => {
           <p>Total price with VAT:</p>
         </Col>
         <Col md={6} className="border-top border-bottom pt-3">
-          <p className="text-right">12.5,-€</p>
+          <p className="text-right">{(cartTotalSum * 1.2).toFixed(2)},-€</p>
         </Col>
       </Row>
     </Col>

@@ -1,4 +1,4 @@
-import React, { FC, useContext } from 'react';
+import React, { FC, useContext, useEffect } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { Button } from 'reactstrap';
 
@@ -33,6 +33,7 @@ const CartProductTableRow: FC<ICartProductTableRow> = ({
     const { title: prodVariantTitle } = variants
       .filter((variant: any) => variant.title === variantTitle)
       .pop();
+
     // variant price object destructed as price and currency
     const {
       value: price,

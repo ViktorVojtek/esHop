@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, useContext } from 'react';
+import React, { FC, useContext, useEffect } from 'react';
 import Link from 'next/link';
 import { Container } from 'reactstrap';
 
@@ -21,8 +21,21 @@ const CartEmpty: () => JSX.Element = () => (
 
 const CartBodyComponent: FC = () => {
   const {
-    state: { cart },
+    state: { cart, cartTotalSum },
+    dispatch,
   } = useContext(Context);
+
+  useEffect(() => {
+    let sum: number = 0;
+
+    cart.forEach((item: any) => {
+      sum += item.variant.count * item.variant.price.value;
+    });
+
+    dispatch({ type: 'SET_TOTAL_SUM', payload: sum });
+  }, [cart]);
+
+  console.log(cartTotalSum);
 
   return (
     <Wrapper>
