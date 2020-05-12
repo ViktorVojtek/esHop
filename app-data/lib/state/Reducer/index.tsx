@@ -81,6 +81,15 @@ const Reducer = (state: IState, action: IAction) => {
         ...state,
         cart,
       };
+    case 'SET_TOTAL_SUM':
+      if (storage) {
+        storage.setItem('cartTotalSum', JSON.stringify(action.payload.sum));
+      }
+
+      return {
+        ...state,
+        cartTotalSum: action.payload.sum,
+      };
     case 'SET_MODAL':
       return {
         ...state,

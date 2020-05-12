@@ -13,6 +13,7 @@ export type CartProduct = {
 
 export interface IState {
   cart: CartProduct[] | [];
+  cartTotalSum: number;
   modal: boolean;
   error: boolean;
 }
