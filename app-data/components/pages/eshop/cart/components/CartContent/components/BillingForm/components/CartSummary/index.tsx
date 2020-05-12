@@ -101,10 +101,10 @@ const CartSummary: FC = () => {
 
   return (
     <Col md={6}>
-      <h4 className="mb-5">3. Cart Summary</h4>
+      <h4 className="mb-5">3. Súhrn košíka</h4>
       <Row form>
         <Col md={6} className="border-top border-bottom pt-3 pb-1 mb-3">
-          <p>Total:</p>
+          <p>Spolu:</p>
         </Col>
         <Col md={6} className="border-top border-bottom pt-3 pb-1 mb-3">
           <p className="text-right">
@@ -113,21 +113,21 @@ const CartSummary: FC = () => {
           </p>
         </Col>
       </Row>
-      <h5 className="mb-4">Choose delivery method</h5>
+      <h5 className="mb-4">Zvoľte spôsob doručenia</h5>
       {deliveryMethodsEl}
-      <h5 className="mb-4">Choose payment method</h5>
+      <h5 className="mb-4">Zvoľte spôsob platby</h5>
       <Row form>
         <Col md={6}>
           <FormGroup>
             <FormGroup check>
               <Label htmlFor="card">
-                <Input type="radio" name="card" id="card" /> Card payment
+                <Input type="radio" name="card" id="card" /> Platba kartou
               </Label>
             </FormGroup>
           </FormGroup>
         </Col>
         <Col md={6}>
-          <p className="text-right">FREE</p>
+          <p className="text-right">Zadarmo</p>
         </Col>
       </Row>{' '}
       <Row form>
@@ -135,7 +135,7 @@ const CartSummary: FC = () => {
           <FormGroup>
             <FormGroup check>
               <Label htmlFor="cod">
-                <Input type="radio" name="cod" id="cod" /> Cash on delivery
+                <Input type="radio" name="cod" id="cod" /> Dobierka
               </Label>
             </FormGroup>
           </FormGroup>
@@ -149,19 +149,18 @@ const CartSummary: FC = () => {
           <FormGroup>
             <FormGroup check>
               <Label htmlFor="pcc">
-                <Input type="radio" name="pcc" id="pcc" /> Personal collection
-                in cash
+                <Input type="radio" name="pcc" id="pcc" /> Osobný odber
               </Label>
             </FormGroup>
           </FormGroup>
         </Col>
         <Col md={6}>
-          <p className="text-right">FREE</p>
+          <p className="text-right">Zadarmo</p>
         </Col>
       </Row>{' '}
       <Row form>
         <Col md={6} className="mt-3 mb-3">
-          Use discount code:
+          Použiť zľavový kód:
         </Col>
         <Col md={6} className="mt-3 mb-3">
           <Row>
@@ -174,7 +173,7 @@ const CartSummary: FC = () => {
                 onClick={() => console.log('Discount')}
                 className="w-100"
               >
-                Use
+                Použiť
               </Button>
             </Col>
           </Row>
@@ -182,7 +181,7 @@ const CartSummary: FC = () => {
       </Row>
       <Row form>
         <Col md={6} className="border-top border-bottom pt-3">
-          <p>Total price with VAT:</p>
+          <p>Spolu s DPH:</p>
         </Col>
         <Col md={6} className="border-top border-bottom pt-3">
           <p className="text-right">{(cartTotalSum * 1.2).toFixed(2)},-€</p>
