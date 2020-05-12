@@ -48,7 +48,7 @@ const ProductList: FC = () => {
   const productItems: JSX.Element[] = products.map(({ title, _id }) => (
     <ListGroupItem key={_id}>
       <Row>
-        <Col>{title}</Col>
+        <Col className="d-flex align-items-center">{title}</Col>
         <Col className="text-right">
           <Link
             href={{

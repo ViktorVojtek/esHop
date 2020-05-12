@@ -245,4 +245,12 @@ export default createGlobalStyle`
       color: black !important;
     }
   }
+  .list-group{
+    max-width: 800px;
+  }
+  .list-group-item{
+    border: none;
+    box-shadow: 0px 0px 5px 0px #c5c5c5;
+    margin: .5rem 0rem;
+  }
 `;
