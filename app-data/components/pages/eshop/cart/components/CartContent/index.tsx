@@ -10,16 +10,16 @@ interface ICartContent {
 }
 const CartContent: FC<ICartContent> = ({ data }) => (
   <Container>
-    <H2>Shopping cart</H2>
-    <h4 className="mb-5">1. Products in cart</h4>
+    <H2>Nákupný košík</H2>
+    <h4 className="mb-5">1. Položky v košíku</h4>
     <Table className="mb-5" hover>
       <thead>
         <tr>
-          <th>Product title</th>
+          <th>Názov produktu</th>
           <th>Variant</th>
-          <th>Item price</th>
-          <th>Quantity</th>
-          <th>Total price</th>
+          <th>Cena</th>
+          <th>Počet</th>
+          <th>Cena celkom</th>
         </tr>
       </thead>
       <tbody>

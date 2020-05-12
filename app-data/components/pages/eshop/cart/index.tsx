@@ -8,7 +8,7 @@ import CartContent from './components/CartContent';
 
 const CartEmpty: () => JSX.Element = () => (
   <div className="mx-auto w-50">
-    <h2 className="text-center">Shopping cart is empty</h2>
+    <h2 className="text-center">Nákupný košík je prázdny</h2>
     <p className="text-center">
       Let's go{' '}
       <Link href="/eshop">
