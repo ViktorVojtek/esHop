@@ -11,59 +11,59 @@ const BillingForm: FC = () => (
   >
     <Row>
       <Col md={6}>
-        <h4 className="mb-5">2. Billing information</h4>
+        <h4 className="mb-5">2. Fakturačné údaje</h4>
         <Row form>
           <Col md={6}>
             <FormGroup>
-              <Label htmlFor="firstName">Name *</Label>
+              <Label htmlFor="firstName">Meno *</Label>
               <Input type="text" name="firstName" id="firstName" required />
             </FormGroup>
           </Col>
           <Col md={6}>
             <FormGroup>
-              <Label htmlFor="lastName">Surname *</Label>
+              <Label htmlFor="lastName">Priezvisko *</Label>
               <Input type="text" name="lastName" id="lastName" required />
             </FormGroup>
           </Col>
         </Row>
         <FormGroup>
-          <Label htmlFor="companyTitle">Company Title</Label>
+          <Label htmlFor="companyTitle">Názov spoločnosti</Label>
           <Input type="text" name="companyTitle" id="companyTitle" />
         </FormGroup>
         <Row form>
           <Col md={6}>
             <FormGroup>
-              <Label htmlFor="companyId">Company Id</Label>
+              <Label htmlFor="companyId">IČO</Label>
               <Input type="text" name="companyId" id="companyId" />
             </FormGroup>
           </Col>
           <Col md={6}>
             <FormGroup>
-              <Label htmlFor="VATID">VAT Id</Label>
+              <Label htmlFor="VATID">DIČ</Label>
               <Input type="text" name="VATID" id="VATID" />
             </FormGroup>
           </Col>
         </Row>
         <FormGroup>
-          <Label>Street *</Label>
+          <Label>Ulica *</Label>
           <Input type="text" nam="street" id="street" required />
         </FormGroup>
         <Row form>
           <Col md={6}>
             <FormGroup>
-              <Label htmlFor="postCode">Post Code *</Label>
+              <Label htmlFor="postCode">PSČ *</Label>
               <Input type="text" name="postCode" id="postCode" required />
             </FormGroup>
           </Col>
           <Col md={6}>
             <FormGroup>
-              <Label htmlFor="city">City *</Label>
+              <Label htmlFor="city">Mesto *</Label>
               <Input type="text" name="city" id="city" required />
             </FormGroup>
           </Col>
         </Row>
         <FormGroup>
-          <Label htmlFor="country">Country *</Label>
+          <Label htmlFor="country">Štát *</Label>
           <Input
             type="select"
             name="country"
@@ -71,7 +71,7 @@ const BillingForm: FC = () => (
             defaultValue={0}
             required
           >
-            <option value={0}>Select country</option>
+            <option value={0}>Zvoľte štát</option>
             {countryData.map((item) => (
               <option value={item.value} key={item.value}>
                 {item.text}
@@ -80,7 +80,7 @@ const BillingForm: FC = () => (
           </Input>
         </FormGroup>
         <FormGroup>
-          <Label htmlFor="phone">Telephone</Label>
+          <Label htmlFor="phone">Telefón</Label>
           <Input type="tel" name="phone" id="phone" />
         </FormGroup>
         <FormGroup>
@@ -88,27 +88,27 @@ const BillingForm: FC = () => (
           <Input type="email" name="email" id="email" />
         </FormGroup>
         <FormGroup>
-          <Label htmlFor="message">Message</Label>
+          <Label htmlFor="message">Správa</Label>
           <Input type="textarea" name="message" id="message" />
         </FormGroup>{' '}
       </Col>
       <Col md={6}>
-        <h4 className="mb-5">3. Cart Summary</h4>
+        <h4 className="mb-5">3. Súhrn košíka</h4>
         <Row form>
           <Col md={6} className="border-top border-bottom pt-3 pb-1 mb-3">
-            <p>Total:</p>
+            <p>Spolu:</p>
           </Col>
           <Col md={6} className="border-top border-bottom pt-3 pb-1 mb-3">
             <p className="text-right">0.00,-€</p>
           </Col>
         </Row>
-        <h5 className="mb-4">Choose delivery method</h5>
+        <h5 className="mb-4">Spôsob doručenia</h5>
         <Row form>
           <Col md={6}>
             <FormGroup>
               <FormGroup check>
                 <Label htmlFor="courier">
-                  <Input type="radio" name="courier" id="courier" /> Kurier
+                  <Input type="radio" name="courier" id="courier" /> Kuriér
                 </Label>
               </FormGroup>
             </FormGroup>
@@ -127,7 +127,7 @@ const BillingForm: FC = () => (
                     name="personalCollection"
                     id="personalCollection"
                   />{' '}
-                  Personal collection
+                  Osobný odber
                 </Label>
               </FormGroup>
             </FormGroup>
@@ -136,19 +136,19 @@ const BillingForm: FC = () => (
             <p className="text-right">FREE</p>
           </Col>
         </Row>{' '}
-        <h5 className="mb-4">Choose payment method</h5>
+        <h5 className="mb-4">Spôsob platby</h5>
         <Row form>
           <Col md={6}>
             <FormGroup>
               <FormGroup check>
                 <Label htmlFor="card">
-                  <Input type="radio" name="card" id="card" /> Card payment
+                  <Input type="radio" name="card" id="card" /> Platba kartou
                 </Label>
               </FormGroup>
             </FormGroup>
           </Col>
           <Col md={6}>
-            <p className="text-right">FREE</p>
+            <p className="text-right">Zadarmo</p>
           </Col>
         </Row>{' '}
         <Row form>
@@ -156,7 +156,7 @@ const BillingForm: FC = () => (
             <FormGroup>
               <FormGroup check>
                 <Label htmlFor="cod">
-                  <Input type="radio" name="cod" id="cod" /> Cash on delivery
+                  <Input type="radio" name="cod" id="cod" /> Dobierka
                 </Label>
               </FormGroup>
             </FormGroup>
@@ -170,19 +170,18 @@ const BillingForm: FC = () => (
             <FormGroup>
               <FormGroup check>
                 <Label htmlFor="pcc">
-                  <Input type="radio" name="pcc" id="pcc" /> Personal collection
-                  in cash
+                  <Input type="radio" name="pcc" id="pcc" /> Osobný odber
                 </Label>
               </FormGroup>
             </FormGroup>
           </Col>
           <Col md={6}>
-            <p className="text-right">FREE</p>
+            <p className="text-right">Zadarmo</p>
           </Col>
         </Row>{' '}
         <Row form>
           <Col md={6} className="mt-3 mb-3">
-            Use discount code:
+            Zľavový kód:
           </Col>
           <Col md={6} className="mt-3 mb-3">
             <Row>
@@ -195,7 +194,7 @@ const BillingForm: FC = () => (
                   onClick={() => console.log('Discount')}
                   className="w-100"
                 >
-                  Use
+                  Použiť
                 </Button>
               </Col>
             </Row>
@@ -203,7 +202,7 @@ const BillingForm: FC = () => (
         </Row>
         <Row form>
           <Col md={6} className="border-top border-bottom pt-3">
-            <p>Total price with VAT:</p>
+            <p>Spolu s DPH:</p>
           </Col>
           <Col md={6} className="border-top border-bottom pt-3">
             <p className="text-right">12.5,-€</p>
@@ -214,7 +213,7 @@ const BillingForm: FC = () => (
 
     <FormGroup>
       <Button type="submit" color="primary" disabled>
-        Submit
+        Odoslať
       </Button>
     </FormGroup>
   </Form>
