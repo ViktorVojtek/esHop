@@ -228,4 +228,29 @@ export default createGlobalStyle`
   .navbar-toggler{
     outline: none !important;
   }
+  .admin-logo{
+    width: 200px;
+  }
+  .lsnav-head{
+    font-size: 1.5rem;
+    color: rgb(0, 174, 239);
+    font-weight: bold;
+  }
+  .lsnav-link{
+    font-size: 1rem !important;
+    color: rgb(170, 174, 184) !important;
+    font-weight: bold;
+    transition: color .3s ease-out;
+    &:hover{
+      color: black !important;
+    }
+  }
+  .list-group{
+    max-width: 800px;
+  }
+  .list-group-item{
+    border: none;
+    box-shadow: 0px 0px 5px 0px #c5c5c5;
+    margin: .5rem 0rem;
+  }
 `;

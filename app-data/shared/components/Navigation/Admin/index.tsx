@@ -14,7 +14,9 @@ const NavHeader: FC = () => {
 
   return (
     <Navbar className="position-sticky border-bottom mb-2" expand="md">
-      <NavbarBrand href="/">es&times;Hop</NavbarBrand>
+      <NavbarBrand href="/">
+        <img className="admin-logo" src="/images/logo.png" alt="Červený kláštor" />
+      </NavbarBrand>
       <Collapse isOpen={isOpen} navbar>
         <Nav className="ml-auto" navbar>
           <NavItem>

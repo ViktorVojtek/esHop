@@ -24,6 +24,7 @@ export const Price = styled.p`
 
 export const ProductImg = styled.img`
   width: 100%;
+  border-radius: 4px;
 `;
 
 export const ImageWrap = styled.aside`
@@ -52,22 +53,25 @@ export const StyledProductTitle = styled.h2`
 `;
 
 export const StyledShortDescription = styled.h4`
-  color: #B3B3B3;
+  color: #888888;
+  font-size: 1.25rem;
 `;
 
 export const StyledDescription = styled.p`
-color: #B3B3B3;
+  color: #888888;
 `;
 
 export const StyledCartLink = styled.a`
   background-color: #FF4D7D;
   text-transform: uppercase;
   color: #FFF !important;
-  padding: 1.25rem;
+  padding: 1rem 1.5rem;
   border-radius: .35rem;
-  
-  &:hover {
-    cursor: pointer;
+  transition: all .3s ease-out;
+  cursor: pointer;
+  display: inline-block;
+  &:hover{
+    background-color: #f4255d;
   }
 `;
 
@@ -75,12 +79,12 @@ export const StyledCartBtn = styled.button`
   background-color: #FF4D7D;
   text-transform: uppercase;
   color: #FFF !important;
-  padding: 1rem 1.25rem;
+  padding: 1rem 1.5rem;
   border-radius: .35rem;
   outline: none !important;
   border-radius: 6px;
   border: none;
-  font-size: .8rem;
+  font-size: 1rem;
   position: absolute;
   bottom: 1rem;
   transition: all .3s ease-out;
