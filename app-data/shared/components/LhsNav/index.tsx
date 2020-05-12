@@ -8,7 +8,7 @@ import { INavItem } from './TS/LhsNav.interface';
 const LinkItem: FC<INavItem> = ({ href, title }) => (
   <NavItem>
     <Link href={href}>
-      <NavLink href={href}>{title}</NavLink>
+      <NavLink className="lsnav-link"  href={href}>{title}</NavLink>
     </Link>
   </NavItem>
 );
@@ -16,12 +16,12 @@ const LinkItem: FC<INavItem> = ({ href, title }) => (
 const LhsNav: () => JSX.Element = () => (
   <Wrapper className="position-sticky">
     <Nav vertical>
-      <NavItem>e-Commerce</NavItem>
+      <NavItem className="lsnav-head">e-Commerce</NavItem>
       <LinkItem href="/admin/products" title="Products" />
       <LinkItem href="/admin/orders" title="Orders" />
       <LinkItem href="/admin/customers" title="Customers" />
       <LinkItem href="/admin/reviews" title="Reviews" />
-      <NavItem>Settings</NavItem>
+      <NavItem className="lsnav-head">Settings</NavItem>
       <LinkItem href="/admin/settings/category" title="Category" />
       <LinkItem href="/admin/settings/currency" title="Currency" />
       <LinkItem href="/admin/settings/delivery" title="Delivery" />

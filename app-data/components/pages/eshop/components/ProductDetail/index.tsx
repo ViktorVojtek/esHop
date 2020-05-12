@@ -1,5 +1,5 @@
 import React, { useState, useContext, useRef, ChangeEvent } from 'react';
-import { Container, Row, Col, Input } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 import {
   Wrapper,
   Image,
@@ -9,6 +9,7 @@ import {
   StyledCartBtn,
   VariantOption,
   VariantsSelect,
+  Input,
 } from './styles/productDetail.style';
 
 // Types
@@ -102,7 +103,7 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
                 className="mt-4 mb-4"
                 defaultValue={1}
                 step={1}
-                innerRef={productCountRef}
+                ref={productCountRef}
               />
               <StyledCartBtn type="submit">Vložiť do košíka</StyledCartBtn>
             </Col>
