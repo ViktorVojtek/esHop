@@ -10,6 +10,8 @@ const rootTypeDefs = gql`
     discounts: [Discount]
     orders: [Order]
     order: Order
+    paymentMethode(id: String!): Payment
+    paymentMethodes: [Payment]
     products(categoryId: String, subCategoryId: String): [Product]
     product(id: String!): Product
     subCategories(categoryId: String): [SubCategory]

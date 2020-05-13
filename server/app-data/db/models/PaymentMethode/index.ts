@@ -1,6 +1,6 @@
 import mongoose, { Document } from 'mongoose';
 
-interface IPaymentMethode extends Document {
+export interface IPaymentMethode extends Document {
   title: string;
   value: number;
 }
