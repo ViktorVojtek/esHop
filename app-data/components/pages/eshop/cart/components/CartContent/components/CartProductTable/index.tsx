@@ -36,13 +36,8 @@ const CartProductTableRow: FC<ICartProductTableRow> = ({
 
     // variant price object destructed as price and currency
     const {
-      value: price,
-      currencySign: currency,
-    } = variants
-      .map((variant: any) =>
-        variant.title === variantTitle ? variant.price : null
-      )
-      .pop();
+      price: { value: itemPrice, currencySign: currency },
+    } = variants.filter((variant: any) => variant.title === variantTitle).pop();
 
     const handleAddProduct: (id: string) => void = (id) => {
       const cartItemData = cart
@@ -86,10 +81,10 @@ const CartProductTableRow: FC<ICartProductTableRow> = ({
       <tr>
         <td>{title}</td>
         <td>{prodVariantTitle}</td>
-        <td>{`${price},-${currency}`}</td>
+        <td>{`${itemPrice},-${currency}`}</td>
         <td>{count}</td>
         <td>
-          {`${count * price},-${currency}`}{' '}
+          {`${count * itemPrice},-${currency}`}{' '}
           <Button onClick={() => handleRemoveProduct(id)}>-</Button>{' '}
           <Button onClick={() => handleAddProduct(id)}>+</Button>
         </td>

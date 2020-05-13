@@ -23,12 +23,12 @@ const CartContent: FC<ICartContent> = ({ data }) => (
         </tr>
       </thead>
       <tbody>
-        {data.map((item) => (
+        {data.map((item: any, i: number) => (
           <CartProductTableRow
             id={item.id}
             variantTitle={item.variant.title}
             count={item.variant.count}
-            key={item.id}
+            key={`${item.id}-${i}`}
           />
         ))}
       </tbody>

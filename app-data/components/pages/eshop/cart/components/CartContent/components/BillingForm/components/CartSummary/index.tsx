@@ -184,7 +184,7 @@ const CartSummary: FC = () => {
           <p>Spolu s DPH:</p>
         </Col>
         <Col md={6} className="border-top border-bottom pt-3">
-          <p className="text-right">{(cartTotalSum * 1.2).toFixed(2)},-€</p>
+          <p className="text-right">{cartTotalSum.toFixed(2)},-€</p>
         </Col>
       </Row>
     </Col>

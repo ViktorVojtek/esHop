@@ -86,8 +86,6 @@ const Reducer = (state: IState, action: IAction) => {
         storage.setItem('cartTotalSum', JSON.stringify(action.payload));
       }
 
-      console.log(action.payload);
-
       return {
         ...state,
         cartTotalSum: action.payload,
