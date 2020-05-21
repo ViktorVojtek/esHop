@@ -7,6 +7,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '@brainhubeu/react-carousel/lib/style.css';
 import Style from '../app-data/shared/styles/global.style';
 
+// Material UI support
+import { ThemeProvider } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import theme from '../app-data/lib/util/mui/theme';
+
 import withApollo from '../app-data/graphql/withApollo';
 import Store from '../app-data/lib/state/Store';
 
@@ -19,17 +24,29 @@ const MyApp = (props) => {
     apollo,
   } = props;
 
+  React.useEffect(() => {
+    // Remove the server-side injected CSS.
+    const jssStyles = document.querySelector('#jss-server-side');
+    if (jssStyles) {
+      jssStyles.parentElement.removeChild(jssStyles);
+    }
+  }, []);
+
   return (
     <>
       <Head>
         <title>{pageTitle || 'Červený kláštor shop'}</title>
       </Head>
-      <ApolloProvider client={apollo}>
-        <Store>
-          <Style />
-          <Component {...pageProps} />
-        </Store>
-      </ApolloProvider>
+      <ThemeProvider theme={theme}>
+        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+        <CssBaseline />
+        <ApolloProvider client={apollo}>
+          <Store>
+            <Style />
+            <Component {...pageProps} />
+          </Store>
+        </ApolloProvider>
+      </ThemeProvider>
     </>
   );
 };
