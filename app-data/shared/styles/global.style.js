@@ -100,8 +100,14 @@ export default createGlobalStyle`
     color: white!important;
   }
   .navbar{
-    padding: 0.75rem 1rem !important;
+    padding: 0.75rem 7rem !important;
     background-color: #FFFFFF !important;
+    @media(max-width: 1550px){
+      padding: 0.75rem 4rem !important;
+    }
+    @media(max-width: 992px){
+      padding: 0.75rem 2rem !important;
+    }
   }
   .navbar-collapse{
     justify-content: flex-end;
@@ -252,5 +258,10 @@ export default createGlobalStyle`
     border: none;
     box-shadow: 0px 0px 5px 0px #c5c5c5;
     margin: .5rem 0rem;
+  }
+  .table{
+    th{
+      border: none;
+    }
   }
 `;

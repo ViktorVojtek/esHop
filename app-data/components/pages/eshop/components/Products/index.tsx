@@ -32,6 +32,7 @@ const Products: React.FC<IProductsProps> = ({ subCategoryID, categoryID }) => {
   useEffect(() => {
     if (data) {
       const { products } = data;
+      console.log(products);
       let newProducts = [];
 
       if (subCategoryID === '') {

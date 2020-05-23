@@ -74,6 +74,11 @@ const ProductUI: React.FC<IProductUI> = ({
                 ? `${variant[0].price.value} ${variant[0].price.currencySign}`
                 : 'Produkt neexistuje'}
             </Price>
+            {
+              variant[0].price.discount > 0
+            ? <span>{variant[0].price.value - ((variant[0].price.value * variant[0].price.discount) / 100)}{variant[0].price.currencySign}</span>
+              : null
+            }
           </PriceHolder>
           {variant.length > 1 ? (
             <Link href={{ pathname: '/eshop/product', query: { id: _id } }}>

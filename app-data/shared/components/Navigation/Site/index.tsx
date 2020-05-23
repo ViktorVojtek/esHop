@@ -49,7 +49,7 @@ const Navigation: FC = () => {
 
   return (
     <Wrapper id="navigation">
-      <Navbar color="light" light expand="md">
+      <Navbar color="light" light fixed="top" expand="md">
         <Link href="/">
           <CustomNavbarBrand href="/">
             <Logo src="/images/logo.png" alt="Červený kláštor" />

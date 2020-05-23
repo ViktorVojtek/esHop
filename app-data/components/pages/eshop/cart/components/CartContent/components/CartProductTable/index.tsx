@@ -85,6 +85,8 @@ const CartProductTableRow: FC<ICartProductTableRow> = ({
         <td>{count}</td>
         <td>
           {`${count * itemPrice},-${currency}`}{' '}
+        </td>
+        <td>
           <Button onClick={() => handleRemoveProduct(id)}>-</Button>{' '}
           <Button onClick={() => handleAddProduct(id)}>+</Button>
         </td>
