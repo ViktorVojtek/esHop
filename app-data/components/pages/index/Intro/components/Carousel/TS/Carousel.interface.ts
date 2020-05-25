@@ -7,5 +7,4 @@ export interface ICarouselProduct {
 export interface ICarouselItem {
   src: string;
   altText: string;
-  caption: string;
 }

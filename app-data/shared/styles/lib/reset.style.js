@@ -5,50 +5,6 @@ export default createGlobalStyle`
     *** SIMPLE GRID
     *** (C) ZACH COLE 2016
     **/
-
-   @font-face {
-    font-family: MuseoSans-Thin;
-    src: url(/public/fonts/MuseoSans-100.otf);
-    font-display: swap;
-    font-style: normal;
-    font-weight: 100;
-   }
-   @font-face {
-    font-family: MuseoSans-Thin-Italic;
-    src: url(/public/fonts/MuseoSans-100Italic.otf);
-    font-display: swap;
-    font-style: italic;
-    font-weight: 100;
-   }
-   @font-face {
-    font-family: MuseoSans-Normal;
-    src: url(/public/fonts/MuseoSans-300.otf);
-    font-display: swap;
-    font-style: normal;
-    font-weight: 300;
-   }
-   @font-face {
-    font-family: MuseoSans-Normal-Italic;
-    src: url(/public/fonts/MuseoSans-300Italic.otf);
-    font-display: swap;
-    font-style: italic;
-    font-weight: 300;
-   }
-   @font-face {
-    font-family: MuseoSans-Bold;
-    src: url(/public/fonts/MuseoSans-500.otf);
-    font-display: swap;
-    font-style: normal;
-    font-weight: 500;
-   }
-   @font-face {
-    font-family: MuseoSans-Bold-Italic;
-    src: url(/public/fonts/MuseoSans-500Italic.otf);
-    font-display: swap;
-    font-style: italic;
-    font-weight: 500;
-   }
-
     @import url(https://fonts.googleapis.com/css?family=Lato:400,300,300italic,400italic,700,700italic);
 
     /* UNIVERSAL */
@@ -76,32 +32,32 @@ export default createGlobalStyle`
 
     h1 {
     font-size: 2.5rem;
-    font-family:MuseoSans-Bold;
+    font-family:MuseoSans-500;
     }
 
     h2 {
     font-size: 2rem;
-    font-family:MuseoSans-Bold;
+    font-family:MuseoSans-500;
     }
 
     h3 {
     font-size: 1.375rem;
-    font-family:MuseoSans-Bold;
+    font-family:MuseoSans-500;
     }
 
     h4 {
     font-size: 1.125rem;
-    font-family:MuseoSans-Bold;
+    font-family:MuseoSans-500;
     }
 
     h5 {
     font-size: 1rem;
-    font-family:MuseoSans-Bold;
+    font-family:MuseoSans-500;
     }
 
     h6 {
     font-size: 0.875rem;
-    font-family:MuseoSans-Bold;
+    font-family:MuseoSans-500;
     }
 
     p {

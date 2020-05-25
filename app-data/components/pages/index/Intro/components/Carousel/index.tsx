@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { Carousel, CarouselItem, CarouselControl } from 'reactstrap';
+import { Carousel, CarouselItem, CarouselControl, CarouselIndicators } from 'reactstrap';
 
 import { ICarouselProduct, ICarouselItem } from './TS/Carousel.interface';
 
@@ -7,17 +7,14 @@ const items: ICarouselItem[] = [
   {
     src: '/images/sluzby.png',
     altText: 'Produkty',
-    caption: 'Produkty caption',
   },
   {
     src: '/images/sluzby.png',
     altText: 'Sluzby',
-    caption: 'Sluzby caption',
   },
   {
     src: '/images/sluzby.png',
     altText: 'Pobyty',
-    caption: 'Pobyty',
   },
 ];
 
@@ -41,13 +38,18 @@ const CarouselProducts: FC<ICarouselProduct> = ({ setActiveItem }) => {
     setActiveItem(nextIndex);
   };
 
+  const goToIndex = (newIndex: number) => {
+    if (animating) return;
+    setActiveIndex(newIndex);
+  }
+
   const slides: JSX.Element[] = items.map(({ altText, src }) => (
     <CarouselItem
       onExiting={() => setAnimating(true)}
       onExited={() => setAnimating(false)}
       key={altText}
     >
-      <img className="carousel-image" src={src} alt={altText} />
+      <div className="carousel-image" style={{backgroundImage: `url(${src})`}} />
     </CarouselItem>
   ));
 
@@ -57,9 +59,12 @@ const CarouselProducts: FC<ICarouselProduct> = ({ setActiveItem }) => {
       next={next}
       previous={previous}
       interval={5000}
+      indicators={true}
+      controls={false}
     >
       {slides}
-      <CarouselControl
+      <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={goToIndex} />
+     {/* <CarouselControl
         direction="prev"
         directionText="Previous"
         onClickHandler={previous}
@@ -68,7 +73,7 @@ const CarouselProducts: FC<ICarouselProduct> = ({ setActiveItem }) => {
         direction="next"
         directionText="Next"
         onClickHandler={next}
-      />
+     /> */}
     </Carousel>
   );
 };

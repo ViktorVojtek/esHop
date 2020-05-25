@@ -34,8 +34,52 @@ export const LinkButton = styled.a`
 `;
 
 export default createGlobalStyle`
+
+  @font-face {
+    font-family: MuseoSans-Thin;
+    src: url("/public/fonts/MuseoSans-100.otf");
+    font-display: swap;
+    font-style: normal;
+    font-weight: 100;
+   }
+   @font-face {
+    font-family: MuseoSans-Thin-Italic;
+    src: url(/public/fonts/MuseoSans-100Italic.otf);
+    font-display: swap;
+    font-style: italic;
+    font-weight: 100;
+   }
+   @font-face {
+    font-family: MuseoSans-300;
+    src: url("/static/fonts/MuseoSans-300.otf");
+    font-display: swap;
+    font-style: normal;
+    font-weight: 300;
+   }
+   @font-face {
+    font-family: MuseoSans-Normal-Italic;
+    src: url(/public/fonts/MuseoSans-300Italic.otf);
+    font-display: swap;
+    font-style: italic;
+    font-weight: 300;
+   }
+   @font-face {
+    font-family: MuseoSans-500;
+    src: url(/public/fonts/MuseoSans-500.otf);
+    font-display: swap;
+    font-style: normal;
+    font-weight: 500;
+   }
+   @font-face {
+    font-family: MuseoSans-500-Italic;
+    src: url(/public/fonts/MuseoSans-500Italic.otf);
+    font-display: swap;
+    font-style: italic;
+    font-weight: 500;
+   }
+
   * {
-    font-family:MuseoSans-Normal;
+    font-family: MuseoSans-300;
   }
   .admin * {
     font-family:Roboto;
@@ -44,7 +88,7 @@ export default createGlobalStyle`
     overflow: hidden;
   }
   .nav-link{
-    color: rgb(170, 174, 184);
+    color: #5e8796;
     font-weight: 600;
     font-size: 0.8rem;
     &:hover{
@@ -57,6 +101,10 @@ export default createGlobalStyle`
   }
   .carousel-image{
     width: 100%;
+    height: 65vh;
+    min-height: 60vh;
+    background-size: cover;
+    background-position: center center;
   }
   .letter-spacing-1{
     letter-spacing: 1px;
@@ -188,28 +236,25 @@ export default createGlobalStyle`
   .nav-link-main{
     position: relative;
     transition: transform .5s cubic-bezier(1,.25,0,.75) 0s;
+    font-family: MuseoSans-300;
+    color: #5e8796 !important;
     &:before {
       content: "";
       position: absolute;
       width: 80%;
       height: 2px;
       bottom: 4px;
-      left: 10%;
-      background-color: rgb(101,106,119);
-      visibility: hidden;
-      -webkit-transform: scaleX(0);
-      transform: scaleX(0);
-      -webkit-transition: all .5s cubic-bezier(1,.25,0,.75) 0s;
-      transition: all .5s cubic-bezier(1,.25,0,.75) 0s;
+      display:block;
+      background-color: #00aeef;
+      transform: scale(0,1);
+      -webkit-transition: transform 0.4s cubic-bezier(1,0,0,1);
+      transition: transform 0.4s cubic-bezier(1,0,0,1);
     }
     &:hover:before {
-    visibility: visible;
-    -webkit-transform: scaleX(1);
-    transform: scaleX(1);
+      transform: scale(1,1);
     }
     &:hover{
-      color: rgb(101,106,119) !important;
-      transform: translateY(-2px);
+      color: #ff0000 !important;
     }
   }
   .product-image{
