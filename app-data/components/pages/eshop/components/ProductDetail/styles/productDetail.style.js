@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 
 export const Wrapper = styled.div`
-  margin-top: 2rem;
+  margin-top: 120px;
 `;
 
 export const Image = styled.img`
@@ -10,27 +10,27 @@ export const Image = styled.img`
   border-radius: 4px;
 `;
 
-export const Title = styled.h2`
-  font-size: 1.5rem;
-  font-family: 'Open Sans', sans-serif;
+export const Title = styled.h4`
+  color: #5e8796;
+  font-weight: bold;
+  font-size: 2rem;
 `;
 export const Price = styled.p`
-  color: #FF4D7D;
-  font-weight: bold;
-  font-size: 1.25rem;
-  font-family: 'Open Sans', sans-serif;
+  margin: 1rem 0rem;
+  font-weight: 600;
+  font-size: 1.2rem;
 `;
 export const Description = styled.p`
   color: #848484;
   font-size: 1rem;
-  font-family: 'Open Sans', sans-serif;
+  margin: 1rem 0rem;
 `;
 
 export const StyledCartBtn = styled.button`
-  background-color: #FF4D7D;
+  background-color: #00aeefb8;
   text-transform: uppercase;
   color: #FFF !important;
-  padding: 1rem 1.25rem;
+  padding: 1rem 3rem;
   border-radius: .35rem;
   outline: none !important;
   border-radius: 6px;
@@ -40,14 +40,14 @@ export const StyledCartBtn = styled.button`
   font-size: .8rem;
   transition: all .3s ease-out;
   &:hover{
-    background-color: #f4255d;
+    background-color: #00aeef;
   }
 `;
 
 export const VariantsSelect = styled.select`
 display: block;
 width: 100%;
-max-width: 200px;
+max-width: 210px;
 height: calc(1.5em + .75rem + 2px);
 padding: .375rem .75rem;
 font-size: 1rem;
@@ -65,7 +65,7 @@ outline: none;
 export const Input = styled.input`
 display: block;
 width: 100%;
-max-width: 200px;
+max-width: 210px;
 height: calc(1.5em + .75rem + 2px);
 padding: .375rem .75rem;
 font-size: 1rem;

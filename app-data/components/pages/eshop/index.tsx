@@ -46,7 +46,7 @@ const EshopPage: FC = () => {
     <Wrapper>
       <Container>
         <Row>
-          <Col sm="3" xs="12" className="pl-2">
+          <Col sm="3" xs="12" className="pr-4">
             <CategoriesAside
               getCategory={setCategoryID}
               getSubCategory={setSubCategoryID}
@@ -63,6 +63,7 @@ const EshopPage: FC = () => {
                 valueLabelDisplay="auto"
                 aria-labelledby="range-slider"
                 step={1}
+                className=""
               />
             </ThemeProvider>
           </Col>
