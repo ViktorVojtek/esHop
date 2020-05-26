@@ -25,7 +25,7 @@ export const ProductBody = styled.div`
 export const ProductTitle = styled.h4`
   text-align: center;
   padding: 1rem 0.25rem;
-  color: #7e8485;
+  color: #5e8796;
   font-weight: bold;
   user-select: none;
   margin: 0;

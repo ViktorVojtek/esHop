@@ -34,7 +34,13 @@ export const LinkButton = styled.a`
 `;
 
 export default createGlobalStyle`
-
+  @font-face {
+    font-family: Franchise-CE;
+    src: url("/static/fonts/Franchise-CE.otf");
+    font-display: swap;
+    font-style: normal;
+    font-weight: 600;
+  }
   @font-face {
     font-family: MuseoSans-Thin;
     src: url("/public/fonts/MuseoSans-100.otf");
@@ -101,7 +107,7 @@ export default createGlobalStyle`
   }
   .carousel-image{
     width: 100%;
-    height: 65vh;
+    height: 60vh;
     min-height: 60vh;
     background-size: cover;
     background-position: center center;
