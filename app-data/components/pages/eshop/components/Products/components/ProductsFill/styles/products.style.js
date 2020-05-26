@@ -68,7 +68,7 @@ export const StyledCartLink = styled.a`
   border-radius: .35rem;
   transition: all .3s ease-out;
   cursor: pointer;
-  letter-spacing: 2px;
+  letter-spacing: 0px;
   font-weight: 600;
   margin-top: 1rem;
   display: inline-block;
@@ -92,7 +92,7 @@ export const StyledCartBtn = styled.button`
   font-weight: 600;
   position: relative;
   margin-top: 1rem;
-  letter-spacing: 2px;
+  letter-spacing: 0px;
   user-select: none;
   transition: all .3s ease-out;
   &:hover{
