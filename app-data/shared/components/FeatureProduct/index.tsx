@@ -50,7 +50,7 @@ const FeatureProduct: FC<IProductUI> =  ({
           }
         </PriceHolder>
         <Link href={{ pathname: '/eshop/product', query: { id: _id } }}>
-          <StyledCartLink>Kúpiť</StyledCartLink>
+          <StyledCartLink>Ihneď kúpiť</StyledCartLink>
         </Link>
       </ProductBody>
     </ProductItem>

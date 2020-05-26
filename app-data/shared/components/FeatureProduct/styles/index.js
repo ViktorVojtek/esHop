@@ -25,7 +25,7 @@ export const ProductBody = styled.div`
 export const ProductTitle = styled.h4`
   text-align: center;
   padding: 1rem 0.25rem;
-  color: red;
+  color: #7e8485;
   font-weight: bold;
   user-select: none;
   margin: 0;
@@ -44,13 +44,15 @@ export const PriceHolder = styled.div`
 
 export const Price = styled.p`
   margin: 0rem .2rem;
+  font-weight: 600;
+  font-size: 1.2rem;
 `;
 
 export const StyledCartLink = styled.a`
-  background-color: #01aeef;
+  background-color: #00aeefb8;
   text-transform: uppercase;
   color: #FFF !important;
-  padding: 1rem 2rem;
+  padding: 1rem 3rem;
   border-radius: .35rem;
   transition: all .3s ease-out;
   cursor: pointer;
@@ -59,6 +61,6 @@ export const StyledCartLink = styled.a`
   margin-top: 1rem;
   display: inline-block;
   &:hover{
-    background-color: #f4255d;
+    background-color: #00aeef;
   }
 `;
