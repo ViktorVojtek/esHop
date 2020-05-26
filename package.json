@@ -48,6 +48,7 @@
     "react-dom": "16.13.1",
     "react-slideshow-image": "^1.4.2",
     "react-uid": "^2.2.0",
+    "reactrangeslider": "^3.0.6",
     "reactstrap": "^8.4.1",
     "styled-components": "^4.4.1",
     "styled-icons": "^10.2.1",

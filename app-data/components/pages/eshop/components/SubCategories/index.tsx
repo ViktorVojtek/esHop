@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import React, { Dispatch, FC, SetStateAction, useState } from 'react';
+import React, { Dispatch, FC, SetStateAction, useState, useEffect } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { Aside, H3, Button, Buttons } from './style/subCategories.style';
 import { SUBCATEGORIES_QUERY } from '../../../../../graphql/query';
@@ -27,6 +27,8 @@ const SubCategoriesAside: FC<ISubCategoriesAside> = ({
   }
 
   const subCategoriesArray: any = data.subCategories;
+
+  console.log(categoryID);
 
   const handleSetActiveCategory: (id: string) => void = (id) => {
     setActiveSubCategory(id);

@@ -151,7 +151,10 @@ export default createGlobalStyle`
     color: red !important;
   }
   .not-active{
-    color: white!important;
+    color: #00aeefb8 !important;
+    &:hover{
+      color: #00aeef !important;
+    }
   }
   .navbar{
     padding: 0.75rem 7rem !important;

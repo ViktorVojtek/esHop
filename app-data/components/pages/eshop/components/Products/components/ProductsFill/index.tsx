@@ -16,6 +16,8 @@ import {
   StyledCartLink,
   StyledCartBtn,
   EyeDetail,
+  ActionPrice,
+  Del,
 } from './styles/products.style';
 
 // type Product
@@ -49,7 +51,7 @@ const ProductUI: React.FC<IProductUI> = ({
   };
 
   return (
-    <Col className="col-12" key={_id}>
+    <Col className="col-4" key={_id}>
       <ProductItem>
         <ImageWrap>
           {images.length > 0 ? (
@@ -67,17 +69,15 @@ const ProductUI: React.FC<IProductUI> = ({
         </ImageWrap>{' '}
         <ProductBody>
           <ProductTitle id={_id} title={title} />
-          <StyledShortDescription>{shortDescription}</StyledShortDescription>
           <PriceHolder>
-            <Price>
-              {variant.length > 0
-                ? `${variant[0].price.value} ${variant[0].price.currencySign}`
-                : 'Produkt neexistuje'}
-            </Price>
-            {
-              variant[0].price.discount > 0
-            ? <span>{variant[0].price.value - ((variant[0].price.value * variant[0].price.discount) / 100)}{variant[0].price.currencySign}</span>
-              : null
+            {variant[0].price.discount > 0 
+            ? <Price>
+                <Del>{variant[0].price.value}{variant[0].price.currencySign}</Del>
+                <ActionPrice className="ml-2">{variant[0].price.value - ((variant[0].price.value * variant[0].price.discount) / 100)}{variant[0].price.currencySign}</ActionPrice>
+              </Price>
+            : <Price>
+                {variant[0].price.value}{variant[0].price.currencySign}
+              </Price>
             }
           </PriceHolder>
           {variant.length > 1 ? (

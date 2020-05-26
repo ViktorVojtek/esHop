@@ -57,7 +57,6 @@ const CategoriesAside: FC<ICategoriesAside> = ({
 
   return (
     <Aside>
-      <H3>Kategórie</H3>
       <Buttons>{categoryButtons}</Buttons>
     </Aside>
   );
