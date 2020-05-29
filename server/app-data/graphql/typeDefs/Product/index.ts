@@ -53,9 +53,13 @@ const Product = gql`
 
   type ProductVariant {
     default: Boolean
+    description: String
     itemsInStock: Int
+    images: [ProductImage]
+    note: String
     title: String
     price: ProductPrice
+    shortDescription: String
   }
 
   type Product {
@@ -64,14 +68,10 @@ const Product = gql`
     dateCreated: String
     dateDeleted: String
     dateModified: String
-    description: String
     deleted: Boolean
     inStock: Boolean
     modifiedByUserId: String
-    shortDescription: String
     subCategory: String
-    images: [ProductImage]
-    note: String
     title: String
     variant: [ProductVariant]
   }

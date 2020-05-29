@@ -8,6 +8,7 @@ const initialState: IState = {
   cart: [],
   cartTotalSum: 0,
   modal: false,
+  menuOpen: false,
   error: false,
 };
 
