@@ -1,20 +1,33 @@
 import React from 'react';
-
-import Layout from '../../../../../shared/components/Layout/Settings.layout';
+import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
+import Layout from '../../../../../shared/components/Layout/Admin.material.layout';
 import Form from './components/SubCategorySubmitForm';
 import List from './components/SubCategories';
-import { PaddedWrapper } from '../styles/settings.style';
+// import { PaddedWrapper } from '../styles/settings.style';
+import Paper from '@material-ui/core/Paper';
 
-const SubcategoryContentPage: () => JSX.Element = () => (
-  <Layout>
-    <h3 className="pl-3 mt-2 mb-5">Subcategory settings</h3>
-    <PaddedWrapper>
-      <Form />
-    </PaddedWrapper>
-    <PaddedWrapper>
-      <List />
-    </PaddedWrapper>
-  </Layout>
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    paper: {
+      padding: theme.spacing(4),
+      marginBottom: theme.spacing(2),
+    },
+  })
 );
+
+const SubcategoryContentPage: () => JSX.Element = () => {
+  const classes = useStyles();
+
+  return (
+    <Layout pageTitle="Subcategory settings">
+      <Paper className={classes.paper}>
+        <Form />
+      </Paper>
+      <Paper className={classes.paper}>
+        <List />
+      </Paper>
+    </Layout>
+  );
+};
 
 export default SubcategoryContentPage;

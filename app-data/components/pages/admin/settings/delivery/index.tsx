@@ -1,20 +1,32 @@
 import React from 'react';
-
-import Layout from '../../../../../shared/components/Layout/Settings.layout';
+import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
+import Layout from '../../../../../shared/components/Layout/Admin.material.layout';
 import Form from './components/DeliverySubmitForm';
 import List from './components/DeliveryMethods';
-import { PaddedWrapper } from '../styles/settings.style';
+import Paper from '@material-ui/core/Paper';
 
-const DeliveryPageContent: () => JSX.Element = () => (
-  <Layout>
-    <h3 className="pl-3 mt-2 mb-5">Delivery methods settings</h3>
-    <PaddedWrapper>
-      <Form />
-    </PaddedWrapper>
-    <PaddedWrapper>
-      <List />
-    </PaddedWrapper>
-  </Layout>
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    paper: {
+      padding: theme.spacing(4),
+      marginBottom: theme.spacing(2),
+    },
+  })
 );
+
+const DeliveryPageContent: () => JSX.Element = () => {
+  const classes = useStyles();
+
+  return (
+    <Layout pageTitle="Delivery methods settings">
+      <Paper className={classes.paper}>
+        <Form />
+      </Paper>
+      <Paper className={classes.paper}>
+        <List />
+      </Paper>
+    </Layout>
+  );
+};
 
 export default DeliveryPageContent;
