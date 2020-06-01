@@ -1,12 +1,9 @@
 import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { Button, Row, Col } from 'reactstrap';
-
+import { Button } from 'reactstrap';
 import { withAuthSync } from '../../../app-data/lib/auth';
-import Layout from '../../../app-data/shared/components/Layout/Admin.layout';
-import LhsNav from '../../../app-data/shared/components/LhsNav';
-
+import Layout from '../../../app-data/shared/components/Layout/Admin.material.layout';
 import ProductList from '../../../app-data/components/pages/admin/products/ProductList';
 
 const Products: () => JSX.Element = () => (
@@ -15,20 +12,13 @@ const Products: () => JSX.Element = () => (
       <title>esHop App | Products</title>
       <link rel="icon" href="/favicon.ico" />
     </Head>{' '}
-    <Layout>
-      <Row>
-        <Col xs="6" sm="3">
-          <LhsNav />
-        </Col>
-        <Col xs="6" sm="9">
-          <Link href="/admin/products/create">
-            <Button color="primary" className="mb-3">
-              Create product
-            </Button>
-          </Link>{' '}
-          <ProductList />
-        </Col>
-      </Row>
+    <Layout pageTitle="Products">
+      <Link href="/admin/products/create">
+        <Button color="primary" className="mb-3">
+          Create product
+        </Button>
+      </Link>{' '}
+      <ProductList />
     </Layout>
   </>
 );
