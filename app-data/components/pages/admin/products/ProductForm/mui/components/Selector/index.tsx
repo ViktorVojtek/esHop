@@ -35,7 +35,7 @@ const Selector: FC<ISelector> = (props) => {
         onChange={change}
       >
         {data.map((item: any, i: number) => (
-          <MenuItem key={item._id} value={item._id}>
+          <MenuItem key={item._id} value={item._id} data-name={item.title}>
             {item.title}
           </MenuItem>
         ))}

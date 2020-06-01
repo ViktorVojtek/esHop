@@ -15,34 +15,41 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 export default (props) => {
-  const { data } = props;
+  const { data, product } = props;
   console.log(data);
 
   const { title, description, images, price, discount, inStock } = data;
+  const { title: productTitle } = product;
   const classes = useStyles();
 
   return (
     <Card className={classes.root}>
-      <CardMedia
-        component="img"
-        alt={title}
-        height="140"
-        image={images[0].base64 || images[0].src}
-        title={title}
-      />
+      {images && images.length > 0 && (
+        <CardMedia
+          component="img"
+          alt={title}
+          height="140"
+          image={images[0].base64 || images[0].src}
+          title={title}
+        />
+      )}
       <CardContent>
         <Typography color="textSecondary" gutterBottom>
+          <Typography variant="button" component="strong">
+            {productTitle}
+          </Typography>{' '}
           {title}
         </Typography>
         <Typography color="textSecondary">{description}</Typography>
         <Typography variant="body2" component="p">
-          Price: {price.value},-{price.currency}
+          Price: {price.value || 0},-{price.currency}
         </Typography>
         <Typography variant="body2" component="p">
-          Discount: {discount}%
+          Discount: {discount || 0}%
         </Typography>
         <Typography variant="body2" component="p">
-          In stock are <Typography component="strong">{inStock}</Typography>
+          In stock are{' '}
+          <Typography component="strong">{inStock || 0} products</Typography>
         </Typography>
       </CardContent>
     </Card>

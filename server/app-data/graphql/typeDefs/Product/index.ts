@@ -9,31 +9,32 @@ const Product = gql`
     title: String
   }
 
+  input CategoryTypeInput {
+    id: String
+    title: String
+  }
+
   input ProductPriceInput {
     currency: String!
-    currencySign: String!
-    discount: Int
     value: Float!
   }
 
   input ProductVariantInput {
     default: Boolean
-    itemsInStock: Int
+    description: String
+    inStock: Int
+    images: [ProductImageInput]
+    discount: Int
     title: String!
     price: ProductPriceInput!
   }
 
   input ProductInput {
-    category: String
-    description: String
-    inStock: Boolean
+    category: CategoryTypeInput
     modifiedByUserId: String
-    shortDescription: String
-    subCategory: String
-    images: [ProductImageInput]
-    note: String
+    subCategory: CategoryTypeInput
     title: String
-    variant: [ProductVariantInput]
+    variants: [ProductVariantInput]
   }
 
   type ProductImage {
@@ -46,34 +47,36 @@ const Product = gql`
 
   type ProductPrice {
     currency: String
-    currencySign: String
-    discount: Int
     value: Float
   }
 
   type ProductVariant {
     default: Boolean
     description: String
+    discount: Int
     itemsInStock: Int
     images: [ProductImage]
-    note: String
+    inStock: Int
     title: String
     price: ProductPrice
-    shortDescription: String
+  }
+
+  type CategoryType {
+    id: String
+    title: String
   }
 
   type Product {
     _id: String!
-    category: String
+    category: CategoryType
     dateCreated: String
     dateDeleted: String
     dateModified: String
     deleted: Boolean
-    inStock: Boolean
     modifiedByUserId: String
-    subCategory: String
+    subCategory: CategoryType
     title: String
-    variant: [ProductVariant]
+    variants: [ProductVariant]
   }
 `;
 

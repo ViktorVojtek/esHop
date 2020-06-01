@@ -97,6 +97,8 @@ const VariantProductData = (props) => {
     });
   };
 
+  const disabled: boolean = checkVariantAddBtnDisabled(variantData);
+
   return (
     <>
       <Paper className={classes.paperBlock}>
@@ -251,7 +253,7 @@ const VariantProductData = (props) => {
                   color="primary"
                   aria-label="add"
                   onClick={handleAddVariantToProd}
-                  disabled={!(variantData as any).title}
+                  disabled={disabled}
                 >
                   <AddIcon />
                 </Fab>
@@ -263,9 +265,14 @@ const VariantProductData = (props) => {
       {''}
       {productData.variants && productData.variants.length > 0 ? (
         <Carousel arrows={productData.variants.length > 1}>
-          {productData.variants.map((item: any, i: number) => (
-            <VariantItemCard data={item} key={i} />
-          ))}
+          {productData.variants.map((item: any, i: number) => {
+            const { title } = productData;
+            const productProps = { title };
+
+            return (
+              <VariantItemCard data={item} product={productProps} key={i} />
+            );
+          })}
         </Carousel>
       ) : (
         <Paper className={classes.paperBlock}>
@@ -277,6 +284,16 @@ const VariantProductData = (props) => {
     </>
   );
 };
+
+function checkVariantAddBtnDisabled(variantData: any): boolean {
+  const { title, description, inStock, price } = variantData;
+
+  if (title && description && inStock && price) {
+    return false;
+  }
+
+  return true;
+}
 
 function toBase64(file: Blob) {
   return new Promise((resolve, reject) => {

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import {
   Button,
-  Paper,
   Step,
   Stepper,
   StepLabel,
@@ -35,8 +34,14 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const initialProductData = {
   title: '',
-  categoryId: '',
-  subCategoryId: '',
+  category: {
+    id: '',
+    title: '',
+  },
+  subCategory: {
+    id: '',
+    title: '',
+  },
   variants: [],
 };
 
@@ -66,6 +71,8 @@ const ProductStepper = () => {
     productData,
     setProductData
   );
+
+  const disabled: boolean = checkStepBtnDisabled(activeStep, productData);
 
   console.log(productData);
 
@@ -99,7 +106,12 @@ const ProductStepper = () => {
               >
                 <Typography>Back</Typography>
               </Button>
-              <Button variant="contained" color="primary" onClick={handleNext}>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleNext}
+                disabled={disabled}
+              >
                 <Typography>
                   {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                 </Typography>
@@ -111,6 +123,29 @@ const ProductStepper = () => {
     </div>
   );
 };
+
+function checkStepBtnDisabled(step: number, prodData: any) {
+  const {
+    title,
+    category: { id: catId },
+    subCategory: { id: subId },
+    variants,
+  } = prodData;
+  if (step === 0) {
+    if (title && catId && subId) {
+      return false;
+    }
+  } else if (step === 1) {
+    console.log(variants.length);
+    if (variants.length > 0) {
+      return false;
+    }
+  } else {
+    return false;
+  }
+
+  return true;
+}
 
 function getSteps(): string[] {
   return [

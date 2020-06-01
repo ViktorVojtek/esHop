@@ -56,7 +56,7 @@ export default (props: IProps): JSX.Element => {
             productData={productData}
             setProductData={setProductData}
           />
-          {productData.categoryId ? (
+          {productData.category.id ? (
             <SubcategorySelector
               productData={productData}
               setProductData={setProductData}

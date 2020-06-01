@@ -26,10 +26,17 @@ const CategorySelector: FC<{
   const handleChange = (
     event: React.ChangeEvent<{ name?: string; value: unknown }>
   ) => {
+    const nativeEvent: Event = event.nativeEvent;
+    const title: string = (nativeEvent.target as HTMLButtonElement).dataset
+      .name as string;
+
     setSelected(event.target.value as string);
     setProductData({
       ...productData,
-      categoryId: event.target.value as string,
+      category: {
+        id: event.target.value as string,
+        title,
+      },
     });
   };
 

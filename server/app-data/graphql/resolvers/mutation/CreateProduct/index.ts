@@ -1,5 +1,4 @@
 /* eslint-disable no-underscore-dangle */
-import uniqid from 'uniqid';
 import Product, { IProduct } from '../../../../db/models/Product';
 import { config } from '../../../../config';
 import { verifyToken, storeFile } from '../../utils';
@@ -22,54 +21,36 @@ const createProduct: (
       throw new ModError(403, 'Product already exist.');
     }
 
-    const { images, ...prodRawDataWithOutImgs } = productInput;
-
-    const productData: IProduct = new Product(prodRawDataWithOutImgs);
+    const { variants, ...restProductData } = productInput;
+    const productData = new Product(restProductData);
 
     let i = 0;
-    const imagesDataArr = [];
-    const resultImagesDataArr = [];
-    let imagePaths: string[] = [];
+    let variantsData = [];
 
-    if (images && images.length > 0) {
-      while (i < images.length) {
-        const { base64, title: imageTitle, ext } = images[i];
-
-        const fileData = {
-          fileName: imageTitle,
-          fileBase64Data: base64,
-          dirName: productData._id,
-          extension: ext,
-        };
-
-        const promiseFn = storeFile(fileData);
-
-        imagesDataArr.push(promiseFn);
-
-        i += 1;
-      }
-
-      imagePaths = await Promise.all(imagesDataArr);
-
+    while (variants.length > i) {
+      const { images } = variants[i];
       let j = 0;
+      let imagesPaths: string[] = [];
 
-      while (j < imagePaths.length) {
-        const { base64, ...restImageData } = images[j];
-        const imageData = {
-          ...restImageData,
-          imageId: uniqid('img-'),
-          path: imagePaths[j],
-        };
+      if (images && images.length > 0) {
+        const vId = `${productData._id}-${variants[i].title.toUpperCase()}`;
 
-        resultImagesDataArr.push(imageData);
-
-        j += 1;
+        imagesPaths = await getVariantImagesPaths(images, vId);
       }
+
+      const resultVariant = {
+        ...variants[i],
+        images: imagesPaths,
+      };
+
+      variantsData.push(resultVariant);
+
+      i += 1;
     }
 
     const newProductData = {
       ...productData.toObject(),
-      images: resultImagesDataArr,
+      variants: variantsData,
     };
 
     const newProduct = await Product.create(newProductData);
@@ -81,5 +62,36 @@ const createProduct: (
     throw new Error(err);
   }
 };
+
+function getVariantImagesPaths(
+  images: { base64: string; title: string; ext: string }[],
+  vId: string
+): Promise<string[]> {
+  let j: number = 0;
+  const variantImagesDataArr = [];
+
+  return new Promise(async (resolve) => {
+    while (images.length > j) {
+      const { base64, title: imageTitle, ext } = images[j];
+
+      const fileData = {
+        fileName: imageTitle,
+        fileBase64Data: base64,
+        dirName: vId,
+        extension: ext,
+      };
+
+      const promiseFn = storeFile(fileData);
+
+      variantImagesDataArr.push(promiseFn);
+
+      j += 1;
+    }
+
+    const paths = await Promise.all(variantImagesDataArr);
+
+    resolve(paths);
+  });
+}
 
 export default createProduct;

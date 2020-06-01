@@ -12,7 +12,7 @@ const SubcategorySelector: FC<{
   const { productData, setProductData } = props;
   const [selected, setSelected] = useState('');
   const { error, loading, data } = useQuery(SUBCATEGORIES_QUERY, {
-    variables: { categoryId: productData ? productData.categoryId : '' },
+    variables: { categoryId: productData ? productData.category.id : '' },
   });
 
   if (error) {
@@ -28,10 +28,17 @@ const SubcategorySelector: FC<{
   const handleChange = (
     event: React.ChangeEvent<{ name?: string; value: unknown }>
   ) => {
+    const nativeEvent: Event = event.nativeEvent;
+    const title: string = (nativeEvent.target as HTMLButtonElement).dataset
+      .name as string;
+
     setSelected(event.target.value as string);
     setProductData({
       ...productData,
-      subCategoryId: event.target.value as string,
+      subCategory: {
+        id: event.target.value as string,
+        title,
+      },
     });
   };
 
