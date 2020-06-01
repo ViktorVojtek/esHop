@@ -1,42 +1,32 @@
 import mongoose, { Document } from 'mongoose';
 
 export interface IProduct extends Document {
-  category: string;
+  category: Object;
   dateCreated: Date;
   dateDeleted: Date;
   dateModified: Date;
-  description: string;
   deleted: boolean;
-  inStock: boolean;
   modifiedByUserId: string;
-  shortDescription: string;
-  subCategory: string;
-  images: any[];
-  note: string;
+  subCategory: Object;
   title: string;
-  variant: any[];
+  variants: any[];
 }
 const ProductSchema = new mongoose.Schema({
-  category: String,
+  category: Object,
   dateCreated: {
     type: Date,
     default: Date.now,
   },
   dateDeleted: Date,
   dateModified: Date,
-  description: String,
   deleted: {
     default: false,
     type: Boolean,
   },
-  inStock: Boolean,
   modifiedByUserId: String,
-  shortDescription: String,
-  subCategory: String,
-  images: [Object],
-  note: String,
+  subCategory: Object,
   title: String,
-  variant: [Object],
+  variants: [Object],
 });
 
 const Product = mongoose.model<IProduct>('Product', ProductSchema);

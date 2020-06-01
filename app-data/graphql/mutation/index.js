@@ -44,28 +44,31 @@ export const CREATE_SUBCATEGORY_MUTATION = gql`
 export const CREATE_PRODUCT_MUTATION = gql`
   mutation createProduct($productInput: ProductInput!) {
     createProduct(productInput: $productInput) {
-      category
-      dateCreated
-      dateModified
-      description
-      inStock
-      modifiedByUserId
-      shortDescription
-      subCategory
-      images {
-        path
-        size
+      _id
+      category {
+        id
         title
       }
-      note
+      dateCreated
+      dateModified
+      modifiedByUserId
+      subCategory {
+        id
+        title
+      }
       title
-      variant {
+      variants {
         default
-        itemsInStock
+        description
+        discount
+        inStock
+        images {
+          path
+          size
+          title
+        }
         price {
           currency
-          currencySign
-          discount
           value
         }
         title

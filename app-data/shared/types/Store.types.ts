@@ -15,6 +15,7 @@ export interface IState {
   cart: CartProduct[] | [];
   cartTotalSum: number;
   modal: boolean;
+  menuOpen: boolean;
   error: boolean;
 }
 

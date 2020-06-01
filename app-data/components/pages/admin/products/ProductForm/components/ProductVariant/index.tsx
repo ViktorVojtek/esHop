@@ -150,6 +150,17 @@ const ProductVariantComponent: FC<IProductVariant> = ({
   return (
     <>
       <h5>Variant</h5>
+      <FormGroup>
+        <Input
+          type="text"
+          className="variantTitle"
+          placeholder="Title"
+          innerRef={variantTitleRef}
+        />
+      </FormGroup>
+      <FormGroup>
+        <Input type="textarea" placeholder="Short description" />
+      </FormGroup>
       <Row form>
         <Col>
           <FormGroup>

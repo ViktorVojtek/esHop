@@ -98,8 +98,8 @@ const resolvers = {
 
     createProduct: async (root: any, args: any, ctx: any) =>
       createProduct(root, args, ctx),
-    updateProduct: async (root: any, args: any, ctx: any) =>
-      updateProduct(root, args, ctx),
+    // updateProduct: async (root: any, args: any, ctx: any) =>
+    // updateProduct(root, args, ctx),
 
     createSubCategory: async (root: any, args: any, ctx: any) =>
       createSubCategory(root, args, ctx),
@@ -110,8 +110,8 @@ const resolvers = {
       loginUser(root, args, ctx),
     registerUser: async (root: any, args: any, ctx: any) =>
       registerUser(root, args, ctx),
-    removeProduct: async (root: any, args: any, ctx: any) =>
-      removeProduct(root, args, ctx),
+    // removeProduct: async (root: any, args: any, ctx: any) =>
+    // removeProduct(root, args, ctx),
   },
 };
 

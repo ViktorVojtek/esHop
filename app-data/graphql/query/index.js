@@ -67,28 +67,30 @@ export const PRODUCT_QUERY = gql`
   query product($id: String!) {
     product(id: $id) {
       _id
-      category
-      dateCreated
-      dateModified
-      description
-      inStock
-      modifiedByUserId
-      shortDescription
-      subCategory
-      images {
-        path
-        size
+      category {
+        id
         title
       }
-      note
+      dateCreated
+      dateModified
+      modifiedByUserId
+      subCategory {
+        id
+        title
+      }
       title
-      variant {
+      variants {
         default
-        itemsInStock
+        description
+        discount
+        inStock
+        images {
+          path
+          size
+          title
+        }
         price {
           currency
-          currencySign
-          discount
           value
         }
         title
@@ -101,28 +103,30 @@ export const PRODUCTS_QUERY = gql`
   query products($categoryId: String, $subCategoryId: String) {
     products(categoryId: $categoryId, subCategoryId: $subCategoryId) {
       _id
-      category
-      dateCreated
-      dateModified
-      description
-      inStock
-      modifiedByUserId
-      shortDescription
-      subCategory
-      images {
-        path
-        size
+      category {
+        id
         title
       }
-      note
+      dateCreated
+      dateModified
+      modifiedByUserId
+      subCategory {
+        id
+        title
+      }
       title
-      variant {
+      variants {
         default
-        itemsInStock
+        description
+        discount
+        inStock
+        images {
+          path
+          size
+          title
+        }
         price {
           currency
-          currencySign
-          discount
           value
         }
         title

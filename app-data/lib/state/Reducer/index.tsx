@@ -100,6 +100,11 @@ const Reducer = (state: IState, action: IAction) => {
         ...state,
         error: action.payload,
       };
+    case 'MENU_TOGGLE':
+      return {
+        ...state,
+        menuOpen: action.payload,
+      };
     default:
       return state;
   }

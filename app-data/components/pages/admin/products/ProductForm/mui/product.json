@@ -1,0 +1,31 @@
+{
+  "title": "string",
+  "category": {
+    "id": "5eaab23511897ca3b811cbb7",
+    "title": "string"
+  },
+  "subCategory": {
+    "id": "5eaab2c53d0ee6a4122b8221",
+    "title": "string"
+  },
+  "variants": [
+    {
+      "description": "string",
+      "discount": 10,
+      "images": [
+        {
+          "base64": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD",
+          "ext": "jpeg",
+          "size": "8 KB",
+          "title": "string"
+        }
+      ],
+      "inStock": 10,
+      "price": {
+        "value": 10,
+        "currency": "€"
+      },
+      "title": "string"
+    }
+  ]
+}

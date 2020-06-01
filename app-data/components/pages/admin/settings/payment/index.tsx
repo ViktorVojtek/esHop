@@ -1,15 +1,27 @@
 import React from 'react';
+import Layout from '../../../../../shared/components/Layout/Admin.material.layout';
+import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
 
-import Layout from '../../../../../shared/components/Layout/Settings.layout';
-import { PaddedWrapper } from '../styles/settings.style';
-
-const PaymentContentPage: () => JSX.Element = () => (
-  <Layout>
-    <h3 className="pl-3 mt-2 mb-5">Payment settings</h3>
-    <PaddedWrapper>
-      <p>Payment methodes</p>
-    </PaddedWrapper>
-  </Layout>
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      padding: theme.spacing(4),
+    },
+  })
 );
+
+const PaymentContentPage: () => JSX.Element = () => {
+  const classes = useStyles();
+
+  return (
+    <Layout pageTitle="Payment settings">
+      <Paper className={classes.root}>
+        <Typography>Payment methodes</Typography>
+      </Paper>
+    </Layout>
+  );
+};
 
 export default PaymentContentPage;
