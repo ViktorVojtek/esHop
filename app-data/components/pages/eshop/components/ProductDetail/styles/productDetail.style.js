@@ -15,6 +15,11 @@ export const Title = styled.h4`
   font-weight: bold;
   font-size: 2rem;
 `;
+export const VariantTitle = styled.h6`
+  color: #5e8796;
+  font-weight: bold;
+  font-size: 1.5rem;
+`;
 export const Price = styled.p`
   margin: 1rem 0rem;
   font-weight: 600;

@@ -4,6 +4,7 @@ import {
   Wrapper,
   Image,
   Title,
+  VariantTitle,
   Price,
   Description,
   StyledCartBtn,
@@ -29,7 +30,7 @@ interface IProductToCartData {
 
 const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
   // product prop destruct
-  const { _id, variants } = product;
+  const { _id, variants, title } = product;
 
   // hooks used in components
   const productCountRef = useRef(null);
@@ -81,7 +82,8 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
               ) : null}
             </Col>
             <Col md="6">
-              <Title>{variants[activeVariant].title}</Title>
+              <Title>{title}</Title>
+              <VariantTitle>{variants[activeVariant].title}</VariantTitle>
               <Price>
                 {variants[activeVariant].price.value}{' '}
                 {variants[activeVariant].price.currency}

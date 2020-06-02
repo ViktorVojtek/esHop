@@ -15,17 +15,17 @@ import {
 } from './styles/index.js';
 
 const FeatureProduct: FC<IProductUI> =  ({
-  product: { _id, variants, subCategory},
+  product: { _id, variants, subCategory, title},
   addProduct,
 }) => (
-  <Col lg="3" md="4" key={_id}>
+  <Col lg="3" md="6" sm="12" className="mb-4" key={_id}>
     <ProductItem>
       <ImageWrap>
         {variants[0].images.length > 0 ? (
           <Link href={{ pathname: '/eshop/product', query: { id: _id } }}>
             <a>
               <div className="product-image">
-                <ProductImg src={variants[0].images[0].path} alt={variants[0].title} />
+                <ProductImg src={variants[0].images[0].path} alt={title} />
                 <div className="detail">
                   <EyeDetail />
                 </div>
@@ -35,7 +35,7 @@ const FeatureProduct: FC<IProductUI> =  ({
         ) : null}
       </ImageWrap>{' '}
       <ProductBody>
-        <ProductTitle>{variants[0].title}</ProductTitle>
+        <ProductTitle>{title}</ProductTitle>
         <StyledShortDescription>{subCategory.title}</StyledShortDescription>
         <PriceHolder>
           <Price>

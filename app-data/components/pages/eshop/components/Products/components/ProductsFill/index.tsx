@@ -51,7 +51,7 @@ const ProductUI: React.FC<IProductUI> = ({
   };
 
   return (
-    <Col className="col-4" key={_id}>
+    <Col lg="4" md="6" sm="12" key={_id}>
       <ProductItem>
         <ImageWrap>
           {variants[0].images.length > 0 ? (
