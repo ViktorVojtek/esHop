@@ -3,6 +3,7 @@ import Product, { IProduct } from '../../../../db/models/Product';
 import { config } from '../../../../config';
 import { verifyToken, storeFile } from '../../utils';
 import ModError from '../../utils/error';
+import { decodeBase64 } from 'bcryptjs';
 
 const createProduct: (
   root: any,
@@ -29,18 +30,17 @@ const createProduct: (
 
     while (variants.length > i) {
       const { images } = variants[i];
-      let j = 0;
-      let imagesPaths: string[] = [];
+      let imagesData: any[] = [];
 
       if (images && images.length > 0) {
         const vId = `${productData._id}-${variants[i].title.toUpperCase()}`;
 
-        imagesPaths = await getVariantImagesPaths(images, vId);
+        imagesData = await getVariantImagesPaths(images, vId);
       }
 
       const resultVariant = {
         ...variants[i],
-        images: imagesPaths,
+        images: imagesData,
       };
 
       variantsData.push(resultVariant);
@@ -66,7 +66,7 @@ const createProduct: (
 function getVariantImagesPaths(
   images: { base64: string; title: string; ext: string }[],
   vId: string
-): Promise<string[]> {
+): Promise<any[]> {
   let j: number = 0;
   const variantImagesDataArr = [];
 
@@ -90,7 +90,21 @@ function getVariantImagesPaths(
 
     const paths = await Promise.all(variantImagesDataArr);
 
-    resolve(paths);
+    let k = 0;
+    const variantImagesData = [];
+
+    while (paths.length > k) {
+      const { base64, ...restImageData } = images[k];
+      const imageData = {
+        ...restImageData,
+        path: paths[k],
+      };
+
+      variantImagesData.push(imageData);
+      k += 1;
+    }
+
+    resolve(variantImagesData);
   });
 }
 
