@@ -4,7 +4,7 @@ import { VariantOfProduct } from '../../../../../../../../shared/types/Store.typ
 export interface IProductToCartData {
   id: string;
   count?: number;
-  variant?: VariantOfProduct;
+  variants?: VariantOfProduct;
 }
 
 export interface IProductsFillProps {

@@ -29,7 +29,7 @@ interface IProductToCartData {
 
 const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
   // product prop destruct
-  const { _id, description, images, variant, title } = product;
+  const { _id, variants } = product;
 
   // hooks used in components
   const productCountRef = useRef(null);
@@ -52,7 +52,7 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
     event.preventDefault();
 
     const count: number = +productCountRef.current.value as number;
-    const { price, title } = variant[activeVariant];
+    const { price, title } = variants[activeVariant];
 
     handleAddProductToCart({
       id: _id,
@@ -64,7 +64,7 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
     });
   };
 
-  const variantOptions: JSX.Element[] = variant.map(({ title }) => (
+  const variantOptions: JSX.Element[] = variants.map(({ title }) => (
     <VariantOption key={title} value={title}>
       {title}
     </VariantOption>
@@ -76,17 +76,17 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
         <form onSubmit={handleSubmitProductToCart}>
           <Row>
             <Col md="6">
-              {images.length > 0 ? (
-                <Image src={images[0].path} alt={title} />
+              {variants[activeVariant].images.length > 0 ? (
+                <Image src={variants[activeVariant].images[0].path} alt={variants[activeVariant].title} />
               ) : null}
             </Col>
             <Col md="6">
-              <Title>{title}</Title>
+              <Title>{variants[activeVariant].title}</Title>
               <Price>
-                {variant[activeVariant].price.value}{' '}
-                {variant[activeVariant].price.currencySign}
+                {variants[activeVariant].price.value}{' '}
+                {variants[activeVariant].price.currencySign}
               </Price>
-              <Description>{description}</Description>{' '}
+              <Description>{variants[activeVariant].description}</Description>{' '}
               <VariantsSelect
                 id="variants"
                 name="variants"

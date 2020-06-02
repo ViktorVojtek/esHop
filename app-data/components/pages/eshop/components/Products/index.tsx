@@ -37,11 +37,11 @@ const Products: React.FC<IProductsProps> = ({ subCategoryID, categoryID }) => {
 
       if (subCategoryID === '') {
         newProducts = products.filter(
-          (product: any) => product.category === categoryID
+          (product: any) => product.category.id === categoryID
         );
       } else {
         newProducts = products.filter(
-          (product: any) => product.subCategory === subCategoryID
+          (product: any) => product.subCategory.id === subCategoryID
         );
       }
 

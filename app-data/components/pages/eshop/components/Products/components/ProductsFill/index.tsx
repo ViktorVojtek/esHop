@@ -36,7 +36,7 @@ const ProductTitle: React.FC<IProductTitle> = ({ id, title }) => (
 );
 
 const ProductUI: React.FC<IProductUI> = ({
-  product: { _id, description, images, title, shortDescription, variant },
+  product: { _id, variants },
   addProduct,
 }) => {
   const isClient = useIsClient();
@@ -45,20 +45,20 @@ const ProductUI: React.FC<IProductUI> = ({
       default: variantDefault,
       itemsInStock,
       ...restVariantData
-    } = variant[0];
+    } = variants[0];
 
-    addProduct({ id: _id, variant: { ...restVariantData, count: 1 } });
+    addProduct({ id: _id, variants: { ...restVariantData, count: 1 } });
   };
 
   return (
     <Col className="col-4" key={_id}>
       <ProductItem>
         <ImageWrap>
-          {images.length > 0 ? (
+          {variants[0].images.length > 0 ? (
             <Link href={{ pathname: '/eshop/product', query: { id: _id } }}>
               <a>
                 <div className="product-image">
-                  <ProductImg src={images[0].path} alt={title} />
+                  <ProductImg src={variants[0].images[0].path} alt={variants[0].title} />
                   <div className="detail">
                     <EyeDetail />
                   </div>
@@ -68,19 +68,19 @@ const ProductUI: React.FC<IProductUI> = ({
           ) : null}
         </ImageWrap>{' '}
         <ProductBody>
-          <ProductTitle id={_id} title={title} />
+          <ProductTitle id={_id} title={variants[0].title} />
           <PriceHolder>
-            {variant[0].price.discount > 0 
+            {variants[0].discount > 0 
             ? <Price>
-                <Del>{variant[0].price.value}{variant[0].price.currencySign}</Del>
-                <ActionPrice className="ml-2">{variant[0].price.value - ((variant[0].price.value * variant[0].price.discount) / 100)}{variant[0].price.currencySign}</ActionPrice>
+                <Del>{variants[0].price.value}{variants[0].price.currency}</Del>
+                <ActionPrice className="ml-2">{variants[0].price.value - ((variants[0].price.value * variants[0].discount) / 100)}{variants[0].price.currency}</ActionPrice>
               </Price>
             : <Price>
-                {variant[0].price.value}{variant[0].price.currencySign}
+                {variants[0].price.value}{variants[0].price.currency}
               </Price>
             }
           </PriceHolder>
-          {variant.length > 1 ? (
+          {variants.length > 1 ? (
             <Link href={{ pathname: '/eshop/product', query: { id: _id } }}>
               <StyledCartLink>Vložiť do košíka</StyledCartLink>
             </Link>
@@ -101,6 +101,7 @@ const ProductsFill: React.FC<IProductsFillProps> = ({
   products,
   addProduct,
 }) => {
+  console.log(products);
   const elements: JSX.Element[] = products.map((item: Product) => {
     const { _id } = item;
 
