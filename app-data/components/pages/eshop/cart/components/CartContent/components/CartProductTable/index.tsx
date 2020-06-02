@@ -26,7 +26,7 @@ const CartProductTableRow: FC<ICartProductTableRow> = ({
   if (data) {
     const {
       // Destructed product's data fetched from server
-      product: { title, variant: variants },
+      product: { title, variants: variants },
     } = data;
 
     // product variant destructed as prodVariantTitle as it is variant title populated from product variants array
@@ -36,7 +36,7 @@ const CartProductTableRow: FC<ICartProductTableRow> = ({
 
     // variant price object destructed as price and currency
     const {
-      price: { value: itemPrice, currencySign: currency },
+      price: { value: itemPrice, currency: currency },
     } = variants.filter((variant: any) => variant.title === variantTitle).pop();
 
     const handleAddProduct: (id: string) => void = (id) => {
