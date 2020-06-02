@@ -15,17 +15,17 @@ import {
 } from './styles/index.js';
 
 const FeatureProduct: FC<IProductUI> =  ({
-  product: { _id, description, images, title, shortDescription, variant },
+  product: { _id, variants, subCategory},
   addProduct,
 }) => (
   <Col lg="3" md="4" key={_id}>
     <ProductItem>
       <ImageWrap>
-        {images.length > 0 ? (
+        {variants[0].images.length > 0 ? (
           <Link href={{ pathname: '/eshop/product', query: { id: _id } }}>
             <a>
               <div className="product-image">
-                <ProductImg src={images[0].path} alt={title} />
+                <ProductImg src={variants[0].images[0].path} alt={variants[0].title} />
                 <div className="detail">
                   <EyeDetail />
                 </div>
@@ -35,17 +35,17 @@ const FeatureProduct: FC<IProductUI> =  ({
         ) : null}
       </ImageWrap>{' '}
       <ProductBody>
-        <ProductTitle>{title}</ProductTitle>
+        <ProductTitle>{variants[0].title}</ProductTitle>
         <StyledShortDescription>SubKategória</StyledShortDescription>
         <PriceHolder>
           <Price>
-            {variant.length > 0
-              ? `${variant[0].price.value} ${variant[0].price.currencySign}`
+            {variants.length > 0
+              ? `${variants[0].price.value} ${variants[0].price.currency}`
               : 'Produkt neexistuje'}
           </Price>
           {
-            variant[0].price.discount > 0
-          ? <Price>{variant[0].price.value - ((variant[0].price.value * variant[0].price.discount) / 100)}{variant[0].price.currencySign}</Price>
+            variants[0].price.discount > 0
+          ? <Price>{variants[0].price.value - ((variants[0].price.value * variants[0].discount) / 100)}{variants[0].price.currency}</Price>
             : null
           }
         </PriceHolder>

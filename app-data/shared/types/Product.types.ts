@@ -14,29 +14,33 @@ export type ProductPrice = {
   value: number;
 };
 
+export type ProductCategory = {
+  id: string;
+  title: string;
+};
+
 export type ProductVariant = {
   default: boolean;
+  description: string;
+  discount: number;
   itemsInStock: number;
+  images: ProductImage[];
+  inStock: number;
   title: string;
   price: ProductPrice;
 };
 
 type Product = {
   _id: string;
-  category?: string;
+  category?: ProductCategory;
   dateCreated?: string;
   dateDeleted?: string;
   dateModified?: string;
-  description?: string;
   deleted?: boolean;
-  inStock?: boolean;
   modifiedByUserId?: string;
-  shortDescription?: string;
-  subCategory?: string;
-  images?: ProductImage[];
-  note?: string;
+  subCategory?: ProductCategory;
   title?: string;
-  variant?: ProductVariant[];
+  variants?: ProductVariant[];
 };
 
 export default Product;
