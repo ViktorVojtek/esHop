@@ -36,7 +36,7 @@ const FeatureProduct: FC<IProductUI> =  ({
       </ImageWrap>{' '}
       <ProductBody>
         <ProductTitle>{variants[0].title}</ProductTitle>
-        <StyledShortDescription>SubKategória</StyledShortDescription>
+        <StyledShortDescription>{subCategory.title}</StyledShortDescription>
         <PriceHolder>
           <Price>
             {variants.length > 0

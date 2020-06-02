@@ -84,7 +84,7 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
               <Title>{variants[activeVariant].title}</Title>
               <Price>
                 {variants[activeVariant].price.value}{' '}
-                {variants[activeVariant].price.currencySign}
+                {variants[activeVariant].price.currency}
               </Price>
               <Description>{variants[activeVariant].description}</Description>{' '}
               <VariantsSelect
