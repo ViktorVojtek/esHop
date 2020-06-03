@@ -11,7 +11,7 @@ import { withAuthSync } from '../../../../app-data/lib/auth';
 import Layout from '../../../../app-data/shared/components/Layout/Admin.layout';
 import LhsNav from '../../../../app-data/shared/components/LhsNav';
 
-import ProductForm from '../../../../app-data/components/pages/admin/products/ProductForm';
+import ProductForm from '../../../../app-data/components/pages/admin/products/ProductForm/mui';
 import Product from '../../../../app-data/shared/types/Product.types';
 
 const UpdateProduct: FC = () => {
@@ -46,7 +46,7 @@ const UpdateProduct: FC = () => {
           </Col>
           <Col xs="6" sm="9">
             <h3>Update Product</h3>
-            <ProductForm productDataProp={product as Product} />
+            <ProductForm />
           </Col>
         </Row>
       </Layout>
