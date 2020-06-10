@@ -10,8 +10,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import { Slider } from '@material-ui/core';
 
-
-import SubCategoriesAside from './components/SubCategories';
+import SubPageBackground from '../../../shared/components/SubPageBackground';
 import CategoriesAside from './components/Categories';
 import Products from './components/Products';
 
@@ -44,16 +43,13 @@ const EshopPage: FC = () => {
 
   return (
     <Wrapper>
+      <SubPageBackground title="Obchod" imageUrl="/images/eshop/background.jpg"/>
       <Container>
         <Row>
           <Col sm="3" xs="12" className="pr-4">
             <CategoriesAside
               getCategory={setCategoryID}
               getSubCategory={setSubCategoryID}
-            />
-            <SubCategoriesAside
-              getSubCategory={setSubCategoryID}
-              categoryID={categoryID}
             />
             <H3>Cena</H3>
             <ThemeProvider theme={muiTheme}>

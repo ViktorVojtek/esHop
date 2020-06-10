@@ -6,9 +6,11 @@ import React, {
   useState,
   useEffect,
 } from 'react';
+import { Collapse } from 'reactstrap';
 import { useQuery } from '@apollo/react-hooks';
 import { Aside, H3, Button, Buttons } from './style/categories.style';
 import { CATEGORIES_QUERY } from '../../../../../graphql/query';
+import Category from '../Category';
 
 interface ICategoriesAside {
   getCategory: Dispatch<SetStateAction<string>>;
@@ -46,13 +48,11 @@ const CategoriesAside: FC<ICategoriesAside> = ({
   };
 
   const categoryButtons = categories.map(({ signFlag, _id, title }) => (
-    <Button
-      key={signFlag}
-      className={activeCategory === _id ? 'active' : 'not-active'}
-      onClick={() => handleSetActiveCategory(_id)}
-    >
-      {title}
-    </Button>
+    <Category
+     title={title}
+     id={_id}
+     getSubCategory={getSubCategory}
+    />
   ));
 
   return (

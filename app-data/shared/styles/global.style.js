@@ -148,12 +148,13 @@ export default createGlobalStyle`
     }
   }
   .active{
-    color: red !important;
+    color: white !important;
+    background-color: #00aeef !important;
   }
   .not-active{
-    color: #00aeefb8 !important;
+    color: white !important;
     &:hover{
-      color: #00aeef !important;
+      color: white !important;
     }
   }
   .navbar{

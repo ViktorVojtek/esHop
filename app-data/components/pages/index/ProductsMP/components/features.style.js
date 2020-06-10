@@ -7,7 +7,7 @@ export const H3 = styled.h3`
   text-transform: uppercase;
   font-weight: bold;
   margin: 4rem 0rem;
-  letter-spacing: 4px;
+  letter-spacing: 1px;
   font-family: Franchise-CE;
 `;
 
