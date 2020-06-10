@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import {
+  Backdrop,
   Button,
+  CircularProgress,
   Step,
   Stepper,
   StepLabel,
   Typography,
 } from '@material-ui/core';
+import { useMutation } from '@apollo/react-hooks';
 import GeneralProductData from './components/GeneralProductData';
 import VariantProductData from './components/VariantProductData';
 import ProductResult from './components/ProductResult';
+import { CREATE_PRODUCT_MUTATION } from '../../../../../../graphql/mutation';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -49,6 +53,8 @@ const ProductStepper = () => {
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0);
   const [productData, setProductData] = useState(initialProductData);
+  const [backdropOpen, toggleBackdrop] = useState(false);
+  const [dispatch] = useMutation(CREATE_PRODUCT_MUTATION);
   const steps = getSteps();
 
   const handleNext = () => {
@@ -66,6 +72,19 @@ const ProductStepper = () => {
     setProductData(dataReset);
   };
 
+  const handleCreateProduct = async () => {
+    try {
+      toggleBackdrop(!backdropOpen);
+      await dispatch({ variables: { productInput: productData } });
+      console.log('Product should be created');
+      setProductData(initialProductData);
+      toggleBackdrop(!backdropOpen);
+      setActiveStep(0);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
   const activeStepContent = getStepContent(
     activeStep,
     productData,
@@ -78,6 +97,9 @@ const ProductStepper = () => {
 
   return (
     <div className={classes.root}>
+      <Backdrop open={backdropOpen}>
+        <CircularProgress color="primary" />
+      </Backdrop>
       <Stepper activeStep={activeStep} alternativeLabel>
         {steps.map((label) => (
           <Step key={label}>
@@ -109,11 +131,17 @@ const ProductStepper = () => {
               <Button
                 variant="contained"
                 color="primary"
-                onClick={handleNext}
+                onClick={() => {
+                  if (activeStep === steps.length - 1) {
+                    handleCreateProduct();
+                  } else {
+                    handleNext();
+                  }
+                }}
                 disabled={disabled}
               >
                 <Typography>
-                  {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                  {activeStep === steps.length - 1 ? 'Publish' : 'Next'}
                 </Typography>
               </Button>
             </div>
