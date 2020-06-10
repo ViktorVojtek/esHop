@@ -97,6 +97,16 @@ const VariantProductData = (props) => {
     });
   };
 
+  const handleRemoveVariant: (idx: number) => void = (idx) => {
+    setProductData({
+      ...productData,
+      variants: [
+        ...productData.variants.slice(0, idx),
+        ...productData.variants.slice(idx + 1),
+      ],
+    });
+  };
+
   const disabled: boolean = checkVariantAddBtnDisabled(variantData);
 
   return (
@@ -270,7 +280,13 @@ const VariantProductData = (props) => {
             const productProps = { title };
 
             return (
-              <VariantItemCard data={item} product={productProps} key={i} />
+              <VariantItemCard
+                data={item}
+                removeItem={handleRemoveVariant}
+                idx={i}
+                product={productProps}
+                key={i}
+              />
             );
           })}
         </Carousel>

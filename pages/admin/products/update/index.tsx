@@ -8,11 +8,11 @@ import { PRODUCT_QUERY } from '../../../../app-data/graphql/query';
 
 import { withAuthSync } from '../../../../app-data/lib/auth';
 
-import Layout from '../../../../app-data/shared/components/Layout/Admin.layout';
-import LhsNav from '../../../../app-data/shared/components/LhsNav';
+import Layout from '../../../../app-data/shared/components/Layout/Admin.material.layout';
+// import LhsNav from '../../../../app-data/shared/components/LhsNav';
 
-import ProductForm from '../../../../app-data/components/pages/admin/products/ProductForm';
-import Product from '../../../../app-data/shared/types/Product.types';
+import ProductForm from '../../../../app-data/components/pages/admin/products/ProductForm/mui';
+// import Product from '../../../../app-data/shared/types/Product.types';
 
 const UpdateProduct: FC = () => {
   const router = useRouter();
@@ -39,16 +39,8 @@ const UpdateProduct: FC = () => {
         <title>esHop App | Product create</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>{' '}
-      <Layout>
-        <Row>
-          <Col xs="6" sm="3">
-            <LhsNav />
-          </Col>
-          <Col xs="6" sm="9">
-            <h3>Update Product</h3>
-            <ProductForm productDataProp={product as Product} />
-          </Col>
-        </Row>
+      <Layout pageTitle="Product - Update">
+        <ProductForm updateProductData={product} update />
       </Layout>
     </>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -15,21 +15,20 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 export default (props) => {
-  const { data, product } = props;
-  console.log(data);
-
+  const { data, idx, product, removeItem } = props;
   const { title, description, images, price, discount, inStock } = data;
   const { title: productTitle } = product;
   const classes = useStyles();
 
   return (
     <Card className={classes.root}>
+      <Button onClick={() => removeItem(idx)}>Remove</Button>
       {images && images.length > 0 && (
         <CardMedia
           component="img"
           alt={title}
           height="140"
-          image={images[0].base64 || images[0].src}
+          image={images[0].base64 || images[0].path}
           title={title}
         />
       )}

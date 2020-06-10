@@ -35,7 +35,7 @@ import updateCurrency from './mutation/UpdateCurrency';
 import removeCurrency from './mutation/RemoveCurrency';
 
 import createProduct from './mutation/CreateProduct';
-import updateProduct from './mutation/UpdateProduct';
+// import updateProduct from './mutation/UpdateProduct';
 import removeProduct from './mutation/RemoveProduct';
 
 import createSubCategory from './mutation/CreateSubCategory';
@@ -110,8 +110,8 @@ const resolvers = {
       loginUser(root, args, ctx),
     registerUser: async (root: any, args: any, ctx: any) =>
       registerUser(root, args, ctx),
-    // removeProduct: async (root: any, args: any, ctx: any) =>
-    // removeProduct(root, args, ctx),
+    removeProduct: async (root: any, args: any, ctx: any) =>
+      removeProduct(root, args, ctx),
   },
 };
 

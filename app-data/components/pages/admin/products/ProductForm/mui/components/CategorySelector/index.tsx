@@ -39,12 +39,17 @@ const CategorySelector: FC<{
       },
     });
   };
+  const handleSetDefValue: (id: string) => void = (id) => {
+    setSelected(id);
+  };
 
   return (
     <Selector
+      dataId={productData.category.id}
       data={categories}
       change={handleChange}
       selected={selected}
+      setDefault={handleSetDefValue}
       title="Category"
     />
   );

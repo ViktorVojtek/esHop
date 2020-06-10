@@ -70,17 +70,8 @@ const ProductList: FC = () => {
 
   return products && products.length > 0 ? (
     <>
-      <Modal>
-        <p className="text-center">
-          Do you really want to delete this item?
-          <br />
-          <Button color="danger" onClick={() => handleDeleteProduct()}>
-            Yes
-          </Button>{' '}
-          <Button color="secondary" onClick={() => handleHideModal()}>
-            Cancel
-          </Button>
-        </p>
+      <Modal title="Delete product" fn={handleDeleteProduct}>
+        Do you really want to delete this item?
       </Modal>
       <ListGroup>{productItems}</ListGroup>
     </>

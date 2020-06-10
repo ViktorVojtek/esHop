@@ -24,7 +24,7 @@ const removeProduct: (
 
     await Product.deleteOne({ _id: mongoose.Types.ObjectId(_id) });
 
-    const imagesToDelete = [];
+    /* const imagesToDelete = [];
 
     productExist.images.forEach((item) => {
       const itemPath = path.resolve(
@@ -39,7 +39,7 @@ const removeProduct: (
       imagesToDelete.push(removeItemDir);
     });
 
-    await Promise.all(imagesToDelete);
+    await Promise.all(imagesToDelete); */
 
     return `Product with _id: ${_id} has been successfuly removed`;
   } catch (err) {
