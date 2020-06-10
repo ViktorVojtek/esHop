@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import {
   Backdrop,
@@ -49,12 +49,23 @@ const initialProductData = {
   variants: [],
 };
 
-const ProductStepper = () => {
+interface IProductForm {
+  update?: boolean;
+  updateProductData?: any;
+}
+const ProductStepper = ({ update, updateProductData }: IProductForm) => {
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0);
   const [productData, setProductData] = useState(initialProductData);
   const [backdropOpen, toggleBackdrop] = useState(false);
   const [dispatch] = useMutation(CREATE_PRODUCT_MUTATION);
+
+  useEffect(() => {
+    if (updateProductData) {
+      setProductData(updateProductData);
+    }
+  }, [updateProductData]);
+
   const steps = getSteps();
 
   const handleNext = () => {

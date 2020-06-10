@@ -41,11 +41,16 @@ const SubcategorySelector: FC<{
       },
     });
   };
+  const handleSetDefValue: (id: string) => void = (id) => {
+    setSelected(id);
+  };
 
   return (
     <Selector
+      dataId={productData.subCategory.id}
       data={subCategories}
       change={handleChange}
+      setDefault={handleSetDefValue}
       selected={selected}
       title="Subcategory"
     />

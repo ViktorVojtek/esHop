@@ -49,6 +49,8 @@ export default (props: IProps): JSX.Element => {
                   title: event.currentTarget.value as string,
                 });
               }}
+              defaultValue={undefined}
+              value={productData.title || ''}
               required
             />
           </FormControl>

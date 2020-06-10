@@ -28,7 +28,7 @@ export default (props) => {
           component="img"
           alt={title}
           height="140"
-          image={images[0].base64 || images[0].src}
+          image={images[0].base64 || images[0].path}
           title={title}
         />
       )}
