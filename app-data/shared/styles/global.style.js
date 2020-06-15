@@ -96,7 +96,7 @@ export default createGlobalStyle`
   .nav-link{
     color: #5e8796;
     font-weight: 600;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     &:hover{
       color: rgb(24, 28, 39);
     }
@@ -251,7 +251,7 @@ export default createGlobalStyle`
     &:before {
       content: "";
       position: absolute;
-      width: 80%;
+      width: calc(100% - 1rem);
       height: 2px;
       bottom: 4px;
       display:block;

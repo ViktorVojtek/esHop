@@ -16,9 +16,9 @@ export const Wrapper = styled.div`
 `;
 
 export const Logo = styled.img`
-  width: 220px;
+  width: 280px;
   @media (max-width: 992px) {
-    width: 180px;
+    width: 200px;
   }
 `;
 

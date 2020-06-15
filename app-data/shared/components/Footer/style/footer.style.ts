@@ -18,7 +18,7 @@ export const BottomDiv: StyledComponent<'div', any, {}, never> = styled.div`
 `;
 
 export const Logo: StyledComponent<'img', any, {}, never> = styled.img`
-  width: 200px;
+  width: 240px;
 
   @media (max-width: 992px) {
     margin-top: 1rem;

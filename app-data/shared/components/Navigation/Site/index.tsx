@@ -61,7 +61,7 @@ const Navigation: FC = () => {
             <LinkItem href="/" title="Domov" />
             <LinkItem href="/eshop" title="Produkty" />
             <LinkItem href="/eshop" title="Služby" />
-            <LinkItem href="/" title="O nás" />
+            <LinkItem href="/darcekove-poukazky" title="Darčekové poukážky" />
             <LinkItem href="/" title="FAQ" />
             <CartWrapper>
               <Link href="/eshop/cart">
