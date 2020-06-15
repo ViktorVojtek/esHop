@@ -93,6 +93,15 @@ export default createGlobalStyle`
   #__next{
     overflow: hidden;
   }
+  .modal-content{
+    padding: 1rem;
+    .modal-title{
+      color: #5e8796;
+      font-size: 1.25rem;
+      font-family: MuseoSans-300;
+      font-weight: bold;
+    }
+  }
   .nav-link{
     color: #5e8796;
     font-weight: 600;
