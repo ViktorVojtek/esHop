@@ -6,8 +6,6 @@ import PoukazkaTypes from './components/PoukazkaTypes';
 import StayType from './components/StayType';
 import MoneyType from './components/MoneyType';
 import RestaurantType from './components/RestaurantType';
-
-
 import {
   H3, Wrapper, RadioInput, RadioGroup, Label, H4, RadioColorGroup,
   RadioColorInput, ColorLabel, NumberLabel, AddToCart, Preview, PreviewHolder,
@@ -16,17 +14,12 @@ import {
 
 const PoukazkyPage: () => JSX.Element = () => {
   const [activeType, setActiveType] = useState(0);
-  const [imageSrc, setImageSrc] = useState("https://kupelecks.sk/wp-content/uploads/2018/10/dppobytp.png");
-  const [imageBackSrc, setImageBackSrc] = useState("https://kupelecks.sk/wp-content/uploads/2018/10/dpproceduryv.png");
+  const [imageSrc, setImageSrc] = useState("/images/poukazky/poukazka_modra.png");
   const [color, setColor] = useState("#00aeef");
   const [frontText, setFrontText] = useState("Miesto pre váš text");
-  const [backText, setBackText] = useState("Miesto pre váš text");
 
   const handleChangeTextArea = (event) => {
     setFrontText(event.target.value);
-  };
-  const handleChangeTextAreaBack = (event) => {
-    setBackText(event.target.value);
   };
   return(
     <Wrapper>
@@ -40,10 +33,10 @@ const PoukazkyPage: () => JSX.Element = () => {
           { activeType === 3 ? <RestaurantType /> : null }
         </div>
         <Form>
-          <H4>Zvoľte farbu poukážky:</H4>
-          <Row className="mt-4">
-            <Col md="6">
-              <FormGroup className="mt-4">
+          <Row className="mt-8">
+            <Col md="6" className="pr-4">
+              <H4>Zvoľte farbu poukážky:</H4>
+              <FormGroup className="mt-4 mb-4">
                 <RadioColorGroup>
                   <div>
                     <RadioColorInput
@@ -51,7 +44,7 @@ const PoukazkyPage: () => JSX.Element = () => {
                       id="color-1"
                       name="colors"
                       value="color-1"
-                      onChange={() => {setImageBackSrc("https://kupelecks.sk/wp-content/uploads/2018/10/dpproceduryv.png"); setImageSrc("https://kupelecks.sk/wp-content/uploads/2018/10/dppobytp.png"); setColor("#00aeef");}} />
+                      onChange={() => {setImageSrc("/images/poukazky/poukazka_modra.png"); setColor("#00aeef");}} />
                     <ColorLabel htmlFor="color-1" colorButton="#00aeef"></ColorLabel>
                   </div>
                   <div>
@@ -60,8 +53,8 @@ const PoukazkyPage: () => JSX.Element = () => {
                     id="color-2"
                     name="colors"
                     value="color-2"
-                    onChange={() => {setImageBackSrc("https://kupelecks.sk/wp-content/uploads/2018/10/dppobytv.png");setImageSrc("https://kupelecks.sk/wp-content/uploads/2018/10/dpproceduryp.png"); setColor("red")}} />
-                    <ColorLabel htmlFor="color-2" colorButton="red"></ColorLabel>
+                    onChange={() => {setImageSrc("/images/poukazky/poukazka_cervena.png"); setColor("#ff0000")}} />
+                    <ColorLabel htmlFor="color-2" colorButton="#ff0000"></ColorLabel>
                   </div>
                   <div>
                     <RadioColorInput
@@ -69,8 +62,8 @@ const PoukazkyPage: () => JSX.Element = () => {
                     id="color-3"
                     name="colors"
                     value="color-3"
-                    onChange={() => {setImageBackSrc("https://kupelecks.sk/wp-content/uploads/2018/10/dpsumav.png");setImageSrc("https://kupelecks.sk/wp-content/uploads/2018/10/dpsumap.png"); setColor("yellow")}} />
-                    <ColorLabel htmlFor="color-3" colorButton="yellow"></ColorLabel>
+                    onChange={() => {setImageSrc("/images/poukazky/poukazka_zlta.png"); setColor("#FBC200")}} />
+                    <ColorLabel htmlFor="color-3" colorButton="#FBC200"></ColorLabel>
                   </div>
                   <div>
                     <RadioColorInput
@@ -78,45 +71,22 @@ const PoukazkyPage: () => JSX.Element = () => {
                     id="color-4"
                     name="colors"
                     value="color-4"
-                    onChange={() => {setImageBackSrc("https://kupelecks.sk/wp-content/uploads/2019/03/dppermav.png");setImageSrc("https://kupelecks.sk/wp-content/uploads/2019/03/dppermap.png"); setColor("green")}} />
-                    <ColorLabel htmlFor="color-4" colorButton="green"></ColorLabel>
+                    onChange={() => {setImageSrc("/images/poukazky/poukazka_zelena.png"); setColor("#00BF0B")}} />
+                    <ColorLabel htmlFor="color-4" colorButton="#00BF0B"></ColorLabel>
                   </div>
                 </RadioColorGroup>
               </FormGroup>
-            </Col>
-            <Col md="6">
-              <Preview src={imageSrc} alt="poukazka" />
-            </Col>
-          </Row>
-          <H4>Zadajte text na prednej strane:</H4>
-          <Row className="mt-4">
-            <Col md="6">
+              <H4>Zadajte text na prednej strane:</H4>
               <FormGroup className="mt-4">
                 <Input type="textarea" name="text" placeholder="Zadajte text" id="frontText" onChange={(e) => handleChangeTextArea(e)} />
               </FormGroup>
             </Col>
-            <Col md="6">
+            <Col md="6" className="d-flex align-items-center">
               <PreviewHolder>
                 <Preview src={imageSrc} alt="poukazka" />
                 <PreviewTextHolder>
                   <PrednaStranaText colorText={color}>{frontText}</PrednaStranaText>
                 </PreviewTextHolder>
-              </PreviewHolder>
-            </Col>
-          </Row>
-          <H4>Zadajte text na zadnej strane:</H4>
-          <Row className="mt-4">
-            <Col md="6">
-              <FormGroup className="mt-4">
-                <Input type="textarea" name="text" placeholder="Zadajte text" id="backText" onChange={(e) => handleChangeTextAreaBack(e)} />
-              </FormGroup>
-            </Col>
-            <Col md="6">
-              <PreviewHolder>
-                <Preview src={imageBackSrc} alt="poukazka" />
-                <PreviewTextHolderBack>
-                  <PrednaStranaText colorText={color}>{backText}</PrednaStranaText>
-                </PreviewTextHolderBack>
               </PreviewHolder>
             </Col>
           </Row>

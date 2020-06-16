@@ -20,7 +20,6 @@ export const H4 = styled.h4`
   font-family: MuseoSans-300;
   color: black;
   font-weight: bold;
-  margin-top: 4rem;
 `;
 
 export const H3 = styled.h3`
@@ -104,11 +103,12 @@ export const Preview = styled.img`
 
 export const PreviewHolder = styled.div`
   position: relative;
+  overflow: hidden;
 `;
 
 export const PrednaStranaText = styled.p<IColorText>`
-  font-size: 1.5rem;
-  font-family: MuseoSans-300;
+  font-size: 2.5rem;
+  font-family: 'Engagement-Regular';
   color: ${({ colorText }) =>colorText ? `${colorText}` : 'black'};
   text-align: center;
   padding-right: 10%;
@@ -118,27 +118,27 @@ export const PrednaStranaText = styled.p<IColorText>`
   margin: 0;
   width: 100%;
   @media(max-width: 1200px){
-    font-size: 1.25rem;
+    font-size: 2rem;
     line-height: 1.75rem;
   }
   @media(max-width: 992px){
-    font-size: 1rem;
-    line-height: 1.5rem;
+    font-size: 1.5rem;
+    line-height: 1.25rem;
   }
   @media(max-width: 768px){
-    font-size: 1.5rem;
+    font-size: 2.25rem;
     line-height: 2rem;
   }
   @media(max-width: 484px){
-    font-size: 1.25rem;
-    line-height: 1.75rem;
-  }
-  @media(max-width: 410px){
-    font-size: 1rem;
+    font-size: 1.75rem;
     line-height: 1.5rem;
   }
+  @media(max-width: 410px){
+    font-size: 1.5rem;
+    line-height: 1.25rem;
+  }
   @media(max-width: 340px){
-    font-size: 0.8rem;
+    font-size: 1.25rem;
     line-height: 1.25rem;
   }
 `;
@@ -205,7 +205,7 @@ margin:0;padding:0;
           appearance:none;
   &:checked{
     & ~ ${ColorLabel}{
-      box-shadow: 0px 0px 10px 4px #00aeef;
+      box-shadow: 0px 0px 4px 4px #00aeef;
       transform: scale(1.15);
     }
   }

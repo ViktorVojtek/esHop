@@ -3,14 +3,14 @@ import { H3, H4, ItemText, Button } from '../../styles/index';
 import { Container, Row, Col, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import RomantikaModal from '../RomantikaModal';
 import JesenZivotaModal from '../JesenZivotaModal';
+import ServicesList from '../ServicesList/index';
+import Services from '../../../index/Intro/components/Services';
 
 const StayType: FC = () => {
   const [activeStay, setActiveStay] = useState(0);
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
-
-  console.log(activeStay);
 
   return(
     <>
@@ -61,6 +61,8 @@ const StayType: FC = () => {
             </div>
           </Col>
         </Row>
+        <H4 className="mb-4 mt-4">Voliteľné služby</H4>
+        <ServicesList />
       </Container>
       <div>
         <Modal isOpen={modal} toggle={toggle}>

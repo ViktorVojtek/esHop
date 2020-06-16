@@ -64,6 +64,7 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Annie+Use+Your+Telescope&display=swap"
             rel="stylesheet"
           />
+          <link href="https://fonts.googleapis.com/css2?family=Engagement&display=swap" rel="stylesheet"></link>
         </Head>
         <body>
           <Main />

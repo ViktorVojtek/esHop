@@ -1,7 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, Dispatch, SetStateAction } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { Row } from 'reactstrap';
 import Proptypes from 'prop-types';
+import Product from '../../../../../shared/types/Product.types';
 
 // Graphql Query def
 import { PRODUCTS_QUERY } from '../../../../../graphql/query';
@@ -17,44 +18,20 @@ import { VariantOfProduct } from '../../../../../shared/types/Store.types';
 interface IProductsProps {
   subCategoryID: string;
   categoryID: string;
+  products: Product[];
+  getProducts: Dispatch<SetStateAction<Array<object>>>;
 }
 interface IProductToCartData {
   id: string;
   count?: number;
   variant?: VariantOfProduct;
 }
-const Products: React.FC<IProductsProps> = ({ subCategoryID, categoryID }) => {
+const Products: React.FC<IProductsProps> = ({ products, getProducts, subCategoryID, categoryID }) => {
   const { error, loading, data } = useQuery(PRODUCTS_QUERY, {
     // fetchPolicy: 'network-only',
   });
-  const [filteredProducts, setFilteredProducts] = useState([]);
   const { dispatch } = useContext(Context);
-  useEffect(() => {
-    if (data) {
-      const { products } = data;
-      console.log(products);
-      let newProducts = [];
-
-      if (subCategoryID === '') {
-        newProducts = products.filter(
-          (product: any) => product.category.id === categoryID
-        );
-      } else {
-        newProducts = products.filter(
-          (product: any) => product.subCategory.id === subCategoryID
-        );
-      }
-
-      setFilteredProducts(newProducts);
-    }
-  }, [subCategoryID, categoryID, data]);
-
-  if (error) {
-    return <>{error.message}</>;
-  }
-  if (loading) {
-    return <>loading</>;
-  }
+  
 
   const handleAddProductToCart: (data: IProductToCartData) => void = (data) => {
     const { id, variant } = data;
@@ -68,7 +45,7 @@ const Products: React.FC<IProductsProps> = ({ subCategoryID, categoryID }) => {
   return (
     <Row>
       <ProductFill
-        products={filteredProducts}
+        products={products}
         addProduct={handleAddProductToCart}
       />
     </Row>

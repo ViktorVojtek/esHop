@@ -49,6 +49,7 @@ const CategoriesAside: FC<ICategoriesAside> = ({
 
   const categoryButtons = categories.map(({ signFlag, _id, title }) => (
     <Category
+     key={_id}
      title={title}
      id={_id}
      getSubCategory={getSubCategory}

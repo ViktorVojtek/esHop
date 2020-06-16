@@ -21,7 +21,6 @@ const FeaturesProducts: FC<IFeaturesProducts> = ({ category }) => {
     if (data) {
       let { products } = data;
       setProducts(products);
-      console.log(products);
     }
   }, [data]);
 

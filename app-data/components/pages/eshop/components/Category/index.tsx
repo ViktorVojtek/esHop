@@ -30,7 +30,6 @@ const Category: FC<ICategory> = ({ title, id, getSubCategory }) => {
 
   const subCategoriesArray: any = data.subCategories;
 
-  console.log(subCategoriesArray);
 
   const handleSetActiveCategory: (id: string) => void = (id) => {
     console.log(id);

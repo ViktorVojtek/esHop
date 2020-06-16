@@ -22,7 +22,7 @@ export const Button = styled.a`
 
 export const H3 = styled.h2`
   text-align: left;
-  color: red;
+  color: #5e8796;
   position: relative;
   font-size: 1.5em !important;
   font-weight: 600;

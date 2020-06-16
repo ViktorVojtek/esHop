@@ -83,6 +83,12 @@ export default createGlobalStyle`
     font-style: italic;
     font-weight: 500;
    }
+   @font-face {
+    font-family: Engagement-Regular;
+    src: url(/static/fonts/Engagement-Regular.ttf);
+    font-display: swap;
+    font-style: cursive;
+   }
 
   * {
     font-family: MuseoSans-300;
@@ -100,6 +106,32 @@ export default createGlobalStyle`
       font-size: 1.25rem;
       font-family: MuseoSans-300;
       font-weight: bold;
+    }
+  }
+  .mt-8{
+    margin-top: 4rem;
+  }
+  .dropdown{
+    .dropdown-toggle{
+      background-color: #00aeefb8 !important;
+      font-family: MuseoSans-300;
+      border: none !important;
+      transition: all .3s ease-out;
+      width: 100%;
+      &:hover{
+        background-color: #00aeef;
+      }
+      &:focus{
+        background-color: #00aeef;
+        box-shadow: none !important;
+      }
+      &:active{
+        background-color: #00aeef;
+        box-shadow: none;
+      }
+    }
+    .dropdown-menu{
+      width: 100%;
     }
   }
   .nav-link{
