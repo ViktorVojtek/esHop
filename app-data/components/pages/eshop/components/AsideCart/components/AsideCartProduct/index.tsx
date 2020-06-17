@@ -69,6 +69,7 @@ const AsideCartProduct: FC<ICartProductTableRow> = ({
         )
         .pop();
 
+        console.log(id);
       const prodItemVariant = {
         ...cartItemData.variant,
         count: cartItemData.variant.count - 1,

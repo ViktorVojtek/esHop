@@ -24,9 +24,9 @@ interface IProductsProps {
 interface IProductToCartData {
   id: string;
   count?: number;
-  variant?: VariantOfProduct;
+  variants?: VariantOfProduct;
 }
-const Products: React.FC<IProductsProps> = ({ products, getProducts, subCategoryID, categoryID }) => {
+const Products: React.FC<IProductsProps> = ({ products }) => {
   const { error, loading, data } = useQuery(PRODUCTS_QUERY, {
     // fetchPolicy: 'network-only',
   });
@@ -34,9 +34,10 @@ const Products: React.FC<IProductsProps> = ({ products, getProducts, subCategory
   
 
   const handleAddProductToCart: (data: IProductToCartData) => void = (data) => {
-    const { id, variant } = data;
+    console.log(data);
+    const { id, variants } = data;
 
-    dispatch({ type: 'ADD_TO_CART', payload: { id, variant } });
+    dispatch({ type: 'ADD_TO_CART', payload: { id, variant: variants } });
   };
   /* const handleRemoveProductFromCart = (id: string) => {
     dispatch({ type: 'REMOVE_FROM_CART', payload: id });
