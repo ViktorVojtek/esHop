@@ -28,8 +28,6 @@ const SubCategoriesAside: FC<ISubCategoriesAside> = ({
 
   const subCategoriesArray: any = data.subCategories;
 
-  console.log(categoryID);
-
   const handleSetActiveCategory: (id: string) => void = (id) => {
     setActiveSubCategory(id);
     getSubCategory(id);

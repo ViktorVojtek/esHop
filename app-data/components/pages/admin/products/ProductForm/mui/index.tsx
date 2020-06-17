@@ -104,8 +104,6 @@ const ProductStepper = ({ update, updateProductData }: IProductForm) => {
 
   const disabled: boolean = checkStepBtnDisabled(activeStep, productData);
 
-  console.log(productData);
-
   return (
     <div className={classes.root}>
       <Backdrop open={backdropOpen}>
@@ -175,7 +173,6 @@ function checkStepBtnDisabled(step: number, prodData: any) {
       return false;
     }
   } else if (step === 1) {
-    console.log(variants.length);
     if (variants.length > 0) {
       return false;
     }

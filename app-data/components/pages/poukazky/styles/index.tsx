@@ -94,7 +94,7 @@ export const Button = styled.button`
 export const InputHolder = styled.div`
   margin: 0 auto; 
   max-width: 600px;
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
 `;
 
 export const Preview = styled.img`

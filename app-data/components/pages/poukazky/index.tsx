@@ -27,12 +27,12 @@ const PoukazkyPage: () => JSX.Element = () => {
       <Container>
         <H3>Zvoľ typ darčekovej poukážky</H3>
         <PoukazkaTypes getActiveType={setActiveType} />
-        <div id="voucherContent">
-          { activeType === 0 ? <StayType /> : null }
-          { activeType === 2 ? <MoneyType /> : null }
-          { activeType === 3 ? <RestaurantType /> : null }
-        </div>
         <Form>
+          <div id="voucherContent">
+            { activeType === 0 ? <StayType /> : null }
+            { activeType === 2 ? <MoneyType /> : null }
+            { activeType === 3 ? <RestaurantType /> : null }
+          </div>
           <Row className="mt-8">
             <Col md="6" className="pr-4">
               <H4>Zvoľte farbu poukážky:</H4>
@@ -90,7 +90,7 @@ const PoukazkyPage: () => JSX.Element = () => {
               </PreviewHolder>
             </Col>
           </Row>
-          <AddToCart>Pridať do košíka</AddToCart>
+          <AddToCart type="submit">Pridať do košíka</AddToCart>
         </Form>
       </Container>
     </Wrapper>

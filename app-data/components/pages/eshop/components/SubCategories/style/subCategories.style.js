@@ -26,5 +26,6 @@ export const H3 = styled.h2`
   position: relative;
   font-size: 1.5em !important;
   font-weight: 600;
+  margin-bottom: 1rem;
   }
 `; 

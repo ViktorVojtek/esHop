@@ -101,7 +101,6 @@ const ProductsFill: React.FC<IProductsFillProps> = ({
   products,
   addProduct,
 }) => {
-  console.log(products);
   const elements: JSX.Element[] = products.map((item: Product) => {
     const { _id } = item;
 

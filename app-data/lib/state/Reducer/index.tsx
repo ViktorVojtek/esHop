@@ -18,6 +18,7 @@ const Reducer = (state: IState, action: IAction) => {
         let productExist = false;
 
         for (let i: number = 0; i < newCart.length; i += 1) {
+          console.log(action.payload);
           if (
             newCart[i].id === action.payload.id &&
             newCart[i].variant.title === action.payload.variant.title

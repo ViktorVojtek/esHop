@@ -4,6 +4,7 @@ import {
 } from 'reactstrap';
 import { useQuery } from '@apollo/react-hooks';
 import Product from '../../../shared/types/Product.types';
+import Link from 'next/link';
 
 import { H3 } from './components/SubCategories/style/subCategories.style';
 
@@ -14,9 +15,9 @@ import SubPageBackground from '../../../shared/components/SubPageBackground';
 import CategoriesAside from './components/Categories';
 import Products from './components/Products';
 
-import { Wrapper } from './styles/eshoppage.style';
+import { Wrapper, HeadWithIcon, CartIcon } from './styles/eshoppage.style';
 import { PRODUCTS_QUERY } from '../../../graphql/query';
-import { number } from 'prop-types';
+import AsideCart from './components/AsideCart';
 
 const EshopPage: FC = () => {
   const { error, loading, data } = useQuery(PRODUCTS_QUERY, {
@@ -38,6 +39,7 @@ const EshopPage: FC = () => {
        const { products } = data;
 
        setFilteredProducts(products);
+       console.log(products);
 
       if (subCategoryID === '') {
         let newProducts = products.filter(
@@ -124,6 +126,13 @@ const EshopPage: FC = () => {
                 <DropdownItem onClick={() => sortByLetterDown(filteredProducts)}>Zostupne Z-A</DropdownItem>
               </DropdownMenu>
             </Dropdown>
+            <HeadWithIcon>
+              <H3 className="mb-0">Nákupný košík</H3>
+              <Link href="/eshop/cart">
+                <CartIcon />
+              </Link>
+            </HeadWithIcon>
+            <AsideCart />
           </Col>
           <Col sm="9" xs="12">
             {/*

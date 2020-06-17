@@ -1,9 +1,19 @@
 import { ProductPrice } from './Product.types';
 
+export type ProductImage = {
+  base64?: string;
+  path?: string;
+  ext: string;
+  imgId: string;
+  size: string;
+  title: string;
+};
+
 export type VariantOfProduct = {
   title: string;
   price: ProductPrice;
   count: number;
+  images: ProductImage[];
 };
 
 export type CartProduct = {
@@ -18,6 +28,7 @@ export interface IState {
   menuOpen: boolean;
   error: boolean;
 }
+
 
 export interface IAction {
   payload: any;

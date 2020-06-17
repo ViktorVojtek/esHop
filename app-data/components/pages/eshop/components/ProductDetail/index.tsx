@@ -53,7 +53,7 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
     event.preventDefault();
 
     const count: number = +productCountRef.current.value as number;
-    const { price, title } = variants[activeVariant];
+    const { price, title, images } = variants[activeVariant];
 
     handleAddProductToCart({
       id: _id,
@@ -61,6 +61,7 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
         count,
         price,
         title,
+        images,
       },
     });
   };
