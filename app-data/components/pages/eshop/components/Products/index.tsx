@@ -16,17 +16,15 @@ import ProductFill from './components/ProductsFill';
 import { VariantOfProduct } from '../../../../../shared/types/Store.types';
 
 interface IProductsProps {
-  subCategoryID: string;
-  categoryID: string;
   products: Product[];
-  getProducts: Dispatch<SetStateAction<Array<object>>>;
+  toggleModal: () => void;
 }
 interface IProductToCartData {
   id: string;
   count?: number;
   variants?: VariantOfProduct;
 }
-const Products: React.FC<IProductsProps> = ({ products }) => {
+const Products: React.FC<IProductsProps> = ({ products, toggleModal }) => {
   const { error, loading, data } = useQuery(PRODUCTS_QUERY, {
     // fetchPolicy: 'network-only',
   });
@@ -48,19 +46,10 @@ const Products: React.FC<IProductsProps> = ({ products }) => {
       <ProductFill
         products={products}
         addProduct={handleAddProductToCart}
+        toggleModal={toggleModal}
       />
     </Row>
   );
-};
-
-Products.defaultProps = {
-  subCategoryID: '',
-  categoryID: '',
-};
-
-Products.propTypes = {
-  subCategoryID: Proptypes.string,
-  categoryID: Proptypes.string,
 };
 
 export default Products;

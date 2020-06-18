@@ -12,6 +12,8 @@ interface ICartProductTableRow {
   variantTitle: string;
   image: ProductImage;
 }
+
+let textCount = "";
 const AsideCartProduct: FC<ICartProductTableRow> = ({
   id,
   count,
@@ -59,6 +61,7 @@ const AsideCartProduct: FC<ICartProductTableRow> = ({
         type: 'ADD_TO_CART',
         payload: { id, variant: prodItemVariant },
       });
+
     };
 
     const handleRemoveProduct: (id: string) => void = (id) => {
@@ -79,6 +82,20 @@ const AsideCartProduct: FC<ICartProductTableRow> = ({
         type: 'REMOVE_FROM_CART',
         payload: { id, variant: prodItemVariant },
       });
+
+    };
+    
+    handleTextCount(count);
+
+    function handleTextCount(count: number){
+      if(count === 1){
+        return textCount = "kus";
+      }
+      else if(count > 1 && count < 5){
+        return textCount = "kusy";
+      }
+      else
+        return textCount = "kusov";
     };
 
     return (
@@ -99,7 +116,7 @@ const AsideCartProduct: FC<ICartProductTableRow> = ({
             </tr>
             <tr>
               <TD>Počet:</TD>
-              <td>{count}</td>
+              <td>{`${count} ${textCount}`}</td>
             </tr>
             <tr>
               <TD>Spolu:</TD>

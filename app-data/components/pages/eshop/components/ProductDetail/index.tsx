@@ -1,5 +1,4 @@
-import React, { useState, useContext, useRef, ChangeEvent } from 'react';
-import { Container, Row, Col } from 'reactstrap';
+import React, { useState, useContext, useRef, ChangeEvent, ReactNode } from 'react';
 import {
   Wrapper,
   Image,
@@ -11,8 +10,12 @@ import {
   VariantOption,
   VariantsSelect,
   Input,
+  StyledModalLink
 } from './styles/productDetail.style';
+import Link from 'next/link';
 
+import { Container, Row, Col } from 'reactstrap';
+import ProductModal from '../../../../../shared/components/ProductModal';
 // Types
 import Product from '../../../../../shared/types/Product.types';
 import { VariantOfProduct } from '../../../../../shared/types/Store.types';
@@ -36,6 +39,9 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
   const productCountRef = useRef(null);
   const [activeVariant, setActiveVariant] = useState(0);
   const { dispatch } = useContext(Context);
+  const [modal, setModal] = useState(false);
+
+  const toggle = () => setModal(!modal);
 
   const handleSetActiveVariant: (i: number) => void = (i) => {
     setActiveVariant(i);
@@ -64,6 +70,7 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
         images,
       },
     });
+    dispatch({ type: 'SET_PRODUCT_MODAL', payload: !modal });
   };
 
   const variantOptions: JSX.Element[] = variants.map(({ title }) => (
@@ -113,6 +120,17 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
           </Row>
         </form>
       </Container>
+      <ProductModal 
+        message="Pokračujte v nákupe alebo do pokladne."
+        title="Produkt bol pridaný do košíka"
+      >
+        <Link href="cart">
+          <StyledModalLink color="primary">Do pokladne</StyledModalLink>
+        </Link>
+        <Link href="/eshop">
+          <StyledModalLink color="primary">Nakupovať</StyledModalLink>
+        </Link>
+      </ProductModal>
     </Wrapper>
   );
 };

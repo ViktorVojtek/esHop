@@ -88,3 +88,21 @@ outline: none;
 
 
 export const VariantOption = styled.option``;
+
+export const StyledModalLink = styled.a`
+  background-color: #00aeefb8;
+  text-transform: uppercase;
+  color: #FFF !important;
+  padding: 1rem 1.5rem;
+  border-radius: .35rem;
+  transition: all .3s ease-out;
+  cursor: pointer;
+  letter-spacing: 0px;
+  font-weight: 600;
+  margin-top: 1rem;
+  display: inline-block;
+  user-select: none;
+  &:hover{
+    background-color: #00aeef;
+  }
+`;

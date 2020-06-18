@@ -1,12 +1,11 @@
 import React, { useState, FC, useEffect } from 'react';
 import {
   Container, Row, Col, Dropdown, DropdownToggle, DropdownMenu, DropdownItem,
+  Modal, ModalHeader, ModalBody, ModalFooter, Collapse,
 } from 'reactstrap';
 import { useQuery } from '@apollo/react-hooks';
 import Product from '../../../shared/types/Product.types';
 import Link from 'next/link';
-
-import { H3 } from './components/SubCategories/style/subCategories.style';
 
 import Typography from '@material-ui/core/Typography';
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -15,7 +14,7 @@ import SubPageBackground from '../../../shared/components/SubPageBackground';
 import CategoriesAside from './components/Categories';
 import Products from './components/Products';
 
-import { Wrapper, HeadWithIcon, CartIcon } from './styles/eshoppage.style';
+import { Wrapper, HeadWithIcon, CartIcon, StyledModalBtn, StyledModalLink, H3 } from './styles/eshoppage';
 import { PRODUCTS_QUERY } from '../../../graphql/query';
 import AsideCart from './components/AsideCart';
 
@@ -30,6 +29,12 @@ const EshopPage: FC = () => {
   const [minValue, setMinValue] = useState(0);
   const [maxValue, setMaxValue] = useState(1000);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [modal, setModal] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
+
+  const toggleModal = () => setModal(!modal);
+
+  const toggleCart = () => setIsOpen(!isOpen);
 
   const toggle = () => setDropdownOpen(prevState => !prevState);
 
@@ -126,23 +131,42 @@ const EshopPage: FC = () => {
                 <DropdownItem onClick={() => sortByLetterDown(filteredProducts)}>Zostupne Z-A</DropdownItem>
               </DropdownMenu>
             </Dropdown>
-            <HeadWithIcon>
-              <H3 className="mb-0">Nákupný košík</H3>
-              <Link href="/eshop/cart">
-                <CartIcon />
-              </Link>
-            </HeadWithIcon>
-            <AsideCart />
+            <div>
+              <HeadWithIcon onClick={toggleCart}>
+                <H3 className="mb-0">Nákupný košík</H3>
+                <CartIcon isOpen={isOpen} />
+              </HeadWithIcon>
+              <Collapse isOpen={isOpen}>
+                <AsideCart />
+              </Collapse>
+            </div>
           </Col>
           <Col sm="9" xs="12">
             {/*
               Maybe in the future Products component will use the following prop:
               setProductsCount={setProductsCount}
             */}
-            <Products products={filteredProducts} getProducts={setFilteredProducts} categoryID={categoryID} subCategoryID={subCategoryID} />
+            <Products
+              products={filteredProducts}
+              toggleModal={toggleModal}
+            />
           </Col>
         </Row>
       </Container>
+      <div>
+        <Modal isOpen={modal} toggle={toggleModal}>
+          <ModalHeader toggle={toggleModal}>Produkt bol pridaný do košíka</ModalHeader>
+          <ModalBody>
+            Pokračujte v nákupe alebo do pokladne.
+          </ModalBody>
+          <ModalFooter>
+            <Link href="eshop/cart">
+              <StyledModalLink color="primary">Do pokladne</StyledModalLink>
+            </Link>
+            <StyledModalBtn color="secondary" onClick={toggleModal}>Nakupovať</StyledModalBtn>
+          </ModalFooter>
+        </Modal>
+      </div>
     </Wrapper>
   );
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { Col } from 'reactstrap';
 import { useIsClient } from '../../../../../../../lib/util/app.util';
@@ -38,6 +38,7 @@ const ProductTitle: React.FC<IProductTitle> = ({ id, title }) => (
 const ProductUI: React.FC<IProductUI> = ({
   product: { _id, variants },
   addProduct,
+  toggleModal,
 }) => {
   const isClient = useIsClient();
   const handleAddProductToCart = () => {
@@ -48,6 +49,8 @@ const ProductUI: React.FC<IProductUI> = ({
     } = variants[0];
 
     addProduct({ id: _id, variants: { ...restVariantData, count: 1 } });
+    console.log("otvor modal");
+    toggleModal();
   };
 
   return (
@@ -100,11 +103,12 @@ const ProductUI: React.FC<IProductUI> = ({
 const ProductsFill: React.FC<IProductsFillProps> = ({
   products,
   addProduct,
+  toggleModal,
 }) => {
   const elements: JSX.Element[] = products.map((item: Product) => {
     const { _id } = item;
 
-    return <ProductUI product={item} addProduct={addProduct} key={_id} />;
+    return <ProductUI toggleModal={toggleModal} product={item} addProduct={addProduct} key={_id} />;
   });
 
   return <>{elements}</>;

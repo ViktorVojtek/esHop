@@ -103,6 +103,11 @@ const Reducer = (state: IState, action: IAction) => {
         ...state,
         modal: action.payload,
       };
+    case 'SET_PRODUCT_MODAL':
+      return {
+        ...state,
+        modal: action.payload,
+      };
     case 'SET_ERROR':
       return {
         ...state,
