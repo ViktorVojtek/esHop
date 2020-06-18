@@ -1,19 +1,21 @@
-import React, { Dispatch, SetStateAction, useState, FC } from 'react';
+import React, { Dispatch, SetStateAction, useState, FC, useContext } from 'react';
 import { Collapse, Button, CardBody, Card } from 'reactstrap';
 import { SUBCATEGORIES_QUERY } from '../../../../../graphql/query';
 import { useQuery } from '@apollo/react-hooks';
+import { Context } from '../../../../../lib/state/Store';
 
 import { ButtonSubCategory, ButtonCategory, Buttons } from './style';
 
 interface ICategory{
   title: string;
   id: string;
-  getSubCategory: any;
 }
 
-const Category: FC<ICategory> = ({ title, id, getSubCategory }) => {
+const Category: FC<ICategory> = ({ title, id }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
+  const { state, dispatch } = useContext(Context);
+  const { subCategory } = state;
 
   const { loading, error, data } = useQuery(SUBCATEGORIES_QUERY, {
     variables: { categoryId: id || '' },
@@ -34,7 +36,7 @@ const Category: FC<ICategory> = ({ title, id, getSubCategory }) => {
   const handleSetActiveCategory: (id: string) => void = (id) => {
     console.log(id);
     setActiveSubCategory(id);
-    getSubCategory(id);
+    dispatch({ type: 'SET_SUBCATEGORY', payload: id });
   };
 
   const subCategoryButtons: JSX.Element[] = subCategoriesArray.map(

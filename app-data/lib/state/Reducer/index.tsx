@@ -113,6 +113,16 @@ const Reducer = (state: IState, action: IAction) => {
         ...state,
         error: action.payload,
       };
+    case 'SET_CATEGORY':
+      return {
+        ...state,
+        category: action.payload,
+      };
+    case 'SET_SUBCATEGORY':
+      return {
+        ...state,
+        subCategory: action.payload,
+      };
     case 'MENU_TOGGLE':
       return {
         ...state,

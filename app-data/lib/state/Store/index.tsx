@@ -10,6 +10,8 @@ const initialState: IState = {
   modal: false,
   menuOpen: false,
   error: false,
+  category: '',
+  subCategory: '',
 };
 
 export const Context = createContext<{

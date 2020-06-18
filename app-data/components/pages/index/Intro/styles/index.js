@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
   margin: 0 auto;
   margin-top: 98px;
   @media (max-width: 768px) {
-    margin-top: 86px;
+    margin-top: 0px;
   }
 `;
 export const Left = styled.div`

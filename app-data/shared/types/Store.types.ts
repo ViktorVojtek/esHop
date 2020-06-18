@@ -27,6 +27,8 @@ export interface IState {
   modal: boolean;
   menuOpen: boolean;
   error: boolean;
+  category: string;
+  subCategory: string;
 }
 
 

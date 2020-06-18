@@ -1,5 +1,11 @@
 import styled from 'styled-components';
 
+export const AsideCartWrapper = styled.div`
+  @media(max-width: 992px){
+    max-width: 600px;
+  }
+`;
+
 export const HeadWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -47,5 +53,8 @@ export const Button = styled.button`
   width: 45%;
   &:hover{
     background-color: #00aeef;
+  }
+  @media(max-width: 1200px){
+    padding: 1rem .5rem;
   }
 `;

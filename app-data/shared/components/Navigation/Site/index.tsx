@@ -15,9 +15,11 @@ import { CartWrapper, Logo, Wrapper } from './styles';
 import { Context } from '../../../../lib/state/Store';
 
 import { ILinkItem } from './TS/Navigation.interface';
+import MobileMenuEshop from '../../../components/MobileMenuEshop';
 
 const CartIcon = styled(ShoppingCartOutline)`
   color: red;
+  width: 36px;
 `;
 
 type FWRCBrand = {
@@ -48,32 +50,49 @@ const Navigation: FC = () => {
   const toggle: () => void = () => setIsOpen(!isOpen);
 
   return (
-    <Wrapper id="navigation">
-      <Navbar color="light" light fixed="top" expand="md">
+    <>
+      <Wrapper id="navigation">
+        <Navbar color="light" light fixed="top" expand="md">
+          <Link href="/">
+            <CustomNavbarBrand href="/">
+              <Logo src="/images/logo.png" alt="Červený kláštor" />
+            </CustomNavbarBrand>
+          </Link>
+          <NavbarToggler onClick={toggle} />
+          <Collapse isOpen={isOpen} navbar>
+            <Nav navbar>
+              <LinkItem href="/" title="Domov" />
+              <LinkItem href="/eshop" title="Produkty" />
+              <LinkItem href="/eshop" title="Služby" />
+              <LinkItem href="/darcekove-poukazky" title="Darčekové poukážky" />
+              <LinkItem href="/" title="FAQ" />
+              <CartWrapper>
+                <Link href="/eshop/cart">
+                  <a>
+                    <CartIcon /> <span>{cart.length}</span>
+                  </a>
+                </Link>
+              </CartWrapper>
+            </Nav>
+          </Collapse>
+        </Navbar>{' '}
+      </Wrapper>
+      <Wrapper id="mobileNavigation">
+        <MobileMenuEshop />
         <Link href="/">
           <CustomNavbarBrand href="/">
             <Logo src="/images/logo.png" alt="Červený kláštor" />
           </CustomNavbarBrand>
         </Link>
-        <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar>
-          <Nav navbar>
-            <LinkItem href="/" title="Domov" />
-            <LinkItem href="/eshop" title="Produkty" />
-            <LinkItem href="/eshop" title="Služby" />
-            <LinkItem href="/darcekove-poukazky" title="Darčekové poukážky" />
-            <LinkItem href="/" title="FAQ" />
-            <CartWrapper>
-              <Link href="/eshop/cart">
-                <a>
-                  <CartIcon width={30} height={30} /> <span>{cart.length}</span>
-                </a>
-              </Link>
-            </CartWrapper>
-          </Nav>
-        </Collapse>
-      </Navbar>{' '}
-    </Wrapper>
+        <CartWrapper>
+          <Link href="/eshop/cart">
+            <a>
+              <CartIcon /> <span>{cart.length}</span>
+            </a>
+          </Link>
+        </CartWrapper>
+      </Wrapper>
+    </>
   );
 };
 

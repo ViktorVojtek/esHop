@@ -5,31 +5,27 @@ import React, {
   SetStateAction,
   useState,
   useEffect,
+  useContext,
 } from 'react';
 import { Collapse } from 'reactstrap';
 import { useQuery } from '@apollo/react-hooks';
 import { Aside, H3, Button, Buttons } from './style/categories.style';
 import { CATEGORIES_QUERY } from '../../../../../graphql/query';
 import Category from '../Category';
+import { Context } from '../../../../../lib/state/Store';
 
-interface ICategoriesAside {
-  getCategory: Dispatch<SetStateAction<string>>;
-  getSubCategory: Dispatch<SetStateAction<string>>;
-}
-const CategoriesAside: FC<ICategoriesAside> = ({
-  getCategory,
-  getSubCategory,
-}) => {
+const CategoriesAside: FC = () => {
   const { error, loading, data } = useQuery(CATEGORIES_QUERY);
   const [activeCategory, setActiveCategory] = useState('');
+  const { state, dispatch } = useContext(Context);
+  const { category } = state;
 
   useEffect(() => {
     if (data !== undefined) {
       const { categories } = data;
-      setActiveCategory(categories[0]._id);
-      getCategory(categories[0]._id);
+      dispatch({ type: 'SET_CATEGORY', payload: categories[0]._id });
     }
-  }, [data, getCategory]);
+  }, [data, category]);
 
   if (error) {
     return <>{error.message}</>;
@@ -42,9 +38,7 @@ const CategoriesAside: FC<ICategoriesAside> = ({
   const { categories } = data;
 
   const handleSetActiveCategory: (id: string) => void = (id) => {
-    setActiveCategory(id);
-    getCategory(id);
-    getSubCategory('');
+    dispatch({ type: 'SET_CATEGORY', payload: id });
   };
 
   const categoryButtons = categories.map(({ signFlag, _id, title }) => (
@@ -52,7 +46,6 @@ const CategoriesAside: FC<ICategoriesAside> = ({
      key={_id}
      title={title}
      id={_id}
-     getSubCategory={getSubCategory}
     />
   ));
 

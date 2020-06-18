@@ -90,6 +90,27 @@ export default createGlobalStyle`
     font-style: cursive;
    }
 
+   #navigation{
+     display: block;
+     @media(max-width: 768px){
+       display:none;
+     }
+   }
+   #mobileNavigation{
+     display:none;
+    @media(max-width: 768px){
+      display:block;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+   }
+   .hideMobile{
+     @media(max-width: 768px){
+       display:none;
+     }
+   }
+
   * {
     font-family: MuseoSans-300;
   }
@@ -137,13 +158,19 @@ export default createGlobalStyle`
   .nav-link{
     color: #5e8796;
     font-weight: 600;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     &:hover{
       color: rgb(24, 28, 39);
     }
+    @media(max-width: 992px){
+      font-size: 0.7rem;
+      text-align: left;
+    }
     @media(max-width: 768px){
       font-size: 2rem;
-      text-align: center;
+    }
+    @media(max-width: 530px){
+      font-size: 1.6rem;
     }
   }
   .carousel-image{
@@ -222,8 +249,8 @@ export default createGlobalStyle`
   }
   .navbar-nav{
     @media(max-width: 768px){
-      height: 100vh;
-      align-items: center;
+      align-items: start;
+      margin-top: 2rem;
     }
   }
   .card-item{
@@ -300,6 +327,9 @@ export default createGlobalStyle`
       transform: scale(0,1);
       -webkit-transition: transform 0.4s cubic-bezier(1,0,0,1);
       transition: transform 0.4s cubic-bezier(1,0,0,1);
+      @media(max-width: 992px){
+        width: 100%;
+      }
     }
     &:hover:before {
       transform: scale(1,1);

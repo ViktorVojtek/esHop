@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { Context } from '../../../../../../../lib/state/Store';
 import { PRODUCT_QUERY } from '../../../../../../../graphql/query';
 import { ProductImage } from '../../../../../../../shared/types/Product.types';
-import { HeadWrapper, P, Image, TD, Button } from './styles/asideCartProductStyle';
+import { HeadWrapper, P, Image, TD, Button,AsideCartWrapper } from './styles/asideCartProductStyle';
 
 interface ICartProductTableRow {
   id: string;
@@ -99,7 +99,7 @@ const AsideCartProduct: FC<ICartProductTableRow> = ({
     };
 
     return (
-      <div className="mt-4">
+      <AsideCartWrapper className="mt-4">
         <HeadWrapper className="d-flex">
           <P>{title}</P>
           <Image src={image.path} />
@@ -128,7 +128,7 @@ const AsideCartProduct: FC<ICartProductTableRow> = ({
           <Button onClick={() => handleRemoveProduct(id)}>Odobrať</Button>
           <Button onClick={() => handleAddProduct(id)}>Pridať</Button>
         </div>
-      </div>
+      </AsideCartWrapper>
     );
   }
 

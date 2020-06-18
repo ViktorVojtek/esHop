@@ -1,4 +1,4 @@
-import React, { useState, FC, useEffect } from 'react';
+import React, { useState, FC, useEffect, useContext } from 'react';
 import {
   Container, Row, Col, Dropdown, DropdownToggle, DropdownMenu, DropdownItem,
   Modal, ModalHeader, ModalBody, ModalFooter, Collapse,
@@ -17,14 +17,16 @@ import Products from './components/Products';
 import { Wrapper, HeadWithIcon, CartIcon, StyledModalBtn, StyledModalLink, H3 } from './styles/eshoppage';
 import { PRODUCTS_QUERY } from '../../../graphql/query';
 import AsideCart from './components/AsideCart';
+import { Context } from '../../../lib/state/Store';
 
 const EshopPage: FC = () => {
   const { error, loading, data } = useQuery(PRODUCTS_QUERY, {
     // fetchPolicy: 'network-only',
   });
 
-  const [subCategoryID, setSubCategoryID] = useState('');
-  const [categoryID, setCategoryID] = useState('');
+  const { state, dispatch } = useContext(Context);
+  const { category, subCategory } = state;
+
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [minValue, setMinValue] = useState(0);
   const [maxValue, setMaxValue] = useState(1000);
@@ -44,22 +46,22 @@ const EshopPage: FC = () => {
        const { products } = data;
 
        setFilteredProducts(products);
-       console.log(products);
+       console.log(category);
 
-      if (subCategoryID === '') {
+      if (subCategory === '') {
         let newProducts = products.filter(
-          (product: any) => product.category.id === categoryID
+          (product: any) => product.category.id === category
         );
         setFilteredProducts(newProducts);
         
       } else {
         let newProducts = products.filter(
-          (product: any) => product.subCategory.id === subCategoryID
+          (product: any) => product.subCategory.id === subCategory
         );
         setFilteredProducts(newProducts);
       }
     }
-  }, [subCategoryID, categoryID, data]);
+  }, [subCategory, category, data]);
 
   if (error) {
     return <>{error.message}</>;
@@ -114,11 +116,8 @@ const EshopPage: FC = () => {
       <SubPageBackground title="Obchod" imageUrl="/images/eshop/background.jpg"/>
       <Container>
         <Row>
-          <Col sm="3" xs="12" className="pr-4">
-            <CategoriesAside
-              getCategory={setCategoryID}
-              getSubCategory={setSubCategoryID}
-            />
+          <Col lg="3" md="4" xs="12" className="pr-4 hideMobile">
+            <CategoriesAside/>
             <H3>Filter</H3>
             <Dropdown isOpen={dropdownOpen} toggle={toggle}>
               <DropdownToggle caret>
@@ -141,7 +140,7 @@ const EshopPage: FC = () => {
               </Collapse>
             </div>
           </Col>
-          <Col sm="9" xs="12">
+          <Col lg="9" md="8" className="mt-3">
             {/*
               Maybe in the future Products component will use the following prop:
               setProductsCount={setProductsCount}

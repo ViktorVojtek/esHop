@@ -16,17 +16,25 @@ export const Wrapper = styled.div`
 `;
 
 export const Logo = styled.img`
-  width: 280px;
+  width: 260px;
   @media (max-width: 992px) {
+    width: 210px;
+  }
+  @media (max-width: 430px) {
+    width: 220px;
+  }
+  @media (max-width: 400px) {
     width: 200px;
+  }
+  @media (max-width: 360px) {
+    width: 160px;
   }
 `;
 
 export const CartWrapper = styled.div`
   margin-left: 60px;
-  @media(max-width: 768px){
+  @media(max-width: 992px){
     margin-left: 0;
-    margin-top: 1rem;
   }
   span {
     background-color: #01aeef;
