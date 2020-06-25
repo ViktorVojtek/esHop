@@ -36,28 +36,28 @@ const StayType: FC = () => {
             <ItemText>Čaro pienin</ItemText>
             <div className="d-flex w-100 mb-4">
               <Button>Pridať</Button>
-              <Button>O pobyte</Button>
+              <Button onClick={() => {toggle(); setActiveStay(1)}}>O pobyte</Button>
             </div>
           </Col>
           <Col md="4" sm="6" xs="12" className="d-flex align-items-center justify-content-center flex-column">
             <ItemText>Rodinná idylka</ItemText>
             <div className="d-flex w-100 mb-4">
               <Button>Pridať</Button>
-              <Button>O pobyte</Button>
+              <Button onClick={() => {toggle(); setActiveStay(1)}}>O pobyte</Button>
             </div>
           </Col>
           <Col md="4" sm="6" xs="12" className="d-flex align-items-center justify-content-center flex-column">
             <ItemText>Hrejivá zima</ItemText>
             <div className="d-flex w-100 mb-4">
               <Button>Pridať</Button>
-              <Button>O pobyte</Button>
+              <Button onClick={() => {toggle(); setActiveStay(1)}}>O pobyte</Button>
             </div>
           </Col>
           <Col md="4" sm="6" xs="12" className="d-flex align-items-center justify-content-center flex-column">
             <ItemText>Silvester s rodinou</ItemText>
             <div className="d-flex w-100 mb-4">
               <Button>Pridať</Button>
-              <Button>O pobyte</Button>
+              <Button onClick={() => {toggle(); setActiveStay(1)}}>O pobyte</Button>
             </div>
           </Col>
         </Row>

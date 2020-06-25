@@ -29,6 +29,7 @@ export const ProductTitle = styled.h4`
   font-weight: bold;
   user-select: none;
   margin: 0;
+  font-size: 1.2rem;
 `;
 
 export const StyledShortDescription = styled.p`

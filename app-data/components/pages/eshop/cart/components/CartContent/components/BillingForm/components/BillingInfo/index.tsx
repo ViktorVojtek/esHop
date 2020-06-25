@@ -2,10 +2,11 @@ import React from 'react';
 import { Col, Row, FormGroup, Input, Label } from 'reactstrap';
 
 import countryData from './data/country.data.json';
+import { H4 } from "../../../../../../styles/cart.style";
 
 const BillingInfo: () => JSX.Element = () => (
   <Col md={6}>
-    <h4 className="mb-5">2. Fakturačné údaje</h4>
+    <H4 className="mb-5">2. Fakturačné údaje</H4>
     <Row form>
       <Col md={6}>
         <FormGroup>

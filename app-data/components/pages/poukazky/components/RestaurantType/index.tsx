@@ -42,28 +42,28 @@ const RestaurantType: FC = () => {
             <ItemText>Balíček 3</ItemText>
             <div className="d-flex w-100 mb-4">
               <Button>Pridať</Button>
-              <Button>O balíčku</Button>
+              <Button onClick={() => {toggle(); setActivePackage(0)}}>O balíčku</Button>
             </div>
           </Col>
           <Col md="4" sm="6" xs="12" className="d-flex align-items-center justify-content-center flex-column">
             <ItemText>Balíček 4</ItemText>
             <div className="d-flex w-100 mb-4">
               <Button>Pridať</Button>
-              <Button>O balíčku</Button>
+              <Button onClick={() => {toggle(); setActivePackage(0)}}>O balíčku</Button>
             </div>
           </Col>
           <Col md="4" sm="6" xs="12" className="d-flex align-items-center justify-content-center flex-column">
             <ItemText>Balíček 5</ItemText>
             <div className="d-flex w-100 mb-4">
               <Button>Pridať</Button>
-              <Button>O balíčku</Button>
+              <Button onClick={() => {toggle(); setActivePackage(0)}}>O balíčku</Button>
             </div>
           </Col>
           <Col md="4" sm="6" xs="12" className="d-flex align-items-center justify-content-center flex-column">
             <ItemText>Balíček 6</ItemText>
             <div className="d-flex w-100 mb-4">
               <Button>Pridať</Button>
-              <Button>O balíčku</Button>
+              <Button onClick={() => {toggle(); setActivePackage(0)}}>O balíčku</Button>
             </div>
           </Col>
         </Row>

@@ -90,6 +90,11 @@ export default createGlobalStyle`
     font-style: cursive;
    }
 
+   .modal-open {
+    overflow-y: scroll;
+    padding-right: 0!important;
+   }
+
    #navigation{
      display: block;
      @media(max-width: 768px){

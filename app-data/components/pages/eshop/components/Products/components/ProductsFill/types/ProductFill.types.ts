@@ -10,7 +10,7 @@ export interface IProductToCartData {
 export interface IProductsFillProps {
   products: Product[];
   addProduct: (data: IProductToCartData) => void;
-  toggleModal: () => void;
+  toggleModal?: () => void;
 }
 
 export interface IProductTitle {

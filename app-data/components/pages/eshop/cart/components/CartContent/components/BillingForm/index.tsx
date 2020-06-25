@@ -3,6 +3,7 @@ import { Button, Form, FormGroup, Row } from 'reactstrap';
 
 import BillingInfo from './components/BillingInfo';
 import CartSummary from './components/CartSummary';
+import { ButtonAddrRemove } from '../../../../styles/cart.style';
 
 const BillingForm: FC = () => (
   <Form
@@ -15,9 +16,9 @@ const BillingForm: FC = () => (
       <CartSummary />
     </Row>
     <FormGroup>
-      <Button type="submit" color="primary" disabled>
+      <ButtonAddrRemove type="submit" disabled>
         Odoslať
-      </Button>
+      </ButtonAddrRemove>
     </FormGroup>
   </Form>
 );

@@ -11,11 +11,12 @@ import {
 } from 'reactstrap';
 import styled from 'styled-components';
 import { ShoppingCartOutline } from 'styled-icons/evaicons-outline';
-import { CartWrapper, Logo, Wrapper } from './styles';
+import { CartWrapper, Logo, Wrapper, Login } from './styles';
 import { Context } from '../../../../lib/state/Store';
 
 import { ILinkItem } from './TS/Navigation.interface';
 import MobileMenuEshop from '../../../components/MobileMenuEshop';
+import LoginRegisterModal from '../../../../shared/components/LoginRegisterModal';
 
 const CartIcon = styled(ShoppingCartOutline)`
   color: red;
@@ -44,6 +45,7 @@ const LinkItem: FC<ILinkItem> = ({ href, title }) => (
 );
 const Navigation: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [loginModal, setLoginModal] = useState(false);
   const { state } = useContext(Context);
 
   const { cart } = state;
@@ -73,6 +75,7 @@ const Navigation: FC = () => {
                   </a>
                 </Link>
               </CartWrapper>
+              <Login onClick={() => setLoginModal(true)} />
             </Nav>
           </Collapse>
         </Navbar>{' '}
@@ -92,6 +95,7 @@ const Navigation: FC = () => {
           </Link>
         </CartWrapper>
       </Wrapper>
+      <LoginRegisterModal loginModal={loginModal} setLoginModal={setLoginModal} />
     </>
   );
 };

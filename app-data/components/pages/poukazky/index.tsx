@@ -21,13 +21,17 @@ const PoukazkyPage: () => JSX.Element = () => {
   const handleChangeTextArea = (event) => {
     setFrontText(event.target.value);
   };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  }
   return(
     <Wrapper>
       <SubPageBackground title="Darčekové poukážky" imageUrl="/images/eshop/background.jpg"/>
       <Container>
         <H3>Zvoľ typ darčekovej poukážky</H3>
         <PoukazkaTypes getActiveType={setActiveType} />
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <div id="voucherContent">
             { activeType === 0 ? <StayType /> : null }
             { activeType === 2 ? <MoneyType /> : null }

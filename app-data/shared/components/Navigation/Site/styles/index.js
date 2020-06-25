@@ -1,4 +1,12 @@
 import styled from 'styled-components';
+import { LogIn } from '@styled-icons/boxicons-regular';
+
+export const Login = styled(LogIn)`
+  color: red;
+  width: 36px;
+  margin-left: 1rem;
+  cursor: pointer;
+`;
 
 export const Wrapper = styled.div`
   max-width: 1920px;

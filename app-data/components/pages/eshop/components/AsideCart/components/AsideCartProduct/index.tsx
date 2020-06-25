@@ -120,7 +120,7 @@ const AsideCartProduct: FC<ICartProductTableRow> = ({
             </tr>
             <tr>
               <TD>Spolu:</TD>
-              <td>{`${count * itemPrice},-${currency}`}</td>
+              <td>{`${Math.round((count * itemPrice)*100)/100},-${currency}`}</td>
             </tr>
           </tbody>
         </table>

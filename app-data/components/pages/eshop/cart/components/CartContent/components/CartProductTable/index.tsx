@@ -4,6 +4,7 @@ import { Button } from 'reactstrap';
 
 import { Context } from '../../../../../../../../lib/state/Store';
 import { PRODUCT_QUERY } from '../../../../../../../../graphql/query';
+import { TD,ButtonAddrRemove } from '../../../../styles/cart.style';
 
 interface ICartProductTableRow {
   id: string;
@@ -79,17 +80,17 @@ const CartProductTableRow: FC<ICartProductTableRow> = ({
 
     return (
       <tr>
-        <td>{title}</td>
-        <td>{prodVariantTitle}</td>
-        <td>{`${itemPrice},-${currency}`}</td>
-        <td>{count}</td>
-        <td>
-          {`${count * itemPrice},-${currency}`}{' '}
-        </td>
-        <td>
-          <Button onClick={() => handleRemoveProduct(id)}>-</Button>{' '}
-          <Button onClick={() => handleAddProduct(id)}>+</Button>
-        </td>
+        <TD>{title}</TD>
+        <TD>{prodVariantTitle}</TD>
+        <TD>{`${itemPrice},-${currency}`}</TD>
+        <TD>{count}</TD>
+        <TD>
+          {`${Math.round((count * itemPrice)*100)/100},-${currency}`}{' '}
+        </TD>
+        <TD>
+          <ButtonAddrRemove onClick={() => handleRemoveProduct(id)}>-</ButtonAddrRemove>{' '}
+          <ButtonAddrRemove onClick={() => handleAddProduct(id)}>+</ButtonAddrRemove>
+        </TD>
       </tr>
     );
   }

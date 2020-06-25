@@ -4,6 +4,7 @@ import { Button, Col, Row, FormGroup, Input, Label } from 'reactstrap';
 
 import { Context } from '../../../../../../../../../../lib/state/Store';
 import { DELIVERY_METHODS_QUERY } from '../../../../../../../../../../graphql/query';
+import { H4 } from "../../../../../../styles/cart.style";
 
 const CartSummary: FC = () => {
   const {
@@ -101,7 +102,7 @@ const CartSummary: FC = () => {
 
   return (
     <Col md={6}>
-      <h4 className="mb-5">3. Súhrn košíka</h4>
+      <H4 className="mb-5">3. Súhrn košíka</H4>
       <Row form>
         <Col md={6} className="border-top border-bottom pt-3 pb-1 mb-3">
           <p>Spolu:</p>
@@ -186,6 +187,7 @@ const CartSummary: FC = () => {
         <Col md={6} className="border-top border-bottom pt-3">
           <p className="text-right">{cartTotalSum.toFixed(2)},-€</p>
         </Col>
+        <p className="text-left mt-1">* Nie sme platcami DPH</p>
       </Row>
     </Col>
   );
