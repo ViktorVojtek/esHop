@@ -108,6 +108,11 @@ export default createGlobalStyle`
       display: flex;
       align-items: center;
       justify-content: space-between;
+      position: fixed;
+      top: 0;
+      z-index: 1;
+      background-color: white;
+      width: 100%;
     }
    }
    .hideMobile{
