@@ -27,6 +27,7 @@ const CartContent: FC<ICartContent> = ({ data }) => (
         {data.map((item: any, i: number) => (
           <CartProductTableRow
             id={item.id}
+            discount={item.variant.discount}
             variantTitle={item.variant.title}
             count={item.variant.count}
             key={`${item.id}-${i}`}

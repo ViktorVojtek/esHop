@@ -29,11 +29,20 @@ const CartBodyComponent: FC = () => {
     let sum: number = 0;
 
     cart.forEach((item: any) => {
-      sum += item.variant.count * item.variant.price.value;
+      if (item.variant.discount && item.variant.discount > 0) {
+        sum +=
+          item.variant.count *
+          (item.variant.price.value -
+            item.variant.price.value * (item.variant.discount / 100));
+      } else {
+        sum += item.variant.count * item.variant.price.value;
+      }
     });
 
     dispatch({ type: 'SET_TOTAL_SUM', payload: sum });
   }, [cart]);
+
+  console.log(cart);
 
   return (
     <Wrapper>

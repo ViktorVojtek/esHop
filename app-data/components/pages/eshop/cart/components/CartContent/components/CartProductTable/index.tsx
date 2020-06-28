@@ -1,18 +1,20 @@
 import React, { FC, useContext, useEffect } from 'react';
 import { useQuery } from '@apollo/react-hooks';
-import { Button } from 'reactstrap';
+// import { Button } from 'reactstrap';
 
 import { Context } from '../../../../../../../../lib/state/Store';
 import { PRODUCT_QUERY } from '../../../../../../../../graphql/query';
-import { TD,ButtonAddrRemove } from '../../../../styles/cart.style';
+import { TD, ButtonAddrRemove } from '../../../../styles/cart.style';
 
 interface ICartProductTableRow {
   id: string;
+  discount: number;
   count: number;
   variantTitle: string;
 }
 const CartProductTableRow: FC<ICartProductTableRow> = ({
   id,
+  discount,
   count,
   variantTitle,
 }) => {
@@ -78,18 +80,33 @@ const CartProductTableRow: FC<ICartProductTableRow> = ({
       });
     };
 
+    console.log(discount);
+
+    const calculatedItemPrice =
+      discount && discount > 0
+        ? itemPrice - itemPrice * (discount / 100)
+        : itemPrice;
+
+    console.log(calculatedItemPrice);
+
     return (
       <tr>
         <TD>{title}</TD>
         <TD>{prodVariantTitle}</TD>
-        <TD>{`${itemPrice},-${currency}`}</TD>
+        <TD>{`${calculatedItemPrice},-${currency}`}</TD>
         <TD>{count}</TD>
         <TD>
-          {`${Math.round((count * itemPrice)*100)/100},-${currency}`}{' '}
+          {`${
+            Math.round(count * calculatedItemPrice * 100) / 100
+          },-${currency}`}{' '}
         </TD>
         <TD>
-          <ButtonAddrRemove onClick={() => handleRemoveProduct(id)}>-</ButtonAddrRemove>{' '}
-          <ButtonAddrRemove onClick={() => handleAddProduct(id)}>+</ButtonAddrRemove>
+          <ButtonAddrRemove onClick={() => handleRemoveProduct(id)}>
+            -
+          </ButtonAddrRemove>{' '}
+          <ButtonAddrRemove onClick={() => handleAddProduct(id)}>
+            +
+          </ButtonAddrRemove>
         </TD>
       </tr>
     );

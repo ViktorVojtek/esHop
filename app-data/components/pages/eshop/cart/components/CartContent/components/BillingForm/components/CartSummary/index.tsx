@@ -4,7 +4,7 @@ import { Button, Col, Row, FormGroup, Input, Label } from 'reactstrap';
 
 import { Context } from '../../../../../../../../../../lib/state/Store';
 import { DELIVERY_METHODS_QUERY } from '../../../../../../../../../../graphql/query';
-import { H4 } from "../../../../../../styles/cart.style";
+import { H4 } from '../../../../../../styles/cart.style';
 
 const CartSummary: FC = () => {
   const {
@@ -40,7 +40,14 @@ const CartSummary: FC = () => {
     let sum: number = 0;
 
     cart.forEach((item: any) => {
-      sum += item.variant.count * item.variant.price.value;
+      if (item.variant.discount && item.variant.discount > 0) {
+        sum +=
+          item.variant.count *
+          (item.variant.price.value -
+            item.variant.price.value * (item.variant.discount / 100));
+      } else {
+        sum += item.variant.count * item.variant.price.value;
+      }
     });
 
     dispatch({
@@ -99,6 +106,8 @@ const CartSummary: FC = () => {
         </Col>
       </Row>
     );
+
+  console.log(cartTotalSum);
 
   return (
     <Col md={6}>
