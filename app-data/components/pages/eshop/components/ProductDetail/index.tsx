@@ -10,7 +10,9 @@ import {
   VariantOption,
   VariantsSelect,
   Input,
-  StyledModalLink
+  StyledModalLink,
+  ActionPrice,
+  Del
 } from './styles/productDetail.style';
 import Link from 'next/link';
 
@@ -59,12 +61,14 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
     event.preventDefault();
 
     const count: number = +productCountRef.current.value as number;
-    const { price, title, images } = variants[activeVariant];
+    const { price, title, images, discount } = variants[activeVariant];
+
 
     handleAddProductToCart({
       id: _id,
       variant: {
         count,
+        discount,
         price,
         title,
         images,
@@ -92,10 +96,15 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
             <Col md="6">
               <Title>{title}</Title>
               <VariantTitle>{variants[activeVariant].title}</VariantTitle>
-              <Price>
-                {variants[activeVariant].price.value}{' '}
-                {variants[activeVariant].price.currency}
-              </Price>
+              {variants[activeVariant].discount > 0 
+                ? <Price>
+                    <Del>{variants[activeVariant].price.value}{variants[activeVariant].price.currency}</Del>
+                    <ActionPrice className="ml-2">{variants[activeVariant].price.value - ((variants[activeVariant].price.value * variants[activeVariant].discount) / 100)}{variants[activeVariant].price.currency}</ActionPrice>
+                  </Price>
+                : <Price>
+                    {variants[activeVariant].price.value}{variants[activeVariant].price.currency}
+                  </Price>
+                }
               <Description>{variants[activeVariant].description}</Description>{' '}
               <VariantsSelect
                 id="variants"

@@ -12,6 +12,7 @@ const AsideCartContent: FC<ICartContent> = ({ data }) => (
         id={item.id}
         variantTitle={item.variant.title}
         count={item.variant.count}
+        discount={item.variant.discount}
         image={
           item.variant && item.variant.images ? item.variant.images[0] : ''
         }

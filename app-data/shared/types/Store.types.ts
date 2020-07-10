@@ -12,6 +12,7 @@ export type ProductImage = {
 export type VariantOfProduct = {
   title: string;
   price: ProductPrice;
+  discount: number;
   count: number;
   images: ProductImage[];
 };

@@ -9,6 +9,7 @@ import { HeadWrapper, P, Image, TD, Button,AsideCartWrapper } from './styles/asi
 interface ICartProductTableRow {
   id: string;
   count: number;
+  discount: number;
   variantTitle: string;
   image: ProductImage;
 }
@@ -18,6 +19,7 @@ const AsideCartProduct: FC<ICartProductTableRow> = ({
   id,
   count,
   variantTitle,
+  discount,
   image,
 }) => {
   const {
@@ -98,6 +100,11 @@ const AsideCartProduct: FC<ICartProductTableRow> = ({
         return textCount = "kusov";
     };
 
+    const calculatedItemPrice =
+      discount && discount > 0
+        ? itemPrice - itemPrice * (discount / 100)
+        : itemPrice;
+
     return (
       <AsideCartWrapper className="mt-4">
         <HeadWrapper className="d-flex">
@@ -112,7 +119,7 @@ const AsideCartProduct: FC<ICartProductTableRow> = ({
             </tr>
             <tr>
               <TD>Cena:</TD>
-              <td>{`${itemPrice},-${currency}`}</td>
+              <td>{`${calculatedItemPrice},-${currency}`}</td>
             </tr>
             <tr>
               <TD>Počet:</TD>
@@ -120,7 +127,7 @@ const AsideCartProduct: FC<ICartProductTableRow> = ({
             </tr>
             <tr>
               <TD>Spolu:</TD>
-              <td>{`${Math.round((count * itemPrice)*100)/100},-${currency}`}</td>
+              <td>{`${Math.round((count * calculatedItemPrice)*100)/100},-${currency}`}</td>
             </tr>
           </tbody>
         </table>

@@ -25,6 +25,13 @@ export const Price = styled.p`
   font-weight: 600;
   font-size: 1.2rem;
 `;
+export const ActionPrice = styled.span`
+  color: red;
+`;
+
+export const Del = styled.del`
+  font-size: 1rem;
+`;
 export const Description = styled.p`
   color: #848484;
   font-size: 1rem;
