@@ -12,6 +12,10 @@ export const Image = styled.img`
   border-radius: 4px;
 `;
 
+export const RelatedTitle = styled.h2`
+  margin: 2rem 0;
+`;
+
 export const Title = styled.h4`
   color: #5e8796;
   font-weight: bold;

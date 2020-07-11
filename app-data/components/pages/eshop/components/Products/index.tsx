@@ -1,4 +1,10 @@
-import React, { useContext, useEffect, useState, Dispatch, SetStateAction } from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useState,
+  Dispatch,
+  SetStateAction,
+} from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { Row } from 'reactstrap';
 import Proptypes from 'prop-types';
@@ -29,10 +35,8 @@ const Products: React.FC<IProductsProps> = ({ products, toggleModal }) => {
     // fetchPolicy: 'network-only',
   });
   const { dispatch } = useContext(Context);
-  
 
   const handleAddProductToCart: (data: IProductToCartData) => void = (data) => {
-    console.log(data);
     const { id, variants } = data;
 
     dispatch({ type: 'ADD_TO_CART', payload: { id, variant: variants } });

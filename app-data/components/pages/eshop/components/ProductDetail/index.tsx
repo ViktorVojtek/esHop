@@ -3,7 +3,7 @@ import React, {
   useContext,
   useRef,
   ChangeEvent,
-  ReactNode,
+  useEffect,
 } from 'react';
 import {
   Wrapper,
@@ -21,8 +21,10 @@ import {
   ActionPrice,
   Del,
   Label,
+  RelatedTitle,
 } from './styles/productDetail.style';
 import Link from 'next/link';
+import { useQuery } from '@apollo/react-hooks';
 
 import { Container, Row, Col } from 'reactstrap';
 import ProductModal from '../../../../../shared/components/ProductModal';
@@ -31,6 +33,8 @@ import Product from '../../../../../shared/types/Product.types';
 import { VariantOfProduct } from '../../../../../shared/types/Store.types';
 
 import { Context } from '../../../../../lib/state/Store';
+import { PRODUCTS_QUERY } from '../../../../../graphql/query';
+import RelatedProducts from '../../../../../shared/components/RelatedProducts';
 
 interface IProductDetailProps {
   product: Product;
@@ -43,16 +47,37 @@ interface IProductToCartData {
 
 const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
   // product prop destruct
-  const { _id, variants, title } = product;
+  const { _id, variants, title, subCategory } = product;
 
   // hooks used in components
   const productCountRef = useRef(null);
   const [activeVariant, setActiveVariant] = useState(0);
-  const { dispatch } = useContext(Context);
   const [modal, setModal] = useState(false);
+  const [products, setProducts] = useState([]);
+  const { dispatch } = useContext(Context);
 
-  const toggle = () => setModal(!modal);
+  const { error, loading, data } = useQuery(PRODUCTS_QUERY, {
+    variables: { subCategoryId: subCategory.id },
+  });
+  useEffect(() => {
+    if (data) {
+      let { products } = data;
+      setRelatedProducts(products);
+    }
+  }, [data]);
 
+  if (error) {
+    return <>{error.message}</>;
+  }
+  if (loading) {
+    return <>loading</>;
+  }
+
+  const setRelatedProducts = (products: Product[]) => {
+    console.log(products);
+    const filteredProducts = products.filter((item) => item._id !== _id);
+    setProducts(filteredProducts);
+  };
   const handleSetActiveVariant: (i: number) => void = (i) => {
     setActiveVariant(i);
   };
@@ -156,6 +181,10 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
             </Col>
           </Row>
         </form>
+      </Container>
+      <Container>
+        <RelatedTitle>Súvisiace produkty</RelatedTitle>
+        <RelatedProducts products={products} />
       </Container>
       <ProductModal
         message="Pokračujte v nákupe alebo do pokladne."

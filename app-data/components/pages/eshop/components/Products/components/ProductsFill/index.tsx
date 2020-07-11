@@ -36,7 +36,7 @@ const ProductTitle: React.FC<IProductTitle> = ({ id, title }) => (
 );
 
 const ProductUI: React.FC<IProductUI> = ({
-  product: { _id, variants },
+  product: { _id, variants, subCategory, title },
   addProduct,
   toggleModal,
 }) => {
@@ -73,7 +73,8 @@ const ProductUI: React.FC<IProductUI> = ({
           ) : null}
         </ImageWrap>{' '}
         <ProductBody>
-          <ProductTitle id={_id} title={variants[0].title} />
+          <ProductTitle id={_id} title={title} />
+          <StyledShortDescription>{subCategory.title}</StyledShortDescription>
           <PriceHolder>
             {variants[0].discount > 0 ? (
               <Price>
