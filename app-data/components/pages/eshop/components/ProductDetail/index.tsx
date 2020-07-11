@@ -1,8 +1,15 @@
-import React, { useState, useContext, useRef, ChangeEvent, ReactNode } from 'react';
+import React, {
+  useState,
+  useContext,
+  useRef,
+  ChangeEvent,
+  ReactNode,
+} from 'react';
 import {
   Wrapper,
   Image,
   Title,
+  TitleMobile,
   VariantTitle,
   Price,
   Description,
@@ -12,7 +19,8 @@ import {
   Input,
   StyledModalLink,
   ActionPrice,
-  Del
+  Del,
+  Label,
 } from './styles/productDetail.style';
 import Link from 'next/link';
 
@@ -63,7 +71,6 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
     const count: number = +productCountRef.current.value as number;
     const { price, title, images, discount } = variants[activeVariant];
 
-
     handleAddProductToCart({
       id: _id,
       variant: {
@@ -89,37 +96,58 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
         <form onSubmit={handleSubmitProductToCart}>
           <Row>
             <Col md="6">
+              <TitleMobile className="mb-3">{title}</TitleMobile>
               {variants[activeVariant].images.length > 0 ? (
-                <Image src={variants[activeVariant].images[0].path} alt={variants[activeVariant].title} />
+                <Image
+                  src={variants[activeVariant].images[0].path}
+                  alt={variants[activeVariant].title}
+                  className="mb-3"
+                />
               ) : null}
             </Col>
             <Col md="6">
               <Title>{title}</Title>
-              <VariantTitle>{variants[activeVariant].title}</VariantTitle>
-              {variants[activeVariant].discount > 0 
-                ? <Price>
-                    <Del>{variants[activeVariant].price.value}{variants[activeVariant].price.currency}</Del>
-                    <ActionPrice className="ml-2">{variants[activeVariant].price.value - ((variants[activeVariant].price.value * variants[activeVariant].discount) / 100)}{variants[activeVariant].price.currency}</ActionPrice>
-                  </Price>
-                : <Price>
-                    {variants[activeVariant].price.value}{variants[activeVariant].price.currency}
-                  </Price>
-                }
+              {variants.length > 1 && (
+                <VariantTitle>{variants[activeVariant].title}</VariantTitle>
+              )}
+              {variants[activeVariant].discount > 0 ? (
+                <Price>
+                  <Del>
+                    {variants[activeVariant].price.value}
+                    {variants[activeVariant].price.currency}
+                  </Del>
+                  <ActionPrice className="ml-2">
+                    {variants[activeVariant].price.value -
+                      (variants[activeVariant].price.value *
+                        variants[activeVariant].discount) /
+                        100}
+                    {variants[activeVariant].price.currency}
+                  </ActionPrice>
+                </Price>
+              ) : (
+                <Price>
+                  {variants[activeVariant].price.value}
+                  {variants[activeVariant].price.currency}
+                </Price>
+              )}
               <Description>{variants[activeVariant].description}</Description>{' '}
-              <VariantsSelect
-                id="variants"
-                name="variants"
-                onChange={(event: ChangeEvent<HTMLSelectElement>) => {
-                  const idx: number = event.currentTarget.selectedIndex;
+              {variants.length > 1 && (
+                <VariantsSelect
+                  id="variants"
+                  name="variants"
+                  onChange={(event: ChangeEvent<HTMLSelectElement>) => {
+                    const idx: number = event.currentTarget.selectedIndex;
 
-                  handleSetActiveVariant(idx);
-                }}
-              >
-                {variantOptions}
-              </VariantsSelect>
+                    handleSetActiveVariant(idx);
+                  }}
+                >
+                  {variantOptions}
+                </VariantsSelect>
+              )}
+              <Label className="mt-4">Počet</Label>
               <Input
                 type="number"
-                className="mt-4 mb-4"
+                className="mb-4"
                 defaultValue={1}
                 step={1}
                 ref={productCountRef}
@@ -129,7 +157,7 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
           </Row>
         </form>
       </Container>
-      <ProductModal 
+      <ProductModal
         message="Pokračujte v nákupe alebo do pokladne."
         title="Produkt bol pridaný do košíka"
       >

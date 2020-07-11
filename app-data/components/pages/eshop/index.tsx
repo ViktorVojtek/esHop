@@ -1,23 +1,39 @@
-import React, { useState, FC, useEffect, useContext } from 'react';
+import React, { useState, FC, useEffect, useContext, useCallback } from 'react';
 import {
-  Container, Row, Col, Dropdown, DropdownToggle, DropdownMenu, DropdownItem,
-  Modal, ModalHeader, ModalBody, ModalFooter, Collapse,
+  Container,
+  Row,
+  Col,
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
 } from 'reactstrap';
 import { useQuery } from '@apollo/react-hooks';
-import Product from '../../../shared/types/Product.types';
 import Link from 'next/link';
-
-import Typography from '@material-ui/core/Typography';
-import { createMuiTheme } from '@material-ui/core/styles';
 
 import SubPageBackground from '../../../shared/components/SubPageBackground';
 import CategoriesAside from './components/Categories';
 import Products from './components/Products';
 
-import { Wrapper, HeadWithIcon, CartIcon, StyledModalBtn, StyledModalLink, H3 } from './styles/eshoppage';
+import {
+  Wrapper,
+  StyledModalBtn,
+  StyledModalLink,
+  H3,
+} from './styles/eshoppage';
 import { PRODUCTS_QUERY } from '../../../graphql/query';
-import AsideCart from './components/AsideCart';
 import { Context } from '../../../lib/state/Store';
+import {
+  sortByPriceMin,
+  sortByLetterDown,
+  sortByLetterUp,
+  sortByPriceMax,
+} from '../../../shared/helpers';
+import Product from '../../../shared/types/Product.types';
 
 const EshopPage: FC = () => {
   const { error, loading, data } = useQuery(PRODUCTS_QUERY, {
@@ -28,38 +44,22 @@ const EshopPage: FC = () => {
   const { category, subCategory } = state;
 
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const [minValue, setMinValue] = useState(0);
-  const [maxValue, setMaxValue] = useState(1000);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [modal, setModal] = useState(false);
-  const [isOpen, setIsOpen] = useState(true);
 
   const toggleModal = () => setModal(!modal);
 
-  const toggleCart = () => setIsOpen(!isOpen);
-
-  const toggle = () => setDropdownOpen(prevState => !prevState);
-
+  const toggle = () => setDropdownOpen((prevState) => !prevState);
 
   useEffect(() => {
     if (data) {
-       const { products } = data;
+      const { products } = data;
 
-       setFilteredProducts(products);
-       console.log(category);
-
-      if (subCategory === '') {
-        let newProducts = products.filter(
-          (product: any) => product.category.id === category
-        );
-        setFilteredProducts(newProducts);
-        
-      } else {
-        let newProducts = products.filter(
-          (product: any) => product.subCategory.id === subCategory
-        );
-        setFilteredProducts(newProducts);
-      }
+      if (subCategory === '' && category !== '') {
+        filterByCategory(products);
+      } else if (subCategory !== '') {
+        filterBySubCategory(products);
+      } else setFilteredProducts(products);
     }
   }, [subCategory, category, data]);
 
@@ -70,99 +70,91 @@ const EshopPage: FC = () => {
     return <>loading</>;
   }
 
-  function sortByPriceMin(products: Product[]){
-    products.sort(function(a,b){
-      return a.variants[0].price.value - b.variants[0].price.value;
-    });
-    setFilteredProducts(products);
-  }
-  function sortByPriceMax(products: Product[]){
-    products.sort(function(a,b){
-      return a.variants[0].price.value - b.variants[0].price.value;
-    });
-    setFilteredProducts(products.reverse());
-  }
-  function sortByLetterUp(products: Product[]){
-    products.sort(function(a,b){
-      let nameA = a.variants[0].title.toUpperCase();
-      let nameB = b.variants[0].title.toUpperCase();
-      if (nameA < nameB) {
-        return -1;
-      }
-      if (nameA > nameB) {
-        return 1;
-      }
-      return 0;
-    });
-    setFilteredProducts(products);
-  }
-  function sortByLetterDown(products: Product[]){
-    products.sort(function(a,b){
-      let nameA = a.variants[0].title.toUpperCase();
-      let nameB = b.variants[0].title.toUpperCase();
-      if (nameA < nameB) {
-        return -1;
-      }
-      if (nameA > nameB) {
-        return 1;
-      }
-      return 0;
-    });
-    setFilteredProducts(products.reverse());
-  }
+  const filterByCategory = (products: Product[]) => {
+    let newProducts = products.filter(
+      (product: any) => product.category.id === category
+    );
+    return setFilteredProducts(newProducts);
+  };
+  const filterBySubCategory = (products: Product[]) => {
+    let newProducts = products.filter(
+      (product: Product) => product.subCategory.id === subCategory
+    );
+    return setFilteredProducts(newProducts);
+  };
 
   return (
     <Wrapper>
-      <SubPageBackground title="Obchod" imageUrl="/images/eshop/background.jpg"/>
+      <SubPageBackground
+        title="Obchod"
+        imageUrl="/images/eshop/background.jpg"
+      />
       <Container>
-        <Row>
-          <Col lg="3" md="4" xs="12" className="pr-4 hideMobile">
-            <CategoriesAside/>
-            <H3>Filter</H3>
+        <Row className="d-flex justify-content-between mb-4">
+          <Col sm="6">
+            <Row>
+              <CategoriesAside />
+            </Row>
+          </Col>
+          <Col md="3" sm="6">
             <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-              <DropdownToggle caret>
-                Zoradit podľa
-                </DropdownToggle>
+              <DropdownToggle caret>Zoradit podľa</DropdownToggle>
               <DropdownMenu>
-                <DropdownItem onClick={() => sortByPriceMin(filteredProducts)}>Od najlacnejších</DropdownItem>
-                <DropdownItem onClick={() => sortByPriceMax(filteredProducts)}>Od najdrahších</DropdownItem>
-                <DropdownItem onClick={() => sortByLetterUp(filteredProducts)}>Vzostupne A-Z</DropdownItem>
-                <DropdownItem onClick={() => sortByLetterDown(filteredProducts)}>Zostupne Z-A</DropdownItem>
+                <DropdownItem
+                  onClick={() =>
+                    sortByPriceMin(filteredProducts, setFilteredProducts)
+                  }
+                >
+                  Od najlacnejších
+                </DropdownItem>
+                <DropdownItem
+                  onClick={() =>
+                    sortByPriceMax(filteredProducts, setFilteredProducts)
+                  }
+                >
+                  Od najdrahších
+                </DropdownItem>
+                <DropdownItem
+                  onClick={() =>
+                    sortByLetterUp(filteredProducts, setFilteredProducts)
+                  }
+                >
+                  Vzostupne A-Z
+                </DropdownItem>
+                <DropdownItem
+                  onClick={() =>
+                    sortByLetterDown(filteredProducts, setFilteredProducts)
+                  }
+                >
+                  Zostupne Z-A
+                </DropdownItem>
               </DropdownMenu>
             </Dropdown>
-            <div>
-              <HeadWithIcon onClick={toggleCart}>
-                <H3 className="mb-0">Nákupný košík</H3>
-                <CartIcon isOpen={isOpen} />
-              </HeadWithIcon>
-              <Collapse isOpen={isOpen}>
-                <AsideCart />
-              </Collapse>
-            </div>
           </Col>
-          <Col lg="9" md="8" className="mt-3">
+        </Row>
+        <Row>
+          <Col className="mt-3">
             {/*
               Maybe in the future Products component will use the following prop:
               setProductsCount={setProductsCount}
             */}
-            <Products
-              products={filteredProducts}
-              toggleModal={toggleModal}
-            />
+            <Products products={filteredProducts} toggleModal={toggleModal} />
           </Col>
         </Row>
       </Container>
       <div>
         <Modal isOpen={modal} toggle={toggleModal}>
-          <ModalHeader toggle={toggleModal}>Produkt bol pridaný do košíka</ModalHeader>
-          <ModalBody>
-            Pokračujte v nákupe alebo do pokladne.
-          </ModalBody>
+          <ModalHeader toggle={toggleModal}>
+            Produkt bol pridaný do košíka
+          </ModalHeader>
+          <ModalBody>Pokračujte v nákupe alebo do pokladne.</ModalBody>
           <ModalFooter>
             <Link href="eshop/cart">
               <StyledModalLink color="primary">Do pokladne</StyledModalLink>
             </Link>
-            <StyledModalBtn color="secondary" onClick={toggleModal}>Nakupovať</StyledModalBtn>
+            <StyledModalBtn color="secondary" onClick={toggleModal}>
+              Nakupovať
+            </StyledModalBtn>
           </ModalFooter>
         </Modal>
       </div>

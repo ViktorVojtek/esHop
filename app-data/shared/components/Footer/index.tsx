@@ -9,6 +9,7 @@ import {
   CreatedBy,
   ScrollTop,
 } from './style/footer.style';
+import { scrollTop } from '../../helpers/';
 
 const Footer: () => JSX.Element = () => (
   <Wrapper>
@@ -18,13 +19,13 @@ const Footer: () => JSX.Element = () => (
       <CreatedBy>
         &copy; 2020 Designed and Created by CodeBrothers s.r.o.
       </CreatedBy>
-      <AnchorLink href="#navigation">
+      <a onClick={() => scrollTop()}>
         <ScrollTop
           src="/icons/home.png"
           alt="home"
           className="button-icon-white"
         />
-      </AnchorLink>
+      </a>
     </BottomDiv>
   </Wrapper>
 );

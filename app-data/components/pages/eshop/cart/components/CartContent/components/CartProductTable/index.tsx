@@ -80,14 +80,10 @@ const CartProductTableRow: FC<ICartProductTableRow> = ({
       });
     };
 
-    console.log(discount);
-
     const calculatedItemPrice =
       discount && discount > 0
         ? itemPrice - itemPrice * (discount / 100)
         : itemPrice;
-
-    console.log(calculatedItemPrice);
 
     return (
       <tr>

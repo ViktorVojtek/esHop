@@ -42,8 +42,6 @@ const CartBodyComponent: FC = () => {
     dispatch({ type: 'SET_TOTAL_SUM', payload: sum });
   }, [cart]);
 
-  console.log(cart);
-
   return (
     <Wrapper>
       <Container>

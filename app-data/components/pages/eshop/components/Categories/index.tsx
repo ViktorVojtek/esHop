@@ -1,31 +1,16 @@
 /* eslint-disable no-underscore-dangle */
-import React, {
-  FC,
-  Dispatch,
-  SetStateAction,
-  useState,
-  useEffect,
-  useContext,
-} from 'react';
-import { Collapse } from 'reactstrap';
+import React, { FC, useState, useEffect, useContext } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { Aside, H3, Button, Buttons } from './style/categories.style';
 import { CATEGORIES_QUERY } from '../../../../../graphql/query';
 import Category from '../Category';
 import { Context } from '../../../../../lib/state/Store';
+import { Col } from 'reactstrap';
 
 const CategoriesAside: FC = () => {
   const { error, loading, data } = useQuery(CATEGORIES_QUERY);
-  const [activeCategory, setActiveCategory] = useState('');
   const { state, dispatch } = useContext(Context);
   const { category } = state;
-
-  useEffect(() => {
-    if (data !== undefined) {
-      const { categories } = data;
-      dispatch({ type: 'SET_CATEGORY', payload: categories[0]._id });
-    }
-  }, [data, category]);
 
   if (error) {
     return <>{error.message}</>;
@@ -37,23 +22,12 @@ const CategoriesAside: FC = () => {
 
   const { categories } = data;
 
-  const handleSetActiveCategory: (id: string) => void = (id) => {
-    dispatch({ type: 'SET_CATEGORY', payload: id });
-  };
-
   const categoryButtons = categories.map(({ signFlag, _id, title }) => (
-    <Category
-     key={_id}
-     title={title}
-     id={_id}
-    />
+    <Col md="6" className="mb-2" key={signFlag}>
+      <Category key={_id} title={title} id={_id} />
+    </Col>
   ));
-
-  return (
-    <Aside>
-      <Buttons>{categoryButtons}</Buttons>
-    </Aside>
-  );
+  return <>{categoryButtons}</>;
 };
 
 export default CategoriesAside;

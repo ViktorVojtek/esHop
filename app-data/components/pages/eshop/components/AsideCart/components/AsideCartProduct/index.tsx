@@ -4,7 +4,16 @@ import { useQuery } from '@apollo/react-hooks';
 import { Context } from '../../../../../../../lib/state/Store';
 import { PRODUCT_QUERY } from '../../../../../../../graphql/query';
 import { ProductImage } from '../../../../../../../shared/types/Product.types';
-import { HeadWrapper, P, Image, TD, Button,AsideCartWrapper } from './styles/asideCartProductStyle';
+import {
+  HeadWrapper,
+  P,
+  Image,
+  DetailItem,
+  Button,
+  AsideCartWrapper,
+  Title,
+  Detail,
+} from './styles/asideCartProductStyle';
 
 interface ICartProductTableRow {
   id: string;
@@ -14,7 +23,7 @@ interface ICartProductTableRow {
   image: ProductImage;
 }
 
-let textCount = "";
+let textCount = '';
 const AsideCartProduct: FC<ICartProductTableRow> = ({
   id,
   count,
@@ -63,7 +72,6 @@ const AsideCartProduct: FC<ICartProductTableRow> = ({
         type: 'ADD_TO_CART',
         payload: { id, variant: prodItemVariant },
       });
-
     };
 
     const handleRemoveProduct: (id: string) => void = (id) => {
@@ -74,7 +82,6 @@ const AsideCartProduct: FC<ICartProductTableRow> = ({
         )
         .pop();
 
-        console.log(id);
       const prodItemVariant = {
         ...cartItemData.variant,
         count: cartItemData.variant.count - 1,
@@ -84,21 +91,17 @@ const AsideCartProduct: FC<ICartProductTableRow> = ({
         type: 'REMOVE_FROM_CART',
         payload: { id, variant: prodItemVariant },
       });
-
     };
-    
+
     handleTextCount(count);
 
-    function handleTextCount(count: number){
-      if(count === 1){
-        return textCount = "kus";
-      }
-      else if(count > 1 && count < 5){
-        return textCount = "kusy";
-      }
-      else
-        return textCount = "kusov";
-    };
+    function handleTextCount(count: number) {
+      if (count === 1) {
+        return (textCount = 'kus');
+      } else if (count > 1 && count < 5) {
+        return (textCount = 'kusy');
+      } else return (textCount = 'kusov');
+    }
 
     const calculatedItemPrice =
       discount && discount > 0
@@ -108,29 +111,17 @@ const AsideCartProduct: FC<ICartProductTableRow> = ({
     return (
       <AsideCartWrapper className="mt-4">
         <HeadWrapper className="d-flex">
-          <P>{title}</P>
           <Image src={image.path} />
+          <Detail>
+            <Title>{title}</Title>
+            <DetailItem>{`${calculatedItemPrice},-${currency}`}</DetailItem>
+            <DetailItem>{`Počet: ${count} ${textCount}`}</DetailItem>
+            <DetailItem>{`Spolu: ${
+              Math.round(count * calculatedItemPrice * 100) / 100
+            },-${currency}`}</DetailItem>
+          </Detail>
         </HeadWrapper>
-        <table>
-          <tbody>
-            <tr>
-              <TD>Variant:</TD>
-              <td>{prodVariantTitle}</td>
-            </tr>
-            <tr>
-              <TD>Cena:</TD>
-              <td>{`${calculatedItemPrice},-${currency}`}</td>
-            </tr>
-            <tr>
-              <TD>Počet:</TD>
-              <td>{`${count} ${textCount}`}</td>
-            </tr>
-            <tr>
-              <TD>Spolu:</TD>
-              <td>{`${Math.round((count * calculatedItemPrice)*100)/100},-${currency}`}</td>
-            </tr>
-          </tbody>
-        </table>
+
         <div className="d-flex justify-content-between">
           <Button onClick={() => handleRemoveProduct(id)}>Odobrať</Button>
           <Button onClick={() => handleAddProduct(id)}>Pridať</Button>

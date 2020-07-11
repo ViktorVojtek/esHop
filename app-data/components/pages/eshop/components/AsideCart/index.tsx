@@ -7,9 +7,7 @@ import AsideCartContent from './components/AsideCartContent';
 
 const CartEmpty: () => JSX.Element = () => (
   <div className="w-100">
-    <p className="text-center">
-      Nákupný košík je prázdny!
-    </p>
+    <p className="text-center">Nákupný košík je prázdny!</p>
   </div>
 );
 
@@ -18,8 +16,6 @@ const CartAside: FC = () => {
     state: { cart, cartTotalSum },
     dispatch,
   } = useContext(Context);
-
-  console.log(cart);
 
   useEffect(() => {
     let sum: number = 0;
@@ -33,7 +29,7 @@ const CartAside: FC = () => {
 
   return (
     <div>
-      {cart.length > 0 ? <AsideCartContent data={cart} />  : <CartEmpty />}
+      {cart.length > 0 ? <AsideCartContent data={cart} /> : <CartEmpty />}
     </div>
   );
 };

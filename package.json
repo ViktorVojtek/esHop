@@ -21,6 +21,7 @@
     "@styled-icons/fa-solid": "^10.0.0",
     "@types/classnames": "^2.2.10",
     "@types/js-cookie": "^2.2.6",
+    "@types/react-scroll": "^1.5.5",
     "apollo-boost": "^0.4.7",
     "apollo-link-http": "^1.5.16",
     "apollo-server-express": "^2.11.0",

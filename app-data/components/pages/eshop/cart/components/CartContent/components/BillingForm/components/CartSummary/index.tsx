@@ -107,8 +107,6 @@ const CartSummary: FC = () => {
       </Row>
     );
 
-  console.log(cartTotalSum);
-
   return (
     <Col md={6}>
       <H4 className="mb-5">3. Súhrn košíka</H4>

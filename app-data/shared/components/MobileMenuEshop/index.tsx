@@ -1,17 +1,12 @@
-import React, {  FC, ReactNode, useState, useContext, forwardRef  } from 'react';
+import React, { FC, ReactNode, useState, useContext, forwardRef } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import {
-  Nav,
-  NavItem,
-  NavLink,
-  NavbarBrand,
-} from 'reactstrap';
+import { Nav, NavItem, NavLink, NavbarBrand, Row, Col } from 'reactstrap';
 import { ILinkItem } from '../Navigation/Site/TS/Navigation.interface';
-import { MenuIcon, HomeIcon, Wrapper, Logo } from './styles';
+import { MenuIcon, HomeIcon, Wrapper, Logo, H2 } from './styles';
 import CategoriesAside from '../../../components/pages/eshop/components/Categories';
 import AsideCart from '../../../components/pages/eshop/components/AsideCart';
 
@@ -60,7 +55,7 @@ export default function TemporaryDrawer() {
   const router = useRouter();
 
   const toggleDrawer = (anchor: Anchor, open: boolean) => (
-    event: React.KeyboardEvent | React.MouseEvent,
+    event: React.KeyboardEvent | React.MouseEvent
   ) => {
     if (
       event.type === 'keydown' &&
@@ -74,42 +69,49 @@ export default function TemporaryDrawer() {
   };
 
   const list = () => (
-    <div>
+    <Row>
       <Wrapper className={clsx(classes.list)}>
-      {
-        router.pathname === "/eshop" ?
-        <>
-          <Link href="/">
-            <HomeIcon />
-          </Link>
-          <CategoriesAside />
-          <AsideCart />
-        </>:
-        <>
-          <Link href="/">
-            <CustomNavbarBrand href="/">
-              <Logo src="/images/logo.png" alt="Červený kláštor" />
-            </CustomNavbarBrand>
-          </Link>
-          <Nav navbar>
-            <LinkItem href="/" title="Domov" />
-            <LinkItem href="/eshop" title="Produkty" />
-            <LinkItem href="/eshop" title="Služby" />
-            <LinkItem href="/darcekove-poukazky" title="Darčekové poukážky" />
-            <LinkItem href="/" title="FAQ" />
-          </Nav>
-        </>
-      }
+        {router.pathname === '/eshop' ? (
+          <>
+            <Col className="mb-2">
+              <Link href="/">
+                <HomeIcon />
+              </Link>
+            </Col>
+            <CategoriesAside />
+            <Col className="mt-2">
+              <H2>Nákupný košík</H2>
+              <AsideCart />
+            </Col>
+          </>
+        ) : (
+          <>
+            <Link href="/">
+              <CustomNavbarBrand href="/">
+                <Logo src="/images/logo.png" alt="Červený kláštor" />
+              </CustomNavbarBrand>
+            </Link>
+            <Nav navbar>
+              <LinkItem href="/" title="Domov" />
+              <LinkItem href="/eshop" title="Produkty" />
+              <LinkItem href="/eshop" title="Služby" />
+              <LinkItem href="/darcekove-poukazky" title="Darčekové poukážky" />
+              <LinkItem href="/" title="FAQ" />
+            </Nav>
+          </>
+        )}
       </Wrapper>
-    </div>
+    </Row>
   );
 
   return (
     <div>
-      <MenuIcon
-       onClick={toggleDrawer("left", true)}
-      />
-      <Drawer anchor="left" open={state["left"]} onClose={toggleDrawer("left", false)}>
+      <MenuIcon onClick={toggleDrawer('left', true)} />
+      <Drawer
+        anchor="left"
+        open={state['left']}
+        onClose={toggleDrawer('left', false)}
+      >
         {list()}
       </Drawer>
     </div>

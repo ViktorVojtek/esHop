@@ -50,8 +50,6 @@ const Reducer = (state: IState, action: IAction) => {
         newCart = [...state.cart];
 
         for (let i: number = 0; i < newCart.length; i += 1) {
-          console.log(newCart[i].id);
-          console.log(action.payload.id);
           if (
             newCart[i].id === action.payload.id &&
             newCart[i].variant.title === action.payload.variant.title &&
@@ -59,11 +57,11 @@ const Reducer = (state: IState, action: IAction) => {
           ) {
             newCart[i].variant.count = action.payload.variant.count;
             break;
-          } else if(
+          } else if (
             newCart[i].id === action.payload.id &&
             newCart[i].variant.title === action.payload.variant.title &&
             newCart[i].variant.count === 1
-          ){
+          ) {
             newCart = [...newCart.slice(0, i), ...newCart.slice(i + 1)];
             break;
           }
@@ -117,6 +115,7 @@ const Reducer = (state: IState, action: IAction) => {
       return {
         ...state,
         category: action.payload,
+        subCategory: '',
       };
     case 'SET_SUBCATEGORY':
       return {

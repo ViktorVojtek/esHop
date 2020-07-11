@@ -1,12 +1,27 @@
-import React, { Dispatch, SetStateAction, useState, FC, useContext } from 'react';
-import { Collapse, Button, CardBody, Card } from 'reactstrap';
+import React, {
+  Dispatch,
+  SetStateAction,
+  useState,
+  FC,
+  useContext,
+} from 'react';
+import {
+  Collapse,
+  Button,
+  CardBody,
+  Card,
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+} from 'reactstrap';
 import { SUBCATEGORIES_QUERY } from '../../../../../graphql/query';
 import { useQuery } from '@apollo/react-hooks';
 import { Context } from '../../../../../lib/state/Store';
 
 import { ButtonSubCategory, ButtonCategory, Buttons } from './style';
 
-interface ICategory{
+interface ICategory {
   title: string;
   id: string;
 }
@@ -20,7 +35,6 @@ const Category: FC<ICategory> = ({ title, id }) => {
   const { loading, error, data } = useQuery(SUBCATEGORIES_QUERY, {
     variables: { categoryId: id || '' },
   });
-  const [activeSubCategory, setActiveSubCategory] = useState('');
 
   if (error) {
     return <>{error.message}</>;
@@ -32,33 +46,35 @@ const Category: FC<ICategory> = ({ title, id }) => {
 
   const subCategoriesArray: any = data.subCategories;
 
-
-  const handleSetActiveCategory: (id: string) => void = (id) => {
-    console.log(id);
-    setActiveSubCategory(id);
+  const handleSetActiveSubCategory: (id: string) => void = (id) => {
     dispatch({ type: 'SET_SUBCATEGORY', payload: id });
+  };
+  const handleSetActiveCategory: (id: string) => void = (id) => {
+    dispatch({ type: 'SET_CATEGORY', payload: id });
   };
 
   const subCategoryButtons: JSX.Element[] = subCategoriesArray.map(
     ({ _id, signFlag, title }) => (
-      <ButtonSubCategory
+      <DropdownItem
         key={signFlag}
-        className={activeSubCategory === _id ? 'active' : 'not-active'}
-        onClick={() => handleSetActiveCategory(_id)}
+        onClick={() => handleSetActiveSubCategory(_id)}
       >
         {title}
-      </ButtonSubCategory>
+      </DropdownItem>
     )
   );
 
-  return(
+  return (
     <>
-      <ButtonCategory onClick={toggle}>{title}</ButtonCategory>
-      <Collapse isOpen={isOpen}>
-        <Buttons>
+      <Dropdown isOpen={isOpen} toggle={toggle}>
+        <DropdownToggle caret>{title}</DropdownToggle>
+        <DropdownMenu>
+          <DropdownItem onClick={() => handleSetActiveCategory(id)}>
+            Všetko
+          </DropdownItem>
           {subCategoryButtons}
-        </Buttons>
-      </Collapse>
+        </DropdownMenu>
+      </Dropdown>
     </>
   );
 };

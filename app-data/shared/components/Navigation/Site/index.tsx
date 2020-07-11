@@ -17,6 +17,7 @@ import { Context } from '../../../../lib/state/Store';
 import { ILinkItem } from './TS/Navigation.interface';
 import MobileMenuEshop from '../../../components/MobileMenuEshop';
 import LoginRegisterModal from '../../../../shared/components/LoginRegisterModal';
+import CartPopover from '../../CartPopover';
 
 const CartIcon = styled(ShoppingCartOutline)`
   color: red;
@@ -67,14 +68,15 @@ const Navigation: FC = () => {
               <LinkItem href="/eshop" title="Produkty" />
               <LinkItem href="/eshop" title="Služby" />
               <LinkItem href="/darcekove-poukazky" title="Darčekové poukážky" />
-              <LinkItem href="/" title="FAQ" />
-              <CartWrapper>
+              <LinkItem href="/kontakt" title="Kontakt" />
+              {/*<CartWrapper id="cartLink">
                 <Link href="/eshop/cart">
                   <a>
                     <CartIcon /> <span>{cart.length}</span>
                   </a>
                 </Link>
-              </CartWrapper>
+              </CartWrapper>*/}
+              <CartPopover target="cartIcon" />
               <Login onClick={() => setLoginModal(true)} />
             </Nav>
           </Collapse>
@@ -95,7 +97,10 @@ const Navigation: FC = () => {
           </Link>
         </CartWrapper>
       </Wrapper>
-      <LoginRegisterModal loginModal={loginModal} setLoginModal={setLoginModal} />
+      <LoginRegisterModal
+        loginModal={loginModal}
+        setLoginModal={setLoginModal}
+      />
     </>
   );
 };

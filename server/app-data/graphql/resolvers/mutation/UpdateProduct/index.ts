@@ -89,8 +89,6 @@ const updateProduct: (
         j += 1;
       }
 
-      console.log(updateImagesArr);
-
       resultImagesDataArr = updateImagesArr.concat(existingImagesArr);
     }
 
@@ -98,9 +96,6 @@ const updateProduct: (
       ...productData,
       images: resultImagesDataArr,
     };
-
-    console.log('\n');
-    console.log(newProductData);
 
     const updatedProduct: IProduct = await Product.findOneAndUpdate(
       { _id: mongoose.Types.ObjectId(_id) },

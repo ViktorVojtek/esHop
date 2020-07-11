@@ -41,7 +41,8 @@ export const Logo = styled.img`
 
 export const CartWrapper = styled.div`
   margin-left: 60px;
-  @media(max-width: 992px){
+  position: relative;
+  @media (max-width: 992px) {
     margin-left: 0;
   }
   span {

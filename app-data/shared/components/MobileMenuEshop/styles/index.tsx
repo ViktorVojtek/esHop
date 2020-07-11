@@ -7,7 +7,7 @@ export const MenuIcon = styled(Menu)`
   width: 48px;
 `;
 export const HomeIcon = styled(Home)`
-  color: #00aeef; 
+  color: #00aeef;
   width: 48px;
 `;
 
@@ -15,6 +15,15 @@ export const Wrapper = styled.div`
   padding: 2rem;
 `;
 
+export const H2 = styled.h2`
+  text-align: left;
+  color: #5e8796;
+  position: relative;
+  font-size: 1.5em !important;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}`;
 export const Logo = styled.img`
   @media (max-width: 768px) {
     width: 260px;
