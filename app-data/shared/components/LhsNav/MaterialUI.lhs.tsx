@@ -25,7 +25,7 @@ import { Context } from '../../../lib/state/Store';
 
 const useStyles = makeStyles({
   list: {
-    width: 250,
+    width: 240,
   },
   fullList: {
     width: 'auto',

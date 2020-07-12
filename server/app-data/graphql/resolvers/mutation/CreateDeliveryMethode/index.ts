@@ -7,7 +7,7 @@ const createDeliveryMethode: (
   root: any,
   args: { title: string; value: number },
   ctx: any
-) => Promise<IDeliveryMethode> = async (roor, { title, value }, ctx) => {
+) => Promise<IDeliveryMethode> = async (root, { title, value }, ctx) => {
   try {
     const exist: IDeliveryMethode = await DeliveryMethode.findOne({ title });
 

@@ -145,3 +145,23 @@ export const SUBCATEGORIES_QUERY = gql`
     }
   }
 `;
+
+export const PAYMENT_METHODE_QUERY = gql`
+  query paymentMethode($id: String!) {
+    paymentMethode(id: $id) {
+      _id
+      title
+      value
+    }
+  }
+`;
+
+export const PAYMENT_METHODES_QUERY = gql`
+  query paymentMethodes {
+    paymentMethodes {
+      _id
+      title
+      value
+    }
+  }
+`;

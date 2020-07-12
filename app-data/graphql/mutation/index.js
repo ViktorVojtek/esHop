@@ -41,6 +41,16 @@ export const CREATE_SUBCATEGORY_MUTATION = gql`
   }
 `;
 
+export const CREATE_PAYMENT_MUTATION = gql`
+  mutation createPaymentMethode($title: String!, $value: Int!) {
+    createPaymentMethode(title: $title, value: $value) {
+      _id
+      title
+      value
+    }
+  }
+`;
+
 export const CREATE_PRODUCT_MUTATION = gql`
   mutation createProduct($productInput: ProductInput!) {
     createProduct(productInput: $productInput) {

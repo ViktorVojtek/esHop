@@ -2,7 +2,7 @@ import PaymentMethode, {
   IPaymentMethode,
 } from '../../../../db/models/PaymentMethode';
 
-const paymentMethodes: () => Promise<IPaymentMethode[]> = async () => {
+export default async (): Promise<IPaymentMethode[]> => {
   try {
     const exist: IPaymentMethode[] = (await PaymentMethode.find()) || [];
 
@@ -11,5 +11,3 @@ const paymentMethodes: () => Promise<IPaymentMethode[]> = async () => {
     throw new Error(err.message);
   }
 };
-
-export default paymentMethodes;

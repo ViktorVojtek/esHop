@@ -29,6 +29,9 @@ const rootTypeDefs = gql`
     createDiscount(code: String!, value: Int): Discount
     removeDiscount(id: String!): String
 
+    createPaymentMethode(title: String!, value: Int!): Payment
+    removePaymentMethode(id: String!): String
+
     createOrder(data: OrderInput!): Order
 
     setCurrency(currencyInput: CurrencyInput!): Currency

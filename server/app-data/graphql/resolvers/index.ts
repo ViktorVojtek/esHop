@@ -22,6 +22,9 @@ import removeCategory from './mutation/RemoveCategory';
 import createDeliveryMethode from './mutation/CreateDeliveryMethode';
 import removeDeliveryMethode from './mutation/RemoveDeliveryMethode';
 
+import createPaymentMethode from './mutation/CreatePaymentMethode';
+import removePaymentMethode from './mutation/RemovePaymentMethode';
+
 import createDiscount from './mutation/CreateDiscount';
 import removeDiscount from './mutation/RemoveDiscount';
 
@@ -77,6 +80,11 @@ const resolvers = {
       createDeliveryMethode(root, args, ctx),
     removeDeliveryMethode: async (root: any, args: { id: string }, ctx: any) =>
       removeDeliveryMethode(root, args, ctx),
+
+    createPaymentMethode: async (root: any, args: any, ctx: any) =>
+      createPaymentMethode(root, args, ctx),
+    removePaymentMethode: async (root: any, args: any, ctx: any) =>
+      removePaymentMethode(root, args, ctx),
 
     createDiscount: async (
       root: any,

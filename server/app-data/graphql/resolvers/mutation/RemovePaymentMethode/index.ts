@@ -2,19 +2,25 @@ import mongoose from 'mongoose';
 import PaymentMethode, {
   IPaymentMethode,
 } from '../../../../db/models/PaymentMethode';
-import ModError from '../../utils/error';
+import ModErr from '../../utils/error';
 
-export default async (root: any, { id }: { id: string }, ctx: any) => {
+export default async (
+  root: any,
+  { id }: { id: string },
+  ctx: any
+): Promise<string> => {
   try {
     const exist: IPaymentMethode = await PaymentMethode.findOne({
       _id: mongoose.Types.ObjectId(id),
     });
 
     if (!exist) {
-      throw new ModError(404, 'Not found');
+      throw new ModErr(404, 'Not found');
     }
 
-    return exist;
+    await PaymentMethode.deleteOne({ _id: mongoose.Types.ObjectId(id) });
+
+    return `Payment method with id: ${id} has been sucessfuly deleted.`;
   } catch (err) {
     throw new Error(err.message);
   }
