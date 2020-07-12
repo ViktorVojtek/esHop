@@ -29,6 +29,7 @@ export const Circle = styled.div<ICircle>`
 
 export const TR = styled.tr`
   background-color: #ededed;
+  white-space: nowrap;
 `;
 
 export const TD = styled.td`
