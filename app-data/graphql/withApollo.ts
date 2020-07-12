@@ -6,9 +6,7 @@ import nextCookie from 'next-cookies';
 // import typeDefs from './typeDefs';
 
 const domain: string =
-  process.env.NODE_ENV === 'production'
-    ? 'ckshop.codebrothers.sk'
-    : 'localhost';
+  process.env.NODE_ENV === 'production' ? 'eshop.kupelecks.sk' : 'localhost';
 const protocol: string =
   process.env.NODE_ENV === 'production' ? 'https' : 'http';
 const port: number = 3016;
