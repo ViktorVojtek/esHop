@@ -38,7 +38,9 @@ const AsideCartContent: FC<ICartContent> = ({ data }) => {
         </TotalItem>
         <TotalItem>
           <TotalText light>Spolu:</TotalText>
-          <TotalText className="ml-1">{`${sum} €`}</TotalText>
+          <TotalText className="ml-1">{`${
+            Math.round(sum * 100) / 100
+          } €`}</TotalText>
         </TotalItem>
       </Total>
       {data.map((item: any, i: number) => (

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Eye } from '@styled-icons/evaicons-solid';
 
 export const ProductItem = styled.div`
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 `;
 
 export const ImageWrap = styled.div``;

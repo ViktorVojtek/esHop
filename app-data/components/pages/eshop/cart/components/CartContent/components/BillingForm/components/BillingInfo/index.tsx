@@ -2,7 +2,7 @@ import React from 'react';
 import { Col, Row, FormGroup, Input, Label } from 'reactstrap';
 
 import countryData from './data/country.data.json';
-import { H4 } from "../../../../../../styles/cart.style";
+import { H4 } from '../../../../../../styles/cart.style';
 
 const BillingInfo: () => JSX.Element = () => (
   <Col md={6}>
@@ -75,12 +75,12 @@ const BillingInfo: () => JSX.Element = () => (
       </Input>
     </FormGroup>
     <FormGroup>
-      <Label htmlFor="phone">Telefónne číslo</Label>
-      <Input type="tel" name="phone" id="phone" />
+      <Label htmlFor="phone">Telefónne číslo *</Label>
+      <Input type="tel" name="phone" id="phone" required />
     </FormGroup>
     <FormGroup>
       <Label htmlFor="email">Email *</Label>
-      <Input type="email" name="email" id="email" />
+      <Input type="email" name="email" id="email" required />
     </FormGroup>
     <FormGroup>
       <Label htmlFor="message">Správa</Label>
