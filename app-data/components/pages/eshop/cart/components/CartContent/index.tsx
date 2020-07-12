@@ -11,7 +11,7 @@ interface ICartContent {
   giftCards: any[];
 }
 const CartContent: FC<ICartContent> = ({ data, giftCards }) => (
-  <Container visible-lg>
+  <Container>
     <H2>Nákupný košík</H2>
     <H4 className="mb-4">1. Položky v košíku</H4>
     {data.length > 0 && (
