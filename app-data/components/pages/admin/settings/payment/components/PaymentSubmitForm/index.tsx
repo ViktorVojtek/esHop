@@ -41,7 +41,7 @@ export default () => {
         <Label for="value" className="mr-sm-3">
           Value
         </Label>
-        <Input id="value" type="number" placeholder="Insert value" />
+        <Input id="value" type="number" step={0.1} placeholder="Insert value" />
       </FormGroup>
       <Button type="submit" color="primary" className="ml-auto mr-3">
         Submit
