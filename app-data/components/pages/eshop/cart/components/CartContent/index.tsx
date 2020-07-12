@@ -49,9 +49,11 @@ const CartContent: FC<ICartContent> = ({ data, giftCards }) => (
         <thead>
           <TR>
             <TH>Názov produktu</TH>
+            <TH>Typ</TH>
             <TH>Farba</TH>
-            <TH>Cena</TH>
+            <TH>Hodnota</TH>
             <TH>Venovanie</TH>
+            <TH>Cena celkom</TH>
             <TH>Odstrániť</TH>
           </TR>
         </thead>

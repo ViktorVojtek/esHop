@@ -40,8 +40,12 @@ const CartBodyComponent: FC = () => {
       }
     });
 
+    giftCards.forEach((item: any) => {
+      sum += item.price;
+    });
+
     dispatch({ type: 'SET_TOTAL_SUM', payload: sum });
-  }, [cart]);
+  }, [cart, giftCards]);
 
   return (
     <Wrapper>

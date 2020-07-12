@@ -11,24 +11,12 @@ import { Context } from '../../../../../../../lib/state/Store';
 
 interface ICartContent {
   data: any[];
+  cartTotalSum: number;
 }
 
-const AsideCartContent: FC<ICartContent> = ({ data }) => {
+const AsideCartContent: FC<ICartContent> = ({ data, cartTotalSum }) => {
   const { state } = useContext(Context);
   const { cart } = state;
-
-  let sum: number = 0;
-
-  cart.forEach((item: any) => {
-    if (item.variant.discount && item.variant.discount > 0) {
-      sum +=
-        item.variant.count *
-        (item.variant.price.value -
-          item.variant.price.value * (item.variant.discount / 100));
-    } else {
-      sum += item.variant.count * item.variant.price.value;
-    }
-  });
   return (
     <>
       <Total>
@@ -38,9 +26,7 @@ const AsideCartContent: FC<ICartContent> = ({ data }) => {
         </TotalItem>
         <TotalItem>
           <TotalText light>Spolu:</TotalText>
-          <TotalText className="ml-1">{`${
-            Math.round(sum * 100) / 100
-          } €`}</TotalText>
+          <TotalText className="ml-1">{`${cartTotalSum},- €`}</TotalText>
         </TotalItem>
       </Total>
       {data.map((item: any, i: number) => (

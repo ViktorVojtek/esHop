@@ -19,7 +19,7 @@ const MoneyType: FC<IMoneyType> = ({ handleChange }) => {
               min={10}
               type="number"
               step="1"
-              name="price"
+              name="priceValue"
               onChange={handleChange}
               required
             />

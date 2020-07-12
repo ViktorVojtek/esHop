@@ -113,8 +113,6 @@ const Reducer = (state: IState, action: IAction) => {
       if (state.giftCards.length > 0) {
         newGiftCards = [...state.giftCards];
         newGiftCards.splice(action.payload.id, 1);
-
-        console.log(newGiftCards);
       }
       if (storage) {
         storage.setItem('giftCards', JSON.stringify(newGiftCards));

@@ -8,7 +8,7 @@ import { H4 } from '../../../../../../styles/cart.style';
 
 const CartSummary: FC = () => {
   const {
-    state: { cart, cartTotalSum },
+    state: { cart, cartTotalSum, giftCards },
     dispatch,
   } = useContext(Context);
   const { error, loading, data } = useQuery(DELIVERY_METHODS_QUERY);
@@ -48,6 +48,9 @@ const CartSummary: FC = () => {
       } else {
         sum += item.variant.count * item.variant.price.value;
       }
+    });
+    giftCards.forEach((item: any) => {
+      sum += item.price;
     });
 
     dispatch({

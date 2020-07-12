@@ -29,11 +29,13 @@ const GiftCardTableRow: FC<IGiftCardTableRow> = ({
   return (
     <tr>
       <TD>Darčeková poukážka</TD>
+      <TD>Suma</TD>
       <TD>
         <Circle color={cardColor}></Circle>
       </TD>
       <TD>{`${price},-€`}</TD>
       <TD>{text}</TD>
+      <TD>{`${price},-€`}</TD>
       <TD>
         <ButtonAddrRemove onClick={() => handleRemoveGiftCard(id)}>
           Odstrániť

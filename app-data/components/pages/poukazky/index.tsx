@@ -28,14 +28,14 @@ import { Context } from '../../../lib/state/Store';
 
 type IProductToCartData = {
   cardColor: string;
-  price: number;
+  priceValue: number;
   text: string;
 };
 
 const PoukazkyPage: () => JSX.Element = () => {
   const [formData, setFormData] = useState<IProductToCartData>({
     cardColor: '#00aeef',
-    price: 0,
+    priceValue: 0,
     text: '',
   });
   const [activeType, setActiveType] = useState(2);
@@ -51,7 +51,8 @@ const PoukazkyPage: () => JSX.Element = () => {
   };
 
   const handleAddGiftCard: (data: IProductToCartData) => void = (data) => {
-    const { cardColor, price, text } = data;
+    const { cardColor, priceValue, text } = data;
+    let price = Number(priceValue);
     dispatch({
       type: 'ADD_TO_GIFT_CARDS',
       payload: { cardColor, price, text },
