@@ -46,7 +46,8 @@ const ShopingCart = styled.div<ShoppingCartType>`
   border-radius: 3px;
   border: 1px solid #00aeef;
   padding: 20px;
-
+  max-height: 80vh;
+  overflow-y: auto;
   display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
   animation: ${({ isOpen }) => (isOpen ? fadeIn : fadeOut)} 0.4s linear;
   transition: opacity 1s linear;

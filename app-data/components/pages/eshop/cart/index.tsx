@@ -49,13 +49,11 @@ const CartBodyComponent: FC = () => {
 
   return (
     <Wrapper>
-      <Container>
-        {cart.length > 0 || giftCards.length > 0 ? (
-          <CartContent data={cart} giftCards={giftCards} />
-        ) : (
-          <CartEmpty />
-        )}
-      </Container>
+      {cart.length > 0 || giftCards.length > 0 ? (
+        <CartContent data={cart} giftCards={giftCards} />
+      ) : (
+        <CartEmpty />
+      )}
     </Wrapper>
   );
 };

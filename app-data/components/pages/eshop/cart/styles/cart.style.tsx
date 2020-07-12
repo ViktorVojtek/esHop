@@ -34,6 +34,7 @@ export const TR = styled.tr`
 export const TD = styled.td`
   vertical-align: middle !important;
   font-weight: 600;
+  white-space: nowrap;
 `;
 export const Image = styled.img`
   width: 40px;

@@ -93,8 +93,7 @@ export default function TemporaryDrawer() {
             </Link>
             <Nav navbar>
               <LinkItem href="/" title="Domov" />
-              <LinkItem href="/eshop" title="Produkty" />
-              <LinkItem href="/eshop" title="Služby" />
+              <LinkItem href="/eshop" title="Obchod" />
               <LinkItem href="/darcekove-poukazky" title="Darčekové poukážky" />
               <LinkItem href="/" title="FAQ" />
             </Nav>

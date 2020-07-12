@@ -7,8 +7,8 @@ const Wrapper = styled.div`
   padding-right: 100px;
   margin-top: 6rem;
   @media (max-width: 1550px) {
-    padding-left: 40px;
-    padding-right: 40px;
+    padding-left: 0px;
+    padding-right: 0px;
   }
 `;
 

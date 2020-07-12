@@ -27,6 +27,7 @@ export const Logo: StyledComponent<'img', any, {}, never> = styled.img`
 export const CreatedBy: StyledComponent<'a', any, {}, never> = styled.a`
   font-size: 0.8rem;
   color: rgb(159, 164, 175) !important;
+  text-align: center;
 
   @media (max-width: 992px) {
     margin-top: 1rem;

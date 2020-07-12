@@ -28,12 +28,16 @@ const CartAside: FC = () => {
     });
 
     dispatch({ type: 'SET_TOTAL_SUM', payload: sum });
-  }, [cart]);
+  }, [cart, giftCards]);
 
   return (
     <div>
       {cart.length > 0 ? (
-        <AsideCartContent data={cart} cartTotalSum={cartTotalSum} />
+        <AsideCartContent
+          data={cart}
+          giftCards={giftCards}
+          cartTotalSum={cartTotalSum}
+        />
       ) : (
         <CartEmpty />
       )}

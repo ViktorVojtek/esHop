@@ -14,10 +14,7 @@ const GiftCardTableRow: FC<IGiftCardTableRow> = ({
   text,
   id,
 }) => {
-  const {
-    state: { giftCards },
-    dispatch,
-  } = useContext(Context);
+  const { dispatch } = useContext(Context);
 
   const handleRemoveGiftCard: (id: number) => void = (id) => {
     dispatch({

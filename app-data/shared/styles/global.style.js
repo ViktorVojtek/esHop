@@ -8,10 +8,10 @@ export const WrapperFlex = styled.div`
   justify-content: flex-start;
 
   & > div {
-    margin-right: .5rem;
+    margin-right: 0.5rem;
 
     &:last-child {
-      margin-right: .5rem;
+      margin-right: 0.5rem;
       width: 100%;
     }
   }
@@ -24,12 +24,12 @@ export const LinkButton = styled.a`
   font-weight: bold;
   border-radius: 6px;
   background-color: rgb(255, 77, 125);
-  padding: .75rem 1.5rem;
+  padding: 0.75rem 1.5rem;
   transition: box-shadow 0.3s ease-in-out;
-  &:hover{
+  &:hover {
     text-decoration: none;
-    color:white;
-    box-shadow: 0px 0px 12px 0px rgb(255,77, 125);
+    color: white;
+    box-shadow: 0px 0px 12px 0px rgb(255, 77, 125);
   }
 `;
 
@@ -94,6 +94,13 @@ export default createGlobalStyle`
     overflow-y: scroll;
     padding-right: 0!important;
    }
+
+   @media (max-width: 992px) {
+    .container {
+      max-width:calc(100% - 20px);
+      margin: 0px 10px;
+    }
+ }
 
    #navigation{
      display: block;

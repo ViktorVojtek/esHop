@@ -65,8 +65,7 @@ const Navigation: FC = () => {
           <Collapse isOpen={isOpen} navbar>
             <Nav navbar>
               <LinkItem href="/" title="Domov" />
-              <LinkItem href="/eshop" title="Produkty" />
-              <LinkItem href="/eshop" title="Služby" />
+              <LinkItem href="/eshop" title="Obchod" />
               <LinkItem href="/darcekove-poukazky" title="Darčekové poukážky" />
               <LinkItem href="/kontakt" title="Kontakt" />
               {/*<CartWrapper id="cartLink">

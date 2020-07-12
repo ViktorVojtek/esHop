@@ -8,13 +8,20 @@ import {
 } from '../AsideCartProduct/styles/asideCartProductStyle';
 import Link from 'next/link';
 import { Context } from '../../../../../../../lib/state/Store';
+import { GiftCard } from '../../../../../../../shared/types/Store.types';
+import AsideCartGiftCards from '../AsideCartGiftCards';
 
 interface ICartContent {
   data: any[];
+  giftCards: GiftCard[];
   cartTotalSum: number;
 }
 
-const AsideCartContent: FC<ICartContent> = ({ data, cartTotalSum }) => {
+const AsideCartContent: FC<ICartContent> = ({
+  data,
+  cartTotalSum,
+  giftCards,
+}) => {
   const { state } = useContext(Context);
   const { cart } = state;
   return (
@@ -38,6 +45,15 @@ const AsideCartContent: FC<ICartContent> = ({ data, cartTotalSum }) => {
           image={
             item.variant && item.variant.images ? item.variant.images[0] : ''
           }
+          key={`${item.id}-${i}`}
+        />
+      ))}
+      {giftCards.map((item: any, i: number) => (
+        <AsideCartGiftCards
+          id={i}
+          cardColor={item.cardColor}
+          price={item.price}
+          text={item.text}
           key={`${item.id}-${i}`}
         />
       ))}
