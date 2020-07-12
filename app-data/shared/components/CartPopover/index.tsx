@@ -77,14 +77,14 @@ const CartPopover: FC<CartPopoverType> = ({ target }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const { state } = useContext(Context);
-  const { cart } = state;
+  const { cart, giftCards } = state;
 
   return (
     <>
       <CartWrapper onMouseEnter={() => setIsOpen(true)}>
         <Link href="/eshop/cart">
           <a>
-            <CartIcon /> <span>{cart.length}</span>
+            <CartIcon /> <span>{cart.length + giftCards.length}</span>
           </a>
         </Link>
         <ShopingCart isOpen={isOpen} onMouseLeave={() => setIsOpen(false)}>

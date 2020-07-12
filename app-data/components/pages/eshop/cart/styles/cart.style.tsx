@@ -20,13 +20,24 @@ export const TH = styled.th`
   border-bottom: none !important;
 `;
 
+export const Circle = styled.div<ICircle>`
+  border-radius: 128px;
+  background-color: ${({ color }) => (color ? `${color}` : 'black')};
+  width: 40px;
+  height: 40px;
+`;
+
 export const TR = styled.tr`
-background-color: #ededed;
+  background-color: #ededed;
 `;
 
 export const TD = styled.td`
-vertical-align: middle !important;
-font-weight: 600;
+  vertical-align: middle !important;
+  font-weight: 600;
+`;
+export const Image = styled.img`
+  width: 40px;
+  margin-right: 0.5rem;
 `;
 export const ButtonAddrRemove = styled.button`
   display: inline-block;
@@ -40,13 +51,18 @@ export const ButtonAddrRemove = styled.button`
   user-select: none;
   background-color: #00aeeff8;
   border: 1px solid transparent;
-  padding: .375rem 1rem;
+  padding: 0.375rem 1rem;
   font-size: 1rem;
   line-height: 1.5;
-  border-radius: .25rem;
-  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   outline: none !important;
-  &:hover{
+  &:hover {
     background-color: #00aeef;
   }
 `;
+
+interface ICircle {
+  color: string;
+}

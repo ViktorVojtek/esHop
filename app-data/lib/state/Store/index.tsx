@@ -12,6 +12,7 @@ const initialState: IState = {
   error: false,
   category: '',
   subCategory: '',
+  giftCards: [],
 };
 
 export const Context = createContext<{

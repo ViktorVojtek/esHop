@@ -4,19 +4,22 @@ import { useQuery } from '@apollo/react-hooks';
 
 import { Context } from '../../../../../../../../lib/state/Store';
 import { PRODUCT_QUERY } from '../../../../../../../../graphql/query';
-import { TD, ButtonAddrRemove } from '../../../../styles/cart.style';
+import { TD, ButtonAddrRemove, Image } from '../../../../styles/cart.style';
+import { ProductImage } from '../../../../../../../../shared/types/Product.types';
 
 interface ICartProductTableRow {
   id: string;
   discount: number;
   count: number;
   variantTitle: string;
+  image: ProductImage;
 }
 const CartProductTableRow: FC<ICartProductTableRow> = ({
   id,
   discount,
   count,
   variantTitle,
+  image,
 }) => {
   const {
     state: { cart },
@@ -87,7 +90,10 @@ const CartProductTableRow: FC<ICartProductTableRow> = ({
 
     return (
       <tr>
-        <TD>{title}</TD>
+        <TD>
+          <Image src={image.path} alt={prodVariantTitle} />
+          {title}
+        </TD>
         <TD>{prodVariantTitle}</TD>
         <TD>{`${calculatedItemPrice},-${currency}`}</TD>
         <TD>{count}</TD>

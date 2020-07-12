@@ -17,6 +17,12 @@ export type VariantOfProduct = {
   images: ProductImage[];
 };
 
+export type GiftCard = {
+  cardColor: string;
+  price: number;
+  text: string;
+};
+
 export type CartProduct = {
   id: string;
   variant: VariantOfProduct;
@@ -30,8 +36,8 @@ export interface IState {
   error: boolean;
   category: string;
   subCategory: string;
+  giftCards: GiftCard[] | [];
 }
-
 
 export interface IAction {
   payload: any;

@@ -21,7 +21,8 @@ const CartEmpty: () => JSX.Element = () => (
 
 const CartBodyComponent: FC = () => {
   const {
-    state: { cart, cartTotalSum },
+    state: { cart, giftCards },
+    state,
     dispatch,
   } = useContext(Context);
 
@@ -45,7 +46,11 @@ const CartBodyComponent: FC = () => {
   return (
     <Wrapper>
       <Container>
-        {cart.length > 0 ? <CartContent data={cart} /> : <CartEmpty />}
+        {cart.length > 0 || giftCards.length > 0 ? (
+          <CartContent data={cart} giftCards={giftCards} />
+        ) : (
+          <CartEmpty />
+        )}
       </Container>
     </Wrapper>
   );
