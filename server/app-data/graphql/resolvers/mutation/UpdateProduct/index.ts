@@ -34,7 +34,7 @@ const updateProduct: (
     const existingImagesArr = [];
     let imagePaths = [];
 
-    const oldImagesArr = productExist.images;
+    const oldImagesArr = (productExist as any).images;
     let imagesToDelete = [];
 
     console.log(oldImagesArr);

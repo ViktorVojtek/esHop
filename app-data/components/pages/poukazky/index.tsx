@@ -23,8 +23,11 @@ import {
   PrednaStranaText,
   PreviewTextHolder,
   PreviewTextHolderBack,
+  StyledModalLink,
 } from './styles';
 import { Context } from '../../../lib/state/Store';
+import Link from 'next/link';
+import ProductModal from '../../../shared/components/ProductModal';
 
 type IProductToCartData = {
   cardColor: string;
@@ -39,6 +42,7 @@ const PoukazkyPage: () => JSX.Element = () => {
     text: '',
   });
   const [activeType, setActiveType] = useState(2);
+  const [modal, setModal] = useState(false);
   const [imageSrc, setImageSrc] = useState(
     '/images/poukazky/poukazka_modra.png'
   );
@@ -69,6 +73,7 @@ const PoukazkyPage: () => JSX.Element = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     handleAddGiftCard(formData);
+    dispatch({ type: 'SET_PRODUCT_MODAL', payload: !modal });
   };
   return (
     <Wrapper>
@@ -191,6 +196,17 @@ const PoukazkyPage: () => JSX.Element = () => {
           <AddToCart type="submit">Pridať do košíka</AddToCart>
         </Form>
       </Container>
+      <ProductModal
+        message="Pokračujte v nákupe alebo do pokladne."
+        title="Darčeková poukážka bola vytvorená a pridaná do košíka."
+      >
+        <Link href="cart">
+          <StyledModalLink color="primary">Do pokladne</StyledModalLink>
+        </Link>
+        <Link href="/eshop">
+          <StyledModalLink color="primary">Nakupovať</StyledModalLink>
+        </Link>
+      </ProductModal>
     </Wrapper>
   );
 };

@@ -32,9 +32,6 @@ const AsideCartGiftCards: FC<IAsideCartGiftCards> = ({
       payload: { id },
     });
   };
-
-  console.log(cardColor);
-
   return (
     <AsideCartWrapper className="mt-4">
       <HeadWrapper className="d-flex">

@@ -27,17 +27,14 @@ const ProductsMP: () => JSX.Element = () => {
     return <>loading</>;
   }
 
-
   return (
     <Container fluid>
-      { category.length > 0 ?
+      {category.length > 0 ? (
         <>
           <FeaturesProducts category={category[0]._id} />
-          { /* Change category parameter to 1 for services */ }
-          <FeaturesServices category={category[0]._id} />
+          <FeaturesServices category={category[1]._id} />
         </>
-      : null
-      }
+      ) : null}
     </Container>
   );
 };

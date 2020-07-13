@@ -42,7 +42,7 @@ export const Button = styled.button`
   font-family: MuseoSans-300;
   text-transform: uppercase;
   color: #fff !important;
-  padding: 1rem 1.5rem;
+  padding: 0.75rem 1rem;
   border-radius: 0.35rem;
   outline: none !important;
   border-radius: 6px;
@@ -93,7 +93,7 @@ export const ButtonLink = styled.a`
   font-family: MuseoSans-300;
   text-transform: uppercase;
   color: #fff !important;
-  padding: 1rem 1.5rem;
+  padding: 0.75rem 1rem;
   border-radius: 0.35rem;
   outline: none !important;
   border-radius: 6px;

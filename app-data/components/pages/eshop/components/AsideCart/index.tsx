@@ -32,7 +32,7 @@ const CartAside: FC = () => {
 
   return (
     <div>
-      {cart.length > 0 ? (
+      {cart.length > 0 || giftCards.length > 0 ? (
         <AsideCartContent
           data={cart}
           giftCards={giftCards}

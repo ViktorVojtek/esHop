@@ -41,7 +41,7 @@ const ShopingCart = styled.div<ShoppingCartType>`
   margin: 20px 0;
   right: 0rem;
   background: white;
-  width: 320px;
+  width: 400px;
   position: absolute;
   border-radius: 3px;
   border: 1px solid #00aeef;

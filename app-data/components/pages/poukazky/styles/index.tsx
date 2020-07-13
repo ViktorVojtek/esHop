@@ -32,9 +32,7 @@ export const H3 = styled.h3`
   letter-spacing: 1px;
   font-family: Franchise-CE;
 `;
-export const RadioGroup = styled.div`
-
-`;
+export const RadioGroup = styled.div``;
 export const RadioColorGroup = styled.div`
   margin-top: 2rem;
   display: flex;
@@ -49,9 +47,9 @@ export const AddToCart = styled.button`
   background-color: #00aeefb8;
   font-family: MuseoSans-300;
   text-transform: uppercase;
-  color: #FFF !important;
+  color: #fff !important;
   padding: 1rem 1.5rem;
-  border-radius: .35rem;
+  border-radius: 0.35rem;
   outline: none !important;
   border-radius: 6px;
   border: none;
@@ -61,8 +59,8 @@ export const AddToCart = styled.button`
   margin-top: 1rem;
   letter-spacing: 0px;
   user-select: none;
-  transition: all .3s ease-out;
-  &:hover{
+  transition: all 0.3s ease-out;
+  &:hover {
     background-color: #00aeef;
   }
 `;
@@ -71,9 +69,9 @@ export const Button = styled.button`
   background-color: #00aeefb8;
   font-family: MuseoSans-300;
   text-transform: uppercase;
-  color: #FFF !important;
+  color: #fff !important;
   padding: 1rem 1.5rem;
-  border-radius: .35rem;
+  border-radius: 0.35rem;
   outline: none !important;
   border-radius: 6px;
   border: none;
@@ -83,16 +81,16 @@ export const Button = styled.button`
   margin-top: 1rem;
   letter-spacing: 0px;
   user-select: none;
-  transition: all .3s ease-out;
-  margin: .5rem;
+  transition: all 0.3s ease-out;
+  margin: 0.5rem;
   width: 40%;
-  &:hover{
+  &:hover {
     background-color: #00aeef;
   }
 `;
 
 export const InputHolder = styled.div`
-  margin: 0 auto; 
+  margin: 0 auto;
   max-width: 600px;
   margin-bottom: 2rem;
 `;
@@ -109,7 +107,7 @@ export const PreviewHolder = styled.div`
 export const PrednaStranaText = styled.p<IColorText>`
   font-size: 2.5rem;
   font-family: 'Engagement-Regular';
-  color: ${({ colorText }) =>colorText ? `${colorText}` : 'black'};
+  color: ${({ colorText }) => (colorText ? `${colorText}` : 'black')};
   text-align: center;
   padding-right: 10%;
   line-height: 2rem;
@@ -117,27 +115,27 @@ export const PrednaStranaText = styled.p<IColorText>`
   word-break: break-all;
   margin: 0;
   width: 100%;
-  @media(max-width: 1200px){
+  @media (max-width: 1200px) {
     font-size: 2rem;
     line-height: 1.75rem;
   }
-  @media(max-width: 992px){
+  @media (max-width: 992px) {
     font-size: 1.5rem;
     line-height: 1.25rem;
   }
-  @media(max-width: 768px){
+  @media (max-width: 768px) {
     font-size: 2.25rem;
     line-height: 2rem;
   }
-  @media(max-width: 484px){
+  @media (max-width: 484px) {
     font-size: 1.75rem;
     line-height: 1.5rem;
   }
-  @media(max-width: 410px){
+  @media (max-width: 410px) {
     font-size: 1.5rem;
     line-height: 1.25rem;
   }
-  @media(max-width: 340px){
+  @media (max-width: 340px) {
     font-size: 1.25rem;
     line-height: 1.25rem;
   }
@@ -150,7 +148,7 @@ export const PreviewTextHolder = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  top:0;
+  top: 0;
   right: 0;
 `;
 export const PreviewTextHolderBack = styled.div`
@@ -165,27 +163,28 @@ export const PreviewTextHolderBack = styled.div`
 `;
 
 export const Label = styled.label<IPhotoRightItem>`
-background-image: ${({ imageUrl }) =>imageUrl ? `url(${imageUrl})` : '0'};
-cursor:pointer;
-    background-size:contain;
-    background-repeat:no-repeat;
-    display:inline-block;
-    width: 100%;
-    padding-top: 35%;
-    -webkit-transition: all 100ms ease-in;
-       -moz-transition: all 100ms ease-in;
-            transition: all 100ms ease-in;
-    -webkit-filter: grayscale(1);
-       -moz-filter: grayscale(1);
-            filter: grayscale(1);
-  &:hover{
-    -webkit-filter: grayscale(0) ;
-       -moz-filter: grayscale(0) ;
-            filter: grayscale(0) ;
+  background-image: ${({ imageUrl }) => (imageUrl ? `url(${imageUrl})` : '0')};
+  cursor: pointer;
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: inline-block;
+  width: 100%;
+  padding-top: 35%;
+  -webkit-transition: all 100ms ease-in;
+  -moz-transition: all 100ms ease-in;
+  transition: all 100ms ease-in;
+  -webkit-filter: grayscale(1);
+  -moz-filter: grayscale(1);
+  filter: grayscale(1);
+  &:hover {
+    -webkit-filter: grayscale(0);
+    -moz-filter: grayscale(0);
+    filter: grayscale(0);
   }
 `;
 export const ColorLabel = styled.label<IColor>`
-  background-color: ${({ colorButton }) =>colorButton ? `${colorButton}` : 'black'};
+  background-color: ${({ colorButton }) =>
+    colorButton ? `${colorButton}` : 'black'};
   cursor:pointer;
   display:inline-block;
   width: 60px;
@@ -199,39 +198,64 @@ export const ColorLabel = styled.label<IColor>`
 }
 `;
 export const RadioColorInput = styled.input`
-margin:0;padding:0;
-  -webkit-appearance:none;
-    -moz-appearance:none;
-          appearance:none;
-  &:checked{
-    & ~ ${ColorLabel}{
+  margin: 0;
+  padding: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  &:checked {
+    & ~ ${ColorLabel} {
       box-shadow: 0px 0px 4px 4px #00aeef;
       transform: scale(1.15);
     }
   }
-  &:active{
-    & ~ ${ColorLabel}{
+  &:active {
+    & ~ ${ColorLabel} {
       transform: scale(1.15);
     }
   }
 `;
 
 export const RadioInput = styled.input`
-  margin:0;padding:0;
-  -webkit-appearance:none;
-    -moz-appearance:none;
-          appearance:none;
-  &:active{
-    & ~ ${Label}{
+  margin: 0;
+  padding: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  &:active {
+    & ~ ${Label} {
       opacity: 1;
     }
   }
-  &:checked{
-    & ~ ${Label}{
+  &:checked {
+    & ~ ${Label} {
       -webkit-filter: none;
       -moz-filter: none;
-          filter: none;
+      filter: none;
     }
+  }
+`;
+
+export const StyledModalLink = styled.a`
+  background-color: #00aeefb8;
+  text-transform: uppercase;
+  color: #fff !important;
+  padding: 1rem 1.5rem;
+  border-radius: 0.35rem;
+  transition: all 0.3s ease-out;
+  cursor: pointer;
+  letter-spacing: 0px;
+  font-weight: 600;
+  margin-top: 1rem;
+  display: inline-block;
+  user-select: none;
+  @media (max-width: 350px) {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+  &:hover {
+    background-color: #00aeef;
   }
 `;
 interface IPhotoRightItem {
@@ -244,7 +268,3 @@ interface IColor {
 interface IColorText {
   colorText?: string;
 }
-
-
-
-

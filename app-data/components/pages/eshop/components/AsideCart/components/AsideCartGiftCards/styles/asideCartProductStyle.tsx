@@ -13,7 +13,7 @@ export const HeadWrapper = styled.div`
 
 export const P = styled.p`
   margin: 0;
-  width: 67%;
+  width: 100%;
   font-weight: bold;
 `;
 export const Circle = styled.div<ImageColor>`
@@ -23,7 +23,7 @@ export const Circle = styled.div<ImageColor>`
   background-color: ${({ color }) => (color ? `${color}` : 'black')};
 `;
 export const Detail = styled.div`
-  width: 67%;
+  width: 100%;
 `;
 
 export const DetailItem = styled.p`
@@ -43,7 +43,7 @@ export const Button = styled.button`
   font-family: MuseoSans-300;
   text-transform: uppercase;
   color: #fff !important;
-  padding: 1rem 1.5rem;
+  padding: 0.75rem 1rem;
   border-radius: 0.35rem;
   outline: none !important;
   border-radius: 6px;
