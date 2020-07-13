@@ -42,7 +42,6 @@ const PoukazkyPage: () => JSX.Element = () => {
     text: '',
   });
   const [activeType, setActiveType] = useState(2);
-  const [modal, setModal] = useState(false);
   const [imageSrc, setImageSrc] = useState(
     '/images/poukazky/poukazka_modra.png'
   );
@@ -73,7 +72,7 @@ const PoukazkyPage: () => JSX.Element = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     handleAddGiftCard(formData);
-    dispatch({ type: 'SET_PRODUCT_MODAL', payload: !modal });
+    dispatch({ type: 'SET_PRODUCT_MODAL', payload: true });
   };
   return (
     <Wrapper>
@@ -200,7 +199,7 @@ const PoukazkyPage: () => JSX.Element = () => {
         message="Pokračujte v nákupe alebo do pokladne."
         title="Darčeková poukážka bola vytvorená a pridaná do košíka."
       >
-        <Link href="cart">
+        <Link href="/eshop/cart">
           <StyledModalLink color="primary">Do pokladne</StyledModalLink>
         </Link>
         <Link href="/eshop">

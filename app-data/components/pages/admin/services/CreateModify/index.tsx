@@ -3,6 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import StepperWrapper from './StepperWrapper';
 
 import { getSteps } from './helpers';
+import { Select } from '@material-ui/core';
 
 const Comp1 = () => (
   <div>

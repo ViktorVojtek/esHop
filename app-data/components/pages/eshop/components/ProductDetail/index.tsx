@@ -106,7 +106,7 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
         images,
       },
     });
-    dispatch({ type: 'SET_PRODUCT_MODAL', payload: !modal });
+    dispatch({ type: 'SET_PRODUCT_MODAL', payload: true });
   };
 
   const variantOptions: JSX.Element[] = variants.map(({ title }) => (
