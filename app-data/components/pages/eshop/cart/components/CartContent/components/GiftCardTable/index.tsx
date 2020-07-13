@@ -1,5 +1,10 @@
 import React, { FC, useContext } from 'react';
-import { TD, Circle, ButtonAddrRemove } from '../../../../styles/cart.style';
+import {
+  TD,
+  Circle,
+  ButtonAddrRemove,
+  TDtext,
+} from '../../../../styles/cart.style';
 import { Context } from '../../../../../../../../lib/state/Store';
 
 interface IGiftCardTableRow {
@@ -31,7 +36,7 @@ const GiftCardTableRow: FC<IGiftCardTableRow> = ({
         <Circle color={cardColor}></Circle>
       </TD>
       <TD>{`${price},-€`}</TD>
-      <TD>{text}</TD>
+      <TDtext>{text}</TDtext>
       <TD>{`${price},-€`}</TD>
       <TD>
         <ButtonAddrRemove onClick={() => handleRemoveGiftCard(id)}>

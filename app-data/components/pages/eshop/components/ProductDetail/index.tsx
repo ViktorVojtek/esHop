@@ -74,7 +74,6 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
   }
 
   const setRelatedProducts = (products: Product[]) => {
-    console.log(products);
     const filteredProducts = products.filter((item) => item._id !== _id);
     setProducts(filteredProducts);
   };
@@ -191,10 +190,24 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
         title="Produkt bol pridaný do košíka"
       >
         <Link href="cart">
-          <StyledModalLink color="primary">Do pokladne</StyledModalLink>
+          <StyledModalLink
+            onClick={() =>
+              dispatch({ type: 'SET_PRODUCT_MODAL', payload: false })
+            }
+            color="primary"
+          >
+            Do pokladne
+          </StyledModalLink>
         </Link>
         <Link href="/eshop">
-          <StyledModalLink color="primary">Nakupovať</StyledModalLink>
+          <StyledModalLink
+            onClick={() =>
+              dispatch({ type: 'SET_PRODUCT_MODAL', payload: false })
+            }
+            color="primary"
+          >
+            Nakupovať
+          </StyledModalLink>
         </Link>
       </ProductModal>
     </Wrapper>

@@ -37,6 +37,12 @@ export const TD = styled.td`
   font-weight: 600;
   white-space: nowrap;
 `;
+export const TDtext = styled.td`
+  vertical-align: middle !important;
+  font-weight: 600;
+  white-space: pre-line;
+  min-width: 180px;
+`;
 export const Image = styled.img`
   width: 40px;
   margin-right: 0.5rem;
