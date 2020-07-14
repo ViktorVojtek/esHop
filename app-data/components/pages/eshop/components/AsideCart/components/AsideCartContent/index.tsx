@@ -29,7 +29,9 @@ const AsideCartContent: FC<ICartContent> = ({
       <Total>
         <TotalItem>
           <TotalText light>Počet položiek:</TotalText>
-          <TotalText className="ml-1">{cart.length}</TotalText>
+          <TotalText className="ml-1">
+            {cart.length + giftCards.length}
+          </TotalText>
         </TotalItem>
         <TotalItem>
           <TotalText light>Spolu:</TotalText>
