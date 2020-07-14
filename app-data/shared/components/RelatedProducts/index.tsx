@@ -16,6 +16,10 @@ import {
   Price,
   StyledCartLink,
 } from './styles/index.js';
+import {
+  Del,
+  ActionPrice,
+} from '../../../components/pages/eshop/components/Products/components/ProductsFill/styles/products.style';
 
 type RelatedProductType = {
   product: Product;
@@ -47,22 +51,26 @@ const RelatedProducts: FC<RelatedProductType> = ({
         <ProductTitle>{title}</ProductTitle>
         <StyledShortDescription>{subCategory.title}</StyledShortDescription>
         <PriceHolder>
-          <Price>
-            {variants.length > 0
-              ? `${variants[0].price.value.toFixed(2)} ${
-                  variants[0].price.currency
-                }`
-              : 'Produkt neexistuje'}
-          </Price>
-          {variants[0].price.discount > 0 ? (
+          {variants[0].discount > 0 ? (
             <Price>
-              {(
-                variants[0].price.value -
-                (variants[0].price.value * variants[0].discount) / 100
-              ).toFixed(2)}
+              <Del>
+                {variants[0].price.value.toFixed(2)}
+                {variants[0].price.currency}
+              </Del>
+              <ActionPrice className="ml-2">
+                {(
+                  variants[0].price.value -
+                  (variants[0].price.value * variants[0].discount) / 100
+                ).toFixed(2)}
+                {variants[0].price.currency}
+              </ActionPrice>
+            </Price>
+          ) : (
+            <Price>
+              {variants[0].price.value.toFixed(2)}
               {variants[0].price.currency}
             </Price>
-          ) : null}
+          )}
         </PriceHolder>
         <Link href={{ pathname: '/eshop/product', query: { id: _id } }}>
           <StyledCartLink>Ihneď kúpiť</StyledCartLink>

@@ -26,7 +26,7 @@ import {
 import Link from 'next/link';
 import { useQuery } from '@apollo/react-hooks';
 
-import { Container, Row, Col } from 'reactstrap';
+import { Container, Row, Col, Spinner } from 'reactstrap';
 import ProductModal from '../../../../../shared/components/ProductModal';
 // Types
 import Product from '../../../../../shared/types/Product.types';
@@ -70,7 +70,7 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
     return <>{error.message}</>;
   }
   if (loading) {
-    return <>loading</>;
+    return <Spinner color="primary" />;
   }
 
   const setRelatedProducts = (products: Product[]) => {

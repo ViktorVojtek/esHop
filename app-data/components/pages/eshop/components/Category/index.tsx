@@ -14,6 +14,7 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
+  Spinner,
 } from 'reactstrap';
 import { SUBCATEGORIES_QUERY } from '../../../../../graphql/query';
 import { useQuery } from '@apollo/react-hooks';
@@ -41,7 +42,7 @@ const Category: FC<ICategory> = ({ title, id }) => {
   }
 
   if (loading) {
-    return <>loading</>;
+    return <Spinner color="primary" />;
   }
 
   const subCategoriesArray: any = data.subCategories;

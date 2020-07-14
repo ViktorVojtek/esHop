@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container } from 'reactstrap';
+import { Container, Spinner } from 'reactstrap';
 import { useQuery } from '@apollo/react-hooks';
 
 import { CATEGORIES_QUERY } from '../../../../graphql/query';
@@ -24,7 +24,7 @@ const ProductsMP: () => JSX.Element = () => {
     return <>{error.message}</>;
   }
   if (loading) {
-    return <>loading</>;
+    return <Spinner color="primary" />;
   }
 
   return (

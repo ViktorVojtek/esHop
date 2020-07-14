@@ -1,6 +1,6 @@
 import React, { useEffect, FC, useState } from 'react';
 import { useQuery } from '@apollo/react-hooks';
-import { Container, Row } from 'reactstrap';
+import { Container, Row, Spinner } from 'reactstrap';
 
 import { H3 } from '../features.style';
 
@@ -27,7 +27,7 @@ const FeaturesProducts: FC<IFeaturesProducts> = ({ category }) => {
     return <>{error.message}</>;
   }
   if (loading) {
-    return <>loading</>;
+    return <Spinner color="primary" />;
   }
 
   return (

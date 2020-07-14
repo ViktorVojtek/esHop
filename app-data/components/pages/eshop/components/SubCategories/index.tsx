@@ -1,8 +1,15 @@
 /* eslint-disable no-underscore-dangle */
-import React, { Dispatch, FC, SetStateAction, useState, useEffect } from 'react';
+import React, {
+  Dispatch,
+  FC,
+  SetStateAction,
+  useState,
+  useEffect,
+} from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { Aside, H3, Button, Buttons } from './style/subCategories.style';
 import { SUBCATEGORIES_QUERY } from '../../../../../graphql/query';
+import { Spinner } from 'reactstrap';
 
 interface ISubCategoriesAside {
   getSubCategory: Dispatch<SetStateAction<string>>;
@@ -23,7 +30,7 @@ const SubCategoriesAside: FC<ISubCategoriesAside> = ({
   }
 
   if (loading) {
-    return <>loading</>;
+    return <Spinner color="primary" />;
   }
 
   const subCategoriesArray: any = data.subCategories;

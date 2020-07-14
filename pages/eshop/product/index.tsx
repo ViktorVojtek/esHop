@@ -2,6 +2,7 @@ import React from 'react';
 import Error from 'next/error';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/react-hooks';
+import { Spinner } from 'reactstrap';
 
 import Layout from '../../../app-data/shared/components/Layout/Site.layout';
 import ProductDetailBody from '../../../app-data/components/pages/eshop/components/ProductDetail';
@@ -19,7 +20,7 @@ const ProductDetail: React.FC = () => {
   });
 
   if (loading) {
-    return <>loading</>;
+    return <Spinner color="primary" />;
   }
 
   if (error) {
