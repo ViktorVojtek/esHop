@@ -95,12 +95,12 @@ const CartProductTableRow: FC<ICartProductTableRow> = ({
           {title}
         </TD>
         <TD>{prodVariantTitle}</TD>
-        <TD>{`${calculatedItemPrice},-${currency}`}</TD>
+        <TD>{`${calculatedItemPrice.toFixed(2)},-${currency}`}</TD>
         <TD>{count}</TD>
         <TD>
-          {`${
-            Math.round(count * calculatedItemPrice * 100) / 100
-          },-${currency}`}{' '}
+          {`${(Math.round(count * calculatedItemPrice * 100) / 100).toFixed(
+            2
+          )},-${currency}`}{' '}
         </TD>
         <TD>
           <ButtonAddrRemove onClick={() => handleRemoveProduct(id)}>

@@ -5,7 +5,7 @@ import { Aside, H3, Button, Buttons } from './style/categories.style';
 import { CATEGORIES_QUERY } from '../../../../../graphql/query';
 import Category from '../Category';
 import { Context } from '../../../../../lib/state/Store';
-import { Col } from 'reactstrap';
+import { Col, Spinner } from 'reactstrap';
 
 const CategoriesAside: FC = () => {
   const { error, loading, data } = useQuery(CATEGORIES_QUERY);
@@ -17,7 +17,7 @@ const CategoriesAside: FC = () => {
   }
 
   if (loading) {
-    return <>loading</>;
+    return <Spinner color="primary" />;
   }
 
   const { categories } = data;

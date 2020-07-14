@@ -162,6 +162,16 @@ const Reducer = (state: IState, action: IAction) => {
         ...state,
         menuOpen: action.payload,
       };
+    case 'SET_PRODUCTS_TOTAL_COUNT':
+      return {
+        ...state,
+        productsTotal: action.payload,
+      };
+    case 'SET_PRODUCTS_TO_SHOW_COUNT':
+      return {
+        ...state,
+        productsToShow: action.payload,
+      };
     default:
       return state;
   }

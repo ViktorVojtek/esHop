@@ -37,6 +37,8 @@ export interface IState {
   category: string;
   subCategory: string;
   giftCards: GiftCard[] | [];
+  productsTotal: number;
+  productsToShow: number;
 }
 
 export interface IAction {

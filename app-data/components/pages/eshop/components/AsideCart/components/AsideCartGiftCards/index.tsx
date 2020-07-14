@@ -37,7 +37,7 @@ const AsideCartGiftCards: FC<IAsideCartGiftCards> = ({
       <HeadWrapper className="d-flex">
         <Detail>
           <Title>Darčeková poukážka</Title>
-          <DetailItem>{`Hodnota: ${price},-€`}</DetailItem>
+          <DetailItem>{`Hodnota: ${price.toFixed(2)},-€`}</DetailItem>
           <DetailItem>{`Venovanie: ${text}`}</DetailItem>
           <div className="d-flex align-items-center">
             <DetailItem>Farba poukážky:</DetailItem>

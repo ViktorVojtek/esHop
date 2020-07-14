@@ -103,7 +103,7 @@ export default () => {
               </Col>
               <Col md={6}>
                 <p className="text-right">
-                  {value === 0 ? 'Zadarmo' : `${value},-€`}
+                  {value === 0 ? 'Zadarmo' : `${value.toFixed(2)},-€`}
                 </p>
               </Col>
             </Row>

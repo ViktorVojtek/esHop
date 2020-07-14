@@ -13,6 +13,8 @@ const initialState: IState = {
   category: '',
   subCategory: '',
   giftCards: [],
+  productsTotal: 0,
+  productsToShow: 0,
 };
 
 export const Context = createContext<{

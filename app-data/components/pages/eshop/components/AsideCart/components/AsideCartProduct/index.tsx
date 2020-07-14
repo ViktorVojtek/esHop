@@ -114,11 +114,13 @@ const AsideCartProduct: FC<ICartProductTableRow> = ({
           <Image src={image.path} />
           <Detail>
             <Title>{title}</Title>
-            <DetailItem>{`${calculatedItemPrice},-${currency}`}</DetailItem>
+            <DetailItem>{`${calculatedItemPrice.toFixed(
+              2
+            )},-${currency}`}</DetailItem>
             <DetailItem>{`Počet: ${count} ${textCount}`}</DetailItem>
-            <DetailItem>{`Spolu: ${
-              Math.round(count * calculatedItemPrice * 100) / 100
-            },-${currency}`}</DetailItem>
+            <DetailItem>{`Spolu: ${Math.round(
+              (count * calculatedItemPrice * 100) / 100
+            ).toFixed(2)},-${currency}`}</DetailItem>
           </Detail>
         </HeadWrapper>
 

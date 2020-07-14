@@ -33,7 +33,9 @@ const AsideCartContent: FC<ICartContent> = ({
         </TotalItem>
         <TotalItem>
           <TotalText light>Spolu:</TotalText>
-          <TotalText className="ml-1">{`${cartTotalSum},- €`}</TotalText>
+          <TotalText className="ml-1">{`${cartTotalSum.toFixed(
+            2
+          )},- €`}</TotalText>
         </TotalItem>
       </Total>
       {data.map((item: any, i: number) => (

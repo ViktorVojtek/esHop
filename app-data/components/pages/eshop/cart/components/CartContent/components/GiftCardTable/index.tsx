@@ -35,9 +35,9 @@ const GiftCardTableRow: FC<IGiftCardTableRow> = ({
       <TD>
         <Circle color={cardColor}></Circle>
       </TD>
-      <TD>{`${price},-€`}</TD>
+      <TD>{`${price.toFixed(2)},-€`}</TD>
       <TDtext>{text}</TDtext>
-      <TD>{`${price},-€`}</TD>
+      <TD>{`${price.toFixed(2)},-€`}</TD>
       <TD>
         <ButtonAddrRemove onClick={() => handleRemoveGiftCard(id)}>
           Odstrániť

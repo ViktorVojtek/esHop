@@ -79,18 +79,20 @@ const ProductUI: React.FC<IProductUI> = ({
             {variants[0].discount > 0 ? (
               <Price>
                 <Del>
-                  {variants[0].price.value}
+                  {variants[0].price.value.toFixed(2)}
                   {variants[0].price.currency}
                 </Del>
                 <ActionPrice className="ml-2">
-                  {variants[0].price.value -
-                    (variants[0].price.value * variants[0].discount) / 100}
+                  {(
+                    variants[0].price.value -
+                    (variants[0].price.value * variants[0].discount) / 100
+                  ).toFixed(2)}
                   {variants[0].price.currency}
                 </ActionPrice>
               </Price>
             ) : (
               <Price>
-                {variants[0].price.value}
+                {variants[0].price.value.toFixed(2)}
                 {variants[0].price.currency}
               </Price>
             )}

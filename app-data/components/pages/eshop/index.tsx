@@ -11,6 +11,7 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
+  Spinner,
 } from 'reactstrap';
 import { useQuery } from '@apollo/react-hooks';
 import Link from 'next/link';
@@ -67,7 +68,7 @@ const EshopPage: FC = () => {
     return <>{error.message}</>;
   }
   if (loading) {
-    return <>loading</>;
+    return <Spinner color="primary" />;
   }
 
   const filterByCategory = (products: Product[]) => {

@@ -49,13 +49,17 @@ const RelatedProducts: FC<RelatedProductType> = ({
         <PriceHolder>
           <Price>
             {variants.length > 0
-              ? `${variants[0].price.value} ${variants[0].price.currency}`
+              ? `${variants[0].price.value.toFixed(2)} ${
+                  variants[0].price.currency
+                }`
               : 'Produkt neexistuje'}
           </Price>
           {variants[0].price.discount > 0 ? (
             <Price>
-              {variants[0].price.value -
-                (variants[0].price.value * variants[0].discount) / 100}
+              {(
+                variants[0].price.value -
+                (variants[0].price.value * variants[0].discount) / 100
+              ).toFixed(2)}
               {variants[0].price.currency}
             </Price>
           ) : null}
