@@ -200,10 +200,24 @@ const PoukazkyPage: () => JSX.Element = () => {
         title="Darčeková poukážka bola vytvorená a pridaná do košíka."
       >
         <Link href="/eshop/cart">
-          <StyledModalLink color="primary">Do pokladne</StyledModalLink>
+          <StyledModalLink
+            color="primary"
+            onClick={() =>
+              dispatch({ type: 'SET_PRODUCT_MODAL', payload: false })
+            }
+          >
+            Do pokladne
+          </StyledModalLink>
         </Link>
         <Link href="/eshop">
-          <StyledModalLink color="primary">Nakupovať</StyledModalLink>
+          <StyledModalLink
+            color="primary"
+            onClick={() =>
+              dispatch({ type: 'SET_PRODUCT_MODAL', payload: false })
+            }
+          >
+            Nakupovať
+          </StyledModalLink>
         </Link>
       </ProductModal>
     </Wrapper>

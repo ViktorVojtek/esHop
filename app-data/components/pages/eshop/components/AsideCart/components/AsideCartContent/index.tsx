@@ -10,6 +10,7 @@ import Link from 'next/link';
 import { Context } from '../../../../../../../lib/state/Store';
 import { GiftCard } from '../../../../../../../shared/types/Store.types';
 import AsideCartGiftCards from '../AsideCartGiftCards';
+import { formatPrice } from '../../../../../../../shared/helpers/formatters';
 
 interface ICartContent {
   data: any[];
@@ -35,9 +36,9 @@ const AsideCartContent: FC<ICartContent> = ({
         </TotalItem>
         <TotalItem>
           <TotalText light>Spolu:</TotalText>
-          <TotalText className="ml-1">{`${cartTotalSum.toFixed(
-            2
-          )},- €`}</TotalText>
+          <TotalText className="ml-1">{`${formatPrice(
+            cartTotalSum
+          )} €`}</TotalText>
         </TotalItem>
       </Total>
       {data.map((item: any, i: number) => (

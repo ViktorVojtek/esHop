@@ -35,6 +35,7 @@ import { VariantOfProduct } from '../../../../../shared/types/Store.types';
 import { Context } from '../../../../../lib/state/Store';
 import { PRODUCTS_QUERY } from '../../../../../graphql/query';
 import RelatedProducts from '../../../../../shared/components/RelatedProducts';
+import { formatPrice } from '../../../../../shared/helpers/formatters';
 
 interface IProductDetailProps {
   product: Product;
@@ -137,22 +138,22 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
               {variants[activeVariant].discount > 0 ? (
                 <Price>
                   <Del>
-                    {variants[activeVariant].price.value.toFixed(2)}
+                    {formatPrice(variants[activeVariant].price.value)}{' '}
                     {variants[activeVariant].price.currency}
                   </Del>
                   <ActionPrice className="ml-2">
-                    {(
+                    {formatPrice(
                       variants[activeVariant].price.value -
-                      (variants[activeVariant].price.value *
-                        variants[activeVariant].discount) /
-                        100
-                    ).toFixed(2)}
+                        (variants[activeVariant].price.value *
+                          variants[activeVariant].discount) /
+                          100
+                    )}{' '}
                     {variants[activeVariant].price.currency}
                   </ActionPrice>
                 </Price>
               ) : (
                 <Price>
-                  {variants[activeVariant].price.value.toFixed(2)}
+                  {formatPrice(variants[activeVariant].price.value)}{' '}
                   {variants[activeVariant].price.currency}
                 </Price>
               )}

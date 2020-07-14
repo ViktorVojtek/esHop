@@ -3,6 +3,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { Context } from '../../../../../../../../../../../lib/state/Store';
 import { PAYMENT_METHODES_QUERY } from '../../../../../../../../../../../graphql/query';
 import { Col, Row, FormGroup, Input, Label } from 'reactstrap';
+import { formatPrice } from '../../../../../../../../../../../shared/helpers/formatters';
 
 export default () => {
   const {
@@ -103,7 +104,7 @@ export default () => {
               </Col>
               <Col md={6}>
                 <p className="text-right">
-                  {value === 0 ? 'Zadarmo' : `${value.toFixed(2)},-€`}
+                  {value === 0 ? 'Zadarmo' : `${formatPrice(value)} €`}
                 </p>
               </Col>
             </Row>

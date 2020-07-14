@@ -6,6 +6,7 @@ import { Context } from '../../../../../../../../lib/state/Store';
 import { PRODUCT_QUERY } from '../../../../../../../../graphql/query';
 import { TD, ButtonAddrRemove, Image } from '../../../../styles/cart.style';
 import { ProductImage } from '../../../../../../../../shared/types/Product.types';
+import { formatPrice } from '../../../../../../../../shared/helpers/formatters';
 
 interface ICartProductTableRow {
   id: string;
@@ -95,12 +96,12 @@ const CartProductTableRow: FC<ICartProductTableRow> = ({
           {title}
         </TD>
         <TD>{prodVariantTitle}</TD>
-        <TD>{`${calculatedItemPrice.toFixed(2)},-${currency}`}</TD>
+        <TD>{`${formatPrice(calculatedItemPrice)} ${currency}`}</TD>
         <TD>{count}</TD>
         <TD>
-          {`${(Math.round(count * calculatedItemPrice * 100) / 100).toFixed(
-            2
-          )},-${currency}`}{' '}
+          {`${formatPrice(
+            Math.round(count * calculatedItemPrice * 100) / 100
+          )} ${currency}`}{' '}
         </TD>
         <TD>
           <ButtonAddrRemove onClick={() => handleRemoveProduct(id)}>

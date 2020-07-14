@@ -14,6 +14,7 @@ import {
   Title,
   Detail,
 } from './styles/asideCartProductStyle';
+import { formatPrice } from '../../../../../../../shared/helpers/formatters';
 
 interface ICartProductTableRow {
   id: string;
@@ -114,13 +115,15 @@ const AsideCartProduct: FC<ICartProductTableRow> = ({
           <Image src={image.path} />
           <Detail>
             <Title>{title}</Title>
-            <DetailItem>{`${calculatedItemPrice.toFixed(
-              2
-            )},-${currency}`}</DetailItem>
+            <DetailItem>{`${formatPrice(
+              calculatedItemPrice
+            )} ${currency}`}</DetailItem>
             <DetailItem>{`Počet: ${count} ${textCount}`}</DetailItem>
-            <DetailItem>{`Spolu: ${Math.round(
-              (count * calculatedItemPrice * 100) / 100
-            ).toFixed(2)},-${currency}`}</DetailItem>
+            <DetailItem>
+              {`Spolu: ${formatPrice(
+                Math.round(count * calculatedItemPrice * 100) / 100
+              )} ${currency}`}{' '}
+            </DetailItem>
           </Detail>
         </HeadWrapper>
 

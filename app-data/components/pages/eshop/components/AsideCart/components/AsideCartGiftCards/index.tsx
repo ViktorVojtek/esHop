@@ -10,6 +10,7 @@ import {
   Title,
   Detail,
 } from './styles/asideCartProductStyle';
+import { formatPrice } from '../../../../../../../shared/helpers/formatters';
 
 type IAsideCartGiftCards = {
   cardColor: string;
@@ -37,7 +38,7 @@ const AsideCartGiftCards: FC<IAsideCartGiftCards> = ({
       <HeadWrapper className="d-flex">
         <Detail>
           <Title>Darčeková poukážka</Title>
-          <DetailItem>{`Hodnota: ${price.toFixed(2)},-€`}</DetailItem>
+          <DetailItem>{`Hodnota: ${formatPrice(price)} €`}</DetailItem>
           <DetailItem>{`Venovanie: ${text}`}</DetailItem>
           <div className="d-flex align-items-center">
             <DetailItem>Farba poukážky:</DetailItem>

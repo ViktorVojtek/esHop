@@ -25,6 +25,7 @@ import {
   Del,
   ActionPrice,
 } from '../../../components/pages/eshop/components/ProductDetail/styles/productDetail.style';
+import { formatPrice } from '../../helpers/formatters';
 
 const FeatureProduct: FC<IProductUI> = ({
   product: { _id, variants, subCategory, title },
@@ -53,20 +54,20 @@ const FeatureProduct: FC<IProductUI> = ({
           {variants[0].discount > 0 ? (
             <Price>
               <Del>
-                {variants[0].price.value.toFixed(2)}
+                {formatPrice(variants[0].price.value)}{' '}
                 {variants[0].price.currency}
               </Del>
               <ActionPrice className="ml-2">
-                {(
+                {formatPrice(
                   variants[0].price.value -
-                  (variants[0].price.value * variants[0].discount) / 100
-                ).toFixed(2)}
+                    (variants[0].price.value * variants[0].discount) / 100
+                )}{' '}
                 {variants[0].price.currency}
               </ActionPrice>
             </Price>
           ) : (
             <Price>
-              {variants[0].price.value.toFixed(2)}
+              {formatPrice(variants[0].price.value)}{' '}
               {variants[0].price.currency}
             </Price>
           )}

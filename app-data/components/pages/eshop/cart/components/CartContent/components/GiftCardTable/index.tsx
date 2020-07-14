@@ -6,6 +6,7 @@ import {
   TDtext,
 } from '../../../../styles/cart.style';
 import { Context } from '../../../../../../../../lib/state/Store';
+import { formatPrice } from '../../../../../../../../shared/helpers/formatters';
 
 interface IGiftCardTableRow {
   cardColor: string;
@@ -35,9 +36,9 @@ const GiftCardTableRow: FC<IGiftCardTableRow> = ({
       <TD>
         <Circle color={cardColor}></Circle>
       </TD>
-      <TD>{`${price.toFixed(2)},-€`}</TD>
+      <TD>{`${formatPrice(price)} €`}</TD>
       <TDtext>{text}</TDtext>
-      <TD>{`${price.toFixed(2)},-€`}</TD>
+      <TD>{`${formatPrice(price)} €`}</TD>
       <TD>
         <ButtonAddrRemove onClick={() => handleRemoveGiftCard(id)}>
           Odstrániť
