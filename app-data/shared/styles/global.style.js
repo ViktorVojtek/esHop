@@ -149,6 +149,14 @@ export default createGlobalStyle`
   .mt-8{
     margin-top: 4rem;
   }
+  .pagination{
+    .active{
+      button{
+        background-color:#00aeefb8 !important;
+        border-color: #00aeefb8 !important;
+      }
+    }
+  }
   .dropdown{
     .dropdown-toggle{
       background-color: #00aeefb8 !important;
