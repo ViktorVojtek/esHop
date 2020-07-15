@@ -5,8 +5,9 @@ import { ApolloProvider } from 'react-apollo';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@brainhubeu/react-carousel/lib/style.css';
-import Style from '../app-data/shared/styles/global.style';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
+import Style from '../app-data/shared/styles/global.style';
 // Material UI support
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';

@@ -20,6 +20,10 @@ export default (props) => {
   const { title: productTitle } = product;
   const classes = useStyles();
 
+  function renderDescription() {
+    return { __html: description };
+  }
+
   return (
     <Card className={classes.root}>
       <Button onClick={() => removeItem(idx)}>Remove</Button>
@@ -39,7 +43,10 @@ export default (props) => {
           </Typography>{' '}
           {title}
         </Typography>
-        <Typography color="textSecondary">{description}</Typography>
+        <Typography
+          color="textSecondary"
+          dangerouslySetInnerHTML={renderDescription()}
+        ></Typography>
         <Typography variant="body2" component="p">
           Price: {price.value || 0},-{price.currency}
         </Typography>

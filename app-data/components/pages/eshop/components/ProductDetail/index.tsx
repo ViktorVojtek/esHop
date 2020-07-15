@@ -74,6 +74,10 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
     return <Spinner color="primary" />;
   }
 
+  function renderDescription(description) {
+    return { __html: description };
+  }
+
   const setRelatedProducts = (products: Product[]) => {
     const filteredProducts = products.filter((item) => item._id !== _id);
     setProducts(filteredProducts);
@@ -157,7 +161,11 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
                   {variants[activeVariant].price.currency}
                 </Price>
               )}
-              <Description>{variants[activeVariant].description}</Description>{' '}
+              <Description
+                dangerouslySetInnerHTML={renderDescription(
+                  variants[activeVariant].description
+                )}
+              />
               {variants.length > 1 && (
                 <VariantsSelect
                   id="variants"
