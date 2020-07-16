@@ -142,7 +142,7 @@ const VariantProductData = (props) => {
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               setVariantData({
                 ...variantData,
-                title: event.currentTarget.value,
+                title: event.currentTarget.value.trim(),
               });
             }}
             required
