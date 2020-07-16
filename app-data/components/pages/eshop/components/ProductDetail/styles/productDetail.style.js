@@ -51,10 +51,11 @@ export const ActionPrice = styled.span`
 export const Del = styled.del`
   font-size: 1rem;
 `;
-export const Description = styled.p`
-  color: #848484;
-  font-size: 1rem;
-  margin: 1rem 0rem;
+export const Description = styled.div`
+  color: black;
+  p {
+    font-size: 1rem;
+  }
 `;
 
 export const Label = styled.p`

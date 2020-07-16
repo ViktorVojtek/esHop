@@ -51,6 +51,9 @@ export default (props) => {
       console.log(err.message);
     }
   };
+  function renderDescription(description) {
+    return { __html: description };
+  }
 
   return (
     <Paper className={classes.paperBlock}>
@@ -103,7 +106,9 @@ export default (props) => {
                       </TableBody>
                     </Table>
                   </TableContainer>
-                  <Typography>{description}</Typography>
+                  <Typography
+                    dangerouslySetInnerHTML={renderDescription(description)}
+                  ></Typography>
                 </CardContent>
               </Card>
             )
