@@ -69,51 +69,56 @@ export default (props) => {
         </Typography>
       </Box>
       {variants && variants.length > 0 && (
-        <Carousel
-          slidesPerPage={variants.length > 1 ? 2 : 1}
-          arrows={variants.length > 2}
-        >
-          {variants.map(
-            (
-              { description, discount, inStock, images, title, price },
-              i: number
-            ) => (
-              <Card key={`${title}-${i}`} className={classes.card}>
-                <CardMedia
-                  className={classes.media}
-                  image={images[0].base64 || images[0].path}
-                  title={title}
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    {title}
-                  </Typography>
-                  <TableContainer component={Paper} className={classes.marginB}>
-                    <Table size="small">
-                      <TableHead>
-                        <TableRow>
-                          <TableCell>Price</TableCell>
-                          <TableCell>Items in stock</TableCell>
-                          <TableCell>Discount</TableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        <TableRow>
-                          <TableCell>{`${price.value},-${price.currency}`}</TableCell>
-                          <TableCell>{`${inStock || 0} pcs.`}</TableCell>
-                          <TableCell>{`${discount || 0}%`}</TableCell>
-                        </TableRow>
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
-                  <Typography
-                    dangerouslySetInnerHTML={renderDescription(description)}
-                  ></Typography>
-                </CardContent>
-              </Card>
-            )
-          )}
-        </Carousel>
+        <div>
+          <Carousel
+            slidesPerPage={variants.length > 1 ? 2 : 1}
+            arrows={variants.length > 2}
+          >
+            {variants.map(
+              (
+                { description, discount, inStock, images, title, price },
+                i: number
+              ) => (
+                <Card key={`${title}-${i}`} className={classes.card}>
+                  <CardMedia
+                    className={classes.media}
+                    image={images[0].base64 || images[0].path}
+                    title={title}
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="h2">
+                      {title}
+                    </Typography>
+                    <TableContainer
+                      component={Paper}
+                      className={classes.marginB}
+                    >
+                      <Table size="small">
+                        <TableHead>
+                          <TableRow>
+                            <TableCell>Price</TableCell>
+                            <TableCell>Items in stock</TableCell>
+                            <TableCell>Discount</TableCell>
+                          </TableRow>
+                        </TableHead>
+                        <TableBody>
+                          <TableRow>
+                            <TableCell>{`${price.value},-${price.currency}`}</TableCell>
+                            <TableCell>{`${inStock || 0} pcs.`}</TableCell>
+                            <TableCell>{`${discount || 0}%`}</TableCell>
+                          </TableRow>
+                        </TableBody>
+                      </Table>
+                    </TableContainer>
+                    <Typography
+                      dangerouslySetInnerHTML={renderDescription(description)}
+                    ></Typography>
+                  </CardContent>
+                </Card>
+              )
+            )}
+          </Carousel>
+        </div>
       )}
     </Paper>
   );

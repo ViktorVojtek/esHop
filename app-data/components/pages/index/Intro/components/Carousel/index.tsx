@@ -1,11 +1,16 @@
 import React, { FC, useState } from 'react';
-import { Carousel, CarouselItem, CarouselControl, CarouselIndicators } from 'reactstrap';
+import {
+  Carousel,
+  CarouselItem,
+  CarouselControl,
+  CarouselIndicators,
+} from 'reactstrap';
 
 import { ICarouselProduct, ICarouselItem } from './TS/Carousel.interface';
 
 const items: ICarouselItem[] = [
   {
-    src: '/images/sluzby.png',
+    src: '/images/index/carousel1.jpg',
     altText: 'Produkty',
   },
   {
@@ -41,7 +46,7 @@ const CarouselProducts: FC<ICarouselProduct> = ({ setActiveItem }) => {
   const goToIndex = (newIndex: number) => {
     if (animating) return;
     setActiveIndex(newIndex);
-  }
+  };
 
   const slides: JSX.Element[] = items.map(({ altText, src }) => (
     <CarouselItem
@@ -49,7 +54,10 @@ const CarouselProducts: FC<ICarouselProduct> = ({ setActiveItem }) => {
       onExited={() => setAnimating(false)}
       key={altText}
     >
-      <div className="carousel-image" style={{backgroundImage: `url(${src})`}} />
+      <div
+        className="carousel-image"
+        style={{ backgroundImage: `url(${src})` }}
+      />
     </CarouselItem>
   ));
 
@@ -63,8 +71,12 @@ const CarouselProducts: FC<ICarouselProduct> = ({ setActiveItem }) => {
       controls={false}
     >
       {slides}
-      <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={goToIndex} />
-     {/* <CarouselControl
+      <CarouselIndicators
+        items={items}
+        activeIndex={activeIndex}
+        onClickHandler={goToIndex}
+      />
+      {/* <CarouselControl
         direction="prev"
         directionText="Previous"
         onClickHandler={previous}

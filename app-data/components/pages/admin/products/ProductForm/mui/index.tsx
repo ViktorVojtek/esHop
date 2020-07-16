@@ -18,7 +18,7 @@ import { CREATE_PRODUCT_MUTATION } from '../../../../../../graphql/mutation';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      width: '100%',
+      width: 'calc(100vw - 300px)',
     },
     backButton: {
       marginRight: theme.spacing(1),

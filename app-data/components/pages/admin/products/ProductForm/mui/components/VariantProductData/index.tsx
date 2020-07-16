@@ -274,21 +274,19 @@ const VariantProductData = (props) => {
         </div>
 
         {images && images.length > 0 ? (
-          <div>
-            <Carousel
-              slidesPerPage={images.length > 1 ? 2 : 1}
-              arrows={images.length > 1}
-            >
-              {images.map(({ base64, path }, i) => (
-                <ImagePreview
-                  key={i}
-                  idx={i}
-                  srcImg={base64 || path}
-                  removeImage={handleRemoveImage}
-                />
-              ))}
-            </Carousel>
-          </div>
+          <Carousel
+            slidesPerPage={images.length > 1 ? 2 : 1}
+            arrows={images.length > 1}
+          >
+            {images.map(({ base64, path }, i) => (
+              <ImagePreview
+                key={i}
+                idx={i}
+                srcImg={base64 || path}
+                removeImage={handleRemoveImage}
+              />
+            ))}
+          </Carousel>
         ) : (
           <Paper className={classes.imagePreview} variant="outlined">
             <Typography align="center">Image preview</Typography>
@@ -314,24 +312,22 @@ const VariantProductData = (props) => {
       </Paper>
       {''}
       {productData.variants && productData.variants.length > 0 ? (
-        <div>
-          <Carousel arrows={productData.variants.length > 1}>
-            {productData.variants.map((item: any, i: number) => {
-              const { title } = productData;
-              const productProps = { title };
+        <Carousel arrows={productData.variants.length > 1}>
+          {productData.variants.map((item: any, i: number) => {
+            const { title } = productData;
+            const productProps = { title };
 
-              return (
-                <VariantItemCard
-                  data={item}
-                  removeItem={handleRemoveVariant}
-                  idx={i}
-                  product={productProps}
-                  key={i}
-                />
-              );
-            })}
-          </Carousel>
-        </div>
+            return (
+              <VariantItemCard
+                data={item}
+                removeItem={handleRemoveVariant}
+                idx={i}
+                product={productProps}
+                key={i}
+              />
+            );
+          })}
+        </Carousel>
       ) : (
         <Paper className={classes.paperBlock}>
           <Typography align="center">
