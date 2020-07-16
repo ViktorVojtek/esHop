@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import useStyles from './styles';
+import dynamic from 'next/dynamic';
 import Box from '@material-ui/core/Box';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -18,9 +19,14 @@ import Carousel from '@brainhubeu/react-carousel';
 import ImagePreview from './components/ImagePreview';
 import VariantItemCard from './components/VariantCardItem';
 import { EditorState, convertToRaw } from 'draft-js';
-import { Editor } from 'react-draft-wysiwyg';
+//import { Editor } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
+
+const Editor = dynamic(
+  () => import('react-draft-wysiwyg').then((mod) => mod.Editor, Editor),
+  { ssr: false }
+);
 
 const VariantProductData = (props) => {
   const { productData, setProductData } = props;
