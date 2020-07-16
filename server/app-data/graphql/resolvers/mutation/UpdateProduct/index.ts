@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import uniqid from 'uniqid';
 import Product, { IProduct } from '../../../../db/models/Product';
 import { config } from '../../../../config';
-import { verifyToken, storeFile } from '../../utils';
+import { verifyToken, storeFile, getVariantImagesPaths } from '../../utils';
 import ModError from '../../utils/error';
 
 const updateProduct: (
@@ -23,94 +23,50 @@ const updateProduct: (
       throw new ModError(404, 'Product not exist.');
     }
 
-    const { images, ...prodRawDataWithOutImgs } = productInput;
-
-    const productData = prodRawDataWithOutImgs;
+    const { variants, ...restProductData } = productInput;
+    // const { images, ...prodRawDataWithOutImgs } = productInput;
+    const productData = restProductData;
 
     let i = 0;
-    const imagesDataArr = [];
-    let resultImagesDataArr = [];
-    const updateImagesArr = [];
-    const existingImagesArr = [];
-    let imagePaths = [];
+    let variantsData = [];
 
-    const oldImagesArr = (productExist as any).images;
-    let imagesToDelete = [];
+    while (i < variants.length) {
+      const { images } = variants[i];
+      let imagesData: any[] = [];
 
-    console.log(oldImagesArr);
+      if (images && images.length > 0 && images[0].base64) {
+        const vId = `${productData._id}-${variants[i].title.toUpperCase()}`;
 
-    imagesToDelete = oldImagesArr.filter((oldItem) => {
-      return !images.some((cItem) => {
-        return oldItem.imageId !== cItem.imageId;
-      });
-    });
-
-    console.log('images to delete');
-    console.log(imagesToDelete);
-
-    if (images && images.length > 0) {
-      while (i < images.length) {
-        if (images[i].base64) {
-          const { base64, title, ext } = images[i];
-
-          const fileData = {
-            fileName: title,
-            fileBase64Data: base64,
-            dirName: _id,
-            extension: ext,
-          };
-
-          const promiseFn = storeFile(fileData);
-
-          imagesDataArr.push(promiseFn);
-        } else if (images[i].path) {
-          existingImagesArr.push(images[i]);
-        }
-
-        i += 1;
+        imagesData = await getVariantImagesPaths(images, vId);
+      } else {
+        imagesData = productExist.variants[i].images;
       }
 
-      imagePaths = await Promise.all(imagesDataArr);
+      const resultVariant = {
+        ...variants[i],
+        images: imagesData,
+      };
 
-      console.log(imagePaths);
+      variantsData.push(resultVariant);
 
-      let j = 0;
-
-      while (j < imagePaths.length) {
-        const { base64, ...restImageData } = images[j];
-        const imageData = {
-          ...restImageData,
-          imageId: uniqid('img-'),
-          path: imagePaths[j],
-        };
-
-        updateImagesArr.push(imageData);
-
-        j += 1;
-      }
-
-      resultImagesDataArr = updateImagesArr.concat(existingImagesArr);
+      i += 1;
     }
 
-    const newProductData = {
-      ...productData,
-      images: resultImagesDataArr,
-    };
+    console.log(variantsData);
+
+    productData.variants = variantsData;
+
+    console.log(productData);
 
     const updatedProduct: IProduct = await Product.findOneAndUpdate(
       { _id: mongoose.Types.ObjectId(_id) },
       {
         $set: {
-          category: newProductData.category,
-          description: newProductData.description,
-          inStock: newProductData.inStock,
-          modifiedByUserId: newProductData.modifiedByUserId,
-          shortDescription: newProductData.shortDescription,
-          subCategory: newProductData.subCategory,
-          images: newProductData.images,
-          note: newProductData.note,
-          title: newProductData.title,
-          variant: newProductData.variant,
+          category: productData.category,
+          dateModified: (Date.now as unknown) as Date,
+          subCategory: productData.subCategory,
+          title: productData.title,
+          variants: productData.variants,
         },
       },
       { new: true }

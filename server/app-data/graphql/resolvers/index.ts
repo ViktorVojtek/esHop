@@ -38,7 +38,7 @@ import updateCurrency from './mutation/UpdateCurrency';
 import removeCurrency from './mutation/RemoveCurrency';
 
 import createProduct from './mutation/CreateProduct';
-// import updateProduct from './mutation/UpdateProduct';
+import updateProduct from './mutation/UpdateProduct';
 import removeProduct from './mutation/RemoveProduct';
 
 import createSubCategory from './mutation/CreateSubCategory';
@@ -106,8 +106,8 @@ const resolvers = {
 
     createProduct: async (root: any, args: any, ctx: any) =>
       createProduct(root, args, ctx),
-    // updateProduct: async (root: any, args: any, ctx: any) =>
-    // updateProduct(root, args, ctx),
+    updateProduct: async (root: any, args: any, ctx: any) =>
+      updateProduct(root, args, ctx),
 
     createSubCategory: async (root: any, args: any, ctx: any) =>
       createSubCategory(root, args, ctx),

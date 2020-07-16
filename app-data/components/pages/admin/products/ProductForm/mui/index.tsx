@@ -13,7 +13,10 @@ import { useMutation } from '@apollo/react-hooks';
 import GeneralProductData from './components/GeneralProductData';
 import VariantProductData from './components/VariantProductData';
 import ProductResult from './components/ProductResult';
-import { CREATE_PRODUCT_MUTATION } from '../../../../../../graphql/mutation';
+import {
+  CREATE_PRODUCT_MUTATION,
+  UPDATE_PRODUCT_MUTATION,
+} from '../../../../../../graphql/mutation';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -58,7 +61,8 @@ const ProductStepper = ({ update, updateProductData }: IProductForm) => {
   const [activeStep, setActiveStep] = useState(0);
   const [productData, setProductData] = useState(initialProductData);
   const [backdropOpen, toggleBackdrop] = useState(false);
-  const [dispatch] = useMutation(CREATE_PRODUCT_MUTATION);
+  const [createProduct] = useMutation(CREATE_PRODUCT_MUTATION);
+  const [updateProduct] = useMutation(UPDATE_PRODUCT_MUTATION);
 
   useEffect(() => {
     if (updateProductData) {
@@ -86,8 +90,23 @@ const ProductStepper = ({ update, updateProductData }: IProductForm) => {
   const handleCreateProduct = async () => {
     try {
       toggleBackdrop(!backdropOpen);
-      await dispatch({ variables: { productInput: productData } });
-      console.log('Product should be created');
+
+      if (updateProductData) {
+        const {
+          _id,
+          dateCreated,
+          dateModified,
+          ...restProductData
+        } = updateProductData;
+        console.log(restProductData);
+        await updateProduct({
+          variables: { _id, productInput: restProductData },
+        });
+      } else {
+        console.log('Product should be created');
+        await createProduct({ variables: { productInput: productData } });
+      }
+
       setProductData(initialProductData);
       toggleBackdrop(!backdropOpen);
       setActiveStep(0);

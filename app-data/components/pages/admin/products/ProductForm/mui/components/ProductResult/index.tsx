@@ -80,11 +80,13 @@ export default (props) => {
                 i: number
               ) => (
                 <Card key={`${title}-${i}`} className={classes.card}>
-                  <CardMedia
-                    className={classes.media}
-                    image={images[0].base64 || images[0].path}
-                    title={title}
-                  />
+                  {images && images.length > 0 && (
+                    <CardMedia
+                      className={classes.media}
+                      image={images[0].base64 || images[0].path}
+                      title={title}
+                    />
+                  )}
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
                       {title}
