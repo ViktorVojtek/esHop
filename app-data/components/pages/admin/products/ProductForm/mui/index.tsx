@@ -13,6 +13,7 @@ import { useMutation } from '@apollo/react-hooks';
 import GeneralProductData from './components/GeneralProductData';
 import VariantProductData from './components/VariantProductData';
 import ProductResult from './components/ProductResult';
+import { PRODUCTS_QUERY } from '../../../../../../graphql/query';
 import {
   CREATE_PRODUCT_MUTATION,
   UPDATE_PRODUCT_MUTATION,
@@ -61,8 +62,12 @@ const ProductStepper = ({ update, updateProductData }: IProductForm) => {
   const [activeStep, setActiveStep] = useState(0);
   const [productData, setProductData] = useState(initialProductData);
   const [backdropOpen, toggleBackdrop] = useState(false);
-  const [createProduct] = useMutation(CREATE_PRODUCT_MUTATION);
-  const [updateProduct] = useMutation(UPDATE_PRODUCT_MUTATION);
+  const [createProduct] = useMutation(CREATE_PRODUCT_MUTATION, {
+    refetchQueries: [{ query: PRODUCTS_QUERY }],
+  });
+  const [updateProduct] = useMutation(UPDATE_PRODUCT_MUTATION, {
+    refetchQueries: [{ query: PRODUCTS_QUERY }],
+  });
 
   useEffect(() => {
     if (updateProductData) {
