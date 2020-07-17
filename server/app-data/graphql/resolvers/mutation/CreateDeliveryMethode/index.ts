@@ -5,9 +5,13 @@ import ModError from '../../utils/error';
 
 const createDeliveryMethode: (
   root: any,
-  args: { title: string; value: number },
+  args: { isEnvelopeSize: boolean; title: string; value: number },
   ctx: any
-) => Promise<IDeliveryMethode> = async (root, { title, value }, ctx) => {
+) => Promise<IDeliveryMethode> = async (
+  root,
+  { isEnvelopeSize, title, value },
+  ctx
+) => {
   try {
     const exist: IDeliveryMethode = await DeliveryMethode.findOne({ title });
 
@@ -15,7 +19,7 @@ const createDeliveryMethode: (
       throw new ModError(409, 'Delivery methode already exist');
     }
 
-    const newItemData = new DeliveryMethode({ title, value });
+    const newItemData = new DeliveryMethode({ isEnvelopeSize, title, value });
 
     await DeliveryMethode.create(newItemData);
 

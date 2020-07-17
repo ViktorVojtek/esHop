@@ -32,6 +32,7 @@ const Product = gql`
   input ProductInput {
     category: CategoryTypeInput
     modifiedByUserId: String
+    isEnvelopeSize: Boolean
     subCategory: CategoryTypeInput
     title: String
     variants: [ProductVariantInput]
@@ -73,6 +74,7 @@ const Product = gql`
     dateDeleted: String
     dateModified: String
     deleted: Boolean
+    isEnvelopeSize: Boolean
     modifiedByUserId: String
     subCategory: CategoryType
     title: String

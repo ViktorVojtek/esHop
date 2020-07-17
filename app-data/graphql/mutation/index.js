@@ -11,9 +11,18 @@ export const CREATE_CATEGORY_MUTATION = gql`
 `;
 
 export const CREATE_DELIVERY_METHODE = gql`
-  mutation createDeliveryMethode($title: String!, $value: String!) {
-    createDeliveryMethode(title: $title, value: $value) {
+  mutation createDeliveryMethode(
+    $isEnvelopeSize: Boolean
+    $title: String!
+    $value: String!
+  ) {
+    createDeliveryMethode(
+      isEnvelopeSize: $isEnvelopeSize
+      title: $title
+      value: $value
+    ) {
       _id
+      isEnvelopeSize
       title
       value
     }
@@ -62,6 +71,7 @@ export const CREATE_PRODUCT_MUTATION = gql`
       dateCreated
       dateModified
       modifiedByUserId
+      isEnvelopeSize
       subCategory {
         id
         title
@@ -98,6 +108,7 @@ export const UPDATE_PRODUCT_MUTATION = gql`
       dateCreated
       dateModified
       modifiedByUserId
+      isEnvelopeSize
       subCategory {
         id
         title

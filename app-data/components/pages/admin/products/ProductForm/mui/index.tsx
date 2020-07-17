@@ -46,6 +46,7 @@ const initialProductData = {
     id: '',
     title: '',
   },
+  isEnvelopeSize: false,
   subCategory: {
     id: '',
     title: '',

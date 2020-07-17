@@ -17,14 +17,20 @@ const DeliverySubmitForm: FC = () => {
   ) => Promise<void> = async (event) => {
     event.preventDefault();
 
-    const title = (document.getElementById('deliveryTitle') as HTMLInputElement)
-      .value;
+    const isEnvelopeSize: boolean = (document.getElementById(
+      'isEnvelopeSize'
+    ) as HTMLInputElement).checked;
+    const title: string = (document.getElementById(
+      'deliveryTitle'
+    ) as HTMLInputElement).value;
     const { value } = document.getElementById(
       'deliveryValue'
     ) as HTMLInputElement;
 
     try {
-      await createDeliveryMethode({ variables: { title, value } });
+      await createDeliveryMethode({
+        variables: { isEnvelopeSize, title, value },
+      });
     } catch ({ message }) {
       console.log(message);
       dispatch({ type: 'SET_MODAL', payload: true });
@@ -44,6 +50,12 @@ const DeliverySubmitForm: FC = () => {
           Value
         </Label>
         <Input id="deliveryValue" type="text" placeholder="Insert value" />
+      </FormGroup>
+      <FormGroup>
+        <Label for="deliveryValue" className="mr-sm-3">
+          Is envelope size?
+        </Label>
+        <Input id="isEnvelopeSize" type="checkbox" />
       </FormGroup>
       <Button type="submit" color="primary" className="ml-auto mr-3">
         Submit

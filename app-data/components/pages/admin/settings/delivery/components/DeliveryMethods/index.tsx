@@ -36,9 +36,10 @@ const DeliveryMethods: FC = () => {
       <thead>
         <tr>
           <th className="border-top-0">#</th>
-          <th colSpan={2} className="border-top-0">
-            Delivery method title
-          </th>
+          <th className="border-top-0">Title</th>
+          <th className="border-top-0"></th>
+          <th className="border-top-0"></th>
+          <th colSpan={2} className="border-top-0" />
         </tr>
       </thead>
       <tbody>
@@ -46,15 +47,22 @@ const DeliveryMethods: FC = () => {
           (
             {
               _id,
+              isEnvelopeSize,
               title,
               value,
-            }: { _id: string; title: string; value: number },
+            }: {
+              _id: string;
+              isEnvelopeSize: boolean;
+              title: string;
+              value: number;
+            },
             i: number
           ) => (
             <tr key={_id}>
               <th scope="row">{i + 1}</th>
               <td>{title}</td>
               <td>{value}</td>
+              <td>{isEnvelopeSize ? 'x' : ''}</td>
               <td className="text-right">
                 <Button color="danger" onClick={() => handleRemoveItem(_id)}>
                   Remove

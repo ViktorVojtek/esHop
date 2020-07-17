@@ -59,6 +59,7 @@ const updateProduct: (
       {
         $set: {
           category: productData.category,
+          isEnvelopeSize: productData.isEnvelopeSize,
           subCategory: productData.subCategory,
           title: productData.title,
           variants: productData.variants,

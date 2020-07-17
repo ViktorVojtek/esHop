@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -52,6 +54,23 @@ export default (props: IProps): JSX.Element => {
               defaultValue={undefined}
               value={productData.title || ''}
               required
+            />
+          </FormControl>
+          <FormControl>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={productData.isEnvelopeSize}
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                    setProductData({
+                      ...productData,
+                      isEnvelopeSize: event.currentTarget.checked,
+                    });
+                  }}
+                  name="isEnvelopeSize"
+                />
+              }
+              label="Is envelope size?"
             />
           </FormControl>
           <CategorySelector

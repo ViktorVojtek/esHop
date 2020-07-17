@@ -23,7 +23,11 @@ const rootTypeDefs = gql`
     updateCategory(_id: String!, title: String!): Category
     removeCategory(_id: String!): String
 
-    createDeliveryMethode(title: String!, value: String!): Delivery
+    createDeliveryMethode(
+      isEnvelopeSize: Boolean
+      title: String!
+      value: String!
+    ): Delivery
     removeDeliveryMethode(id: String): String
 
     createDiscount(code: String!, value: Int): Discount

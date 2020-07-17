@@ -37,6 +37,7 @@ export const DELIVERY_METHODS_QUERY = gql`
   query deliveryMethods {
     deliveryMethods {
       _id
+      isEnvelopeSize
       title
       value
     }
@@ -74,6 +75,7 @@ export const PRODUCT_QUERY = gql`
       dateCreated
       dateModified
       modifiedByUserId
+      isEnvelopeSize
       subCategory {
         id
         title
@@ -110,6 +112,7 @@ export const PRODUCTS_QUERY = gql`
       dateCreated
       dateModified
       modifiedByUserId
+      isEnvelopeSize
       subCategory {
         id
         title

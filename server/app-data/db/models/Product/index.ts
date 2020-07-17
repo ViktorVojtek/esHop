@@ -8,6 +8,7 @@ export interface IProduct extends Document {
   deleted: boolean;
   modifiedByUserId: string;
   subCategory: Object;
+  isEnvelopeSize: Boolean;
   title: string;
   variants: any[];
 }
@@ -25,6 +26,10 @@ const ProductSchema = new mongoose.Schema({
   },
   modifiedByUserId: String,
   subCategory: Object,
+  isEnvelopeSize: {
+    type: Boolean,
+    default: false,
+  },
   title: String,
   variants: [Object],
 });
