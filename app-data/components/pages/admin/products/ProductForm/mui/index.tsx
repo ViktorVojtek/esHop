@@ -96,11 +96,14 @@ const ProductStepper = ({ update, updateProductData }: IProductForm) => {
           _id,
           dateCreated,
           dateModified,
-          ...restProductData
-        } = updateProductData;
-        console.log(restProductData);
+          modifiedByUserId,
+          ...restData
+        } = productData as any;
+
+        console.log(restData);
+
         await updateProduct({
-          variables: { _id, productInput: restProductData },
+          variables: { _id, productInput: restData },
         });
       } else {
         console.log('Product should be created');

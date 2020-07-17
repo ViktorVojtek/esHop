@@ -23,9 +23,20 @@ const updateProduct: (
       throw new ModError(404, 'Product not exist.');
     }
 
+    console.log('Product exist.');
+    console.log('Input data are:');
+    console.log(productInput);
+    console.log('\n');
+    console.log('Finded product is:');
+    console.log(productExist);
+    console.log('\n');
+
     const { variants, ...restProductData } = productInput;
-    // const { images, ...prodRawDataWithOutImgs } = productInput;
-    const productData = restProductData;
+    const productData = { ...restProductData };
+
+    console.log('Cleaned data are: ');
+    console.log(productData);
+    console.log('\n');
 
     let i = 0;
     let variantsData = [];
@@ -52,10 +63,13 @@ const updateProduct: (
       i += 1;
     }
 
+    console.log('Variants data are:');
     console.log(variantsData);
+    console.log('\n');
 
     productData.variants = variantsData;
 
+    console.log('Final data to update: ');
     console.log(productData);
 
     const updatedProduct: IProduct = await Product.findOneAndUpdate(
@@ -63,7 +77,7 @@ const updateProduct: (
       {
         $set: {
           category: productData.category,
-          dateModified: (Date.now as unknown) as Date,
+          // dateModified: (Date.now as unknown) as Date,
           subCategory: productData.subCategory,
           title: productData.title,
           variants: productData.variants,
@@ -73,6 +87,9 @@ const updateProduct: (
     );
 
     const { __v, ...result } = updatedProduct.toObject();
+
+    console.log('Updated result: ');
+    console.log(result);
 
     return result as IProduct;
   } catch (err) {
