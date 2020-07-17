@@ -94,7 +94,7 @@ const ProductStepper = ({ update, updateProductData }: IProductForm) => {
 
   const handleCreateProduct = async () => {
     try {
-      toggleBackdrop(!backdropOpen);
+      toggleBackdrop(true);
 
       if (updateProductData) {
         const {
@@ -111,12 +111,11 @@ const ProductStepper = ({ update, updateProductData }: IProductForm) => {
           variables: { _id, productInput: restData },
         });
       } else {
-        console.log('Product should be created');
         await createProduct({ variables: { productInput: productData } });
       }
 
       setProductData(initialProductData);
-      toggleBackdrop(!backdropOpen);
+      toggleBackdrop(false);
       setActiveStep(0);
     } catch (err) {
       console.log(err.message);
@@ -132,59 +131,61 @@ const ProductStepper = ({ update, updateProductData }: IProductForm) => {
   const disabled: boolean = checkStepBtnDisabled(activeStep, productData);
 
   return (
-    <div className={classes.root}>
+    <>
       <Backdrop open={backdropOpen}>
         <CircularProgress color="primary" />
       </Backdrop>
-      <Stepper activeStep={activeStep} alternativeLabel>
-        {steps.map((label) => (
-          <Step key={label}>
-            <StepLabel>{label}</StepLabel>
-          </Step>
-        ))}
-      </Stepper>
-      <div>
-        {activeStep === steps.length ? (
-          <div>
-            <Typography className={classes.instructions}>
-              Product has been created.
-            </Typography>
-            <Button onClick={handleReset}>Reset</Button>
-          </div>
-        ) : (
-          <div>
-            <div className={classes.stepContent}>
-              <div>{activeStepContent}</div>
-            </div>
+      <div className={classes.root}>
+        <Stepper activeStep={activeStep} alternativeLabel>
+          {steps.map((label) => (
+            <Step key={label}>
+              <StepLabel>{label}</StepLabel>
+            </Step>
+          ))}
+        </Stepper>
+        <div>
+          {activeStep === steps.length ? (
             <div>
-              <Button
-                disabled={activeStep === 0}
-                onClick={handleBack}
-                className={classes.backButton}
-              >
-                <Typography>Back</Typography>
-              </Button>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => {
-                  if (activeStep === steps.length - 1) {
-                    handleCreateProduct();
-                  } else {
-                    handleNext();
-                  }
-                }}
-                disabled={disabled}
-              >
-                <Typography>
-                  {activeStep === steps.length - 1 ? 'Publish' : 'Next'}
-                </Typography>
-              </Button>
+              <Typography className={classes.instructions}>
+                Product has been created.
+              </Typography>
+              <Button onClick={handleReset}>Reset</Button>
             </div>
-          </div>
-        )}
+          ) : (
+            <div>
+              <div className={classes.stepContent}>
+                <div>{activeStepContent}</div>
+              </div>
+              <div>
+                <Button
+                  disabled={activeStep === 0}
+                  onClick={handleBack}
+                  className={classes.backButton}
+                >
+                  <Typography>Back</Typography>
+                </Button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => {
+                    if (activeStep === steps.length - 1) {
+                      handleCreateProduct();
+                    } else {
+                      handleNext();
+                    }
+                  }}
+                  disabled={disabled}
+                >
+                  <Typography>
+                    {activeStep === steps.length - 1 ? 'Publish' : 'Next'}
+                  </Typography>
+                </Button>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
