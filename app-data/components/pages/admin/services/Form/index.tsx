@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { Button } from 'reactstrap';
+import { useMutation } from '@apollo/react-hooks';
 import FormControl from '@material-ui/core/FormControl';
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
@@ -12,6 +13,8 @@ import { EditorState, convertToRaw } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import CategorySelector from '../../../admin/products/ProductForm/mui/components/CategorySelector';
 import SubcategorySelector from '../../../admin/products/ProductForm/mui/components/SubCategorySelector';
+import { CREATE_SERVICE_MUTATION } from '../../../../../graphql/mutation';
+import { SERVICES_QUERY } from '../../../../../graphql/query';
 
 const Editor = dynamic(
   () => import('react-draft-wysiwyg').then((mod) => mod.Editor, Editor),
@@ -79,6 +82,9 @@ export default () => {
   const classes = useStyles();
   const [data, populateData] = useState(initialData);
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
+  const [createService] = useMutation(CREATE_SERVICE_MUTATION, {
+    refetchQueries: [{ query: SERVICES_QUERY }],
+  });
   const htmlForm = useRef(null);
 
   const onEditorStateChange = (state: EditorState) => {
@@ -112,13 +118,19 @@ export default () => {
     });
   };
 
-  const handleSubmitData: (e: React.FormEvent<HTMLFormElement>) => void = (
+  const handleSubmitData: (
     e: React.FormEvent<HTMLFormElement>
-  ) => {
+  ) => Promise<void> = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.log('Submitting data');
-    console.log(data);
+    try {
+      console.log('Submitting data');
+      console.log(data);
+
+      await createService({ variables: { serviceInput: data } });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (

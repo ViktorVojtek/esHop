@@ -98,13 +98,24 @@ export const CREATE_PRODUCT_MUTATION = gql`
 `;
 
 export const CREATE_SERVICE_MUTATION = gql`
-  mutation createService($serviceInput: ServiceInput) {
+  mutation createService($serviceInput: ServiceInput!) {
     createService(serviceInput: $serviceInput) {
-      _id
       title
-      img
-      category
-      subCategory
+      img {
+        path
+        ext
+        imgId
+        size
+        title
+      }
+      category {
+        id
+        title
+      }
+      subCategory {
+        id
+        title
+      }
       html
     }
   }

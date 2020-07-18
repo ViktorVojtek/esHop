@@ -18,11 +18,13 @@ export default async (
   ctx: any
 ): Promise<IService> => {
   try {
+    console.log('In create service');
     const { serviceInput } = args;
     const { title } = serviceInput;
+
     const serviceExist = await Service.findOne({ title });
 
-    if (!serviceExist) {
+    if (serviceExist) {
       throw new ModError(403, 'Service allready exist');
     }
 
@@ -30,7 +32,7 @@ export default async (
 
     const serviceData = new Service(restServiceData);
 
-    if ((img as any).base64) {
+    if (img && (img as any).base64) {
       const vId = `${serviceData._id}-${title.toUpperCase()}`;
 
       const fileData = {

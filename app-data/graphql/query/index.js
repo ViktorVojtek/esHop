@@ -168,3 +168,53 @@ export const PAYMENT_METHODES_QUERY = gql`
     }
   }
 `;
+
+export const SERVICE_QUERY = gql`
+  query service($id: String!) {
+    service(id: $id) {
+      category {
+        id
+        title
+      }
+      html
+      img {
+        path
+        ext
+        imgId
+        size
+        title
+      }
+      price
+      subCategory {
+        id
+        title
+      }
+      video
+      title
+    }
+  }
+`;
+
+export const SERVICES_QUERY = gql`
+  query services {
+    category {
+      id
+      title
+    }
+    html
+    img {
+      path
+      ext
+      imgId
+      size
+      title
+    }
+    price
+    subCategory {
+      id
+      title
+    }
+    video
+    title
+  }
+`;
