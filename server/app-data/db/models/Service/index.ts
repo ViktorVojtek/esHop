@@ -3,7 +3,7 @@ import mongoose, { Document } from 'mongoose';
 export interface IService extends Document {
   category: object;
   html: string;
-  img: string;
+  img: object;
   price: number;
   subCategory: object;
   video: string;
@@ -12,7 +12,7 @@ export interface IService extends Document {
 const ServiceSchema = new mongoose.Schema({
   category: Object,
   html: String,
-  img: String,
+  img: Object,
   price: Number,
   subCategory: Object,
   video: String,

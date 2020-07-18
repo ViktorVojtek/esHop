@@ -13,7 +13,7 @@ export default async (
     const service = await Service.findOne({ _id: mongoose.Types.ObjectId(id) });
 
     if (!service) {
-      throw new ModError(404, 'Product not exist');
+      throw new ModError(404, 'Service not exist');
     }
 
     return service;
