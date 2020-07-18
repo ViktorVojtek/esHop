@@ -180,6 +180,9 @@ export default createGlobalStyle`
       width: 100%;
     }
   }
+  .form-check-input{
+    margin-top: .2rem;
+  }
   .nav-link{
     color: #5e8796;
     font-weight: 600;

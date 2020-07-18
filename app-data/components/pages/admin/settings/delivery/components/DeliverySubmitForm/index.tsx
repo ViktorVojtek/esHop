@@ -32,7 +32,6 @@ const DeliverySubmitForm: FC = () => {
         variables: { isEnvelopeSize, title, value },
       });
     } catch ({ message }) {
-      console.log(message);
       dispatch({ type: 'SET_MODAL', payload: true });
     }
   };

@@ -37,7 +37,7 @@ const ProductTitle: React.FC<IProductTitle> = ({ id, title }) => (
 );
 
 const ProductUI: React.FC<IProductUI> = ({
-  product: { _id, variants, subCategory, title },
+  product: { _id, variants, subCategory, title, isEnvelopeSize },
   addProduct,
   toggleModal,
 }) => {
@@ -49,7 +49,11 @@ const ProductUI: React.FC<IProductUI> = ({
       ...restVariantData
     } = variants[0];
 
-    addProduct({ id: _id, variants: { ...restVariantData, count: 1 } });
+    addProduct({
+      id: _id,
+      variants: { ...restVariantData, count: 1 },
+      isEnvelopeSize: isEnvelopeSize,
+    });
     toggleModal();
   };
 

@@ -1,13 +1,6 @@
-import React, {
-  useContext,
-  useEffect,
-  useState,
-  Dispatch,
-  SetStateAction,
-} from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { Row } from 'reactstrap';
-import Proptypes from 'prop-types';
 import Product from '../../../../../shared/types/Product.types';
 import PaginationComponent from 'react-reactstrap-pagination';
 
@@ -30,6 +23,7 @@ interface IProductToCartData {
   id: string;
   count?: number;
   variants?: VariantOfProduct;
+  isEnvelopeSize?: boolean;
 }
 const productsCount = 16;
 const Products: React.FC<IProductsProps> = ({ products, toggleModal }) => {
@@ -38,15 +32,18 @@ const Products: React.FC<IProductsProps> = ({ products, toggleModal }) => {
   const [paginationProducts, setPaginationProducts] = useState([]);
   const [totalItems, setTotalItems] = useState(0);
   const [showenProducts, setShowenProducts] = useState(0);
-  const { error, loading, data } = useQuery(PRODUCTS_QUERY, {
-    // fetchPolicy: 'network-only',
-  });
-  const { dispatch } = useContext(Context);
+  const {
+    dispatch,
+    state: { subCategory },
+  } = useContext(Context);
 
   const handleAddProductToCart: (data: IProductToCartData) => void = (data) => {
-    const { id, variants } = data;
+    const { id, variants, isEnvelopeSize } = data;
 
-    dispatch({ type: 'ADD_TO_CART', payload: { id, variant: variants } });
+    dispatch({
+      type: 'ADD_TO_CART',
+      payload: { id, variant: variants, isEnvelopeSize },
+    });
   };
   /* const handleRemoveProductFromCart = (id: string) => {
     dispatch({ type: 'REMOVE_FROM_CART', payload: id });
@@ -68,6 +65,10 @@ const Products: React.FC<IProductsProps> = ({ products, toggleModal }) => {
       payload: { productsToShow },
     });
   }, [products, selectedPage]);
+
+  useEffect(() => {
+    setSelectedPage(1);
+  }, [subCategory]);
 
   useEffect(() => {
     setShowenProducts(
@@ -100,6 +101,7 @@ const Products: React.FC<IProductsProps> = ({ products, toggleModal }) => {
             previousPageText="Dozadu"
             nextPageText="Dopredu"
             lastPageText="Posledná"
+            defaultActivePage={selectedPage}
           />
         </div>
       </Row>

@@ -134,7 +134,6 @@ export default () => {
     e.preventDefault();
 
     console.log('Submitting data');
-    console.log(data);
   };
 
   const containsItems: JSX.Element[] =

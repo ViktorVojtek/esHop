@@ -15,8 +15,6 @@ const ProductModalComponent: FC<IModal> = ({ children, message, title }) => {
     dispatch({ type: 'SET_PRODUCT_MODAL', payload: false });
   };
 
-  console.log(modal);
-
   return (
     <Modal isOpen={modal} toggle={toggle}>
       <ModalHeader toggle={toggle}>{title}</ModalHeader>

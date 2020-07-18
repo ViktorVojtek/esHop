@@ -172,6 +172,11 @@ const Reducer = (state: IState, action: IAction) => {
         ...state,
         productsToShow: action.payload,
       };
+    case 'ALLOW_ENVELOPE':
+      return {
+        ...state,
+        allowEnvelope: action.payload,
+      };
     default:
       return state;
   }

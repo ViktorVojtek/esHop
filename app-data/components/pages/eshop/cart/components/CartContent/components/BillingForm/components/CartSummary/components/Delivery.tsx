@@ -1,13 +1,14 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { Context } from '../../../../../../../../../../../lib/state/Store';
 import { DELIVERY_METHODS_QUERY } from '../../../../../../../../../../../graphql/query';
 import { Col, Row, FormGroup, Input, Label } from 'reactstrap';
 import { formatPrice } from '../../../../../../../../../../../shared/helpers/formatters';
+import { CartProduct } from '../../../../../../../../../../../shared/types/Store.types';
 
 export default () => {
   const {
-    state: { cart, cartTotalSum, giftCards },
+    state: { cart, allowEnvelope, giftCards },
     dispatch,
   } = useContext(Context);
   const { error, loading, data } = useQuery(DELIVERY_METHODS_QUERY);
@@ -76,10 +77,12 @@ export default () => {
             _id,
             title,
             value,
+            isEnvelopeSize,
           }: {
             _id: string;
             title: string;
             value: number;
+            isEnvelopeSize: boolean;
           },
           i: number
         ) => {
@@ -89,14 +92,26 @@ export default () => {
                 <FormGroup>
                   <FormGroup check>
                     <Label htmlFor={title.toLowerCase()}>
-                      <Input
-                        type="radio"
-                        name={title.toLowerCase()}
-                        id={title.toLowerCase()}
-                        className="delivery-data-input"
-                        onChange={handleChangeDelivery}
-                        data-value={value}
-                      />{' '}
+                      {isEnvelopeSize ? (
+                        <Input
+                          type="radio"
+                          name={title.toLowerCase()}
+                          id={title.toLowerCase()}
+                          className="delivery-data-input"
+                          onChange={handleChangeDelivery}
+                          data-value={value}
+                          disabled={allowEnvelope ? false : true}
+                        />
+                      ) : (
+                        <Input
+                          type="radio"
+                          name={title.toLowerCase()}
+                          id={title.toLowerCase()}
+                          className="delivery-data-input"
+                          onChange={handleChangeDelivery}
+                          data-value={value}
+                        />
+                      )}{' '}
                       {title}
                     </Label>
                   </FormGroup>

@@ -41,6 +41,7 @@ type Product = {
   subCategory?: ProductCategory;
   title?: string;
   variants?: ProductVariant[];
+  isEnvelopeSize: boolean;
 };
 
 export default Product;

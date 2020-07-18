@@ -40,7 +40,6 @@ const VariantProductData = (props) => {
   }, []);
 
   const onEditorStateChange = (state: EditorState) => {
-    console.log(draftToHtml(convertToRaw(state.getCurrentContent())));
     let description = draftToHtml(convertToRaw(state.getCurrentContent()));
     setEditorState(state);
     setVariantData({
