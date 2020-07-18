@@ -12,6 +12,8 @@ import paymentMethodes from './query/PaymentMethodes';
 import products from './query/Products';
 import product from './query/Product';
 import subCategories from './query/SubCategories';
+import service from './query/Service';
+import services from './query/Services';
 import users from './query/Users';
 
 // mutations
@@ -64,6 +66,12 @@ const resolvers = {
     products: async (root: any, args: any, ctx: any) =>
       products(root, args, ctx),
     product: async (root: any, args: any, ctx: any) => product(root, args, ctx),
+
+    service: async (root: any, args: { id: string }, ctx: any) =>
+      service(root, args, ctx),
+    services: async (root: any, args: any, ctx: any) =>
+      services(root, args, ctx),
+
     subCategories: async (root: any, args: any, ctx: any) =>
       subCategories(root, args, ctx),
     users: async (root: any, args: any, ctx: any) => users(root, args, ctx),
