@@ -7,6 +7,7 @@ export interface IService extends Document {
   price: number;
   subCategory: object;
   video: string;
+  title: string;
 }
 
 const ServiceSchema = new mongoose.Schema({
@@ -16,6 +17,7 @@ const ServiceSchema = new mongoose.Schema({
   price: Number,
   subCategory: Object,
   video: String,
+  title: String,
 });
 
 export default mongoose.model<IService>('Service', ServiceSchema);

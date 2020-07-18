@@ -43,6 +43,9 @@ import createProduct from './mutation/CreateProduct';
 import updateProduct from './mutation/UpdateProduct';
 import removeProduct from './mutation/RemoveProduct';
 
+import createService from './mutation/CreateService';
+import updateService from './mutation/UpdateService';
+
 import createSubCategory from './mutation/CreateSubCategory';
 import removeSubCategory from './mutation/RemoveSubCategory';
 
@@ -121,6 +124,11 @@ const resolvers = {
       createSubCategory(root, args, ctx),
     removeSubCategory: async (root: any, args: any, ctx: any) =>
       removeSubCategory(root, args, ctx),
+
+    createService: async (root: any, args: any, ctx: any) =>
+      createService(root, args, ctx),
+    updateService: async (root: any, args: any, ctx: any) =>
+      updateService(root, args, ctx),
 
     loginUser: async (root: any, args: any, ctx: any) =>
       loginUser(root, args, ctx),

@@ -21,6 +21,7 @@ export default gql`
     subCategory: ServiceCategoryTypeInput
     price: Float
     video: String
+    title: String
   }
 
   type ServiceCategory {
@@ -43,5 +44,6 @@ export default gql`
     price: Float
     subCategory: ServiceCategory
     video: String
+    title: String
   }
 `;

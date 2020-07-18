@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import Service, { IService } from '../../../../db/models/Service';
 import { storeFile } from '../../utils';
 import ModError from '../../utils/error';
@@ -5,6 +6,7 @@ import ModError from '../../utils/error';
 export default async (
   root: any,
   args: {
+    _id: string;
     serviceInput: {
       category: object;
       html: string;
@@ -18,20 +20,21 @@ export default async (
   ctx: any
 ): Promise<IService> => {
   try {
-    const { serviceInput } = args;
-    const { title } = serviceInput;
-    const serviceExist = await Service.findOne({ title });
+    const { _id, serviceInput } = args;
+
+    const serviceExist: IService = await Service.findOne({
+      _id: mongoose.Types.ObjectId(_id),
+    });
 
     if (!serviceExist) {
-      throw new ModError(403, 'Service allready exist');
+      throw new ModError(404, 'Service not exist');
     }
 
     const { img, ...restServiceData } = serviceInput;
-
-    const serviceData = new Service(restServiceData);
+    const serviceData = (restServiceData as unknown) as IService;
 
     if ((img as any).base64) {
-      const vId = `${serviceData._id}-${title.toUpperCase()}`;
+      const vId = `${_id}-${restServiceData.title.toUpperCase()}`;
 
       const fileData = {
         fileName: (img as any).title,
@@ -51,9 +54,24 @@ export default async (
       serviceData.img = imageData;
     }
 
-    const newService = await Service.create(serviceData);
+    const updatedService = await Service.findOneAndUpdate(
+      {
+        _id: mongoose.Types.ObjectId(_id),
+      },
+      {
+        $set: {
+          category: serviceData.category,
+          html: serviceData.html,
+          img: serviceData.img,
+          price: serviceData.price,
+          subCategory: serviceData.subCategory,
+          title: serviceData.title,
+          video: serviceData.video,
+        },
+      }
+    );
 
-    const { __v, ...result } = newService.toObject();
+    const { __v, ...result } = updatedService.toObject();
 
     return result;
   } catch (err) {
