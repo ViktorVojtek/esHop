@@ -76,10 +76,6 @@ const PoukazkyPage: () => JSX.Element = () => {
   };
   return (
     <Wrapper>
-      <SubPageBackground
-        title="Darčekové poukážky"
-        imageUrl="/images/eshop/background.jpg"
-      />
       <Container>
         {/*<H3>Zvoľ typ darčekovej poukážky</H3>
         <PoukazkaTypes getActiveType={setActiveType} />*/}

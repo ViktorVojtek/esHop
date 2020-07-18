@@ -15,8 +15,6 @@ export default (): JSX.Element => {
 
   const { paymentMethodes } = data;
 
-  console.log(paymentMethodes);
-
   const payments =
     paymentMethodes.length > 0
       ? paymentMethodes.map(

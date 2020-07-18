@@ -24,7 +24,6 @@ export default () => {
     try {
       await mutate({ variables: { title, value: +value as number } });
     } catch ({ message }) {
-      console.log(message);
       dispatch({ type: 'SET_MODAL', payload: true });
     }
   };

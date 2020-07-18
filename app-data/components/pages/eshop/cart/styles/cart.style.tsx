@@ -8,6 +8,9 @@ export const H2 = styled.h2`
 export const H4 = styled.h4`
   font-weight: 600;
 `;
+export const H5 = styled.h5`
+  font-weight: 500;
+`;
 export const TH = styled.th`
   padding-top: 12px;
   padding-bottom: 12px;

@@ -57,6 +57,7 @@ export const AddToCart = styled.button`
   font-weight: 600;
   position: relative;
   margin-top: 1rem;
+  margin-bottom: 2.2rem;
   letter-spacing: 0px;
   user-select: none;
   transition: all 0.3s ease-out;
@@ -112,7 +113,7 @@ export const PrednaStranaText = styled.p<IColorText>`
   padding-right: 10%;
   line-height: 2rem;
   white-space: pre-wrap;
-  word-break: break-all;
+  word-break: break-word;
   margin: 0;
   width: 100%;
   @media (max-width: 1200px) {

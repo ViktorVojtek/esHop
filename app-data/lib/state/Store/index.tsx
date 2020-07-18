@@ -15,6 +15,7 @@ const initialState: IState = {
   giftCards: [],
   productsTotal: 0,
   productsToShow: 0,
+  allowEnvelope: true,
 };
 
 export const Context = createContext<{

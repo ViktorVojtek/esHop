@@ -5,6 +5,7 @@ import { Container } from 'reactstrap';
 import { Context } from '../../../../lib/state/Store';
 import Wrapper from '../../../../shared/styles/components/Wrapper/Wrapper.style';
 import CartContent from './components/CartContent';
+import { CartProduct } from '../../../../shared/types/Store.types';
 
 const CartEmpty: () => JSX.Element = () => (
   <div className="mx-auto w-50">
@@ -26,6 +27,16 @@ const CartBodyComponent: FC = () => {
     dispatch,
   } = useContext(Context);
 
+  function setAllowEnvelope() {
+    let setAllowEnvelope = cart.every(function (item: CartProduct) {
+      return item.isEnvelopeSize === true;
+    });
+    dispatch({
+      type: 'ALLOW_ENVELOPE',
+      payload: setAllowEnvelope,
+    });
+  }
+
   useEffect(() => {
     let sum: number = 0;
 
@@ -45,6 +56,7 @@ const CartBodyComponent: FC = () => {
     });
 
     dispatch({ type: 'SET_TOTAL_SUM', payload: sum });
+    setAllowEnvelope();
   }, [cart, giftCards]);
 
   return (

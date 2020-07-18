@@ -26,6 +26,7 @@ export type GiftCard = {
 export type CartProduct = {
   id: string;
   variant: VariantOfProduct;
+  isEnvelopeSize: boolean;
 };
 
 export interface IState {
@@ -39,6 +40,7 @@ export interface IState {
   giftCards: GiftCard[] | [];
   productsTotal: number;
   productsToShow: number;
+  allowEnvelope: boolean;
 }
 
 export interface IAction {
