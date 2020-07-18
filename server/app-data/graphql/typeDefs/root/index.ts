@@ -14,6 +14,8 @@ const rootTypeDefs = gql`
     paymentMethodes: [Payment]
     products(categoryId: String, subCategoryId: String): [Product]
     product(id: String!): Product
+    service(id: String!): Service
+    services: [Service]
     subCategories(categoryId: String): [SubCategory]
     users: [User]
   }
@@ -51,6 +53,10 @@ const rootTypeDefs = gql`
 
     createSubCategory(categoryId: String!, title: String!): SubCategory
     removeSubCategory(_id: String!): String
+
+    createService(serviceInput: ServiceInput!): Service
+    updateService(_id: String!, serviceInput: ServiceInput!): Service
+    removeService(_id: String!): String
   }
 
   schema {

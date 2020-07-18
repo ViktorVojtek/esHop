@@ -6,6 +6,7 @@ import root from './root';
 import Order from './Order';
 import PaymentMethode from './PaymentMethode';
 import Product from './Product';
+import Service from './Service';
 import SubCategory from './SubCategory';
 import User from './User';
 
@@ -18,6 +19,7 @@ const typeDefs = [
   Order,
   PaymentMethode,
   Product,
+  Service,
   SubCategory,
   User,
 ];

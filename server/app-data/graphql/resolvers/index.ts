@@ -12,6 +12,8 @@ import paymentMethodes from './query/PaymentMethodes';
 import products from './query/Products';
 import product from './query/Product';
 import subCategories from './query/SubCategories';
+import service from './query/Service';
+import services from './query/Services';
 import users from './query/Users';
 
 // mutations
@@ -41,6 +43,10 @@ import createProduct from './mutation/CreateProduct';
 import updateProduct from './mutation/UpdateProduct';
 import removeProduct from './mutation/RemoveProduct';
 
+import createService from './mutation/CreateService';
+import updateService from './mutation/UpdateService';
+import removeService from './mutation/RemoveService';
+
 import createSubCategory from './mutation/CreateSubCategory';
 import removeSubCategory from './mutation/RemoveSubCategory';
 
@@ -64,6 +70,12 @@ const resolvers = {
     products: async (root: any, args: any, ctx: any) =>
       products(root, args, ctx),
     product: async (root: any, args: any, ctx: any) => product(root, args, ctx),
+
+    service: async (root: any, args: { id: string }, ctx: any) =>
+      service(root, args, ctx),
+    services: async (root: any, args: any, ctx: any) =>
+      services(root, args, ctx),
+
     subCategories: async (root: any, args: any, ctx: any) =>
       subCategories(root, args, ctx),
     users: async (root: any, args: any, ctx: any) => users(root, args, ctx),
@@ -113,6 +125,13 @@ const resolvers = {
       createSubCategory(root, args, ctx),
     removeSubCategory: async (root: any, args: any, ctx: any) =>
       removeSubCategory(root, args, ctx),
+
+    createService: async (root: any, args: any, ctx: any) =>
+      createService(root, args, ctx),
+    updateService: async (root: any, args: any, ctx: any) =>
+      updateService(root, args, ctx),
+    removeService: async (root: any, args: any, ctx: any) =>
+      removeService(root, args, ctx),
 
     loginUser: async (root: any, args: any, ctx: any) =>
       loginUser(root, args, ctx),
