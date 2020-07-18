@@ -97,6 +97,19 @@ export const CREATE_PRODUCT_MUTATION = gql`
   }
 `;
 
+export const CREATE_SERVICE_MUTATION = gql`
+  mutation createService($serviceInput: ServiceInput) {
+    createService(serviceInput: $serviceInput) {
+      _id
+      title
+      img
+      category
+      subCategory
+      html
+    }
+  }
+`;
+
 export const UPDATE_PRODUCT_MUTATION = gql`
   mutation updateProduct($_id: String!, $productInput: ProductInput!) {
     updateProduct(_id: $_id, productInput: $productInput) {

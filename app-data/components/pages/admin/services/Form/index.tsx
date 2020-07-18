@@ -1,17 +1,22 @@
 import React, { useState, useRef } from 'react';
+import dynamic from 'next/dynamic';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { Button } from 'reactstrap';
 import FormControl from '@material-ui/core/FormControl';
 import IconButton from '@material-ui/core/IconButton';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import TextField from '@material-ui/core/TextField';
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
-import Grid from '@material-ui/core/Grid';
-import SvgIcon from '@material-ui/core/SvgIcon';
-import AddIcon from '@material-ui/icons/Add';
-import ClearIcon from '@material-ui/icons/Clear';
+import toBase64 from '../../../../../shared/helpers/toBase64';
+import { bytesToSize } from '../../../../../shared/helpers/formatters';
+import { EditorState, convertToRaw } from 'draft-js';
+import draftToHtml from 'draftjs-to-html';
+import CategorySelector from '../../../admin/products/ProductForm/mui/components/CategorySelector';
+import SubcategorySelector from '../../../admin/products/ProductForm/mui/components/SubCategorySelector';
+
+const Editor = dynamic(
+  () => import('react-draft-wysiwyg').then((mod) => mod.Editor, Editor),
+  { ssr: false }
+);
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -46,85 +51,64 @@ const useStyles = makeStyles((theme: Theme) =>
 
 type initialDataType = {
   title: string;
-  contains: string[];
-  description: string;
-  image: string;
+  category: any;
+  html: string;
+  img: any;
+  subCategory: any;
   price: number;
-  location: string;
-  bonus: string[];
+  video: string;
 };
 
 const initialData: initialDataType = {
   title: '',
-  contains: [],
-  description: '',
-  image: '',
+  category: {
+    id: '',
+    title: '',
+  },
+  html: '',
+  img: null,
   price: 0,
-  location: '',
-  bonus: [],
+  subCategory: {
+    id: '',
+    title: '',
+  },
+  video: '',
 };
 
 export default () => {
   const classes = useStyles();
   const [data, populateData] = useState(initialData);
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const htmlForm = useRef(null);
-  const containsInput = useRef(null);
-  const bonusInput = useRef(null);
 
-  const handleAddImage: (
-    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-  ) => void = (event) => {
-    const { files } = event.currentTarget as HTMLInputElement;
+  const onEditorStateChange = (state: EditorState) => {
+    let description = draftToHtml(convertToRaw(state.getCurrentContent()));
 
-    if (files && files[0]) {
-      const reader = new FileReader();
-
-      reader.addEventListener('load', (progress: ProgressEvent<FileReader>) => {
-        populateData({
-          ...data,
-          image: progress.target.result as string,
-        });
-      });
-
-      reader.readAsDataURL(files[0]);
-    }
-  };
-
-  const handleAddContainsData: () => void = () => {
-    const newData: string[] = [
-      ...data.contains,
-      containsInput.current.value as string,
-    ];
-
+    setEditorState(state);
     populateData({
       ...data,
-      contains: newData,
+      html: description,
     });
+    setEditorState(state);
   };
-  const handleAddBonusData: () => void = () => {
-    const newData: string[] = [
-      ...data.bonus,
-      bonusInput.current.value as string,
-    ];
+
+  const handleAddImageData: (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => Promise<void> = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { files } = event.currentTarget;
+    let i = 0;
+
+    const b64 = await toBase64(files[i]);
+    const imgData = {
+      ext: files[i].type.replace('image/', ''),
+      size: bytesToSize(files[i].size),
+      title: files[i].name.split('.')[files[i].name.split('.').length - 2],
+      base64: b64,
+    };
 
     populateData({
       ...data,
-      bonus: newData,
-    });
-  };
-
-  const handleRemoveListData: (key: string, idx: number) => void = (
-    key,
-    idx
-  ) => {
-    const newData: string[] = [
-      ...data[key].slice(0, idx),
-      ...data[key].slice(idx + 1),
-    ];
-
-    populateData({
-      ...data,
-      [key]: newData,
+      img: imgData,
     });
   };
 
@@ -136,35 +120,6 @@ export default () => {
     console.log('Submitting data');
     console.log(data);
   };
-
-  const containsItems: JSX.Element[] =
-    data.contains.length > 0
-      ? data.contains.map((item, i) => (
-          <ListItem key={`${item}-${i}`} className={classes.listItem}>
-            {item}
-            <IconButton
-              color="secondary"
-              onClick={() => handleRemoveListData('contains', i)}
-            >
-              <ClearIcon />
-            </IconButton>
-          </ListItem>
-        ))
-      : null;
-  const bonusItems: JSX.Element[] =
-    data.bonus.length > 0
-      ? data.bonus.map((item, i) => (
-          <ListItem key={`${item}-${i}`} className={classes.listItem}>
-            {item}
-            <IconButton
-              color="secondary"
-              onClick={() => handleRemoveListData('bonus', i)}
-            >
-              <ClearIcon />
-            </IconButton>
-          </ListItem>
-        ))
-      : null;
 
   return (
     <form ref={htmlForm} onSubmit={handleSubmitData}>
@@ -181,13 +136,25 @@ export default () => {
           }}
         />
       </FormControl>
+      <CategorySelector productData={data} setProductData={populateData} />
+      {data.category.id ? (
+        <SubcategorySelector productData={data} setProductData={populateData} />
+      ) : (
+        <div />
+      )}
+      <Editor
+        editorState={editorState}
+        wrapperClassName="description-wrapper"
+        editorClassName="description-editor"
+        onEditorStateChange={onEditorStateChange}
+      />
       <FormControl className={classes.fieldRow}>
         <input
           accept="image/*"
           className={classes.input}
           id="icon-button-file"
           type="file"
-          onChange={handleAddImage}
+          onChange={handleAddImageData}
         />
         <label htmlFor="icon-button-file">
           <IconButton
@@ -199,44 +166,14 @@ export default () => {
           </IconButton>
         </label>
       </FormControl>
-      {data.image.length > 0 && (
+      {data.img && (
         <FormControl className={classes.fieldRow}>
-          <img src={data.image} style={{ maxWidth: 500 }} />
+          <img
+            src={data.img.path || data.img.base64}
+            style={{ maxWidth: 500 }}
+          />
         </FormControl>
       )}
-      <FormControl className={classes.fieldRow}>
-        <TextareaAutosize
-          rows={4}
-          placeholder="Description"
-          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-            populateData({
-              ...data,
-              description: e.currentTarget.value,
-            });
-          }}
-        />
-      </FormControl>
-      <FormControl className={classes.fieldRow}>
-        <Grid container>
-          <Grid item>
-            <TextField label="Contains" inputRef={containsInput} />
-          </Grid>
-          <Grid>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleAddContainsData}
-            >
-              <SvgIcon>
-                <AddIcon />
-              </SvgIcon>
-            </Button>
-          </Grid>
-          <Grid item>
-            <List className={classes.list}>{containsItems}</List>
-          </Grid>
-        </Grid>
-      </FormControl>
       <FormControl className={classes.fieldRow}>
         <TextField
           type="number"
@@ -251,33 +188,15 @@ export default () => {
       </FormControl>
       <FormControl className={classes.fieldRow}>
         <TextField
-          label="Location"
+          type="text"
+          label="Video"
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             populateData({
               ...data,
-              location: event.currentTarget.value as string,
+              video: event.currentTarget.value as string,
             });
           }}
         />
-      </FormControl>
-      <FormControl className={classes.fieldRow}>
-        <Grid container>
-          <Grid item>
-            <TextField label="Bonus" inputRef={bonusInput} />
-          </Grid>
-          <Grid item>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleAddBonusData}
-            >
-              <SvgIcon>
-                <AddIcon />
-              </SvgIcon>
-            </Button>
-          </Grid>
-          <Grid item>{bonusItems}</Grid>
-        </Grid>
       </FormControl>
       <FormControl className={classes.fieldRow}>
         <Button color="primary" type="submit">
