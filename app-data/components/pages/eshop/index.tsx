@@ -1,4 +1,11 @@
-import React, { useState, FC, useEffect, useContext, useCallback } from 'react';
+import React, {
+  useState,
+  FC,
+  useEffect,
+  useContext,
+  useCallback,
+  useRef,
+} from 'react';
 import {
   Container,
   Row,
@@ -12,6 +19,8 @@ import {
   ModalBody,
   ModalFooter,
   Spinner,
+  FormGroup,
+  Input,
 } from 'reactstrap';
 import { useQuery } from '@apollo/react-hooks';
 import Link from 'next/link';
@@ -26,7 +35,7 @@ import {
   StyledModalLink,
   H3,
 } from './styles/eshoppage';
-import { PRODUCTS_QUERY } from '../../../graphql/query';
+import { PRODUCTS_QUERY, SERVICES_QUERY } from '../../../graphql/query';
 import { Context } from '../../../lib/state/Store';
 import {
   sortByPriceMin,
@@ -37,12 +46,19 @@ import {
 import Product from '../../../shared/types/Product.types';
 
 const EshopPage: FC = () => {
-  const { error, loading, data } = useQuery(PRODUCTS_QUERY, {
-    // fetchPolicy: 'network-only',
-  });
-
+  const queryMultiple = () => {
+    const res1 = useQuery(PRODUCTS_QUERY);
+    const res2 = useQuery(SERVICES_QUERY);
+    return [res1, res2];
+  };
+  const [
+    { error: error, loading: loading, data: productsData },
+    { error: error2, loading: loading2, data: servicesData },
+  ] = queryMultiple();
   const { state, dispatch } = useContext(Context);
   const { category, subCategory } = state;
+  const searchInput = useRef(null);
+  const [compareString, setCompareString] = useState('');
 
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -53,16 +69,18 @@ const EshopPage: FC = () => {
   const toggle = () => setDropdownOpen((prevState) => !prevState);
 
   useEffect(() => {
-    if (data) {
-      const { products } = data;
+    if (productsData && servicesData) {
+      const { products } = productsData;
+      const { services } = servicesData;
+      let allProducts = products.concat(services);
 
       if (subCategory === '' && category !== '') {
-        filterByCategory(products);
+        filterByCategory(allProducts);
       } else if (subCategory !== '') {
-        filterBySubCategory(products);
-      } else setFilteredProducts(products);
+        filterBySubCategory(allProducts);
+      } else setFilteredProducts(allProducts);
     }
-  }, [subCategory, category, data]);
+  }, [subCategory, category, productsData, servicesData]);
 
   if (error) {
     return <>{error.message}</>;
@@ -82,6 +100,10 @@ const EshopPage: FC = () => {
       (product: Product) => product.subCategory.id === subCategory
     );
     return setFilteredProducts(newProducts);
+  };
+
+  const filterByName = () => {
+    setCompareString(searchInput.current.value);
   };
 
   return (
@@ -129,6 +151,18 @@ const EshopPage: FC = () => {
               </DropdownMenu>
             </Dropdown>
           </Col>
+          <Col md="3" sm="6">
+            <FormGroup>
+              <Input
+                type="text"
+                name="search"
+                id="search"
+                placeholder="Vyhľadávať"
+                onChange={filterByName}
+                innerRef={searchInput}
+              />
+            </FormGroup>
+          </Col>
         </Row>
         <Row>
           <Col className="mt-3">
@@ -136,7 +170,11 @@ const EshopPage: FC = () => {
               Maybe in the future Products component will use the following prop:
               setProductsCount={setProductsCount}
             */}
-            <Products products={filteredProducts} toggleModal={toggleModal} />
+            <Products
+              products={filteredProducts}
+              toggleModal={toggleModal}
+              compareString={compareString}
+            />
           </Col>
         </Row>
       </Container>

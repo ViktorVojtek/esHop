@@ -27,7 +27,9 @@ import {
   IProductTitle,
   IProductUI,
 } from './types/ProductFill.types';
+import ServiceUI from '../ServicesFill';
 import { formatPrice } from '../../../../../../../shared/helpers/formatters';
+import Service from '../../../../../../../shared/types/Service.types';
 const ProductTitle: React.FC<IProductTitle> = ({ id, title }) => (
   <Link href={{ pathname: '/eshop/product', query: { id } }}>
     <a>
@@ -124,16 +126,22 @@ const ProductsFill: React.FC<IProductsFillProps> = ({
   addProduct,
   toggleModal,
 }) => {
-  const elements: JSX.Element[] = products.map((item: Product) => {
-    const { _id } = item;
+  const elements: JSX.Element[] = products.map((item: any) => {
+    const { _id, subCategory } = item;
 
     return (
-      <ProductUI
-        toggleModal={toggleModal}
-        product={item}
-        addProduct={addProduct}
-        key={_id}
-      />
+      <>
+        {subCategory.title !== 'Pobyty' ? (
+          <ProductUI
+            toggleModal={toggleModal}
+            product={item}
+            addProduct={addProduct}
+            key={_id}
+          />
+        ) : (
+          <ServiceUI product={item} key={_id} />
+        )}
+      </>
     );
   });
 

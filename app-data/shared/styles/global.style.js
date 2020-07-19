@@ -204,9 +204,20 @@ export default createGlobalStyle`
   .carousel-image{
     width: 100%;
     height: 60vh;
-    min-height: 60vh;
     background-size: cover;
     background-position: center center;
+    @media(max-width: 1550px){
+      height: 500px;
+    }
+    @media(max-width: 1200px){
+      height: 400px;
+    }
+    @media(max-width: 920px){
+      height: 300px;
+    }
+    @media(max-width: 768px){
+      height: 220px;
+    }
   }
   .letter-spacing-1{
     letter-spacing: 1px;

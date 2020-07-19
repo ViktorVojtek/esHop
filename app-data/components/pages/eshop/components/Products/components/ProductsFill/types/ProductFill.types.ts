@@ -1,5 +1,6 @@
 import Product from '../../../../../../../../shared/types/Product.types';
 import { VariantOfProduct } from '../../../../../../../../shared/types/Store.types';
+import Service from '../../../../../../../../shared/types/Service.types';
 
 export interface IProductToCartData {
   id: string;
@@ -9,7 +10,7 @@ export interface IProductToCartData {
 }
 
 export interface IProductsFillProps {
-  products: Product[];
+  products: any;
   addProduct: (data: IProductToCartData) => void;
   toggleModal?: () => void;
 }

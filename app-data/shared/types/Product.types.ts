@@ -39,7 +39,7 @@ type Product = {
   deleted?: boolean;
   modifiedByUserId?: string;
   subCategory?: ProductCategory;
-  title?: string;
+  title: string;
   variants?: ProductVariant[];
   isEnvelopeSize: boolean;
 };

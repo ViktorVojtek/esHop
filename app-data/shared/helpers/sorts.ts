@@ -1,54 +1,73 @@
 import Product from '../types/Product.types';
+import Service from '../types/Service.types';
 
 export function sortByPriceMin(
-  products: Product[],
+  products: any,
   setFilteredProducts: React.Dispatch<any>
 ) {
-  products.sort(function (a, b) {
-    return a.variants[0].price.value - b.variants[0].price.value;
+  let sortProducts = [...products];
+  sortProducts.sort(function (a, b) {
+    return getPrice(a) - getPrice(b);
   });
-  setFilteredProducts(products);
+  setFilteredProducts(sortProducts);
 }
 export function sortByPriceMax(
-  products: Product[],
+  products: any,
   setFilteredProducts: React.Dispatch<any>
 ) {
-  products.sort(function (a, b) {
-    return a.variants[0].price.value - b.variants[0].price.value;
+  let sortProducts = [...products];
+  sortProducts.sort(function (a, b) {
+    return getPrice(a) - getPrice(b);
   });
-  setFilteredProducts(products.reverse());
+  setFilteredProducts(sortProducts.reverse());
 }
 export function sortByLetterUp(
   products: Product[],
   setFilteredProducts: React.Dispatch<any>
 ) {
-  products.sort(function (a, b) {
-    let nameA = a.variants[0].title.toUpperCase();
-    let nameB = b.variants[0].title.toUpperCase();
-    if (nameA < nameB) {
-      return -1;
-    }
-    if (nameA > nameB) {
-      return 1;
-    }
-    return 0;
+  let sortProducts = [...products];
+  sortProducts.sort(function (a, b) {
+    let nameA = getName(a);
+    let nameB = getName(b);
+    return nameA.localeCompare(nameB);
   });
-  setFilteredProducts(products);
+  setFilteredProducts(sortProducts);
 }
 export function sortByLetterDown(
   products: Product[],
   setFilteredProducts: React.Dispatch<any>
 ) {
-  products.sort(function (a, b) {
-    let nameA = a.variants[0].title.toUpperCase();
-    let nameB = b.variants[0].title.toUpperCase();
-    if (nameA < nameB) {
-      return -1;
-    }
-    if (nameA > nameB) {
-      return 1;
-    }
-    return 0;
+  let sortProducts = [...products];
+  sortProducts.sort(function (a, b) {
+    let nameA = getName(a);
+    let nameB = getName(b);
+    return nameA.localeCompare(nameB);
   });
-  setFilteredProducts(products.reverse());
+  setFilteredProducts(sortProducts.reverse());
+}
+
+function getPrice(product: any) {
+  let price = 0;
+  if (product.variants !== undefined) {
+    if (product.variants[0].discount > 0) {
+      price =
+        product.variants[0].price.value -
+        (product.variants[0].price.value * product.variants[0].discount) / 100;
+      console.log(price);
+    } else price = product.variants[0].price.value;
+  } else {
+    if (product.discount > 0) {
+      price =
+        product.price.value - (product.price.value * product.discount) / 100;
+    } else price = product.price.value;
+  }
+  return price;
+}
+
+function getName(product: any) {
+  let name = '';
+  if (product.variants !== undefined) {
+    name = product.title.toUpperCase();
+  } else name = product.title;
+  return name;
 }

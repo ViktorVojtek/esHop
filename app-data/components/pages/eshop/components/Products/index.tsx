@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useCallback } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { Row } from 'reactstrap';
 import Product from '../../../../../shared/types/Product.types';
@@ -14,10 +14,13 @@ import { Context } from '../../../../../lib/state/Store';
 import ProductFill from './components/ProductsFill';
 
 import { VariantOfProduct } from '../../../../../shared/types/Store.types';
+import Service from '../../../../../shared/types/Service.types';
+import { copySync } from 'fs-extra';
 
 interface IProductsProps {
-  products: Product[];
+  products: Product[] | Service[];
   toggleModal: () => void;
+  compareString: string;
 }
 interface IProductToCartData {
   id: string;
@@ -26,7 +29,11 @@ interface IProductToCartData {
   isEnvelopeSize?: boolean;
 }
 const productsCount = 16;
-const Products: React.FC<IProductsProps> = ({ products, toggleModal }) => {
+const Products: React.FC<IProductsProps> = ({
+  products,
+  toggleModal,
+  compareString,
+}) => {
   const [pageSize, setPageSize] = useState(productsCount);
   const [selectedPage, setSelectedPage] = useState(1);
   const [paginationProducts, setPaginationProducts] = useState([]);
@@ -48,7 +55,6 @@ const Products: React.FC<IProductsProps> = ({ products, toggleModal }) => {
   /* const handleRemoveProductFromCart = (id: string) => {
     dispatch({ type: 'REMOVE_FROM_CART', payload: id });
   }; */
-
   useEffect(() => {
     setTotalItems(products.length);
     setPaginationProducts(
@@ -79,6 +85,14 @@ const Products: React.FC<IProductsProps> = ({ products, toggleModal }) => {
   const handleSelected = (selectedPage: number) => {
     setSelectedPage(selectedPage);
   };
+  useEffect(() => {
+    let searchedProducts = [...products];
+    let newArray = searchedProducts.filter((item) =>
+      item.title.toLocaleLowerCase().includes(compareString.toLocaleLowerCase())
+    );
+    setTotalItems(newArray.length);
+    setPaginationProducts(newArray);
+  }, [compareString]);
 
   return (
     <>
@@ -91,7 +105,7 @@ const Products: React.FC<IProductsProps> = ({ products, toggleModal }) => {
       </Row>
       <Row>
         <div className="mt-4 w-100 d-flex justify-content-end align-items-center">
-          <p className="mr-4">{`Zobrazuje ${showenProducts} z ${products.length}`}</p>
+          <p className="mr-4">{`Zobrazuje ${showenProducts} z ${totalItems}`}</p>
           <PaginationComponent
             size="sm"
             totalItems={totalItems}

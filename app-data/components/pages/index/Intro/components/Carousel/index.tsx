@@ -14,11 +14,11 @@ const items: ICarouselItem[] = [
     altText: 'Produkty',
   },
   {
-    src: '/images/sluzby.png',
+    src: '/images/index/carousel2.jpg',
     altText: 'Sluzby',
   },
   {
-    src: '/images/sluzby.png',
+    src: '/images/index/carousel3.jpg',
     altText: 'Pobyty',
   },
 ];

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
   max-width: 100%;
   margin: 0 auto;
-  margin-top: 98px;
+  margin-top: 120px;
   @media (max-width: 768px) {
     margin-top: 86px;
   }
