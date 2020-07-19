@@ -172,6 +172,7 @@ export const PAYMENT_METHODES_QUERY = gql`
 export const SERVICE_QUERY = gql`
   query service($id: String!) {
     service(id: $id) {
+      _id
       category {
         id
         title
@@ -184,7 +185,10 @@ export const SERVICE_QUERY = gql`
         size
         title
       }
-      price
+      price {
+        currency
+        value
+      }
       subCategory {
         id
         title
@@ -197,24 +201,30 @@ export const SERVICE_QUERY = gql`
 
 export const SERVICES_QUERY = gql`
   query services {
-    category {
-      id
+    services {
+      _id
+      category {
+        id
+        title
+      }
+      html
+      img {
+        path
+        ext
+        imgId
+        size
+        title
+      }
+      price {
+        currency
+        value
+      }
+      subCategory {
+        id
+        title
+      }
+      video
       title
     }
-    html
-    img {
-      path
-      ext
-      imgId
-      size
-      title
-    }
-    price
-    subCategory {
-      id
-      title
-    }
-    video
-    title
   }
 `;

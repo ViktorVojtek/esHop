@@ -61,6 +61,7 @@ export default async (
       {
         $set: {
           category: serviceData.category,
+          discount: serviceData.discount,
           html: serviceData.html,
           img: serviceData.img,
           price: serviceData.price,

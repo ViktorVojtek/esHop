@@ -4,7 +4,9 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { Button } from 'reactstrap';
 import { useMutation } from '@apollo/react-hooks';
 import FormControl from '@material-ui/core/FormControl';
+import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
+import InputAdornment from '@material-ui/core/InputAdornment';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import TextField from '@material-ui/core/TextField';
 import toBase64 from '../../../../../shared/helpers/toBase64';
@@ -55,10 +57,14 @@ const useStyles = makeStyles((theme: Theme) =>
 type initialDataType = {
   title: string;
   category: any;
+  discount: number;
   html: string;
   img: any;
   subCategory: any;
-  price: number;
+  price: {
+    currency: string;
+    value: number;
+  };
   video: string;
 };
 
@@ -68,9 +74,13 @@ const initialData: initialDataType = {
     id: '',
     title: '',
   },
+  discount: 0,
   html: '',
   img: null,
-  price: 0,
+  price: {
+    currency: '€',
+    value: 0,
+  },
   subCategory: {
     id: '',
     title: '',
@@ -186,18 +196,45 @@ export default () => {
           />
         </FormControl>
       )}
-      <FormControl className={classes.fieldRow}>
-        <TextField
-          type="number"
-          label="Price"
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            populateData({
-              ...data,
-              price: +event.currentTarget.value as number,
-            });
-          }}
-        />
-      </FormControl>
+      <Grid container spacing={3}>
+        <Grid item xs={6}>
+          <FormControl className={classes.fieldRow}>
+            <TextField
+              type="number"
+              label="Price"
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                populateData({
+                  ...data,
+                  price: {
+                    currency: '€',
+                    value: +event.currentTarget.value as number,
+                  },
+                });
+              }}
+              InputProps={{
+                endAdornment: <InputAdornment position="end">€</InputAdornment>,
+              }}
+            />
+          </FormControl>
+        </Grid>
+        <Grid item xs={6}>
+          <FormControl className={classes.fieldRow}>
+            <TextField
+              type="number"
+              label="Discount"
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                populateData({
+                  ...data,
+                  discount: +event.currentTarget.value as number,
+                });
+              }}
+              InputProps={{
+                endAdornment: <InputAdornment position="end">%</InputAdornment>,
+              }}
+            />
+          </FormControl>
+        </Grid>
+      </Grid>
       <FormControl className={classes.fieldRow}>
         <TextField
           type="text"

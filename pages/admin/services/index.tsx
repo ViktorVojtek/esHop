@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Button } from 'reactstrap';
 import { withAuthSync } from '../../../app-data/lib/auth';
 import Layout from '../../../app-data/shared/components/Layout/Admin.material.layout';
+import ServicesList from '../../../app-data/components/pages/admin/services/List';
 
 const Services: () => JSX.Element = () => (
   <>
@@ -17,7 +18,7 @@ const Services: () => JSX.Element = () => (
           Create service
         </Button>
       </Link>{' '}
-      <p>Here should be a services page content.</p>
+      <ServicesList />
     </Layout>
   </>
 );

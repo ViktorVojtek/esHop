@@ -112,12 +112,22 @@ export const CREATE_SERVICE_MUTATION = gql`
         id
         title
       }
+      price {
+        currency
+        value
+      }
       subCategory {
         id
         title
       }
       html
     }
+  }
+`;
+
+export const REMOVE_SERVICE_MUTATION = gql`
+  mutation removeService($_id: String!) {
+    removeService(_id: $_id)
   }
 `;
 

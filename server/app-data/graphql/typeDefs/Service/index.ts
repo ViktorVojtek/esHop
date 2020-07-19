@@ -14,12 +14,18 @@ export default gql`
     title: String
   }
 
+  input ServicePriceInput {
+    currency: String
+    value: Float
+  }
+
   input ServiceInput {
     category: ServiceCategoryTypeInput
     html: String
+    discount: Float
     img: ServiceImageInput
     subCategory: ServiceCategoryTypeInput
-    price: Float
+    price: ServicePriceInput
     video: String
     title: String
   }
@@ -37,11 +43,18 @@ export default gql`
     title: String
   }
 
+  type ServicePrice {
+    currency: String
+    value: Float
+  }
+
   type Service {
+    _id: String
     category: ServiceCategory
+    discount: Float
     html: String
     img: ServiceImage
-    price: Float
+    price: ServicePrice
     subCategory: ServiceCategory
     video: String
     title: String
