@@ -1,84 +1,116 @@
-import React, { useState, FC } from 'react';
-import { H3, H4, ItemText, Button } from '../../styles/index';
-import { Container, Row, Col, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import RomantikaModal from '../RomantikaModal';
-import JesenZivotaModal from '../JesenZivotaModal';
-import ServicesList from '../ServicesList/index';
-import Services from '../../../index/Intro/components/Services';
+import React, { useState, FC, useEffect } from 'react';
+import { H3, H4, ItemText, Button, StyledCartLink } from '../../styles/index';
+import { Container, Row, Col, Spinner } from 'reactstrap';
+import { SERVICES_QUERY } from '../../../../../graphql/query';
+import { useQuery } from 'react-apollo';
+import Service from '../../../../../shared/types/Service.types';
+import Link from 'next/link';
+import Procedures from '../Procedures';
 
-const StayType: FC = () => {
-  const [activeStay, setActiveStay] = useState(0);
+type IITem = {
+  title: string;
+  price: number;
+  count: number;
+};
+
+type IStayType = {
+  handleProcedure: (items: IITem[]) => void;
+};
+
+const StayType: FC<IStayType> = ({ handleProcedure }) => {
   const [modal, setModal] = useState(false);
+  const { loading, error, data } = useQuery(SERVICES_QUERY);
+  const [servicesArray, setServicesArray] = useState([]);
+
+  if (error) {
+    return <>{error.message}</>;
+  }
+
+  if (loading) {
+    return <Spinner color="primary" />;
+  }
+
+  const addProcedure = (service) => {
+    const sameArray = servicesArray.filter(
+      (item) => item.title === service.title
+    );
+    const diffArray = servicesArray.filter(
+      (item) => item.title !== service.title
+    );
+    if (sameArray.length > 0) {
+      let mergeCount = Number(service.count) + Number(sameArray[0].count);
+      service.count = mergeCount;
+    }
+    const newArray = [...diffArray, service];
+    setServicesArray(newArray);
+    handleProcedure(newArray);
+  };
+
+  const removeProcedure = (value: number) => {
+    setServicesArray(servicesArray.splice(value, 1));
+  };
+
+  const { services } = data;
 
   const toggle = () => setModal(!modal);
 
-  return(
+  const pobyty: JSX.Element[] = services.map((item: Service) => {
+    const handleAddProcedure = () => {
+      let service = {
+        title: item.title,
+        price: item.price.value,
+        count: 1,
+      };
+      addProcedure(service);
+    };
+    return (
+      item.subCategory.title === 'Pobyty' && (
+        <Col
+          key={item.title}
+          md="4"
+          sm="6"
+          xs="12"
+          className="d-flex align-items-center justify-content-center flex-column"
+        >
+          <ItemText>{item.title}</ItemText>
+          <div className="d-flex w-100 mb-4 justify-content-between">
+            <Button type="button" onClick={handleAddProcedure}>
+              Pridať
+            </Button>
+            <Link
+              href={{ pathname: '/eshop/service', query: { id: item._id } }}
+            >
+              <StyledCartLink>Detail</StyledCartLink>
+            </Link>
+          </div>
+        </Col>
+      )
+    );
+  });
+
+  const procedury = services.map((item: Service) => {
+    return (
+      item.subCategory.title === 'Procedúry' && (
+        <Procedures
+          key={item.title}
+          service={item}
+          addProcedure={addProcedure}
+        />
+      )
+    );
+  });
+
+  return (
     <>
       <Container>
         <H3>Vyberte si služby</H3>
         <H4 className="mb-4">Pobyty</H4>
-        <Row>
-          <Col md="4" sm="6" xs="12" className="d-flex align-items-center justify-content-center flex-column">
-            <ItemText>Romantika</ItemText>
-            <div className="d-flex w-100 mb-4">
-              <Button>Pridať</Button>
-              <Button onClick={() => {toggle(); setActiveStay(0)}}>O pobyte</Button>
-            </div>
-          </Col>
-          <Col md="4" sm="6" xs="12" className="d-flex align-items-center justify-content-center flex-column">
-            <ItemText>Jesen života</ItemText>
-            <div className="d-flex w-100 mb-4">
-              <Button>Pridať</Button>
-              <Button onClick={() => {toggle(); setActiveStay(1)}}>O pobyte</Button>
-            </div>
-          </Col>
-          <Col md="4" sm="6" xs="12" className="d-flex align-items-center justify-content-center flex-column">
-            <ItemText>Čaro pienin</ItemText>
-            <div className="d-flex w-100 mb-4">
-              <Button>Pridať</Button>
-              <Button onClick={() => {toggle(); setActiveStay(1)}}>O pobyte</Button>
-            </div>
-          </Col>
-          <Col md="4" sm="6" xs="12" className="d-flex align-items-center justify-content-center flex-column">
-            <ItemText>Rodinná idylka</ItemText>
-            <div className="d-flex w-100 mb-4">
-              <Button>Pridať</Button>
-              <Button onClick={() => {toggle(); setActiveStay(1)}}>O pobyte</Button>
-            </div>
-          </Col>
-          <Col md="4" sm="6" xs="12" className="d-flex align-items-center justify-content-center flex-column">
-            <ItemText>Hrejivá zima</ItemText>
-            <div className="d-flex w-100 mb-4">
-              <Button>Pridať</Button>
-              <Button onClick={() => {toggle(); setActiveStay(1)}}>O pobyte</Button>
-            </div>
-          </Col>
-          <Col md="4" sm="6" xs="12" className="d-flex align-items-center justify-content-center flex-column">
-            <ItemText>Silvester s rodinou</ItemText>
-            <div className="d-flex w-100 mb-4">
-              <Button>Pridať</Button>
-              <Button onClick={() => {toggle(); setActiveStay(1)}}>O pobyte</Button>
-            </div>
-          </Col>
-        </Row>
+        <Row>{pobyty}</Row>
         <H4 className="mb-4 mt-4">Voliteľné služby</H4>
-        <ServicesList />
+        <Row>{procedury}</Row>
       </Container>
-      <div>
-        <Modal isOpen={modal} toggle={toggle}>
-          <ModalHeader toggle={toggle}>Informácie o pobyte</ModalHeader>
-          <ModalBody>
-            { activeStay === 0 ? <RomantikaModal /> : null }
-            { activeStay === 1 ? <JesenZivotaModal /> : null }
-          </ModalBody>
-          <ModalFooter>
-            <Button color="primary" onClick={toggle}>Pridať</Button>{' '}
-            <Button color="secondary" onClick={toggle}>Zavrieť</Button>
-          </ModalFooter>
-        </Modal>
-      </div>
     </>
   );
-}
+};
 
 export default StayType;

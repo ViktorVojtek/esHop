@@ -127,11 +127,10 @@ const ProductsFill: React.FC<IProductsFillProps> = ({
   toggleModal,
 }) => {
   const elements: JSX.Element[] = products.map((item: any) => {
-    const { _id, subCategory } = item;
-
+    const { _id, subCategory, variants } = item;
     return (
       <>
-        {subCategory.title !== 'Pobyty' ? (
+        {variants !== undefined ? (
           <ProductUI
             toggleModal={toggleModal}
             product={item}

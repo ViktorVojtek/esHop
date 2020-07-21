@@ -1,7 +1,5 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Form, FormGroup, Container, Row, Col, Input } from 'reactstrap';
-import ServicesList from './components/ServicesList/index';
-import SubPageBackground from '../../../shared/components/SubPageBackground';
 import PoukazkaTypes from './components/PoukazkaTypes';
 import StayType from './components/StayType';
 import MoneyType from './components/MoneyType';
@@ -9,30 +7,33 @@ import RestaurantType from './components/RestaurantType';
 import {
   H3,
   Wrapper,
-  RadioInput,
-  RadioGroup,
-  Label,
   H4,
   RadioColorGroup,
   RadioColorInput,
   ColorLabel,
-  NumberLabel,
   AddToCart,
   Preview,
   PreviewHolder,
   PrednaStranaText,
   PreviewTextHolder,
-  PreviewTextHolderBack,
   StyledModalLink,
 } from './styles';
 import { Context } from '../../../lib/state/Store';
 import Link from 'next/link';
 import ProductModal from '../../../shared/components/ProductModal';
+import Summary from './components/Summary';
+
+type ServiceData = {
+  title: string;
+  price: number;
+  count: number;
+};
 
 type IProductToCartData = {
   cardColor: string;
   priceValue: number;
   text: string;
+  services: ServiceData[];
 };
 
 const PoukazkyPage: () => JSX.Element = () => {
@@ -40,6 +41,7 @@ const PoukazkyPage: () => JSX.Element = () => {
     cardColor: '#00aeef',
     priceValue: 0,
     text: '',
+    services: [],
   });
   const [activeType, setActiveType] = useState(2);
   const [imageSrc, setImageSrc] = useState(
@@ -52,20 +54,42 @@ const PoukazkyPage: () => JSX.Element = () => {
   const handleChangeTextArea = (event) => {
     setFrontText(event.target.value);
   };
-
   const handleAddGiftCard: (data: IProductToCartData) => void = (data) => {
-    const { cardColor, priceValue, text } = data;
+    const { cardColor, priceValue, text, services } = data;
     let price = Number(priceValue);
     dispatch({
       type: 'ADD_TO_GIFT_CARDS',
-      payload: { cardColor, price, text },
+      payload: { cardColor, price, text, services },
     });
   };
+
+  useEffect(() => {
+    setFormData({
+      cardColor: color,
+      priceValue: 0,
+      text: frontText,
+      services: [],
+    });
+  }, [activeType]);
 
   const handleChange = (event) => {
     setFormData({
       ...formData,
       [event.target.name]: event.target.value,
+    });
+  };
+  const getPrice = (items) => {
+    let price = 0;
+    for (let i = 0; i < items.length; i++) {
+      price += items[i].price * items[i].count;
+    }
+    return price;
+  };
+  const handleProcedure = (items) => {
+    setFormData({
+      ...formData,
+      priceValue: getPrice(items),
+      services: items,
     });
   };
 
@@ -77,15 +101,12 @@ const PoukazkyPage: () => JSX.Element = () => {
   return (
     <Wrapper>
       <Container>
-        {/*<H3>Zvoľ typ darčekovej poukážky</H3>
-        <PoukazkaTypes getActiveType={setActiveType} />*/}
+        <H3>Zvoľ typ darčekovej poukážky</H3>
+        <PoukazkaTypes getActiveType={setActiveType} />
         <Form onSubmit={handleSubmit}>
           <div id="voucherContent">
-            {activeType === 0 ? <StayType /> : null}
-            {activeType === 2 ? (
-              <MoneyType handleChange={handleChange} />
-            ) : null}
-            {activeType === 3 ? <RestaurantType /> : null}
+            {activeType === 0 && <StayType handleProcedure={handleProcedure} />}
+            {activeType === 2 && <MoneyType handleChange={handleChange} />}
           </div>
           <Row className="mt-8">
             <Col md="6" className="pr-4">
@@ -186,6 +207,12 @@ const PoukazkyPage: () => JSX.Element = () => {
                   </PrednaStranaText>
                 </PreviewTextHolder>
               </PreviewHolder>
+            </Col>
+          </Row>
+          <Row className="mt-8">
+            <Col md="6" className="pr-4">
+              <H4>Súhrn poukážky:</H4>
+              <Summary formData={formData} setFormData={setFormData} />
             </Col>
           </Row>
           <AddToCart type="submit">Pridať do košíka</AddToCart>

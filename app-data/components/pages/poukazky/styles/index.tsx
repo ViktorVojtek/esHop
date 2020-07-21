@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { CloseCircle } from '@styled-icons/evaicons-solid';
 
 export const Wrapper = styled.div`
   max-width: 100%;
@@ -8,11 +9,52 @@ export const Wrapper = styled.div`
     margin-top: 86px;
   }
 `;
+
+export const Remove = styled(CloseCircle)`
+  color: red;
+  width: 26px;
+  margin-left: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+  &:hover {
+    transform: scale(1.1);
+  }
+`;
+
+export const P = styled.p`
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  width: 100%;
+`;
+export const Text = styled.p`
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+`;
+export const Circle = styled.span<ImageColor>`
+  width: 22px;
+  height: 22px;
+  border-radius: 128px;
+  background-color: ${({ color }) => (color ? `${color}` : 'black')};
+`;
+export const Span = styled.span`
+  font-size: 1rem;
+  word-break: break-all;
+`;
 export const ItemText = styled.h6`
   font-size: 1.5rem;
   font-family: MuseoSans-300;
   color: #5e8796;
   font-weight: bold;
+`;
+export const ItemTextProcedures = styled.h6`
+  font-size: 1.2rem;
+  font-family: MuseoSans-300;
+  color: #5e8796;
+  font-weight: bold;
+  width: 100%;
 `;
 
 export const H4 = styled.h4`
@@ -66,6 +108,29 @@ export const AddToCart = styled.button`
   }
 `;
 
+export const AddButton = styled.button`
+  background-color: #00aeefb8;
+  font-family: MuseoSans-300;
+  text-transform: uppercase;
+  color: #fff !important;
+  padding: 0rem 1.5rem;
+  border-radius: 0.35rem;
+  outline: none !important;
+  border-radius: 6px;
+  border: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+  position: relative;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  letter-spacing: 0px;
+  user-select: none;
+  transition: all 0.3s ease-out;
+  &:hover {
+    background-color: #00aeef;
+  }
+`;
+
 export const Button = styled.button`
   background-color: #00aeefb8;
   font-family: MuseoSans-300;
@@ -83,8 +148,7 @@ export const Button = styled.button`
   letter-spacing: 0px;
   user-select: none;
   transition: all 0.3s ease-out;
-  margin: 0.5rem;
-  width: 40%;
+  width: 45%;
   &:hover {
     background-color: #00aeef;
   }
@@ -259,6 +323,25 @@ export const StyledModalLink = styled.a`
     background-color: #00aeef;
   }
 `;
+export const StyledCartLink = styled.a`
+  background-color: #00aeefb8;
+  text-transform: uppercase;
+  color: #fff !important;
+  padding: 1rem 1.5rem;
+  border-radius: 0.35rem;
+  transition: all 0.3s ease-out;
+  cursor: pointer;
+  letter-spacing: 0px;
+  font-weight: 600;
+  margin-top: 1rem;
+  display: inline-block;
+  user-select: none;
+  width: 45%;
+  text-align: center;
+  &:hover {
+    background-color: #00aeef;
+  }
+`;
 interface IPhotoRightItem {
   imageUrl?: string;
 }
@@ -269,3 +352,6 @@ interface IColor {
 interface IColorText {
   colorText?: string;
 }
+type ImageColor = {
+  color: string;
+};

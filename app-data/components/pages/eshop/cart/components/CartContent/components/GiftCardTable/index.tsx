@@ -8,17 +8,25 @@ import {
 import { Context } from '../../../../../../../../lib/state/Store';
 import { formatPrice } from '../../../../../../../../shared/helpers/formatters';
 
+type IService = {
+  title: string;
+  count: number;
+  price: number;
+};
+
 interface IGiftCardTableRow {
   cardColor: string;
   price: number;
   text: string;
   id: number;
+  services: IService[];
 }
 const GiftCardTableRow: FC<IGiftCardTableRow> = ({
   cardColor,
   price,
   text,
   id,
+  services,
 }) => {
   const { dispatch } = useContext(Context);
 
@@ -32,11 +40,21 @@ const GiftCardTableRow: FC<IGiftCardTableRow> = ({
   return (
     <tr>
       <TD>Darčeková poukážka</TD>
-      <TD>Suma</TD>
       <TD>
         <Circle color={cardColor}></Circle>
       </TD>
-      <TD>{`${formatPrice(price)} €`}</TD>
+      {services.length > 0 ? (
+        <TD>
+          {services.map((item) => {
+            return (
+              <p className="w-100 mb-0">{`${item.title} ${item.count}x`}</p>
+            );
+          })}
+        </TD>
+      ) : (
+        <TD>{`Suma: ${formatPrice(price)} €`}</TD>
+      )}
+
       <TDtext>{text}</TDtext>
       <TD>{`${formatPrice(price)} €`}</TD>
       <TD>
