@@ -1,6 +1,9 @@
 // queries
 import categories from './query/Categories';
 import currencies from './query/Currencies';
+import customer from './query/Customer';
+import customers from './query/Customers';
+
 import deliveryMethode from './query/DeliveryMethode';
 import deliveryMethods from './query/DeliveryMethods';
 import discount from './query/Discount';
@@ -20,6 +23,10 @@ import users from './query/Users';
 import createCategory from './mutation/CreateCategory';
 import updateCategory from './mutation/UpdateCategory';
 import removeCategory from './mutation/RemoveCategory';
+
+import createCustomer from './mutation/CreateCustomer';
+import updateCustomer from './mutation/UpdateCustomer';
+import logInCustomer from './mutation/LogInCustomer';
 
 import createDeliveryMethode from './mutation/CreateDeliveryMethode';
 import removeDeliveryMethode from './mutation/RemoveDeliveryMethode';
@@ -54,6 +61,10 @@ const resolvers = {
   Query: {
     categories: async () => categories(),
     currencies: async () => currencies(),
+
+    customer: async (root: any, args: any, ctx: any) => customer(root, args, ctx),
+    customers: async () => customers(),
+
     deliveryMethode: async (root: any, args: any, ctx: any) =>
       deliveryMethode(root, args, ctx),
     deliveryMethods: async () => deliveryMethods(),
@@ -87,6 +98,11 @@ const resolvers = {
       updateCategory(root, args, ctx),
     removeCategory: async (root: any, args: any, ctx: any) =>
       removeCategory(root, args, ctx),
+
+    createCustomer: async (root: any, args: any, ctx: any) =>
+      createCustomer(root, args, ctx),
+    updateCustomer: async (root: any, args: any, ctx: any) => updateCustomer(root, args, ctx),
+    logInCustomer: async (root: any, args: any, ctx: any) => logInCustomer(root, args, ctx),
 
     createDeliveryMethode: async (root: any, args: any, ctx: any) =>
       createDeliveryMethode(root, args, ctx),
