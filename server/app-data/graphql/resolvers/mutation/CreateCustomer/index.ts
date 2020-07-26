@@ -1,24 +1,29 @@
+import bcrypt from 'bcryptjs';
 import Customer from '../../../../db/models/Customer';
 import ModError from '../../utils/error';
 
 export default async (root: any, args: any, ctx: any) => {
   try {
-    const { customerData: { email, firstName, lastName, password, role } } = args;
+    const {
+      customerData: { email, firstName, lastName, password, role },
+    } = args;
     const customerExist = await Customer.findOne({ email });
 
     if (customerExist) {
       throw new ModError(409, 'Allready exist');
     }
 
-    const hashedPasw = await bcrypt.hash(userRegInput.password, 10);
+    const hashedPasw = await bcrypt.hash(password, 10);
 
-    const newCustomer = new Customer({
+    const newUserData = {
       email,
       firstName,
       lastName,
       password: hashedPasw,
-      role
-    });
+      role,
+    };
+
+    const newCustomer = new Customer(newUserData);
 
     await Customer.create(newCustomer);
 

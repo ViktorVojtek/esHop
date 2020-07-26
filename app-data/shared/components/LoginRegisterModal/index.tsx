@@ -11,7 +11,11 @@ import {
 import { useMutation } from '@apollo/react-hooks';
 
 import { StyledModalBtn, RegisterButton, P, Danger } from './styles/index';
-import { REGISTER_CUSTOMER_MUTATION } from '../../../graphql/mutation';
+import {
+  REGISTER_CUSTOMER_MUTATION,
+  LOGIN_CUSTOMER_MUTATION,
+} from '../../../graphql/mutation';
+import { login } from '../../../lib/authCustomer';
 
 interface ILoginRegisterModal {
   loginModal: boolean;
@@ -24,15 +28,50 @@ const LoginRegisterModal: FC<ILoginRegisterModal> = ({
 }) => {
   const [isLogin, setIsLogin] = useState(true);
   const [isMatchPass, setIsMatchPass] = useState(true);
+  const [userExist, setUserExist] = useState(false);
+  const [badLogin, setBadLogin] = useState(false);
   const passwordEl = useRef(null);
   const toggle = () => {
     setLoginModal(!loginModal);
     setIsLogin(true);
   };
   const [createUser] = useMutation(REGISTER_CUSTOMER_MUTATION);
+  const [loginUser] = useMutation(LOGIN_CUSTOMER_MUTATION);
 
-  const handleSubmitLogin = (event) => {
-    event.preventDefault();
+  const handleSubmitLogin: (
+    event: React.FormEvent<HTMLFormElement>
+  ) => Promise<void> = async (event) => {
+    try {
+      event.preventDefault();
+
+      const form = event.currentTarget;
+      const email = form.email.value;
+      const password = form.password.value;
+      console.log(email);
+      console.log(password);
+
+      const {
+        data: {
+          loginUser: { _id, firstName, lastName, token },
+        },
+      } = await loginUser({
+        variables: {
+          customerData: {
+            email,
+            password,
+          },
+        },
+      });
+      login({
+        _id,
+        firstName,
+        lastName,
+        token,
+      });
+    } catch (err) {
+      console.log(err);
+      setBadLogin(true);
+    }
   };
 
   const handleSubmitRegister: (
@@ -57,8 +96,9 @@ const LoginRegisterModal: FC<ILoginRegisterModal> = ({
           },
         },
       });
+      setIsLogin(true);
     } catch (err) {
-      console.log(err);
+      setUserExist(true);
     }
   };
 
@@ -102,6 +142,7 @@ const LoginRegisterModal: FC<ILoginRegisterModal> = ({
                     Zaregistrujte sa
                   </RegisterButton>
                 </P>
+                {badLogin && <Danger>Nesprávne meno alebo heslo</Danger>}
                 <StyledModalBtn type="submit">Prihlásiť</StyledModalBtn>
               </Form>
             </ModalBody>
@@ -173,7 +214,8 @@ const LoginRegisterModal: FC<ILoginRegisterModal> = ({
                     required
                   />
                 </FormGroup>
-                {isMatchPass ? null : <Danger>Hesla sa nezhodujú</Danger>}
+                {userExist && <Danger>Účet už existuje</Danger>}
+                {!isMatchPass && <Danger>Hesla sa nezhodujú</Danger>}
                 <StyledModalBtn disabled={!isMatchPass} type="submit">
                   Zaregistrovať
                 </StyledModalBtn>
