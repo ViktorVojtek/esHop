@@ -4,6 +4,8 @@ const rootTypeDefs = gql`
   type Query {
     categories: [Category]
     currencies: [Currency]
+    customer(id: String!): Customer
+    customers: [Customer]
     deliveryMethode(id: String!): Delivery
     deliveryMethods: [Delivery]
     discount(id: String!): Discount
@@ -24,6 +26,10 @@ const rootTypeDefs = gql`
     createCategory(title: String!): Category
     updateCategory(_id: String!, title: String!): Category
     removeCategory(_id: String!): String
+
+    createCustomer(customerData: CustomerRegInput!): Customer
+    updateCustomer(id: String!, customerData: CustomerRegInput!): Customer
+    logInCustomer(customerData: CustomerLoginInput!): CustomerLogged
 
     createDeliveryMethode(
       isEnvelopeSize: Boolean

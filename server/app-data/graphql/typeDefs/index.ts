@@ -1,5 +1,6 @@
 import Category from './Category';
 import Currency from './Currency';
+import Customer from './Customer';
 import DeliveryMethode from './DeliveryMethode';
 import Discount from './Discount';
 import root from './root';
@@ -13,6 +14,7 @@ import User from './User';
 const typeDefs = [
   Category,
   Currency,
+  Customer,
   DeliveryMethode,
   Discount,
   root,
