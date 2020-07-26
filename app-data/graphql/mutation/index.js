@@ -224,6 +224,19 @@ export const REGISTER_CUSTOMER_MUTATION = gql`
   }
 `;
 
+export const LOGIN_CUSTOMER_MUTATION = gql`
+  mutation logInCustomer($customerData: CustomerLoginInput!) {
+    logInCustomer(customerData: $customerData) {
+      _id
+      email
+      firstName
+      lastName
+      token
+      tokenExpiresIn
+    }
+  }
+`;
+
 export const SET_CURRENCY_MUTATION = gql`
   mutation setCurrency($currencyInput: CurrencyInput!) {
     setCurrency(currencyInput: $currencyInput) {
