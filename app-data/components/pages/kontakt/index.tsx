@@ -60,6 +60,16 @@ const KontaktPage = () => (
   <Wrapper>
     <Container>
       <H1>Kontakt a FAQ</H1>
+      <iframe
+        src="https://docs.google.com/forms/d/e/1FAIpQLSd9WGODigIJAW64Ej3XjUCRog2Ev_r9QRjLX63FKTpReY8Oxg/viewform?embedded=true"
+        width="640"
+        height="787"
+        frameBorder="0"
+        marginHeight={0}
+        marginWidth={0}
+      >
+        Načítava sa…
+      </iframe>
       <Row>
         <Col md="6">
           <H2 className="w-100">Kontakt</H2>

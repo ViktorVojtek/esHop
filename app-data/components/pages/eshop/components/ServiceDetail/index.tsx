@@ -19,6 +19,7 @@ import Service from '../../../../../shared/types/Service.types';
 
 import { formatPrice } from '../../../../../shared/helpers/formatters';
 import { StyledCartLink } from '../Products/components/ProductsFill/styles/products.style';
+import { Head } from '../ProductDetail/styles/productDetail.style';
 
 interface IServiceDetailProps {
   service: Service;
@@ -44,11 +45,7 @@ const ServiceDetailBody: React.FC<IServiceDetailProps> = ({ service }) => {
     <Wrapper>
       <Container>
         <Row>
-          <Col md="6">
-            <TitleMobile className="mb-3">{title}</TitleMobile>
-            <Image src={img.path} alt={title} className="mb-3" />
-          </Col>
-          <Col md="6">
+          <Col>
             <Title>{title}</Title>
             {discount > 0 ? (
               <Price>
@@ -65,10 +62,15 @@ const ServiceDetailBody: React.FC<IServiceDetailProps> = ({ service }) => {
                 {formatPrice(price.value)} {price.currency}
               </Price>
             )}
-            <Description dangerouslySetInnerHTML={renderDescription(html)} />
             <Link href={{ pathname: '/rezervacia' }}>
-              <StyledCartLink>Rezervovať</StyledCartLink>
+              <StyledCartLink className="mt-0">Rezervovať</StyledCartLink>
             </Link>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Head>Popis produktu</Head>
+            <Description dangerouslySetInnerHTML={renderDescription(html)} />
           </Col>
         </Row>
       </Container>

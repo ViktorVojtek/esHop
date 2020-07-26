@@ -22,6 +22,7 @@ import {
   Del,
   Label,
   RelatedTitle,
+  Head,
 } from './styles/productDetail.style';
 import Link from 'next/link';
 import { useQuery } from '@apollo/react-hooks';
@@ -163,11 +164,6 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
                   {variants[activeVariant].price.currency}
                 </Price>
               )}
-              <Description
-                dangerouslySetInnerHTML={renderDescription(
-                  variants[activeVariant].description
-                )}
-              />
               {variants.length > 1 && (
                 <VariantsSelect
                   id="variants"
@@ -190,6 +186,16 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
                 ref={productCountRef}
               />
               <StyledCartBtn type="submit">Vložiť do košíka</StyledCartBtn>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Head>Popis produktu</Head>
+              <Description
+                dangerouslySetInnerHTML={renderDescription(
+                  variants[activeVariant].description
+                )}
+              />
             </Col>
           </Row>
         </form>

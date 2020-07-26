@@ -28,8 +28,16 @@ const Summary: FC<IProductToCartData> = ({ formData, setFormData }) => {
     newServices.splice(value, 1);
     setFormData({
       ...formData,
+      priceValue: getPrice(newServices),
       services: newServices,
     });
+  };
+  const getPrice = (items) => {
+    let price = 0;
+    for (let i = 0; i < items.length; i++) {
+      price += items[i].price * items[i].count;
+    }
+    return price;
   };
 
   return (

@@ -15,6 +15,9 @@ export const Image = styled.img`
 export const RelatedTitle = styled.h2`
   margin: 2rem 0;
 `;
+export const Head = styled.h2`
+  margin: 1rem 0;
+`;
 
 export const Title = styled.h4`
   color: #5e8796;
@@ -39,6 +42,7 @@ export const VariantTitle = styled.h6`
   font-weight: bold;
   font-size: 1.5rem;
 `;
+
 export const Price = styled.p`
   margin: 1rem 0rem;
   font-weight: 600;

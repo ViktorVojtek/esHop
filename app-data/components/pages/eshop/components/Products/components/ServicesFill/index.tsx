@@ -69,7 +69,7 @@ const ServiceUI: FC<IServiceUI> = ({
               </Price>
             )}
           </PriceHolder>
-          <Link href={{ pathname: '/eshop/service', query: { id: _id } }}>
+          <Link href={{ pathname: '/rezervacia' }}>
             <StyledCartLink>Rezervovať</StyledCartLink>
           </Link>
         </ProductBody>
