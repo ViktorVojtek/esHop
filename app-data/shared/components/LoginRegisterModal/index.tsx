@@ -69,6 +69,7 @@ const LoginRegisterModal: FC<ILoginRegisterModal> = ({
         token,
       });
     } catch (err) {
+      console.log(err);
       setBadLogin(true);
     }
   };
