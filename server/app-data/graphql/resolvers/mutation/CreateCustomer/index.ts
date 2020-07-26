@@ -10,11 +10,13 @@ export default async (root: any, args: any, ctx: any) => {
       throw new ModError(409, 'Allready exist');
     }
 
+    const hashedPasw = await bcrypt.hash(userRegInput.password, 10);
+
     const newCustomer = new Customer({
       email,
       firstName,
       lastName,
-      password,
+      password: hashedPasw,
       role
     });
 
