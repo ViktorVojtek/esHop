@@ -76,7 +76,7 @@ const Navigation: FC = () => {
                 </Link>
               </CartWrapper>*/}
               <CartPopover target="cartIcon" />
-              {/*<Login onClick={() => setLoginModal(true)} />*/}
+              <Login onClick={() => setLoginModal(true)} />
             </Nav>
           </Collapse>
         </Navbar>{' '}

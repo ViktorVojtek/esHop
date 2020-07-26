@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { LogIn } from '@styled-icons/boxicons-regular';
+import { User } from '@styled-icons/boxicons-regular';
 
-export const Login = styled(LogIn)`
+export const Login = styled(User)`
   color: red;
   width: 36px;
   margin-left: 1rem;
