@@ -21,7 +21,7 @@ export default async (root: any, args: any, ctx: any) => {
 
     const updatedCustomer = await Customer.updateOne({ _id: mongoose.Types.ObjectId(id) }, newCustomerData);
 
-    const { __v, ...returnCustomerData } = updatedCustomer;
+    const { __v, ...returnCustomerData } = updatedCustomer.toObject();
 
     return returnCustomerData;
   } catch (err) {

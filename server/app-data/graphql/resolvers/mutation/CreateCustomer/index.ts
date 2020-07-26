@@ -20,7 +20,9 @@ export default async (root: any, args: any, ctx: any) => {
 
     await Customer.create(newCustomer);
 
-    const { __v, ...returnCustomerData } = newCustomer;
+    const { __v, ...returnCustomerData } = newCustomer.toObject();
+
+    console.log(returnCustomerData);
 
     return returnCustomerData;
   } catch (err) {
