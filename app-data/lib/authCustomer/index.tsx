@@ -1,8 +1,9 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import Router from 'next/router';
 import nextCookie from 'next-cookies';
 import cookie from 'js-cookie';
+import { Context } from '../state/Store';
 
 import { ILogin } from './TS/auth.interface';
 
@@ -16,8 +17,8 @@ export const login: (data: ILogin) => void = ({
   cookie.set('userId', _id);
   cookie.set('firstName', firstName);
   cookie.set('lastName', lastName);
-
-  Router.push('/moja-zona');
+  let isMyZone = Router.pathname.includes('moja-zona');
+  isMyZone ? Router.push('/moja-zona') : Router.reload();
 };
 
 export const auth: (ctx: any) => string = (ctx) => {
@@ -42,13 +43,15 @@ export const logout: () => void = () => {
   cookie.remove('firstName');
   cookie.remove('lastName');
   cookie.remove('userEmail');
+  let isMyZone = Router.pathname.includes('moja-zona');
 
   // to support logging out from all windows
   window.localStorage.setItem('logout', `${Date.now()}`);
-  Router.push('/moja-zona/prihlasenie');
+
+  isMyZone ? Router.push('/moja-zona/prihlasenie') : Router.reload();
 };
 
-export const withAuthSync = (WrappedComponent: any) => {
+export const withAuthSyncCustomer = (WrappedComponent: any) => {
   const Wrapper = (props) => {
     const syncLogout = (event) => {
       if (event.key === 'logout') {
@@ -70,6 +73,7 @@ export const withAuthSync = (WrappedComponent: any) => {
 
   Wrapper.getInitialProps = async (ctx) => {
     const token = auth(ctx);
+    console.log(token);
 
     const componentProps =
       WrappedComponent.getInitialProps &&

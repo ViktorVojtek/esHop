@@ -6,6 +6,9 @@ export const Login = styled(User)`
   width: 36px;
   margin-left: 1rem;
   cursor: pointer;
+  @media (max-width: 576px) {
+    width: 26px;
+  }
 `;
 
 export const Wrapper = styled.div`
@@ -25,14 +28,14 @@ export const Wrapper = styled.div`
 
 export const Logo = styled.img`
   width: 260px;
-  @media (max-width: 992px) {
-    width: 210px;
+  @media (max-width: 1110px) {
+    width: 200px;
   }
   @media (max-width: 430px) {
-    width: 220px;
+    width: 200px;
   }
   @media (max-width: 400px) {
-    width: 200px;
+    width: 160px;
   }
   @media (max-width: 360px) {
     width: 160px;
@@ -42,6 +45,9 @@ export const Logo = styled.img`
 export const CartWrapper = styled.div`
   margin-left: 60px;
   position: relative;
+  @media (max-width: 1100px) {
+    margin-left: 6px;
+  }
   @media (max-width: 992px) {
     margin-left: 0;
   }

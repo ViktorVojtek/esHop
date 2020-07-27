@@ -29,6 +29,13 @@ export type CartProduct = {
   isEnvelopeSize: boolean;
 };
 
+export type Customer = {
+  firstName: string;
+  lastName: string;
+  userId: string;
+  token: string;
+};
+
 export interface IState {
   cart: CartProduct[] | [];
   cartTotalSum: number;
@@ -41,6 +48,7 @@ export interface IState {
   productsTotal: number;
   productsToShow: number;
   allowEnvelope: boolean;
+  customer: Customer;
 }
 
 export interface IAction {

@@ -104,13 +104,13 @@ export default createGlobalStyle`
 
    #navigation{
      display: block;
-     @media(max-width: 768px){
+     @media(max-width: 992px){
        display:none;
      }
    }
    #mobileNavigation{
      display:none;
-    @media(max-width: 768px){
+    @media(max-width: 992px){
       display:block;
       display: flex;
       align-items: center;
@@ -120,10 +120,12 @@ export default createGlobalStyle`
       z-index: 1;
       background-color: white;
       width: 100%;
+      padding-top: .5rem;
+      padding-bottom: .5rem;
     }
    }
    .hideMobile{
-     @media(max-width: 768px){
+     @media(max-width: 992px){
        display:none;
      }
    }
@@ -349,6 +351,9 @@ export default createGlobalStyle`
     &:hover{
     transform: translateY(-2px);
     }
+  }
+  .cursor-pointer{
+    cursor: pointer;
   }
   .nav-link-main{
     position: relative;

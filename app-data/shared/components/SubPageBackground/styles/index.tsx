@@ -7,10 +7,11 @@ interface IImageUrl {
 export const Wrapper = styled.div<IImageUrl>`
   position: relative;
   width: 100%;
-  height: 240px;
-  background-image: ${({ imageUrl }) =>imageUrl ? `url(${imageUrl})` : '0'};
+  height: 200px;
+  background-image: ${({ imageUrl }) => (imageUrl ? `url(${imageUrl})` : '0')};
   background-size: cover;
   margin-bottom: 2rem;
+  background-position: center;
 `;
 
 export const Fade = styled.div`

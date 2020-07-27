@@ -228,3 +228,13 @@ export const SERVICES_QUERY = gql`
     }
   }
 `;
+export const CUSTOMER_QUERY = gql`
+  query customer($id: String!) {
+    customer(id: $id) {
+      _id
+      email
+      firstName
+      lastName
+    }
+  }
+`;

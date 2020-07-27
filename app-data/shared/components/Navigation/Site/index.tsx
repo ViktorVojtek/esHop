@@ -11,17 +11,20 @@ import {
 } from 'reactstrap';
 import styled from 'styled-components';
 import { ShoppingCartOutline } from 'styled-icons/evaicons-outline';
-import { CartWrapper, Logo, Wrapper, Login } from './styles';
+import { CartWrapper, Logo, Wrapper } from './styles';
 import { Context } from '../../../../lib/state/Store';
 
 import { ILinkItem } from './TS/Navigation.interface';
 import MobileMenuEshop from '../../../components/MobileMenuEshop';
-import LoginRegisterModal from '../../../../shared/components/LoginRegisterModal';
 import CartPopover from '../../CartPopover';
+import CustomerMenu from '../../CustomerMenu';
 
 const CartIcon = styled(ShoppingCartOutline)`
   color: red;
   width: 36px;
+  @media (max-width: 576px) {
+    width: 26px;
+  }
 `;
 
 type FWRCBrand = {
@@ -46,7 +49,6 @@ const LinkItem: FC<ILinkItem> = ({ href, title }) => (
 );
 const Navigation: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [loginModal, setLoginModal] = useState(false);
   const { state } = useContext(Context);
 
   const { cart } = state;
@@ -68,15 +70,8 @@ const Navigation: FC = () => {
               <LinkItem href="/eshop" title="Obchod" />
               <LinkItem href="/darcekove-poukazky" title="Darčekové poukážky" />
               <LinkItem href="/kontakt" title="Kontakt" />
-              {/*<CartWrapper id="cartLink">
-                <Link href="/eshop/cart">
-                  <a>
-                    <CartIcon /> <span>{cart.length}</span>
-                  </a>
-                </Link>
-              </CartWrapper>*/}
               <CartPopover target="cartIcon" />
-              <Login onClick={() => setLoginModal(true)} />
+              <CustomerMenu />
             </Nav>
           </Collapse>
         </Navbar>{' '}
@@ -88,18 +83,17 @@ const Navigation: FC = () => {
             <Logo src="/images/logo.png" alt="Červený kláštor" />
           </CustomNavbarBrand>
         </Link>
-        <CartWrapper>
-          <Link href="/eshop/cart">
-            <a>
-              <CartIcon /> <span>{cart.length}</span>
-            </a>
-          </Link>
-        </CartWrapper>
+        <div className="d-flex">
+          <CartWrapper>
+            <Link href="/eshop/cart">
+              <a>
+                <CartIcon /> <span>{cart.length}</span>
+              </a>
+            </Link>
+          </CartWrapper>
+          <CustomerMenu />
+        </div>
       </Wrapper>
-      <LoginRegisterModal
-        loginModal={loginModal}
-        setLoginModal={setLoginModal}
-      />
     </>
   );
 };

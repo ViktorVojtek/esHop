@@ -16,6 +16,12 @@ const initialState: IState = {
   productsTotal: 0,
   productsToShow: 0,
   allowEnvelope: true,
+  customer: {
+    firstName: '',
+    lastName: '',
+    userId: '',
+    token: '',
+  },
 };
 
 export const Context = createContext<{

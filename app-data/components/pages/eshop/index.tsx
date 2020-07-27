@@ -116,52 +116,56 @@ const EshopPage: FC = () => {
               <CategoriesAside />
             </Row>
           </Col>
-          <Col md="3" sm="6">
-            <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-              <DropdownToggle caret>Zoradit podľa</DropdownToggle>
-              <DropdownMenu>
-                <DropdownItem
-                  onClick={() =>
-                    sortByPriceMin(filteredProducts, setFilteredProducts)
-                  }
-                >
-                  Od najlacnejších
-                </DropdownItem>
-                <DropdownItem
-                  onClick={() =>
-                    sortByPriceMax(filteredProducts, setFilteredProducts)
-                  }
-                >
-                  Od najdrahších
-                </DropdownItem>
-                <DropdownItem
-                  onClick={() =>
-                    sortByLetterUp(filteredProducts, setFilteredProducts)
-                  }
-                >
-                  Vzostupne A-Z
-                </DropdownItem>
-                <DropdownItem
-                  onClick={() =>
-                    sortByLetterDown(filteredProducts, setFilteredProducts)
-                  }
-                >
-                  Zostupne Z-A
-                </DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
-          </Col>
-          <Col md="3" sm="6">
-            <FormGroup>
-              <Input
-                type="text"
-                name="search"
-                id="search"
-                placeholder="Vyhľadávať"
-                onChange={filterByName}
-                innerRef={searchInput}
-              />
-            </FormGroup>
+          <Col sm="6">
+            <Row>
+              <Col md="6" className="mb-2">
+                <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+                  <DropdownToggle caret>Zoradit podľa</DropdownToggle>
+                  <DropdownMenu>
+                    <DropdownItem
+                      onClick={() =>
+                        sortByPriceMin(filteredProducts, setFilteredProducts)
+                      }
+                    >
+                      Od najlacnejších
+                    </DropdownItem>
+                    <DropdownItem
+                      onClick={() =>
+                        sortByPriceMax(filteredProducts, setFilteredProducts)
+                      }
+                    >
+                      Od najdrahších
+                    </DropdownItem>
+                    <DropdownItem
+                      onClick={() =>
+                        sortByLetterUp(filteredProducts, setFilteredProducts)
+                      }
+                    >
+                      Vzostupne A-Z
+                    </DropdownItem>
+                    <DropdownItem
+                      onClick={() =>
+                        sortByLetterDown(filteredProducts, setFilteredProducts)
+                      }
+                    >
+                      Zostupne Z-A
+                    </DropdownItem>
+                  </DropdownMenu>
+                </Dropdown>
+              </Col>
+              <Col md="6" className="mb-2">
+                <FormGroup>
+                  <Input
+                    type="text"
+                    name="search"
+                    id="search"
+                    placeholder="Vyhľadávať"
+                    onChange={filterByName}
+                    innerRef={searchInput}
+                  />
+                </FormGroup>
+              </Col>
+            </Row>
           </Col>
         </Row>
         <Row>

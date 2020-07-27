@@ -69,38 +69,36 @@ export default function TemporaryDrawer() {
   };
 
   const list = () => (
-    <Row>
-      <Wrapper className={clsx(classes.list)}>
-        {router.pathname === '/eshop' ? (
-          <>
-            <Col className="mb-2">
-              <Link href="/">
-                <HomeIcon />
-              </Link>
-            </Col>
-            <CategoriesAside />
-            <Col className="mt-2">
-              <H2>Nákupný košík</H2>
-              <AsideCart />
-            </Col>
-          </>
-        ) : (
-          <>
+    <Wrapper className={clsx(classes.list)}>
+      {router.pathname === '/eshop' ? (
+        <>
+          <Col className="mb-2">
             <Link href="/">
-              <CustomNavbarBrand href="/">
-                <Logo src="/images/logo.png" alt="Červený kláštor" />
-              </CustomNavbarBrand>
+              <HomeIcon />
             </Link>
-            <Nav navbar>
-              <LinkItem href="/" title="Domov" />
-              <LinkItem href="/eshop" title="Obchod" />
-              <LinkItem href="/darcekove-poukazky" title="Darčekové poukážky" />
-              <LinkItem href="/" title="FAQ" />
-            </Nav>
-          </>
-        )}
-      </Wrapper>
-    </Row>
+          </Col>
+          <CategoriesAside />
+          <Col className="mt-2">
+            <H2>Nákupný košík</H2>
+            <AsideCart />
+          </Col>
+        </>
+      ) : (
+        <>
+          <Link href="/">
+            <CustomNavbarBrand href="/">
+              <Logo src="/images/logo.png" alt="Červený kláštor" />
+            </CustomNavbarBrand>
+          </Link>
+          <Nav navbar>
+            <LinkItem href="/" title="Domov" />
+            <LinkItem href="/eshop" title="Obchod" />
+            <LinkItem href="/darcekove-poukazky" title="Darčekové poukážky" />
+            <LinkItem href="/" title="FAQ" />
+          </Nav>
+        </>
+      )}
+    </Wrapper>
   );
 
   return (

@@ -47,8 +47,6 @@ const LoginRegisterModal: FC<ILoginRegisterModal> = ({
       const form = event.currentTarget;
       const email = form.email.value;
       const password = form.password.value;
-      console.log(email);
-      console.log(password);
 
       const response = await loginUser({
         variables: {
@@ -59,7 +57,11 @@ const LoginRegisterModal: FC<ILoginRegisterModal> = ({
         },
       });
 
-      const { data: { logInCustomer: { _id, firstName, lastName, token } } } = response;
+      const {
+        data: {
+          logInCustomer: { _id, firstName, lastName, token },
+        },
+      } = response;
 
       login({
         _id,
@@ -147,81 +149,81 @@ const LoginRegisterModal: FC<ILoginRegisterModal> = ({
             </ModalBody>
           </>
         ) : (
-            <>
-              <ModalHeader toggle={toggle}>Registrácia</ModalHeader>
-              <ModalBody>
-                <Form onSubmit={handleSubmitRegister}>
-                  <FormGroup>
-                    <Label className="font-weight-bold" for="firstName">
-                      Meno
+          <>
+            <ModalHeader toggle={toggle}>Registrácia</ModalHeader>
+            <ModalBody>
+              <Form onSubmit={handleSubmitRegister}>
+                <FormGroup>
+                  <Label className="font-weight-bold" for="firstName">
+                    Meno
                   </Label>
-                    <Input
-                      type="text"
-                      name="firstName"
-                      id="firstName"
-                      placeholder="Zadajte meno"
-                      required
-                    />
-                  </FormGroup>
-                  <FormGroup>
-                    <Label className="font-weight-bold" for="lastName">
-                      Priezvisko
+                  <Input
+                    type="text"
+                    name="firstName"
+                    id="firstName"
+                    placeholder="Zadajte meno"
+                    required
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Label className="font-weight-bold" for="lastName">
+                    Priezvisko
                   </Label>
-                    <Input
-                      type="text"
-                      name="lastName"
-                      id="lastName"
-                      placeholder="Zadajte priezvisko"
-                      required
-                    />
-                  </FormGroup>
-                  <FormGroup>
-                    <Label className="font-weight-bold" for="email">
-                      Email
+                  <Input
+                    type="text"
+                    name="lastName"
+                    id="lastName"
+                    placeholder="Zadajte priezvisko"
+                    required
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Label className="font-weight-bold" for="email">
+                    Email
                   </Label>
-                    <Input
-                      type="email"
-                      name="email"
-                      id="email"
-                      placeholder="Zadajte email"
-                      required
-                    />
-                  </FormGroup>
-                  <FormGroup>
-                    <Label className="font-weight-bold" for="password">
-                      Heslo
+                  <Input
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="Zadajte email"
+                    required
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Label className="font-weight-bold" for="password">
+                    Heslo
                   </Label>
-                    <Input
-                      innerRef={passwordEl}
-                      type="password"
-                      name="password"
-                      id="password"
-                      placeholder="Zadajte heslo"
-                      required
-                    />
-                  </FormGroup>
-                  <FormGroup>
-                    <Label className="font-weight-bold" for="checkPassword">
-                      Zopakujte Heslo
+                  <Input
+                    innerRef={passwordEl}
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="Zadajte heslo"
+                    required
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Label className="font-weight-bold" for="checkPassword">
+                    Zopakujte Heslo
                   </Label>
-                    <Input
-                      onChange={(event) => matchPassoword(event)}
-                      type="password"
-                      name="checkPassword"
-                      id="checkPassword"
-                      placeholder="Zadajte heslo"
-                      required
-                    />
-                  </FormGroup>
-                  {userExist && <Danger>Účet už existuje</Danger>}
-                  {!isMatchPass && <Danger>Hesla sa nezhodujú</Danger>}
-                  <StyledModalBtn disabled={!isMatchPass} type="submit">
-                    Zaregistrovať
+                  <Input
+                    onChange={(event) => matchPassoword(event)}
+                    type="password"
+                    name="checkPassword"
+                    id="checkPassword"
+                    placeholder="Zadajte heslo"
+                    required
+                  />
+                </FormGroup>
+                {userExist && <Danger>Účet už existuje</Danger>}
+                {!isMatchPass && <Danger>Hesla sa nezhodujú</Danger>}
+                <StyledModalBtn disabled={!isMatchPass} type="submit">
+                  Zaregistrovať
                 </StyledModalBtn>
-                </Form>
-              </ModalBody>
-            </>
-          )}
+              </Form>
+            </ModalBody>
+          </>
+        )}
       </Modal>
     </div>
   );

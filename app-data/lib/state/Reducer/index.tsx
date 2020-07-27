@@ -7,6 +7,7 @@ import {
 } from '../../../shared/types/Store.types';
 import { Context } from '../Store';
 import { useStorage } from '../../util/app.util';
+import cookie from 'js-cookie';
 
 const storage: Storage = useStorage();
 let newCart: CartProduct[] = [];
@@ -177,6 +178,11 @@ const Reducer = (state: IState, action: IAction) => {
         ...state,
         allowEnvelope: action.payload,
       };
+    case 'SET_CUSTOMER':
+      return {
+        ...state,
+        customer: action.payload,
+      };
     default:
       return state;
   }
@@ -190,6 +196,15 @@ export const withSetCart = <P extends object>(
   useEffect(() => {
     dispatch({ type: 'SET_CART', payload: null });
     dispatch({ type: 'SET_GIFTCARD', payload: null });
+    dispatch({
+      type: 'SET_CUSTOMER',
+      payload: {
+        firstName: cookie.get('firstName'),
+        lastName: cookie.get('lastName'),
+        userId: cookie.get('userId'),
+        token: cookie.get('token'),
+      },
+    });
   }, []);
 
   return <Component {...props} />;
