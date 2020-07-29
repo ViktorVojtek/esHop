@@ -1,4 +1,4 @@
-import React, { FC, useContext } from 'react';
+import React, { FC, useContext, useEffect } from 'react';
 import { Button, Col, Row, Input } from 'reactstrap';
 import { Context } from '../../../../../../../../../../lib/state/Store';
 import { H4 } from '../../../../../../styles/cart.style';
@@ -6,10 +6,44 @@ import Delivery from './components/Delivery';
 import Payment from './components/Payment';
 import { formatPrice } from '../../../../../../../../../../shared/helpers/formatters';
 
-const CartSummary: FC = () => {
+interface IData {
+  firstName: string;
+  lastName: string;
+  companyName: string;
+  companyVatNum: string;
+  companyDVATNum: string;
+  address: string;
+  postalCode: string;
+  city: string;
+  state: string;
+  optionalAddress: string;
+  optionalPostalCode: string;
+  optionalCity: string;
+  phone: string;
+  email: string;
+  message: string;
+  deliveryMethode: string;
+  paymentMethode: string;
+  totalPrice: number;
+  products: any[];
+}
+interface IProps {
+  data?: IData;
+  handleData?: (data: IData) => void;
+}
+
+const CartSummary: (props: IProps) => JSX.Element = (props) => {
   const {
     state: { cartTotalSum },
   } = useContext(Context);
+  const { data, handleData } = props;
+
+  useEffect(() => {
+    handleData({
+      ...data,
+      totalPrice: cartTotalSum,
+    });
+  }, [cartTotalSum]);
 
   return (
     <Col md={6}>
@@ -22,8 +56,8 @@ const CartSummary: FC = () => {
           <p className="text-right">{formatPrice(cartTotalSum)} €</p>
         </Col>
       </Row>
-      <Delivery />
-      <Payment />
+      <Delivery data={data} handleData={handleData} />
+      <Payment data={data} handleData={handleData} />
       <Row form>
         <Col md={6} className="mt-3 mb-3">
           Použiť zľavový kód:

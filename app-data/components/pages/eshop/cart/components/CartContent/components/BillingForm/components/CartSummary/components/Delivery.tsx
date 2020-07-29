@@ -6,7 +6,34 @@ import { Col, Row, FormGroup, Input, Label } from 'reactstrap';
 import { formatPrice } from '../../../../../../../../../../../shared/helpers/formatters';
 import { CartProduct } from '../../../../../../../../../../../shared/types/Store.types';
 
-export default () => {
+interface IData {
+  firstName: string;
+  lastName: string;
+  companyName: string;
+  companyVatNum: string;
+  companyDVATNum: string;
+  address: string;
+  postalCode: string;
+  city: string;
+  state: string;
+  optionalAddress: string;
+  optionalPostalCode: string;
+  optionalCity: string;
+  phone: string;
+  email: string;
+  message: string;
+  deliveryMethode: string;
+  paymentMethode: string;
+  totalPrice: number;
+  products: any[];
+}
+interface IProps {
+  data?: IData;
+  handleData?: (data: IData) => void;
+}
+
+export default (props: IProps) => {
+  const { data: orderData, handleData } = props;
   const {
     state: { cart, allowEnvelope, giftCards },
     dispatch,
@@ -61,6 +88,10 @@ export default () => {
       }
     });
 
+    handleData({
+      ...orderData,
+      deliveryMethode: event.currentTarget.name,
+    });
     dispatch({
       type: 'SET_TOTAL_SUM',
       payload: sum, // currentValue === 0 ? sum : cartTotalSum + currentValue,
