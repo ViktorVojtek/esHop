@@ -19,7 +19,7 @@ export interface IOrder extends Document {
   postalCode: string;
   state: string;
   totalPrice: number;
-  products: any[];
+  products: string[];
 }
 
 const OrderSchema = new mongoose.Schema({
@@ -41,7 +41,7 @@ const OrderSchema = new mongoose.Schema({
   postalCode: String,
   state: String,
   totalPrice: Number,
-  products: [Object],
+  products: [String],
 });
 
 export default mongoose.model<IOrder>('Order', OrderSchema);

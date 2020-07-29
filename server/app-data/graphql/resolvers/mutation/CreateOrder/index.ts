@@ -1,6 +1,6 @@
 import Order, { IOrder } from '../../../../db/models/Order';
 
-const createOrder: (root: any, args: any, ctx: any) => Promise<IOrder> = async (
+const createOrder: (root: any, args: any, ctx: any) => Promise<String> = async (
   root,
   { data },
   ctx
@@ -11,7 +11,7 @@ const createOrder: (root: any, args: any, ctx: any) => Promise<IOrder> = async (
 
   const { __v, ...result } = newOrder.toObject();
 
-  return result;
+  return 'Order has been created.'; //result;
 };
 
 export default createOrder;

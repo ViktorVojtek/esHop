@@ -1,5 +1,11 @@
 import gql from 'graphql-tag';
 
+export const CREATE_ORDER_MUTATION = gql`
+  mutation createOrder($data: OrderInput!) {
+    createOrder(data: $data)
+  }
+`;
+
 export const CREATE_CATEGORY_MUTATION = gql`
   mutation createCategory($title: String!) {
     createCategory(title: $title) {

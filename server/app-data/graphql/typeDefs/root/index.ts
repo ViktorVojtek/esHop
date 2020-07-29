@@ -44,7 +44,7 @@ const rootTypeDefs = gql`
     createPaymentMethode(title: String!, value: Int!): Payment
     removePaymentMethode(id: String!): String
 
-    createOrder(data: OrderInput!): Order
+    createOrder(data: OrderInput!): String
 
     setCurrency(currencyInput: CurrencyInput!): Currency
     updateCurrency(currencyUpdateInput: CurrencyUpdateInput!): Currency

@@ -23,7 +23,7 @@ interface IData {
   deliveryMethode: string;
   paymentMethode: string;
   totalPrice: number;
-  products: any[];
+  products: string[];
 }
 interface IProps {
   data?: IData;

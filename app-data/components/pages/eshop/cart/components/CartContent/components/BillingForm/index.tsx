@@ -1,6 +1,8 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Form, FormGroup, Row } from 'reactstrap';
+import { useMutation } from '@apollo/react-hooks';
 import { useStore } from '../../../../../../../../lib/state/Store';
+import { CREATE_ORDER_MUTATION } from '../../../../../../../../graphql/mutation';
 import BillingInfo from './components/BillingInfo';
 import CartSummary from './components/CartSummary';
 import { ButtonAddrRemove } from '../../../../styles/cart.style';
@@ -24,7 +26,7 @@ interface IData {
   deliveryMethode: string;
   paymentMethode: string;
   totalPrice: number;
-  products: any[];
+  products: string[];
 }
 const initialOrderData: IData = {
   firstName: '',
@@ -51,28 +53,41 @@ const initialOrderData: IData = {
 const BillingForm: FC = () => {
   const { state } = useStore();
   const [orderData, setOrderData] = useState(initialOrderData);
+  const [mutate] = useMutation(CREATE_ORDER_MUTATION);
 
   const { cart, giftCards } = state;
 
-  const handleSubmitForm: (event: React.FormEvent<HTMLFormElement>) => void = (
-    event
-  ) => {
+  useEffect(() => {
+    const products = cart.concat(giftCards as any);
+    const productsIDS = products.map(({ id }) => id as string);
+
+    console.log(productsIDS);
+
+    handleOrderData({
+      ...orderData,
+      products: productsIDS,
+    });
+  }, [cart, giftCards]);
+
+  const handleSubmitForm: (
+    event: React.FormEvent<HTMLFormElement>
+  ) => Promise<void> = async (event) => {
     event.preventDefault();
 
-    console.log(orderData);
+    try {
+      console.log(orderData);
+      await mutate({
+        variables: {
+          data: orderData,
+        },
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
   const handleOrderData = (data: IData) => {
     setOrderData(data);
   };
-
-  useEffect(() => {
-    const products = cart.concat(giftCards as any);
-
-    handleOrderData({
-      ...orderData,
-      products,
-    });
-  }, [cart, giftCards]);
 
   // console.log(orderData);
 
