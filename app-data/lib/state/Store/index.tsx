@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { createContext, useReducer } from 'react';
+import React, { createContext, useContext, useReducer } from 'react';
 import Reducer from '../Reducer';
 
 import { IState } from '../../../shared/types/Store.types';
@@ -39,5 +39,10 @@ const Store = ({ children }) => {
     <Context.Provider value={{ state, dispatch }}>{children}</Context.Provider>
   );
 };
+
+export const useStore: () => {
+  state: IState;
+  dispatch: React.Dispatch<any>;
+} = () => useContext(Context);
 
 export default Store;

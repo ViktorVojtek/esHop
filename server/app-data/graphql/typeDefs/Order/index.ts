@@ -1,51 +1,49 @@
 import { gql } from 'apollo-server-express';
 
 const Order = gql`
-  enum PaymentMethodEnum {
-    CARD
-    CASH_ON_DELIVERY
-  }
-
-  input OrderCustomerAddressInput {
-    city: String
-    state: String
-    street: String
-    postcode: String
-  }
-
-  input OrderCustomerInput {
-    address: OrderCustomerAddressInput
-    firstName: String
-    lastName: String
-    email: String
-    phone: String
-  }
-
   input OrderInput {
-    customer: OrderCustomerInput
-    paymentMethod: PaymentMethodEnum
-    products: [ProductInput]
-  }
-
-  type OrderCustomerAddress {
+    address: String
     city: String
-    state: String
-    street: String
-    postcode: String
-  }
-
-  type OrderCustomer {
-    address: OrderCustomerAddress
+    companyDVATNum: String
+    companyName: String
+    companyVatNum: String
+    deliveryMethode: String
+    email: String
     firstName: String
     lastName: String
-    email: String
+    message: String
+    optionalAddress: String
+    optionalCity: String
+    optionalPostalCode: String
+    paymentMethode: String
     phone: String
+    postalCode: String
+    state: String
+    totalPrice: Float
+    products: [String]
   }
 
   type Order {
-    customer: OrderCustomer
-    paymentMethod: PaymentMethodEnum
-    products: [Product]
+    _id: String!
+    address: String
+    city: String
+    companyDVATNum: String
+    companyName: String
+    companyVatNum: String
+    deliveryMethode: String
+    email: String
+    firstName: String
+    lastName: String
+    message: String
+    optionalAddress: String
+    optionalCity: String
+    optionalPostalCode: String
+    paymentMethode: String
+    phone: String
+    postalCode: String
+    state: String
+    totalPrice: Float
+    products: [String]
   }
 `;
 

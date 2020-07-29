@@ -1,46 +1,47 @@
 import mongoose, { Document } from 'mongoose';
 
-export type AddressType = {
+export interface IOrder extends Document {
+  address: string;
   city: string;
-  state: string;
-  street: string;
-  postcode: string;
-};
-export type CutomerType = {
-  address: AddressType;
+  companyDVATNum: string;
+  companyName: string;
+  companyVatNum: string;
+  deliveryMethode: string;
+  email: string;
   firstName: string;
   lastName: string;
-  email: string;
+  message: string;
+  optionalAddress: string;
+  optionalCity: string;
+  optionalPostalCode: string;
+  paymentMethode: string;
   phone: string;
-};
-
-export interface IOrder extends Document {
-  customer: CutomerType;
-  paymentMethod: string;
-  products: any[];
+  postalCode: string;
+  state: string;
+  totalPrice: number;
+  products: string[];
 }
 
 const OrderSchema = new mongoose.Schema({
-  customer: {
-    address: {
-      city: String,
-      state: String,
-      street: String,
-      postcode: String,
-    },
-    firstName: String,
-    lastName: String,
-    email: String,
-    phone: String,
-  },
-  paymentMethod: {
-    type: String,
-    enum: ['CARD', 'CASH_ON_DELIVERY'],
-    default: 'CARD',
-  },
-  products: [Object],
+  address: String,
+  city: String,
+  companyDVATNum: String,
+  companyName: String,
+  companyVatNum: String,
+  deliveryMethode: String,
+  email: String,
+  firstName: String,
+  lastName: String,
+  message: String,
+  optionalAddress: String,
+  optionalCity: String,
+  optionalPostalCode: String,
+  paymentMethode: String,
+  phone: String,
+  postalCode: String,
+  state: String,
+  totalPrice: Number,
+  products: [String],
 });
 
-const Order = mongoose.model<IOrder>('Order', OrderSchema);
-
-export default Order;
+export default mongoose.model<IOrder>('Order', OrderSchema);
