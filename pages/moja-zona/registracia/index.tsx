@@ -74,11 +74,11 @@ const Register: FC = () => {
       <Wrapper>
         <Form onSubmit={handleSubmitRegister}>
           <FormGroup>
-            <Label htmlFor="firstName">First Name</Label>
+            <Label htmlFor="firstName">Meno</Label>
             <Input id="firstName" name="firstName" type="text" required />
           </FormGroup>
           <FormGroup>
-            <Label htmlFor="lastName">Last Name</Label>
+            <Label htmlFor="lastName">Priezvisko</Label>
             <Input id="lastName" name="lastName" type="text" required />
           </FormGroup>
           <FormGroup>
@@ -86,7 +86,7 @@ const Register: FC = () => {
             <Input id="email" name="email" type="email" required />
           </FormGroup>
           <FormGroup>
-            <Label htmlFor="password">Password</Label>
+            <Label htmlFor="password">Heslo</Label>
             <Input
               id="password"
               name="password"
@@ -96,7 +96,7 @@ const Register: FC = () => {
             />
           </FormGroup>
           <FormGroup>
-            <Label htmlFor="retypePassword">Retype Password</Label>
+            <Label htmlFor="retypePassword">Zopakovať heslo</Label>
             <Input
               id="retypePassword"
               name="retypePassword"

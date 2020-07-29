@@ -37,8 +37,8 @@ const ContactUs = () => (
                 <ContactItemCol tel="+421 911 904 880" title="Rezervácie" />
                 <ContactItemCol tel="+421 911 904 880" title="Infolinka" />
                 <ContactItemCol
-                  email="contact@kupelecks.sk"
-                  title="contact@kupelecks.sk"
+                  email="eshop@kupelecks.sk "
+                  title="eshop@kupelecks.sk "
                 />
               </Row>
             </Col>

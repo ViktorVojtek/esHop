@@ -60,16 +60,6 @@ const KontaktPage = () => (
   <Wrapper>
     <Container>
       <H1>Kontakt a FAQ</H1>
-      <iframe
-        src="https://docs.google.com/forms/d/e/1FAIpQLSd9WGODigIJAW64Ej3XjUCRog2Ev_r9QRjLX63FKTpReY8Oxg/viewform?embedded=true"
-        width="640"
-        height="787"
-        frameBorder="0"
-        marginHeight={0}
-        marginWidth={0}
-      >
-        Načítava sa…
-      </iframe>
       <Row>
         <Col md="6">
           <H2 className="w-100">Kontakt</H2>
@@ -78,7 +68,7 @@ const KontaktPage = () => (
             <P>059 06 Červený Kláštor</P>
             <ContactHolder>
               <Span>Email: </Span>
-              <A href="mailto:info@kupelecks.sk">info@kupelecks.sk</A>
+              <A href="mailto:eshop@kupelecks.sk">eshop@kupelecks.sk</A>
             </ContactHolder>
             <ContactHolder>
               <Span>Tel: </Span>
@@ -112,11 +102,12 @@ const KontaktPage = () => (
       <Row>
         <Col md="6" className="align-items-center">
           <div className="mt-4">
-            <P>Červený Kláštor 147</P>
+            <P>Červený Kláštor 12</P>
+            <P>Červený Kláštor - Kúpele</P>
             <P>059 06 Červený Kláštor</P>
             <ContactHolder>
               <Span>Email: </Span>
-              <A href="mailto:info@kupelecks.sk">info@kupelecks.sk</A>
+              <A href="mailto:eshop@kupelecks.sk">eshop@kupelecks.sk</A>
             </ContactHolder>
             <ContactHolder>
               <Span>Tel: </Span>
@@ -126,7 +117,8 @@ const KontaktPage = () => (
         </Col>
         <Col md="6">
           <div className="mt-4">
-            <P>Hviezdoslavova 22</P>
+            <P>Popradská 6</P>
+            <P>Cestovná agentúra</P>
             <P>064 01 Stará Ľubovňa</P>
             <ContactHolder>
               <Span>Email: </Span>

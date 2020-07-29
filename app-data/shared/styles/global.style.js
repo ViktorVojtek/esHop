@@ -104,6 +104,7 @@ export default createGlobalStyle`
 
    #navigation{
      display: block;
+     box-shadow: -1px -1px 10px 3px #e6e6e6;
      @media(max-width: 992px){
        display:none;
      }
@@ -122,6 +123,7 @@ export default createGlobalStyle`
       width: 100%;
       padding-top: .5rem;
       padding-bottom: .5rem;
+      box-shadow: -1px -1px 10px 3px #e6e6e6;
     }
    }
    .hideMobile{
@@ -260,6 +262,15 @@ export default createGlobalStyle`
     color: white !important;
     background-color: #00aeef !important;
   }
+  .carousel-indicators{
+    li{
+      background-color: grey !important;
+    }
+    .active{
+      color: white !important;
+      background-color: #262b39 !important;
+    }
+  }
   .not-active{
     color: white !important;
     &:hover{
@@ -269,6 +280,7 @@ export default createGlobalStyle`
   .navbar{
     padding: 0.75rem 7rem !important;
     background-color: #FFFFFF !important;
+    box-shadow: -1px -1px 10px 2px #e6e6e6;
     @media(max-width: 1550px){
       padding: 0.75rem 4rem !important;
     }

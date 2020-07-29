@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   width: 100%;
-  background-color: #262b39;
+  background-color: #00aeef;
   margin-top: 6rem;
 `;
 
@@ -28,11 +28,11 @@ export const Name = styled.p`
   color: white;
   font-size: 0.8rem;
   margin-top: 1rem;
-  margin-bottom: .2rem;
+  margin-bottom: 0.2rem;
 `;
 export const Position = styled.p`
-  color:white;
+  color: white;
   font-size: 0.7rem;
-  margin:0;
+  margin: 0;
   margin-bottom: 4rem;
 `;

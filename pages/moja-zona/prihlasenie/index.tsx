@@ -84,7 +84,7 @@ const LogIn: FC = () => {
             <Input id="email" name="email" type="email" />
           </FormGroup>
           <FormGroup>
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">Heslo</label>
             <Input id="password" name="password" type="password" />
           </FormGroup>
           <P>
