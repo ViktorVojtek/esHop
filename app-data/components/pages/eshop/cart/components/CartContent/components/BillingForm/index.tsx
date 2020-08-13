@@ -59,13 +59,32 @@ const BillingForm: FC = () => {
 
   useEffect(() => {
     const products = cart.concat(giftCards as any);
-    const productsIDS = products.map(({ id }) => id as string);
+    // const productsIDS = products.map(({ id }) => id as string);
 
-    console.log(productsIDS);
+    const productsToBuy = products.map((item: any) => {
+      let result: any;
+
+      if (item.variant) {
+        result = {
+          ...item,
+          variant: {
+            count: item.variant.count,
+            description: item.variant.description,
+            discount: item.variant.discount,
+            price: item.variant.price,
+            title: item.variant.title,
+          },
+        };
+      } else {
+        result = item;
+      }
+
+      return result;
+    });
 
     handleOrderData({
       ...orderData,
-      products: productsIDS,
+      products: productsToBuy,
     });
   }, [cart, giftCards]);
 
@@ -85,6 +104,7 @@ const BillingForm: FC = () => {
       console.log(err);
     }
   };
+
   const handleOrderData = (data: IData) => {
     setOrderData(data);
   };

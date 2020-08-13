@@ -1,6 +1,7 @@
 import mongoose, { Document } from 'mongoose';
 
 export interface IOrder extends Document {
+  userId?: string;
   address: string;
   city: string;
   companyDVATNum: string;
@@ -19,10 +20,11 @@ export interface IOrder extends Document {
   postalCode: string;
   state: string;
   totalPrice: number;
-  products: string[];
+  products: any[];
 }
 
 const OrderSchema = new mongoose.Schema({
+  userId: String,
   address: String,
   city: String,
   companyDVATNum: String,
@@ -41,7 +43,7 @@ const OrderSchema = new mongoose.Schema({
   postalCode: String,
   state: String,
   totalPrice: Number,
-  products: [String],
+  products: [Object],
 });
 
 export default mongoose.model<IOrder>('Order', OrderSchema);
