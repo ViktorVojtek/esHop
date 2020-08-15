@@ -33,6 +33,7 @@ export const ObjectScalarType = new GraphQLScalarType({
 
 const Order = gql`
   input OrderInput {
+    userId: String
     address: String
     city: String
     companyDVATNum: String
@@ -56,6 +57,7 @@ const Order = gql`
 
   type Order {
     _id: String!
+    userId: String
     address: String
     city: String
     companyDVATNum: String

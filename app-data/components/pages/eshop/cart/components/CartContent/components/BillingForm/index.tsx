@@ -8,6 +8,7 @@ import CartSummary from './components/CartSummary';
 import { ButtonAddrRemove } from '../../../../styles/cart.style';
 
 interface IData {
+  userId?: string;
   firstName: string;
   lastName: string;
   companyName: string;
@@ -29,6 +30,7 @@ interface IData {
   products: string[];
 }
 const initialOrderData: IData = {
+  userId: '',
   firstName: '',
   lastName: '',
   companyName: '',
@@ -55,7 +57,9 @@ const BillingForm: FC = () => {
   const [orderData, setOrderData] = useState(initialOrderData);
   const [mutate] = useMutation(CREATE_ORDER_MUTATION);
 
-  const { cart, giftCards } = state;
+  // console.log(state);
+
+  const { cart, customer, giftCards } = state;
 
   useEffect(() => {
     const products = cart.concat(giftCards as any);
@@ -84,6 +88,7 @@ const BillingForm: FC = () => {
 
     handleOrderData({
       ...orderData,
+      userId: customer && customer.userId ? customer.userId : '',
       products: productsToBuy,
     });
   }, [cart, giftCards]);
@@ -94,12 +99,13 @@ const BillingForm: FC = () => {
     event.preventDefault();
 
     try {
-      console.log(orderData);
+      // console.log(orderData);
       await mutate({
         variables: {
           data: orderData,
         },
       });
+      console.log('Order sucessfully placed');
     } catch (err) {
       console.log(err);
     }
