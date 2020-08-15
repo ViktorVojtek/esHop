@@ -222,6 +222,7 @@ export const REGISTER_CUSTOMER_MUTATION = gql`
   mutation createCustomer($customerData: CustomerRegInput!) {
     createCustomer(customerData: $customerData) {
       _id
+      customerPoints
       email
       firstName
       lastName
@@ -234,6 +235,7 @@ export const LOGIN_CUSTOMER_MUTATION = gql`
   mutation logInCustomer($customerData: CustomerLoginInput!) {
     logInCustomer(customerData: $customerData) {
       _id
+      customerPoints
       email
       firstName
       lastName

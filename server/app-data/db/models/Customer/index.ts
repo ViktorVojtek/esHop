@@ -1,6 +1,7 @@
 import mongoose, { Document } from 'mongoose';
 
 export interface ICustomer extends Document {
+  customerPoints?: number;
   email: string;
   firstName: string;
   lastName: string;
@@ -9,6 +10,10 @@ export interface ICustomer extends Document {
 }
 
 const CustomerSchema = new mongoose.Schema({
+  customerPoints: {
+    default: 0,
+    type: Number,
+  },
   email: String,
   firstName: String,
   lastName: String,

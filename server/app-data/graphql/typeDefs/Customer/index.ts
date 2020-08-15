@@ -16,6 +16,7 @@ export default gql`
 
   type Customer {
     _id: String!
+    customerPoints: Float
     email: String
     firstName: String
     lastName: String
@@ -24,6 +25,7 @@ export default gql`
 
   type CustomerLogged {
     _id: String!
+    customerPoints: Float
     email: String
     firstName: String
     lastName: String
