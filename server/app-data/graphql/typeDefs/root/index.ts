@@ -1,6 +1,8 @@
 import { gql } from 'apollo-server-express';
 
 const rootTypeDefs = gql`
+  scalar Object
+
   type Query {
     categories: [Category]
     currencies: [Currency]

@@ -1,3 +1,5 @@
+import { ObjectScalarType } from '../typeDefs/Order';
+
 // queries
 import categories from './query/Categories';
 import currencies from './query/Currencies';
@@ -58,11 +60,13 @@ import createSubCategory from './mutation/CreateSubCategory';
 import removeSubCategory from './mutation/RemoveSubCategory';
 
 const resolvers = {
+  Object: ObjectScalarType,
   Query: {
     categories: async () => categories(),
     currencies: async () => currencies(),
 
-    customer: async (root: any, args: any, ctx: any) => customer(root, args, ctx),
+    customer: async (root: any, args: any, ctx: any) =>
+      customer(root, args, ctx),
     customers: async () => customers(),
 
     deliveryMethode: async (root: any, args: any, ctx: any) =>
@@ -101,8 +105,10 @@ const resolvers = {
 
     createCustomer: async (root: any, args: any, ctx: any) =>
       createCustomer(root, args, ctx),
-    updateCustomer: async (root: any, args: any, ctx: any) => updateCustomer(root, args, ctx),
-    logInCustomer: async (root: any, args: any, ctx: any) => logInCustomer(root, args, ctx),
+    updateCustomer: async (root: any, args: any, ctx: any) =>
+      updateCustomer(root, args, ctx),
+    logInCustomer: async (root: any, args: any, ctx: any) =>
+      logInCustomer(root, args, ctx),
 
     createDeliveryMethode: async (root: any, args: any, ctx: any) =>
       createDeliveryMethode(root, args, ctx),
