@@ -446,4 +446,7 @@ export default createGlobalStyle`
       border: none;
     }
   }
+  .cookies{
+    padding: 1rem 2rem;
+  }
 `;

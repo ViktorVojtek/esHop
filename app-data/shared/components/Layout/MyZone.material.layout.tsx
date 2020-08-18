@@ -18,8 +18,23 @@ import {
 } from '@material-ui/core/styles';
 import { logout } from '../../../lib/authCustomer';
 import MyZoneNav from '../MyZoneNav/drawerLhsNav';
+import Link from 'next/link';
+import styled from 'styled-components';
 
 const drawerWidth = 240;
+
+const A = styled.a`
+  font-size: 0.875rem;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  font-weight: 500;
+  line-height: 1.75;
+  letter-spacing: 0.02857em;
+  text-transform: uppercase;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline !important;
+  }
+`;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -99,6 +114,9 @@ export default function ResponsiveDrawer(props: Props) {
           <Typography variant="h6" noWrap className={classes.title}>
             {pageTitle || ''}
           </Typography>
+          <Link href="/eshop">
+            <A>Do obchodu</A>
+          </Link>
           <Button color="inherit" onClick={logout}>
             <Typography variant="button">
               Odhlásenie{' '}
