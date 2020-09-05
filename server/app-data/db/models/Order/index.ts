@@ -4,6 +4,7 @@ export interface IOrder extends Document {
   userId?: string;
   address: string;
   city: string;
+  created_at: Date;
   companyDVATNum: string;
   companyName: string;
   companyVatNum: string;
@@ -20,6 +21,7 @@ export interface IOrder extends Document {
   postalCode: string;
   state: string;
   totalPrice: number;
+  orderId: string;
   products: any[];
 }
 
@@ -27,6 +29,10 @@ const OrderSchema = new mongoose.Schema({
   userId: String,
   address: String,
   city: String,
+  created_at: {
+    default: () => new Date(),
+    type: Date
+  },
   companyDVATNum: String,
   companyName: String,
   companyVatNum: String,
@@ -43,6 +49,7 @@ const OrderSchema = new mongoose.Schema({
   postalCode: String,
   state: String,
   totalPrice: Number,
+  orderId: String,
   products: [Object],
 });
 

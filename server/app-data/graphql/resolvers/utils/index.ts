@@ -1,6 +1,7 @@
 import * as jwt from 'jsonwebtoken';
 import * as path from 'path';
 import { writeFile, mkdirp, unlink, remove } from 'fs-extra';
+import Order, { IOrder } from '../../../db/models/Order';
 
 export const verifyToken: (ctx: any, secret: string) => Promise<void> = (
   ctx,
@@ -132,5 +133,31 @@ export function getVariantImagesPaths(
     }
 
     resolve(variantImagesData);
+  });
+}
+
+export async function calculateOrderId(): Promise<string> {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let orderId: string = '00000001';
+      const lastOrder = await Order.findOne({}).sort({ created_at: -1 });
+
+      if (lastOrder) {
+        let oINum = parseInt(lastOrder.orderId) + 1;
+        let zeros: string = '';
+
+        for(let i = 0; i < lastOrder.orderId.length - String(oINum).length; i += 1) {
+          zeros += '0';
+        }
+
+        orderId = `${zeros}${oINum}`;
+
+        resolve(orderId);
+      }
+
+      resolve(orderId);
+    } catch (err) {
+      reject (err);
+    }
   });
 }

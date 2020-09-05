@@ -1,4 +1,4 @@
-import express, { Express } from 'express';
+import express, { Express, NextFunction, Request, Response } from 'express';
 // import * as createLocaleMiddleware from 'express-locale';
 import { ApolloServer } from 'apollo-server-express';
 // import bodyParser from 'body-parser';
@@ -9,6 +9,8 @@ import cors from 'cors';
 import typeDefs from './app-data/graphql/typeDefs';
 import resolvers from './app-data/graphql/resolvers';
 import db from './app-data/db';
+
+import paymentRoute from './app-data/routes/payment';
 
 const dev = process.env.NODE_ENV !== 'production';
 const nextApp = nextjsApp({ dev });
@@ -54,6 +56,7 @@ const App: () => Promise<void> = async () => {
     await db();
     // await setup();
 
+    app.use('/payment', paymentRoute);
     app.all('*', (req, res) => handle(req, res));
 
     app.listen({ port });
