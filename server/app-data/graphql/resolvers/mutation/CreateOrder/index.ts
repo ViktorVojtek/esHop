@@ -3,7 +3,7 @@ import nodemailer from 'nodemailer';
 import Customer, { ICustomer } from '../../../../db/models/Customer';
 import Order, { IOrder } from '../../../../db/models/Order';
 import ModError from '../../utils/error';
-import ReactPDF from '@react-pdf/renderer';
+import { calculateOrderId } from '../../utils';
 
 // from: '"Fred Foo 👻" <foo@example.com>'
 // to: "bar@example.com, baz@example.com",
@@ -43,28 +43,43 @@ function sendMailNotification(from: string, to: string) {
   });
 }
 
-const createOrder: (root: any, args: any, ctx: any) => Promise<String> = async (
-  root,
-  { data },
-  ctx
-) => {
-  const newOrder: IOrder = new Order(data);
-  console.log(data);
+const createOrder: (
+  root: any,
+  args: any,
+  ctx: any,
+  orderIdIn?: string
+) => Promise<String> = async (root, { data }, ctx, orderIdIn) => {
+  let updatedData: any;
+  let orderId: string = '';
+
+  if (!orderIdIn) {
+    orderId = await calculateOrderId();
+  } else {
+    orderId = orderIdIn;
+  }
+
+  console.log(orderId);
+
+  updatedData = { ...data, orderId };
+
+  const newOrder: IOrder = new Order(updatedData);
 
   await Order.create(newOrder);
 
-  await sendMailNotification('info@codebrothers.sk', data.email);
+  await sendMailNotification('info@codebrothers.sk', updatedData.email);
 
-  const { userId } = data;
+  const { userId } = updatedData;
 
   if (userId) {
     const customerExist: ICustomer = await Customer.findOne({
       _id: mongoose.Types.ObjectId(userId),
     });
 
-    if (!customerExist) {
+    console.log(customerExist);
+
+    /* if (!customerExist) {
       throw new ModError(404, 'Customer does not exist');
-    }
+    } */
 
     const custData = customerExist.toObject();
     const updatedCustData = {

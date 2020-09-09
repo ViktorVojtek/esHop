@@ -3,8 +3,11 @@ const ver: string = 'CK-01';
 export const config = {
   dbName: `esHop-${ver}`,
   gp: {
-    ClientID: '1209532907',
+    ClientID: '10007901',
+    ClientName: 'Amicus',
+    ClientPass: 'Hamicus064',
     ClientSecret: 'J3EMGn8d',
+    StoreKey: 'E7007901',
     SandBox: true,
   },
   mailer: {

@@ -100,11 +100,37 @@ const BillingForm: FC = () => {
 
     try {
       // console.log(orderData);
-      await mutate({
-        variables: {
-          data: orderData,
-        },
-      });
+      const paymentMTD = orderData.paymentMethode;
+
+      if (paymentMTD.toLowerCase().indexOf('card') > -1 || paymentMTD.toLowerCase().indexOf('kart') > -1) {
+        console.log('Pay by CARD');
+        const url = '/payment';
+
+        const paymentResponse = await fetch(url, {
+          method: 'POST', // *GET, POST, PUT, DELETE, etc.
+          mode: 'cors', // no-cors, *cors, same-origin
+          cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+          credentials: 'same-origin', // include, *same-origin, omit
+          headers: {
+            'Content-Type': 'application/json'
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          redirect: 'follow', // manual, *follow, error
+          referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+          body: JSON.stringify(orderData) // body data type must match "Content-Type" header
+        });
+
+        console.log(paymentResponse);
+      } else {
+        console.log('Create order');
+
+        await mutate({
+          variables: {
+            data: orderData,
+          },
+        }); 
+      }
+
       console.log('Order sucessfully placed');
       // vytvorit PDF
     } catch (err) {
