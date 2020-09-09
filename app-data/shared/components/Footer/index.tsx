@@ -27,11 +27,11 @@ const Footer: () => JSX.Element = () => (
           <Col md="6" sm="12">
             <LinksHolder>
               <Links>
-                <Link href="zasady-ochrany-osobnych-udajov">
-                  <A>Zásady ochrany osobných údajov</A>
+                <Link href="pravidla-ochrany-osobnych-udajov">
+                  <A>Pravidlá ochrany osobných údajov</A>
                 </Link>
-                <Link href="zasady-ochrany-osobnych-udajov">
-                  <A>Zásady používania súborov cookies</A>
+                <Link href="pravidla-ochrany-osobnych-udajov">
+                  <A>Pravidlá používania súborov cookies</A>
                 </Link>
               </Links>
               <a onClick={() => scrollTop()}>

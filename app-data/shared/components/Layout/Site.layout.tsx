@@ -40,7 +40,7 @@ const Layout: FC<ILayout> = ({ children }) => {
           lepší zážitok z jej prezerania. Kliknutím na tlačidlo „SÚHLASÍM“ alebo
           ďalším používaním tejto webstránky vyjadrujete súhlas s používaním
           súborov cookies. Viac informácií o používaní súborov cookies nájdete{' '}
-          <Link href="/zasady-pouzivania-suborov-cookies">
+          <Link href="/pravidla-pouzivania-suborov-cookies">
             <a>tu</a>
           </Link>
           .

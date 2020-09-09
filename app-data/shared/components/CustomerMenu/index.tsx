@@ -40,11 +40,7 @@ const CustomerMenu = () => {
               </DropdownToggle>
               <DropdownMenu>
                 <DropdownItem>
-                  <Link href="/moja-zona">
-                    <a target="_blank" rel="noreferrer">
-                      Moja zóna
-                    </a>
-                  </Link>
+                  <Link href="/moja-zona">Moja zóna</Link>
                 </DropdownItem>
                 <DropdownItem onClick={logout}>Odhlásenie</DropdownItem>
               </DropdownMenu>

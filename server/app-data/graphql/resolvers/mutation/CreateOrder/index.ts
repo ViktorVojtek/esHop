@@ -3,6 +3,7 @@ import nodemailer from 'nodemailer';
 import Customer, { ICustomer } from '../../../../db/models/Customer';
 import Order, { IOrder } from '../../../../db/models/Order';
 import ModError from '../../utils/error';
+import ReactPDF from '@react-pdf/renderer';
 
 // from: '"Fred Foo 👻" <foo@example.com>'
 // to: "bar@example.com, baz@example.com",
@@ -48,6 +49,7 @@ const createOrder: (root: any, args: any, ctx: any) => Promise<String> = async (
   ctx
 ) => {
   const newOrder: IOrder = new Order(data);
+  console.log(data);
 
   await Order.create(newOrder);
 
@@ -67,7 +69,7 @@ const createOrder: (root: any, args: any, ctx: any) => Promise<String> = async (
     const custData = customerExist.toObject();
     const updatedCustData = {
       ...custData,
-      customerPoints: custData.customerPoints + 1,
+      customerPoints: custData.customerPoints + 10,
     };
 
     await Customer.findByIdAndUpdate(userId, updatedCustData);

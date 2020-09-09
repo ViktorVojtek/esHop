@@ -7,14 +7,20 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  margin-top: 2rem;
 `;
 
 export const Form = styled.form`
   margin: 0 auto;
-  padding: 2rem;
-  box-shadow: -1px 0px 10px 0px lightgrey;
+  width: 100%;
+`;
 
-  min-width: 300px;
+export const H4 = styled.h4`
+  font-size: 2rem;
+  font-family: MuseoSans-300;
+  color: black;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
 `;
 
 export const Button = styled.button`
@@ -41,11 +47,11 @@ export const Button = styled.button`
 `;
 
 export const Input = styled.input`
-  width: 100%;
   border-radius: 0.25rem;
   border: 1px solid #ececec;
   padding: 0.5rem 0.25rem;
   margin-bottom: 0.5rem;
+  max-width: 200px;
 `;
 
 export const H3 = styled.h2`

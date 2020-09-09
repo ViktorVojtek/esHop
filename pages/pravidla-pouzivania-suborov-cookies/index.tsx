@@ -14,14 +14,15 @@ const CookiesPolicy: () => JSX.Element = () => (
   <Layout>
     <Wrapper>
       <Container>
-        <H1>Zásady používania súborov cookies</H1>
+        <H1>Pravidlá používania súborov cookies</H1>
         <P>
-          Tieto zásady používania súborov cookies sa vzťahujú na webovú stránku
-          www.eshop.kupelecks.sk, ktorá je prevádzkovaná spoločnosťou AMICUS
-          RELAX, s.r.o., so sídlom Popradská 6, 064 01 Stará Ľubovňa, IČO: 36
-          849 987, registrovaná v Obchodnom registri vedenom Okresným súdom
-          Prešov, odd. Sro, vložka č. 19260/P (ďalej len „cookies“). Tieto
-          zásady môžu byť priebežne aktualizované a zmenené aj bez upozornenia.{' '}
+          Tieto Pravidlá používania súborov cookies sa vzťahujú na webovú
+          stránku www.eshop.kupelecks.sk, ktorá je prevádzkovaná spoločnosťou
+          AMICUS RELAX, s.r.o., so sídlom Popradská 6, 064 01 Stará Ľubovňa,
+          IČO: 36 849 987, registrovaná v Obchodnom registri vedenom Okresným
+          súdom Prešov, odd. Sro, vložka č. 19260/P (ďalej len „cookies“). Tieto
+          Pravidlá môžu byť priebežne aktualizované a zmenené aj bez
+          upozornenia.{' '}
         </P>
         <H2>Čo sú cookies?</H2>
         <P>

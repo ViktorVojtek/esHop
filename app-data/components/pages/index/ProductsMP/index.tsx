@@ -32,7 +32,7 @@ const ProductsMP: () => JSX.Element = () => {
       {category.length > 0 ? (
         <>
           <FeaturesProducts category={category[0]._id} />
-          <FeaturesServices category={category[1]._id} />
+          {/*<FeaturesServices category={category[1]._id} />*/}
         </>
       ) : null}
     </Container>

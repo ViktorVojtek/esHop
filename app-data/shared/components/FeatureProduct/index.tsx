@@ -83,7 +83,7 @@ const FeaturecProductsFill: React.FC<IProductsFillProps> = ({
   products,
   addProduct,
 }) => {
-  const elements: JSX.Element[] = products.slice(0, 4).map((item: Product) => {
+  const elements: JSX.Element[] = products.slice(0, 8).map((item: Product) => {
     const { _id } = item;
 
     return <FeatureProduct product={item} addProduct={addProduct} key={_id} />;

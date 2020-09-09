@@ -9,7 +9,7 @@ const MainPage: () => JSX.Element = () => (
   <>
     <Intro />
     <ProductsMP />
-    <Doctors />
+    {/*<Doctors />*/}
     <ContactUs />
   </>
 );

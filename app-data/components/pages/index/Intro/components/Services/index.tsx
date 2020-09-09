@@ -22,15 +22,17 @@ const Services: FC = () => (
             <GiftIcon />
             <ServiceTitle>Originálne balíčky</ServiceTitle>
             <Divider />
-            <ServiceText>Produkty sú balene v originálnom balení.</ServiceText>
+            <ServiceText>
+              Produkty sú jednoducho a ekologický balené.
+            </ServiceText>
           </Service>
         </Col>
         <Col lg="3" md="6">
           <Service>
             <ShippingFastIcon />
-            <ServiceTitle>Doručenie zdarma</ServiceTitle>
+            <ServiceTitle>Výhodné doručenie</ServiceTitle>
             <Divider />
-            <ServiceText>Nakúp nad 50 € a doručenie máš zdarma.</ServiceText>
+            <ServiceText>Bez ohľadu na veľkosť Vašej objednávky.</ServiceText>
           </Service>
         </Col>
         <Col lg="3" md="6">
@@ -39,7 +41,7 @@ const Services: FC = () => (
             <ServiceTitle>Starostlivosť o Vás</ServiceTitle>
             <Divider />
             <ServiceText>
-              Radi Vám poradíme pri výbere produktov a služieb.
+              Pomoc s výberom a vernostný program pre stálych zákazníkov.
             </ServiceText>
           </Service>
         </Col>

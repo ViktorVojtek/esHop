@@ -106,6 +106,7 @@ const BillingForm: FC = () => {
         },
       });
       console.log('Order sucessfully placed');
+      // vytvorit PDF
     } catch (err) {
       console.log(err);
     }

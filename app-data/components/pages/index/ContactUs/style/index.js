@@ -23,7 +23,7 @@ export const P = styled.p`
   margin-top: 1.5rem;
 `;
 
-export const Link = styled.a`
+export const CustomLink = styled.a`
   font-weight: bold;
   font-size: 1rem;
   text-align: left;
@@ -31,9 +31,9 @@ export const Link = styled.a`
   cursor: pointer;
   text-decoration: none !important;
   position: relative;
-  
+
   &:before {
-    content: "";
+    content: '';
     position: absolute;
     width: 100%;
     height: 2px;
@@ -43,12 +43,12 @@ export const Link = styled.a`
     visibility: hidden;
     -webkit-transform: scaleX(0);
     transform: scaleX(0);
-    -webkit-transition: all .5s cubic-bezier(1,.25,0,.75) 0s;
-    transition: all .5s cubic-bezier(1,.25,0,.75) 0s;
+    -webkit-transition: all 0.5s cubic-bezier(1, 0.25, 0, 0.75) 0s;
+    transition: all 0.5s cubic-bezier(1, 0.25, 0, 0.75) 0s;
   }
   &:hover:before {
-  visibility: visible;
-  -webkit-transform: scaleX(1);
-  transform: scaleX(1);
+    visibility: visible;
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
   }
 `;

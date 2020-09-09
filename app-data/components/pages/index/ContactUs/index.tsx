@@ -1,16 +1,17 @@
 import React, { FC } from 'react';
 
 import { Container, Col, Row } from 'reactstrap';
-import { H3, Link, P, Wrapper } from './style/index';
+import { H3, CustomLink, P, Wrapper } from './style/index';
 
 import { ITelItem } from './TS/ContactUs.interface';
+import Link from 'next/link';
 
 const ContactItemCol: FC<ITelItem> = ({ email, tel, title }) => (
   <Col md="6">
     <P>{email ? 'Email' : title}</P>
-    <Link href={email ? `mailto:${email}` : `tel:${tel}`}>
+    <CustomLink href={email ? `mailto:${email}` : `tel:${tel}`}>
       {email ? email : tel}
-    </Link>
+    </CustomLink>
   </Col>
 );
 const ContactUs = () => (
@@ -24,18 +25,24 @@ const ContactUs = () => (
           <Row>
             <Col sm="8">
               <P>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry&apos;s standard
-                dummy text ever since the 1550s, when an unknown printer took a
-                galley of type and scrambled it to make a type specimen book.
+                Ak máte nejaké otázky, môžete sa pozrieť na{' '}
+                <Link href="kontakt">často kladené otázky</Link>. Tu si môžete
+                pozrieť, ako používať našu stránku, ako si objednať, ako sa
+                prihlásiť a taktiež môžete sledovať vaše objednávky.
               </P>
             </Col>
           </Row>
           <Row>
             <Col xl="6" md="6">
               <Row>
-                <ContactItemCol tel="+421 911 904 880" title="Rezervácie" />
-                <ContactItemCol tel="+421 911 904 880" title="Infolinka" />
+                <ContactItemCol
+                  tel="+421 914 338 820"
+                  title="Rezervácie kúpele"
+                />
+                <ContactItemCol
+                  tel="+421 911 904 880"
+                  title="Infolinka eshop"
+                />
                 <ContactItemCol
                   email="eshop@kupelecks.sk "
                   title="eshop@kupelecks.sk "

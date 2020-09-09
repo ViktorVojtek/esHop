@@ -75,7 +75,7 @@ const LogIn: FC = () => {
       <Modal>
         <p>{errorMessage}</p>
       </Modal>
-      <Wrapper>
+      <Wrapper style={{ maxWidth: '400px', margin: '0 auto' }}>
         <H1>Moja zóna</H1>
         <H3>Prihlásenie</H3>
         <Form onSubmit={handleSubmitLogin}>
