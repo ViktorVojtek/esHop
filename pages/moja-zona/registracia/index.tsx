@@ -2,8 +2,21 @@
 import React, { FC, useRef, useState, useContext } from 'react';
 import Link from 'next/link';
 import { useMutation } from '@apollo/react-hooks';
-import { FormGroup, Label, Input } from 'reactstrap';
+import {
+  FormGroup,
+  Label,
+  Input,
+  Row,
+  Col,
+  Container,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+} from 'reactstrap';
 import { REGISTER_CUSTOMER_MUTATION } from '../../../app-data/graphql/mutation';
+import Layout from '../../../app-data/shared/components/Layout/Site.layout';
+import { withSetCart } from '../../../app-data/lib/state/Reducer';
 
 // import Layout from '../../../app-data/shared/components/Layout/Admin.layout';
 import {
@@ -12,18 +25,20 @@ import {
   Button,
   RegisterButton,
   P,
+  H4,
 } from '../../../app-data/shared/styles/components/Auth';
 import { Context } from '../../../app-data/lib/state/Store';
-
-import Modal from '../../../app-data/shared/components/Modal';
 import { Danger } from '../../../app-data/shared/components/LoginRegisterModal/styles';
 
 const Register: FC = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [userExist, setUserExist] = useState(false);
   const [isMatchPass, setIsMatchPass] = useState(true);
+  const [isOlder, setIsOlder] = useState(false);
   const { dispatch } = useContext(Context);
   const passwordEl = useRef(null);
+  const subscribeEl = useRef(null);
+  const [modal, setModal] = useState(false);
   const [registerUserMutate] = useMutation(REGISTER_CUSTOMER_MUTATION);
 
   const handleSetErrorMessage: (message: string) => void = (message) => {
@@ -33,30 +48,50 @@ const Register: FC = () => {
     dispatch({ type: 'SET_MODAL', payload: true });
   };
 
+  const toggle = () => setModal(!modal);
+
   const handleSubmitRegister: (
     event: React.FormEvent<HTMLFormElement>
   ) => Promise<void> = async (event) => {
-    try {
-      event.preventDefault();
-
-      const form = event.currentTarget;
-      const email = form.email.value;
-      const firstName = form.firstName.value;
-      const lastName = form.lastName.value;
-      const password = form.password.value;
-
-      await registerUserMutate({
-        variables: {
-          customerData: {
-            email,
-            firstName,
-            lastName,
-            password,
+    event.preventDefault();
+    if (isMatchPass) {
+      try {
+        const form = event.currentTarget;
+        const email = form.email.value;
+        const tel = form.tel.value;
+        const firstName = form.firstName.value;
+        const lastName = form.lastName.value;
+        const password = form.password.value;
+        await registerUserMutate({
+          variables: {
+            customerData: {
+              email,
+              tel,
+              firstName,
+              lastName,
+              password,
+            },
           },
-        },
-      });
-    } catch (err) {
-      setUserExist(true);
+        });
+        if (subscribeEl.current.checked) {
+          await fetch('/subscribe', {
+            body: JSON.stringify({
+              email: email,
+              fname: firstName,
+              lname: lastName,
+              tel: tel,
+            }),
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            method: 'POST',
+          });
+        }
+        toggle();
+      } catch (err) {
+        console.log(err);
+        setUserExist(true);
+      }
     }
   };
 
@@ -67,45 +102,101 @@ const Register: FC = () => {
   };
 
   return (
-    <>
-      <Modal>
-        <p>{errorMessage}</p>
+    <Layout>
+      <Modal isOpen={modal} toggle={toggle}>
+        <ModalBody>
+          <h4>Vaša registrácia prebehla úspešne.</h4>
+          <Link href="prihlasenie">
+            <Button>Prihláste sa</Button>
+          </Link>
+        </ModalBody>
       </Modal>
       <Wrapper>
+        <H4 className="mt-4">Registrácia</H4>
         <Form onSubmit={handleSubmitRegister}>
-          <FormGroup>
-            <Label htmlFor="firstName">Meno</Label>
-            <Input id="firstName" name="firstName" type="text" required />
-          </FormGroup>
-          <FormGroup>
-            <Label htmlFor="lastName">Priezvisko</Label>
-            <Input id="lastName" name="lastName" type="text" required />
-          </FormGroup>
-          <FormGroup>
+          <Row form>
+            <Col md={6}>
+              <FormGroup className="mb-2">
+                <Label htmlFor="firstName">Meno</Label>
+                <Input id="firstName" name="firstName" type="text" required />
+              </FormGroup>
+            </Col>
+            <Col md={6}>
+              <FormGroup className="mb-2">
+                <Label htmlFor="lastName">Priezvisko</Label>
+                <Input id="lastName" name="lastName" type="text" required />
+              </FormGroup>
+            </Col>
+          </Row>
+
+          <FormGroup className="mb-2">
             <Label htmlFor="email">Email</Label>
             <Input id="email" name="email" type="email" required />
           </FormGroup>
-          <FormGroup>
-            <Label htmlFor="password">Heslo</Label>
-            <Input
-              id="password"
-              name="password"
-              type="password"
-              innerRef={passwordEl}
-              required
-            />
+          <FormGroup className="mb-2">
+            <Label htmlFor="tel">Telefón</Label>
+            <Input id="tel" name="tel" type="tel" required />
           </FormGroup>
-          <FormGroup>
-            <Label htmlFor="retypePassword">Zopakovať heslo</Label>
-            <Input
-              id="retypePassword"
-              name="retypePassword"
-              type="password"
-              onChange={matchPassoword}
-            />
-          </FormGroup>
+          <Row form>
+            <Col md={6}>
+              <FormGroup className="mb-2">
+                <Label htmlFor="password">Heslo</Label>
+                <Input
+                  id="password"
+                  name="password"
+                  type="password"
+                  innerRef={passwordEl}
+                  required
+                  autoComplete="new-password"
+                />
+              </FormGroup>
+            </Col>
+            <Col md={6}>
+              <FormGroup className="mb-2">
+                <Label htmlFor="retypePassword">Zopakovať heslo</Label>
+                <Input
+                  id="retypePassword"
+                  name="retypePassword"
+                  type="password"
+                  onChange={matchPassoword}
+                  required
+                />
+              </FormGroup>
+            </Col>
+          </Row>
           {userExist && <Danger>Účet už existuje</Danger>}
           {!isMatchPass && <Danger>Hesla sa nezhodujú</Danger>}
+          <P>
+            Odoslaním formulára súhlasím so{' '}
+            <Link href="/pravidla-ochrany-osobnych-udajov">
+              <a target="_blank">spracovaním osobných údajov</a>
+            </Link>
+            .
+          </P>
+
+          <FormGroup className="mb-2" check>
+            <Label check>
+              <Input type="checkbox" required /> Som starší ako 16 rokov.
+            </Label>
+          </FormGroup>
+          <FormGroup className="mb-2" check>
+            <Label check>
+              <Input type="checkbox" innerRef={subscribeEl} />{' '}
+              <Link href="/pravidla-ochrany-osobnych-udajov">
+                <a target="_blank">Súhlasím</a>
+              </Link>{' '}
+              so zasielaním newslettrov
+            </Label>
+          </FormGroup>
+          <FormGroup className="mb-2" check>
+            <Label check>
+              <Input type="checkbox" />{' '}
+              <Link href="/pravidla-ochrany-osobnych-udajov">
+                <a target="_blank">Súhlasím</a>
+              </Link>{' '}
+              s používaním emailu na marketingové účely
+            </Label>
+          </FormGroup>
           <Button type="submit">Registrovať</Button>
           <P className="mt-2">
             Už máte konto?{' '}
@@ -115,8 +206,8 @@ const Register: FC = () => {
           </P>
         </Form>
       </Wrapper>
-    </>
+    </Layout>
   );
 };
 
-export default Register;
+export default withSetCart(Register);

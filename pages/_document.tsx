@@ -41,11 +41,7 @@ class MyDocument extends Document {
       <html lang="en" dir="ltr">
         <Head>
           <meta charSet="utf-8" />
-          {/* Use minimum-scale=1 to enable GPU rasterization */}
-          <meta
-            name="viewport"
-            content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
-          />
+
           {/* PWA primary color */}
           <meta name="theme-color" content={theme.palette.primary.main} />
           <link
@@ -64,7 +60,10 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Annie+Use+Your+Telescope&display=swap"
             rel="stylesheet"
           />
-          <link href="https://fonts.googleapis.com/css2?family=Engagement&display=swap" rel="stylesheet"></link>
+          <link
+            href="https://fonts.googleapis.com/css2?family=Engagement&display=swap"
+            rel="stylesheet"
+          ></link>
         </Head>
         <body>
           <Main />

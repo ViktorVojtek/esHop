@@ -13,19 +13,19 @@ export const login: (data: ILogin) => void = ({
   lastName,
   token,
 }) => {
-  cookie.set('token', token, { expires: 0.33 }); // 1 stands for a day (24h), 0.33 stands aprox. for 8h
-  cookie.set('userId', _id);
-  cookie.set('firstName', firstName);
-  cookie.set('lastName', lastName);
+  cookie.set('customerToken', token, { expires: 0.33 }); // 1 stands for a day (24h), 0.33 stands aprox. for 8h
+  cookie.set('customerId', _id);
+  cookie.set('customerFName', firstName);
+  cookie.set('customerLName', lastName);
   let isMyZone = Router.pathname.includes('moja-zona');
   isMyZone ? Router.push('/moja-zona') : Router.reload();
 };
 
 export const auth: (ctx: any) => string = (ctx) => {
-  const { token } = nextCookie(ctx);
+  const { customerToken } = nextCookie(ctx);
 
   // If there's no token, it means the user is not logged in.
-  if (!token) {
+  if (!customerToken) {
     if (typeof window === 'undefined') {
       ctx.res.writeHead(302, { Location: '/moja-zona/prihlasenie' });
       ctx.res.end();
@@ -34,15 +34,14 @@ export const auth: (ctx: any) => string = (ctx) => {
     }
   }
 
-  return token;
+  return customerToken;
 };
 
 export const logout: () => void = () => {
-  cookie.remove('token');
-  cookie.remove('userId');
-  cookie.remove('firstName');
-  cookie.remove('lastName');
-  cookie.remove('userEmail');
+  cookie.remove('customerToken');
+  cookie.remove('customerId');
+  cookie.remove('customerFName');
+  cookie.remove('customerLName');
   let isMyZone = Router.pathname.includes('moja-zona');
 
   // to support logging out from all windows

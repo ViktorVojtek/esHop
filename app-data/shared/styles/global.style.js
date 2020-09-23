@@ -105,13 +105,13 @@ export default createGlobalStyle`
    #navigation{
      display: block;
      box-shadow: -1px -1px 10px 3px #e6e6e6;
-     @media(max-width: 992px){
+     @media(max-width: 768px){
        display:none;
      }
    }
    #mobileNavigation{
      display:none;
-    @media(max-width: 992px){
+    @media(max-width: 768px){
       display:block;
       display: flex;
       align-items: center;
@@ -127,7 +127,7 @@ export default createGlobalStyle`
     }
    }
    .hideMobile{
-     @media(max-width: 992px){
+     @media(max-width: 768px){
        display:none;
      }
    }
@@ -448,5 +448,10 @@ export default createGlobalStyle`
   }
   .cookies{
     padding: 1rem 2rem;
+  }
+  .mobile-text-center{
+    @media(max-width: 768px){
+      text-align: center;
+    }
   }
 `;

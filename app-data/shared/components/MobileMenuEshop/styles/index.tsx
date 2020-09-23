@@ -25,6 +25,7 @@ export const H2 = styled.h2`
   cursor: pointer;
 }`;
 export const Logo = styled.img`
+  width: 260px;
   @media (max-width: 768px) {
     width: 260px;
   }

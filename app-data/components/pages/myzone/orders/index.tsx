@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { useQuery } from 'react-apollo';
 import { CUSTOMER_QUERY } from '../../../../graphql/query';
 import { Spinner, Input, Form, Label, FormGroup, Button } from 'reactstrap';
-import { P, H2 } from '../../../../../pages/moja-zona/mojaZona';
+import { P, H2 } from '../mojaZona';
 
 type IOrders = {
   id: string;

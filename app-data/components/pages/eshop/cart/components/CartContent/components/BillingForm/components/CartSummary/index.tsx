@@ -87,7 +87,6 @@ const CartSummary: (props: IProps) => JSX.Element = (props) => {
           <p className="text-right">{formatPrice(cartTotalSum)} €</p>
         </Col>
         <p className="text-left mt-2 mb-0 w-100">* Povinné pole</p>
-        <p className="text-left mt-1">** Nie sme platcami DPH</p>
       </Row>
     </Col>
   );

@@ -3,16 +3,16 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
   display: flex;
   width: 100vw;
-  height: 100vh;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  margin-top: 2rem;
+  margin: 0 auto;
+  margin-top: 8rem;
 `;
 
 export const Form = styled.form`
-  margin: 0 auto;
   width: 100%;
+  max-width: 600px;
 `;
 
 export const H4 = styled.h4`

@@ -30,7 +30,7 @@ const Footer: () => JSX.Element = () => (
                 <Link href="pravidla-ochrany-osobnych-udajov">
                   <A>Pravidlá ochrany osobných údajov</A>
                 </Link>
-                <Link href="pravidla-ochrany-osobnych-udajov">
+                <Link href="pravidla-pouzivania-suborov-cookies">
                   <A>Pravidlá používania súborov cookies</A>
                 </Link>
               </Links>

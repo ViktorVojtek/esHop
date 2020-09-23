@@ -11,7 +11,7 @@ import {
   Row,
   Col,
 } from 'reactstrap';
-import { P, H2 } from '../../../../../pages/moja-zona/mojaZona';
+import { P, H2 } from '../mojaZona';
 
 type ISettings = {
   id: string;

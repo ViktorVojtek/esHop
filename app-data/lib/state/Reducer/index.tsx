@@ -199,10 +199,10 @@ export const withSetCart = <P extends object>(
     dispatch({
       type: 'SET_CUSTOMER',
       payload: {
-        firstName: cookie.get('firstName'),
-        lastName: cookie.get('lastName'),
-        userId: cookie.get('userId'),
-        token: cookie.get('token'),
+        firstName: cookie.get('customerFName'),
+        lastName: cookie.get('customerLName'),
+        userId: cookie.get('customerId'),
+        token: cookie.get('customerToken'),
       },
     });
   }, []);

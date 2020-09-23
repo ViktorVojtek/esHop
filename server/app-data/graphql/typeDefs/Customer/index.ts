@@ -8,6 +8,7 @@ export default gql`
 
   input CustomerRegInput {
     email: String!
+    tel: String!
     firstName: String!
     lastName: String!
     password: String!
@@ -18,6 +19,7 @@ export default gql`
     _id: String!
     customerPoints: Float
     email: String
+    tel: String
     firstName: String
     lastName: String
     role: Int!
@@ -27,6 +29,7 @@ export default gql`
     _id: String!
     customerPoints: Float
     email: String
+    tel: String
     firstName: String
     lastName: String
     role: Int!

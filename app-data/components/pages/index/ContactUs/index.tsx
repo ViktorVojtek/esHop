@@ -1,7 +1,16 @@
 import React, { FC } from 'react';
 
 import { Container, Col, Row } from 'reactstrap';
-import { H3, CustomLink, P, Wrapper } from './style/index';
+import {
+  H3,
+  CustomLink,
+  P,
+  Wrapper,
+  Facebook,
+  Youtube,
+  Instagram,
+  SocialHolder,
+} from './style/index';
 
 import { ITelItem } from './TS/ContactUs.interface';
 import Link from 'next/link';
@@ -15,7 +24,7 @@ const ContactItemCol: FC<ITelItem> = ({ email, tel, title }) => (
   </Col>
 );
 const ContactUs = () => (
-  <Wrapper>
+  <Wrapper className="mobile-text-center">
     <Container fluid>
       <Row>
         <Col xl="4" md="12">
@@ -23,7 +32,7 @@ const ContactUs = () => (
         </Col>
         <Col xl="8" md="12">
           <Row>
-            <Col sm="8">
+            <Col md="8">
               <P>
                 Ak máte nejaké otázky, môžete sa pozrieť na{' '}
                 <Link href="kontakt">často kladené otázky</Link>. Tu si môžete
@@ -33,7 +42,7 @@ const ContactUs = () => (
             </Col>
           </Row>
           <Row>
-            <Col xl="6" md="6">
+            <Col xl="8" md="12">
               <Row>
                 <ContactItemCol
                   tel="+421 914 338 820"
@@ -47,6 +56,32 @@ const ContactUs = () => (
                   email="eshop@kupelecks.sk "
                   title="eshop@kupelecks.sk "
                 />
+                <Col md="6">
+                  <P>Sledujte nás!</P>
+                  <SocialHolder>
+                    <a
+                      href="https://www.facebook.com/KupeleCervenyKlastorSmerdzonka"
+                      target="_blank"
+                      rel="noreferrer noopener"
+                    >
+                      <Facebook />
+                    </a>
+                    <a
+                      href="https://www.instagram.com/kupelecervenyklastorsmerdzonka/"
+                      target="_blank"
+                      rel="noreferrer noopener"
+                    >
+                      <Instagram />
+                    </a>
+                    <a
+                      href="https://www.youtube.com/channel/UCagE9AfD69zG7IOU9SMVgyg"
+                      target="_blank"
+                      rel="noreferrer noopener"
+                    >
+                      <Youtube />
+                    </a>
+                  </SocialHolder>
+                </Col>
               </Row>
             </Col>
           </Row>

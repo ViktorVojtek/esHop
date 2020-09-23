@@ -5,7 +5,7 @@ import ModError from '../../utils/error';
 export default async (root: any, args: any, ctx: any) => {
   try {
     const {
-      customerData: { email, firstName, lastName, password, role },
+      customerData: { email, tel, firstName, lastName, password, role },
     } = args;
     const customerExist = await Customer.findOne({ email });
 
@@ -17,6 +17,7 @@ export default async (root: any, args: any, ctx: any) => {
 
     const newUserData = {
       email,
+      tel,
       firstName,
       lastName,
       password: hashedPasw,

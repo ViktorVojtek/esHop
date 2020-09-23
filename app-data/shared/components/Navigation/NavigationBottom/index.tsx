@@ -14,9 +14,7 @@ const NavigationBottom: () => JSX.Element = () => (
   <Wrapper>
     <NavHolder>
       <LinkItem href="/" title="Domov" />
-      <LinkItem href="/o-nas" title="O nás" />
-      <LinkItem href="/eshop/products" title="Produkty" />
-      <LinkItem href="/eshop/services" title="Služby" />
+      <LinkItem href="/eshop" title="Obchod" />
       <LinkItem href="/darcekove-poukazky" title="Darčekové poukážky" />
       <LinkItem href="/kontakt" title="Kontakt" />
     </NavHolder>

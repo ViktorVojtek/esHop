@@ -5,7 +5,7 @@ import { useMutation } from '@apollo/react-hooks';
 import { LOGIN_CUSTOMER_MUTATION } from '../../../app-data/graphql/mutation';
 import Link from 'next/link';
 
-// import Layout from '../../../app-data/shared/components/Layout/Admin.layout';
+import Layout from '../../../app-data/shared/components/Layout/Site.layout';
 
 import {
   Wrapper,
@@ -75,27 +75,29 @@ const LogIn: FC = () => {
       <Modal>
         <p>{errorMessage}</p>
       </Modal>
-      <Wrapper style={{ maxWidth: '400px', margin: '0 auto' }}>
-        <H1>Moja zóna</H1>
-        <H3>Prihlásenie</H3>
-        <Form onSubmit={handleSubmitLogin}>
-          <FormGroup>
-            <label htmlFor="email">Email</label>
-            <Input id="email" name="email" type="email" />
-          </FormGroup>
-          <FormGroup>
-            <label htmlFor="password">Heslo</label>
-            <Input id="password" name="password" type="password" />
-          </FormGroup>
-          <P>
-            Nemáte účet?{' '}
-            <Link href="registracia">
-              <RegisterButton>Zaregistrujte sa</RegisterButton>
-            </Link>
-          </P>
-          <Button type="submit">Prihlásiť</Button>
-        </Form>
-      </Wrapper>
+      <Layout>
+        <Wrapper style={{ maxWidth: '400px', minHeight: '65vh' }}>
+          <H1>Moja zóna</H1>
+          <H3>Prihlásenie</H3>
+          <Form onSubmit={handleSubmitLogin}>
+            <FormGroup>
+              <label htmlFor="email">Email</label>
+              <Input id="email" name="email" type="email" />
+            </FormGroup>
+            <FormGroup>
+              <label htmlFor="password">Heslo</label>
+              <Input id="password" name="password" type="password" />
+            </FormGroup>
+            <P>
+              Nemáte účet?{' '}
+              <Link href="registracia">
+                <RegisterButton>Zaregistrujte sa</RegisterButton>
+              </Link>
+            </P>
+            <Button type="submit">Prihlásiť</Button>
+          </Form>
+        </Wrapper>
+      </Layout>
     </>
   );
 };

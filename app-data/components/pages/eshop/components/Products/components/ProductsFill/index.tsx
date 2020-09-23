@@ -62,61 +62,63 @@ const ProductUI: React.FC<IProductUI> = ({
   return (
     <Col lg="3" sm="6" key={_id}>
       <ProductItem>
-        <ImageWrap>
-          {variants[0].images.length > 0 ? (
-            <Link href={{ pathname: '/eshop/product', query: { id: _id } }}>
-              <a>
-                <div className="product-image">
-                  <ProductImg
-                    src={variants[0].images[0].path}
-                    alt={variants[0].title}
-                  />
-                  <div className="detail">
-                    <EyeDetail />
+        <div>
+          <ImageWrap>
+            {variants[0].images.length > 0 ? (
+              <Link href={{ pathname: '/eshop/product', query: { id: _id } }}>
+                <a>
+                  <div className="product-image">
+                    <ProductImg
+                      src={variants[0].images[0].path}
+                      alt={variants[0].title}
+                    />
+                    <div className="detail">
+                      <EyeDetail />
+                    </div>
                   </div>
-                </div>
-              </a>
-            </Link>
-          ) : null}
-        </ImageWrap>{' '}
-        <ProductBody>
-          <ProductTitle id={_id} title={title} />
-          <StyledShortDescription>{subCategory.title}</StyledShortDescription>
-          <PriceHolder>
-            {variants[0].discount > 0 ? (
-              <Price>
-                <Del>
+                </a>
+              </Link>
+            ) : null}
+          </ImageWrap>{' '}
+          <ProductBody>
+            <ProductTitle id={_id} title={title} />
+            <StyledShortDescription>{subCategory.title}</StyledShortDescription>
+            <PriceHolder>
+              {variants[0].discount > 0 ? (
+                <Price>
+                  <Del>
+                    {formatPrice(variants[0].price.value)}{' '}
+                    {variants[0].price.currency}
+                  </Del>
+                  <ActionPrice className="ml-2">
+                    {formatPrice(
+                      variants[0].price.value -
+                        (variants[0].price.value * variants[0].discount) / 100
+                    )}{' '}
+                    {variants[0].price.currency}
+                  </ActionPrice>
+                </Price>
+              ) : (
+                <Price>
                   {formatPrice(variants[0].price.value)}{' '}
                   {variants[0].price.currency}
-                </Del>
-                <ActionPrice className="ml-2">
-                  {formatPrice(
-                    variants[0].price.value -
-                      (variants[0].price.value * variants[0].discount) / 100
-                  )}{' '}
-                  {variants[0].price.currency}
-                </ActionPrice>
-              </Price>
-            ) : (
-              <Price>
-                {formatPrice(variants[0].price.value)}{' '}
-                {variants[0].price.currency}
-              </Price>
-            )}
-          </PriceHolder>
-          {variants.length > 1 ? (
-            <Link href={{ pathname: '/eshop/product', query: { id: _id } }}>
-              <StyledCartLink>Vložiť do košíka</StyledCartLink>
-            </Link>
-          ) : (
-            <StyledCartBtn
-              type="button"
-              onClick={() => (isClient ? handleAddProductToCart() : null)}
-            >
-              Vložiť do košíka
-            </StyledCartBtn>
-          )}
-        </ProductBody>
+                </Price>
+              )}
+            </PriceHolder>
+          </ProductBody>
+        </div>
+        {variants.length > 1 ? (
+          <Link href={{ pathname: '/eshop/product', query: { id: _id } }}>
+            <StyledCartLink>Vložiť do košíka</StyledCartLink>
+          </Link>
+        ) : (
+          <StyledCartBtn
+            type="button"
+            onClick={() => (isClient ? handleAddProductToCart() : null)}
+          >
+            Vložiť do košíka
+          </StyledCartBtn>
+        )}
       </ProductItem>
     </Col>
   );

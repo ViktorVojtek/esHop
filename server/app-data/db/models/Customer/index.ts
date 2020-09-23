@@ -3,6 +3,7 @@ import mongoose, { Document } from 'mongoose';
 export interface ICustomer extends Document {
   customerPoints?: number;
   email: string;
+  tel: string;
   firstName: string;
   lastName: string;
   password: string;
@@ -15,6 +16,7 @@ const CustomerSchema = new mongoose.Schema({
     type: Number,
   },
   email: String,
+  tel: String,
   firstName: String,
   lastName: String,
   password: String,

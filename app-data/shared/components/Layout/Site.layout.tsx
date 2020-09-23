@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { ILayout } from './TS/layout.interface';
 
 import Navigation from '../Navigation/Site';
+
+import { withSetCart } from '../../../../app-data/lib/state/Reducer';
 import Footer from '../Footer';
 import CookieConsent, { Cookies } from 'react-cookie-consent';
 import Link from 'next/link';
@@ -57,4 +59,4 @@ Layout.propTypes = {
   ]).isRequired,
 };
 
-export default Layout;
+export default withSetCart(Layout);

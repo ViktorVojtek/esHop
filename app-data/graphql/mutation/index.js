@@ -224,6 +224,7 @@ export const REGISTER_CUSTOMER_MUTATION = gql`
       _id
       customerPoints
       email
+      tel
       firstName
       lastName
       role

@@ -139,7 +139,7 @@ const LoginRegisterModal: FC<ILoginRegisterModal> = ({
               </FormGroup>
               <P>
                 Nemáte účet?{' '}
-                <Link href="/registracia">
+                <Link href="/moja-zona/registracia">
                   <RegisterButton onClick={toggle}>
                     Zaregistrujte sa
                   </RegisterButton>

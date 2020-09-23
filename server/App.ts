@@ -11,6 +11,7 @@ import resolvers from './app-data/graphql/resolvers';
 import db from './app-data/db';
 
 import paymentRoute from './app-data/routes/payment';
+import subscribeRoute from './app-data/routes/subscribe';
 
 const dev = process.env.NODE_ENV !== 'production';
 const nextApp = nextjsApp({ dev });
@@ -56,6 +57,7 @@ const App: () => Promise<void> = async () => {
     await db();
     // await setup();
 
+    app.use('/subscribe', subscribeRoute);
     app.use('/payment', paymentRoute);
     app.all('*', (req, res) => handle(req, res));
 

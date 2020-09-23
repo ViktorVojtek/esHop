@@ -92,9 +92,9 @@ const PrivacyPolicy: () => JSX.Element = () => (
         <P>
           Aby sme mohli efektívne vykonávať prevádzkovanie internetového obchodu
           a mohli Vám prinášať súťaže, doručovať novinky, posielať tovar a
-          vykonávať ďalšie úkony nevyhnuté pre fungovanie internetového obchodu
+          vykonávať ďalšie úkony nevyhnutné pre fungovanie internetového obchodu
           potrebujeme od Vás zbierať určité osobné údaje. Rešpektujeme Vaše
-          súkromie a preto spracúvame iba údaje nevyhnuté na výkon našej
+          súkromie a preto spracúvame iba údaje nevyhnutné na výkon našej
           činnosti v súlade s účinnými zákonmi a nariadeniami.
         </P>
         <P style={{ textDecoration: 'underline' }}>
@@ -267,6 +267,10 @@ const PrivacyPolicy: () => JSX.Element = () => (
             PIENINY RESORT s.r.o., so sídlom: Popradská 6, 064 01 Stará Ľubovňa,
             IČO: 36 821 063
           </LI>
+          <LI>
+            D.J.K., spoločnosť s ručením obmedzeným, so sídlom: Južná trieda 26,
+            040 01 Košice, IČO: 31 691 897
+          </LI>
         </ul>
         <P>
           Všetky vyššie uvedené osobné údaje (vrátane vášho hesla vo forme
@@ -344,12 +348,9 @@ const PrivacyPolicy: () => JSX.Element = () => (
           uplynutia zákonnej záruky). Osobné údaje zo zrušených objednávok
           uchovávame maximálne osemnásť mesiacov. Po uplynutí týchto retenčných
           období sa osobné údaje úplne odstránia. Za týmto účelom môžete použiť
-          formulár na našej stránke. Link na odhlásenie nájdete tu [na
-          podčiarknutom texte by mal byť preklik na odhlásenie z účtu, toto
-          treba technicky zabzepečiť, asi to treba prediskutovať s code
-          brothers, ale na stránke by mala by byť možnosť odhlásiť sa z účtu].
-          Odhlásenie má za dôsledok vymazanie získaných osobných údajov
-          užívateľa.
+          formulár na našej stránke. Link na odhlásenie nájdete{' '}
+          <Link href="moja-zona">tu</Link>. Odhlásenie má za dôsledok vymazanie
+          získaných osobných údajov užívateľa.
         </P>
         <H2>5. Spracovanie osobných údajov na reklamné účely</H2>
         <P>
@@ -384,7 +385,7 @@ const PrivacyPolicy: () => JSX.Element = () => (
           odvolať s účinnosťou do budúcnosti, a to e-mailom na kontaktnú
           e-mailovú adresu uvedenú v bode 1. Odvolanie súhlasu vedie k vymazaniu
           vašich údajov. Za týmto účelom môžete použiť formulár na našej
-          stránke. Link na formulár nájdete <a>tu</a>.
+          stránke. Link na formulár nájdete <Link href="moja-zona">tu</Link>.
         </P>
         <P>
           Právnym základom na uvedené spracovania je článok 6 ods. 1 písm. f)
@@ -731,13 +732,17 @@ const PrivacyPolicy: () => JSX.Element = () => (
           Pokiaľ nie je výslovne uvedené inak, vaše osobné údaje neposkytujeme
           žiadnym príjemcom so sídlom mimo Európskej únie alebo Európskeho
           hospodárskeho priestoru. Vo vyššie uvedených prípadoch dochádza k
-          prenosu dát na servery spoločností Google LLC a Facebook Inc. Tieto
-          servery sú čiastočne v USA. Pokiaľ ide o USA, Európska komisia
-          rozhodnutím z 12.7.2016 určila, že za podmienok podľa EÚ-U.S. Privacy
-          Shield existuje v USA primeraná úroveň ochrany osobných údajov (tzv.
+          prenosu dát na servery spoločností The Rocket Science Group LLC,
+          DigitalOcean LLC, Google LLC a Facebook Inc. Tieto servery sú
+          čiastočne v USA. Pokiaľ ide o USA, Európska komisia rozhodnutím z
+          12.7.2016 určila, že za podmienok podľa EÚ-U.S. Privacy Shield
+          existuje v USA primeraná úroveň ochrany osobných údajov (tzv.
           „Rozhodnutie o primeranosti“ podľa článku 45 GDPR). Poskytovatelia
-          služieb Google LLC, 1600 Amphitheatre Parkway, Mountain View, CA
-          94043, USA a Facebook Inc., 1 Hacker Way, Menlo Park, CA 94025 sú
+          služieb The Rocket Science Group LLC, 675 Ponce de Leon Ave NE,
+          Atlanta, GA 30308 USA a DigitalOcean, LLC, 101 Avenue of the Americas,
+          10th Floor, New York, NY 10013, USA, sú certifikovaní podľa EÚ-U.S.
+          Privacy Shield. Google LLC, 1600 Amphitheatre Parkway, Mountain View,
+          CA 94043, USA a Facebook Inc., 1 Hacker Way, Menlo Park, CA 94025 sú
           certifikovaní podľa EÚ-U.S. Privacy Shield.
         </P>
         <P>
