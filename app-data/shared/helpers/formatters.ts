@@ -15,3 +15,25 @@ export const bytesToSize: (bytes: number) => string = (bytes) => {
 
   return `${Math.round(bytes / 1024 ** c)} ${sizes[c]}`;
 };
+
+const status = {
+  0: 'Nová',
+  1: 'Odoslaná',
+  2: 'Vybavená',
+  3: 'Zrušená',
+};
+
+const statusColor = {
+  0: 'primary',
+  1: 'warning',
+  2: 'success',
+  3: 'danger',
+};
+
+export const translateStatus: (value: number) => string = (value) => {
+  return status[value];
+};
+
+export const translateStatusColor: (value: number) => string = (value) => {
+  return statusColor[value];
+};

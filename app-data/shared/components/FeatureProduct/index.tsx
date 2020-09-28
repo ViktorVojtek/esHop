@@ -33,49 +33,51 @@ const FeatureProduct: FC<IProductUI> = ({
 }) => (
   <Col lg="3" sm="6" xs="12" className="mb-4" key={_id}>
     <ProductItem>
-      <ImageWrap>
-        {variants[0].images.length > 0 ? (
-          <Link href={{ pathname: '/eshop/product', query: { id: _id } }}>
-            <a>
-              <div className="product-image">
-                <ProductImg src={variants[0].images[0].path} alt={title} />
-                <div className="detail">
-                  <EyeDetail />
+      <div>
+        <ImageWrap>
+          {variants[0].images.length > 0 ? (
+            <Link href={{ pathname: '/eshop/product', query: { id: _id } }}>
+              <a>
+                <div className="product-image">
+                  <ProductImg src={variants[0].images[0].path} alt={title} />
+                  <div className="detail">
+                    <EyeDetail />
+                  </div>
                 </div>
-              </div>
-            </a>
-          </Link>
-        ) : null}
-      </ImageWrap>{' '}
-      <ProductBody>
-        <ProductTitle>{title}</ProductTitle>
-        <StyledShortDescription>{subCategory.title}</StyledShortDescription>
-        <PriceHolder>
-          {variants[0].discount > 0 ? (
-            <Price>
-              <Del>
+              </a>
+            </Link>
+          ) : null}
+        </ImageWrap>{' '}
+        <ProductBody>
+          <ProductTitle>{title}</ProductTitle>
+          <StyledShortDescription>{subCategory.title}</StyledShortDescription>
+          <PriceHolder>
+            {variants[0].discount > 0 ? (
+              <Price>
+                <Del>
+                  {formatPrice(variants[0].price.value)}{' '}
+                  {variants[0].price.currency}
+                </Del>
+                <ActionPrice className="ml-2">
+                  {formatPrice(
+                    variants[0].price.value -
+                      (variants[0].price.value * variants[0].discount) / 100
+                  )}{' '}
+                  {variants[0].price.currency}
+                </ActionPrice>
+              </Price>
+            ) : (
+              <Price>
                 {formatPrice(variants[0].price.value)}{' '}
                 {variants[0].price.currency}
-              </Del>
-              <ActionPrice className="ml-2">
-                {formatPrice(
-                  variants[0].price.value -
-                    (variants[0].price.value * variants[0].discount) / 100
-                )}{' '}
-                {variants[0].price.currency}
-              </ActionPrice>
-            </Price>
-          ) : (
-            <Price>
-              {formatPrice(variants[0].price.value)}{' '}
-              {variants[0].price.currency}
-            </Price>
-          )}
-        </PriceHolder>
-        <Link href={{ pathname: '/eshop/product', query: { id: _id } }}>
-          <StyledCartLink>Ihneď kúpiť</StyledCartLink>
-        </Link>
-      </ProductBody>
+              </Price>
+            )}
+          </PriceHolder>
+        </ProductBody>
+      </div>
+      <Link href={{ pathname: '/eshop/product', query: { id: _id } }}>
+        <StyledCartLink>Ihneď kúpiť</StyledCartLink>
+      </Link>
     </ProductItem>
   </Col>
 );

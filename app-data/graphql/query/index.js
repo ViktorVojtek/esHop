@@ -250,3 +250,25 @@ export const CUSTOMER_QUERY = gql`
     }
   }
 `;
+
+export const ORDER_QUERY = gql`
+  query orders {
+    orders {
+      userId
+      address
+      city
+      deliveryMethode
+      email
+      firstName
+      lastName
+      message
+      paymentMethode
+      phone
+      postalCode
+      state
+      totalPrice
+      products
+      status
+    }
+  }
+`;

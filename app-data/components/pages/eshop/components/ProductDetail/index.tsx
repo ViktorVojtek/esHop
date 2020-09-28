@@ -46,6 +46,7 @@ interface IProductToCartData {
   count?: number;
   variant?: VariantOfProduct;
   isEnvelopeSize: boolean;
+  title: string;
 }
 
 const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
@@ -89,9 +90,12 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
   };
 
   const handleAddProductToCart: (data: IProductToCartData) => void = (data) => {
-    const { id, variant, isEnvelopeSize } = data;
+    const { id, variant, isEnvelopeSize, title } = data;
 
-    dispatch({ type: 'ADD_TO_CART', payload: { id, variant, isEnvelopeSize } });
+    dispatch({
+      type: 'ADD_TO_CART',
+      payload: { id, variant, isEnvelopeSize, title },
+    });
   };
 
   const handleSubmitProductToCart: (
@@ -112,6 +116,7 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
         images,
       },
       isEnvelopeSize,
+      title,
     });
     dispatch({ type: 'SET_PRODUCT_MODAL', payload: true });
   };

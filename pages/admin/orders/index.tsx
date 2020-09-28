@@ -3,6 +3,7 @@ import Head from 'next/head';
 
 import { withAuthSync } from '../../../app-data/lib/auth';
 import Layout from '../../../app-data/shared/components/Layout/Admin.material.layout';
+import OrdersList from '../../../app-data/components/pages/admin/orders';
 
 const Orders: () => JSX.Element = () => (
   <>
@@ -11,7 +12,7 @@ const Orders: () => JSX.Element = () => (
       <link rel="icon" href="/favicon.ico" />
     </Head>{' '}
     <Layout pageTitle="Orders">
-      <p>Orders content.</p>
+      <OrdersList />
     </Layout>
   </>
 );

@@ -51,6 +51,7 @@ const Order = gql`
     phone: String
     postalCode: String
     state: String
+    status: Int
     totalPrice: Float
     products: [Object]
   }
@@ -75,6 +76,7 @@ const Order = gql`
     phone: String
     postalCode: String
     state: String
+    status: Int
     totalPrice: Float
     products: [Object]
   }

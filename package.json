@@ -54,6 +54,7 @@
     "next-with-apollo": "^4.3.0",
     "node-nestpay": "^1.0.4",
     "nodemailer": "^6.4.11",
+    "pdf-creator-node": "^1.4.1",
     "prop-types": "^15.7.2",
     "react": "16.13.1",
     "react-anchor-link-smooth-scroll": "^1.0.12",

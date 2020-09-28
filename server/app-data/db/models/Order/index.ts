@@ -20,6 +20,7 @@ export interface IOrder extends Document {
   phone: string;
   postalCode: string;
   state: string;
+  status: number;
   totalPrice: number;
   orderId: string;
   products: any[];
@@ -31,7 +32,7 @@ const OrderSchema = new mongoose.Schema({
   city: String,
   created_at: {
     default: () => new Date(),
-    type: Date
+    type: Date,
   },
   companyDVATNum: String,
   companyName: String,
@@ -48,6 +49,10 @@ const OrderSchema = new mongoose.Schema({
   phone: String,
   postalCode: String,
   state: String,
+  status: {
+    default: 0,
+    type: Number,
+  },
   totalPrice: Number,
   orderId: String,
   products: [Object],

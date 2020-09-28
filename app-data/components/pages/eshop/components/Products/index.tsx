@@ -27,6 +27,7 @@ interface IProductToCartData {
   count?: number;
   variants?: VariantOfProduct;
   isEnvelopeSize?: boolean;
+  title: string;
 }
 const productsCount = 16;
 const Products: React.FC<IProductsProps> = ({
@@ -45,11 +46,11 @@ const Products: React.FC<IProductsProps> = ({
   } = useContext(Context);
 
   const handleAddProductToCart: (data: IProductToCartData) => void = (data) => {
-    const { id, variants, isEnvelopeSize } = data;
+    const { id, variants, isEnvelopeSize, title } = data;
 
     dispatch({
       type: 'ADD_TO_CART',
-      payload: { id, variant: variants, isEnvelopeSize },
+      payload: { id, variant: variants, isEnvelopeSize, title },
     });
   };
   /* const handleRemoveProductFromCart = (id: string) => {

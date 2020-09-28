@@ -7,6 +7,7 @@ export interface IProductToCartData {
   count?: number;
   variants?: VariantOfProduct;
   isEnvelopeSize: boolean;
+  title: string;
 }
 
 export interface IProductsFillProps {

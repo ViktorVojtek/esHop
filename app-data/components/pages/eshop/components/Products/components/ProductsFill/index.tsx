@@ -55,6 +55,7 @@ const ProductUI: React.FC<IProductUI> = ({
       id: _id,
       variants: { ...restVariantData, count: 1 },
       isEnvelopeSize: isEnvelopeSize,
+      title: title,
     });
     toggleModal();
   };

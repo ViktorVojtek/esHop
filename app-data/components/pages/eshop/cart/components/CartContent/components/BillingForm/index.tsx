@@ -102,7 +102,10 @@ const BillingForm: FC = () => {
       // console.log(orderData);
       const paymentMTD = orderData.paymentMethode;
 
-      if (paymentMTD.toLowerCase().indexOf('card') > -1 || paymentMTD.toLowerCase().indexOf('kart') > -1) {
+      if (
+        paymentMTD.toLowerCase().indexOf('card') > -1 ||
+        paymentMTD.toLowerCase().indexOf('kart') > -1
+      ) {
         console.log('Pay by CARD');
         const url = '/payment';
 
@@ -112,23 +115,25 @@ const BillingForm: FC = () => {
           cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
           credentials: 'same-origin', // include, *same-origin, omit
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
             // 'Content-Type': 'application/x-www-form-urlencoded',
           },
           redirect: 'follow', // manual, *follow, error
           referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-          body: JSON.stringify(orderData) // body data type must match "Content-Type" header
+          body: JSON.stringify(orderData), // body data type must match "Content-Type" header
         });
 
         console.log(paymentResponse);
       } else {
         console.log('Create order');
 
+        console.log(orderData);
+
         await mutate({
           variables: {
             data: orderData,
           },
-        }); 
+        });
       }
 
       console.log('Order sucessfully placed');
