@@ -8,9 +8,10 @@ const orders: (
 ) => Promise<IOrder[]> = async (root, args, ctx) => {
   const { id } = args;
 
-  const orderItems = id
-    ? (await Order.find()) || []
-    : (await Order.find({ _id: mongoose.Types.ObjectId(id) })) || [];
+  const orderItems =
+    id && id.length > 0
+      ? (await Order.find({ _id: mongoose.Types.ObjectId(id) })) || []
+      : (await Order.find()) || [];
 
   return orderItems;
 };
