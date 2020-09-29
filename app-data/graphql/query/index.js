@@ -255,8 +255,8 @@ export const CUSTOMER_QUERY = gql`
 `;
 
 export const ORDER_QUERY = gql`
-  query orders {
-    orders {
+  query orders($id: String) {
+    orders(id: $id) {
       _id
       userId
       address
