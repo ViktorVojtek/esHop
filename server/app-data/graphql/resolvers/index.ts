@@ -29,6 +29,7 @@ import removeCategory from './mutation/RemoveCategory';
 import createCustomer from './mutation/CreateCustomer';
 import updateCustomer from './mutation/UpdateCustomer';
 import logInCustomer from './mutation/LogInCustomer';
+import removeCustomer from './mutation/RemoveCustomer';
 
 import createDeliveryMethode from './mutation/CreateDeliveryMethode';
 import removeDeliveryMethode from './mutation/RemoveDeliveryMethode';
@@ -111,6 +112,8 @@ const resolvers = {
       updateCustomer(root, args, ctx),
     logInCustomer: async (root: any, args: any, ctx: any) =>
       logInCustomer(root, args, ctx),
+    removeCustomer: (root: any, args: { id: string }, ctx: any) =>
+      removeCustomer(root, args, ctx),
 
     createDeliveryMethode: async (root: any, args: any, ctx: any) =>
       createDeliveryMethode(root, args, ctx),

@@ -1,4 +1,3 @@
-import * as mongoose from 'mongoose';
 import Order, { IOrder } from '../../../../db/models/Order';
 
 const orders: (
@@ -10,7 +9,7 @@ const orders: (
 
   const orderItems =
     id && id.length > 0
-      ? (await Order.find({ _id: mongoose.Types.ObjectId(id) })) || []
+      ? (await Order.find({ userId: id })) || []
       : (await Order.find()) || [];
 
   return orderItems;

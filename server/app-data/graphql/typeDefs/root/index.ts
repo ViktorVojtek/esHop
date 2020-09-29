@@ -32,6 +32,7 @@ const rootTypeDefs = gql`
     createCustomer(customerData: CustomerRegInput!): Customer
     updateCustomer(id: String!, customerData: CustomerRegInput!): Customer
     logInCustomer(customerData: CustomerLoginInput!): CustomerLogged
+    removeCustomer(id: String!): String
 
     createDeliveryMethode(
       isEnvelopeSize: Boolean
