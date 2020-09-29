@@ -6,6 +6,28 @@ export const CREATE_ORDER_MUTATION = gql`
   }
 `;
 
+export const UPDATE_ORDER_MUTATION = gql`
+  mutation updateOrder($_id: String!, $status: Int) {
+    updateOrder(_id: $_id, status: $status) {
+      userId
+      address
+      city
+      deliveryMethode
+      email
+      firstName
+      lastName
+      message
+      paymentMethode
+      phone
+      postalCode
+      state
+      totalPrice
+      products
+      status
+    }
+  }
+`;
+
 export const CREATE_CATEGORY_MUTATION = gql`
   mutation createCategory($title: String!) {
     createCategory(title: $title) {

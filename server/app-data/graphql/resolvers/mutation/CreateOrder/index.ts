@@ -18,7 +18,7 @@ var html = fs.readFileSync(
   'utf8'
 );
 
-function sendMailNotification(from: string, to: string) {
+function sendMailNotification(from: string, to: string): Promise<void> {
   return new Promise(async (resolve, reject) => {
     try {
       // Generate test SMTP service account from ethereal.email

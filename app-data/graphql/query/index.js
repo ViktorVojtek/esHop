@@ -118,6 +118,7 @@ export const PRODUCTS_QUERY = gql`
         title
       }
       title
+      state
       variants {
         default
         description
@@ -228,6 +229,7 @@ export const SERVICES_QUERY = gql`
     }
   }
 `;
+
 export const CUSTOMERS_QUERY = gql`
   query customers {
     customers {
@@ -240,6 +242,7 @@ export const CUSTOMERS_QUERY = gql`
     }
   }
 `;
+
 export const CUSTOMER_QUERY = gql`
   query customer($id: String!) {
     customer(id: $id) {
@@ -254,6 +257,7 @@ export const CUSTOMER_QUERY = gql`
 export const ORDER_QUERY = gql`
   query orders {
     orders {
+      _id
       userId
       address
       city

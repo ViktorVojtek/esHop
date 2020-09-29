@@ -5,28 +5,39 @@ import {
   DropdownMenu,
   DropdownItem,
 } from 'reactstrap';
+import { useMutation } from '@apollo/react-hooks';
+import { UPDATE_ORDER_MUTATION } from '../../../../../graphql/mutation';
+import { ORDER_QUERY } from '../../../../../graphql/query';
 
-const Actions = ({ status }) => {
+const Actions = ({ id }: { id: string; status: string }) => {
+  const [mutate] = useMutation(UPDATE_ORDER_MUTATION, {
+    refetchQueries: [{ query: ORDER_QUERY }],
+  });
   const [dropdownOpen, setOpen] = useState(false);
-  const [statusText, setStatusText] = useState('');
 
   const toggle = () => setOpen(!dropdownOpen);
+  const handleOnClick: (event: any) => Promise<void> = async (event) => {
+    const { value } = event.currentTarget;
+
+    await mutate({ variables: { _id: id, status: +value } });
+  };
+
   return (
     <ButtonDropdown isOpen={dropdownOpen} toggle={toggle}>
       <DropdownToggle color="primary" caret>
         Zmeniť stav
       </DropdownToggle>
       <DropdownMenu>
-        <DropdownItem color="primary" onClick={() => setStatusText('Nová')}>
+        <DropdownItem value={0} color="primary" onClick={handleOnClick}>
           Nová
         </DropdownItem>
-        <DropdownItem color="warning" onClick={() => setStatusText('Odoslaná')}>
+        <DropdownItem value={1} color="warning" onClick={handleOnClick}>
           Odoslaná
         </DropdownItem>
-        <DropdownItem color="success" onClick={() => setStatusText('Vybavená')}>
+        <DropdownItem value={2} color="success" onClick={handleOnClick}>
           Vybavená
         </DropdownItem>
-        <DropdownItem color="danger" onClick={() => setStatusText('Zrušená')}>
+        <DropdownItem value={3} color="danger" onClick={handleOnClick}>
           Zrušená
         </DropdownItem>
       </DropdownMenu>
