@@ -78,7 +78,8 @@ const resolvers = {
       discount(root, args, ctx),
     discounts: async () => discounts(),
     order: async (root: any, args: any, ctx: any) => order(root, args, ctx),
-    orders: async () => orders(),
+    orders: async (root: any, args: { id?: string }, ctx: any) =>
+      orders(root, args, ctx),
 
     paymentMethode: async (root: any, args: { id: string }, ctx: any) =>
       paymentMethode(root, args, ctx),
