@@ -25,7 +25,7 @@ const Home: () => JSX.Element = () => {
       <Layout>
         <Wrapper>
           <Container>
-            <H2 className="text-center">Vitajte vo Vašom konte {name} !</H2>
+            <H2 className="text-center">Vitajte vo Vašom konte !</H2>
             <P className="text-center mb-4">
               Môžte si prezrieť Vaše objednávky, sledovať Váš vernostný program
               alebo nastaviť svoj účet.

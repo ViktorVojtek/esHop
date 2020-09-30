@@ -4,9 +4,13 @@ import ModError from '../../utils/error';
 
 export default async (root: any, args: { id: string }, ctx: any) => {
   const { id } = args;
+
+  console.log(id);
   const customer: ICustomer = await Customer.findOne({
     _id: mongoose.Types.ObjectId(id),
   });
+
+  console.log(customer);
 
   if (!customer) {
     throw new ModError(404, 'Customer not exist');

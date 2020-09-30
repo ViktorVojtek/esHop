@@ -40,8 +40,6 @@ const OrdersList: FC = () => {
             _id,
           } = args;
 
-          console.log(status);
-
           return (
             <tr key={index}>
               <th>{index + 1}</th>
@@ -54,7 +52,7 @@ const OrdersList: FC = () => {
               <th>{`${formatPrice(totalPrice)} €`}</th>
               <th>{statusBadge(status)}</th>
               <th>
-                <Actions id={_id} />
+                <Actions id={_id} status={status} />
               </th>
             </tr>
           );

@@ -39,11 +39,13 @@ const Order = gql`
     companyDVATNum: String
     companyName: String
     companyVatNum: String
+    created_at: String
     deliveryMethode: String
     email: String
     firstName: String
     lastName: String
     message: String
+    orderId: String
     optionalAddress: String
     optionalCity: String
     optionalPostalCode: String
@@ -64,11 +66,13 @@ const Order = gql`
     companyDVATNum: String
     companyName: String
     companyVatNum: String
+    created_at: String
     deliveryMethode: String
     email: String
     firstName: String
     lastName: String
     message: String
+    orderId: String
     optionalAddress: String
     optionalCity: String
     optionalPostalCode: String

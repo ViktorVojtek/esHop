@@ -1,17 +1,17 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { useQuery } from 'react-apollo';
-import { CUSTOMER_QUERY } from '../../../../graphql/query';
-import { Spinner, Input, Form, Label, FormGroup, Button } from 'reactstrap';
+import { ORDER_QUERY } from '../../../../graphql/query';
+import { Spinner, Table, Button, Badge } from 'reactstrap';
 import { P, H2 } from '../mojaZona';
+
+import OrdersFill from './OrdersFill';
 
 type IOrders = {
   id: string;
 };
 
 const Orders: FC<IOrders> = ({ id }) => {
-  //TODO get orders
-
-  /*const { error, loading, data } = useQuery(CUSTOMER_QUERY, {
+  const { error, loading, data } = useQuery(ORDER_QUERY, {
     variables: { id: id },
     fetchPolicy: 'network-only',
   });
@@ -24,12 +24,31 @@ const Orders: FC<IOrders> = ({ id }) => {
     return <Spinner />;
   }
 
-  const { customer } = data;*/
+  const { orders } = data;
 
   return (
     <>
       <H2>Vaše objednávky</H2>
-      <P>Aktuálne nemáte vytvorené žiadne objednávky.</P>
+      {orders.length > 0 ? (
+        <Table striped responsive>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Dátum vytvorenia</th>
+              <th>Stav objednávky</th>
+              <th>Spôsob doručenia</th>
+              <th>Spôsob platby</th>
+              <th>Cena spolu</th>
+              <th>Detail produktov</th>
+            </tr>
+          </thead>
+          {orders.map((order, index) => (
+            <OrdersFill key={index} order={order} />
+          ))}
+        </Table>
+      ) : (
+        <P>Aktuálne nemáte vytvorené žiadne objednávky.</P>
+      )}
     </>
   );
 };

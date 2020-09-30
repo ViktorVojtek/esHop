@@ -9,9 +9,7 @@ type IPoints = {
 };
 
 const Points: FC<IPoints> = ({ id }) => {
-  //TODO get orders
-
-  /*const { error, loading, data } = useQuery(CUSTOMER_QUERY, {
+  const { error, loading, data } = useQuery(CUSTOMER_QUERY, {
     variables: { id: id },
     fetchPolicy: 'network-only',
   });
@@ -24,13 +22,16 @@ const Points: FC<IPoints> = ({ id }) => {
     return <Spinner />;
   }
 
-  const { customer } = data;*/
+  const { customer } = data;
+
+  console.log(customer);
 
   return (
     <>
       <H2>Vernostný program</H2>
       <P>
-        <strong>Počet bodov: </strong>0
+        <strong>Počet bodov: </strong>
+        {customer.customerPoints}
       </P>
     </>
   );

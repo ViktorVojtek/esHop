@@ -112,16 +112,16 @@ const createOrder: (
   };
   await pdf.create(document);
 
-  await sendMailNotification('info@codebrothers.sk', updatedData.email);
+  //await sendMailNotification('info@codebrothers.sk', updatedData.email);
 
   const { userId } = updatedData;
+
+  console.log(updatedData);
 
   if (userId) {
     const customerExist: ICustomer = await Customer.findOne({
       _id: mongoose.Types.ObjectId(userId),
     });
-
-    console.log(customerExist);
 
     /* if (!customerExist) {
       throw new ModError(404, 'Customer does not exist');
@@ -130,7 +130,8 @@ const createOrder: (
     const custData = customerExist.toObject();
     const updatedCustData = {
       ...custData,
-      customerPoints: custData.customerPoints + 10,
+      customerPoints:
+        custData.customerPoints + Math.floor(updatedData.totalPrice) * 100,
     };
 
     await Customer.findByIdAndUpdate(userId, updatedCustData);

@@ -250,6 +250,7 @@ export const CUSTOMER_QUERY = gql`
       email
       firstName
       lastName
+      customerPoints
     }
   }
 `;
@@ -259,6 +260,8 @@ export const ORDER_QUERY = gql`
     orders(id: $id) {
       _id
       userId
+      orderId
+      created_at
       address
       city
       deliveryMethode

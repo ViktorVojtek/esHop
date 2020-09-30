@@ -454,4 +454,14 @@ export default createGlobalStyle`
       text-align: center;
     }
   }
+  .full-table{
+    max-width: 800px;
+    th{
+      white-space: nowrap;
+      vertical-align: center;
+    }
+  }
+  .table th{
+    vertical-align: middle;
+  }
 `;
