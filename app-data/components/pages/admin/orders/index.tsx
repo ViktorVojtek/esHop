@@ -1,15 +1,9 @@
-import React, { FC } from 'react';
+import React, { FC, useRef, useEffect, useState } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { ORDER_QUERY } from '../../../../graphql/query';
-import { Table, Badge } from 'reactstrap';
-import {
-  formatPrice,
-  translateStatus,
-  translateStatusColor,
-} from '../../../../shared/helpers/formatters';
-import Actions from './Actions';
+import OrdersList from './Orders';
 
-const OrdersList: FC = () => {
+const Orders: FC = () => {
   const { loading, error, data } = useQuery(ORDER_QUERY);
 
   if (loading) {
@@ -22,70 +16,7 @@ const OrdersList: FC = () => {
 
   const { orders } = data;
 
-  const listItems =
-    orders && orders.length > 0
-      ? orders.map((args: any, index: number) => {
-          const {
-            firstName,
-            lastName,
-            address,
-            city,
-            email,
-            message,
-            phone,
-            postalCode,
-            totalPrice,
-            state,
-            status,
-            _id,
-          } = args;
-
-          return (
-            <tr key={index}>
-              <th>{index + 1}</th>
-              <th>{firstName}</th>
-              <th>{lastName}</th>
-              <th>{email}</th>
-              <th>{phone}</th>
-              <th>{`${address}, ${postalCode} ${city}, ${state}`}</th>
-              <th>{message}</th>
-              <th>{`${formatPrice(totalPrice)} €`}</th>
-              <th>{statusBadge(status)}</th>
-              <th>
-                <Actions id={_id} status={status} />
-              </th>
-            </tr>
-          );
-        })
-      : null;
-
-  return orders && orders.length > 0 ? (
-    <Table style={{ minHeight: '400px' }} striped>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Meno</th>
-          <th>Priezvisko</th>
-          <th>Email</th>
-          <th>Telefón</th>
-          <th>Adresa</th>
-          <th>Správa</th>
-          <th>Spolu cena</th>
-          <th>Stav objednávky</th>
-          <th>Akcie</th>
-        </tr>
-      </thead>
-      <tbody>{listItems}</tbody>
-    </Table>
-  ) : (
-    <p>Neexistujú žiadne objednávky.</p>
-  );
+  return <OrdersList orders={orders} />;
 };
 
-function statusBadge(value: number) {
-  return (
-    <Badge color={translateStatusColor(value)}>{translateStatus(value)}</Badge>
-  );
-}
-
-export default OrdersList;
+export default Orders;
