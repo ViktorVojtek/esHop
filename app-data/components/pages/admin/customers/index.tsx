@@ -22,7 +22,7 @@ const CustomersList: FC = () => {
           ({ firstName, lastName, customerPoints, tel, email, _id }, index) => {
             return (
               <tr>
-                <th>{index}</th>
+                <th>{index + 1}</th>
                 <th>{firstName}</th>
                 <th>{lastName}</th>
                 <th>{email}</th>

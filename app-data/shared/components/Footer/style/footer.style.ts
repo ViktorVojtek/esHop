@@ -3,6 +3,8 @@ import styled, { StyledComponent } from 'styled-components';
 export const Wrapper: StyledComponent<'div', any, {}, never> = styled.div`
   width: 100%;
   margin-top: 2rem;
+  z-index: 1030;
+  position: absolute;
 `;
 
 export const BottomDiv: StyledComponent<'div', any, {}, never> = styled.div`

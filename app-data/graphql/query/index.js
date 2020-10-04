@@ -118,7 +118,6 @@ export const PRODUCTS_QUERY = gql`
         title
       }
       title
-      state
       variants {
         default
         description

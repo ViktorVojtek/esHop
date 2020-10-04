@@ -5,7 +5,7 @@ const Wrapper = styled.div`
   margin: 0 auto;
   padding-left: 100px;
   padding-right: 100px;
-  margin-top: 6rem;
+  margin-top: 8rem;
   @media (max-width: 1550px) {
     padding-left: 0px;
     padding-right: 0px;

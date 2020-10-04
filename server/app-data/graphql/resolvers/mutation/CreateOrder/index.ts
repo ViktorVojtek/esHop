@@ -1,12 +1,14 @@
 const pdf = require('pdf-creator-node');
 const path = require('path');
 const fs = require('fs');
+const handlebars = require('handlebars');
 import mongoose from 'mongoose';
 import nodemailer from 'nodemailer';
 import Customer, { ICustomer } from '../../../../db/models/Customer';
 import Order, { IOrder } from '../../../../db/models/Order';
 import ModError from '../../utils/error';
 import { calculateOrderId } from '../../utils';
+import { formatPrice } from '../../../../../../app-data/shared/helpers/formatters';
 
 // from: '"Fred Foo 👻" <foo@example.com>'
 // to: "bar@example.com, baz@example.com",
@@ -18,31 +20,62 @@ var html = fs.readFileSync(
   'utf8'
 );
 
-function sendMailNotification(from: string, to: string): Promise<void> {
+const orderCreated = fs.readFileSync(
+  path.join(
+    __dirname,
+    `../../../../../../public/html/orderTemplate/order_created.html`
+  ),
+  'utf8'
+);
+
+function sendMailNotification(
+  from: string,
+  to: string,
+  orderData: any
+): Promise<void> {
   return new Promise(async (resolve, reject) => {
     try {
-      // Generate test SMTP service account from ethereal.email
-      // Only needed if you don't have a real mail account for testing
-      let testAccount = await nodemailer.createTestAccount();
-
       // create reusable transporter object using the default SMTP transport
       let transporter = nodemailer.createTransport({
-        host: 'smtp.ethereal.email',
-        port: 587,
-        secure: false, // true for 465, false for other ports
+        host: 'smtp.websupport.sk',
+        port: 465, // 587,
+        secure: true, // true, // ssl
         auth: {
-          user: testAccount.user, // generated ethereal user
-          pass: testAccount.pass, // generated ethereal password
+          user: 'eshop@kupelecks.sk', // generated ethereal user
+          pass: 'Cyp147.?riaN20ck12', // generated ethereal password
         },
       });
 
+      const templateOrderMail = handlebars.compile(orderCreated);
+      var replacement = {
+        orderId: orderData.orderId,
+        date: orderData.createdAt,
+        name: orderData.firstName,
+        surname: orderData.lastName,
+        address: orderData.address,
+        postalCode: orderData.postalCode,
+        city: orderData.city,
+        state: orderData.state,
+        phone: orderData.phone,
+        deliveryMethod: orderData.deliveryMethode,
+        paymentMethod: orderData.paymentMethode,
+        products: orderData.products,
+        totalPriceWithoutVat: formatPrice(orderData.totalPriceWithoutVat),
+        totalPriceVat: formatPrice(orderData.totalPriceVat),
+        totalPrice: formatPrice(orderData.totalPrice),
+        isBankovyPrevod: orderData.paymentMethod === 'Bankový prevod',
+      };
+
+      console.log(replacement.isBankovyPrevod);
+
+      const orderMailToSend = templateOrderMail(replacement);
+
       // send mail with defined transport object
       let info = await transporter.sendMail({
-        from, // sender address
+        from: 'eshop@kupelecks.sk',
         to, // list of receivers
         subject: 'Červený Kláštor | Vaša objednávka bola prijatá', // Subject line
-        text: 'Hello world?', // plain text body
-        html: '<b>Hello world?</b>', // html body
+        html: orderMailToSend, // html body
       });
 
       console.log('Message sent: %s', info.messageId);
@@ -112,11 +145,13 @@ const createOrder: (
   };
   await pdf.create(document);
 
-  //await sendMailNotification('info@codebrothers.sk', updatedData.email);
+  await sendMailNotification(
+    'info@codebrothers.sk',
+    updatedData.email,
+    updatedData
+  );
 
   const { userId } = updatedData;
-
-  console.log(updatedData);
 
   if (userId) {
     const customerExist: ICustomer = await Customer.findOne({
@@ -130,8 +165,7 @@ const createOrder: (
     const custData = customerExist.toObject();
     const updatedCustData = {
       ...custData,
-      customerPoints:
-        custData.customerPoints + Math.floor(updatedData.totalPrice) * 100,
+      customerPoints: custData.customerPoints + updatedData.totalPrice * 100,
     };
 
     await Customer.findByIdAndUpdate(userId, updatedCustData);

@@ -6,7 +6,8 @@ import { CREATE_ORDER_MUTATION } from '../../../../../../../../graphql/mutation'
 import BillingInfo from './components/BillingInfo';
 import CartSummary from './components/CartSummary';
 import { ButtonAddrRemove } from '../../../../styles/cart.style';
-
+import Loading from '../../../../../../../../shared/components/Loading';
+import Router from 'next/router';
 interface IData {
   userId?: string;
   firstName: string;
@@ -55,6 +56,7 @@ const initialOrderData: IData = {
 const BillingForm: FC = () => {
   const { state } = useStore();
   const [orderData, setOrderData] = useState(initialOrderData);
+  const [loader, setLoader] = useState(false);
   const [mutate] = useMutation(CREATE_ORDER_MUTATION);
 
   // console.log(state);
@@ -97,6 +99,7 @@ const BillingForm: FC = () => {
     event: React.FormEvent<HTMLFormElement>
   ) => Promise<void> = async (event) => {
     event.preventDefault();
+    setLoader(true);
 
     try {
       // console.log(orderData);
@@ -137,9 +140,11 @@ const BillingForm: FC = () => {
       }
 
       console.log('Order sucessfully placed');
-      // vytvorit PDF
+      Router.push('/eshop/cart/uspesna-objednavka');
+      setLoader(false);
     } catch (err) {
-      console.log(err);
+      setLoader(false);
+      Router.push('/eshop/cart/neuspesna-objednavka');
     }
   };
 
@@ -150,15 +155,18 @@ const BillingForm: FC = () => {
   // console.log(orderData);
 
   return (
-    <Form onSubmit={handleSubmitForm}>
-      <Row>
-        <BillingInfo data={orderData} handleData={handleOrderData} />
-        <CartSummary data={orderData} handleData={handleOrderData} />
-      </Row>
-      <FormGroup>
-        <ButtonAddrRemove type="submit">Odoslať</ButtonAddrRemove>
-      </FormGroup>
-    </Form>
+    <>
+      <Form onSubmit={handleSubmitForm}>
+        <Row>
+          <BillingInfo data={orderData} handleData={handleOrderData} />
+          <CartSummary data={orderData} handleData={handleOrderData} />
+        </Row>
+        <FormGroup>
+          <ButtonAddrRemove type="submit">Odoslať</ButtonAddrRemove>
+        </FormGroup>
+      </Form>
+      {loader && <Loading />}
+    </>
   );
 };
 
