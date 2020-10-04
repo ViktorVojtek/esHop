@@ -1,7 +1,5 @@
 import React, { FC, useRef, useEffect, useState } from 'react';
-import { useQuery } from '@apollo/react-hooks';
-import { ORDER_QUERY } from '../../../../../graphql/query';
-import { Table, Badge, Col, FormGroup, Input, Row } from 'reactstrap';
+import { Table, Badge, Col, FormGroup, Input, Row, Label } from 'reactstrap';
 import {
   formatPrice,
   translateStatus,
@@ -60,28 +58,29 @@ const OrdersList: FC<IOrders> = ({ orders }) => {
 
           return (
             <tr key={index}>
-              <th>{index + 1}</th>
-              <th>{firstName}</th>
-              <th>{lastName}</th>
-              <th>{email}</th>
-              <th>{phone}</th>
-              <th>{`${address}, ${postalCode} ${city}, ${state}`}</th>
-              <th>{message}</th>
-              <th>{`${formatPrice(totalPrice)} €`}</th>
-              <th>{statusBadge(status)}</th>
-              <th>
+              <td>{index + 1}</td>
+              <td>{firstName}</td>
+              <td>{lastName}</td>
+              <td>{email}</td>
+              <td>{phone}</td>
+              <td>{`${address}, ${postalCode} ${city}, ${state}`}</td>
+              <td>{message}</td>
+              <td>{`${formatPrice(totalPrice)} €`}</td>
+              <td>{statusBadge(status)}</td>
+              <td>
                 <Actions id={_id} status={status} />
-              </th>
+              </td>
             </tr>
           );
         })
       : null;
 
   return (
-    <>
+    <div style={{ minHeight: '400px' }}>
       <Row>
-        <Col md="6" className="mb-2">
+        <Col md="3" className="mb-2">
           <FormGroup>
+            <Label for="status">Email zákaznika</Label>
             <Input
               type="text"
               name="search"
@@ -92,8 +91,9 @@ const OrdersList: FC<IOrders> = ({ orders }) => {
             />
           </FormGroup>
         </Col>
-        <Col md="6" className="mb-2">
+        <Col md="3" className="mb-2">
           <FormGroup>
+            <Label for="status">Stav objednávky</Label>
             <Input
               type="select"
               name="status"
@@ -128,7 +128,7 @@ const OrdersList: FC<IOrders> = ({ orders }) => {
         </thead>
         <tbody>{listItems}</tbody>
       </Table>
-    </>
+    </div>
   );
 };
 

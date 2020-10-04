@@ -464,4 +464,7 @@ export default createGlobalStyle`
   .table th{
     vertical-align: middle;
   }
+  .table td{
+    vertical-align: middle;
+  }
 `;
