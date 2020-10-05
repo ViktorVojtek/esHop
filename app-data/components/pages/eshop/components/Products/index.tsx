@@ -47,7 +47,7 @@ const Products: React.FC<IProductsProps> = ({
 
   const handleAddProductToCart: (data: IProductToCartData) => void = (data) => {
     const { id, variants, isEnvelopeSize, title } = data;
-
+    console.log(title);
     dispatch({
       type: 'ADD_TO_CART',
       payload: { id, variant: variants, isEnvelopeSize, title },

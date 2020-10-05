@@ -45,9 +45,12 @@ const GiftCardTableRow: FC<IGiftCardTableRow> = ({
       </TD>
       {services.length > 0 ? (
         <TD>
-          {services.map((item) => {
+          {services.map((item, i) => {
             return (
-              <p className="w-100 mb-0">{`${item.title} ${item.count}x`}</p>
+              <p
+                key={i}
+                className="w-100 mb-0"
+              >{`${item.title} ${item.count}x`}</p>
             );
           })}
         </TD>

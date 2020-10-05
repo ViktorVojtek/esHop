@@ -31,7 +31,8 @@ const orderCreated = fs.readFileSync(
 function sendMailNotification(
   from: string,
   to: string,
-  orderData: any
+  orderData: any,
+  giftCards: any
 ): Promise<void> {
   return new Promise(async (resolve, reject) => {
     try {
@@ -64,9 +65,8 @@ function sendMailNotification(
         totalPriceVat: formatPrice(orderData.totalPriceVat),
         totalPrice: formatPrice(orderData.totalPrice),
         isBankovyPrevod: orderData.paymentMethod === 'Bankový prevod',
+        giftCards: giftCards,
       };
-
-      console.log(replacement.isBankovyPrevod);
 
       const orderMailToSend = templateOrderMail(replacement);
 
@@ -122,18 +122,24 @@ const createOrder: (
   await Order.create(newOrder);
 
   updatedData.products.forEach((product) => {
-    product.price = product.variant.discount
-      ? product.variant.price.value -
-        (product.variant.price.value * product.variant.discount) / 100
-      : product.variant.price.value;
-    product.price = Math.round(product.price * 100) / 100;
-    product.totalPrice = product.variant.count * product.price;
-    product.totalPriceVat = product.totalPrice - product.totalPrice / 1.2;
-    product.totalPriceVat = Math.round(product.totalPriceVat * 100) / 100;
-    product.totalPriceWithoutVat = product.totalPrice / 1.2;
-    product.totalPriceWithoutVat =
-      Math.round(product.totalPriceWithoutVat * 100) / 100;
+    if (product.type !== 'poukazka') {
+      product.price = product.variant.discount
+        ? product.variant.price.value -
+          (product.variant.price.value * product.variant.discount) / 100
+        : product.variant.price.value;
+      product.price = Math.round(product.price * 100) / 100;
+      product.totalPrice = product.variant.count * product.price;
+      product.totalPriceVat = product.totalPrice - product.totalPrice / 1.2;
+      product.totalPriceVat = Math.round(product.totalPriceVat * 100) / 100;
+      product.totalPriceWithoutVat = product.totalPrice / 1.2;
+      product.totalPriceWithoutVat =
+        Math.round(product.totalPriceWithoutVat * 100) / 100;
+    }
   });
+
+  const girftCards = updatedData.products.filter(
+    (product) => product.variant === undefined
+  );
 
   const document = {
     html: html,
@@ -148,7 +154,8 @@ const createOrder: (
   await sendMailNotification(
     'info@codebrothers.sk',
     updatedData.email,
-    updatedData
+    updatedData,
+    girftCards
   );
 
   const { userId } = updatedData;

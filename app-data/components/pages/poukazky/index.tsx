@@ -59,7 +59,7 @@ const PoukazkyPage: () => JSX.Element = () => {
     let price = Number(priceValue);
     dispatch({
       type: 'ADD_TO_GIFT_CARDS',
-      payload: { cardColor, price, text, services },
+      payload: { cardColor, price, text, services, type: 'poukazka' },
     });
   };
 

@@ -52,7 +52,7 @@ interface IProductToCartData {
 const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
   // product prop destruct
   const { _id, variants, title, subCategory, isEnvelopeSize } = product;
-
+  const mainTitle = title;
   // hooks used in components
   const productCountRef = useRef(null);
   const [activeVariant, setActiveVariant] = useState(0);
@@ -92,6 +92,8 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
   const handleAddProductToCart: (data: IProductToCartData) => void = (data) => {
     const { id, variant, isEnvelopeSize, title } = data;
 
+    console.log(data);
+
     dispatch({
       type: 'ADD_TO_CART',
       payload: { id, variant, isEnvelopeSize, title },
@@ -116,7 +118,7 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
         images,
       },
       isEnvelopeSize,
-      title,
+      title: mainTitle,
     });
     dispatch({ type: 'SET_PRODUCT_MODAL', payload: true });
   };
