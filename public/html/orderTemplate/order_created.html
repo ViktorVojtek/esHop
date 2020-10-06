@@ -94,7 +94,7 @@
       <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:white;background-color:white;width:100%;">
         <tbody>
           <tr>
-            <td style="direction:ltr;font-size:0px;padding:20px 0;text-align:center;">
+            <td style="border-top:20px solid #EEE;direction:ltr;font-size:0px;padding:20px 0;text-align:center;">
               <!--[if mso | IE]>
                   <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                 
@@ -386,6 +386,23 @@
                                         <div style="font-family:Arial;font-size:16px;line-height:20px;text-align:left;color:#777777;">Tel: {{phone}}</div>
                                       </td>
                                     </tr>
+                                    {{#if isCompany}}
+                                      <tr>
+                                        <td align="left" style="font-size:0px;padding:10px 25px;padding-top:0px;padding-bottom:0;word-break:break-word;">
+                                          <div style="font-family:Arial;font-size:16px;line-height:20px;text-align:left;color:#777777;">Názov firmy: {{companyName}}</div>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td align="left" style="font-size:0px;padding:10px 25px;padding-top:0px;padding-bottom:0;word-break:break-word;">
+                                          <div style="font-family:Arial;font-size:16px;line-height:20px;text-align:left;color:#777777;">IČO: {{companyVatNum}}</div>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td align="left" style="font-size:0px;padding:10px 25px;padding-top:0px;padding-bottom:0;word-break:break-word;">
+                                          <div style="font-family:Arial;font-size:16px;line-height:20px;text-align:left;color:#777777;">DIČ: {{companyDVATNum}}</div>
+                                        </td>
+                                      </tr>
+                                    {{/if}}
                                   </table>
                                 </td>
                               </tr>
@@ -400,40 +417,32 @@
             >
           <![endif]-->
                         <div class="mj-column-per-50 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
-                          <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
-                            <tbody>
-                              <tr>
-                                <td style="vertical-align:top;padding-top:10px;">
-                                  <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="" width="100%">
-                                    <tr>
-                                      <td align="left" style="font-size:0px;padding:10px 25px;padding-bottom:10px;word-break:break-word;">
-                                        <div style="font-family:Arial;font-size:18px;font-weight:600;line-height:20px;text-align:left;color:#777777;">Doručovacia adresa</div>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td align="left" style="font-size:0px;padding:10px 25px;padding-top:0px;padding-bottom:0;word-break:break-word;">
-                                        <div style="font-family:Arial;font-size:16px;line-height:20px;text-align:left;color:#777777;">{{name}} {{surname}}</div>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td align="left" style="font-size:0px;padding:10px 25px;padding-top:0px;padding-bottom:0;word-break:break-word;">
-                                        <div style="font-family:Arial;font-size:16px;line-height:20px;text-align:left;color:#777777;">{{address}}</div>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td align="left" style="font-size:0px;padding:10px 25px;padding-top:0px;padding-bottom:0;word-break:break-word;">
-                                        <div style="font-family:Arial;font-size:16px;line-height:20px;text-align:left;color:#777777;">{{postalCode}}, {{city}}, {{state}}</div>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td align="left" style="font-size:0px;padding:10px 25px;padding-top:0px;padding-bottom:0;word-break:break-word;">
-                                        <div style="font-family:Arial;font-size:16px;line-height:20px;text-align:left;color:#777777;">Tel: {{phone}}</div>
-                                      </td>
-                                    </tr>
-                                  </table>
-                                </td>
-                              </tr>
-                            </tbody>
+                          <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+                            <tr>
+                              <td align="left" style="font-size:0px;padding:10px 25px;padding-bottom:10px;word-break:break-word;">
+                                <div style="font-family:Arial;font-size:18px;font-weight:600;line-height:20px;text-align:left;color:#777777;">Doručovacia adresa</div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td align="left" style="font-size:0px;padding:10px 25px;padding-top:0px;padding-bottom:0;word-break:break-word;">
+                                <div style="font-family:Arial;font-size:16px;line-height:20px;text-align:left;color:#777777;">{{name}} {{surname}}</div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td align="left" style="font-size:0px;padding:10px 25px;padding-top:0px;padding-bottom:0;word-break:break-word;">
+                                <div style="font-family:Arial;font-size:16px;line-height:20px;text-align:left;color:#777777;">{{deliveryAdress.address}}</div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td align="left" style="font-size:0px;padding:10px 25px;padding-top:0px;padding-bottom:0;word-break:break-word;">
+                                <div style="font-family:Arial;font-size:16px;line-height:20px;text-align:left;color:#777777;">{{deliveryAdress.postalCode}}, {{deliveryAdress.city}}, {{deliveryAdress.state}}</div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td align="left" style="font-size:0px;padding:10px 25px;padding-top:0px;padding-bottom:0;word-break:break-word;">
+                                <div style="font-family:Arial;font-size:16px;line-height:20px;text-align:left;color:#777777;">Tel: {{phone}}</div>
+                              </td>
+                            </tr>
                           </table>
                         </div>
                         <!--[if mso | IE]>
@@ -518,108 +527,12 @@
                                   <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="" width="100%">
                                     <tr>
                                       <td align="left" style="font-size:0px;padding:10px 25px;padding-bottom:10px;word-break:break-word;">
-                                        <div style="font-family:Arial;font-size:18px;font-weight:600;line-height:20px;text-align:left;color:#777777;">Poštovné</div>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td align="left" style="font-size:0px;padding:10px 25px;padding-top:0px;padding-bottom:0;word-break:break-word;">
-                                        <div style="font-family:Arial;font-size:16px;line-height:20px;text-align:left;color:#777777;">{{deliveryPrice}}</div>
-                                      </td>
-                                    </tr>
-                                  </table>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                        <!--[if mso | IE]>
-            </td>
-          
-        </tr>
-      
-                  </table>
-                <![endif]-->
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <!--[if mso | IE]>
-          </td>
-        </tr>
-      </table>
-      
-              </td>
-            </tr>
-          
-            <tr>
-              <td
-                 class="" width="800px"
-              >
-          
-      <table
-         align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:800px;" width="800"
-      >
-        <tr>
-          <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
-      <![endif]-->
-              <div style="margin:0px auto;max-width:800px;">
-                <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
-                  <tbody>
-                    <tr>
-                      <td style="direction:ltr;font-size:0px;padding:20px 0;padding-top:0px;text-align:center;">
-                        <!--[if mso | IE]>
-                  <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-                
-        <tr>
-      
-            <td
-               class="" style="vertical-align:top;width:400px;"
-            >
-          <![endif]-->
-                        <div class="mj-column-per-50 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
-                          <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
-                            <tbody>
-                              <tr>
-                                <td style="vertical-align:top;padding:0;">
-                                  <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="" width="100%">
-                                    <tr>
-                                      <td align="left" style="font-size:0px;padding:10px 25px;padding-bottom:10px;word-break:break-word;">
                                         <div style="font-family:Arial;font-size:18px;font-weight:600;line-height:20px;text-align:left;color:#777777;">Spôsob platby</div>
                                       </td>
                                     </tr>
                                     <tr>
                                       <td align="left" style="font-size:0px;padding:10px 25px;padding-top:0px;padding-bottom:0;word-break:break-word;">
                                         <div style="font-family:Arial;font-size:16px;line-height:20px;text-align:left;color:#777777;">{{paymentMethod}}</div>
-                                      </td>
-                                    </tr>
-                                  </table>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                        <!--[if mso | IE]>
-            </td>
-          
-            <td
-               class="" style="vertical-align:top;width:400px;"
-            >
-          <![endif]-->
-                        <div class="mj-column-per-50 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
-                          <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
-                            <tbody>
-                              <tr>
-                                <td style="vertical-align:top;padding:0;">
-                                  <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="" width="100%">
-                                    <tr>
-                                      <td align="left" style="font-size:0px;padding:10px 25px;padding-bottom:10px;word-break:break-word;">
-                                        <div style="font-family:Arial;font-size:18px;font-weight:600;line-height:20px;text-align:left;color:#777777;">Celková suma</div>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td align="left" style="font-size:0px;padding:10px 25px;padding-top:0px;padding-bottom:0;word-break:break-word;">
-                                        <div style="font-family:Arial;font-size:16px;line-height:20px;text-align:left;color:#777777;">{{paymentPrice}}</div>
                                       </td>
                                     </tr>
                                   </table>
@@ -683,7 +596,7 @@
                                     <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="" width="100%">
                                       <tr>
                                         <td align="left" style="font-size:0px;padding:10px 25px;padding-bottom:10px;word-break:break-word;">
-                                          <div style="font-family:Arial;font-size:18px;font-weight:600;line-height:20px;text-align:left;color:#777777;">Bankové údaje pre platbu {{isBankovyPrevod}}</div>
+                                          <div style="font-family:Arial;font-size:18px;font-weight:600;line-height:20px;text-align:left;color:#777777;">Bankové údaje pre platbu</div>
                                         </td>
                                       </tr>
                                       <tr>
@@ -821,7 +734,7 @@
                 <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
                   <tbody>
                     <tr>
-                      <td style="direction:ltr;font-size:0px;padding:20px 0;padding-top:0px;text-align:center;">
+                      <td style="direction:ltr;font-size:0px;padding:0px;text-align:center;">
                         <!--[if mso | IE]>
                   <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                 
@@ -842,50 +755,143 @@
                                         <div style="font-family:Arial;font-size:18px;font-weight:600;line-height:20px;text-align:left;color:#777777;">Súhrn objednávky</div>
                                       </td>
                                     </tr>
-                                    <tr>
-                                      <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                                        <table cellpadding="0" cellspacing="0" width="100%" border="0" style="color:#000000;font-family:Arial;font-size:13px;line-height:40px;table-layout:auto;width:100%;border:none;">
-                                          <tr style="text-align: left; padding: 15px 0">
-                                            <th width="30%" style="
-                  padding: 0 15px 0 0;
-                  color: #777;
-                  font-weight: 600;
-                  font-size: 16px;
-                "> Názov </th>
-                                            <th width="30%" style="
-                  padding: 0 15px 0 0;
-                  color: #777;
-                  font-weight: 600;
-                  font-size: 16px;
-                "> Variant </th>
-                                            <th style="
-                  padding: 0 15px;
-                  color: #777;
-                  font-weight: 600;
-                  font-size: 16px;
-                "> Množstvo </th>
-                                            <th style="
-                  padding: 0 0 0 15px;
-                  color: #777;
-                  font-weight: 600;
-                  font-size: 16px;
-                "> Cena </th>
-                                          </tr>
-                                          {{#each products as |product index|}}
-                                            <tr style="
-                border-top: 1px solid #777;
-                text-align: left;
-                padding: 15px 0;
-              ">
-                                              <td style="padding: 0 15px 0 0">{{product.title}}</td>
-                                              <td style="padding: 0px 15px">{{product.variant.title}}</td>
-                                              <td style="padding: 0 0 0 15px">{{product.variant.count}} ks</td>
-                                              <td style="padding: 0 0 0 15px">{{product.price}} €</td>
-                                            </tr>
-                                          {{/each}}
-                                        </table>
-                                      </td>
-                                    </tr>
+                                    {{#each products as |item index|}}
+                                      <tr>
+                                        <td align="left" style="font-size:0px;padding:10px 25px;padding-top:10px;padding-bottom:0;word-break:break-word;">
+                                          <div style="font-family:Arial;font-size:16px;line-height:20px;text-align:left;color:#777777;">{{item.title}}</div>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td align="left" style="font-size:0px;padding:10px 25px;padding-top:10px;padding-bottom:0;word-break:break-word;">
+                                          <div style="font-family:Arial;font-size:16px;line-height:20px;text-align:left;color:#777777;">Variant: {{item.variant.title}}</div>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td align="left" style="font-size:0px;padding:10px 25px;padding-top:10px;padding-bottom:0;word-break:break-word;">
+                                          <div style="font-family:Arial;font-size:16px;line-height:20px;text-align:left;color:#777777;">Počet: {{item.variant.count}} ks</div>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td align="left" style="font-size:0px;padding:10px 25px;padding-top:10px;padding-bottom:0;word-break:break-word;">
+                                          <div style="font-family:Arial;font-size:16px;line-height:20px;text-align:left;color:#777777;">Cena ks: {{item.price}} €</div>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                                          <p style="border-top:solid 1px lightgrey;font-size:1px;margin:0px auto;width:100%;">
+                                          </p>
+                                          <!--[if mso | IE]>
+        <table
+           align="center" border="0" cellpadding="0" cellspacing="0" style="border-top:solid 1px lightgrey;font-size:1px;margin:0px auto;width:750px;" role="presentation" width="750px"
+        >
+          <tr>
+            <td style="height:0;line-height:0;">
+              &nbsp;
+            </td>
+          </tr>
+        </table>
+      <![endif]-->
+                                        </td>
+                                      </tr>
+                                    {{/each}}
+                                  </table>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <!--[if mso | IE]>
+            </td>
+          
+        </tr>
+      
+                  </table>
+                <![endif]-->
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!--[if mso | IE]>
+          </td>
+        </tr>
+      </table>
+      
+              </td>
+            </tr>
+          
+            <tr>
+              <td
+                 class="" width="800px"
+              >
+          
+      <table
+         align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:800px;" width="800"
+      >
+        <tr>
+          <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
+      <![endif]-->
+              <div style="margin:0px auto;max-width:800px;">
+                <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
+                  <tbody>
+                    <tr>
+                      <td style="direction:ltr;font-size:0px;padding:0;text-align:center;">
+                        <!--[if mso | IE]>
+                  <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                
+        <tr>
+      
+            <td
+               class="" style="vertical-align:top;width:800px;"
+            >
+          <![endif]-->
+                        <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                          <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
+                            <tbody>
+                              <tr>
+                                <td style="vertical-align:top;padding:0;">
+                                  <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="" width="100%">
+                                    {{#each giftCards as |item index|}}
+                                      <tr>
+                                        <td align="left" style="font-size:0px;padding:10px 25px;padding-top:10px;padding-bottom:0;word-break:break-word;">
+                                          <div style="font-family:Arial;font-size:16px;line-height:20px;text-align:left;color:#777777;">Darčeková poukážka</div>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td align="left" style="font-size:0px;padding:10px 25px;padding-top:10px;padding-bottom:0;word-break:break-word;">
+                                          <div style="font-family:Arial;font-size:16px;line-height:20px;text-align:left;color:#777777;">Cena: {{item.price}} €</div>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td align="left" style="font-size:0px;padding:10px 25px;padding-top:10px;padding-bottom:0;word-break:break-word;">
+                                          <div style="font-family:Arial;font-size:16px;line-height:20px;text-align:left;color:#777777;">Venovanie: {{item.text}}</div>
+                                        </td>
+                                      </tr>
+                                      {{#each services as |item index|}}
+                                        <tr>
+                                          <td align="left" style="font-size:0px;padding:10px 25px;padding-top:10px;padding-bottom:0;word-break:break-word;">
+                                            <div style="font-family:Arial;font-size:16px;line-height:20px;text-align:left;color:#777777;">Služba: {{item.title}}</div>
+                                          </td>
+                                        </tr>
+                                      {{/each}}
+                                      <tr>
+                                        <td style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                                          <p style="border-top:solid 1px lightgrey;font-size:1px;margin:0px auto;width:100%;">
+                                          </p>
+                                          <!--[if mso | IE]>
+        <table
+           align="center" border="0" cellpadding="0" cellspacing="0" style="border-top:solid 1px lightgrey;font-size:1px;margin:0px auto;width:750px;" role="presentation" width="750px"
+        >
+          <tr>
+            <td style="height:0;line-height:0;">
+              &nbsp;
+            </td>
+          </tr>
+        </table>
+      <![endif]-->
+                                        </td>
+                                      </tr>
+                                    {{/each}}
                                   </table>
                                 </td>
                               </tr>

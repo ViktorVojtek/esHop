@@ -9,9 +9,10 @@ import { useMutation } from '@apollo/react-hooks';
 import { UPDATE_ORDER_MUTATION } from '../../../../../graphql/mutation';
 import { ORDER_QUERY } from '../../../../../graphql/query';
 
-const Actions = ({ id }: { id: string; status: string }) => {
+const Actions = ({ id }: { id: string }) => {
   const [mutate] = useMutation(UPDATE_ORDER_MUTATION, {
     refetchQueries: [{ query: ORDER_QUERY }],
+    awaitRefetchQueries: true,
   });
   const [dropdownOpen, setOpen] = useState(false);
 

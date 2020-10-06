@@ -54,18 +54,42 @@ function sendMailNotification(
         name: orderData.firstName,
         surname: orderData.lastName,
         address: orderData.address,
+        deliveryAdress: {
+          address:
+            orderData.optionalAddress != ''
+              ? orderData.optionalAddress
+              : orderData.address,
+          postalCode:
+            orderData.optionalAddress != ''
+              ? orderData.optionalPostalCode
+              : orderData.postalCode,
+          city:
+            orderData.optionalAddress != ''
+              ? orderData.optionalCity
+              : orderData.city,
+          state:
+            orderData.optionalAddress != ''
+              ? orderData.optionalState
+              : orderData.state,
+        },
         postalCode: orderData.postalCode,
         city: orderData.city,
         state: orderData.state,
         phone: orderData.phone,
         deliveryMethod: orderData.deliveryMethode,
         paymentMethod: orderData.paymentMethode,
-        products: orderData.products,
+        products: orderData.products ? orderData.products : [],
         totalPriceWithoutVat: formatPrice(orderData.totalPriceWithoutVat),
         totalPriceVat: formatPrice(orderData.totalPriceVat),
         totalPrice: formatPrice(orderData.totalPrice),
         isBankovyPrevod: orderData.paymentMethod === 'Bankový prevod',
-        giftCards: giftCards,
+        giftCards: giftCards ? giftCards : [],
+        areProducts: orderData.products.length > 0,
+        areGiftCards: giftCards.length > 0,
+        isCompany: orderData.companyName != '',
+        companyName: orderData.companyName,
+        companyVatNum: orderData.companyVatNum,
+        companyDVATNum: orderData.companyDVATNum,
       };
 
       const orderMailToSend = templateOrderMail(replacement);
@@ -121,7 +145,16 @@ const createOrder: (
 
   await Order.create(newOrder);
 
-  updatedData.products.forEach((product) => {
+  const filteredProducts = updatedData.products.filter(
+    (product) => product.variant !== undefined
+  );
+
+  const readyData = {
+    ...updatedData,
+    products: filteredProducts,
+  };
+
+  readyData.products.forEach((product) => {
     if (product.type !== 'poukazka') {
       product.price = product.variant.discount
         ? product.variant.price.value -
@@ -137,9 +170,15 @@ const createOrder: (
     }
   });
 
-  const girftCards = updatedData.products.filter(
+  const giftCards = updatedData.products.filter(
     (product) => product.variant === undefined
   );
+
+  giftCards.forEach((card) => {
+    card.services.length > 0
+      ? (card.areServices = true)
+      : (card.areServices = false);
+  });
 
   const document = {
     html: html,
@@ -153,12 +192,12 @@ const createOrder: (
 
   await sendMailNotification(
     'info@codebrothers.sk',
-    updatedData.email,
-    updatedData,
-    girftCards
+    readyData.email,
+    readyData,
+    giftCards
   );
 
-  const { userId } = updatedData;
+  const { userId } = readyData;
 
   if (userId) {
     const customerExist: ICustomer = await Customer.findOne({

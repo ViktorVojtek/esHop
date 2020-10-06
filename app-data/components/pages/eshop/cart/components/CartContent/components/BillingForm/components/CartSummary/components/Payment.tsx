@@ -18,6 +18,7 @@ interface IData {
   optionalAddress: string;
   optionalPostalCode: string;
   optionalCity: string;
+  optionalState: string;
   phone: string;
   email: string;
   message: string;
@@ -89,7 +90,7 @@ export default (props: IProps) => {
 
     handleData({
       ...orderData,
-      paymentMethode: event.currentTarget.name,
+      paymentMethode: event.currentTarget.id,
     });
     dispatch({
       type: 'SET_TOTAL_SUM',
@@ -122,11 +123,12 @@ export default (props: IProps) => {
                     <Label htmlFor={title.toLowerCase()}>
                       <Input
                         type="radio"
-                        name={title.toLowerCase()}
+                        name="paymentMethods"
                         id={title.toLowerCase()}
                         className="payment-data-input"
                         onChange={handleChangePayment}
                         data-value={value}
+                        required
                       />{' '}
                       {title}
                     </Label>

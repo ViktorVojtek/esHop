@@ -19,6 +19,7 @@ interface IData {
   optionalAddress: string;
   optionalPostalCode: string;
   optionalCity: string;
+  optionalState: string;
   phone: string;
   email: string;
   message: string;

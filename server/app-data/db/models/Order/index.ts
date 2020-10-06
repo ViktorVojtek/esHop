@@ -20,6 +20,7 @@ export interface IOrder extends Document {
   phone: string;
   postalCode: string;
   state: string;
+  optionalState: string;
   status: number;
   totalPrice: number;
   orderId: string;
@@ -49,6 +50,7 @@ const OrderSchema = new mongoose.Schema({
   phone: String,
   postalCode: String,
   state: String,
+  optionalState: String,
   status: {
     default: 0,
     type: Number,

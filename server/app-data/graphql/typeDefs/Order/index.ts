@@ -48,6 +48,7 @@ const Order = gql`
     orderId: String
     optionalAddress: String
     optionalCity: String
+    optionalState: String
     optionalPostalCode: String
     paymentMethode: String
     phone: String
@@ -75,6 +76,7 @@ const Order = gql`
     orderId: String
     optionalAddress: String
     optionalCity: String
+    optionalState: String
     optionalPostalCode: String
     paymentMethode: String
     phone: String

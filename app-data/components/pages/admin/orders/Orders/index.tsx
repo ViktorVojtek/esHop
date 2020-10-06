@@ -14,6 +14,7 @@ type IOrders = {
 const OrdersList: FC<IOrders> = ({ orders }) => {
   const [compareString, setCompareString] = useState('');
   const [totalOrders, setTotalOrders] = useState([]);
+  const [shouldUpdate, setShouldUpdate] = useState(false);
   const statusInput = useRef(null);
   const searchInput = useRef(null);
 
@@ -68,7 +69,7 @@ const OrdersList: FC<IOrders> = ({ orders }) => {
               <td>{`${formatPrice(totalPrice)} €`}</td>
               <td>{statusBadge(status)}</td>
               <td>
-                <Actions id={_id} status={status} />
+                <Actions id={_id} />
               </td>
             </tr>
           );
@@ -76,7 +77,7 @@ const OrdersList: FC<IOrders> = ({ orders }) => {
       : null;
 
   return (
-    <div style={{ minHeight: '400px' }}>
+    <div style={{ paddingBottom: '100px' }}>
       <Row>
         <Col md="3" className="mb-2">
           <FormGroup>

@@ -14,6 +14,7 @@ interface IData {
   postalCode: string;
   city: string;
   state: string;
+  optionalState: string;
   optionalAddress: string;
   optionalPostalCode: string;
   optionalCity: string;
@@ -84,11 +85,11 @@ const BillingInfo: (props: IProps) => JSX.Element = (props) => {
         </Col>
         <Col md={6}>
           <FormGroup>
-            <Label htmlFor="lastName">Priezvisko *</Label>
+            <Label htmlFor="lName">Priezvisko *</Label>
             <Input
               type="text"
-              name="lastName"
-              id="lastName"
+              name="lName"
+              id="lName"
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                 const lastName = event.currentTarget.value;
 
@@ -241,7 +242,7 @@ const BillingInfo: (props: IProps) => JSX.Element = (props) => {
               state,
             });
           }}
-          defaultValue={0}
+          defaultValue={'SK'}
           required
         >
           <option value={0}>Zvoľte štát</option>
@@ -322,6 +323,14 @@ const BillingInfo: (props: IProps) => JSX.Element = (props) => {
             type="select"
             name="country"
             id="countryDelivery"
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              const optionalState = event.currentTarget.value;
+
+              handleData({
+                ...data,
+                optionalState,
+              });
+            }}
             defaultValue={0}
           >
             <option value={0}>Zvoľte štát</option>

@@ -19,6 +19,7 @@ interface IData {
   optionalAddress: string;
   optionalPostalCode: string;
   optionalCity: string;
+  optionalState: string;
   phone: string;
   email: string;
   message: string;
@@ -90,7 +91,7 @@ export default (props: IProps) => {
 
     handleData({
       ...orderData,
-      deliveryMethode: event.currentTarget.name,
+      deliveryMethode: event.currentTarget.id,
     });
     dispatch({
       type: 'SET_TOTAL_SUM',
@@ -120,13 +121,13 @@ export default (props: IProps) => {
           return (
             <Row form key={_id}>
               <Col md={6}>
-                <FormGroup>
+                <FormGroup required>
                   <FormGroup check>
                     <Label htmlFor={title.toLowerCase()}>
                       {isEnvelopeSize ? (
                         <Input
                           type="radio"
-                          name={title.toLowerCase()}
+                          name="deliveryMethods"
                           id={title.toLowerCase()}
                           className="delivery-data-input"
                           onChange={handleChangeDelivery}
@@ -136,11 +137,12 @@ export default (props: IProps) => {
                       ) : (
                         <Input
                           type="radio"
-                          name={title.toLowerCase()}
+                          name="deliveryMethods"
                           id={title.toLowerCase()}
                           className="delivery-data-input"
                           onChange={handleChangeDelivery}
                           data-value={value}
+                          required
                         />
                       )}{' '}
                       {title}

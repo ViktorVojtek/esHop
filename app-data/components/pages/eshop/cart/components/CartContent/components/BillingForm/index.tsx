@@ -18,6 +18,7 @@ interface IData {
   address: string;
   postalCode: string;
   city: string;
+  optionalState: string;
   state: string;
   optionalAddress: string;
   optionalPostalCode: string;
@@ -44,6 +45,7 @@ const initialOrderData: IData = {
   optionalAddress: '',
   optionalPostalCode: '',
   optionalCity: '',
+  optionalState: '',
   phone: '',
   email: '',
   message: '',
