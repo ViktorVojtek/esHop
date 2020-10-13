@@ -1,4 +1,6 @@
 import React, { FC, useState } from 'react';
+import {PDF} from '../../mojaZona';
+import Link from 'next/link';
 
 import {
   Button,
@@ -40,6 +42,7 @@ const OrdersFill = ({ order }) => {
             <th>{deliveryMethode}</th>
             <th>{paymentMethode}</th>
             <th>{`${formatPrice(totalPrice)} €`}</th>
+            <th><Link href={`/static/orders/order-${orderId}.pdf`}><a target="_blank"><PDF></PDF></a></Link></th>
           </tr>
         </>
     )

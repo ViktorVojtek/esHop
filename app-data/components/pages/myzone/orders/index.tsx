@@ -39,6 +39,7 @@ const Orders: FC<IOrders> = ({ id }) => {
               <th>Spôsob doručenia</th>
               <th>Spôsob platby</th>
               <th>Cena spolu</th>
+              <th>Objednávka</th>
             </tr>
           </thead>
           <tbody>
