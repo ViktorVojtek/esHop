@@ -247,6 +247,7 @@ export const CUSTOMER_QUERY = gql`
     customer(id: $id) {
       _id
       email
+      tel
       firstName
       lastName
       customerPoints

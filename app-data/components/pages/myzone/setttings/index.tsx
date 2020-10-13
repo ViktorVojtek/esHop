@@ -68,6 +68,9 @@ const Settings: FC<ISettings> = ({ id }) => {
           <P>
             <strong>Email:</strong> <span>{customer.email}</span>
           </P>
+          <P>
+            <strong>Tel:</strong> <span>{customer.tel}</span>
+          </P>
           <P className="mt-4">
             <strong>Zrušiť príjimanie marketingových emailov:</strong>
           </P>
