@@ -81,11 +81,31 @@ const CartSummary: (props: IProps) => JSX.Element = (props) => {
         </Col>
       </Row>
       <Row form>
+        <Col md={6} className="border-top  pt-3">
+          <p>Spolu bez DPH:</p>
+        </Col>
+        <Col md={6} className="border-top pt-3">
+          <p className="text-right">{formatPrice(cartTotalSum / 1.2)} €</p>
+        </Col>
+      </Row>
+      <Row form>
+        <Col md={6} className="border-top  pt-3">
+          <p>DPH (20%):</p>
+        </Col>
+        <Col md={6} className="border-top pt-3">
+          <p className="text-right">
+            {formatPrice(cartTotalSum - cartTotalSum / 1.2)} €
+          </p>
+        </Col>
+      </Row>
+      <Row form>
         <Col md={6} className="border-top border-bottom pt-3">
-          <p>Spolu s DPH:</p>
+          <p className="font-weight-bold">Spolu s DPH:</p>
         </Col>
         <Col md={6} className="border-top border-bottom pt-3">
-          <p className="text-right">{formatPrice(cartTotalSum)} €</p>
+          <p className="text-right font-weight-bold">
+            {formatPrice(cartTotalSum)} €
+          </p>
         </Col>
         <p className="text-left mt-2 mb-0 w-100">* Povinné pole</p>
       </Row>

@@ -100,21 +100,6 @@ const KontaktPage = () => (
         </Col>
       </Row>
       <Row>
-        <Col md="6" className="align-items-center">
-          <div className="mt-4">
-            <P>Červený Kláštor 12</P>
-            <P>Červený Kláštor - Kúpele</P>
-            <P>059 06 Červený Kláštor</P>
-            <ContactHolder>
-              <Span>Email: </Span>
-              <A href="mailto:eshop@kupelecks.sk">eshop@kupelecks.sk</A>
-            </ContactHolder>
-            <ContactHolder>
-              <Span>Tel: </Span>
-              <A href="tel:+421911904880">+421 911 904 880</A>
-            </ContactHolder>
-          </div>
-        </Col>
         <Col md="6">
           <div className="mt-4">
             <P>Popradská 6</P>
@@ -122,11 +107,11 @@ const KontaktPage = () => (
             <P>064 01 Stará Ľubovňa</P>
             <ContactHolder>
               <Span>Email: </Span>
-              <A href="mailto:rezervacie@kupelecks.sk">info@kupelecks.sk</A>
+              <A href="mailto:eshop@kupelecks.sk">eshop@kupelecks.sk</A>
             </ContactHolder>
             <ContactHolder>
               <Span>Tel: </Span>
-              <A href="tel:+421914338829">+421 914 338 829</A>
+              <A href="tel:+421914338829">+421 911 338 828</A>
             </ContactHolder>
           </div>
         </Col>

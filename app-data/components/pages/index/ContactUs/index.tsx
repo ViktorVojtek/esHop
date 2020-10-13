@@ -49,7 +49,7 @@ const ContactUs = () => (
                   title="Rezervácie kúpele"
                 />
                 <ContactItemCol
-                  tel="+421 911 904 880"
+                  tel="+421 911 338 828"
                   title="Infolinka eshop"
                 />
                 <ContactItemCol

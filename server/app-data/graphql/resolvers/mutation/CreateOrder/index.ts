@@ -8,7 +8,12 @@ import Customer, { ICustomer } from '../../../../db/models/Customer';
 import Order, { IOrder } from '../../../../db/models/Order';
 import ModError from '../../utils/error';
 import { calculateOrderId } from '../../utils';
-import { formatPrice } from '../../../../../../app-data/shared/helpers/formatters';
+
+const formatPrice = (number: number) => {
+  let numberToFormat = number.toFixed(2).toString();
+  return numberToFormat.replace('.', ',');
+};
+
 
 // from: '"Fred Foo 👻" <foo@example.com>'
 // to: "bar@example.com, baz@example.com",
