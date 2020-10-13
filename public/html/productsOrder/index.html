@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Faktúra</title>
+    <link rel="stylesheet" href="style.css" media="all" />
+  </head>
+  <body>
+    <header class="clearfix">
+      <div id="logo">
+        <img
+          src="https://kupelecks.sk/wp-content/uploads/2018/09/logo-big.png"
+        />
+      </div>
+      <div id="orderNumber" class="clearfix">
+        <h3 style="margin: 0;">FAKT&Uacute;RA {{this.orderId}}</h3>
+        <h4 style="margin: 0; margin-top: 0.5rem;">
+          VARIABILNY SYMBOL {{this.orderId}}
+        </h4>
+      </div>
+      <div id="company" class="clearfix">
+        <p style="font-weight: bold; margin: 0; margin-bottom: 1rem;">
+          ODBERATEĽ:
+        </p>
+        <p style="margin: 0;">{{this.firstName}} {{this.lastName}}</p>
+        <p style="margin: 0;">{{this.address}}</p>
+        <p style="margin: 0;">{{this.postalCode}}, {{this.city}}</p>
+        <p style="margin: 0;">&nbsp;</p>
+        <p style="margin: 0;">Email: {{this.email}}</p>
+        <p style="margin: 0;">Tel: {{this.phone}}</p>
+        <p style="margin: 0;">&nbsp;</p>
+        <p style="margin: 0;">Adresa dodania: {{this.address}}</p>
+        <p style="margin: 0;">{{this.postalCode}}, {{this.city}}</p>
+      </div>
+      <div id="project">
+        <p style="font-weight: bold; margin: 0; margin-bottom: 1rem;">
+          DOD&Aacute;VATEĽ:
+        </p>
+        <p style="margin: 0;">AMICUS RELAX s.r.o.</p>
+        <p style="margin: 0;">Popradsk&aacute; 6</p>
+        <p style="margin: 0;">064 01 Star&aacute; Ľubovňa</p>
+        <p style="margin: 0;">Slovensk&aacute; republika</p>
+        <p style="margin: 0;">&nbsp;</p>
+        <p style="margin: 0;">IČO: 36849987</p>
+        <p style="margin: 0;">DIČ: 2022474025</p>
+        <p style="margin: 0;">IČ DPH: SK2022474025</p>
+        <p style="margin: 0;">&nbsp;</p>
+        <p style="margin: 0;">Bankov&eacute; spojenie:</p>
+        <p style="margin: 0;">&nbsp;</p>
+        <p style="margin: 0;">Datum vystavenia / dodania {{date}}</p>
+      </div>
+    </header>
+    <main>
+      <table
+        autosize="1"
+        style="word-wrap: break-word; table-layout: fixed; width: 100%;"
+      >
+        <tr>
+          <td
+            width="10%"
+            style="
+              border: 1px solid #ddd;
+              padding: 8px;
+              padding-top: 12px;
+              padding-bottom: 12px;
+              text-align: left;
+              background-color: lightgray;
+              color: black;
+            "
+          >
+            P.Č
+          </td>
+          <td
+            width="30%"
+            style="
+              border: 1px solid #ddd;
+              padding: 8px;
+              padding-top: 12px;
+              padding-bottom: 12px;
+              text-align: left;
+              background-color: lightgray;
+              color: black;
+            "
+          >
+            N&aacute;zov
+          </td>
+          <td
+            width="10%"
+            style="
+              border: 1px solid #ddd;
+              padding: 8px;
+              padding-top: 12px;
+              padding-bottom: 12px;
+              text-align: left;
+              background-color: lightgray;
+              color: black;
+            "
+          >
+            KS
+          </td>
+          <td
+            width="10%"
+            style="
+              border: 1px solid #ddd;
+              padding: 8px;
+              padding-top: 12px;
+              padding-bottom: 12px;
+              text-align: left;
+              background-color: lightgray;
+              color: black;
+            "
+          >
+            Cena KS
+          </td>
+          <td
+            width="10%"
+            style="
+              border: 1px solid #ddd;
+              padding: 8px;
+              padding-top: 12px;
+              padding-bottom: 12px;
+              text-align: left;
+              background-color: lightgray;
+              color: black;
+            "
+          >
+            BEZ DPH
+          </td>
+          <td
+            width="10%"
+            style="
+              border: 1px solid #ddd;
+              padding: 8px;
+              padding-top: 12px;
+              padding-bottom: 12px;
+              text-align: left;
+              background-color: lightgray;
+              color: black;
+            "
+          >
+            DPH
+          </td>
+          <td
+            style="
+              border: 1px solid #ddd;
+              padding: 8px;
+              padding-top: 12px;
+              padding-bottom: 12px;
+              text-align: left;
+              background-color: lightgray;
+              color: black;
+            "
+          >
+            DPH %
+          </td>
+          <td
+            style="
+              border: 1px solid #ddd;
+              padding: 8px;
+              padding-top: 12px;
+              padding-bottom: 12px;
+              text-align: left;
+              background-color: lightgray;
+              color: black;
+            "
+          >
+            Cena
+          </td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid #ddd; padding: 8px;">{{this.item}}</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">{{this.title}}</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">{{this.count}}</td>
+          <td style="border: 1px solid #ddd; padding: 8px;">
+            {{this.itemPrice}}
+          </td>
+          <td style="border: 1px solid #ddd; padding: 8px;">
+            {{this.price.withoutVat}}
+          </td>
+          <td style="border: 1px solid #ddd; padding: 8px;">
+            {{this.price.withVat}}
+          </td>
+          <td style="border: 1px solid #ddd; padding: 8px;">
+            {{this.price.VAT}}
+          </td>
+          <td style="border: 1px solid #ddd; padding: 8px;">
+            {{this.price.price}}
+          </td>
+        </tr>
+      </table>
+      <p>&nbsp;</p>
+      <table style="border-collapse: collapse; width: 60%;">
+        <tbody>
+          <tr>
+            <td
+              style="
+                border: 1px solid #ddd;
+                padding: 8px;
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                background-color: lightgray;
+                color: black;
+              "
+            >
+              Z&aacute;klad DPH 20%:
+            </td>
+            <td style="border: 1px solid #ddd; padding: 8px;">
+              {{totalPriceWithoutWat}} {{currency}}
+            </td>
+          </tr>
+          <tr>
+            <td
+              style="
+                border: 1px solid #ddd;
+                padding: 8px;
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                background-color: lightgray;
+                color: black;
+              "
+            >
+              DPH 20%:
+            </td>
+            <td style="border: 1px solid #ddd; padding: 8px;">
+              {{totalVat}} {{currency}}
+            </td>
+          </tr>
+          <tr>
+            <td
+              style="
+                border: 1px solid #ddd;
+                padding: 8px;
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                background-color: lightgray;
+                color: black;
+              "
+            >
+              SPOLU:
+            </td>
+            <td style="border: 1px solid #ddd; padding: 8px;">
+              {{totalPrice}} {{currency}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p>&nbsp;</p>
+      <table>
+        <tbody>
+          <tr>
+            <td>Vystavil, podpísaný:</td>
+            <td>
+              <img
+                style="width: 125px;"
+                src="{{signatureImg}}"
+                alt="Signature"
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+    <footer></footer>
+  </body>
+</html>

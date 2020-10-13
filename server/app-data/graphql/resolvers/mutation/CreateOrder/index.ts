@@ -25,6 +25,14 @@ var html = fs.readFileSync(
   'utf8'
 );
 
+var orderPDF = fs.readFileSync(
+  path.join(
+    __dirname,
+    `../../../../../../public/html/productsOrder/template.html`
+  ),
+  'utf8'
+);
+
 const orderCreated = fs.readFileSync(
   path.join(
     __dirname,
@@ -185,12 +193,14 @@ const createOrder: (
       : (card.areServices = false);
   });
 
+  const pdfData = {...readyData, giftCards};
+
   const document = {
-    html: html,
-    data: updatedData,
+    html: orderPDF,
+    data: pdfData,
     path: path.join(
       __dirname,
-      `../../../../../../static/invoices/invoice-${orderId}.pdf`
+      `../../../../../../static/orders/order-${orderId}.pdf`
     ),
   };
   await pdf.create(document);
