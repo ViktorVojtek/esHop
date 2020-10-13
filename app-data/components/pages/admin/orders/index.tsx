@@ -4,7 +4,9 @@ import { ORDER_QUERY } from '../../../../graphql/query';
 import OrdersList from './Orders';
 
 const Orders: FC = () => {
-  const { loading, error, data } = useQuery(ORDER_QUERY);
+  const orderQuery = useQuery(ORDER_QUERY);
+
+  const { loading, error, data } = orderQuery;
 
   if (loading) {
     return <>loading</>;

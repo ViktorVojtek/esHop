@@ -24,7 +24,7 @@ const OrdersList: FC<IOrders> = ({ orders }) => {
 
   const filterByStatus = () => {
     if (statusInput.current.value == 4) {
-      return setTotalOrders(orders);
+      return setTotalOrders([...orders]);
     }
     const results = orders.filter(
       (order) => order.status == statusInput.current.value
@@ -36,10 +36,9 @@ const OrdersList: FC<IOrders> = ({ orders }) => {
     const results = orders.filter((order) =>
       order.email.toLowerCase().includes(compareString)
     );
-    setTotalOrders(results);
-  }, [compareString]);
 
-  console.log(totalOrders);
+    setTotalOrders([...results]);
+  }, [compareString, orders]);
 
   const listItems =
     totalOrders && totalOrders.length > 0
@@ -70,7 +69,9 @@ const OrdersList: FC<IOrders> = ({ orders }) => {
               <td>{message}</td>
               <td>{`${formatPrice(totalPrice)} €`}</td>
               <td>{statusBadge(status)}</td>
-              <td>{`${date.toLocaleDateString('sk-SK')}, ${date.toLocaleTimeString('sk-SK')}`}</td>
+              <td>{`${date.toLocaleDateString(
+                'sk-SK'
+              )}, ${date.toLocaleTimeString('sk-SK')}`}</td>
               <td>
                 <Actions id={_id} />
               </td>

@@ -27,7 +27,8 @@ export default async (
       },
       {
         $set: { status },
-      }
+      },
+      { new: true }
     );
 
     const { __v, ...result } = updatedOrder.toObject();
