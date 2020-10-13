@@ -6,10 +6,18 @@ import {
   translateStatusColor,
 } from '../../../../../shared/helpers/formatters';
 import Actions from '../Actions';
+import styled from 'styled-components';
+import { FilePdf } from '@styled-icons/fa-solid';
+import Link from 'next/link';
 
 type IOrders = {
   orders: any;
 };
+
+const PDF = styled(FilePdf)`
+  width: 30px;
+  color: #007bff;
+`;
 
 const OrdersList: FC<IOrders> = ({ orders }) => {
   const [compareString, setCompareString] = useState('');
@@ -44,6 +52,7 @@ const OrdersList: FC<IOrders> = ({ orders }) => {
     totalOrders && totalOrders.length > 0
       ? totalOrders.map((args: any, index: number) => {
           const {
+            orderId,
             firstName,
             lastName,
             address,
@@ -72,6 +81,7 @@ const OrdersList: FC<IOrders> = ({ orders }) => {
               <td>{`${date.toLocaleDateString(
                 'sk-SK'
               )}, ${date.toLocaleTimeString('sk-SK')}`}</td>
+              <td><Link href={`/static/orders/order-${orderId}.pdf`}><a target="_blank"><PDF></PDF></a></Link></td>
               <td>
                 <Actions id={_id} />
               </td>
@@ -128,6 +138,7 @@ const OrdersList: FC<IOrders> = ({ orders }) => {
             <th>Spolu cena</th>
             <th>Stav</th>
             <th>Dátum vytvorenia</th>
+            <th>Objednávka</th>
             <th>Akcie</th>
           </tr>
         </thead>
