@@ -29,59 +29,19 @@ const OrdersFill = ({ order }) => {
     products,
     created_at,
   } = order;
+  const date = new Date(created_at.slice(0, 10) * 1000);
   return (
     order && (
-      <tbody>
         <>
           <tr>
             <th>{orderId}</th>
-            <th>{created_at}</th>
+            <th>{`${date.toLocaleDateString('sk-SK')}, ${date.toLocaleTimeString('sk-SK')}`}</th>
             <th>{statusBadge(status)}</th>
             <th>{deliveryMethode}</th>
             <th>{paymentMethode}</th>
             <th>{`${formatPrice(totalPrice)} €`}</th>
-            <th>
-              <Button color="primary" onClick={toggle}>
-                Zobraziť
-              </Button>
-            </th>
           </tr>
         </>
-        <Modal className="full-table" isOpen={modal} toggle={toggle}>
-          <ModalHeader toggle={toggle}>Súhrn produktov</ModalHeader>
-          <ModalBody>
-            <Table striped responsive>
-              <thead>
-                <tr>
-                  <th>Názov</th>
-                  <th>Variant</th>
-                  <th>KS</th>
-                  <th>Cena</th>
-                  <th>Cena Spolu</th>
-                </tr>
-              </thead>
-              <tbody>
-                {products.map((product, index) => (
-                  <tr key={index}>
-                    <th>{product.title}</th>
-                    <th>{product.variant.title}</th>
-                    <th>{product.variant.count}</th>
-                    <th>{`${product.variant.price.value} €`}</th>
-                    <th>{`${
-                      product.variant.price.value * product.variant.count
-                    } €`}</th>
-                  </tr>
-                ))}
-              </tbody>
-            </Table>
-          </ModalBody>
-          <ModalFooter>
-            <Button color="primary" onClick={toggle}>
-              Zavrieť
-            </Button>
-          </ModalFooter>
-        </Modal>
-      </tbody>
     )
   );
 };

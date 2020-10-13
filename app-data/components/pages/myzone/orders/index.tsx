@@ -39,12 +39,13 @@ const Orders: FC<IOrders> = ({ id }) => {
               <th>Spôsob doručenia</th>
               <th>Spôsob platby</th>
               <th>Cena spolu</th>
-              <th>Detail produktov</th>
             </tr>
           </thead>
+          <tbody>
           {orders.map((order, index) => (
             <OrdersFill key={index} order={order} />
           ))}
+          </tbody>
         </Table>
       ) : (
         <P>Aktuálne nemáte vytvorené žiadne objednávky.</P>

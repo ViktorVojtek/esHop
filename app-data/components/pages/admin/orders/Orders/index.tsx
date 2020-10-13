@@ -39,6 +39,8 @@ const OrdersList: FC<IOrders> = ({ orders }) => {
     setTotalOrders(results);
   }, [compareString]);
 
+  console.log(totalOrders);
+
   const listItems =
     totalOrders && totalOrders.length > 0
       ? totalOrders.map((args: any, index: number) => {
@@ -54,20 +56,21 @@ const OrdersList: FC<IOrders> = ({ orders }) => {
             totalPrice,
             state,
             status,
+            created_at,
             _id,
           } = args;
-
+          const date = new Date(created_at.slice(0, 10) * 1000);
           return (
             <tr key={index}>
               <td>{index + 1}</td>
-              <td>{firstName}</td>
-              <td>{lastName}</td>
+              <td>{`${firstName} ${lastName}`}</td>
               <td>{email}</td>
               <td>{phone}</td>
               <td>{`${address}, ${postalCode} ${city}, ${state}`}</td>
               <td>{message}</td>
               <td>{`${formatPrice(totalPrice)} €`}</td>
               <td>{statusBadge(status)}</td>
+              <td>{`${date.toLocaleDateString('sk-SK')}, ${date.toLocaleTimeString('sk-SK')}`}</td>
               <td>
                 <Actions id={_id} />
               </td>
@@ -116,14 +119,14 @@ const OrdersList: FC<IOrders> = ({ orders }) => {
         <thead>
           <tr>
             <th>#</th>
-            <th>Meno</th>
-            <th>Priezvisko</th>
+            <th>Zákazník</th>
             <th>Email</th>
             <th>Telefón</th>
             <th>Adresa</th>
             <th>Správa</th>
             <th>Spolu cena</th>
-            <th>Stav objednávky</th>
+            <th>Stav</th>
+            <th>Dátum vytvorenia</th>
             <th>Akcie</th>
           </tr>
         </thead>
