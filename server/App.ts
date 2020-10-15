@@ -12,6 +12,7 @@ import db from './app-data/db';
 
 import paymentRoute from './app-data/routes/payment';
 import subscribeRoute from './app-data/routes/subscribe';
+import omegaRoute from './app-data/routes/invoice-omega';
 
 const dev = process.env.NODE_ENV !== 'production';
 const nextApp = nextjsApp({ dev });
@@ -57,6 +58,7 @@ const App: () => Promise<void> = async () => {
     await db();
     // await setup();
 
+    app.use('/invoice-omega', omegaRoute);
     app.use('/subscribe', subscribeRoute);
     app.use('/payment', paymentRoute);
     app.all('*', (req, res) => handle(req, res));

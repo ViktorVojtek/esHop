@@ -20,7 +20,21 @@ const Actions = ({ id }: { id: string }) => {
   const handleOnClick: (event: any) => Promise<void> = async (event) => {
     const { value } = event.currentTarget;
 
-    await mutate({ variables: { _id: id, status: +value } });
+    const result = await mutate({ variables: { _id: id, status: +value } });
+
+    const order = result.data.updateOrder;
+
+    if (value === 2) {
+      await fetch('/invoice-omega', {
+        body: JSON.stringify({
+          email: order.email,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: 'POST',
+      });
+    }
   };
 
   return (
