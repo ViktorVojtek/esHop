@@ -6,6 +6,7 @@ export interface IOrder extends Document {
   city: string;
   created_at: Date;
   companyDVATNum: string;
+  companyDTAXNum: string;
   companyName: string;
   companyVatNum: string;
   deliveryMethode: string;
@@ -36,6 +37,7 @@ const OrderSchema = new mongoose.Schema({
     type: Date,
   },
   companyDVATNum: String,
+  companyDTAXNum: String,
   companyName: String,
   companyVatNum: String,
   deliveryMethode: String,

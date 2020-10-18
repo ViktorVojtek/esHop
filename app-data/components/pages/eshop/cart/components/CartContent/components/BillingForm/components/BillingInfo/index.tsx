@@ -10,6 +10,7 @@ interface IData {
   companyName: string;
   companyVatNum: string;
   companyDVATNum: string;
+  companyDTAXNum: string;
   address: string;
   postalCode: string;
   city: string;
@@ -48,6 +49,7 @@ const BillingInfo: (props: IProps) => JSX.Element = (props) => {
     postalCode,
     companyVatNum,
     companyDVATNum,
+    companyDTAXNum,
     optionalAddress,
     optionalPostalCode,
     optionalCity,
@@ -163,6 +165,25 @@ const BillingInfo: (props: IProps) => JSX.Element = (props) => {
                   });
                 }}
                 value={companyDVATNum || ''}
+              />
+            </FormGroup>
+          </Col>
+          <Col md={6}>
+            <FormGroup>
+              <Label htmlFor="VATID">IČ DPH</Label>
+              <Input
+                type="text"
+                name="TAXID"
+                id="TAXID"
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                  const companyDTAXNum = event.currentTarget.value;
+
+                  handleData({
+                    ...data,
+                    companyDTAXNum,
+                  });
+                }}
+                value={companyDTAXNum || ''}
               />
             </FormGroup>
           </Col>

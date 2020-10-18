@@ -11,6 +11,7 @@ interface IData {
   companyName: string;
   companyVatNum: string;
   companyDVATNum: string;
+  companyDTAXNum: string;
   address: string;
   postalCode: string;
   city: string;

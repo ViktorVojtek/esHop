@@ -10,6 +10,7 @@ export const UPDATE_ORDER_MUTATION = gql`
   mutation updateOrder($_id: String!, $status: Int) {
     updateOrder(_id: $_id, status: $status) {
       userId
+      orderId
       address
       city
       deliveryMethode

@@ -37,6 +37,7 @@ const Order = gql`
     address: String
     city: String
     companyDVATNum: String
+    companyDTAXNum: String
     companyName: String
     companyVatNum: String
     created_at: String
@@ -65,6 +66,7 @@ const Order = gql`
     address: String
     city: String
     companyDVATNum: String
+    companyDTAXNum: String
     companyName: String
     companyVatNum: String
     created_at: String

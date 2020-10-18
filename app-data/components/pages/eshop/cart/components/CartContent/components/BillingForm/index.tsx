@@ -15,6 +15,7 @@ interface IData {
   companyName: string;
   companyVatNum: string;
   companyDVATNum: string;
+  companyDTAXNum: string;
   address: string;
   postalCode: string;
   city: string;
@@ -38,6 +39,7 @@ const initialOrderData: IData = {
   companyName: '',
   companyVatNum: '',
   companyDVATNum: '',
+  companyDTAXNum: '',
   address: '',
   postalCode: '',
   city: '',

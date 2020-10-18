@@ -56,18 +56,20 @@ const Actions = ({ id }: { id: string }) => {
 
     console.log(value);
 
-    if (value === '2') {
+    /*if (value === '2') {
       console.log('fetchujem');
       await fetch('/invoice-omega', {
         body: JSON.stringify({
+          orderId: order.orderId,
           email: order.email,
+          totalPrice: order.totalPrice,
         }),
         headers: {
           'Content-Type': 'application/json',
         },
         method: 'POST',
       });
-    }
+    }*/
   };
 
   return (
