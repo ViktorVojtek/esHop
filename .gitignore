@@ -19,6 +19,12 @@
 /static/products/*
 !/static/products/.gitkeep
 
+/static/invoice/*
+!/static/invoice/.gitkeep
+
+/static/orders/*
+!/static/orders/.gitkeep
+
 # misc
 .DS_Store
 .env*

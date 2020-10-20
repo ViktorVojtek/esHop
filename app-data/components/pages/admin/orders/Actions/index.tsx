@@ -54,22 +54,38 @@ const Actions = ({ id }: { id: string }) => {
 
     const order = result.data.updateOrder;
 
-    console.log(value);
+    console.log(order);
 
-    /*if (value === '2') {
+    if (value === '2') {
       console.log('fetchujem');
       await fetch('/invoice-omega', {
         body: JSON.stringify({
           orderId: order.orderId,
           email: order.email,
           totalPrice: order.totalPrice,
+          firstName: order.firstName,
+          lastName: order.lastName,
+          paymentMethode: order.paymentMethode,
+          deliveryMethode: order.deliveryMethode,
+          phone: order.phone,
+          address: order.address,
+          postalCode: order.postalCode,
+          city: order.city,
+          optionalAddress: order.optionalAddress,
+          optionalCity: order.optionalCity,
+          optionalPostalCode: order.optionalPostalCode,
+          companyDTAXNum: order.companyDTAXNum,
+          products: order.products,
+          companyDVATNum: order.companyDVATNum,
+          companyName: order.companyName,
+          companyVatNum: order.companyVatNum,
         }),
         headers: {
           'Content-Type': 'application/json',
         },
         method: 'POST',
       });
-    }*/
+    }
   };
 
   return (

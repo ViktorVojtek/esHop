@@ -9,22 +9,32 @@ export const CREATE_ORDER_MUTATION = gql`
 export const UPDATE_ORDER_MUTATION = gql`
   mutation updateOrder($_id: String!, $status: Int) {
     updateOrder(_id: $_id, status: $status) {
+      _id
+      status
+      products
       userId
-      orderId
       address
       city
+      companyDVATNum
+      companyDTAXNum
+      companyName
+      companyVatNum
       deliveryMethode
       email
       firstName
       lastName
       message
+      optionalAddress
+      optionalCity
+      optionalState
+      optionalPostalCode
       paymentMethode
       phone
       postalCode
       state
       totalPrice
-      products
-      status
+      orderId
+      created_at
     }
   }
 `;

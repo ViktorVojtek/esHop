@@ -146,6 +146,38 @@ export async function calculateOrderId(): Promise<string> {
         let oINum = parseInt(lastOrder.orderId) + 1;
         let zeros: string = '';
 
+        for (
+          let i = 0;
+          i < lastOrder.orderId.length - String(oINum).length;
+          i += 1
+        ) {
+          zeros += '0';
+        }
+
+        orderId = `${zeros}${oINum}`;
+
+        resolve(orderId);
+      }
+
+      resolve(orderId);
+    } catch (err) {
+      reject(err);
+    }
+  });
+}
+
+/*export async function calculateInvoiceId(): Promise<string> {
+  return new Promise(async (resolve, reject) => {
+    try {
+      // new Date()
+      // porovnat previous rok - ak iny zacni od 0001 ak nie pokracuj
+      let invoiceId: string = `10${year}0001`;
+      const lastOrder = await Order.findOne({}).sort({ created_at: -1 });
+
+      if (lastOrder) {
+        let oINum = parseInt(lastOrder.orderId) + 1;
+        let zeros: string = '';
+
         for(let i = 0; i < lastOrder.orderId.length - String(oINum).length; i += 1) {
           zeros += '0';
         }
@@ -160,4 +192,4 @@ export async function calculateOrderId(): Promise<string> {
       reject (err);
     }
   });
-}
+}*/

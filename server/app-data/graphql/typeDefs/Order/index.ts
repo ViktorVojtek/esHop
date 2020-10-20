@@ -47,6 +47,7 @@ const Order = gql`
     lastName: String
     message: String
     orderId: String
+    invoiceId: String
     optionalAddress: String
     optionalCity: String
     optionalState: String
@@ -73,6 +74,7 @@ const Order = gql`
     deliveryMethode: String
     email: String
     firstName: String
+    invoiceId: String
     lastName: String
     message: String
     orderId: String

@@ -259,23 +259,31 @@ export const ORDER_QUERY = gql`
   query orders($id: String) {
     orders(id: $id) {
       _id
+      status
+      products
       userId
-      orderId
-      created_at
       address
       city
+      companyDVATNum
+      companyDTAXNum
+      companyName
+      companyVatNum
       deliveryMethode
       email
       firstName
       lastName
       message
+      optionalAddress
+      optionalCity
+      optionalState
+      optionalPostalCode
       paymentMethode
       phone
       postalCode
       state
       totalPrice
-      products
-      status
+      orderId
+      created_at
     }
   }
 `;
