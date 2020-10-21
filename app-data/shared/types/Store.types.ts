@@ -15,6 +15,7 @@ export type VariantOfProduct = {
   discount: number;
   count: number;
   images: ProductImage[];
+  identificationNumber?: string;
 };
 
 export type GiftCard = {

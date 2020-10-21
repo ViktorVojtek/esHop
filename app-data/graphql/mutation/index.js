@@ -131,6 +131,7 @@ export const CREATE_PRODUCT_MUTATION = gql`
           value
         }
         title
+        identificationNumber
       }
     }
   }
@@ -202,6 +203,7 @@ export const UPDATE_PRODUCT_MUTATION = gql`
           value
         }
         title
+        identificationNumber
       }
     }
   }

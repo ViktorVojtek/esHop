@@ -96,6 +96,7 @@ export const PRODUCT_QUERY = gql`
           value
         }
         title
+        identificationNumber
       }
     }
   }
@@ -133,6 +134,7 @@ export const PRODUCTS_QUERY = gql`
           value
         }
         title
+        identificationNumber
       }
     }
   }

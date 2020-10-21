@@ -147,6 +147,21 @@ const VariantProductData = (props) => {
             required
           />
         </FormControl>
+        <FormControl margin="normal">
+          <TextField
+            label="Variant number"
+            variant="standard"
+            id="vIdentificationNumber"
+            style={{ marginLeft: '10px' }}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setVariantData({
+                ...variantData,
+                identificationNumber: event.currentTarget.value.trim(),
+              });
+            }}
+            required
+          />
+        </FormControl>
         <div>
           <p className="mt-4 mb-2">Description </p>
           <Editor

@@ -28,6 +28,7 @@ export type ProductVariant = {
   inStock: number;
   title: string;
   price: ProductPrice;
+  identificationNumber?: string;
 };
 
 type Product = {

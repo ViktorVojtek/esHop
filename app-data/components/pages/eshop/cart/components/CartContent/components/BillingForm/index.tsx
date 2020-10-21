@@ -83,6 +83,7 @@ const BillingForm: FC = () => {
             discount: item.variant.discount,
             price: item.variant.price,
             title: item.variant.title,
+            identificationNumber: item.variant.identificationNumber,
           },
         };
       } else {
