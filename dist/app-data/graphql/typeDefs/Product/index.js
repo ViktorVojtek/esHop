@@ -28,6 +28,7 @@ const Product = apollo_server_express_1.gql `
     discount: Int
     title: String!
     price: ProductPriceInput!
+    productCode: String
   }
 
   input ProductInput {
@@ -61,6 +62,7 @@ const Product = apollo_server_express_1.gql `
     inStock: Int
     title: String
     price: ProductPrice
+    productCode: String
   }
 
   type CategoryType {

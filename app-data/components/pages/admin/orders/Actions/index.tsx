@@ -67,6 +67,7 @@ const Actions = ({ id }: { id: string }) => {
           lastName: order.lastName,
           paymentMethode: order.paymentMethode,
           deliveryMethode: order.deliveryMethode,
+          deliveryPrice: order.deliveryPrice,
           phone: order.phone,
           address: order.address,
           postalCode: order.postalCode,

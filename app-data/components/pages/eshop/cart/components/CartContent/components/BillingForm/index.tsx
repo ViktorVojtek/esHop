@@ -28,6 +28,7 @@ interface IData {
   email: string;
   message: string;
   deliveryMethode: string;
+  deliveryPrice: number;
   paymentMethode: string;
   totalPrice: number;
   products: string[];
@@ -52,6 +53,7 @@ const initialOrderData: IData = {
   email: '',
   message: '',
   deliveryMethode: '',
+  deliveryPrice: 0,
   paymentMethode: '',
   totalPrice: 0,
   products: [],
@@ -83,7 +85,7 @@ const BillingForm: FC = () => {
             discount: item.variant.discount,
             price: item.variant.price,
             title: item.variant.title,
-            identificationNumber: item.variant.identificationNumber,
+            productCode: item.variant.productCode,
           },
         };
       } else {

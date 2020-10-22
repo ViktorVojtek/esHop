@@ -96,7 +96,7 @@ export const PRODUCT_QUERY = gql`
           value
         }
         title
-        identificationNumber
+        productCode
       }
     }
   }
@@ -134,7 +134,7 @@ export const PRODUCTS_QUERY = gql`
           value
         }
         title
-        identificationNumber
+        productCode
       }
     }
   }
@@ -271,6 +271,7 @@ export const ORDER_QUERY = gql`
       companyName
       companyVatNum
       deliveryMethode
+      deliveryPrice
       email
       firstName
       lastName

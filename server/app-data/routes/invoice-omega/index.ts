@@ -5,6 +5,7 @@ export default async (req, res) => {
     totalPrice,
     paymentMethode,
     deliveryMethode,
+    deliveryPrice,
     firstName,
     lastName,
     phone,
@@ -23,10 +24,16 @@ export default async (req, res) => {
   try {
     const API_KEY = '7ecec41b-612a-4710-82f6-071f856419f4';
 
+    const formatGiftCardPrice = (value: string) => {
+      let stringToFormat = value.replace(',', '.');
+      return parseFloat(stringToFormat).toFixed(2);
+    };
+
     products.forEach((product) => {
       if (product.type !== 'poukazka') {
         product.name = product.title;
         product.count = product.variant.count;
+        product.productCode = product.variant.productCode;
         product.unitPriceWithVat = product.variant.discount
           ? product.variant.price.value -
             (product.variant.price.value * product.variant.discount) / 100
@@ -36,20 +43,31 @@ export default async (req, res) => {
         product.totalPriceWithVat = product.unitPriceWithVat * product.count;
         product.totalPriceWithVat =
           Math.round(product.totalPriceWithVat * 100) / 100;
+      } else {
+        product.name = 'Darčeková poukážka';
+        product.count = 1;
+        product.unitPriceWithVat = formatGiftCardPrice(product.price);
+        product.unitPriceWithVat =
+          Math.round(product.unitPriceWithVat * 100) / 100;
+        product.totalPriceWithVat = product.unitPriceWithVat;
       }
     });
 
+    const deliveryProduct = {
+      name: deliveryMethode,
+      count: 1,
+      unitPriceWithVat: +deliveryPrice,
+      totalPriceWithVat: +deliveryPrice,
+    };
+    const finalProducts = [...products, deliveryProduct];
     const clientHasDifferentPostalAddress = optionalAddress !== undefined;
     const senderIsVatPayer = companyDTAXNum !== undefined;
-    const totalPriceWithoutVat = Math.round((totalPrice / 1.2) * 100) / 100;
-
-    console.log(companyName);
 
     const data = [
       {
         documentNumber: orderId,
         numberingSequence: 'OFEsh',
-        totalPriceWithVat: '54.50',
+        totalPriceWithVat: totalPrice,
         paymentType: `${paymentMethode}`,
         deliveryType: `${deliveryMethode}`,
         clientName: companyName ? `${companyName}` : `${firstName} ${lastName}`,
@@ -62,13 +80,16 @@ export default async (req, res) => {
         clientTown: `${city}`,
         clientCountry: 'Slovenská republika',
         clientHasDifferentPostalAddress: clientHasDifferentPostalAddress,
-        clientPostalName: `${firstName} ${lastName}`,
+        clientPostalName: companyName
+          ? `${companyName}`
+          : `${firstName} ${lastName}`,
         clientPostalContactName: `${firstName}`,
         clientPostalContactSurname: `${lastName}`,
         clientPostalPhone: `${phone}`,
-        clientPostalStreet: `${optionalAddress}`,
-        clientPostalPostCode: `${optionalPostalCode}`,
-        clientPostalTown: `${optionalCity}`,
+        clientPostalStreet: optionalAddress != '' ? optionalAddress : address,
+        clientPostalPostCode:
+          optionalAddress != '' ? optionalPostalCode : postalCode,
+        clientPostalTown: optionalAddress != '' ? optionalCity : city,
         clientPostalCountry: 'Slovenská republika',
         clientRegistrationId: companyVatNum ? `${companyVatNum}` : '',
         clientTaxId: companyDVATNum ? `${companyDVATNum}` : '',
@@ -86,7 +107,7 @@ export default async (req, res) => {
         orderNumber: `${orderId}`,
         clientNote: '',
         isVatAccordingPayment: true,
-        items: products,
+        items: finalProducts,
       },
     ];
 

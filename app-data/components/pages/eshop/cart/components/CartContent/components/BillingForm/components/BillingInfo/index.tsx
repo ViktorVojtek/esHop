@@ -23,6 +23,7 @@ interface IData {
   email: string;
   message: string;
   deliveryMethode: string;
+  deliveryPrice: number;
   paymentMethode: string;
   totalPrice: number;
   products: string[];
@@ -57,6 +58,7 @@ const BillingInfo: (props: IProps) => JSX.Element = (props) => {
     email,
     message,
     deliveryMethode,
+    deliveryPrice,
     paymentMethode,
     totalPrice,
   } = data;

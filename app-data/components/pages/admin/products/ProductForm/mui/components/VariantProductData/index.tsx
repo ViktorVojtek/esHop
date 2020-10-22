@@ -151,12 +151,12 @@ const VariantProductData = (props) => {
           <TextField
             label="Variant number"
             variant="standard"
-            id="vIdentificationNumber"
+            id="vproductCode"
             style={{ marginLeft: '10px' }}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               setVariantData({
                 ...variantData,
-                identificationNumber: event.currentTarget.value.trim(),
+                productCode: event.currentTarget.value.trim(),
               });
             }}
             required

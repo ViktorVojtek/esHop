@@ -10,6 +10,7 @@ export interface IOrder extends Document {
   companyName: string;
   companyVatNum: string;
   deliveryMethode: string;
+  deliveryPrice: number;
   email: string;
   firstName: string;
   invoiceId: string;
@@ -42,6 +43,10 @@ const OrderSchema = new mongoose.Schema({
   companyName: String,
   companyVatNum: String,
   deliveryMethode: String,
+  deliveryPrice: {
+    default: 0,
+    type: Number,
+  },
   email: String,
   firstName: String,
   invoiceId: String,

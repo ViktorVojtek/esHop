@@ -25,6 +25,7 @@ interface IData {
   email: string;
   message: string;
   deliveryMethode: string;
+  deliveryPrice: number;
   paymentMethode: string;
   totalPrice: number;
   products: string[];
@@ -93,7 +94,10 @@ export default (props: IProps) => {
     handleData({
       ...orderData,
       deliveryMethode: event.currentTarget.id,
+      deliveryPrice: currentValue,
     });
+
+    console.log(orderData);
     dispatch({
       type: 'SET_TOTAL_SUM',
       payload: sum, // currentValue === 0 ? sum : cartTotalSum + currentValue,

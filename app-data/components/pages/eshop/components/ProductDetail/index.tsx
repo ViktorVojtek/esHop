@@ -106,7 +106,7 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
     event.preventDefault();
 
     const count: number = +productCountRef.current.value as number;
-    const { price, title, images, discount, identificationNumber } = variants[
+    const { price, title, images, discount, productCode } = variants[
       activeVariant
     ];
     console.log(variants[activeVariant]);
@@ -119,7 +119,7 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
         price,
         title,
         images,
-        identificationNumber,
+        productCode,
       },
       isEnvelopeSize,
       title: mainTitle,

@@ -27,7 +27,7 @@ const Product = gql`
     discount: Int
     title: String!
     price: ProductPriceInput!
-    identificationNumber: String
+    productCode: String
   }
 
   input ProductInput {
@@ -61,7 +61,7 @@ const Product = gql`
     inStock: Int
     title: String
     price: ProductPrice
-    identificationNumber: String
+    productCode: String
   }
 
   type CategoryType {

@@ -25,6 +25,7 @@ interface IData {
   email: string;
   message: string;
   deliveryMethode: string;
+  deliveryPrice: number;
   paymentMethode: string;
   totalPrice: number;
   products: string[];

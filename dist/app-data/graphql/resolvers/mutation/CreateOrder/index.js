@@ -16,9 +16,6 @@ const formatPrice = (number) => {
     let numberToFormat = number.toFixed(2).toString();
     return numberToFormat.replace('.', ',');
 };
-// from: '"Fred Foo 👻" <foo@example.com>'
-// to: "bar@example.com, baz@example.com",
-var html = fs.readFileSync(path.join(__dirname, `../../../../../../public/html/invoiceTemplate/template.html`), 'utf8');
 var orderPDF = fs.readFileSync(path.join(__dirname, `../../../../../../public/html/productsOrder/template.html`), 'utf8');
 const orderCreated = fs.readFileSync(path.join(__dirname, `../../../../../../public/html/orderTemplate/order_created.html`), 'utf8');
 function sendMailNotification(from, to, orderData, giftCards) {
@@ -73,6 +70,7 @@ function sendMailNotification(from, to, orderData, giftCards) {
                 companyName: orderData.companyName,
                 companyVatNum: orderData.companyVatNum,
                 companyDVATNum: orderData.companyDVATNum,
+                companyDTAXNum: orderData.companyDTAXNum,
             };
             const orderMailToSend = templateOrderMail(replacement);
             // send mail with defined transport object
@@ -127,6 +125,10 @@ const createOrder = async (root, { data }, ctx, orderIdIn) => {
             product.totalPriceWithoutVat = product.totalPrice / 1.2;
             product.totalPriceWithoutVat =
                 Math.round(product.totalPriceWithoutVat * 100) / 100;
+            product.price = formatPrice(product.price);
+            product.totalPrice = formatPrice(product.totalPrice);
+            product.totalPriceVat = formatPrice(product.totalPriceVat);
+            product.totalPriceWithoutVat = formatPrice(product.totalPriceWithoutVat);
         }
     });
     const giftCards = updatedData.products.filter((product) => product.variant === undefined);

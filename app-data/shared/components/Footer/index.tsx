@@ -19,22 +19,7 @@ import ReactGA from 'react-ga';
 
 const Footer: () => JSX.Element = () => {
   useEffect(() => {
-    ReactGA.initialize(
-      [
-        {
-          trackingId: 'UA-127305873-1',
-          gaOptions: {
-            name: 'Ján Korčák',
-          },
-        },
-        {
-          trackingId: 'UA-127305873-2',
-          gaOptions: { name: 'Štefan Mačuga' },
-        },
-      ],
-      { debug: true, alwaysSendToDefaultTracker: false }
-    );
-    ReactGA.set({ page: window.location.pathname });
+    ReactGA.initialize('UA-127305873-2');
     ReactGA.pageview(window.location.pathname + window.location.search);
   }, []);
   return (

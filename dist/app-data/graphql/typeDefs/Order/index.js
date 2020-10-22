@@ -37,15 +37,18 @@ const Order = apollo_server_express_1.gql `
     address: String
     city: String
     companyDVATNum: String
+    companyDTAXNum: String
     companyName: String
     companyVatNum: String
     created_at: String
     deliveryMethode: String
+    deliveryPrice: Float
     email: String
     firstName: String
     lastName: String
     message: String
     orderId: String
+    invoiceId: String
     optionalAddress: String
     optionalCity: String
     optionalState: String
@@ -65,12 +68,15 @@ const Order = apollo_server_express_1.gql `
     address: String
     city: String
     companyDVATNum: String
+    companyDTAXNum: String
     companyName: String
     companyVatNum: String
     created_at: String
     deliveryMethode: String
+    deliveryPrice: Float
     email: String
     firstName: String
+    invoiceId: String
     lastName: String
     message: String
     orderId: String

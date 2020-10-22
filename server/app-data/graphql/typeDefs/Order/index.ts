@@ -42,6 +42,7 @@ const Order = gql`
     companyVatNum: String
     created_at: String
     deliveryMethode: String
+    deliveryPrice: Float
     email: String
     firstName: String
     lastName: String
@@ -72,6 +73,7 @@ const Order = gql`
     companyVatNum: String
     created_at: String
     deliveryMethode: String
+    deliveryPrice: Float
     email: String
     firstName: String
     invoiceId: String

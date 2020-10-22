@@ -20,6 +20,7 @@ export const UPDATE_ORDER_MUTATION = gql`
       companyName
       companyVatNum
       deliveryMethode
+      deliveryPrice
       email
       firstName
       lastName
@@ -131,7 +132,7 @@ export const CREATE_PRODUCT_MUTATION = gql`
           value
         }
         title
-        identificationNumber
+        productCode
       }
     }
   }
@@ -203,7 +204,7 @@ export const UPDATE_PRODUCT_MUTATION = gql`
           value
         }
         title
-        identificationNumber
+        productCode
       }
     }
   }
