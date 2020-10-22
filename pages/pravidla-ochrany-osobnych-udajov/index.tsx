@@ -448,10 +448,9 @@ const PrivacyPolicy: () => JSX.Element = () => (
         </P>
         <P>
           Váš súhlas môžete kedykoľvek odvolať s účinnosťou do budúcnosti, a to
-          e-mailom na kontaktnú e-mailovú adresu uvedenú v bode 1. Odvolanie
-          súhlasu vedie k vymazaniu Vašich údajov. Za týmto účelom môžete použiť
-          formulár na našej stránke. Link na formulár nájdete{' '}
-          <Link href="moja-zona">tu</Link>.
+          zaslaním e-mailu na kontaktnú e-mailovú adresu uvedenú v bode 1, alebo
+          kliknutím na linku odhlásenia, zobrazenú v každom e-maile obsahujúcom
+          newsletter. Odvolanie súhlasu vedie k vymazaniu Vašich údajov
         </P>
         <P style={{ textDecoration: 'underline' }}>
           Príjemcovia/Kategórie príjemcov:

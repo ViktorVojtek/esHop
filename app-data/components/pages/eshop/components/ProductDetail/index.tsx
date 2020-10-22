@@ -193,6 +193,7 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
                 type="number"
                 className="mb-4"
                 defaultValue={1}
+                min={1}
                 step={1}
                 ref={productCountRef}
               />
