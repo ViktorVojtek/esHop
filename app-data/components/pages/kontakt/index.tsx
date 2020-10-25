@@ -5,54 +5,68 @@ import FaqItem from './components/faqItem';
 
 const faq = [
   {
-    question: 'What is Lorem Ipsum?',
+    question:
+      'Je možné objednať si tovar v e-shope a vyzdvihnúť na odbernom mieste? Ak áno, aké sú podmienky ?',
     answer:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+      'Áno, je možné tovar si objednať v e-shope a osobne prevziať na odbernom mieste. Pri osobnom odbere na odbernom mieste nie je možné meniť objednávku z e-shopu. Objednávka je záväzná. <strong>Pri vyzdvihnutí objednávky je možné platiť v hotovosti alebo platobnou kartou. Pri osobnom odbere kupujúci neplatí poštovné a balné.</strong>( zvýraznené neviem, či môže byť. Musíš porozmýšľať, či môžu ľudia platiť aj pri osobnom odbere tovaru)',
   },
   {
-    question: 'What is Lorem Ipsum?',
+    question: 'Je povinná registrácia ?',
     answer:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+      'Nie, registrácia nie je povinná. Pri objednávke je ale potrebné vyplniť údaje potrebné k zaslaniu tovaru. Ak ste však pravidelným odberateľom je pre vás pohodlnejšie sa registrovať a ušetriť čas opakovaným vyplňovaním povinných údajov.',
   },
   {
-    question: 'What is Lorem Ipsum?',
+    question: 'Platba za objednaný tovar?',
     answer:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+      'Platba je možná online kartou, bankovým prevodom alebo pri osobnom odbere.',
   },
   {
-    question: 'What is Lorem Ipsum?',
+    question: 'Ako postupovať pri reklamácii / výmene tovaru?',
     answer:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+      'Reklamácie vybavujeme do 30 dní. Na tovar sa vzťahuje záručná doba 24 mesiacov v zmysle platných právnych predpisov. <br> <strong>Návod pri reklamácii tovaru:</strong><br><ul><li>Tovar aj s kópiou faktúry a sprievodným listom nám zašlite doporučene (nie na dobierku) na adresu:----------------------------------- V sprievodnom liste uveďte meno a priezvisko, na ktoré bola objednávka vytvorená, číslo faktúry (tú nájdete aj vo Vašom konte, ale ak ju neviete nájsť, tak uveďte, kedy ste si u nás objednávku vytvárali a na akú sumu) a dôvod reklamácie.</li><li>Pri výmene tovaru je potrebné si vytvoriť novú objednávku, kde do poznámky v objednávke uvediete, že sa jedná o "reklamáciu tovaru z faktúry číslo ..." (tým si tovar rezervujete a je to pre nás tiež informácia, aby sme Vám objednávku zatiaľ neposielali). Pokiaľ daný tovar nie je k dispozícii, vyberte si iný. Pokiaľ si nechcete vybrať iný tovar, objednávku si nevytvárajte, ale do sprievodného listu uveďte číslo účtu, kde chcete zaslať peniaze za vrátený tovar.</li><li>V prípade ďalších otázok nás neváhajte kontaktovať prostredníctvom emailu.</li></ul>',
   },
   {
-    question: 'What is Lorem Ipsum?',
+    question: 'Aké tlačivo potrebujem pri výmene alebo reklamácii tovaru?',
     answer:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+      'Výmena tovaru na stiahnutie tu:............<br>Odstúpenie od kúpnej zmluvy na stiahnutie tu:...............<br>Reklamačný protokol na stiahnutie tu:............',
   },
   {
-    question: 'What is Lorem Ipsum?',
+    question: 'Budete ma informovať o dodaní tovaru pred doručením?',
     answer:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+      'Áno. Akonáhle je vaša objednávka spracovaná, odovzdáme zabalenú zásielku prepravcovi. Kuriér Vás bude kontaktovať telefonicky a dohodne si s Vami presný čas doručenia podľa zadanej dodacej adresy.',
   },
   {
-    question: 'What is Lorem Ipsum?',
+    question: 'Ako viem, že som úspešne potvrdil/a objednávku?',
     answer:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+      'Ak ste úspešne potvrdili objednávku, príde Vám e-mail s potvrdením objednávky.<br> Ak by Vám e-mail neprišiel, skontrolujte si, či ste dokončili nákup. V nákupnom košíku by Vám nemal zostať žiadny tovar.',
   },
   {
-    question: 'What is Lorem Ipsum?',
+    question: 'Je možné poslať tovar aj do zahraničia?',
     answer:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+      'Zaslanie tovaru do zahraničia nie je problém. V procese objednávky táto služba zatiaľ nie je dostupná, no radi Vám vyhovieme individuálne. Pri takejto požiadavke je nutné kontaktovať náš zákaznícky servis, kde kalkuláciu a poslanie balíka radi vyriešime.',
   },
   {
-    question: 'What is Lorem Ipsum?',
+    question:
+      'V objednávke som zadal/a platbu bankovým prevodom, ale údaje k platbe mi neprišli. Ako mám postupovať?',
     answer:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+      'Údaje k platbe nájdete v e-maile potvrdzujúcom prijatie Vašej objednávky. Číslo účtu pre platbu je....................., ako variabilný symbol uveďte číslo Vašej objednávky. Pokiaľ si nie ste istý/á, aké údaje máte pri platbe zadať, kontaktujte prosím tel.číslo ......',
   },
   {
-    question: 'What is Lorem Ipsum?',
+    question: 'Aká je záručná doba na tovar?',
     answer:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+      'Záručná doba na tovar je dva roky od predaja, pokiaľ sa viditeľne od výrobcu neudáva inak???',
+  },
+  {
+    question: 'Čím sú produkty spoločnosti ………….výnimočné?',
+    answer: 'predovšetkým prémiovou kvalitou produktov za bezkonkurenčné ceny',
+  },
+  {
+    question: 'Sú produkty Maxima certifikované?',
+    answer: 'áno, sú certifikované..................',
+  },
+  {
+    question: 'Kedy mi budú vrátené peniaze za stornovanú objednávku?',
+    answer: ' Peniaze Vám budú vrátené najneskôr do 5 pracovných dní.',
   },
 ];
 
@@ -102,9 +116,9 @@ const KontaktPage = () => (
       <Row>
         <Col md="6">
           <div className="mt-4">
-            <P>Popradská 6</P>
-            <P>Cestovná agentúra</P>
+            <P>Cestovná agentúra DJK Tour</P>
             <P>064 01 Stará Ľubovňa</P>
+            <P>Popradská 6</P>
             <ContactHolder>
               <Span>Email: </Span>
               <A href="mailto:eshop@kupelecks.sk">eshop@kupelecks.sk</A>
@@ -112,6 +126,40 @@ const KontaktPage = () => (
             <ContactHolder>
               <Span>Tel: </Span>
               <A href="tel:+421914338829">+421 911 338 828</A>
+            </ContactHolder>
+            <ContactHolder>
+              <Span>Trasa: </Span>
+              <A
+                href="https://maps.google.com/?q=49.301994, 20.688364"
+                target="_blank"
+              >
+                Navigácia
+              </A>
+            </ContactHolder>
+          </div>
+        </Col>
+
+        <Col md="6">
+          <div className="mt-4">
+            <P>Kúpeľná reštaurácia</P>
+            <P>Červený Kláštor 12</P>
+            <P>059 06 Červený Kláštor</P>
+            <ContactHolder>
+              <Span>Email: </Span>
+              <A href="mailto:eshop@kupelecks.sk">eshop@kupelecks.sk</A>
+            </ContactHolder>
+            <ContactHolder>
+              <Span>Tel: </Span>
+              <A href="tel:+421914338829">+421 911 338 828</A>
+            </ContactHolder>
+            <ContactHolder>
+              <Span>Trasa: </Span>
+              <A
+                href="https://maps.google.com/?q=49.388951, 20.421086"
+                target="_blank"
+              >
+                Navigácia
+              </A>
             </ContactHolder>
           </div>
         </Col>

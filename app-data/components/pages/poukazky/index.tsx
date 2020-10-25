@@ -191,6 +191,7 @@ const PoukazkyPage: () => JSX.Element = () => {
                   placeholder="Zadajte text"
                   id="frontText"
                   required
+                  maxlength="140"
                   onChange={(e) => {
                     handleChangeTextArea(e);
                     handleChange(e);

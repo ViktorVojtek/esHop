@@ -9,32 +9,43 @@ type IFaqItem = {
 
 const P = styled.p`
   font-size: 1rem;
-  font-weight: bold;
-  color: #01aeef;
+  font-weight: normal;
+  color: black;
   @media (max-width: 768px) {
     text-align: center;
     padding: 0rem 1rem;
   }
+  strong {
+    color: #01aeef;
+  }
 `;
-const H5 = styled.h4`
+const H5 = styled.h5`
   cursor: pointer;
+  font-weight: bold;
   user-select: none;
   @media (max-width: 768px) {
     text-align: center;
   }
+`;
+const Holder = styled.div`
+  padding-bottom: 1rem;
 `;
 
 const FaqItem: FC<IFaqItem> = ({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
+  const createMarkup = () => {
+    return { __html: answer };
+  };
+
   return (
-    <div>
+    <Holder>
       <H5 onClick={toggle}>{question}</H5>
       <Collapse isOpen={isOpen}>
-        <P>{answer}</P>
+        <P dangerouslySetInnerHTML={createMarkup()} />
       </Collapse>
-    </div>
+    </Holder>
   );
 };
 

@@ -23,7 +23,7 @@ const Services: FC = () => (
             <ServiceTitle>Originálne balíčky</ServiceTitle>
             <Divider />
             <ServiceText>
-              Produkty sú jednoducho a ekologický balené.
+              Produkty sú jednoducho a ekologicky balené.
             </ServiceText>
           </Service>
         </Col>

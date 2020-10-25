@@ -34,10 +34,12 @@ const ContactUs = () => (
           <Row>
             <Col md="8">
               <P>
-                Ak máte nejaké otázky, môžete sa pozrieť na{' '}
-                <Link href="kontakt">často kladené otázky</Link>. Tu si môžete
-                pozrieť, ako používať našu stránku, ako si objednať, ako sa
-                prihlásiť a taktiež môžete sledovať vaše objednávky.
+                V prípade nejasností navštívte stránku{' '}
+                <Link href="kontakt">často kladené otázky</Link>. Nájdete tam
+                základné informácie ako používať našu stránku, ako si objednať,
+                ako sa prihlásiť a pod. Ak ste nenašli to čo hľadáte tak nás
+                neváhajte kontaktovať prostredníctvom online chatu alebo
+                email/telefón.
               </P>
             </Col>
           </Row>
