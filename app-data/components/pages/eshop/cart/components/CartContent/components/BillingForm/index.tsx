@@ -137,8 +137,6 @@ const BillingForm: FC = () => {
       } else {
         console.log('Create order');
 
-        console.log(orderData);
-
         await mutate({
           variables: {
             data: orderData,

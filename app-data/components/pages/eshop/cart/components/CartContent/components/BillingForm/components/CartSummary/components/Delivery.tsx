@@ -93,11 +93,10 @@ export default (props: IProps) => {
 
     handleData({
       ...orderData,
+      totalPrice: sum,
       deliveryMethode: event.currentTarget.id,
       deliveryPrice: currentValue,
     });
-
-    console.log(orderData);
     dispatch({
       type: 'SET_TOTAL_SUM',
       payload: sum, // currentValue === 0 ? sum : cartTotalSum + currentValue,

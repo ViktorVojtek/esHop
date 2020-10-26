@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <title>Objednávka</title>
     <style>
+      html{zoom: 0.67;}
       .clearfix:after {
         content: '';
         display: table;
@@ -147,7 +148,6 @@
         position: absolute;
         bottom: 0;
         border-top: 1px solid #c1ced9;
-        padding: 8px 0;
         text-align: center;
       }
     </style>
@@ -176,8 +176,14 @@
         <p style="margin: 0;">Fakturačná adresa: {{this.address}}</p>
         <p style="margin: 0;">{{this.postalCode}}, {{this.city}}</p>
         <p style="margin: 0;">&nbsp;</p>
-        <p style="margin: 0;">Dodacia adresa: {{this.optionalAddress}}</p>
-        <p style="margin: 0;">{{this.optionalPostalCode}}, {{this.optionalCity}}</p>
+        {{#if isDeliveryAddress}}
+        <p style="margin: 0">Dodacia adresa: {{this.optionalAddress}}</p>
+        <p style="margin: 0">
+          {{this.optionalPostalCode}}, {{this.optionalCity}}
+        </p>
+        {{else}}
+        <p style="margin: 0">Dodacia adresa je rovnaká ako fakturačná adresa.</p>
+        {{/if}}
         <p style="margin: 0;">&nbsp;</p>
         <p style="margin: 0;">Názov firmy: {{this.companyName}}</p>
         <p style="margin: 0;">IČO: {{this.companyVatNum}}</p>

@@ -168,7 +168,7 @@ const createOrder: (
       product.totalPriceVat = Math.round(product.totalPriceVat * 100) / 100;
       product.totalPriceWithoutVat = product.totalPrice / 1.2;
       product.totalPriceWithoutVat =
-      Math.round(product.totalPriceWithoutVat * 100) / 100;
+        Math.round(product.totalPriceWithoutVat * 100) / 100;
       product.price = formatPrice(product.price);
       product.totalPrice = formatPrice(product.totalPrice);
       product.totalPriceVat = formatPrice(product.totalPriceVat);
@@ -186,7 +186,17 @@ const createOrder: (
       : (card.areServices = false);
   });
 
-  const pdfData = {...readyData, giftCards};
+  const pdfData = {
+    ...readyData,
+    giftCards,
+    isDeliveryAddress: readyData.optionalAddress != '',
+  };
+
+  var options = {
+    format: 'A4',
+    orientation: 'portrait',
+    border: '10mm',
+  };
 
   const document = {
     html: orderPDF,
@@ -196,7 +206,7 @@ const createOrder: (
       `../../../../../../static/orders/order-${orderId}.pdf`
     ),
   };
-  await pdf.create(document);
+  await pdf.create(document, options);
 
   await sendMailNotification(
     'info@codebrothers.sk',

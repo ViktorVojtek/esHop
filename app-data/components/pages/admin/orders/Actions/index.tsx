@@ -54,10 +54,7 @@ const Actions = ({ id }: { id: string }) => {
 
     const order = result.data.updateOrder;
 
-    console.log(order);
-
     if (value === '2') {
-      console.log('fetchujem');
       await fetch('/invoice-omega', {
         body: JSON.stringify({
           orderId: order.orderId,

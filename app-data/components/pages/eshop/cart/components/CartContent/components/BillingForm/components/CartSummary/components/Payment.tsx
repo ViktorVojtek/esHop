@@ -91,6 +91,7 @@ export default (props: IProps) => {
 
     handleData({
       ...orderData,
+      totalPrice: sum,
       paymentMethode: event.currentTarget.id,
     });
     dispatch({
