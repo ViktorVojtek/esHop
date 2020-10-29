@@ -15,6 +15,7 @@ import theme from '../app-data/lib/util/mui/theme';
 
 import withApollo from '../app-data/graphql/withApollo';
 import Store from '../app-data/lib/state/Store';
+import { SnackbarProvider } from 'notistack';
 
 const MyApp = (props) => {
   const {
@@ -49,7 +50,12 @@ const MyApp = (props) => {
         <ApolloProvider client={apollo}>
           <Store>
             <Style />
-            <Component {...pageProps} />
+            <SnackbarProvider
+              maxSnack={3}
+              anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+            >
+              <Component {...pageProps} />
+            </SnackbarProvider>
           </Store>
         </ApolloProvider>
       </ThemeProvider>

@@ -1,12 +1,12 @@
-import React, { FC, useRef, useEffect, useState } from 'react';
+import React, { FC } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { ORDER_QUERY } from '../../../../graphql/query';
 import OrdersList from './Orders';
 
 const Orders: FC = () => {
-  const orderQuery = useQuery(ORDER_QUERY);
-
-  const { loading, error, data } = orderQuery;
+  const { loading, error, data } = useQuery(ORDER_QUERY, {
+    pollInterval: 10000,
+  });
 
   if (loading) {
     return <>loading</>;
@@ -17,7 +17,7 @@ const Orders: FC = () => {
   }
 
   const { orders } = data;
-
+  console.log(orders);
   return <OrdersList orders={orders} />;
 };
 

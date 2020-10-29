@@ -20,6 +20,7 @@ export default gql`
     customerPoints: Float
     email: String
     tel: String
+    isVerified: Boolean
     firstName: String
     lastName: String
     role: Int!

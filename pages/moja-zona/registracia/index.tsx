@@ -106,6 +106,10 @@ const Register: FC = () => {
       <Modal isOpen={modal} toggle={toggle}>
         <ModalBody>
           <h4>Vaša registrácia prebehla úspešne.</h4>
+          <p>
+            Pre úspešne dokončenie registrácie kliknite na link, ktorý Vám
+            prišiel emailom.
+          </p>
           <Link href="prihlasenie">
             <Button>Prihláste sa</Button>
           </Link>

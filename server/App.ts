@@ -13,6 +13,9 @@ import db from './app-data/db';
 import paymentRoute from './app-data/routes/payment';
 import subscribeRoute from './app-data/routes/subscribe';
 import omegaRoute from './app-data/routes/invoice-omega';
+import confirmationRoute from './app-data/routes/confirmation';
+import resendRoute from './app-data/routes/resend';
+import resetPassword from './app-data/routes/reset-password';
 
 const dev = process.env.NODE_ENV !== 'production';
 const nextApp = nextjsApp({ dev });
@@ -61,6 +64,9 @@ const App: () => Promise<void> = async () => {
     app.use('/invoice-omega', omegaRoute);
     app.use('/subscribe', subscribeRoute);
     app.use('/payment', paymentRoute);
+    app.use('/confirmation', confirmationRoute);
+    app.use('/resend', resendRoute);
+    app.use('/reset-password', resetPassword);
     app.all('*', (req, res) => handle(req, res));
 
     app.listen({ port });

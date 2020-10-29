@@ -5,11 +5,7 @@ import { config } from '../../../../config';
 import Customer, { ICustomer } from '../../../../db/models/Customer';
 import ModError from '../../utils/error';
 
-export default async (
-  root: any,
-  { customerData },
-  ctx: any
-) => {
+export default async (root: any, { customerData }, ctx: any) => {
   try {
     const { email, password } = customerData;
 
@@ -25,6 +21,10 @@ export default async (
 
     if (!passwordMatch) {
       throw new ModError(422, 'Incorrect input data');
+    }
+
+    if (!userExist.isVerified) {
+      throw new ModError(544, 'Email address is not verified');
     }
 
     const { superSecret } = config;

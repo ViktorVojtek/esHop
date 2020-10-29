@@ -16,12 +16,16 @@ const CustomersList: FC = () => {
 
   const { customers } = data;
 
+  const verifiedCustomers = customers.filter((customer) => {
+    return customer.isVerified;
+  });
+
   const listItems =
-    customers && customers.length > 0
-      ? customers.map(
+    verifiedCustomers && verifiedCustomers.length > 0
+      ? verifiedCustomers.map(
           ({ firstName, lastName, customerPoints, tel, email, _id }, index) => {
             return (
-              <tr>
+              <tr key={index}>
                 <th>{index + 1}</th>
                 <th>{firstName}</th>
                 <th>{lastName}</th>
@@ -33,7 +37,7 @@ const CustomersList: FC = () => {
           }
         )
       : null;
-  return customers && customers.length > 0 ? (
+  return verifiedCustomers && verifiedCustomers.length > 0 ? (
     <Table>
       <thead>
         <tr>

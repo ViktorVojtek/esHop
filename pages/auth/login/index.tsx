@@ -9,18 +9,18 @@ import { LOGIN_USER_MUTATION } from '../../../app-data/graphql/mutation';
 import { Wrapper } from '../../../app-data/shared/styles/components/Auth';
 import { login } from '../../../app-data/lib/auth';
 import { Context } from '../../../app-data/lib/state/Store';
-
-import Modal from '../../../app-data/shared/components/Modal';
+import { SnackbarProvider, useSnackbar } from 'notistack';
 
 const LogIn: FC = () => {
-  const [errorMessage, setErrorMessage] = useState('');
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const { dispatch } = useContext(Context);
   const [loginUserMutate] = useMutation(LOGIN_USER_MUTATION);
 
   const handleSetErrorMessage: (message: string) => void = (message) => {
     const parsedMessage: string = message.replace('GraphQL error:', ' ').trim();
-
-    setErrorMessage(parsedMessage);
+    enqueueSnackbar(`Nesprávne prihlasovacie údaje`, {
+      variant: 'error',
+    });
     dispatch({ type: 'SET_MODAL', payload: true });
   };
 
@@ -60,24 +60,20 @@ const LogIn: FC = () => {
   };
 
   return (
-    <>
-      <Modal>
-        <p>{errorMessage}</p>
-      </Modal>
-      <Wrapper>
-        <Form onSubmit={handleSubmitLogin}>
-          <FormGroup>
-            <label htmlFor="email">Email</label>
-            <Input id="email" name="email" type="email" />
-          </FormGroup>
-          <FormGroup>
-            <label htmlFor="password">Password</label>
-            <Input id="password" name="password" type="password" />
-          </FormGroup>
-          <Button type="submit">Send</Button>
-        </Form>
-      </Wrapper>
-    </>
+    <Wrapper>
+      <h2 className="mb-4">Prihlásenie</h2>
+      <Form onSubmit={handleSubmitLogin} style={{ minWidth: '250px' }}>
+        <FormGroup>
+          <label htmlFor="email">Email</label>
+          <Input id="email" name="email" type="email" />
+        </FormGroup>
+        <FormGroup>
+          <label htmlFor="password">Password</label>
+          <Input id="password" name="password" type="password" />
+        </FormGroup>
+        <Button type="submit">Send</Button>
+      </Form>
+    </Wrapper>
   );
 };
 

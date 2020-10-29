@@ -13,6 +13,7 @@ export const Wrapper = styled.div`
 export const Form = styled.form`
   width: 100%;
   max-width: 600px;
+  padding: 20px;
 `;
 
 export const H4 = styled.h4`

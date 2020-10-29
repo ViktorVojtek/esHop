@@ -33,6 +33,7 @@ export type CartProduct = {
 export type Customer = {
   firstName: string;
   lastName: string;
+  isVerified: boolean;
   userId: string;
   token: string;
 };

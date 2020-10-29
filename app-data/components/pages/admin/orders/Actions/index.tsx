@@ -15,6 +15,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { useMutation } from '@apollo/react-hooks';
 import { UPDATE_ORDER_MUTATION } from '../../../../../graphql/mutation';
 import { ORDER_QUERY } from '../../../../../graphql/query';
+import { useSnackbar } from 'notistack';
+import { translateStatus } from '../../../../../shared/helpers/formatters';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -30,6 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Actions = ({ id }: { id: string }) => {
   const classes = useStyles();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [mutate] = useMutation(UPDATE_ORDER_MUTATION, {
     refetchQueries: [{ query: ORDER_QUERY }],
     awaitRefetchQueries: true,
@@ -53,6 +56,13 @@ const Actions = ({ id }: { id: string }) => {
     const result = await mutate({ variables: { _id: id, status: +value } });
 
     const order = result.data.updateOrder;
+
+    enqueueSnackbar(
+      `Nový status objednávky: ${translateStatus(order.status)}`,
+      {
+        variant: 'success',
+      }
+    );
 
     if (value === '2') {
       await fetch('/invoice-omega', {

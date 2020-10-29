@@ -237,6 +237,7 @@ export const CUSTOMERS_QUERY = gql`
       _id
       email
       tel
+      isVerified
       customerPoints
       firstName
       lastName
@@ -250,6 +251,7 @@ export const CUSTOMER_QUERY = gql`
       _id
       email
       tel
+      isVerified
       firstName
       lastName
       customerPoints
