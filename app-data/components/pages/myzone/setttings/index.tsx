@@ -18,6 +18,7 @@ import {
 } from 'reactstrap';
 import { P, H2 } from '../mojaZona';
 import Router from 'next/router';
+import cookie from 'js-cookie';
 
 type ISettings = {
   id: string;
@@ -48,6 +49,11 @@ const Settings: FC<ISettings> = ({ id }) => {
     try {
       await removeCutomer({ variables: { id: id } });
 
+      cookie.remove('customerToken');
+      cookie.remove('customerId');
+      cookie.remove('customerFName');
+      cookie.remove('customerLName');
+
       Router.push('/moja-zona/prihlasenie');
     } catch (err) {
       console.log(err);
@@ -72,7 +78,9 @@ const Settings: FC<ISettings> = ({ id }) => {
             <strong>Tel:</strong> <span>{customer.tel}</span>
           </P>
           <P className="mt-4">
-            <strong>Zrušiť príjimanie marketingových emailov:</strong>
+            <strong>
+              Zrušenie súhlasu na spracovanie osobných údajov na reklamné účely:
+            </strong>
           </P>
           <Button>Zrušiť</Button>
           <P className="mt-4">

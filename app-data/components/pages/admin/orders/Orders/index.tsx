@@ -7,8 +7,9 @@ import {
 } from '../../../../../shared/helpers/formatters';
 import Actions from '../Actions';
 import styled from 'styled-components';
-import { FilePdf } from '@styled-icons/fa-solid';
+import { FilePdf, Envelope } from '@styled-icons/fa-solid';
 import Link from 'next/link';
+import CustomMessage from './CustomMessage';
 
 type IOrders = {
   orders: any;
@@ -23,6 +24,7 @@ const OrdersList: FC<IOrders> = ({ orders }) => {
   const [compareString, setCompareString] = useState('');
   const [totalOrders, setTotalOrders] = useState([]);
   const [shouldUpdate, setShouldUpdate] = useState(false);
+  const [modalMessage, setMessage] = useState('');
   const statusInput = useRef(null);
   const searchInput = useRef(null);
 
@@ -75,13 +77,23 @@ const OrdersList: FC<IOrders> = ({ orders }) => {
               <td>{email}</td>
               <td>{phone}</td>
               <td>{`${address}, ${postalCode} ${city}, ${state}`}</td>
-              <td>{message}</td>
+              <td>
+                {message && (
+                  <CustomMessage id={`envelope-${index}`} message={message} />
+                )}
+              </td>
               <td>{`${formatPrice(totalPrice)} €`}</td>
               <td>{statusBadge(status)}</td>
               <td>{`${date.toLocaleDateString(
                 'sk-SK'
               )}, ${date.toLocaleTimeString('sk-SK')}`}</td>
-              <td><Link href={`/static/orders/order-${orderId}.pdf`}><a target="_blank"><PDF></PDF></a></Link></td>
+              <td>
+                <Link href={`/static/orders/order-${orderId}.pdf`}>
+                  <a target="_blank">
+                    <PDF></PDF>
+                  </a>
+                </Link>
+              </td>
               <td>
                 <Actions id={_id} />
               </td>
@@ -126,7 +138,7 @@ const OrdersList: FC<IOrders> = ({ orders }) => {
           </FormGroup>
         </Col>
       </Row>
-      <Table striped>
+      <Table striped responsive>
         <thead>
           <tr>
             <th>#</th>

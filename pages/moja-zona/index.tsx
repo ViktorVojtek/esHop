@@ -27,7 +27,7 @@ const Home: () => JSX.Element = () => {
           <Container>
             <H2 className="text-center">Vitajte vo Vašom konte !</H2>
             <P className="text-center mb-4">
-              Môžte si prezrieť Vaše objednávky, sledovať Váš vernostný program
+              Môžete si prezrieť Vaše objednávky, sledovať Váš vernostný program
               alebo nastaviť svoj účet.
             </P>
             <Orders id={id} />

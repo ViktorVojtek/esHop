@@ -21,6 +21,7 @@ const initialState: IState = {
     lastName: '',
     userId: '',
     token: '',
+    isVerified: false,
   },
 };
 

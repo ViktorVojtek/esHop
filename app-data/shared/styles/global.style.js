@@ -467,4 +467,13 @@ export default createGlobalStyle`
   .table td{
     vertical-align: middle;
   }
+  .popover{
+    .popover-header{
+      ::before{border-bottom-color: #556cd6 !important;}
+    }
+    .arrow{
+      ::before{border-bottom-color: #556cd6 !important;}
+     ::after{border-bottom-color: #556cd6 !important;}
+    }
+  }
 `;

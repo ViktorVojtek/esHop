@@ -215,6 +215,8 @@ const createOrder: (
     giftCards
   );
 
+  console.log(readyData);
+
   const { userId } = readyData;
 
   if (userId) {
@@ -222,9 +224,9 @@ const createOrder: (
       _id: mongoose.Types.ObjectId(userId),
     });
 
-    /* if (!customerExist) {
-      throw new ModError(404, 'Customer does not exist');
-    } */
+    // if(!customerExist) {
+    //   throw new ModError(404, 'Customer does not exist');
+    // }
 
     const custData = customerExist.toObject();
     const updatedCustData = {

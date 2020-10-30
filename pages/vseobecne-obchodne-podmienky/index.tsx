@@ -32,7 +32,8 @@ const VOP: () => JSX.Element = () => (
             <a href="mailto: eshopoffice@kupelecks.sk">
               eshopoffice@kupelecks.sk
             </a>
-            , tel. číslo: 000/000000 (ďalej len „predávajúci“).
+            , tel. číslo: <a href="tel: +421 911 338 828">+421 911 338 828</a>{' '}
+            (ďalej len „predávajúci“).
           </LI>
           <LI>
             Na právne vzťahy predávajúceho so spotrebiteľmi sa vzťahujú okrem

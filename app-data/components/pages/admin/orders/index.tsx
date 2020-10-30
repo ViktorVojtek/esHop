@@ -17,7 +17,6 @@ const Orders: FC = () => {
   }
 
   const { orders } = data;
-  console.log(orders);
   return <OrdersList orders={orders} />;
 };
 
