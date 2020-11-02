@@ -60,6 +60,8 @@ const ProductUI: React.FC<IProductUI> = ({
     toggleModal();
   };
 
+  console.log(_id);
+
   return (
     <Col lg="3" sm="6" key={_id}>
       <ProductItem>
@@ -138,10 +140,9 @@ const ProductsFill: React.FC<IProductsFillProps> = ({
             toggleModal={toggleModal}
             product={item}
             addProduct={addProduct}
-            key={_id}
           />
         ) : (
-          <ServiceUI product={item} key={_id} />
+          <ServiceUI product={item} />
         )}
       </>
     );

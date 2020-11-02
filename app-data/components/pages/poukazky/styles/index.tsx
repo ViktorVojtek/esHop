@@ -64,6 +64,17 @@ export const H4 = styled.h4`
   font-weight: bold;
 `;
 
+export const H1 = styled.h3`
+  color: red;
+  text-align: center;
+  font-size: 3rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin: 4rem 0rem;
+  letter-spacing: 1px;
+  font-family: Franchise-CE;
+`;
+
 export const H3 = styled.h3`
   color: red;
   text-align: center;

@@ -59,7 +59,7 @@ export const A = styled.a`
   }
 `;
 export const Wrapper = styled.div`
-  margin-top: 6rem;
+  margin-top: 120px;
   @media (max-width: 992px) {
     margin-top: 80px;
   }

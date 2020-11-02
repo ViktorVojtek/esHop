@@ -5,7 +5,7 @@ import StayType from './components/StayType';
 import MoneyType from './components/MoneyType';
 import RestaurantType from './components/RestaurantType';
 import {
-  H3,
+  H1,
   Wrapper,
   H4,
   RadioColorGroup,
@@ -101,7 +101,7 @@ const PoukazkyPage: () => JSX.Element = () => {
   return (
     <Wrapper>
       <Container>
-        <H3>Zvoľ typ darčekovej poukážky</H3>
+        <H1>Zvoľ typ darčekovej poukážky</H1>
         <PoukazkaTypes getActiveType={setActiveType} />
         <Form onSubmit={handleSubmit}>
           <div id="voucherContent">

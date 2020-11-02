@@ -1,13 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { FC, useState, useContext } from 'react';
-import {
-  FormGroup,
-  Input,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-} from 'reactstrap';
+import { FormGroup, Input } from 'reactstrap';
 import { useMutation } from '@apollo/react-hooks';
 import { LOGIN_CUSTOMER_MUTATION } from '../../../app-data/graphql/mutation';
 import Link from 'next/link';
@@ -25,9 +18,7 @@ import {
 import { login } from '../../../app-data/lib/authCustomer';
 import { Context } from '../../../app-data/lib/state/Store';
 import ErrorMessage from '../../../app-data/shared/components/ErrorMessage';
-import SuccessMessage from '../../../app-data/shared/components/SucessMessage';
-
-const messages = ['Účet neexistuje!', 'Nastala chyba', 'Email bol odoslaný'];
+import ForgetPasswordModal from '../../../app-data/shared/components/ForgetPasswordModal';
 
 const LogIn: FC = () => {
   const [errorMessage, setErrorMessage] = useState('');
@@ -35,9 +26,6 @@ const LogIn: FC = () => {
   const { dispatch } = useContext(Context);
   const [loginUserMutate] = useMutation(LOGIN_CUSTOMER_MUTATION);
   const [modal, setModal] = useState(false);
-  const [messageId, setMessageId] = useState(0);
-  const [isErrorReset, setIsErrorReset] = useState(false);
-  const [isSuccessReset, setIsSuccessReset] = useState(false);
 
   const toggle = () => setModal(!modal);
 
@@ -94,112 +82,43 @@ const LogIn: FC = () => {
     }
   };
 
-  const handleResetPassword: (
-    event: React.FormEvent<HTMLFormElement>
-  ) => Promise<void> = async (event) => {
-    event.preventDefault();
-    try {
-      const form = event.currentTarget;
-      const email = form.email.value;
-      const response = await fetch('/reset-password', {
-        body: JSON.stringify({
-          email: email,
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        method: 'POST',
-      });
-      if (response.status === 200) {
-        setMessageId(2);
-        setIsErrorReset(false);
-        setIsSuccessReset(true);
-      }
-      if (response.status === 404) {
-        setMessageId(0);
-        setIsErrorReset(true);
-        setIsSuccessReset(false);
-      }
-      if (response.status === 500) {
-        setMessageId(1);
-        setIsErrorReset(true);
-        setIsSuccessReset(false);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   return (
-    <>
-      <Layout>
-        <Wrapper
-          style={{ maxWidth: '400px', minHeight: '65vh', width: '100%' }}
-        >
-          <H1>Moja zóna</H1>
-          <H3>Prihlásenie</H3>
-          <Form onSubmit={handleSubmitLogin}>
-            <FormGroup>
-              <label htmlFor="email">Email</label>
-              <Input id="email" name="email" type="email" />
-            </FormGroup>
-            <FormGroup>
-              <label htmlFor="password">Heslo</label>
-              <Input id="password" name="password" type="password" />
-            </FormGroup>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-              }}
-            >
-              <P>
-                <Link href="registracia">
-                  <RegisterButton>Zaregistrujte sa</RegisterButton>
-                </Link>
-              </P>
-              <P>
-                <RegisterButton onClick={toggle}>
-                  Zabudnuté heslo
-                </RegisterButton>
-              </P>
-            </div>
+    <Layout>
+      <Wrapper style={{ maxWidth: '400px', width: '100%' }}>
+        <H1>Moja zóna</H1>
+        <H3>Prihlásenie</H3>
+        <Form onSubmit={handleSubmitLogin}>
+          <FormGroup>
+            <label htmlFor="email">Email</label>
+            <Input id="email" name="email" type="email" />
+          </FormGroup>
+          <FormGroup>
+            <label htmlFor="password">Heslo</label>
+            <Input id="password" name="password" type="password" />
+          </FormGroup>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}
+          >
+            <P>
+              <Link href="registracia">
+                <RegisterButton>Zaregistrujte sa</RegisterButton>
+              </Link>
+            </P>
+            <P>
+              <RegisterButton onClick={toggle}>Zabudnuté heslo</RegisterButton>
+            </P>
+          </div>
 
-            <ErrorMessage message={errorMessage} open={isError} />
-            <Button type="submit">Prihlásiť</Button>
-          </Form>
-        </Wrapper>
-      </Layout>
-      <div>
-        <Modal isOpen={modal} toggle={toggle}>
-          <ModalHeader toggle={toggle}>Zabudnuté heslo</ModalHeader>
-          <ModalBody>
-            <h5 className="text-center">
-              Zadajte email, na ktorý Vám zašleme adresu na zmenu hesla.
-            </h5>
-            <Form onSubmit={handleResetPassword}>
-              <FormGroup>
-                <label htmlFor="email">Email</label>
-                <Input id="email" name="email" type="email" />
-              </FormGroup>
-
-              <ErrorMessage message={errorMessage} open={isError} />
-
-              <Button className="mb-4" type="submit">
-                Odoslať
-              </Button>
-
-              <ErrorMessage message={messages[messageId]} open={isErrorReset} />
-              <SuccessMessage
-                message={messages[messageId]}
-                open={isSuccessReset}
-              />
-            </Form>
-          </ModalBody>
-        </Modal>
-      </div>
-    </>
+          <ErrorMessage message={errorMessage} open={isError} />
+          <Button type="submit">Prihlásiť</Button>
+        </Form>
+      </Wrapper>
+      <ForgetPasswordModal setModal={setModal} modal={modal} />
+    </Layout>
   );
 };
 

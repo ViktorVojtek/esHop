@@ -1,4 +1,18 @@
 import styled from 'styled-components';
+import { CartArrowDown } from '@styled-icons/fa-solid';
+
+export const Wrapper = styled.div`
+  margin-top: 150px;
+  margin-bottom: 150px;
+  min-height: calc(100vh - 425px);
+`;
+
+export const EmptyCart = styled(CartArrowDown)`
+  color: #00aeef;
+  width: 160px;
+  margin: 0 auto;
+  display: block;
+`;
 
 export const H2 = styled.h2`
   padding: 0 0 3rem 0;
@@ -69,6 +83,39 @@ export const ButtonAddrRemove = styled.button`
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   outline: none !important;
+  &:hover {
+    background-color: #00aeef;
+  }
+`;
+
+export const ButtonLink = styled.a`
+  background-color: #00aeefb8;
+  font-family: MuseoSans-300;
+  text-transform: uppercase;
+  color: #fff !important;
+  padding: 1rem 1.5rem;
+  border-radius: 0.35rem;
+  outline: none !important;
+  border-radius: 6px;
+  border: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+  position: relative;
+  margin-top: 1rem;
+  -webkit-letter-spacing: 0px;
+  -moz-letter-spacing: 0px;
+  -ms-letter-spacing: 0px;
+  letter-spacing: 0px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+  display: inline-block;
+  text-align: center;
+
+  cursor: pointer;
   &:hover {
     background-color: #00aeef;
   }

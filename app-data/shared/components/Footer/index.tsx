@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react';
 import Link from 'next/link';
 
-import NavigationBottom from '../Navigation/NavigationBottom/index';
 import {
   Wrapper,
   Logo,
-  CreatedBy,
   ScrollTop,
   Links,
   A,
@@ -17,6 +15,12 @@ import { scrollTop } from '../../helpers/';
 import MessengerCustomerChat from 'react-messenger-customer-chat';
 import ReactGA from 'react-ga';
 
+import {
+  Facebook,
+  SocialHolder,
+  Instagram,
+  Youtube,
+} from '../../../components/pages/index/ContactUs/style';
 const Footer: () => JSX.Element = () => {
   useEffect(() => {
     ReactGA.initialize('UA-127305873-2');
@@ -24,14 +28,38 @@ const Footer: () => JSX.Element = () => {
   }, []);
   return (
     <Wrapper>
-      <NavigationBottom />
       <BottomDiv>
         <Container fluid>
           <Row>
-            <Col md="6" sm="12">
+            <Col lg="4" sm="12">
               <Logo src="/images/logo.png" alt="Červený Kláštor" />
             </Col>
-            <Col md="6" sm="12">
+            <Col lg="4" sm="12">
+              <SocialHolder>
+                <a
+                  href="https://www.facebook.com/KupeleCervenyKlastorSmerdzonka"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  <Facebook />
+                </a>
+                <a
+                  href="https://www.instagram.com/kupelecervenyklastorsmerdzonka/"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  <Instagram />
+                </a>
+                <a
+                  href="https://www.youtube.com/channel/UCagE9AfD69zG7IOU9SMVgyg"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  <Youtube />
+                </a>
+              </SocialHolder>
+            </Col>
+            <Col lg="4" sm="12">
               <LinksHolder>
                 <Links>
                   <Link href="/pravidla-ochrany-osobnych-udajov">
@@ -44,13 +72,6 @@ const Footer: () => JSX.Element = () => {
                     <A>Všeobecné obchodné podmienky</A>
                   </Link>
                 </Links>
-                <a onClick={() => scrollTop()}>
-                  <ScrollTop
-                    src="/icons/home.png"
-                    alt="home"
-                    className="button-icon-white"
-                  />
-                </a>
               </LinksHolder>
             </Col>
           </Row>

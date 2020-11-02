@@ -15,7 +15,12 @@ export const Wrapper = styled.div`
 `;
 
 export const SocialHolder = styled.div`
-  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @media (max-width: 992px) {
+    margin-top: 1rem;
+  }
 `;
 
 export const Facebook = styled(FacebookWithCircle)`

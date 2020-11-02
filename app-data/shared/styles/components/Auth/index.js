@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
   justify-content: center;
   flex-direction: column;
   margin: 0 auto;
-  margin-top: 8rem;
+  min-height: calc(100vh - 125px);
 `;
 
 export const Form = styled.form`
@@ -22,6 +22,7 @@ export const H4 = styled.h4`
   color: black;
   font-weight: bold;
   margin-bottom: 1.5rem;
+  margin-top: 120px;
 `;
 
 export const Button = styled.button`
@@ -42,6 +43,39 @@ export const Button = styled.button`
   user-select: none;
   transition: all 0.3s ease-out;
   width: 100%;
+  &:hover {
+    background-color: #00aeef;
+  }
+`;
+
+export const ButtonLink = styled.a`
+  background-color: #00aeefb8;
+  font-family: MuseoSans-300;
+  text-transform: uppercase;
+  color: #fff !important;
+  padding: 1rem 1.5rem;
+  border-radius: 0.35rem;
+  outline: none !important;
+  border-radius: 6px;
+  border: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+  position: relative;
+  margin-top: 1rem;
+  -webkit-letter-spacing: 0px;
+  -moz-letter-spacing: 0px;
+  -ms-letter-spacing: 0px;
+  letter-spacing: 0px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+  display: inline-block;
+  text-align: center;
+
+  cursor: pointer;
   &:hover {
     background-color: #00aeef;
   }

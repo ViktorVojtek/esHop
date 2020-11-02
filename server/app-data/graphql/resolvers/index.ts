@@ -30,6 +30,8 @@ import createCustomer from './mutation/CreateCustomer';
 import updateCustomer from './mutation/UpdateCustomer';
 import logInCustomer from './mutation/LogInCustomer';
 import removeCustomer from './mutation/RemoveCustomer';
+import changeCustomerPassword from './mutation/ChangeCustomerPassword';
+import changeCustomerZonePassword from './mutation/ChangeCustomerZonePassword';
 
 import createDeliveryMethode from './mutation/CreateDeliveryMethode';
 import removeDeliveryMethode from './mutation/RemoveDeliveryMethode';
@@ -60,6 +62,8 @@ import removeService from './mutation/RemoveService';
 
 import createSubCategory from './mutation/CreateSubCategory';
 import removeSubCategory from './mutation/RemoveSubCategory';
+
+import addToMarketingList from './mutation/AddToMarketingList';
 
 const resolvers = {
   Object: ObjectScalarType,
@@ -114,6 +118,10 @@ const resolvers = {
       logInCustomer(root, args, ctx),
     removeCustomer: (root: any, args: { id: string }, ctx: any) =>
       removeCustomer(root, args, ctx),
+    changeCustomerPassword: (root: any, args: { id: string }, ctx: any) =>
+      changeCustomerPassword(root, args, ctx),
+    changeCustomerZonePassword: (root: any, args: { id: string }, ctx: any) =>
+      changeCustomerZonePassword(root, args, ctx),
 
     createDeliveryMethode: async (root: any, args: any, ctx: any) =>
       createDeliveryMethode(root, args, ctx),
@@ -168,6 +176,8 @@ const resolvers = {
       registerUser(root, args, ctx),
     removeProduct: async (root: any, args: any, ctx: any) =>
       removeProduct(root, args, ctx),
+    addToMarketingList: async (root: any, args: any, ctx: any) =>
+      addToMarketingList(root, args, ctx),
   },
 };
 

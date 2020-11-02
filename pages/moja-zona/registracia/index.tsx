@@ -8,13 +8,13 @@ import {
   Input,
   Row,
   Col,
-  Container,
   Modal,
-  ModalHeader,
   ModalBody,
-  ModalFooter,
 } from 'reactstrap';
-import { REGISTER_CUSTOMER_MUTATION } from '../../../app-data/graphql/mutation';
+import {
+  REGISTER_CUSTOMER_MUTATION,
+  ADD_TO_MARKETING_LIST,
+} from '../../../app-data/graphql/mutation';
 import Layout from '../../../app-data/shared/components/Layout/Site.layout';
 import { withSetCart } from '../../../app-data/lib/state/Reducer';
 
@@ -31,22 +31,15 @@ import { Context } from '../../../app-data/lib/state/Store';
 import { Danger } from '../../../app-data/shared/components/LoginRegisterModal/styles';
 
 const Register: FC = () => {
-  const [errorMessage, setErrorMessage] = useState('');
   const [userExist, setUserExist] = useState(false);
   const [isMatchPass, setIsMatchPass] = useState(true);
-  const [isOlder, setIsOlder] = useState(false);
   const { dispatch } = useContext(Context);
   const passwordEl = useRef(null);
   const subscribeEl = useRef(null);
+  const marketingEl = useRef(null);
   const [modal, setModal] = useState(false);
   const [registerUserMutate] = useMutation(REGISTER_CUSTOMER_MUTATION);
-
-  const handleSetErrorMessage: (message: string) => void = (message) => {
-    const parsedMessage: string = message.replace('GraphQL error:', ' ').trim();
-
-    setErrorMessage(parsedMessage);
-    dispatch({ type: 'SET_MODAL', payload: true });
-  };
+  const [addToMarketingList] = useMutation(ADD_TO_MARKETING_LIST);
 
   const toggle = () => setModal(!modal);
 
@@ -87,6 +80,19 @@ const Register: FC = () => {
             method: 'POST',
           });
         }
+        if (marketingEl.current.checked) {
+          const response = await addToMarketingList({
+            variables: {
+              marketingListData: {
+                email,
+                tel,
+                firstName,
+                lastName,
+              },
+            },
+          });
+          console.log('response', response);
+        }
         toggle();
       } catch (err) {
         console.log(err);
@@ -116,7 +122,7 @@ const Register: FC = () => {
         </ModalBody>
       </Modal>
       <Wrapper>
-        <H4 className="mt-4">Registrácia</H4>
+        <H4>Registrácia</H4>
         <Form onSubmit={handleSubmitRegister}>
           <Row form>
             <Col md={6}>
@@ -189,12 +195,12 @@ const Register: FC = () => {
               <Link href="/pravidla-ochrany-osobnych-udajov">
                 <a target="_blank">Súhlasím</a>
               </Link>{' '}
-              so zasielaním newslettrov
+              so zasielaním noviniek
             </Label>
           </FormGroup>
           <FormGroup className="mb-2" check>
             <Label check>
-              <Input type="checkbox" />{' '}
+              <Input type="checkbox" innerRef={marketingEl} />{' '}
               <Link href="/pravidla-ochrany-osobnych-udajov">
                 <a target="_blank">Súhlasím</a>
               </Link>{' '}

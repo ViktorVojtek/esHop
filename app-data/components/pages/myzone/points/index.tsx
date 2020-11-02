@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { useQuery } from 'react-apollo';
 import { CUSTOMER_QUERY } from '../../../../graphql/query';
-import { Spinner, Input, Form, Label, FormGroup, Button } from 'reactstrap';
+import { Spinner, Progress, Row, Col } from 'reactstrap';
 import { P, H2 } from '../mojaZona';
 
 type IPoints = {
@@ -24,16 +24,36 @@ const Points: FC<IPoints> = ({ id }) => {
 
   const { customer } = data;
 
-  console.log(customer);
-
   return (
-    <>
-      <H2>Vernostný program</H2>
-      <P>
-        <strong>Počet bodov: </strong>
-        {customer.customerPoints}
-      </P>
-    </>
+    <div style={{ marginTop: '36px', marginBottom: '36px' }}>
+      <H2 className="mt4">Vernostný program</H2>
+      <Row>
+        <Col md={4}>
+          <P className="mt-2">
+            <strong>Počet bodov: </strong>
+            <span
+              style={{ color: '#01aeef', fontSize: '24px', fontWeight: 'bold' }}
+            >
+              {customer.customerPoints}
+            </span>
+          </P>
+        </Col>
+        <Col md={4}>
+          <div className="text-center">Zľava 10%</div>
+          <Progress
+            className="mb-4"
+            value={`${customer.customerPoints / 100}`}
+          />
+        </Col>
+        <Col md={4}>
+          <div className="text-center">Zľava 20%</div>
+          <Progress
+            className="mb-4"
+            value={`${customer.customerPoints / 200}`}
+          />
+        </Col>
+      </Row>
+    </div>
   );
 };
 

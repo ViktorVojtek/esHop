@@ -296,6 +296,38 @@ export const UPDATE_CUSTOMER_MUTATION = gql`
   }
 `;
 
+export const CHANGE_CUSTOMER_PASSWORD_MUTATION = gql`
+  mutation changeCustomerPassword($token: String!, $password: String!) {
+    changeCustomerPassword(token: $token, password: $password) {
+      _id
+      customerPoints
+      email
+      tel
+      firstName
+      lastName
+      role
+    }
+  }
+`;
+
+export const CHANGE_CUSTOMERZONE_PASSWORD_MUTATION = gql`
+  mutation changeCustomerZonePassword(
+    $id: String!
+    $oldPass: String!
+    $newPass: String!
+  ) {
+    changeCustomerZonePassword(id: $id, oldPass: $oldPass, newPass: $newPass) {
+      _id
+      customerPoints
+      email
+      tel
+      firstName
+      lastName
+      role
+    }
+  }
+`;
+
 export const REMOVE_CUSTOMER_MUTATION = gql`
   mutation removeCustomer($id: String!) {
     removeCustomer(id: $id)
@@ -331,5 +363,17 @@ export const REMOVE_CURRENCY_MUTATION = gql`
 export const REMOVE_SUBCATEGORY_MUTATION = gql`
   mutation removeSubCategory($_id: String!) {
     removeSubCategory(_id: $_id)
+  }
+`;
+
+export const ADD_TO_MARKETING_LIST = gql`
+  mutation addToMarketingList($marketingListData: MarketingListInput!) {
+    addToMarketingList(marketingListData: $marketingListData) {
+      _id
+      email
+      tel
+      firstName
+      lastName
+    }
   }
 `;

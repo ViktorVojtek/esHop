@@ -3,6 +3,7 @@ import Currency from './Currency';
 import Customer from './Customer';
 import DeliveryMethode from './DeliveryMethode';
 import Discount from './Discount';
+import MarketingList from './MarketingList';
 import root from './root';
 import Order from './Order';
 import PaymentMethode from './PaymentMethode';
@@ -17,6 +18,7 @@ const typeDefs = [
   Customer,
   DeliveryMethode,
   Discount,
+  MarketingList,
   root,
   Order,
   PaymentMethode,

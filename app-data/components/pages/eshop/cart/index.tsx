@@ -3,21 +3,25 @@ import Link from 'next/link';
 import { Container } from 'reactstrap';
 
 import { Context } from '../../../../lib/state/Store';
-import Wrapper from '../../../../shared/styles/components/Wrapper/Wrapper.style';
 import CartContent from './components/CartContent';
 import { CartProduct } from '../../../../shared/types/Store.types';
+import { ButtonLink, EmptyCart, Wrapper } from './styles/cart.style';
 
 const CartEmpty: () => JSX.Element = () => (
-  <div className="mx-auto w-50">
-    <h2 className="text-center">Nákupný košík je prázdny</h2>
-    <p className="text-center">
-      Let's go{' '}
+  <Wrapper>
+    <Container className="text-center">
+      <h2 className="text-center font-weight-bold mt-4 mb-4">
+        Nákupný košík je prázdny
+      </h2>
+      <EmptyCart />
+      <h4 className="text-center font-weight-bold mt-4 mb-4">
+        Vyzerá to, že ste si nepridali žiaden produkt do košíka.
+      </h4>
       <Link href="/eshop">
-        <a>check</a>
+        <ButtonLink>Nakupovať</ButtonLink>
       </Link>{' '}
-      our products.
-    </p>
-  </div>
+    </Container>
+  </Wrapper>
 );
 
 const CartBodyComponent: FC = () => {

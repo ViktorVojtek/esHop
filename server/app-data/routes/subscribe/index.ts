@@ -1,5 +1,7 @@
 export default async (req, res) => {
   const { email, fname, lname, tel } = req.body;
+
+  console.log(email);
   try {
     const API_KEY = 'a2bb51bbfd2f36dd99cec19e22256ee3-us17';
     const LIST_ID = '447d8cc287';

@@ -9,10 +9,9 @@ import styled from 'styled-components';
 import { Form, Button } from '../../app-data/shared/styles/components/Auth';
 import ErrorMessage from '../../app-data/shared/components/ErrorMessage';
 import SuccessMessage from '../../app-data/shared/components/SucessMessage';
-import { red } from '@material-ui/core/colors';
 
 const Wrapper = styled.div`
-  min-height: calc(100vh - 349px);
+  min-height: calc(100vh - 265px);
   margin-top: 140px;
 `;
 

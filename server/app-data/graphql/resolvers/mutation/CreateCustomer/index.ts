@@ -85,8 +85,6 @@ export default async (root: any, args: any, ctx: any) => {
       });
     });
 
-    console.log(returnCustomerData);
-
     return returnCustomerData;
   } catch (err) {
     throw new Error(err.message);

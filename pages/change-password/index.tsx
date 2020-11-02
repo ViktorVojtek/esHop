@@ -6,14 +6,19 @@ import { P, H2 } from '../../app-data/components/pages/myzone/mojaZona';
 import { Container, FormGroup, Input, Label } from 'reactstrap';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
-import { Form, Button } from '../../app-data/shared/styles/components/Auth';
-import ErrorMessage from '../../app-data/shared/components/ErrorMessage';
-import SuccessMessage from '../../app-data/shared/components/SucessMessage';
-import { red } from '@material-ui/core/colors';
+import {
+  Form,
+  Button,
+  ButtonLink,
+} from '../../app-data/shared/styles/components/Auth';
 import { Danger } from '../../app-data/shared/components/LoginRegisterModal/styles';
+import { useMutation } from 'react-apollo';
+import { CHANGE_CUSTOMER_PASSWORD_MUTATION } from '../../app-data/graphql/mutation';
+import Link from 'next/link';
+import ErrorMessage from '../../app-data/shared/components/ErrorMessage';
 
 const Wrapper = styled.div`
-  min-height: calc(100vh - 349px);
+  min-height: calc(100vh - 265px);
   margin-top: 140px;
 `;
 
@@ -24,20 +29,18 @@ const FormHolder = styled.div`
   margin-top: 20px;
 `;
 
-const messages = [
-  'Účet neexistuje!',
-  'Účet už bol verifikovaný!',
-  'Verifikačný email bol odoslaný!',
-];
-
 const ChangePassword: () => JSX.Element = () => {
   const router = useRouter();
   const { query } = router;
-  const [messageId, setMessageId] = useState(0);
-  const [isError, setIsError] = useState(false);
-  const [isSuccess, setisSuccess] = useState(false);
   const passwordEl = useRef(null);
+  const submitEl = useRef(null);
   const [isMatchPass, setIsMatchPass] = useState(true);
+  const [success, setSuccess] = useState(false);
+  const [error, isError] = useState(false);
+
+  const [changeCustomerPassword] = useMutation(
+    CHANGE_CUSTOMER_PASSWORD_MUTATION
+  );
 
   let token = query.token;
 
@@ -47,40 +50,26 @@ const ChangePassword: () => JSX.Element = () => {
     event.preventDefault();
     try {
       const form = event.currentTarget;
-      const email = form.email.value;
-      const response = await fetch('/resend', {
-        body: JSON.stringify({
-          email: email,
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        method: 'POST',
+      const password = form.password.value;
+      submitEl.current.setAttribute('disabled', 'disabled');
+      const response = await changeCustomerPassword({
+        variables: { token, password },
       });
-      if (response.status === 200) {
-        setMessageId(2);
-        setIsError(false);
-        setisSuccess(true);
-      }
-      if (response.status === 404) {
-        setMessageId(0);
-        setIsError(true);
-        setisSuccess(false);
-      }
-      if (response.status === 409) {
-        setMessageId(1);
-        setIsError(true);
-        setisSuccess(false);
-      }
+      setSuccess(true);
     } catch (err) {
-      console.log(err);
+      isError(true);
+      submitEl.current.removeAttribute('disabled');
     }
   };
 
   const matchPassoword = (e) => {
-    e.target.value === passwordEl.current.value
-      ? setIsMatchPass(true)
-      : setIsMatchPass(false);
+    if (e.target.value === passwordEl.current.value) {
+      setIsMatchPass(true);
+      submitEl.current.removeAttribute('disabled');
+    } else {
+      setIsMatchPass(false);
+      submitEl.current.setAttribute('disabled', 'disabled');
+    }
   };
   return (
     <>
@@ -98,37 +87,45 @@ const ChangePassword: () => JSX.Element = () => {
               kliknite v zóne <strong>Príhlasenie</strong> na{' '}
               <strong>Zabudnuté heslo</strong>
             </P>
-            <p>{token}</p>
-            <FormHolder>
-              <Form onSubmit={handleSubmitForm} className="mb-4">
-                <FormGroup className="mb-2">
-                  <Label htmlFor="password">Heslo</Label>
-                  <Input
-                    id="password"
-                    name="password"
-                    type="password"
-                    innerRef={passwordEl}
-                    required
-                    autoComplete="new-password"
-                  />
-                </FormGroup>
-                <FormGroup className="mb-2">
-                  <Label htmlFor="retypePassword">Zopakovať heslo</Label>
-                  <Input
-                    id="retypePassword"
-                    name="retypePassword"
-                    type="password"
-                    onChange={matchPassoword}
-                    required
-                  />
-                </FormGroup>
-                {!isMatchPass && <Danger>Hesla sa nezhodujú</Danger>}
-                <Button type="submit">Odoslať</Button>
-              </Form>
-
-              <ErrorMessage message={messages[messageId]} open={isError} />
-              <SuccessMessage message={messages[messageId]} open={isSuccess} />
-            </FormHolder>
+            {!success ? (
+              <FormHolder>
+                <Form onSubmit={handleSubmitForm} className="mb-4">
+                  <FormGroup className="mb-2">
+                    <Label htmlFor="password">Heslo</Label>
+                    <Input
+                      id="password"
+                      name="password"
+                      type="password"
+                      innerRef={passwordEl}
+                      required
+                      autoComplete="new-password"
+                    />
+                  </FormGroup>
+                  <FormGroup className="mb-2">
+                    <Label htmlFor="retypePassword">Zopakovať heslo</Label>
+                    <Input
+                      id="retypePassword"
+                      name="retypePassword"
+                      type="password"
+                      onChange={matchPassoword}
+                      required
+                    />
+                  </FormGroup>
+                  {!isMatchPass && <Danger>Hesla sa nezhodujú</Danger>}
+                  <ErrorMessage message="Neplatný token" open={error} />
+                  <Button type="submit" ref={submitEl}>
+                    Odoslať
+                  </Button>
+                </Form>
+              </FormHolder>
+            ) : (
+              <div className="text-center">
+                <H2>Zmena hesla prebehla úspešne</H2>
+                <Link href="moja-zona/prihlasenie">
+                  <ButtonLink>Prihlásenie</ButtonLink>
+                </Link>
+              </div>
+            )}
           </Container>
         </Wrapper>
       </Layout>

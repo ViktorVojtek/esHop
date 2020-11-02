@@ -1,4 +1,5 @@
 import styled, { StyledComponent } from 'styled-components';
+import { Home } from '@styled-icons/evaicons-solid';
 
 export const Wrapper: StyledComponent<'div', any, {}, never> = styled.div`
   width: 100%;
@@ -8,9 +9,9 @@ export const Wrapper: StyledComponent<'div', any, {}, never> = styled.div`
 `;
 
 export const BottomDiv: StyledComponent<'div', any, {}, never> = styled.div`
-  background-color: #1f2126;
+  border-top: 1px solid #00aeef;
   padding: 1rem 1rem;
-  @media (max-width: 768px) {
+  @media (max-width: 992px) {
     text-align: center;
     padding: 2rem 0rem;
   }
@@ -34,7 +35,7 @@ export const LinksHolder = styled.div`
   justify-content: flex-end;
   height: 100%;
   align-items: center;
-  @media (max-width: 768px) {
+  @media (max-width: 992px) {
     justify-content: center;
     flex-direction: column;
     margin-top: 1rem;
@@ -48,16 +49,18 @@ export const Links = styled.div`
   align-items: center;
 `;
 export const A = styled.a`
-  color: white !important;
+  color: #00aeef !important;
   cursor: pointer;
+  font-weight: bold;
   &:hover {
     text-decoration: underline !important;
   }
 `;
 
-export const ScrollTop: StyledComponent<'img', any, {}, never> = styled.img`
-  width: 32px;
-  height: 32px;
+export const ScrollTop = styled(Home)`
+  color: #00aeef;
+  width: 40px;
+  height: 40px;
   @media (max-width: 768px) {
     margin-top: 1rem;
   }

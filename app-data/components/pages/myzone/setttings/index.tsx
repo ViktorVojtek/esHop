@@ -1,7 +1,8 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useRef, useState } from 'react';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { CUSTOMER_QUERY } from '../../../../graphql/query';
 import { REMOVE_CUSTOMER_MUTATION } from '../../../../graphql/mutation';
+import { CHANGE_CUSTOMERZONE_PASSWORD_MUTATION } from '../../../../graphql/mutation';
 import {
   Spinner,
   Input,
@@ -19,6 +20,9 @@ import {
 import { P, H2 } from '../mojaZona';
 import Router from 'next/router';
 import cookie from 'js-cookie';
+import { Danger } from '../../../../shared/components/LoginRegisterModal/styles';
+import { useSnackbar } from 'notistack';
+import { logout } from '../../../../lib/auth';
 
 type ISettings = {
   id: string;
@@ -26,9 +30,16 @@ type ISettings = {
 
 const Settings: FC<ISettings> = ({ id }) => {
   const [modal, setModal] = useState(false);
-
+  const oldPassEl = useRef(null);
+  const submitEl = useRef(null);
+  const passwordEl = useRef(null);
   const toggle = () => setModal(!modal);
   const [removeCutomer] = useMutation(REMOVE_CUSTOMER_MUTATION);
+  const [isMatchPass, setIsMatchPass] = useState(true);
+  const [changeCustomerPassword] = useMutation(
+    CHANGE_CUSTOMERZONE_PASSWORD_MUTATION
+  );
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const { error, loading, data } = useQuery(CUSTOMER_QUERY, {
     variables: { id: id },
     fetchPolicy: 'network-only',
@@ -57,6 +68,46 @@ const Settings: FC<ISettings> = ({ id }) => {
       Router.push('/moja-zona/prihlasenie');
     } catch (err) {
       console.log(err);
+    }
+  };
+
+  const handleChangePassword: (
+    event: React.FormEvent<HTMLFormElement>
+  ) => Promise<void> = async (event) => {
+    event.preventDefault();
+    try {
+      const form = event.currentTarget;
+      const oldPassword = form.oldPassword.value;
+      const newPassword = form.newPassword.value;
+      submitEl.current.setAttribute('disabled', 'disabled');
+      const response = await changeCustomerPassword({
+        variables: { id, oldPass: oldPassword, newPass: newPassword },
+      });
+      enqueueSnackbar('Heslo bolo úspešne zmenené', {
+        variant: 'success',
+      });
+      form.reset();
+    } catch (err) {
+      //isError(true);
+      const parsedMessage: string = err.message
+        .replace('GraphQL error:', ' ')
+        .trim();
+      if (parsedMessage === 'Customer not found') {
+        enqueueSnackbar('Nesprávne používateľske heslo', {
+          variant: 'error',
+        });
+      }
+      submitEl.current.removeAttribute('disabled');
+    }
+  };
+
+  const matchPassoword = (e) => {
+    if (e.target.value === passwordEl.current.value) {
+      setIsMatchPass(true);
+      submitEl.current.removeAttribute('disabled');
+    } else {
+      setIsMatchPass(false);
+      submitEl.current.setAttribute('disabled', 'disabled');
     }
   };
 
@@ -97,7 +148,7 @@ const Settings: FC<ISettings> = ({ id }) => {
           <P>
             <strong>Zmena hesla:</strong>
           </P>
-          <Form style={{ maxWidth: '400px' }}>
+          <Form style={{ maxWidth: '400px' }} onSubmit={handleChangePassword}>
             <FormGroup>
               <Label for="oldPassword">Vaše heslo</Label>
               <Input
@@ -105,6 +156,8 @@ const Settings: FC<ISettings> = ({ id }) => {
                 name="password"
                 id="oldPassword"
                 placeholder="Zadajte heslo"
+                required
+                innerRef={oldPassEl}
               />
             </FormGroup>
             <FormGroup>
@@ -114,6 +167,8 @@ const Settings: FC<ISettings> = ({ id }) => {
                 name="password"
                 id="newPassword"
                 placeholder="Zadajte nové heslo"
+                innerRef={passwordEl}
+                required
               />
             </FormGroup>
             <FormGroup>
@@ -123,9 +178,14 @@ const Settings: FC<ISettings> = ({ id }) => {
                 name="password"
                 id="newPasswordCheck"
                 placeholder="Zopakujte nové heslo"
+                onChange={matchPassoword}
+                required
               />
             </FormGroup>
-            <Button>Zmeniť heslo</Button>
+            {!isMatchPass && <Danger>Hesla sa nezhodujú</Danger>}
+            <Button type="submit" innerRef={submitEl}>
+              Zmeniť heslo
+            </Button>
           </Form>
         </Col>
       </Row>

@@ -283,87 +283,95 @@ const BillingInfo: (props: IProps) => JSX.Element = (props) => {
         </Label>
       </FormGroup>
       <Collapse isOpen={isOpenAdress}>
-        <FormGroup>
-          <Label>Adresa dodania</Label>
-          <Input
-            type="text"
-            nam="street"
-            id="streetDelivery"
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              const optionalAddress = event.currentTarget.value;
-
-              handleData({
-                ...data,
-                optionalAddress,
-              });
-            }}
-            value={optionalAddress || ''}
-          />
-        </FormGroup>
-        <Row form>
-          <Col md={6}>
+        {isOpenAdress && (
+          <>
             <FormGroup>
-              <Label htmlFor="postCodeDelivery">PSČ</Label>
+              <Label>Adresa dodania</Label>
               <Input
                 type="text"
-                name="postCode"
-                id="postCodeDelivery"
+                nam="street"
+                id="streetDelivery"
+                required
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  const optionalPostalCode = event.currentTarget.value;
+                  const optionalAddress = event.currentTarget.value;
 
                   handleData({
                     ...data,
-                    optionalPostalCode,
+                    optionalAddress,
                   });
                 }}
-                value={optionalPostalCode || ''}
+                value={optionalAddress || ''}
               />
             </FormGroup>
-          </Col>
-          <Col md={6}>
+            <Row form>
+              <Col md={6}>
+                <FormGroup>
+                  <Label htmlFor="postCodeDelivery">PSČ</Label>
+                  <Input
+                    type="text"
+                    name="postCode"
+                    id="postCodeDelivery"
+                    required
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                      const optionalPostalCode = event.currentTarget.value;
+
+                      handleData({
+                        ...data,
+                        optionalPostalCode,
+                      });
+                    }}
+                    value={optionalPostalCode || ''}
+                  />
+                </FormGroup>
+              </Col>
+              <Col md={6}>
+                <FormGroup>
+                  <Label htmlFor="cityDelivery">Mesto</Label>
+                  <Input
+                    type="text"
+                    name="city"
+                    id="cityDelivery"
+                    required
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                      const optionalCity = event.currentTarget.value;
+
+                      handleData({
+                        ...data,
+                        optionalCity,
+                      });
+                    }}
+                    value={optionalCity || ''}
+                  />
+                </FormGroup>
+              </Col>
+            </Row>
             <FormGroup>
-              <Label htmlFor="cityDelivery">Mesto</Label>
+              <Label htmlFor="countryDelivery">Štát</Label>
               <Input
-                type="text"
-                name="city"
-                id="cityDelivery"
+                type="select"
+                name="country"
+                id="countryDelivery"
+                required
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  const optionalCity = event.currentTarget.value;
+                  const optionalState = event.currentTarget.value;
 
                   handleData({
                     ...data,
-                    optionalCity,
+                    optionalState,
                   });
                 }}
-                value={optionalCity || ''}
-              />
+                defaultValue={0}
+              >
+                <option value={0}>Zvoľte štát</option>
+                {countryData.map((item) => (
+                  <option value={item.value} key={item.value}>
+                    {item.text}
+                  </option>
+                ))}
+              </Input>
             </FormGroup>
-          </Col>
-        </Row>
-        <FormGroup>
-          <Label htmlFor="countryDelivery">Štát</Label>
-          <Input
-            type="select"
-            name="country"
-            id="countryDelivery"
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              const optionalState = event.currentTarget.value;
-
-              handleData({
-                ...data,
-                optionalState,
-              });
-            }}
-            defaultValue={0}
-          >
-            <option value={0}>Zvoľte štát</option>
-            {countryData.map((item) => (
-              <option value={item.value} key={item.value}>
-                {item.text}
-              </option>
-            ))}
-          </Input>
-        </FormGroup>
+          </>
+        )}
       </Collapse>
       <FormGroup>
         <Label htmlFor="phone">Telefónne číslo *</Label>

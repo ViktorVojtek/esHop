@@ -33,6 +33,12 @@ const rootTypeDefs = gql`
     updateCustomer(id: String!, customerData: CustomerRegInput!): Customer
     logInCustomer(customerData: CustomerLoginInput!): CustomerLogged
     removeCustomer(id: String!): String
+    changeCustomerPassword(token: String!, password: String!): Customer
+    changeCustomerZonePassword(
+      id: String!
+      oldPass: String!
+      newPass: String!
+    ): Customer
 
     createDeliveryMethode(
       isEnvelopeSize: Boolean
@@ -67,6 +73,8 @@ const rootTypeDefs = gql`
     createService(serviceInput: ServiceInput!): Service
     updateService(_id: String!, serviceInput: ServiceInput!): Service
     removeService(_id: String!): String
+
+    addToMarketingList(marketingListData: MarketingListInput!): MarketingList
   }
 
   schema {

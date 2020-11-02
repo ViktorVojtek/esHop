@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Collapse } from 'reactstrap';
 import styled from 'styled-components';
 
