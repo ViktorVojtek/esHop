@@ -3,13 +3,21 @@ import { FilePdf } from '@styled-icons/fa-solid';
 
 export const Wrapper = styled.div`
   margin-top: 160px;
+  min-height: calc(100vh - 317px);
 `;
 
 export const P = styled.p`
   font-family: MuseoSans-300;
+  margin-top: 1rem;
 `;
 
-export const H2 = styled.h3``;
+export const H2 = styled.h3`
+  margin-top: 32px;
+`;
+
+export const H6 = styled.h6`
+  margin-top: 32px;
+`;
 
 export const PDF = styled(FilePdf)`
   width: 30px;

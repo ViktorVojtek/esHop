@@ -29,7 +29,7 @@ type ServiceData = {
   count: number;
 };
 
-type IProductToCartData = {
+export type IProductToCartData = {
   cardColor: string;
   priceValue: number;
   text: string;
@@ -105,7 +105,9 @@ const PoukazkyPage: () => JSX.Element = () => {
         <PoukazkaTypes getActiveType={setActiveType} />
         <Form onSubmit={handleSubmit}>
           <div id="voucherContent">
-            {activeType === 0 && <StayType handleProcedure={handleProcedure} />}
+            {activeType === 0 && (
+              <StayType handleProcedure={handleProcedure} formData={formData} />
+            )}
             {activeType === 2 && <MoneyType handleChange={handleChange} />}
           </div>
           <Row className="mt-8">
@@ -191,7 +193,7 @@ const PoukazkyPage: () => JSX.Element = () => {
                   placeholder="Zadajte text"
                   id="frontText"
                   required
-                  maxlength="140"
+                  maxLength={140}
                   onChange={(e) => {
                     handleChangeTextArea(e);
                     handleChange(e);

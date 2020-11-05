@@ -8,9 +8,9 @@ export type ProductImage = {
 };
 
 export type ProductPrice = {
-  currency: string;
-  currencySign: string;
-  discount: number;
+  currency?: string;
+  currencySign?: string;
+  discount?: number;
   value: number;
 };
 

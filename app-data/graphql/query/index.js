@@ -241,6 +241,7 @@ export const CUSTOMERS_QUERY = gql`
       customerPoints
       firstName
       lastName
+      marketing
     }
   }
 `;
@@ -255,6 +256,7 @@ export const CUSTOMER_QUERY = gql`
       firstName
       lastName
       customerPoints
+      marketing
     }
   }
 `;
@@ -289,6 +291,7 @@ export const ORDER_QUERY = gql`
       totalPrice
       orderId
       created_at
+      invoiceId
     }
   }
 `;

@@ -12,6 +12,7 @@ import {
   Button,
   H3,
   H1,
+  H4,
   RegisterButton,
   P,
 } from '../../../app-data/shared/styles/components/Auth';
@@ -52,9 +53,6 @@ const LogIn: FC = () => {
       const email = form.email.value;
       const password = form.password.value;
 
-      console.log(email);
-      console.log(password);
-
       const response = await loginUserMutate({
         variables: {
           customerData: {
@@ -85,8 +83,7 @@ const LogIn: FC = () => {
   return (
     <Layout>
       <Wrapper style={{ maxWidth: '400px', width: '100%' }}>
-        <H1>Moja zóna</H1>
-        <H3>Prihlásenie</H3>
+        <H4 className="text-center">Prihlásenie</H4>
         <Form onSubmit={handleSubmitLogin}>
           <FormGroup>
             <label htmlFor="email">Email</label>

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import Head from 'next/head';
 import { withAuthSyncCustomer } from '../../app-data/lib/authCustomer';
 import Layout from '../../app-data/shared/components/Layout/Site.layout';
@@ -11,11 +11,21 @@ import {
 import { Container } from 'reactstrap';
 import Orders from '../../app-data/components/pages/myzone/orders';
 import Points from '../../app-data/components/pages/myzone/points';
-import Settings from '../../app-data/components/pages/myzone/setttings';
+import SettingsPage from '../../app-data/components/pages/myzone/setttings';
+import { makeStyles, Paper, Tab, Tabs } from '@material-ui/core';
+import ShoppingCart from '@material-ui/icons/ShoppingCart';
+import CardGiftcard from '@material-ui/icons/CardGiftcard';
+import Settings from '@material-ui/icons/Settings';
 
 const Home: () => JSX.Element = () => {
+  const classes = useStyles1();
   const name = `${cookie.get('customerFName')} ${cookie.get('customerLName')}`;
   const id = cookie.get('customerId');
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+    setValue(newValue);
+  };
   return (
     <>
       <Head>
@@ -30,14 +40,45 @@ const Home: () => JSX.Element = () => {
               Môžete si prezrieť Vaše objednávky, sledovať Váš vernostný program
               alebo nastaviť svoj účet.
             </P>
-            <Orders id={id} />
-            <Points id={id} />
-            <Settings id={id} />
+            <Paper square className={classes.root}>
+              <Tabs
+                value={value}
+                onChange={handleChange}
+                variant="fullWidth"
+                indicatorColor="primary"
+                textColor="primary"
+                className={classes.tab}
+              >
+                <Tab icon={<ShoppingCart />} label="Objednávky" />
+                <Tab icon={<CardGiftcard />} label="Vernostný program" />
+                <Tab icon={<Settings />} label="Nastavenia" />
+              </Tabs>
+            </Paper>
+            {value === 0 && <Orders id={id} />}
+            {value === 1 && <Points id={id} />}
+            {value === 2 && <SettingsPage id={id} />}
           </Container>
         </Wrapper>
       </Layout>
     </>
   );
 };
+
+const useStyles1 = makeStyles({
+  root: {
+    flexGrow: 1,
+    maxWidth: 500,
+    margin: '0 auto',
+    marginTop: '32px',
+  },
+  tab: {
+    '& button': {
+      outline: 'none',
+    },
+    '& span': {
+      textTransform: 'capitalize',
+    },
+  },
+});
 
 export default withAuthSyncCustomer(Home);

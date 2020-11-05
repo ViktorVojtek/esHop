@@ -156,7 +156,7 @@ const createOrder: (
     products: filteredProducts,
   };
 
-  readyData.products.forEach((product) => {
+  readyData.products.forEach((product, index) => {
     if (product.type !== 'poukazka') {
       product.price = product.variant.discount
         ? product.variant.price.value -
@@ -173,6 +173,7 @@ const createOrder: (
       product.totalPrice = formatPrice(product.totalPrice);
       product.totalPriceVat = formatPrice(product.totalPriceVat);
       product.totalPriceWithoutVat = formatPrice(product.totalPriceWithoutVat);
+      product.productNumber = index + 1;
     }
   });
 
@@ -180,7 +181,8 @@ const createOrder: (
     (product) => product.variant === undefined
   );
 
-  giftCards.forEach((card) => {
+  giftCards.forEach((card, index) => {
+    card.cardNumber = index + 1;
     card.services.length > 0
       ? (card.areServices = true)
       : (card.areServices = false);
@@ -190,6 +192,8 @@ const createOrder: (
     ...readyData,
     giftCards,
     isDeliveryAddress: readyData.optionalAddress != '',
+    areProducts: readyData.products.length > 0,
+    areGiftCards: giftCards.length > 0,
   };
 
   var options = {

@@ -64,6 +64,7 @@ import createSubCategory from './mutation/CreateSubCategory';
 import removeSubCategory from './mutation/RemoveSubCategory';
 
 import addToMarketingList from './mutation/AddToMarketingList';
+import removeFromMarketingList from './mutation/RemoveFromMarketingList';
 
 const resolvers = {
   Object: ObjectScalarType,
@@ -178,6 +179,8 @@ const resolvers = {
       removeProduct(root, args, ctx),
     addToMarketingList: async (root: any, args: any, ctx: any) =>
       addToMarketingList(root, args, ctx),
+    removeFromMarketingList: async (root: any, args: any, ctx: any) =>
+      removeFromMarketingList(root, args, ctx),
   },
 };
 

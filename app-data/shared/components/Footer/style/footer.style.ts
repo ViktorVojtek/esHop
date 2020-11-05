@@ -3,7 +3,7 @@ import { Home } from '@styled-icons/evaicons-solid';
 
 export const Wrapper: StyledComponent<'div', any, {}, never> = styled.div`
   width: 100%;
-  margin-top: 2rem;
+  margin-top: 64px;
   z-index: 1030;
   position: absolute;
 `;
@@ -45,8 +45,11 @@ export const LinksHolder = styled.div`
 export const Links = styled.div`
   display: flex;
   flex-direction: column;
-  margin-right: 1.5rem;
+  margin-right: 65px;
   align-items: center;
+  @media (max-width: 992px) {
+    margin-right: 0px;
+  }
 `;
 export const A = styled.a`
   color: #00aeef !important;

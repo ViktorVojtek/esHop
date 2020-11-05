@@ -1,5 +1,5 @@
+import Customer from '../../../../db/models/Customer';
 import MarketingList from '../../../../db/models/MarketingList';
-import ModError from '../../utils/error';
 
 export default async (root: any, args: any, ctx: any) => {
   try {
@@ -19,6 +19,8 @@ export default async (root: any, args: any, ctx: any) => {
     if (userExist) {
       return;
     }
+
+    await Customer.updateOne({ email }, { marketing: true });
 
     const newCustomer = new MarketingList(newUserData);
 

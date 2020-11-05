@@ -377,3 +377,9 @@ export const ADD_TO_MARKETING_LIST = gql`
     }
   }
 `;
+
+export const REMOVE_FROM_MARKETING_LIST = gql`
+  mutation removeFromMarketingList($email: String!) {
+    removeFromMarketingList(email: $email)
+  }
+`;

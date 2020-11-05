@@ -166,30 +166,45 @@ export async function calculateOrderId(): Promise<string> {
   });
 }
 
-/*export async function calculateInvoiceId(): Promise<string> {
+export async function calculateInvoiceId(): Promise<string> {
   return new Promise(async (resolve, reject) => {
     try {
-      // new Date()
+      const actualDate = new Date();
+      const actualYear = actualDate.getFullYear();
       // porovnat previous rok - ak iny zacni od 0001 ak nie pokracuj
-      let invoiceId: string = `10${year}0001`;
-      const lastOrder = await Order.findOne({}).sort({ created_at: -1 });
+      const lastOrder = await Order.findOne({
+        invoiceId: { $exists: true },
+      }).sort({
+        created_at: -1,
+      });
+
+      let invoiceId: string = `00${actualYear}0001`;
 
       if (lastOrder) {
-        let oINum = parseInt(lastOrder.orderId) + 1;
-        let zeros: string = '';
+        const previousYear = lastOrder.invoiceId.substring(2, 6);
+        if (+previousYear < actualYear) {
+          invoiceId = `00${actualYear}0001`;
+        } else {
+          let iINum = parseInt(lastOrder.invoiceId) + 1;
+          let zeros: string = '';
 
-        for(let i = 0; i < lastOrder.orderId.length - String(oINum).length; i += 1) {
-          zeros += '0';
+          for (
+            let i = 0;
+            i < lastOrder.invoiceId.length - String(iINum).length;
+            i += 1
+          ) {
+            zeros += '0';
+          }
+
+          invoiceId = `${zeros}${iINum}`;
         }
 
-        orderId = `${zeros}${oINum}`;
-
-        resolve(orderId);
+        resolve(invoiceId);
       }
 
-      resolve(orderId);
+      resolve(invoiceId);
     } catch (err) {
-      reject (err);
+      reject(err);
     }
   });
-}*/
+}

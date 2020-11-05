@@ -18,10 +18,29 @@ import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import Carousel from '@brainhubeu/react-carousel';
 import ImagePreview from './components/ImagePreview';
 import VariantItemCard from './components/VariantCardItem';
-import { EditorState, convertToRaw } from 'draft-js';
+import {
+  EditorState,
+  convertToRaw,
+  ContentState,
+  convertFromHTML,
+} from 'draft-js';
 //import { Editor } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
-import htmlToDraft from 'html-to-draftjs';
+import {
+  ProductImage,
+  ProductPrice,
+} from '../../../../../../../../shared/types/Product.types';
+
+type ProductVariant = {
+  description?: string;
+  discount?: number;
+  itemsInStock?: number;
+  images?: ProductImage[];
+  inStock?: number;
+  title?: string;
+  price?: ProductPrice;
+  productCode?: string;
+};
 
 const Editor = dynamic(
   () => import('react-draft-wysiwyg').then((mod) => mod.Editor, Editor),
@@ -30,14 +49,70 @@ const Editor = dynamic(
 
 const VariantProductData = (props) => {
   const { productData, setProductData } = props;
+  const { variants } = productData;
   const classes = useStyles();
-  const [variantData, setVariantData] = useState({});
-  const [images, setImages] = useState([]);
-  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+  const [activeVariant, setActiveVariant] = useState(0);
+  const [variantData, setVariantData] = useState<ProductVariant>(
+    variants[activeVariant]
+      ? {
+          title: variants[activeVariant].title
+            ? variants[activeVariant].title
+            : '',
+          description: variants[activeVariant].description
+            ? variants[activeVariant].description
+            : '',
+          inStock: variants[activeVariant].inStock
+            ? variants[activeVariant].inStock
+            : 0,
+          images: variants[activeVariant].images
+            ? variants[activeVariant].images
+            : [],
+          discount: variants[activeVariant].discount
+            ? variants[activeVariant].discount
+            : 0,
+          price: variants[activeVariant].price.value
+            ? { value: variants[activeVariant].price.value, currency: '€' }
+            : { value: 0, currency: '€' },
+          productCode: variants[activeVariant].productCode
+            ? variants[activeVariant].productCode
+            : '',
+        }
+      : {
+          title: '',
+          description: '',
+          inStock: 0,
+          images: [],
+          discount: 0,
+          price: { value: 0, currency: '€' },
+          productCode: '',
+        }
+  );
+  const [images, setImages] = useState(variantData.images);
+  const oldDesc = variants[activeVariant]
+    ? variants[activeVariant].description
+    : '';
+  const blocksFromHtml = convertFromHTML(oldDesc);
+  const [editorState, setEditorState] = useState(
+    variants[activeVariant] && variants[activeVariant].description
+      ? EditorState.createWithContent(
+          ContentState.createFromBlockArray(
+            blocksFromHtml.contentBlocks,
+            blocksFromHtml.entityMap
+          )
+        )
+      : EditorState.createEmpty()
+  );
+  //const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
   useEffect(() => {
     return () => {};
   }, []);
+
+  const handleSetActiveVariant = (value: number) => {
+    setActiveVariant(value);
+    setVariantData(variants[value]);
+    setImages(variants[value].images);
+  };
 
   const onEditorStateChange = (state: EditorState) => {
     let description = draftToHtml(convertToRaw(state.getCurrentContent()));
@@ -126,6 +201,7 @@ const VariantProductData = (props) => {
         ...productData.variants.slice(idx + 1),
       ],
     });
+    setActiveVariant(0);
   };
 
   const disabled: boolean = checkVariantAddBtnDisabled(variantData);
@@ -141,9 +217,11 @@ const VariantProductData = (props) => {
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               setVariantData({
                 ...variantData,
-                title: event.currentTarget.value.trim(),
+                title: event.currentTarget.value,
               });
             }}
+            value={variantData.title}
+            defaultValue={undefined}
             required
           />
         </FormControl>
@@ -156,10 +234,12 @@ const VariantProductData = (props) => {
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               setVariantData({
                 ...variantData,
-                productCode: event.currentTarget.value.trim(),
+                productCode: event.currentTarget.value,
               });
             }}
+            value={variantData.productCode}
             required
+            defaultValue={undefined}
           />
         </FormControl>
         <div>
@@ -178,22 +258,6 @@ const VariantProductData = (props) => {
             className="w-100"
           />
         </div>
-        {/*<FormControl className={classes.root} margin="normal">
-          <TextField
-            id="vDesc"
-            label="Description"
-            multiline
-            rows={4}
-            variant="outlined"
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              setVariantData({
-                ...variantData,
-                description: event.currentTarget.value,
-              });
-            }}
-            required
-          />
-          </FormControl>*/}
         <Grid container spacing={2}>
           <Grid item xs={4}>
             <FormControl className={classes.root} margin="normal">
@@ -216,6 +280,7 @@ const VariantProductData = (props) => {
                     },
                   });
                 }}
+                value={variantData.price.value}
                 required
               />
             </FormControl>
@@ -239,6 +304,7 @@ const VariantProductData = (props) => {
                   });
                 }}
                 required
+                value={variantData.discount}
               />
             </FormControl>
           </Grid>
@@ -261,6 +327,7 @@ const VariantProductData = (props) => {
                   });
                 }}
                 required
+                value={variantData.inStock}
               />
             </FormControl>
           </Grid>
@@ -326,7 +393,11 @@ const VariantProductData = (props) => {
       </Paper>
       {''}
       {productData.variants && productData.variants.length > 0 ? (
-        <Carousel arrows={productData.variants.length > 1}>
+        <Carousel
+          arrows={productData.variants.length > 1}
+          value={activeVariant}
+          onChange={handleSetActiveVariant}
+        >
           {productData.variants.map((item: any, i: number) => {
             const { title } = productData;
             const productProps = { title };

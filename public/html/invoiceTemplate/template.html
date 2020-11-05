@@ -160,9 +160,9 @@
         />
       </div>
       <div id="orderNumber" class="clearfix">
-        <h3 style="margin: 0">FAKT&Uacute;RA {{this.orderId}}</h3>
+        <h3 style="margin: 0">FAKT&Uacute;RA {{this.invoiceId}}</h3>
         <h4 style="margin: 0; margin-top: 0.5rem">
-          VARIABILNY SYMBOL {{this.orderId}}
+          VARIABILNY SYMBOL {{this.invoiceId}}
         </h4>
       </div>
       <div id="company" class="clearfix">
@@ -214,6 +214,8 @@
       </div>
     </header>
     <main>
+      {{#if areProducts}}
+      <p style="margin: 0;margin-bottom: 20px;">Produkty</p>
       <table
         autosize="1"
         style="word-wrap: break-word; table-layout: fixed; width: 100%"
@@ -346,7 +348,7 @@
         </tr>
         {{#each products as |product index|}}
         <tr>
-          <td style="border: 1px solid #ddd; padding: 8px">{{index}}</td>
+          <td style="border: 1px solid #ddd; padding: 8px">{{product.productNumber}}</td>
           <td style="border: 1px solid #ddd; padding: 8px">
             {{product.title}}
           </td>
@@ -372,6 +374,9 @@
         </tr>
         {{/each}}
       </table>
+      {{/if}}
+      {{#if areGiftCards}}
+      <p style="margin: 0;margin-bottom: 20px;">Darčekové poukážky</p>
       <table
         autosize="1"
         style="word-wrap: break-word; table-layout: fixed; width: 100%"
@@ -504,7 +509,7 @@
         </tr>
         {{#each giftCards as |item index|}}
         <tr>
-          <td style="border: 1px solid #ddd; padding: 8px">{{index}}</td>
+          <td style="border: 1px solid #ddd; padding: 8px">{{item.cardNumber}}</td>
           <td style="border: 1px solid #ddd; padding: 8px">
             Darčeková poukážka
           </td>
@@ -532,6 +537,7 @@
         </tr>
         {{/each}}
       </table>
+      {{/if}}
       <p>&nbsp;</p>
       <table style="border-collapse: collapse; width: 60%">
         <tbody>

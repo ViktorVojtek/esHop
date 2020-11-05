@@ -22,6 +22,7 @@ export default gql`
     tel: String
     isVerified: Boolean
     firstName: String
+    marketing: String
     lastName: String
     role: Int!
   }

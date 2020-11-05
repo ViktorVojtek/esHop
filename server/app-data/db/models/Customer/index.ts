@@ -7,6 +7,7 @@ export interface ICustomer extends Document {
   firstName: string;
   isVerified: boolean;
   lastName: string;
+  marketing: boolean;
   password: string;
   resetPasswordToken: string;
   resetPasswordExpires: Date;
@@ -25,6 +26,10 @@ const CustomerSchema = new mongoose.Schema({
     type: Boolean,
   },
   firstName: String,
+  marketing: {
+    default: false,
+    type: Boolean,
+  },
   lastName: String,
   password: String,
   resetPasswordToken: String,

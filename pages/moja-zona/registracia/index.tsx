@@ -91,7 +91,6 @@ const Register: FC = () => {
               },
             },
           });
-          console.log('response', response);
         }
         toggle();
       } catch (err) {
@@ -122,7 +121,7 @@ const Register: FC = () => {
         </ModalBody>
       </Modal>
       <Wrapper>
-        <H4>Registrácia</H4>
+        <H4 className="text-center">Registrácia</H4>
         <Form onSubmit={handleSubmitRegister}>
           <Row form>
             <Col md={6}>

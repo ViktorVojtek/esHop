@@ -75,6 +75,7 @@ const rootTypeDefs = gql`
     removeService(_id: String!): String
 
     addToMarketingList(marketingListData: MarketingListInput!): MarketingList
+    removeFromMarketingList(email: String!): String
   }
 
   schema {

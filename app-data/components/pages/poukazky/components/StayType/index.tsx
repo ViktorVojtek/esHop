@@ -6,6 +6,7 @@ import { useQuery } from 'react-apollo';
 import Service from '../../../../../shared/types/Service.types';
 import Link from 'next/link';
 import Procedures from '../Procedures';
+import { IProductToCartData } from '../..';
 
 type IITem = {
   title: string;
@@ -15,12 +16,12 @@ type IITem = {
 
 type IStayType = {
   handleProcedure: (items: IITem[]) => void;
+  formData: IProductToCartData;
 };
 
-const StayType: FC<IStayType> = ({ handleProcedure }) => {
+const StayType: FC<IStayType> = ({ handleProcedure, formData }) => {
   const [modal, setModal] = useState(false);
   const { loading, error, data } = useQuery(SERVICES_QUERY);
-  const [servicesArray, setServicesArray] = useState([]);
 
   if (error) {
     return <>{error.message}</>;
@@ -31,10 +32,10 @@ const StayType: FC<IStayType> = ({ handleProcedure }) => {
   }
 
   const addProcedure = (service) => {
-    const sameArray = servicesArray.filter(
+    const sameArray = formData.services.filter(
       (item) => item.title === service.title
     );
-    const diffArray = servicesArray.filter(
+    const diffArray = formData.services.filter(
       (item) => item.title !== service.title
     );
     if (sameArray.length > 0) {
@@ -42,12 +43,7 @@ const StayType: FC<IStayType> = ({ handleProcedure }) => {
       service.count = mergeCount;
     }
     const newArray = [...diffArray, service];
-    setServicesArray(newArray);
     handleProcedure(newArray);
-  };
-
-  const removeProcedure = (value: number) => {
-    setServicesArray(servicesArray.splice(value, 1));
   };
 
   const { services } = data;

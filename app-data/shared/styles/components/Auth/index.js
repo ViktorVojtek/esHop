@@ -1,19 +1,17 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  display: flex;
   width: 100vw;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
   margin: 0 auto;
-  min-height: calc(100vh - 125px);
+  margin-top: 160px;
+  min-height: calc(100vh - 317px);
 `;
 
 export const Form = styled.form`
   width: 100%;
   max-width: 600px;
   padding: 20px;
+  margin: 0 auto;
 `;
 
 export const H4 = styled.h4`

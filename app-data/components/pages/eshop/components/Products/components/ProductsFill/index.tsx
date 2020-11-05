@@ -60,8 +60,6 @@ const ProductUI: React.FC<IProductUI> = ({
     toggleModal();
   };
 
-  console.log(_id);
-
   return (
     <Col lg="3" sm="6" key={_id}>
       <ProductItem>

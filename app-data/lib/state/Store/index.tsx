@@ -22,6 +22,7 @@ const initialState: IState = {
     userId: '',
     token: '',
     isVerified: false,
+    marketing: false,
   },
 };
 

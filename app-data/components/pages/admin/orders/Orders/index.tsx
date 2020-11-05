@@ -68,8 +68,10 @@ const OrdersList: FC<IOrders> = ({ orders }) => {
             status,
             created_at,
             _id,
+            invoiceId,
           } = args;
           const date = new Date(created_at.slice(0, 10) * 1000);
+          console.log(invoiceId);
           return (
             <tr key={index}>
               <td>{index + 1}</td>
@@ -93,6 +95,15 @@ const OrdersList: FC<IOrders> = ({ orders }) => {
                     <PDF></PDF>
                   </a>
                 </Link>
+              </td>
+              <td>
+                {invoiceId && (
+                  <Link href={`/static/invoice/invoice-${invoiceId}.pdf`}>
+                    <a target="_blank">
+                      <PDF></PDF>
+                    </a>
+                  </Link>
+                )}
               </td>
               <td>
                 <Actions id={_id} />
@@ -151,6 +162,7 @@ const OrdersList: FC<IOrders> = ({ orders }) => {
             <th>Stav</th>
             <th>Dátum vytvorenia</th>
             <th>Objednávka</th>
+            <th>Faktúra</th>
             <th>Akcie</th>
           </tr>
         </thead>

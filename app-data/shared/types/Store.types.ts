@@ -36,6 +36,7 @@ export type Customer = {
   isVerified: boolean;
   userId: string;
   token: string;
+  marketing: boolean;
 };
 
 export interface IState {

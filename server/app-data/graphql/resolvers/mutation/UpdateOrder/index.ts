@@ -5,6 +5,7 @@ const handlebars = require('handlebars');
 import mongoose from 'mongoose';
 import nodemailer from 'nodemailer';
 import Order, { IOrder } from '../../../../db/models/Order';
+import { calculateInvoiceId } from '../../utils';
 import ModError from '../../utils/error';
 
 const formatPrice = (number: number) => {
@@ -47,7 +48,7 @@ var order_canceled_html = fs.readFileSync(
 function sendMailNotificationOrderSend(
   from: string,
   to: string,
-  orderData: any,
+  orderData: any
 ): Promise<void> {
   return new Promise(async (resolve, reject) => {
     try {
@@ -64,7 +65,7 @@ function sendMailNotificationOrderSend(
 
       const templateOrderMail = handlebars.compile(order_send_html);
       var replacement = {
-        orderId: orderData.orderId
+        orderId: orderData.orderId,
       };
 
       const orderSendMailToSend = templateOrderMail(replacement);
@@ -87,8 +88,8 @@ function sendMailNotificationOrderSend(
 
 function sendMailNotificationOrderSolved(
   from: string,
-  to: string, 
-  orderData: any,
+  to: string,
+  orderData: any
 ): Promise<void> {
   return new Promise(async (resolve, reject) => {
     try {
@@ -105,7 +106,8 @@ function sendMailNotificationOrderSolved(
 
       const templateOrderSolvedMail = handlebars.compile(order_solved_html);
       var replacement = {
-        orderId: orderData.orderId
+        orderId: orderData.orderId,
+        invoiceId: orderData.invoiceId,
       };
 
       const orderSolvedMailToSend = templateOrderSolvedMail(replacement);
@@ -116,11 +118,16 @@ function sendMailNotificationOrderSolved(
         to, // list of receivers
         subject: 'Červený Kláštor | Vaša objednávka bola odoslaná', // Subject line
         html: orderSolvedMailToSend, // html body
-        attachments: [{
-          filename: `faktúra-${orderData.orderId}.pdf`,
-          path: path.join(__dirname, `../../../../../../static/invoice/invoice-${orderData.orderId}.pdf`),
-          contentType: 'application/pdf'
-        }],
+        attachments: [
+          {
+            filename: `faktúra-${orderData.invoiceId}.pdf`,
+            path: path.join(
+              __dirname,
+              `../../../../../../static/invoice/invoice-${orderData.invoiceId}.pdf`
+            ),
+            contentType: 'application/pdf',
+          },
+        ],
       });
 
       console.log('Message sent: %s', info.messageId);
@@ -134,7 +141,7 @@ function sendMailNotificationOrderSolved(
 function sendMailNotificationOrderCanceled(
   from: string,
   to: string,
-  orderData: any,
+  orderData: any
 ): Promise<void> {
   return new Promise(async (resolve, reject) => {
     try {
@@ -151,7 +158,7 @@ function sendMailNotificationOrderCanceled(
 
       const templateOrderMail = handlebars.compile(order_canceled_html);
       var replacement = {
-        orderId: orderData.orderId
+        orderId: orderData.orderId,
       };
 
       const orderSendMailToSend = templateOrderMail(replacement);
@@ -171,7 +178,6 @@ function sendMailNotificationOrderCanceled(
     }
   });
 }
-
 
 export default async (
   root: any,
@@ -203,14 +209,32 @@ export default async (
 
     const { __v, ...result } = updatedOrder.toObject();
 
-    if(status === 1){
+    if (status === 1) {
       await sendMailNotificationOrderSend(
         'info@codebrothers.sk',
         result.email,
         result
       );
     }
-    if(status === 2){
+    if (status === 2) {
+      let invoiceId: string = '';
+
+      if (result.invoiceId !== undefined) {
+        invoiceId = result.invoiceId;
+      } else {
+        invoiceId = await calculateInvoiceId();
+        console.log({ invoiceId });
+      }
+
+      await Order.findOneAndUpdate(
+        {
+          _id: mongoose.Types.ObjectId(_id),
+        },
+        {
+          $set: { invoiceId: invoiceId },
+        },
+        { new: true }
+      );
 
       const filteredProducts = result.products.filter(
         (product) => product.variant !== undefined
@@ -218,12 +242,12 @@ export default async (
 
       const isDeliveryAddress = result.optionalAddress !== '';
       const isCompany = result.companyName !== '';
-      let  totalPriceWithoutVat = result.totalPrice / 1.2;
-       totalPriceWithoutVat = Math.round(totalPriceWithoutVat * 100) / 100;
-       let totalPriceVat = result.totalPrice - result.totalPrice / 1.2;
-       totalPriceVat = Math.round(totalPriceVat * 100) / 100;
+      let totalPriceWithoutVat = result.totalPrice / 1.2;
+      totalPriceWithoutVat = Math.round(totalPriceWithoutVat * 100) / 100;
+      let totalPriceVat = result.totalPrice - result.totalPrice / 1.2;
+      totalPriceVat = Math.round(totalPriceVat * 100) / 100;
       const createdAt = new Date().toLocaleDateString('sk-SK');
-    
+
       const readyData = {
         ...result,
         products: filteredProducts,
@@ -233,9 +257,10 @@ export default async (
         totalPriceVat: formatPrice(totalPriceVat),
         totalPrice: formatPrice(result.totalPrice),
         createdAt: createdAt,
+        invoiceId: invoiceId,
       };
-    
-      readyData.products.forEach((product) => {
+
+      readyData.products.forEach((product, index) => {
         if (product.type !== 'poukazka') {
           product.price = product.variant.discount
             ? product.variant.price.value -
@@ -247,54 +272,64 @@ export default async (
           product.totalPriceVat = Math.round(product.totalPriceVat * 100) / 100;
           product.totalPriceWithoutVat = product.totalPrice / 1.2;
           product.totalPriceWithoutVat =
-          Math.round(product.totalPriceWithoutVat * 100) / 100;
+            Math.round(product.totalPriceWithoutVat * 100) / 100;
           product.price = formatPrice(product.price);
           product.totalPrice = formatPrice(product.totalPrice);
           product.totalPriceVat = formatPrice(product.totalPriceVat);
-          product.totalPriceWithoutVat = formatPrice(product.totalPriceWithoutVat);
+          product.totalPriceWithoutVat = formatPrice(
+            product.totalPriceWithoutVat
+          );
+          product.productNumber = index + 1;
         }
       });
-    
+
       const giftCards = result.products.filter(
         (product) => product.variant === undefined
       );
-    
-      giftCards.forEach((card) => {
+
+      giftCards.forEach((card, index) => {
         card.price = Math.round(card.price * 100) / 100;
         card.totalPriceWithoutVat = card.price / 1.2;
-        card.totalPriceWithoutVat = Math.round(card.totalPriceWithoutVat * 100) / 100;
+        card.totalPriceWithoutVat =
+          Math.round(card.totalPriceWithoutVat * 100) / 100;
         card.totalPriceVat = card.price - card.price / 1.2;
         card.totalPriceVat = Math.round(card.totalPriceVat * 100) / 100;
         card.price = formatPrice(card.price);
         card.totalPriceWithoutVat = formatPrice(card.totalPriceWithoutVat);
         card.totalPriceVat = formatPrice(card.totalPriceVat);
+        card.cardNumber = index + 1;
         card.services.length > 0
           ? (card.areServices = true)
           : (card.areServices = false);
       });
-    
-      const pdfData = {...readyData, giftCards};
+
+      const pdfData = {
+        ...readyData,
+        giftCards,
+        areProducts: readyData.products.length > 0,
+        areGiftCards: giftCards.length > 0,
+      };
 
       const document = {
         html: invoice_pdf,
         data: pdfData,
         path: path.join(
           __dirname,
-          `../../../../../../static/invoice/invoice-${result.orderId}.pdf`
+          `../../../../../../static/invoice/invoice-${invoiceId}.pdf`
         ),
       };
       await pdf.create(document);
       await sendMailNotificationOrderSolved(
         'info@codebrothers.sk',
-        result.email,
-        result,
+        readyData.email,
+        readyData
       );
     }
-    if(status === 3){
+    if (status === 3) {
       await sendMailNotificationOrderCanceled(
         'info@codebrothers.sk',
         result.email,
-        result,
+        result
       );
     }
 

@@ -4,7 +4,6 @@ import { CUSTOMER_QUERY } from '../../../../graphql/query';
 import { REMOVE_CUSTOMER_MUTATION } from '../../../../graphql/mutation';
 import { CHANGE_CUSTOMERZONE_PASSWORD_MUTATION } from '../../../../graphql/mutation';
 import {
-  Spinner,
   Input,
   Form,
   Label,
@@ -17,12 +16,14 @@ import {
   ModalBody,
   ModalFooter,
 } from 'reactstrap';
-import { P, H2 } from '../mojaZona';
+import { P, H2, H6 } from '../mojaZona';
 import Router from 'next/router';
 import cookie from 'js-cookie';
 import { Danger } from '../../../../shared/components/LoginRegisterModal/styles';
 import { useSnackbar } from 'notistack';
-import { logout } from '../../../../lib/auth';
+import MarketingSection from './MarketingSection';
+import { Paper } from '@material-ui/core';
+import CustomSpinner from '../../../../shared/components/CustomSpinner/CustomerSpinner';
 
 type ISettings = {
   id: string;
@@ -30,6 +31,7 @@ type ISettings = {
 
 const Settings: FC<ISettings> = ({ id }) => {
   const [modal, setModal] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
   const oldPassEl = useRef(null);
   const submitEl = useRef(null);
   const passwordEl = useRef(null);
@@ -39,7 +41,6 @@ const Settings: FC<ISettings> = ({ id }) => {
   const [changeCustomerPassword] = useMutation(
     CHANGE_CUSTOMERZONE_PASSWORD_MUTATION
   );
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const { error, loading, data } = useQuery(CUSTOMER_QUERY, {
     variables: { id: id },
     fetchPolicy: 'network-only',
@@ -50,13 +51,12 @@ const Settings: FC<ISettings> = ({ id }) => {
   }
 
   if (loading) {
-    return <Spinner />;
+    return <CustomSpinner />;
   }
 
   const { customer } = data;
 
   const handleDeleteUser: () => Promise<void> = async () => {
-    console.log(id);
     try {
       await removeCutomer({ variables: { id: id } });
 
@@ -113,80 +113,88 @@ const Settings: FC<ISettings> = ({ id }) => {
 
   return (
     <>
-      <H2>Nastavenie účtu:</H2>
-      <Row>
+      <Row className="mb-4 mt-4">
         <Col md={6}>
-          <P>
-            <strong>Meno:</strong> <span>{customer.firstName}</span>
-          </P>
-          <P>
-            <strong>Priezvisko:</strong> <span>{customer.lastName}</span>
-          </P>
-          <P>
-            <strong>Email:</strong> <span>{customer.email}</span>
-          </P>
-          <P>
-            <strong>Tel:</strong> <span>{customer.tel}</span>
-          </P>
-          <P className="mt-4">
-            <strong>
-              Zrušenie súhlasu na spracovanie osobných údajov na reklamné účely:
-            </strong>
-          </P>
-          <Button>Zrušiť</Button>
-          <P className="mt-4">
-            <strong>Zrušenie účtu:</strong>
-          </P>
-          <Button
-            style={{ background: 'red', border: 'none' }}
-            onClick={toggle}
-          >
-            Zrušiť účet
-          </Button>
+          <H2 className="mb-4">Osobné údaje</H2>
+          <Paper elevation={3} style={{ padding: '16px 16px 32px 16px' }}>
+            <Row>
+              <Col md="auto">
+                <P>
+                  <strong>Meno:</strong> <span>{customer.firstName}</span>
+                </P>
+                <P>
+                  <strong>Priezvisko:</strong> <span>{customer.lastName}</span>
+                </P>
+              </Col>
+              <Col md="auto">
+                <P>
+                  <strong>Email:</strong> <span>{customer.email}</span>
+                </P>
+                <P>
+                  <strong>Tel:</strong> <span>{customer.tel}</span>
+                </P>
+              </Col>
+            </Row>
+            <MarketingSection id={id} customer={customer} />
+            <H6 className="mt-4">Zrušenie účtu:</H6>
+            <Button
+              style={{ background: 'red', border: 'none' }}
+              onClick={toggle}
+            >
+              Zrušiť účet
+            </Button>
+          </Paper>
         </Col>
         <Col md={6}>
-          <P>
-            <strong>Zmena hesla:</strong>
-          </P>
-          <Form style={{ maxWidth: '400px' }} onSubmit={handleChangePassword}>
-            <FormGroup>
-              <Label for="oldPassword">Vaše heslo</Label>
-              <Input
-                type="password"
-                name="password"
-                id="oldPassword"
-                placeholder="Zadajte heslo"
-                required
-                innerRef={oldPassEl}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="oldPassword">Nové heslo</Label>
-              <Input
-                type="password"
-                name="password"
-                id="newPassword"
-                placeholder="Zadajte nové heslo"
-                innerRef={passwordEl}
-                required
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="newPasswordCheck">Zopakujte nové heslo</Label>
-              <Input
-                type="password"
-                name="password"
-                id="newPasswordCheck"
-                placeholder="Zopakujte nové heslo"
-                onChange={matchPassoword}
-                required
-              />
-            </FormGroup>
-            {!isMatchPass && <Danger>Hesla sa nezhodujú</Danger>}
-            <Button type="submit" innerRef={submitEl}>
-              Zmeniť heslo
-            </Button>
-          </Form>
+          <H2 className="mb-4">Zmena hesla</H2>
+          <Paper elevation={3} style={{ padding: '32px 16px' }}>
+            <Form
+              style={{ maxWidth: '400px', margin: '0 auto' }}
+              onSubmit={handleChangePassword}
+            >
+              <FormGroup>
+                <Label for="oldPassword">Vaše heslo</Label>
+                <Input
+                  type="password"
+                  name="password"
+                  id="oldPassword"
+                  placeholder="Zadajte heslo"
+                  required
+                  innerRef={oldPassEl}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="oldPassword">Nové heslo</Label>
+                <Input
+                  type="password"
+                  name="password"
+                  id="newPassword"
+                  placeholder="Zadajte nové heslo"
+                  innerRef={passwordEl}
+                  required
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="newPasswordCheck">Zopakujte nové heslo</Label>
+                <Input
+                  type="password"
+                  name="password"
+                  id="newPasswordCheck"
+                  placeholder="Zopakujte nové heslo"
+                  onChange={matchPassoword}
+                  required
+                />
+              </FormGroup>
+              {!isMatchPass && <Danger>Hesla sa nezhodujú</Danger>}
+              <Button
+                type="submit"
+                innerRef={submitEl}
+                style={{ backgroundColor: '#007bff' }}
+              >
+                Zmeniť heslo
+              </Button>
+            </Form>
+          </Paper>
         </Col>
       </Row>
       <Modal isOpen={modal} toggle={toggle}>
