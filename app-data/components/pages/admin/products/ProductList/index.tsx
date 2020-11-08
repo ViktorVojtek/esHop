@@ -127,9 +127,7 @@ const ProductList: FC = () => {
       <Modal title="Delete product" fn={handleDeleteProduct}>
         Do you really want to delete this item?
       </Modal>
-      <Container>
-        <Row>{productItems}</Row>
-      </Container>
+      <Row>{productItems}</Row>
     </>
   ) : (
     <p>No product has yet been created.</p>

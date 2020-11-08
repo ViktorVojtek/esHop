@@ -4,7 +4,7 @@ export const Wrapper = styled.div`
   max-width: 100%;
   margin: 0 auto;
   margin-top: 96px;
-  @media (max-width: 768px) {
+  @media (max-width: 992px) {
     margin-top: 57px;
   }
 `;
@@ -12,7 +12,7 @@ export const Left = styled.div`
   margin-left: 0.5rem;
 `;
 export const Right = styled.div`
-  @media (max-width: 768px) {
+  @media (max-width: 992px) {
     margin-top: 2rem;
   }
 `;

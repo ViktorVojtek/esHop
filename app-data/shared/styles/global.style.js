@@ -225,9 +225,6 @@ export default createGlobalStyle`
     @media(max-width: 920px){
       height: 300px;
     }
-    @media(max-width: 768px){
-      height: 220px;
-    }
   }
   .letter-spacing-1{
     letter-spacing: 1px;
