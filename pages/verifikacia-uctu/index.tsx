@@ -10,9 +10,11 @@ import { Form, Button } from '../../app-data/shared/styles/components/Auth';
 import ErrorMessage from '../../app-data/shared/components/ErrorMessage';
 import SuccessMessage from '../../app-data/shared/components/SucessMessage';
 
-const Wrapper = styled.div`
-  min-height: calc(100vh - 265px);
-  margin-top: 140px;
+export const Wrapper = styled.div`
+  width: 100vw;
+  margin: 0 auto;
+  margin-top: 160px;
+  min-height: calc(100vh - 317px);
 `;
 
 const FormHolder = styled.div`

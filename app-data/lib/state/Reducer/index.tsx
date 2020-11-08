@@ -55,16 +55,16 @@ const Reducer = (state: IState, action: IAction) => {
           if (
             newCart[i].id === action.payload.id &&
             newCart[i].variant.title === action.payload.variant.title &&
-            newCart[i].variant.count > 1
+            action.payload.variant.count === 0
           ) {
-            newCart[i].variant.count = action.payload.variant.count;
+            newCart = [...newCart.slice(0, i), ...newCart.slice(i + 1)];
             break;
           } else if (
             newCart[i].id === action.payload.id &&
             newCart[i].variant.title === action.payload.variant.title &&
-            newCart[i].variant.count === 1
+            newCart[i].variant.count > 1
           ) {
-            newCart = [...newCart.slice(0, i), ...newCart.slice(i + 1)];
+            newCart[i].variant.count = action.payload.variant.count;
             break;
           }
         }

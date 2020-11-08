@@ -1,10 +1,33 @@
 import styled from 'styled-components';
 import { CartArrowDown } from '@styled-icons/fa-solid';
+import {
+  CloseCircle,
+  PlusCircle,
+  MinusCircle,
+} from '@styled-icons/evaicons-solid';
 
 export const Wrapper = styled.div`
   margin-top: 150px;
   margin-bottom: 150px;
   min-height: calc(100vh - 425px);
+`;
+
+export const CloseCircleIcon = styled(CloseCircle)`
+  width: 42px;
+  color: #00aeeff8;
+  cursor: pointer;
+`;
+export const PlusCircleIcon = styled(PlusCircle)`
+  width: 42px;
+  color: #00aeeff8;
+  cursor: pointer;
+  user-select: none;
+`;
+export const MinusCircleIcon = styled(MinusCircle)`
+  width: 42px;
+  color: #00aeeff8;
+  cursor: pointer;
+  user-select: none;
 `;
 
 export const EmptyCart = styled(CartArrowDown)`

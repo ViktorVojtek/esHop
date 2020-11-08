@@ -90,7 +90,7 @@ const OrdersList: FC<IOrders> = ({ orders }) => {
                 'sk-SK'
               )}, ${date.toLocaleTimeString('sk-SK')}`}</td>
               <td>
-                <Link href={`/static/orders/order-${orderId}.pdf`}>
+                <Link href={`/static/orders/order-${orderId}.pdf?admin=true`}>
                   <a target="_blank">
                     <PDF></PDF>
                   </a>
@@ -98,7 +98,9 @@ const OrdersList: FC<IOrders> = ({ orders }) => {
               </td>
               <td>
                 {invoiceId && (
-                  <Link href={`/static/invoice/invoice-${invoiceId}.pdf`}>
+                  <Link
+                    href={`/static/invoice/invoice-${invoiceId}.pdf?admin=true`}
+                  >
                     <a target="_blank">
                       <PDF></PDF>
                     </a>

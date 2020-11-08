@@ -108,7 +108,7 @@ const EshopPage: FC = () => {
 
   return (
     <Wrapper>
-      <SubPageBackground title="" imageUrl="/images/eshop/background.png" />
+      {/*<SubPageBackground title="" imageUrl="/images/eshop/background.png" />*/}
       <Container>
         <Row className="d-flex justify-content-between mb-4">
           <Col sm="6">

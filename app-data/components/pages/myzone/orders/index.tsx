@@ -21,6 +21,7 @@ import {
 } from '../../../../shared/helpers/formatters';
 import Link from 'next/link';
 import CustomSpinner from '../../../../shared/components/CustomSpinner/CustomerSpinner';
+import MobileTable from './MobileTable';
 
 type IOrders = {
   id: string;
@@ -49,12 +50,9 @@ const Orders: FC<IOrders> = ({ id }) => {
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, orders.length - page * rowsPerPage);
 
-  console.log(emptyRows);
   function getDate(created_at: any) {
     const date = new Date(created_at.slice(0, 10) * 1000);
-    return `${date.toLocaleDateString('sk-SK')}, ${date.toLocaleTimeString(
-      'sk-SK'
-    )}`;
+    return `${date.toLocaleDateString('sk-SK')}`;
   }
 
   const handleChangePage = (
@@ -88,7 +86,10 @@ const Orders: FC<IOrders> = ({ id }) => {
           component={Paper}
           elevation={3}
         >
-          <Table className={classes.table} aria-label="custom pagination table">
+          <Table
+            className={`${classes.table} hideMobile `}
+            aria-label="custom pagination table"
+          >
             <TableHead>
               <TableRow className={classes.tRow}>
                 <TableCell>Číslo objednávky</TableCell>
@@ -98,6 +99,7 @@ const Orders: FC<IOrders> = ({ id }) => {
                 <TableCell align="left">Platba</TableCell>
                 <TableCell align="left">Cena spolu</TableCell>
                 <TableCell align="left">Objednávka</TableCell>
+                <TableCell align="left">Faktúra</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -128,12 +130,27 @@ const Orders: FC<IOrders> = ({ id }) => {
                     {`${formatPrice(row.totalPrice)} €`}
                   </TableCell>
                   <TableCell>
-                    <Link href={`/static/orders/order-${row.orderId}.pdf`}>
+                    <Link
+                      href={`/static/orders/order-${row.orderId}.pdf?user=${row.userId}`}
+                    >
                       <a target="_blank">
                         <PDF></PDF>
                       </a>
                     </Link>
                   </TableCell>
+                  {row.invoiceId ? (
+                    <TableCell>
+                      <Link
+                        href={`/static/invoice/invoice-${row.invoiceId}.pdf?user=${row.userId}`}
+                      >
+                        <a target="_blank">
+                          <PDF></PDF>
+                        </a>
+                      </Link>
+                    </TableCell>
+                  ) : (
+                    <TableCell>-</TableCell>
+                  )}
                 </TableRow>
               ))}
             </TableBody>
@@ -161,6 +178,27 @@ const Orders: FC<IOrders> = ({ id }) => {
               </TableRow>
             </TableFooter>
           </Table>
+          <Table className={`${classes.table} showMobileTable `}>
+            <TableHead>
+              <TableRow className={classes.tRow}>
+                <TableCell style={{ minWidth: 1 }}></TableCell>
+                <TableCell>Číslo objednávky</TableCell>
+                <TableCell align="left">Cena</TableCell>
+                <TableCell align="left">Stav</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {(rowsPerPage > 0
+                ? orders.slice(
+                    page * rowsPerPage,
+                    page * rowsPerPage + rowsPerPage
+                  )
+                : orders
+              ).map((row) => (
+                <MobileTable key={row.orderId} row={row} />
+              ))}
+            </TableBody>
+          </Table>
         </TableContainer>
       ) : (
         <P>Aktuálne nemáte vytvorené žiadne objednávky.</P>
@@ -174,7 +212,7 @@ const useStyles2 = makeStyles({
     marginTop: '16px',
   },
   table: {
-    minWidth: 500,
+    width: '100%',
   },
   tRow: {
     '& th': {

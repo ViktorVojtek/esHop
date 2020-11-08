@@ -60,7 +60,7 @@ const LogIn: FC = () => {
   };
 
   return (
-    <Wrapper>
+    <Wrapper style={{ maxWidth: '400px' }}>
       <h2 className="mb-4">Prihlásenie</h2>
       <Form onSubmit={handleSubmitLogin} style={{ minWidth: '250px' }}>
         <FormGroup>

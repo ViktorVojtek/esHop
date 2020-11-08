@@ -1,7 +1,8 @@
 import * as jwt from 'jsonwebtoken';
 import * as path from 'path';
 import { writeFile, mkdirp, unlink, remove } from 'fs-extra';
-import Order, { IOrder } from '../../../db/models/Order';
+import Invoices from '../../../db/models/Invoices';
+import Order from '../../../db/models/Order';
 
 export const verifyToken: (ctx: any, secret: string) => Promise<void> = (
   ctx,
@@ -172,34 +173,38 @@ export async function calculateInvoiceId(): Promise<string> {
       const actualDate = new Date();
       const actualYear = actualDate.getFullYear();
       // porovnat previous rok - ak iny zacni od 0001 ak nie pokracuj
-      const lastOrder = await Order.findOne({
-        invoiceId: { $exists: true },
-      }).sort({
-        created_at: -1,
+      const lastNumber = await Invoices.findOne({
+        name: 'main',
       });
 
       let invoiceId: string = `00${actualYear}0001`;
 
-      if (lastOrder) {
-        const previousYear = lastOrder.invoiceId.substring(2, 6);
+      if (lastNumber) {
+        let oldInvoiceId = lastNumber.count;
+        const previousYear = oldInvoiceId.toString().substring(0, 4);
         if (+previousYear < actualYear) {
           invoiceId = `00${actualYear}0001`;
+          oldInvoiceId = parseInt(invoiceId);
+
+          await Invoices.updateOne({ name: 'main' }, { count: oldInvoiceId });
         } else {
-          let iINum = parseInt(lastOrder.invoiceId) + 1;
+          let iINum = oldInvoiceId + 1;
           let zeros: string = '';
 
-          for (
-            let i = 0;
-            i < lastOrder.invoiceId.length - String(iINum).length;
-            i += 1
-          ) {
+          for (let i = 0; i < 2; i += 1) {
             zeros += '0';
           }
 
           invoiceId = `${zeros}${iINum}`;
-        }
 
+          await Invoices.updateOne(
+            { name: 'main' },
+            { count: oldInvoiceId + 1 }
+          );
+        }
         resolve(invoiceId);
+      } else {
+        await Invoices.create({ name: 'main', count: parseInt(invoiceId) });
       }
 
       resolve(invoiceId);

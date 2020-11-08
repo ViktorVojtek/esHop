@@ -218,7 +218,6 @@ export default async (
     }
     if (status === 2) {
       let invoiceId: string = '';
-
       if (result.invoiceId !== undefined) {
         invoiceId = result.invoiceId;
       } else {

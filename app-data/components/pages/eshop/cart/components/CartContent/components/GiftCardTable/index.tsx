@@ -2,7 +2,7 @@ import React, { FC, useContext } from 'react';
 import {
   TD,
   Circle,
-  ButtonAddrRemove,
+  CloseCircleIcon,
   TDtext,
 } from '../../../../styles/cart.style';
 import { Context } from '../../../../../../../../lib/state/Store';
@@ -61,9 +61,9 @@ const GiftCardTableRow: FC<IGiftCardTableRow> = ({
       <TDtext>{text}</TDtext>
       <TD>{`${formatPrice(price)} €`}</TD>
       <TD>
-        <ButtonAddrRemove onClick={() => handleRemoveGiftCard(id)}>
-          Odstrániť
-        </ButtonAddrRemove>
+        <CloseCircleIcon
+          onClick={() => handleRemoveGiftCard(id)}
+        ></CloseCircleIcon>
       </TD>
     </tr>
   );

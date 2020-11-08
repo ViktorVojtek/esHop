@@ -72,7 +72,7 @@ const Register: FC = () => {
       <Modal>
         <p>{errorMessage}</p>
       </Modal>
-      <Wrapper>
+      <Wrapper style={{ maxWidth: '400px' }}>
         <Form onSubmit={handleSubmitRegister}>
           <FormGroup>
             <Label htmlFor="firstName">First Name</Label>

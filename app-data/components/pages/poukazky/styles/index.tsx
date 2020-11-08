@@ -2,12 +2,10 @@ import styled from 'styled-components';
 import { CloseCircle } from '@styled-icons/evaicons-solid';
 
 export const Wrapper = styled.div`
-  max-width: 100%;
+  width: 100vw;
   margin: 0 auto;
-  margin-top: 120px;
-  @media (max-width: 768px) {
-    margin-top: 86px;
-  }
+  margin-top: 160px;
+  min-height: calc(100vh - 317px);
 `;
 
 export const Remove = styled(CloseCircle)`

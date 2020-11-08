@@ -59,11 +59,8 @@ export const A = styled.a`
   }
 `;
 export const Wrapper = styled.div`
-  margin-top: 120px;
-  @media (max-width: 992px) {
-    margin-top: 80px;
-  }
-  @media (max-width: 768px) {
-    margin-top: 60px;
-  }
+  width: 100vw;
+  margin: 0 auto;
+  margin-top: 160px;
+  min-height: calc(100vh - 317px);
 `;

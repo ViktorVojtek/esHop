@@ -1,10 +1,15 @@
 import React, { FC, useContext, useEffect } from 'react';
 import { useQuery } from '@apollo/react-hooks';
-// import { Button } from 'reactstrap';
 
 import { Context } from '../../../../../../../../lib/state/Store';
 import { PRODUCT_QUERY } from '../../../../../../../../graphql/query';
-import { TD, ButtonAddrRemove, Image } from '../../../../styles/cart.style';
+import {
+  TD,
+  Image,
+  CloseCircleIcon,
+  PlusCircleIcon,
+  MinusCircleIcon,
+} from '../../../../styles/cart.style';
 import { ProductImage } from '../../../../../../../../shared/types/Product.types';
 import { formatPrice } from '../../../../../../../../shared/helpers/formatters';
 
@@ -84,6 +89,25 @@ const CartProductTableRow: FC<ICartProductTableRow> = ({
       });
     };
 
+    const handleRemoveAllProducts: (id: string) => void = (id) => {
+      const cartItemData = cart
+        .filter(
+          (item: any) =>
+            item.id === id && item.variant.title === prodVariantTitle
+        )
+        .pop();
+
+      const prodItemVariant = {
+        ...cartItemData.variant,
+        count: 0,
+      };
+
+      dispatch({
+        type: 'REMOVE_FROM_CART',
+        payload: { id, variant: prodItemVariant },
+      });
+    };
+
     const calculatedItemPrice =
       discount && discount > 0
         ? itemPrice - itemPrice * (discount / 100)
@@ -104,12 +128,15 @@ const CartProductTableRow: FC<ICartProductTableRow> = ({
           )} ${currency}`}{' '}
         </TD>
         <TD>
-          <ButtonAddrRemove onClick={() => handleRemoveProduct(id)}>
+          <MinusCircleIcon onClick={() => handleRemoveProduct(id)}>
             -
-          </ButtonAddrRemove>{' '}
-          <ButtonAddrRemove onClick={() => handleAddProduct(id)}>
+          </MinusCircleIcon>{' '}
+          <PlusCircleIcon onClick={() => handleAddProduct(id)}>
             +
-          </ButtonAddrRemove>
+          </PlusCircleIcon>
+        </TD>
+        <TD>
+          <CloseCircleIcon onClick={() => handleRemoveAllProducts(id)} />
         </TD>
       </tr>
     );

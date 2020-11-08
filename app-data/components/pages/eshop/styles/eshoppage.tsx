@@ -2,13 +2,10 @@ import styled from 'styled-components';
 import { DownArrow } from '@styled-icons/boxicons-regular';
 
 export const Wrapper = styled.div`
-  margin-top: 6rem;
-  @media (max-width: 992px) {
-    margin-top: 80px;
-  }
-  @media (max-width: 768px) {
-    margin-top: 60px;
-  }
+  width: 100vw;
+  margin: 0 auto;
+  margin-top: 160px;
+  min-height: calc(100vh - 317px);
 `;
 
 export const H3 = styled.h2`

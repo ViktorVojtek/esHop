@@ -57,7 +57,7 @@ const Navigation: FC = () => {
   return (
     <>
       <Wrapper id="navigation">
-        <Navbar color="light" light fixed="top" expand="md">
+        <Navbar color="light" light fixed="top" expand="lg">
           <Link href="/">
             <CustomNavbarBrand href="/">
               <Logo src="/images/logo.png" alt="Červený kláštor" />
@@ -77,12 +77,14 @@ const Navigation: FC = () => {
         </Navbar>{' '}
       </Wrapper>
       <Wrapper id="mobileNavigation">
-        <MobileMenuEshop />
-        <Link href="/">
-          <CustomNavbarBrand href="/">
-            <Logo src="/images/logo.png" alt="Červený kláštor" />
-          </CustomNavbarBrand>
-        </Link>
+        <div style={{ display: 'flex' }}>
+          <MobileMenuEshop />
+          <Link href="/">
+            <CustomNavbarBrand href="/">
+              <Logo src="/images/logo.png" alt="Červený kláštor" />
+            </CustomNavbarBrand>
+          </Link>
+        </div>
         <div className="d-flex">
           <CartWrapper>
             <Link href="/eshop/cart">

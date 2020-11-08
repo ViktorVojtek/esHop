@@ -24,7 +24,8 @@ const CartContent: FC<ICartContent> = ({ data, giftCards }) => (
               <TH>Cena</TH>
               <TH>Počet</TH>
               <TH>Cena celkom</TH>
-              <TH>Pridať / odstrániť</TH>
+              <TH>Odstrániť / pridať</TH>
+              <TH>Zmazať</TH>
             </TR>
           </thead>
           <tbody>

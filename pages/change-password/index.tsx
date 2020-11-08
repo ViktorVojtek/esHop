@@ -18,8 +18,10 @@ import Link from 'next/link';
 import ErrorMessage from '../../app-data/shared/components/ErrorMessage';
 
 const Wrapper = styled.div`
-  min-height: calc(100vh - 265px);
-  margin-top: 140px;
+  width: 100vw;
+  margin: 0 auto;
+  margin-top: 160px;
+  min-height: calc(100vh - 317px);
 `;
 
 const FormHolder = styled.div`

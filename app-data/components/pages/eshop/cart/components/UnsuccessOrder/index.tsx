@@ -4,16 +4,13 @@ import { Container } from 'reactstrap';
 import Link from 'next/link';
 
 const Wrapper = styled.div`
-  margin-top: 8rem;
+  width: 100vw;
+  margin: 0 auto;
+  margin-top: 160px;
+  min-height: calc(100vh - 317px);
   display: flex;
-  align-items: center;
-  min-height: calc(100vh - 177px - 10rem);
-  @media (max-width: 992px) {
-    margin-top: 120px;
-  }
-  @media (max-width: 768px) {
-    margin-top: 80px;
-  }
+  flex-direction: column;
+  justify-content: center;
 `;
 
 export const H2 = styled.h2`
