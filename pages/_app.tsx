@@ -16,6 +16,7 @@ import theme from '../app-data/lib/util/mui/theme';
 import withApollo from '../app-data/graphql/withApollo';
 import Store from '../app-data/lib/state/Store';
 import { SnackbarProvider } from 'notistack';
+import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 
 const MyApp = (props) => {
   const {
@@ -50,12 +51,14 @@ const MyApp = (props) => {
         <ApolloProvider client={apollo}>
           <Store>
             <Style />
-            <SnackbarProvider
-              maxSnack={3}
-              anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-            >
-              <Component {...pageProps} />
-            </SnackbarProvider>
+            <GoogleReCaptchaProvider reCaptchaKey="6LfgFeEZAAAAAD2fNYXGUjpI_Yu1c65XODYxgoyY">
+              <SnackbarProvider
+                maxSnack={3}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+              >
+                <Component {...pageProps} />
+              </SnackbarProvider>
+            </GoogleReCaptchaProvider>
           </Store>
         </ApolloProvider>
       </ThemeProvider>

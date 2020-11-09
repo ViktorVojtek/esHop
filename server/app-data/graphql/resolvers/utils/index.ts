@@ -4,6 +4,19 @@ import { writeFile, mkdirp, unlink, remove } from 'fs-extra';
 import Invoices from '../../../db/models/Invoices';
 import Order from '../../../db/models/Order';
 
+export async function validateHuman(recaptchaToken: string): Promise<boolean> {
+  const secret = '6LfgFeEZAAAAADVSFhvvtLcBTeg04nkuGawJl4sh';
+  const response = await fetch(
+    `https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${recaptchaToken}`,
+    {
+      method: 'POST',
+    }
+  );
+  const data = await response.json();
+  console.log(data);
+  return data.success;
+}
+
 export const verifyToken: (ctx: any, secret: string) => Promise<void> = (
   ctx,
   secret

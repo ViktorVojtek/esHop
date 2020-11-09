@@ -4,6 +4,7 @@ const User = gql`
   input UserLoginInput {
     email: String!
     password: String!
+    recaptchaToken: String
   }
 
   input UserRegInput {

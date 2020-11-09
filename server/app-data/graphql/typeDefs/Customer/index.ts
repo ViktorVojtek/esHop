@@ -4,6 +4,7 @@ export default gql`
   input CustomerLoginInput {
     email: String!
     password: String!
+    recaptchaToken: String!
   }
 
   input CustomerRegInput {

@@ -5,13 +5,12 @@ import { useMutation } from '@apollo/react-hooks';
 import { LOGIN_CUSTOMER_MUTATION } from '../../../app-data/graphql/mutation';
 import Link from 'next/link';
 import Layout from '../../../app-data/shared/components/Layout/Site.layout';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
 import {
   Wrapper,
   Form,
   Button,
-  H3,
-  H1,
   H4,
   RegisterButton,
   P,
@@ -27,6 +26,8 @@ const LogIn: FC = () => {
   const { dispatch } = useContext(Context);
   const [loginUserMutate] = useMutation(LOGIN_CUSTOMER_MUTATION);
   const [modal, setModal] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState('');
+  const { executeRecaptcha } = useGoogleReCaptcha();
 
   const toggle = () => setModal(!modal);
 
@@ -49,15 +50,22 @@ const LogIn: FC = () => {
     try {
       event.preventDefault();
 
+      if (!executeRecaptcha) {
+        return;
+      }
+
       const form = event.currentTarget;
       const email = form.email.value;
       const password = form.password.value;
+
+      const recaptchaToken = await executeRecaptcha('login');
 
       const response = await loginUserMutate({
         variables: {
           customerData: {
             email,
             password,
+            recaptchaToken,
           },
         },
       });

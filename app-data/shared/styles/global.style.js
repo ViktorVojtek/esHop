@@ -479,4 +479,5 @@ export default createGlobalStyle`
      ::after{border-bottom-color: #556cd6 !important;}
     }
   }
+  .grecaptcha-badge { visibility: visible; }
 `;

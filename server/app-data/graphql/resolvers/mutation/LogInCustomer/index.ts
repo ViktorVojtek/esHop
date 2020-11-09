@@ -3,16 +3,25 @@ import jwt from 'jsonwebtoken';
 
 import { config } from '../../../../config';
 import Customer, { ICustomer } from '../../../../db/models/Customer';
+import { validateHuman } from '../../utils';
 import ModError from '../../utils/error';
 
 export default async (root: any, { customerData }, ctx: any) => {
   try {
-    const { email, password } = customerData;
+    const { email, password, recaptchaToken } = customerData;
 
     const userExist: ICustomer = await Customer.findOne({ email });
 
     if (!userExist) {
       throw new ModError(404, 'User not exist!');
+    }
+
+    const human = await validateHuman(recaptchaToken);
+
+    console.log(human);
+
+    if (!human) {
+      throw new ModError(400, 'You are robot!');
     }
 
     const { __v, password: passwordHash, ...userData } = userExist.toObject();

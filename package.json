@@ -65,6 +65,7 @@
     "react-dom": "16.13.1",
     "react-draft-wysiwyg": "^1.14.5",
     "react-ga": "^3.2.0",
+    "react-google-recaptcha-v3": "^1.7.0",
     "react-messenger-customer-chat": "^0.8.0",
     "react-reactstrap-pagination": "^2.0.3",
     "react-slideshow-image": "^1.4.2",
