@@ -1,11 +1,12 @@
-import { NextFunction } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import crypto from 'crypto';
+import fetch from 'node-fetch';
 import { config } from '../../config';
 import { calculateOrderId } from '../../graphql/resolvers/utils';
 
 var nodeNestpay = require('node-nestpay');
 
-export default async (orderData: any, next: NextFunction) => {
+export default async (orderData: any, req: Request, res: Response, next: NextFunction) => {
   const {
     gp: { ClientID, ClientName, ClientPass, StoreKey },
   } = config;
@@ -26,11 +27,10 @@ export default async (orderData: any, next: NextFunction) => {
 
   const base64 = Buffer.from(genHash).toString('base64');
 
-  console.log(base64);
   //const base64Buff: Buffer = Buffer.from(genHash, 'base64');
   //const base64 = base64Buff.toString('base64');
 
-  console.log(base64);
+  // console.log(base64);
 
   const data = {
     clientid: ClientID,
@@ -45,30 +45,37 @@ export default async (orderData: any, next: NextFunction) => {
     encoding: 'utf-8',
   };
 
-  const response = await fetch(
-    'https://testsecurepay.eway2pay.com/fim/est3dgate',
-    {
-      body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-    }
-  );
+  try {
+    const response = await fetch(
+      'https://testsecurepay.eway2pay.com/fim/est3dgate',
+      {
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded', // 'application/json',
+        },
+        method: 'POST',
+      }
+    );
+  
+    console.log(response);
+    /*const nestpay = new nodeNestpay({
+      name: '',
+      password: '',
+      clientId: ClientID,
+      storekey: '3d_pay_hosting',
+      callbackSuccess: okUrl,
+      callbackFail: failUrl,
+      currency: currency,
+      orderId: orderId,
+      endpoint: 'asseco',
+    }) as any;
+  
+    console.log(nestpay);*/
+    const respJson = await response.text();
 
-  console.log(response);
-  /*const nestpay = new nodeNestpay({
-    name: '',
-    password: '',
-    clientId: ClientID,
-    storekey: '3d_pay_hosting',
-    callbackSuccess: okUrl,
-    callbackFail: failUrl,
-    currency: currency,
-    orderId: orderId,
-    endpoint: 'asseco',
-  }) as any;
+    console.log('\n');
+    console.log(respJson);
 
-  console.log(nestpay);*/
-  next();
+    res.json({ message: respJson });
+  } catch (err) { next(err); }
 };

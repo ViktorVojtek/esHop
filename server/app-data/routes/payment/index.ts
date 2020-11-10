@@ -5,11 +5,11 @@ export default (req: Request, res: Response, next: NextFunction) => {
   console.log("You've access the payment routes\n");
   const cartData = req.body;
   // console.log(cart);
-  console.log('\n');
+  // console.log('\n');
 
-  paymentController(cartData, next);
+  paymentController(cartData, req, res, next);
 
-  console.log('sucsess');
+  // console.log('sucsess');
 
   // next();
 };

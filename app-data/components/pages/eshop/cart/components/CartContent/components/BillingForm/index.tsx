@@ -134,6 +134,9 @@ const BillingForm: FC = () => {
         });
 
         console.log(paymentResponse);
+        const respJson = await paymentResponse.json();
+
+        console.log(respJson);
       } else {
         console.log('Create order');
 
