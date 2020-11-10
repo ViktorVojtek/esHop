@@ -7,7 +7,7 @@ export const config = {
     ClientName: 'Amicus',
     ClientPass: 'Hamicus064',
     ClientSecret: 'J3EMGn8d',
-    StoreKey: 'E7007901',
+    StoreKey: 'CodeBrothers963',
     SandBox: true,
   },
   mailer: {

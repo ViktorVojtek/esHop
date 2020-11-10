@@ -9,5 +9,7 @@ export default (req: Request, res: Response, next: NextFunction) => {
 
   paymentController(cartData, next);
 
+  console.log('sucsess');
+
   // next();
 };

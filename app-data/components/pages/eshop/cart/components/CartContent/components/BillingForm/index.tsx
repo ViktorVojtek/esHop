@@ -142,10 +142,8 @@ const BillingForm: FC = () => {
             data: orderData,
           },
         });
+        Router.push('/eshop/cart/uspesna-objednavka');
       }
-
-      console.log('Order sucessfully placed');
-      Router.push('/eshop/cart/uspesna-objednavka');
       setLoader(false);
     } catch (err) {
       setLoader(false);
