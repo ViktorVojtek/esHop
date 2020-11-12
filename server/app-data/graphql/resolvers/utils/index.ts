@@ -5,7 +5,7 @@ import Invoices from '../../../db/models/Invoices';
 import Order from '../../../db/models/Order';
 
 export async function validateHuman(recaptchaToken: string): Promise<boolean> {
-  const secret = '6LfgFeEZAAAAADVSFhvvtLcBTeg04nkuGawJl4sh';
+  const secret = '6LcS98QZAAAAAN9eTUofGsaAttRhzCVI_CsNPSXG';
   const response = await fetch(
     `https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${recaptchaToken}`,
     {
@@ -13,7 +13,6 @@ export async function validateHuman(recaptchaToken: string): Promise<boolean> {
     }
   );
   const data = await response.json();
-  console.log(data);
   return data.success;
 }
 

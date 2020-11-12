@@ -26,7 +26,6 @@ const LogIn: FC = () => {
   const { dispatch } = useContext(Context);
   const [loginUserMutate] = useMutation(LOGIN_CUSTOMER_MUTATION);
   const [modal, setModal] = useState(false);
-  const [captchaToken, setCaptchaToken] = useState('');
   const { executeRecaptcha } = useGoogleReCaptcha();
 
   const toggle = () => setModal(!modal);

@@ -15,6 +15,7 @@ import { StyledModalBtn, RegisterButton, P, Danger } from './styles/index';
 import { LOGIN_CUSTOMER_MUTATION } from '../../../graphql/mutation';
 import { login } from '../../../lib/authCustomer';
 import ForgetPasswordModal from '../ForgetPasswordModal';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
 interface ILoginRegisterModal {
   loginModal: boolean;
@@ -31,6 +32,7 @@ const LoginRegisterModal: FC<ILoginRegisterModal> = ({
   };
   const [loginUser] = useMutation(LOGIN_CUSTOMER_MUTATION);
   const [isReset, setIsReset] = useState(false);
+  const { executeRecaptcha } = useGoogleReCaptcha();
 
   const toggleReset = () => {
     setIsReset(!isReset);
@@ -45,12 +47,13 @@ const LoginRegisterModal: FC<ILoginRegisterModal> = ({
       const form = event.currentTarget;
       const email = form.email.value;
       const password = form.password.value;
-
+      const recaptchaToken = await executeRecaptcha('login');
       const response = await loginUser({
         variables: {
           customerData: {
             email,
             password,
+            recaptchaToken,
           },
         },
       });

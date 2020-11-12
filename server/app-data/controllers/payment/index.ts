@@ -4,8 +4,6 @@ import fetch from 'node-fetch';
 import { config } from '../../config';
 import { calculateOrderId } from '../../graphql/resolvers/utils';
 
-var nodeNestpay = require('node-nestpay');
-
 export default async (
   orderData: any,
   req: Request,
@@ -13,7 +11,7 @@ export default async (
   next: NextFunction
 ) => {
   const {
-    gp: { ClientID, ClientName, ClientPass, StoreKey },
+    gp: { ClientID, StoreKey },
   } = config;
   const orderId: string = await calculateOrderId();
   const amount: number = orderData.totalPrice; // total sum of transaction
@@ -25,45 +23,44 @@ export default async (
     'https://eshop.kupelecks.sk/eshop/cart/neuspesna-objednavka';
   const tranType: string = 'Auth';
 
-  const plainText = `${ClientID}|${oid}|${amount}|${okUrl}|${failUrl}|${tranType}||"asdf"||||${currency}|${StoreKey}|`;
+  const plainText = `${ClientID}|${oid}|${amount}|${okUrl}|${failUrl}|${tranType}||"asdf"||||${currency}|${StoreKey}`;
 
   console.log(plainText);
 
   const hash = crypto.createHash('sha512');
   const hashedData = hash.update(plainText);
-  const genHash = hashedData.digest('hex');
-  const base64 = Buffer.from(genHash).toString('base64');
+  const genHash = hashedData.digest('base64');
+  //const base64 = Buffer.from(genHash).toString('base64');
 
-  console.log(base64);
-
-  //const base64Buff: Buffer = Buffer.from(genHash, 'base64');
-  //const base64 = base64Buff.toString('base64');
-
-  // console.log(base64);
+  console.log(genHash);
 
   const data = {
     clientid: ClientID,
-    storetype: '3D_PAY_HOSTING',
-    hash: base64,
-    trantype: tranType,
-    amount,
-    currency: currency,
+    storetype: '3d_pay_hosting',
+    hash: `${genHash}`,
+    trantype: `${tranType}`,
+    amount: `${amount}`,
+    currency: `${currency}`,
     oid: orderId,
-    okUrl,
-    failUrl,
+    okUrl: okUrl,
+    failUrl: failUrl,
     lang: 'sk',
     rnd: 'asdf',
     hashAlgorithm: 'ver2',
     encoding: 'utf-8',
   };
-
-  console.log(data);
+  var formBody = [];
+  for (var property in data) {
+    var encodedKey = encodeURIComponent(property);
+    var encodedValue = encodeURIComponent(data[property]);
+    formBody.push(encodedKey + '=' + encodedValue);
+  }
 
   try {
     const response = await fetch(
       'https://testsecurepay.eway2pay.com/fim/est3dgate',
       {
-        body: JSON.stringify(data),
+        body: formBody.join('&'),
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded', // 'application/json',
         },
