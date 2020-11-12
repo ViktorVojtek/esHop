@@ -8,6 +8,7 @@ import CartSummary from './components/CartSummary';
 import { ButtonAddrRemove } from '../../../../styles/cart.style';
 import Loading from '../../../../../../../../shared/components/Loading';
 import Router from 'next/router';
+import PayCardForm from './components/PayCardForm';
 interface IData {
   userId?: string;
   firstName: string;
@@ -63,9 +64,8 @@ const BillingForm: FC = () => {
   const { state } = useStore();
   const [orderData, setOrderData] = useState(initialOrderData);
   const [loader, setLoader] = useState(false);
+  const [cardPay, setCardPay] = useState(null);
   const [mutate] = useMutation(CREATE_ORDER_MUTATION);
-
-  // console.log(state);
 
   const { cart, customer, giftCards } = state;
 
@@ -118,7 +118,6 @@ const BillingForm: FC = () => {
       ) {
         console.log('Pay by CARD');
         const url = '/payment';
-
         const paymentResponse = await fetch(url, {
           method: 'POST', // *GET, POST, PUT, DELETE, etc.
           mode: 'cors', // no-cors, *cors, same-origin
@@ -132,14 +131,10 @@ const BillingForm: FC = () => {
           referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
           body: JSON.stringify(orderData), // body data type must match "Content-Type" header
         });
-
-        console.log(paymentResponse);
         const respJson = await paymentResponse.json();
-
-        console.log(respJson);
+        console.log('loader off ? ');
+        setCardPay(respJson);
       } else {
-        console.log('Create order');
-
         await mutate({
           variables: {
             data: orderData,
@@ -171,6 +166,8 @@ const BillingForm: FC = () => {
           <ButtonAddrRemove type="submit">Odoslať</ButtonAddrRemove>
         </FormGroup>
       </Form>
+
+      {cardPay && <PayCardForm orderData={cardPay} />}
       {loader && <Loading />}
     </>
   );

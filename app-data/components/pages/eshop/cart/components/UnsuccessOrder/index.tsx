@@ -82,7 +82,7 @@ const UnsuccessOrder: () => JSX.Element = () => (
         Zopakujte prosím objednávku, alebo kontaktujte našu podporu na čísle{' '}
         <a href="tel: 0911338828">0911338828</a>.
       </P>
-      <P>Objednávky odosielame šdandardne do 48 hodín od prijatia platby.</P>
+      <P>Objednávky odosielame štandardne do 48 hodín od prijatia platby.</P>
       <LinkHolder>
         <Link href="/eshop/cart">
           <ButtonLink>Zopakovať</ButtonLink>
