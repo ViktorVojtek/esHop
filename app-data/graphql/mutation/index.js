@@ -30,6 +30,42 @@ export const UPDATE_ORDER_MUTATION = gql`
       optionalState
       optionalPostalCode
       paymentMethode
+      paymentStatus
+      phone
+      postalCode
+      state
+      totalPrice
+      orderId
+      created_at
+    }
+  }
+`;
+
+export const UPDATE_PAYMENT_STATUS_MUTATION = gql`
+  mutation updatePaymentStatus($_id: String!, $paymentStatus: Int) {
+    updatePaymentStatus(_id: $_id, paymentStatus: $paymentStatus) {
+      _id
+      status
+      products
+      userId
+      address
+      city
+      companyDVATNum
+      companyDTAXNum
+      companyName
+      companyVatNum
+      deliveryMethode
+      deliveryPrice
+      email
+      firstName
+      lastName
+      message
+      optionalAddress
+      optionalCity
+      optionalState
+      optionalPostalCode
+      paymentMethode
+      paymentStatus
       phone
       postalCode
       state

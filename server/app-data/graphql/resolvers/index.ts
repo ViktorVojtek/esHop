@@ -44,6 +44,7 @@ import removeDiscount from './mutation/RemoveDiscount';
 
 import createOrder from './mutation/CreateOrder';
 import updateOrder from './mutation/UpdateOrder';
+import updatePaymentStatus from './mutation/UpdatePaymentStatus';
 
 import loginUser from './mutation/LoginUser';
 import registerUser from './mutation/RegisterUser';
@@ -146,6 +147,8 @@ const resolvers = {
       createOrder(root, args, ctx),
     updateOrder: async (root: any, args: any, ctx: any) =>
       updateOrder(root, args, ctx),
+    updatePaymentStatus: async (root: any, args: any, ctx: any) =>
+      updatePaymentStatus(root, args, ctx),
 
     setCurrency: async (root: any, args: any, ctx: any) =>
       setCurrency(root, args, ctx),

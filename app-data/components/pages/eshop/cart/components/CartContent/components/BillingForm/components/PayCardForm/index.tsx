@@ -40,8 +40,6 @@ const PayCardForm: (props: IPayCardForm) => JSX.Element = (props) => {
   } = orderData;
   const form = useRef(null);
 
-  console.log(orderData);
-
   useEffect(() => {
     form.current && form.current.submit();
   });

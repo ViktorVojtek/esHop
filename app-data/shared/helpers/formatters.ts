@@ -30,10 +30,30 @@ const statusColor = {
   3: 'danger',
 };
 
+const paymentStatus = {
+  0: 'Neuhradená',
+  1: 'Uhradená',
+};
+
+const paymentStatusColor = {
+  0: 'danger',
+  1: 'success',
+};
+
 export const translateStatus: (value: number) => string = (value) => {
   return status[value];
 };
 
 export const translateStatusColor: (value: number) => string = (value) => {
   return statusColor[value];
+};
+
+export const translatePaymentStatus: (value: number) => string = (value) => {
+  return paymentStatus[value];
+};
+
+export const translatePaymentStatusColor: (value: number) => string = (
+  value
+) => {
+  return paymentStatusColor[value];
 };

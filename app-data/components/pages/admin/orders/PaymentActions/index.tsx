@@ -13,10 +13,10 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { useMutation } from '@apollo/react-hooks';
-import { UPDATE_ORDER_MUTATION } from '../../../../../graphql/mutation';
+import { UPDATE_PAYMENT_STATUS_MUTATION } from '../../../../../graphql/mutation';
 import { ORDER_QUERY } from '../../../../../graphql/query';
 import { useSnackbar } from 'notistack';
-import { translateStatus } from '../../../../../shared/helpers/formatters';
+import { translatePaymentStatus } from '../../../../../shared/helpers/formatters';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -30,91 +30,59 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const Actions = ({ id }: { id: string }) => {
+const PaymentActions = ({ id }: { id: string }) => {
   const classes = useStyles();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-  const [mutate] = useMutation(UPDATE_ORDER_MUTATION, {
+  const [mutate] = useMutation(UPDATE_PAYMENT_STATUS_MUTATION, {
     refetchQueries: [{ query: ORDER_QUERY }],
     awaitRefetchQueries: true,
   });
+
   const [dropdownOpen, setOpenDropdown] = useState(false);
-  const [action, setAction] = useState(0);
+  const [payment, setPayment] = useState(0);
 
   const toggle = () => setOpenDropdown(!dropdownOpen);
   const [open, setOpen] = useState(false);
 
-  // Order status
+  // Payment status
+
   const handleClickOpen = (event: any) => {
     const { value } = event.currentTarget;
     setOpen(true);
-    setAction(value);
+    setPayment(value);
   };
 
   const handleClose = () => {
     setOpen(false);
   };
-  const handleOnClick: (value: any) => Promise<void> = async (value) => {
-    const result = await mutate({ variables: { _id: id, status: +value } });
 
-    const order = result.data.updateOrder;
+  const handleOnClick: (value: any) => Promise<void> = async (value) => {
+    const result = await mutate({
+      variables: { _id: id, paymentStatus: +value },
+    });
+
+    const order = result.data.updatePaymentStatus;
 
     enqueueSnackbar(
-      `Nový status objednávky: ${translateStatus(order.status)}`,
+      `Nový status platby: ${translatePaymentStatus(order.paymentStatus)}`,
       {
         variant: 'success',
       }
     );
-
-    if (value === '2') {
-      await fetch('/invoice-omega', {
-        body: JSON.stringify({
-          orderId: order.orderId,
-          email: order.email,
-          totalPrice: order.totalPrice,
-          firstName: order.firstName,
-          lastName: order.lastName,
-          paymentMethode: order.paymentMethode,
-          deliveryMethode: order.deliveryMethode,
-          deliveryPrice: order.deliveryPrice,
-          phone: order.phone,
-          address: order.address,
-          postalCode: order.postalCode,
-          city: order.city,
-          optionalAddress: order.optionalAddress,
-          optionalCity: order.optionalCity,
-          optionalPostalCode: order.optionalPostalCode,
-          companyDTAXNum: order.companyDTAXNum,
-          products: order.products,
-          companyDVATNum: order.companyDVATNum,
-          companyName: order.companyName,
-          companyVatNum: order.companyVatNum,
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        method: 'POST',
-      });
-    }
   };
 
   return (
     <>
-      <ButtonDropdown className="mb-2" isOpen={dropdownOpen} toggle={toggle}>
+      <ButtonDropdown isOpen={dropdownOpen} toggle={toggle}>
         <DropdownToggle color="primary" caret>
-          Stav objednávky
+          Stav platby
         </DropdownToggle>
         <DropdownMenu>
           <DropdownItem value={0} onClick={handleClickOpen}>
-            Nová
+            Neuhradená
           </DropdownItem>
           <DropdownItem value={1} onClick={handleClickOpen}>
-            Odoslaná
-          </DropdownItem>
-          <DropdownItem value={2} onClick={handleClickOpen}>
-            Vybavená
-          </DropdownItem>
-          <DropdownItem value={3} onClick={handleClickOpen}>
-            Zrušená
+            Uhradená
           </DropdownItem>
         </DropdownMenu>
       </ButtonDropdown>
@@ -127,7 +95,7 @@ const Actions = ({ id }: { id: string }) => {
         <DialogTitle id="alert-dialog-title">{'Potvrdenie akcie'}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Ste si istý, že chcete zmeniť stav objednávky ?
+            Ste si istý, že chcete zmeniť stav platby ?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -141,7 +109,7 @@ const Actions = ({ id }: { id: string }) => {
           <Button
             onClick={() => {
               handleClose();
-              handleOnClick(action);
+              handleOnClick(payment);
             }}
             variant="contained"
             color="primary"
@@ -155,4 +123,4 @@ const Actions = ({ id }: { id: string }) => {
   );
 };
 
-export default Actions;
+export default PaymentActions;

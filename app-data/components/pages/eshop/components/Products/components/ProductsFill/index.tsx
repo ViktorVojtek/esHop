@@ -130,9 +130,9 @@ const ProductsFill: React.FC<IProductsFillProps> = ({
   toggleModal,
 }) => {
   const elements: JSX.Element[] = products.map((item: any) => {
-    const { _id, subCategory, variants } = item;
+    const { _id, variants } = item;
     return (
-      <>
+      <React.Fragment key={_id}>
         {variants !== undefined ? (
           <ProductUI
             toggleModal={toggleModal}
@@ -142,7 +142,7 @@ const ProductsFill: React.FC<IProductsFillProps> = ({
         ) : (
           <ServiceUI product={item} />
         )}
-      </>
+      </React.Fragment>
     );
   });
 

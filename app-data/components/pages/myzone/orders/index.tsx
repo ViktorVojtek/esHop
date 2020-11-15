@@ -111,10 +111,10 @@ const Orders: FC<IOrders> = ({ id }) => {
                 : orders
               ).map((row) => (
                 <TableRow key={row.orderId}>
-                  <TableCell component="th" scope="row">
+                  <TableCell component="td" scope="row">
                     {row.orderId}
                   </TableCell>
-                  <TableCell component="th" scope="row" align="left">
+                  <TableCell component="td" scope="row" align="left">
                     {getDate(row.created_at)}
                   </TableCell>
                   <TableCell style={{ width: 160 }} align="left">

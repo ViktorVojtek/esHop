@@ -55,6 +55,7 @@ const rootTypeDefs = gql`
 
     createOrder(data: OrderInput!): String
     updateOrder(_id: String!, status: Int): Order
+    updatePaymentStatus(_id: String!, paymentStatus: Int): Order
 
     setCurrency(currencyInput: CurrencyInput!): Currency
     updateCurrency(currencyUpdateInput: CurrencyUpdateInput!): Currency

@@ -116,8 +116,14 @@ const BillingForm: FC = () => {
         paymentMTD.toLowerCase().indexOf('card') > -1 ||
         paymentMTD.toLowerCase().indexOf('kart') > -1
       ) {
-        console.log('Pay by CARD');
-        const url = '/payment';
+        const order = await mutate({
+          variables: {
+            data: orderData,
+          },
+        });
+        const orderId = order.data.createOrder;
+        window.localStorage.setItem('orderId', orderId);
+        /*const url = '/payment';
         const paymentResponse = await fetch(url, {
           method: 'POST', // *GET, POST, PUT, DELETE, etc.
           mode: 'cors', // no-cors, *cors, same-origin
@@ -132,8 +138,7 @@ const BillingForm: FC = () => {
           body: JSON.stringify(orderData), // body data type must match "Content-Type" header
         });
         const respJson = await paymentResponse.json();
-        console.log('loader off ? ');
-        setCardPay(respJson);
+        setCardPay(respJson);*/
       } else {
         await mutate({
           variables: {

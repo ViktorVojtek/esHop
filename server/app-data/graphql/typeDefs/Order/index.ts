@@ -54,6 +54,7 @@ const Order = gql`
     optionalState: String
     optionalPostalCode: String
     paymentMethode: String
+    paymentStatus: Int
     phone: String
     postalCode: String
     state: String
@@ -85,6 +86,7 @@ const Order = gql`
     optionalState: String
     optionalPostalCode: String
     paymentMethode: String
+    paymentStatus: Int
     phone: String
     postalCode: String
     state: String

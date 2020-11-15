@@ -219,8 +219,6 @@ const createOrder: (
     giftCards
   );
 
-  console.log(readyData);
-
   const { userId } = readyData;
 
   if (userId) {
@@ -240,10 +238,9 @@ const createOrder: (
 
     await Customer.findByIdAndUpdate(userId, updatedCustData);
   }
+  const { __v, ...result } = newOrder.toObject();
 
-  // const { __v, ...result } = newOrder.toObject();
-
-  return 'Order has been created.';
+  return result._id;
 };
 
 export default createOrder;
