@@ -1,6 +1,19 @@
 import React from 'react';
 import { Row, Col, Container } from 'reactstrap';
-import { H1, H2, Wrapper, P, Span, A, ContactHolder } from './styles';
+import AnchorLink from 'react-anchor-link-smooth-scroll';
+import {
+  H1,
+  H2,
+  Wrapper,
+  P,
+  Span,
+  A,
+  ContactHolder,
+  Card,
+  ImgHolder,
+  Circle,
+  Smooth,
+} from './styles';
 import FaqItem from './components/faqItem';
 
 const faq = [
@@ -72,101 +85,96 @@ const faq = [
 
 const KontaktPage = () => (
   <Wrapper>
+    <ImgHolder>
+      <H1>Kontaktujte nás</H1>
+    </ImgHolder>
     <Container>
-      <H1>Kontakt a FAQ</H1>
       <Row>
-        <Col md="6">
-          <H2 className="w-100">Kontakt</H2>
-          <div className="mt-4">
-            <P>Červený Kláštor 147</P>
-            <P>059 06 Červený Kláštor</P>
-            <ContactHolder>
-              <Span>Email: </Span>
-              <A href="mailto:eshop@kupelecks.sk">eshop@kupelecks.sk</A>
-            </ContactHolder>
-            <ContactHolder>
-              <Span>Tel: </Span>
-              <A href="tel:+421911904880">+421 911 904 880</A>
-            </ContactHolder>
-          </div>
+        <Col md="4" className="mobile-card">
+          <Card>
+            <Circle>
+              <img style={{ width: '24px' }} src="/icons/call.svg" />
+            </Circle>
+            <H2 className="w-100">Kontakt</H2>
+            <div className="mt-4">
+              <P>Červený Kláštor 147</P>
+              <P>059 06 Červený Kláštor</P>
+              <ContactHolder>
+                <Span>Email: </Span>
+                <A href="mailto:eshop@kupelecks.sk">eshop@kupelecks.sk</A>
+              </ContactHolder>
+              <ContactHolder>
+                <Span>Tel: </Span>
+                <A href="tel:+421911904880">+421 911 904 880</A>
+              </ContactHolder>
+              <AnchorLink offset={() => 100} href="#faq">
+                <Smooth>Často kladené otázky</Smooth>
+              </AnchorLink>
+            </div>
+          </Card>
         </Col>
-        <Col md="6">
-          <H2 className="w-100">Rezervácie</H2>
-          <div className="mt-4">
-            <P>Červený Kláštor 147</P>
-            <P>059 06 Červený Kláštor</P>
-            <ContactHolder>
-              <Span>Email: </Span>
-              <A href="mailto:rezervacie@kupelecks.sk">
-                rezervacie@kupelecks.sk
-              </A>
-            </ContactHolder>
-            <ContactHolder>
-              <Span>Tel: </Span>
-              <A href="tel:+421914338829">+421 914 338 829</A>
-            </ContactHolder>
-          </div>
+        <Col md="4" className="mobile-card">
+          <Card>
+            <Circle>
+              <img style={{ width: '24px' }} src="/icons/reception.svg" />
+            </Circle>
+            <H2 className="w-100">Rezervácie</H2>
+            <div className="mt-4">
+              <P>Červený Kláštor 147</P>
+              <P>059 06 Červený Kláštor</P>
+              <ContactHolder>
+                <Span>Email: </Span>
+                <A href="mailto:rezervacie@kupelecks.sk">
+                  rezervacie@kupelecks.sk
+                </A>
+              </ContactHolder>
+              <ContactHolder>
+                <Span>Tel: </Span>
+                <A href="tel:+421914338829">+421 914 338 829</A>
+              </ContactHolder>
+            </div>
+          </Card>
+        </Col>
+        <Col md="4">
+          <Card>
+            <Circle>
+              <img style={{ width: '24px' }} src="/icons/pin.svg" />
+            </Circle>
+            <H2 className="w-100">Odberné miesto</H2>
+            <div className="mt-4">
+              <P>Cestovná agentúra DJK Tour</P>
+              <P>064 01 Stará Ľubovňa</P>
+              <P>Popradská 6</P>
+              <ContactHolder>
+                <Span>Email: </Span>
+                <A href="mailto:eshop@kupelecks.sk">eshop@kupelecks.sk</A>
+              </ContactHolder>
+              <ContactHolder>
+                <Span>Tel: </Span>
+                <A href="tel:+421911338828">+421 911 338 828</A>
+              </ContactHolder>
+              <ContactHolder>
+                <Span>Trasa: </Span>
+                <A
+                  href="https://maps.google.com/?q=49.301994, 20.688364"
+                  target="_blank"
+                >
+                  Navigácia
+                </A>
+              </ContactHolder>
+            </div>
+          </Card>
         </Col>
       </Row>
       <Row>
         <Col>
-          <H2 className="w-100 mt-4">Odberné miesta</H2>
-        </Col>
-      </Row>
-      <Row>
-        <Col md="6">
-          <div className="mt-4">
-            <P>Cestovná agentúra DJK Tour</P>
-            <P>064 01 Stará Ľubovňa</P>
-            <P>Popradská 6</P>
-            <ContactHolder>
-              <Span>Email: </Span>
-              <A href="mailto:eshop@kupelecks.sk">eshop@kupelecks.sk</A>
-            </ContactHolder>
-            <ContactHolder>
-              <Span>Tel: </Span>
-              <A href="tel:+421914338829">+421 911 338 828</A>
-            </ContactHolder>
-            <ContactHolder>
-              <Span>Trasa: </Span>
-              <A
-                href="https://maps.google.com/?q=49.301994, 20.688364"
-                target="_blank"
-              >
-                Navigácia
-              </A>
-            </ContactHolder>
-          </div>
-        </Col>
-
-        <Col md="6">
-          <div className="mt-4">
-            <P>Kúpeľná reštaurácia</P>
-            <P>Červený Kláštor 12</P>
-            <P>059 06 Červený Kláštor</P>
-            <ContactHolder>
-              <Span>Email: </Span>
-              <A href="mailto:eshop@kupelecks.sk">eshop@kupelecks.sk</A>
-            </ContactHolder>
-            <ContactHolder>
-              <Span>Tel: </Span>
-              <A href="tel:+421914338829">+421 911 338 828</A>
-            </ContactHolder>
-            <ContactHolder>
-              <Span>Trasa: </Span>
-              <A
-                href="https://maps.google.com/?q=49.388951, 20.421086"
-                target="_blank"
-              >
-                Navigácia
-              </A>
-            </ContactHolder>
-          </div>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <H2 className="w-100 mt-4 mb-4">FAQ</H2>
+          <H2
+            style={{ borderTop: '1px solid #eaeaea', paddingTop: '32px' }}
+            id="faq"
+            className="w-100 mt-4 mb-4"
+          >
+            ČASTO KLADENÉ OTÁZKY
+          </H2>
           {faq.map((item, i) => (
             <FaqItem key={i} question={item.question} answer={item.answer} />
           ))}

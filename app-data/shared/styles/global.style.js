@@ -480,4 +480,9 @@ export default createGlobalStyle`
     }
   }
   .grecaptcha-badge { visibility: hidden; }
+  .mobile-card{
+    @media(max-width: 768px){
+      margin-bottom: 66px;
+    }
+  }
 `;

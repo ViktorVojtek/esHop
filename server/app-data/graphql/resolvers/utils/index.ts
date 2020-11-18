@@ -3,9 +3,10 @@ import * as path from 'path';
 import { writeFile, mkdirp, unlink, remove } from 'fs-extra';
 import Invoices from '../../../db/models/Invoices';
 import Order from '../../../db/models/Order';
+import { config } from '../../../config/index';
 
 export async function validateHuman(recaptchaToken: string): Promise<boolean> {
-  const secret = '6LcS98QZAAAAAN9eTUofGsaAttRhzCVI_CsNPSXG';
+  const secret = config.recaptcha.secret;
   const response = await fetch(
     `https://www.google.com/recaptcha/api/siteverify?secret=${secret}&response=${recaptchaToken}`,
     {
