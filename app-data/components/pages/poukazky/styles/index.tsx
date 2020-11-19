@@ -4,8 +4,8 @@ import { CloseCircle } from '@styled-icons/evaicons-solid';
 export const Wrapper = styled.div`
   width: 100vw;
   margin: 0 auto;
-  margin-top: 160px;
-  min-height: calc(100vh - 317px);
+  margin-top: 180px;
+  min-height: calc(100vh - 337px);
 `;
 
 export const Remove = styled(CloseCircle)`
@@ -74,14 +74,12 @@ export const H1 = styled.h3`
 `;
 
 export const H3 = styled.h3`
-  color: red;
-  text-align: center;
-  font-size: 3rem;
-  text-transform: uppercase;
+  font-size: 2rem;
+  font-family: MuseoSans-300;
+  color: black;
   font-weight: bold;
-  margin: 4rem 0rem;
-  letter-spacing: 1px;
-  font-family: Franchise-CE;
+  text-align: center;
+  margin: 64px 0 32px 0;
 `;
 export const RadioGroup = styled.div``;
 export const RadioColorGroup = styled.div`

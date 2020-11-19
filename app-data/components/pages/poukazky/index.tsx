@@ -101,124 +101,127 @@ const PoukazkyPage: () => JSX.Element = () => {
   return (
     <Wrapper>
       <Container>
-        <H1>Zvoľ typ darčekovej poukážky</H1>
         <PoukazkaTypes getActiveType={setActiveType} />
         <Form onSubmit={handleSubmit}>
-          <div id="voucherContent">
+          <div id="voucherContent" style={{ minHeight: '1px' }}>
             {activeType === 0 && (
               <StayType handleProcedure={handleProcedure} formData={formData} />
             )}
             {activeType === 2 && <MoneyType handleChange={handleChange} />}
           </div>
-          <Row className="mt-8">
-            <Col md="6" className="pr-4">
-              <H4>Zvoľte farbu poukážky:</H4>
-              <FormGroup className="mt-4 mb-4">
-                <RadioColorGroup>
-                  <div>
-                    <RadioColorInput
-                      type="radio"
-                      id="color-1"
-                      name="cardColor"
-                      value="#00aeef"
-                      onChange={(e) => {
-                        setImageSrc('/images/poukazky/poukazka_modra.png');
-                        setColor('#00aeef');
-                        handleChange(e);
-                      }}
-                    />
-                    <ColorLabel
-                      htmlFor="color-1"
-                      colorButton="#00aeef"
-                    ></ColorLabel>
-                  </div>
-                  <div>
-                    <RadioColorInput
-                      type="radio"
-                      id="color-2"
-                      name="cardColor"
-                      value="#ff0000"
-                      onChange={(e) => {
-                        setImageSrc('/images/poukazky/poukazka_cervena.png');
-                        setColor('#ff0000');
-                        handleChange(e);
-                      }}
-                    />
-                    <ColorLabel
-                      htmlFor="color-2"
-                      colorButton="#ff0000"
-                    ></ColorLabel>
-                  </div>
-                  <div>
-                    <RadioColorInput
-                      type="radio"
-                      id="color-3"
-                      name="cardColor"
-                      value="#FBC200"
-                      onChange={(e) => {
-                        setImageSrc('/images/poukazky/poukazka_zlta.png');
-                        setColor('#FBC200');
-                        handleChange(e);
-                      }}
-                    />
-                    <ColorLabel
-                      htmlFor="color-3"
-                      colorButton="#FBC200"
-                    ></ColorLabel>
-                  </div>
-                  <div>
-                    <RadioColorInput
-                      type="radio"
-                      id="color-4"
-                      name="cardColor"
-                      value="#00BF0B"
-                      onChange={(e) => {
-                        setImageSrc('/images/poukazky/poukazka_zelena.png');
-                        setColor('#00BF0B');
-                        handleChange(e);
-                      }}
-                    />
-                    <ColorLabel
-                      htmlFor="color-4"
-                      colorButton="#00BF0B"
-                    ></ColorLabel>
-                  </div>
-                </RadioColorGroup>
-              </FormGroup>
-              <H4>Zadajte text na prednej strane:</H4>
-              <FormGroup className="mt-4">
-                <Input
-                  type="textarea"
-                  name="text"
-                  placeholder="Zadajte text"
-                  id="frontText"
-                  required
-                  maxLength={140}
-                  onChange={(e) => {
-                    handleChangeTextArea(e);
-                    handleChange(e);
-                  }}
-                />
-              </FormGroup>
-            </Col>
-            <Col md="6" className="d-flex align-items-center">
-              <PreviewHolder>
-                <Preview src={imageSrc} alt="poukazka" />
-                <PreviewTextHolder>
-                  <PrednaStranaText colorText={color}>
-                    {frontText}
-                  </PrednaStranaText>
-                </PreviewTextHolder>
-              </PreviewHolder>
-            </Col>
-          </Row>
-          <Row className="mt-8">
-            <Col md="6" className="pr-4">
-              <H4>Súhrn poukážky:</H4>
-              <Summary formData={formData} setFormData={setFormData} />
-            </Col>
-          </Row>
-          <AddToCart type="submit">Pridať do košíka</AddToCart>
+          <>
+            <Row className="mt-8">
+              <Col md="6" className="pr-4">
+                <H4>Zvoľte farbu poukážky:</H4>
+                <FormGroup className="mt-4 mb-4">
+                  <RadioColorGroup>
+                    <div>
+                      <RadioColorInput
+                        type="radio"
+                        id="color-1"
+                        name="cardColor"
+                        value="#00aeef"
+                        onChange={(e) => {
+                          setImageSrc('/images/poukazky/poukazka_modra.png');
+                          setColor('#00aeef');
+                          handleChange(e);
+                        }}
+                      />
+                      <ColorLabel
+                        htmlFor="color-1"
+                        colorButton="#00aeef"
+                      ></ColorLabel>
+                    </div>
+                    <div>
+                      <RadioColorInput
+                        type="radio"
+                        id="color-2"
+                        name="cardColor"
+                        value="#ff0000"
+                        onChange={(e) => {
+                          setImageSrc('/images/poukazky/poukazka_cervena.png');
+                          setColor('#ff0000');
+                          handleChange(e);
+                        }}
+                      />
+                      <ColorLabel
+                        htmlFor="color-2"
+                        colorButton="#ff0000"
+                      ></ColorLabel>
+                    </div>
+                    <div>
+                      <RadioColorInput
+                        type="radio"
+                        id="color-3"
+                        name="cardColor"
+                        value="#FBC200"
+                        onChange={(e) => {
+                          setImageSrc('/images/poukazky/poukazka_zlta.png');
+                          setColor('#FBC200');
+                          handleChange(e);
+                        }}
+                      />
+                      <ColorLabel
+                        htmlFor="color-3"
+                        colorButton="#FBC200"
+                      ></ColorLabel>
+                    </div>
+                    <div>
+                      <RadioColorInput
+                        type="radio"
+                        id="color-4"
+                        name="cardColor"
+                        value="#00BF0B"
+                        onChange={(e) => {
+                          setImageSrc('/images/poukazky/poukazka_zelena.png');
+                          setColor('#00BF0B');
+                          handleChange(e);
+                        }}
+                      />
+                      <ColorLabel
+                        htmlFor="color-4"
+                        colorButton="#00BF0B"
+                      ></ColorLabel>
+                    </div>
+                  </RadioColorGroup>
+                </FormGroup>
+              </Col>
+              <Col md="6">
+                <H4>Zadajte text na prednej strane:</H4>
+                <FormGroup className="mt-4">
+                  <Input
+                    type="textarea"
+                    name="text"
+                    placeholder="Zadajte text"
+                    id="frontText"
+                    required
+                    maxLength={140}
+                    onChange={(e) => {
+                      handleChangeTextArea(e);
+                      handleChange(e);
+                    }}
+                  />
+                </FormGroup>
+              </Col>
+            </Row>
+            <Row className="mt-4">
+              <Col md="6" className="mb-4">
+                <H4>Súhrn poukážky:</H4>
+                <Summary formData={formData} setFormData={setFormData} />
+              </Col>
+              <Col md="6" className="d-flex align-items-center">
+                <PreviewHolder>
+                  <Preview src={imageSrc} alt="poukazka" />
+                  <PreviewTextHolder>
+                    <PrednaStranaText colorText={color}>
+                      {frontText}
+                    </PrednaStranaText>
+                  </PreviewTextHolder>
+                </PreviewHolder>
+              </Col>
+            </Row>
+            <AddToCart type="submit">Pridať do košíka</AddToCart>
+          </>
         </Form>
       </Container>
       <ProductModal

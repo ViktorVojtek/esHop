@@ -21,42 +21,32 @@ const faq = [
     question:
       'Je možné objednať si tovar v e-shope a vyzdvihnúť na odbernom mieste? Ak áno, aké sú podmienky ?',
     answer:
-      'Áno, je možné tovar si objednať v e-shope a osobne prevziať na odbernom mieste. Pri osobnom odbere na odbernom mieste nie je možné meniť objednávku z e-shopu. Objednávka je záväzná. <strong>Pri vyzdvihnutí objednávky je možné platiť v hotovosti alebo platobnou kartou. Pri osobnom odbere kupujúci neplatí poštovné a balné.</strong>( zvýraznené neviem, či môže byť. Musíš porozmýšľať, či môžu ľudia platiť aj pri osobnom odbere tovaru)',
+      'Samozrejme, tovar objednaný v našom e-shope si môžete prevziať osobne na predajni Cestovná agentúra DJK Tour, Popradská 6, 064 01 Stará Ľubovňa. ',
   },
   {
-    question: 'Je povinná registrácia ?',
+    question: 'Je na nákup v e-shope potrebná registrácia?',
     answer:
-      'Nie, registrácia nie je povinná. Pri objednávke je ale potrebné vyplniť údaje potrebné k zaslaniu tovaru. Ak ste však pravidelným odberateľom je pre vás pohodlnejšie sa registrovať a ušetriť čas opakovaným vyplňovaním povinných údajov.',
+      'Nie, registrácia v  našom e-shope nie je povinná, no odporúčame ju. Je pre vás pohodlnejšie sa registrovať a ušetriť si čas vyplňovaným všetkých povinných údajov. ',
   },
   {
-    question: 'Platba za objednaný tovar?',
+    question: 'Aké spôsoby platby akceptujete?',
     answer:
-      'Platba je možná online kartou, bankovým prevodom alebo pri osobnom odbere.',
+      'Platba za zakúpený tovar/službu je možná platobnou kartou, bankovým prevodom alebo na dobierku.',
   },
   {
     question: 'Ako postupovať pri reklamácii / výmene tovaru?',
     answer:
-      'Reklamácie vybavujeme do 30 dní. Na tovar sa vzťahuje záručná doba 24 mesiacov v zmysle platných právnych predpisov. <br> <strong>Návod pri reklamácii tovaru:</strong><br><ul><li>Tovar aj s kópiou faktúry a sprievodným listom nám zašlite doporučene (nie na dobierku) na adresu:----------------------------------- V sprievodnom liste uveďte meno a priezvisko, na ktoré bola objednávka vytvorená, číslo faktúry (tú nájdete aj vo Vašom konte, ale ak ju neviete nájsť, tak uveďte, kedy ste si u nás objednávku vytvárali a na akú sumu) a dôvod reklamácie.</li><li>Pri výmene tovaru je potrebné si vytvoriť novú objednávku, kde do poznámky v objednávke uvediete, že sa jedná o "reklamáciu tovaru z faktúry číslo ..." (tým si tovar rezervujete a je to pre nás tiež informácia, aby sme Vám objednávku zatiaľ neposielali). Pokiaľ daný tovar nie je k dispozícii, vyberte si iný. Pokiaľ si nechcete vybrať iný tovar, objednávku si nevytvárajte, ale do sprievodného listu uveďte číslo účtu, kde chcete zaslať peniaze za vrátený tovar.</li><li>V prípade ďalších otázok nás neváhajte kontaktovať prostredníctvom emailu.</li></ul>',
-  },
-  {
-    question: 'Aké tlačivo potrebujem pri výmene alebo reklamácii tovaru?',
-    answer:
-      'Výmena tovaru na stiahnutie tu:............<br>Odstúpenie od kúpnej zmluvy na stiahnutie tu:...............<br>Reklamačný protokol na stiahnutie tu:............',
-  },
-  {
-    question: 'Budete ma informovať o dodaní tovaru pred doručením?',
-    answer:
-      'Áno. Akonáhle je vaša objednávka spracovaná, odovzdáme zabalenú zásielku prepravcovi. Kuriér Vás bude kontaktovať telefonicky a dohodne si s Vami presný čas doručenia podľa zadanej dodacej adresy.',
+      'Ak sa na vašom zakúpenom tovare vyskytne závada, máte zo zákona právo ju reklamovať. Záručná doba (doba minimálnej spotreby) tovaru je vyznačená na obale. V ostatných prípadoch platí všeobecná záručná doba v dĺžke 24 mesiacov odo dňa prevzatia tovaru. Záruka sa zvyčajne nevzťahuje na mechanické poškodenie, poškodenie prírodným živlom a podobne.<br> Zásielku s reklamovaným tovarom odporúčame posielať ako poistený balík (nie na dobierku), spolu s kópiou daňového dokladu (paragón, faktúra). Nezabudnite priložiť Výmenný/reklamačný protokol, kde čo najpodrobnejšie popíšete závadu a dôvody reklamácie. Balíček s tovarom nám odošlite na adresu: MICUS RELAX, s.r.o., so sídlom Popradská 6, 064 01 Stará Ľubovňa, Slovenská republika.',
   },
   {
     question: 'Ako viem, že som úspešne potvrdil/a objednávku?',
     answer:
-      'Ak ste úspešne potvrdili objednávku, príde Vám e-mail s potvrdením objednávky.<br> Ak by Vám e-mail neprišiel, skontrolujte si, či ste dokončili nákup. V nákupnom košíku by Vám nemal zostať žiadny tovar.',
+      'Ak ste úspešne potvrdili objednávku, príde Vám e-mail s potvrdením objednávky. V prípade, že ste nedostali žiadny e-mail, skontrolujte, či ste dokončili nákup. V nákupnom košíku by vám nemal zostať žiadny tovar. ',
   },
   {
     question: 'Je možné poslať tovar aj do zahraničia?',
     answer:
-      'Zaslanie tovaru do zahraničia nie je problém. V procese objednávky táto služba zatiaľ nie je dostupná, no radi Vám vyhovieme individuálne. Pri takejto požiadavke je nutné kontaktovať náš zákaznícky servis, kde kalkuláciu a poslanie balíka radi vyriešime.',
+      'Zaslanie tovaru do zahraničia nie je problém. V procese objednávky táto služba nie je dostupná, no radi vám vyhovieme individuálne. Kontaktujte nás, kde kalkuláciu poštovného a poslanie balíka radi vyriešime.',
   },
   {
     question:
@@ -65,21 +55,30 @@ const faq = [
       'Údaje k platbe nájdete v e-maile potvrdzujúcom prijatie Vašej objednávky. Číslo účtu pre platbu je....................., ako variabilný symbol uveďte číslo Vašej objednávky. Pokiaľ si nie ste istý/á, aké údaje máte pri platbe zadať, kontaktujte prosím tel.číslo ......',
   },
   {
-    question: 'Aká je záručná doba na tovar?',
+    question: 'Kedy bude moja reklamácia vybavená? ',
     answer:
-      'Záručná doba na tovar je dva roky od predaja, pokiaľ sa viditeľne od výrobcu neudáva inak???',
+      'Budeme sa snažiť, aby to bolo v čo najkratšom čase, najneskôr však do 30 dní od uplatnenia reklamácie a prijatia reklamovaného tovaru. O výsledku reklamácie budete informovaný e-mailom alebo telefonicky a spolu s tovarom Vám bude doručený reklamačný protokol s vyrozumením.',
   },
   {
-    question: 'Čím sú produkty spoločnosti ………….výnimočné?',
-    answer: 'predovšetkým prémiovou kvalitou produktov za bezkonkurenčné ceny',
+    question:
+      'V zásielke mi neprišiel správny tovar alebo v nej niečo chýba. Ako postupovať?',
+    answer:
+      'Za nepríjemnosť sa vám ospravedlňujeme. Pokiaľ vo vašej zásielke dorazil iný tovar, ako ste si objednali, kontaktujte nás e-mailom: eshop@kupelecks.sk alebo telefonicky + 421 911 904 880 v pracovných dňoch od 08:00 do 17:00 hod. A my vám zašleme už ten správny.',
   },
   {
-    question: 'Sú produkty Maxima certifikované?',
-    answer: 'áno, sú certifikované..................',
+    question: 'Je možné tovar vymeniť?',
+    answer:
+      'V prípade záujmu o výmeu tovaru vám odporúčame tovar vrátiť, vypísať Výmenný reklamačný formulár  a vytvoriť novú objednávku.',
   },
   {
-    question: 'Kedy mi budú vrátené peniaze za stornovanú objednávku?',
-    answer: ' Peniaze Vám budú vrátené najneskôr do 5 pracovných dní.',
+    question: 'Je možné tovar/službu vrátiť?',
+    answer:
+      'Zakúpený tovar alebo službu máte právo vrátiť alebo vymeniť do 14 dní. Balíček nám jednoducho odošlite poštou na adresu:  AMICUS RELAX, s.r.o., Popradská 6, 064 01 Stará Ľubovňa. Chceme vás upozorniť, že tovar musí byť nepoužitý, nepoškodený a v originálnom balení.<br> Do zásielky priložte vyplnený a podpísaný Formulár na odstpúenie od zmluvy, ktorý je vám k dispozícii tu. Vo formulári uveďte tovar, ktorý chcete vrátiť a číslo účtu (IBAN), kam máme finančné prostriedky vrátiť. Akonáhle tieto údaje od vás dostaneme, financie Vám vrátime čo najskôr, najneskôr však do 14 kalendárnych dní. <br> Odporúčame vám zásielku poslať ako doporučený balík s poistením na hodnotu tovaru (v prípade straty, alebo znehodnotenia balíka si ho budete môcť s podacím lístkom na pošte vyreklamovať).',
+  },
+  {
+    question: 'Aký je stav mojej objednávky?',
+    answer:
+      'O stave vašej objednávky vás v každom kroku budeme informovať e-mailom. Dostanete potvrdenie o prijatí objednávky, o jej vyskladnení a napokon aj o odoslaní. V prípade registrovaných zákazníkov si viete stav Vašej objednávky sledovať vo Vašom účte.',
   },
 ];
 
