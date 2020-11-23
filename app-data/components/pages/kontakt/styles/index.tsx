@@ -87,7 +87,7 @@ export const Circle = styled.div`
 export const Card = styled.div`
   position: relative;
   transition: box-shadow 0.3s;
-  border: 1px solid #eaeaea;
+  border: 1px solid #cecece;
   border-radius: 4px;
   display: flex;
   flex-direction: column;

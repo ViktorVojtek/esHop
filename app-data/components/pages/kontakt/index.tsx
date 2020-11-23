@@ -104,7 +104,7 @@ const KontaktPage = () => (
               </ContactHolder>
               <ContactHolder>
                 <Span>Tel: </Span>
-                <A href="tel:+421911904880">+421 911 904 880</A>
+                <A href="tel:+421911338828">+421 911 338 828</A>
               </ContactHolder>
               <AnchorLink offset={() => 100} href="#faq">
                 <Smooth>Často kladené otázky</Smooth>
@@ -168,7 +168,7 @@ const KontaktPage = () => (
       <Row>
         <Col>
           <H2
-            style={{ borderTop: '1px solid #eaeaea', paddingTop: '32px' }}
+            style={{ borderTop: '1px solid #cecece', paddingTop: '32px' }}
             id="faq"
             className="w-100 mt-4 mb-4"
           >

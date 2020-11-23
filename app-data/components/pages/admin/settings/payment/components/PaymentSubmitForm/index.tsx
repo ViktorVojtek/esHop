@@ -30,20 +30,20 @@ export default () => {
 
   return (
     <Form onSubmit={handleSubmitPaymentData} inline>
-      <FormGroup className="mr-sm-2 mb-2">
+      <FormGroup className="mr-sm-2">
         <Label for="title" className="mr-sm-3">
-          Title
+          Názov:
         </Label>
-        <Input id="title" type="text" placeholder="Insert title" />
+        <Input id="title" type="text" placeholder="Zadajte názov" />
       </FormGroup>
       <FormGroup className="mr-sm-2">
         <Label for="value" className="mr-sm-3">
-          Value
+          Cena:
         </Label>
-        <Input id="value" type="number" step={0.1} placeholder="Insert value" />
+        <Input id="value" type="number" step={0.1} placeholder="Zadajte cenu" />
       </FormGroup>
       <Button type="submit" color="primary" className="ml-auto mr-3">
-        Submit
+        Pridať
       </Button>
     </Form>
   );

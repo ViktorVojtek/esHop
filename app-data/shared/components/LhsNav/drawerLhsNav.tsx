@@ -28,22 +28,22 @@ const useStyles = makeStyles((theme: Theme) =>
 const menuItems1 = [
   {
     href: '/admin/products',
-    title: 'Products',
+    title: 'Produkty',
     iconComponent: ScatterPlotOutlinedIcon,
   },
   {
     href: '/admin/services',
-    title: 'Services',
+    title: 'Služby',
     iconComponent: SettingsApplicationsOutlinedIcon,
   },
   {
     href: '/admin/orders',
-    title: 'Orders',
+    title: 'Objednávky',
     iconComponent: FormatListNumberedOutlinedIcon,
   },
   {
     href: '/admin/customers',
-    title: 'Customers',
+    title: 'Používateľia',
     iconComponent: GroupOutlinedIcon,
   },
   {
@@ -56,38 +56,33 @@ const menuItems1 = [
 const menuItems2 = [
   {
     href: '/admin/settings/category',
-    title: 'Category',
+    title: 'Kategórie',
     iconComponent: ClassOutlinedIcon,
   },
   {
     href: '/admin/settings/subcategory',
-    title: 'Subcategory',
+    title: 'Podkategórie',
     iconComponent: ClassOutlinedIcon,
   },
   {
-    href: '/admin/accomodation',
-    title: 'Accomodation',
-    iconComponent: ScatterPlotOutlinedIcon,
-  },
-  {
     href: '/admin/settings/currency',
-    title: 'Currency',
+    title: 'Meny',
     iconComponent: EuroOutlinedIcon,
   },
   {
     href: '/admin/settings/delivery',
-    title: 'Delivery',
+    title: 'Doručenie',
     iconComponent: MailboxOutlinedIcon,
   },
   {
-    href: '/admin/settings/discount',
-    title: 'Discount',
-    iconComponent: TrendingDownOutlinedIcon,
+    href: '/admin/settings/payment',
+    title: 'Platba',
+    iconComponent: PaymentOutlinedIcon,
   },
   {
-    href: '/admin/settings/payment',
-    title: 'Payment',
-    iconComponent: PaymentOutlinedIcon,
+    href: '/admin/settings/discount',
+    title: 'Zľavy',
+    iconComponent: TrendingDownOutlinedIcon,
   },
 ];
 
@@ -108,7 +103,7 @@ export default () => {
       </List>
       <List>
         <ListItem>
-          <Typography>Settings</Typography>
+          <Typography>Nastavenia</Typography>
         </ListItem>
       </List>
       <Divider />

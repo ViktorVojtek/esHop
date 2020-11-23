@@ -38,21 +38,21 @@ const DeliverySubmitForm: FC = () => {
 
   return (
     <Form onSubmit={handleSubmitDeliveryyData} inline>
-      <FormGroup className="mr-sm-2 mb-2">
+      <FormGroup className="mr-sm-2">
         <Label for="deliveryTitle" className="mr-sm-3">
-          Title
+          Názov:
         </Label>
-        <Input id="deliveryTitle" type="text" placeholder="Insert title" />
+        <Input id="deliveryTitle" type="text" placeholder="Zadajte názov" />
       </FormGroup>
       <FormGroup className="mr-sm-2">
         <Label for="deliveryValue" className="mr-sm-3">
-          Value
+          Cena:
         </Label>
-        <Input id="deliveryValue" type="text" placeholder="Insert value" />
+        <Input id="deliveryValue" type="text" placeholder="Zadajne cenu" />
       </FormGroup>
       <FormGroup>
         <Label for="deliveryValue" className="mr-sm-3">
-          Is envelope size?
+          Veľkosť poštovej obálky?
         </Label>
         <Input id="isEnvelopeSize" type="checkbox" />
       </FormGroup>

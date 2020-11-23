@@ -72,25 +72,25 @@ const CurrencySubmitForm: FC = () => {
         <Input
           id="currencyTitle"
           type="text"
-          placeholder="Insert currency title"
+          placeholder="Zadajte názov meny"
         />
       </FormGroup>
       <FormGroup>
-        <Label for="currencySign">Currency sign</Label>
+        <Label for="currencySign">Znak meny</Label>
         <Input
           id="currencySign"
           type="text"
-          placeholder="Insert currency sign e.g. €"
+          placeholder="Zadajte znak meny napr. €"
         />
       </FormGroup>
       <FormGroup>
-        <Label for="currencyValue">Currency value</Label>
+        <Label for="currencyValue">Hodnota meny</Label>
         <Input
           id="currencyValue"
           innerRef={currencyValRef}
           disabled={isDefCurrency}
           type="number"
-          placeholder="Insert currency value"
+          placeholder="Zadajte hodnotu meny"
           step="any"
         />
       </FormGroup>
@@ -102,12 +102,12 @@ const CurrencySubmitForm: FC = () => {
               type="checkbox"
               onChange={handleDefCurrency}
             />{' '}
-            Default currency
+            Základná mena
           </Label>
         </FormGroup>
       </FormGroup>{' '}
       <FormGroup>
-        <Button type="submit">Submit</Button>
+        <Button type="submit">Pridať</Button>
       </FormGroup>
     </Form>
   );

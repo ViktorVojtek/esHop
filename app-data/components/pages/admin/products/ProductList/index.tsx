@@ -105,7 +105,7 @@ const ProductList: FC = () => {
             >
               <a>
                 <Button style={{ fontSize: '.9rem' }} color="primary">
-                  Update
+                  Upraviť
                 </Button>
               </a>
             </Link>{' '}
@@ -114,7 +114,7 @@ const ProductList: FC = () => {
               color="danger"
               onClick={() => handleShowModal(_id)}
             >
-              Delete
+              Zmazať
             </Button>
           </ActionHolder>
         </ProductItem>
@@ -125,12 +125,12 @@ const ProductList: FC = () => {
   return products && products.length > 0 ? (
     <>
       <Modal title="Delete product" fn={handleDeleteProduct}>
-        Do you really want to delete this item?
+        Ste si istý, že chcete zmazať tento produkt ?
       </Modal>
       <Row>{productItems}</Row>
     </>
   ) : (
-    <p>No product has yet been created.</p>
+    <p>Nemáte žiaden vytvorený produkt.</p>
   );
 };
 

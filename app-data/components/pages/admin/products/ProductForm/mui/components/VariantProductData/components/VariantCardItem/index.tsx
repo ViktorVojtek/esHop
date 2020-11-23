@@ -26,7 +26,7 @@ export default (props) => {
 
   return (
     <Card className={classes.root}>
-      <Button onClick={() => removeItem(idx)}>Remove</Button>
+      <Button onClick={() => removeItem(idx)}>Odstrániť</Button>
       {images && images.length > 0 && (
         <CardMedia
           component="img"
@@ -48,14 +48,14 @@ export default (props) => {
           dangerouslySetInnerHTML={renderDescription()}
         ></Typography>
         <Typography variant="body2" component="p">
-          Price: {price.value || 0},-{price.currency}
+          Cena: {price.value || 0},-{price.currency}
         </Typography>
         <Typography variant="body2" component="p">
-          Discount: {discount || 0}%
+          Zľava: {discount || 0}%
         </Typography>
         <Typography variant="body2" component="p">
-          In stock are{' '}
-          <Typography component="strong">{inStock || 0} products</Typography>
+          Na sklade{' '}
+          <Typography component="strong">{inStock || 0} produktov.</Typography>
         </Typography>
       </CardContent>
     </Card>

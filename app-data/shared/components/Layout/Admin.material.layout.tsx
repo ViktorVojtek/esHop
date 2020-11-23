@@ -102,7 +102,7 @@ export default function ResponsiveDrawer(props: Props) {
           </Typography>
           <Button color="inherit" onClick={logout}>
             <Typography variant="button">
-              Logout{' '}
+              Odhlásenie{' '}
               <SvgIcon fontSize="small">
                 <ExitToAppIcon />
               </SvgIcon>

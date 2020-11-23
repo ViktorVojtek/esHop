@@ -6,11 +6,11 @@ import Layout from '../../app-data/shared/components/Layout/Admin.material.layou
 const Home: () => JSX.Element = () => (
   <>
     <Head>
-      <title>esHop App</title>
+      <title>Červený Kláštor - Administrácia</title>
       <link rel="icon" href="/favicon.ico" />
     </Head>{' '}
     <Layout pageTitle="Admin">
-      <p>Admin content.</p>
+      <h4>Vitajte späť!</h4>
     </Layout>
   </>
 );

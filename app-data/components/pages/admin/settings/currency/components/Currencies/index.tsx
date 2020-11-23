@@ -40,7 +40,7 @@ const Currencies: FC = () => {
           <td>{defaultCurrency === true ? 'true' : 'false'}</td>
           <td className="text-right">
             <Button color="danger" onClick={() => handleRemoveItem(_id)}>
-              Remove
+              Odstrániť
             </Button>
           </td>
         </tr>
@@ -52,11 +52,11 @@ const Currencies: FC = () => {
       <thead>
         <tr>
           <th className="border-top-0">#</th>
-          <th className="border-top-0">Title</th>
-          <th className="border-top-0">Sign</th>
-          <th className="border-top-0">Value</th>
+          <th className="border-top-0">Názov</th>
+          <th className="border-top-0">Znak</th>
+          <th className="border-top-0">Hodnota</th>
           <th colSpan={2} className="border-top-0">
-            Default currency
+            Základná mena
           </th>
         </tr>
       </thead>
@@ -64,7 +64,7 @@ const Currencies: FC = () => {
     </Table>
   ) : (
     <div className="d-flex justify-content-center align-items-center h-100">
-      <p className="text-center">No currencies has been set yet.</p>
+      <p className="text-center">Neboli vytvorené žiadne meny.</p>
     </div>
   );
 };

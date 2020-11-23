@@ -56,7 +56,7 @@ export const ItemTextProcedures = styled.h6`
 `;
 
 export const H4 = styled.h4`
-  font-size: 2rem;
+  font-size: 1.25rem;
   font-family: MuseoSans-300;
   color: black;
   font-weight: bold;
@@ -74,7 +74,7 @@ export const H1 = styled.h3`
 `;
 
 export const H3 = styled.h3`
-  font-size: 2rem;
+  font-size: 1.5 rem;
   font-family: MuseoSans-300;
   color: black;
   font-weight: bold;
@@ -275,17 +275,6 @@ export const RadioColorInput = styled.input`
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  &:checked {
-    & ~ ${ColorLabel} {
-      box-shadow: 0px 0px 4px 4px #00aeef;
-      transform: scale(1.15);
-    }
-  }
-  &:active {
-    & ~ ${ColorLabel} {
-      transform: scale(1.15);
-    }
-  }
 `;
 
 export const RadioInput = styled.input`

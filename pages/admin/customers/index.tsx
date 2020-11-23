@@ -7,7 +7,7 @@ import CustomersList from '../../../app-data/components/pages/admin/customers';
 const Customers: () => JSX.Element = () => (
   <>
     <Head>
-      <title>esHop App | Customers</title>
+      <title>esHop App | Používatelia</title>
       <link rel="icon" href="/favicon.ico" />
     </Head>{' '}
     <Layout pageTitle="Customers">

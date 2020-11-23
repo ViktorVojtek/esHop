@@ -7,7 +7,7 @@ import Form from '../../../../app-data/components/pages/admin/products/ProductFo
 const ProductCreate: () => JSX.Element = () => (
   <>
     <Head>
-      <title>esHop App | Product create</title>
+      <title>esHop App | Pridať produkt</title>
       <link rel="icon" href="/favicon.ico" />
     </Head>{' '}
     <Layout pageTitle="Product - Create">

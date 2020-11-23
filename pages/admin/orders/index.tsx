@@ -8,10 +8,10 @@ import OrdersList from '../../../app-data/components/pages/admin/orders';
 const Orders: () => JSX.Element = () => (
   <>
     <Head>
-      <title>esHop App | Orders</title>
+      <title>esHop App | Objednávky</title>
       <link rel="icon" href="/favicon.ico" />
     </Head>{' '}
-    <Layout pageTitle="Orders">
+    <Layout pageTitle="Objednávky">
       <OrdersList />
     </Layout>
   </>

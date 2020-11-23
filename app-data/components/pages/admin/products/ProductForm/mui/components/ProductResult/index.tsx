@@ -62,10 +62,10 @@ export default (props) => {
           {title}
         </Typography>
         <Typography variant="subtitle1" component="h3">
-          Category: {category.title}
+          Kategória: {category.title}
         </Typography>
         <Typography variant="subtitle1" component="h3">
-          Subcategory: {subCategory.title}
+          Podkategória: {subCategory.title}
         </Typography>
       </Box>
       {variants && variants.length > 0 && (
@@ -98,9 +98,9 @@ export default (props) => {
                       <Table size="small">
                         <TableHead>
                           <TableRow>
-                            <TableCell>Price</TableCell>
-                            <TableCell>Items in stock</TableCell>
-                            <TableCell>Discount</TableCell>
+                            <TableCell>Cena</TableCell>
+                            <TableCell>Na sklade</TableCell>
+                            <TableCell>Zľava</TableCell>
                           </TableRow>
                         </TableHead>
                         <TableBody>

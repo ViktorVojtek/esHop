@@ -17,6 +17,7 @@ import {
   PrednaStranaText,
   PreviewTextHolder,
   StyledModalLink,
+  H3,
 } from './styles';
 import { Context } from '../../../lib/state/Store';
 import Link from 'next/link';
@@ -101,6 +102,9 @@ const PoukazkyPage: () => JSX.Element = () => {
   return (
     <Wrapper>
       <Container>
+        <H3 style={{ marginBottom: '100px' }}>
+          Vytvorte si darčekovú poukážku a potešte svojich blízkych
+        </H3>
         <PoukazkaTypes getActiveType={setActiveType} />
         <Form onSubmit={handleSubmit}>
           <div id="voucherContent" style={{ minHeight: '1px' }}>

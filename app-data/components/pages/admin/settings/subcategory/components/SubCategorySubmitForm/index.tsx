@@ -56,7 +56,7 @@ const SubCategorySubmitForm: FC = () => {
           id="categoryForSubCategorySelect"
           required
         >
-          <option value="">Select category</option>
+          <option value="">Zvoľte kategóriu</option>
           {categories && categories.length > 0
             ? categories.map(({ _id, title }) => {
                 return (
@@ -69,15 +69,15 @@ const SubCategorySubmitForm: FC = () => {
         </Input>
       </FormGroup>
       <FormGroup>
-        <Label for="subCategoryTitle">Title</Label>
+        <Label for="subCategoryTitle">Názov</Label>
         <Input
           id="subCategoryTitle"
           type="text"
-          placeholder="Insert category title"
+          placeholder="Zadajte názov podkategórie"
         />
       </FormGroup>
       <FormGroup>
-        <Button type="submit">Submit</Button>
+        <Button type="submit">Pridať</Button>
       </FormGroup>
     </Form>
   );

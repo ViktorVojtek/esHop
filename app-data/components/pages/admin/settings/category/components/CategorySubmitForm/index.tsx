@@ -32,16 +32,17 @@ const CategorySubmitForm: FC = () => {
     <Form onSubmit={handleSubmitCategoryData} inline>
       <FormGroup className="mr-sm-2">
         <Label for="categoryTitle" className="mr-sm-3">
-          Category Title
+          Názov kategórie
         </Label>
         <Input
           id="categoryTitle"
           type="text"
-          placeholder="Insert category title"
+          placeholder="Zadajte názov kategórie"
+          style={{ minWidth: '200px' }}
         />
       </FormGroup>
       <Button type="submit" color="primary" className="ml-auto mr-3">
-        Submit
+        Pridať
       </Button>
     </Form>
   );

@@ -11,7 +11,7 @@ const Reviews: () => JSX.Element = () => (
       <link rel="icon" href="/favicon.ico" />
     </Head>{' '}
     <Layout pageTitle="Reviews">
-      <p>Reviews content.</p>
+      <p>V stave riešenia</p>
     </Layout>
   </>
 );

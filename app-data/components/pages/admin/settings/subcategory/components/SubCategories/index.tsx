@@ -63,7 +63,7 @@ const SubCategories: FC = () => {
                           color="danger"
                           onClick={() => handleRemoveItem(subItem._id)}
                         >
-                          Remove
+                          Odstrániť
                         </Button>
                       </td>
                     </tr>
@@ -93,9 +93,9 @@ const SubCategories: FC = () => {
       <thead>
         <tr>
           <th className="border-top-0">#</th>
-          <th className="border-top-0">Category</th>
+          <th className="border-top-0">Kategória</th>
           <th colSpan={2} className="border-top-0">
-            Subcategory
+            Podkategória
           </th>
         </tr>
       </thead>
@@ -103,7 +103,7 @@ const SubCategories: FC = () => {
     </Table>
   ) : (
     <div className="d-flex justify-content-center align-items-center h-100">
-      <p className="text-center">No subcategorie has been set yet.</p>
+      <p className="text-center">Neboli vytvorené žiadne podkategórie.</p>
     </div>
   );
 };

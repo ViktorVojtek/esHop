@@ -36,7 +36,7 @@ const DeliveryMethods: FC = () => {
       <thead>
         <tr>
           <th className="border-top-0">#</th>
-          <th className="border-top-0">Title</th>
+          <th className="border-top-0">Názov</th>
           <th className="border-top-0"></th>
           <th className="border-top-0"></th>
           <th colSpan={2} className="border-top-0" />
@@ -65,7 +65,7 @@ const DeliveryMethods: FC = () => {
               <td>{isEnvelopeSize ? 'x' : ''}</td>
               <td className="text-right">
                 <Button color="danger" onClick={() => handleRemoveItem(_id)}>
-                  Remove
+                  Odstrániť
                 </Button>
               </td>
             </tr>
@@ -75,7 +75,7 @@ const DeliveryMethods: FC = () => {
     </Table>
   ) : (
     <div className="d-flex justify-content-center align-items-center h-100">
-      <p className="text-center">No delivery methodes has been created yet.</p>
+      <p className="text-center">Neboli vytvorené žiadne spôsoby doručenia.</p>
     </div>
   );
 };

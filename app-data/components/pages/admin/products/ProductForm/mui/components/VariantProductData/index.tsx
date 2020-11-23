@@ -211,7 +211,7 @@ const VariantProductData = (props) => {
       <Paper className={classes.paperBlock}>
         <FormControl margin="normal">
           <TextField
-            label="Variant title"
+            label="Názov variantu"
             variant="standard"
             id="vTitle"
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
@@ -227,7 +227,7 @@ const VariantProductData = (props) => {
         </FormControl>
         <FormControl margin="normal">
           <TextField
-            label="Variant number"
+            label="Číslo produktu"
             variant="standard"
             id="vproductCode"
             style={{ marginLeft: '10px' }}
@@ -243,14 +243,14 @@ const VariantProductData = (props) => {
           />
         </FormControl>
         <div>
-          <p className="mt-4 mb-2">Description </p>
+          <p className="mt-4 mb-2">Popis produktu </p>
           <Editor
             editorState={editorState}
             wrapperClassName="description-wrapper"
             editorClassName="description-editor"
             onEditorStateChange={onEditorStateChange}
           />
-          <p className="mb-2">Preview </p>
+          <p className="mb-2">Náhľad </p>
           <textarea
             disabled
             value={draftToHtml(convertToRaw(editorState.getCurrentContent()))}
@@ -262,7 +262,7 @@ const VariantProductData = (props) => {
           <Grid item xs={4}>
             <FormControl className={classes.root} margin="normal">
               <TextField
-                label="Price"
+                label="Cena"
                 id="vPrice"
                 InputProps={{
                   endAdornment: (
@@ -288,7 +288,7 @@ const VariantProductData = (props) => {
           <Grid item xs={4}>
             <FormControl margin="normal" className={classes.root}>
               <TextField
-                label="Discount"
+                label="Zľava"
                 id="vDiscount"
                 InputProps={{
                   endAdornment: (
@@ -311,7 +311,7 @@ const VariantProductData = (props) => {
           <Grid item xs={4}>
             <FormControl margin="normal" className={classes.root}>
               <TextField
-                label="In Stock"
+                label="Na sklade"
                 id="vInStock"
                 InputProps={{
                   endAdornment: (
@@ -343,7 +343,7 @@ const VariantProductData = (props) => {
             multiple
           />
           <label htmlFor="icon-button-file">
-            <Typography component="span">Upload image: </Typography>
+            <Typography component="span">Nahrať obrázok: </Typography>
             <IconButton
               color="primary"
               aria-label="upload picture"
@@ -370,7 +370,7 @@ const VariantProductData = (props) => {
           </Carousel>
         ) : (
           <Paper className={classes.imagePreview} variant="outlined">
-            <Typography align="center">Image preview</Typography>
+            <Typography align="center">Náhľad obrázku</Typography>
           </Paper>
         )}
 
@@ -416,7 +416,7 @@ const VariantProductData = (props) => {
       ) : (
         <Paper className={classes.paperBlock}>
           <Typography align="center">
-            No variants has beeen created yet
+            Nebol vytvorený žiaden variant produktu.
           </Typography>
         </Paper>
       )}

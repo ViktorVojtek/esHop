@@ -52,7 +52,7 @@ const SubcategorySelector: FC<{
       change={handleChange}
       setDefault={handleSetDefValue}
       selected={selected}
-      title="Subcategory"
+      title="Podkategória"
     />
   );
 };

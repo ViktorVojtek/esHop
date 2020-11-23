@@ -38,12 +38,12 @@ export default (props: IProps): JSX.Element => {
       <Grid container>
         <Grid item xs={6}>
           <Typography variant="h6" component="h3">
-            Here we set the basic product properties
+            Základné vlastnosti produktu
           </Typography>
           <FormControl margin="normal">
             <TextField
               id="title"
-              label="Product title"
+              label="Názov produktu"
               variant="standard"
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                 setProductData({
@@ -56,7 +56,7 @@ export default (props: IProps): JSX.Element => {
               required
             />
           </FormControl>
-          <FormControl>
+          <FormControl className="mt-4 ml-2">
             <FormControlLabel
               control={
                 <Checkbox
@@ -70,7 +70,7 @@ export default (props: IProps): JSX.Element => {
                   name="isEnvelopeSize"
                 />
               }
-              label="Is envelope size?"
+              label="Veľkosť pre poštový list"
             />
           </FormControl>
           <CategorySelector

@@ -50,7 +50,7 @@ const CategorySelector: FC<{
       change={handleChange}
       selected={selected}
       setDefault={handleSetDefValue}
-      title="Category"
+      title="Kategória*"
     />
   );
 };

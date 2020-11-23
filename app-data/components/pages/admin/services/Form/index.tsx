@@ -147,7 +147,8 @@ export default () => {
     <form ref={htmlForm} onSubmit={handleSubmitData}>
       <FormControl className={classes.fieldRow}>
         <TextField
-          label="Title"
+          label="Názov služby"
+          required
           onChange={(
             e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
           ) => {
@@ -201,7 +202,8 @@ export default () => {
           <FormControl className={classes.fieldRow}>
             <TextField
               type="number"
-              label="Price"
+              label="Cena"
+              required
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                 populateData({
                   ...data,
@@ -221,7 +223,8 @@ export default () => {
           <FormControl className={classes.fieldRow}>
             <TextField
               type="number"
-              label="Discount"
+              label="Zľava"
+              required
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                 populateData({
                   ...data,
@@ -249,7 +252,7 @@ export default () => {
       </FormControl>
       <FormControl className={classes.fieldRow}>
         <Button color="primary" type="submit">
-          Send
+          Vytvoriť
         </Button>
       </FormControl>
     </form>

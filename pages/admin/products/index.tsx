@@ -9,13 +9,13 @@ import ProductList from '../../../app-data/components/pages/admin/products/Produ
 const Products: () => JSX.Element = () => (
   <>
     <Head>
-      <title>esHop App | Products</title>
+      <title>esHop App | Produkty</title>
       <link rel="icon" href="/favicon.ico" />
     </Head>{' '}
     <Layout pageTitle="Products">
       <Link href="/admin/products/create">
         <Button color="primary" className="mb-3">
-          Create product
+          Vytvoriť produkt
         </Button>
       </Link>{' '}
       <ProductList />

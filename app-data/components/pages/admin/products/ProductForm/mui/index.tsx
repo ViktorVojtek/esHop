@@ -148,7 +148,7 @@ const ProductStepper = ({ update, updateProductData }: IProductForm) => {
           {activeStep === steps.length ? (
             <div>
               <Typography className={classes.instructions}>
-                Product has been created.
+                Produkt bol vytvorený.
               </Typography>
               <Button onClick={handleReset}>Reset</Button>
             </div>
@@ -163,7 +163,7 @@ const ProductStepper = ({ update, updateProductData }: IProductForm) => {
                   onClick={handleBack}
                   className={classes.backButton}
                 >
-                  <Typography>Back</Typography>
+                  <Typography>Späť</Typography>
                 </Button>
                 <Button
                   variant="contained"
@@ -178,7 +178,9 @@ const ProductStepper = ({ update, updateProductData }: IProductForm) => {
                   disabled={disabled}
                 >
                   <Typography>
-                    {activeStep === steps.length - 1 ? 'Publish' : 'Next'}
+                    {activeStep === steps.length - 1
+                      ? 'Vytvoriť'
+                      : 'Pokračovať'}
                   </Typography>
                 </Button>
               </div>
@@ -214,9 +216,9 @@ function checkStepBtnDisabled(step: number, prodData: any) {
 
 function getSteps(): string[] {
   return [
-    'Fill in general product data',
-    "Create product's variants",
-    'Check your future product',
+    'Základné vlastnosti produktu',
+    'Vytvorenie variantov produktu',
+    'Kontrola produktu',
   ];
 }
 function getStepContent(stepIndex: number, data: any, handler: any) {

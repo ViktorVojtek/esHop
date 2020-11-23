@@ -46,7 +46,7 @@ const H5 = styled.h5`
 `;
 const Holder = styled.div`
   margin-bottom: 1rem;
-  border: 1px solid #eaeaea;
+  border: 1px solid #cecece;
   border-radius: 4px;
   transition: box-shadow 0.3s;
   cursor: pointer;

@@ -32,7 +32,7 @@ export default (): JSX.Element => {
                 <td>{title}</td>
                 <td>{value}</td>
                 <td className="text-right">
-                  <Button color="danger">Remove</Button>
+                  <Button color="danger">Odstrániť</Button>
                 </td>
               </tr>
             );
@@ -45,13 +45,13 @@ export default (): JSX.Element => {
       <thead>
         <tr>
           <th className="border-top-0">#</th>
-          <th className="border-top-0">Payment met. title</th>
-          <th colSpan={2}>Payment met. value</th>
+          <th className="border-top-0">Názov platobnej metódy</th>
+          <th colSpan={2}>Cena za platbu</th>
         </tr>
       </thead>
       <tbody>{payments}</tbody>
     </Table>
   ) : (
-    <p>No payment methodes has been created yet.</p>
+    <p>Neboli vytvorené žiadne spôsoby platby.</p>
   );
 };

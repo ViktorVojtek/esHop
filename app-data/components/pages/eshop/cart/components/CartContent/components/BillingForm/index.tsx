@@ -123,7 +123,11 @@ const BillingForm: FC = () => {
         });
         const orderId = order.data.createOrder;
         window.localStorage.setItem('orderId', orderId);
-        /*const url = '/payment';
+        const orderDataToSend = {
+          ...orderData,
+          orderId,
+        };
+        const url = '/payment';
         const paymentResponse = await fetch(url, {
           method: 'POST', // *GET, POST, PUT, DELETE, etc.
           mode: 'cors', // no-cors, *cors, same-origin
@@ -135,10 +139,10 @@ const BillingForm: FC = () => {
           },
           redirect: 'follow', // manual, *follow, error
           referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-          body: JSON.stringify(orderData), // body data type must match "Content-Type" header
+          body: JSON.stringify(orderDataToSend), // body data type must match "Content-Type" header
         });
         const respJson = await paymentResponse.json();
-        setCardPay(respJson);*/
+        setCardPay(respJson);
       } else {
         await mutate({
           variables: {

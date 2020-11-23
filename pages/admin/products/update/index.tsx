@@ -36,7 +36,7 @@ const UpdateProduct: FC = () => {
   return (
     <>
       <Head>
-        <title>esHop App | Product create</title>
+        <title>esHop App | Upraviť produkt</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>{' '}
       <Layout pageTitle="Product - Update">

@@ -34,7 +34,7 @@ const Categories: FC = () => {
         <tr>
           <th className="border-top-0">#</th>
           <th colSpan={2} className="border-top-0">
-            Category title
+            Názov kategórie
           </th>
         </tr>
       </thead>
@@ -46,7 +46,7 @@ const Categories: FC = () => {
               <td>{title}</td>
               <td className="text-right">
                 <Button color="danger" onClick={() => handleRemoveItem(_id)}>
-                  Remove
+                  Odstrániť
                 </Button>
               </td>
             </tr>

@@ -1,8 +1,12 @@
+import { config } from '../../config';
+
 export default async (req, res) => {
   const { email, fname, lname, tel } = req.body;
 
+  const { mailchimp } = config;
+
   try {
-    const API_KEY = 'a2bb51bbfd2f36dd99cec19e22256ee3-us17';
+    const API_KEY = mailchimp.secret;
     const LIST_ID = '447d8cc287';
     const DATACENTER = API_KEY.split('-')[1];
 

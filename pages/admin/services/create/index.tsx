@@ -10,7 +10,7 @@ const ServiceCreate: () => JSX.Element = () => (
       <title>esHop App | Service create</title>
       <link rel="icon" href="/favicon.ico" />
     </Head>{' '}
-    <Layout pageTitle="Service - Create">
+    <Layout pageTitle="Vytvorenie služby">
       <ServiceForm />
     </Layout>
   </>
