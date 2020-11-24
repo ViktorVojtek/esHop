@@ -3,6 +3,7 @@ import Currency from './Currency';
 import Customer from './Customer';
 import DeliveryMethode from './DeliveryMethode';
 import Discount from './Discount';
+import LoyalityProduct from './LoyalityProduct';
 import MarketingList from './MarketingList';
 import root from './root';
 import Order from './Order';
@@ -18,6 +19,7 @@ const typeDefs = [
   Customer,
   DeliveryMethode,
   Discount,
+  LoyalityProduct,
   MarketingList,
   root,
   Order,

@@ -38,7 +38,7 @@ const fadeOut = keyframes`
 `;
 
 const ShopingCart = styled.div<ShoppingCartType>`
-  margin: 20px 0;
+  margin: 0px 0;
   right: 0rem;
   background: white;
   width: 400px;
@@ -82,7 +82,10 @@ const CartPopover: FC<CartPopoverType> = ({ target }) => {
 
   return (
     <>
-      <CartWrapper onMouseEnter={() => setIsOpen(true)}>
+      <CartWrapper
+        onMouseEnter={() => setIsOpen(true)}
+        onMouseLeave={() => setIsOpen(false)}
+      >
         <Link href="/eshop/cart">
           <a>
             <CartIcon /> <span>{cart.length + giftCards.length}</span>

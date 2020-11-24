@@ -68,6 +68,13 @@ const rootTypeDefs = gql`
     updateProduct(_id: String!, productInput: ProductInput!): Product
     removeProduct(_id: String!): String
 
+    createLoyalityProduct(productInput: ProductInput!): LoyalityProduct
+    updateLoyalityProduct(
+      _id: String!
+      productInput: ProductInput!
+    ): LoyalityProduct
+    removeLoyalityProduct(_id: String!): String
+
     createSubCategory(categoryId: String!, title: String!): SubCategory
     removeSubCategory(_id: String!): String
 

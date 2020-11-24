@@ -52,12 +52,13 @@ const LogIn: FC = () => {
       if (!executeRecaptcha) {
         return;
       }
-
       const form = event.currentTarget;
       const email = form.email.value;
       const password = form.password.value;
 
       const recaptchaToken = await executeRecaptcha('login');
+
+      console.log(recaptchaToken);
 
       const response = await loginUserMutate({
         variables: {
@@ -83,7 +84,8 @@ const LogIn: FC = () => {
       });
       setIsError(false);
     } catch (err) {
-      handleSetErrorMessage(err.message);
+      console.log(err);
+      err && handleSetErrorMessage(err.message);
     }
   };
 

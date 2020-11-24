@@ -10,6 +10,8 @@ export default async (root: any, { customerData }, ctx: any) => {
   try {
     const { email, password, recaptchaToken } = customerData;
 
+    console.log('logujem');
+
     const userExist: ICustomer = await Customer.findOne({ email });
 
     if (!userExist) {

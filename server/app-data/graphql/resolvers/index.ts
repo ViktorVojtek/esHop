@@ -57,6 +57,10 @@ import createProduct from './mutation/CreateProduct';
 import updateProduct from './mutation/UpdateProduct';
 import removeProduct from './mutation/RemoveProduct';
 
+import createLoyalityProduct from './mutation/CreateLoyalityProduct';
+import updateLoyalityProduct from './mutation/UpdateLoyalityProduct';
+import removeLoyalityProduct from './mutation/RemoveLoyalityProduct';
+
 import createService from './mutation/CreateService';
 import updateService from './mutation/UpdateService';
 import removeService from './mutation/RemoveService';
@@ -161,6 +165,13 @@ const resolvers = {
       createProduct(root, args, ctx),
     updateProduct: async (root: any, args: any, ctx: any) =>
       updateProduct(root, args, ctx),
+
+    createLoyalityProduct: async (root: any, args: any, ctx: any) =>
+      createLoyalityProduct(root, args, ctx),
+    updateLoyalityProduct: async (root: any, args: any, ctx: any) =>
+      updateLoyalityProduct(root, args, ctx),
+    removeLoyalityProduct: async (root: any, args: any, ctx: any) =>
+      removeLoyalityProduct(root, args, ctx),
 
     createSubCategory: async (root: any, args: any, ctx: any) =>
       createSubCategory(root, args, ctx),

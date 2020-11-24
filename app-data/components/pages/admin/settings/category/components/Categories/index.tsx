@@ -56,7 +56,7 @@ const Categories: FC = () => {
     </Table>
   ) : (
     <div className="d-flex justify-content-center align-items-center h-100">
-      <p className="text-center">No categories has been set yet.</p>
+      <p className="text-center">Neboli vytvorené žiadne kategórie.</p>
     </div>
   );
 };

@@ -51,7 +51,7 @@ const MyApp = (props) => {
         <ApolloProvider client={apollo}>
           <Store>
             <Style />
-            <GoogleReCaptchaProvider reCaptchaKey="6LcS98QZAAAAAG6FfstRw_BF7BwFknxp-e-0Ra6-">
+            <GoogleReCaptchaProvider reCaptchaKey="6LfgFeEZAAAAAD2fNYXGUjpI_Yu1c65XODYxgoyY">
               <SnackbarProvider
                 maxSnack={3}
                 anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
