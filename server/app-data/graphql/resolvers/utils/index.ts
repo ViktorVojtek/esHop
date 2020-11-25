@@ -150,6 +150,68 @@ export function getVariantImagesPaths(
   });
 }
 
+export const storeLoyalityProductFile: (fileData: any) => Promise<string> = (
+  fileData
+) =>
+  new Promise((resolve, reject) => {
+    const { fileName, fileBase64Data, dirName, extension } = fileData;
+
+    const base64Data: string = fileBase64Data.split(';base64,')[1];
+    const ext: string = extension;
+
+    const extNorm: string = ext === 'jpeg' ? 'jpg' : ext;
+
+    const dir: string = path.resolve(
+      __dirname,
+      `../../../../../static/loyality-products/${dirName}`
+    );
+    const filePath: string = `${dir}/${fileName.toLowerCase()}.${extNorm}`;
+
+    mkdirp(dir, (dirErr) => {
+      if (dirErr) {
+        reject(dirErr);
+      }
+
+      writeFile(filePath, base64Data, { encoding: 'base64' }, (wFerr) => {
+        if (wFerr) {
+          reject(wFerr);
+        }
+
+        const resultFilePath = `/static${filePath
+          .split('static')[1]
+          .replace(/\\/g, '/')}`;
+
+        resolve(resultFilePath);
+      });
+    });
+  });
+
+export function getLoyalityProductImagePath(
+  images: { base64: string; title: string; ext: string }[],
+  vId: string
+): Promise<any[]> {
+  let loyalityProductImageDataArr = [];
+
+  return new Promise(async (resolve) => {
+    const { base64, title: imageTitle, ext } = images[0];
+
+    const fileData = {
+      fileName: imageTitle,
+      fileBase64Data: base64,
+      dirName: vId,
+      extension: ext,
+    };
+
+    const promiseFn = storeLoyalityProductFile(fileData);
+
+    loyalityProductImageDataArr.push(promiseFn);
+
+    const path = await Promise.all(loyalityProductImageDataArr);
+
+    resolve(path[0]);
+  });
+}
+
 export async function calculateOrderId(): Promise<string> {
   return new Promise(async (resolve, reject) => {
     try {

@@ -10,6 +10,7 @@ import deliveryMethode from './query/DeliveryMethode';
 import deliveryMethods from './query/DeliveryMethods';
 import discount from './query/Discount';
 import discounts from './query/Discounts';
+import loyalityProducts from './query/LoyalityProduct';
 import order from './query/Order';
 import orders from './query/Orders';
 import paymentMethode from './query/PaymentMethode';
@@ -88,6 +89,9 @@ const resolvers = {
     discount: async (root: any, args: { id: string }, ctx: any) =>
       discount(root, args, ctx),
     discounts: async () => discounts(),
+
+    loyalityProducts: async (root: any, args: any, ctx: any) =>
+      loyalityProducts(root, args, ctx),
     order: async (root: any, args: any, ctx: any) => order(root, args, ctx),
     orders: async (root: any, args: { id?: string }, ctx: any) =>
       orders(root, args, ctx),

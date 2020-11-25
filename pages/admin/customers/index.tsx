@@ -10,7 +10,7 @@ const Customers: () => JSX.Element = () => (
       <title>esHop App | Používatelia</title>
       <link rel="icon" href="/favicon.ico" />
     </Head>{' '}
-    <Layout pageTitle="Customers">
+    <Layout pageTitle="Používatelia">
       <CustomersList />
     </Layout>
   </>

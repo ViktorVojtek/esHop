@@ -17,6 +17,7 @@ import MailboxOutlinedIcon from '@material-ui/icons/MarkunreadMailboxOutlined';
 import TrendingDownOutlinedIcon from '@material-ui/icons/TrendingDownOutlined';
 import PaymentOutlinedIcon from '@material-ui/icons/PaymentOutlined';
 import RateReviewOutlinedIcon from '@material-ui/icons/RateReviewOutlined';
+import RedeemOutlinedIcon from '@material-ui/icons/RedeemOutlined';
 import SettingsApplicationsOutlinedIcon from '@material-ui/icons/SettingsApplicationsOutlined';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -26,6 +27,16 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const menuItems1 = [
+  {
+    href: '/admin/orders',
+    title: 'Objednávky',
+    iconComponent: FormatListNumberedOutlinedIcon,
+  },
+  {
+    href: '/admin/customers',
+    title: 'Používatelia',
+    iconComponent: GroupOutlinedIcon,
+  },
   {
     href: '/admin/products',
     title: 'Produkty',
@@ -37,14 +48,9 @@ const menuItems1 = [
     iconComponent: SettingsApplicationsOutlinedIcon,
   },
   {
-    href: '/admin/orders',
-    title: 'Objednávky',
-    iconComponent: FormatListNumberedOutlinedIcon,
-  },
-  {
-    href: '/admin/customers',
-    title: 'Používateľia',
-    iconComponent: GroupOutlinedIcon,
+    href: '/admin/loyality-program',
+    title: 'Vernostný program',
+    iconComponent: RedeemOutlinedIcon,
   },
   {
     href: '/admin/reviews',

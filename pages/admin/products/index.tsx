@@ -12,7 +12,7 @@ const Products: () => JSX.Element = () => (
       <title>esHop App | Produkty</title>
       <link rel="icon" href="/favicon.ico" />
     </Head>{' '}
-    <Layout pageTitle="Products">
+    <Layout pageTitle="Produkty">
       <Link href="/admin/products/create">
         <Button color="primary" className="mb-3">
           Vytvoriť produkt

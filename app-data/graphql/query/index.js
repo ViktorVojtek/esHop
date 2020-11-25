@@ -140,6 +140,20 @@ export const PRODUCTS_QUERY = gql`
   }
 `;
 
+export const LOYALITY_PRODUCTS_QUERY = gql`
+  query loyalityProducts {
+    loyalityProducts {
+      _id
+      dateCreated
+      title
+      image
+      isDiscount
+      discount
+      costPoints
+    }
+  }
+`;
+
 export const SUBCATEGORIES_QUERY = gql`
   query subCategories($categoryId: String) {
     subCategories(categoryId: $categoryId) {

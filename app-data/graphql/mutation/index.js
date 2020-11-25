@@ -174,6 +174,20 @@ export const CREATE_PRODUCT_MUTATION = gql`
   }
 `;
 
+export const CREATE_LOYALITY_PRODUCT_MUTATION = gql`
+  mutation createLoyalityProduct($loyalityProductInput: LoyalityProductInput!) {
+    createLoyalityProduct(loyalityProductInput: $loyalityProductInput) {
+      _id
+      costPoints
+      dateCreated
+      discount
+      image
+      isDiscount
+      title
+    }
+  }
+`;
+
 export const CREATE_SERVICE_MUTATION = gql`
   mutation createService($serviceInput: ServiceInput!) {
     createService(serviceInput: $serviceInput) {

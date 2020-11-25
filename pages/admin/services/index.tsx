@@ -12,7 +12,7 @@ const Services: () => JSX.Element = () => (
       <title>esHop App | Služby</title>
       <link rel="icon" href="/favicon.ico" />
     </Head>{' '}
-    <Layout pageTitle="Services">
+    <Layout pageTitle="Služby">
       <Link href="/admin/services/create">
         <Button color="primary" className="mb-3">
           Vytvoriť službu

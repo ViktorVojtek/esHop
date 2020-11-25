@@ -17,6 +17,7 @@ const rootTypeDefs = gql`
     paymentMethode(id: String!): Payment
     paymentMethodes: [Payment]
     products(categoryId: String, subCategoryId: String): [Product]
+    loyalityProducts: [LoyalityProduct]
     product(id: String!): Product
     service(id: String!): Service
     services: [Service]
@@ -68,10 +69,12 @@ const rootTypeDefs = gql`
     updateProduct(_id: String!, productInput: ProductInput!): Product
     removeProduct(_id: String!): String
 
-    createLoyalityProduct(productInput: ProductInput!): LoyalityProduct
+    createLoyalityProduct(
+      loyalityProductInput: LoyalityProductInput!
+    ): LoyalityProduct
     updateLoyalityProduct(
       _id: String!
-      productInput: ProductInput!
+      loyalityProductInput: LoyalityProductInput!
     ): LoyalityProduct
     removeLoyalityProduct(_id: String!): String
 
