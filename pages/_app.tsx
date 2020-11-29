@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
+// import Document, { Html, Head, Main, NextScript } from 'next/document';
 import Head from 'next/head';
 import { ApolloProvider } from 'react-apollo';
 
