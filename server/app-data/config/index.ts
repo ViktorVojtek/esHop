@@ -28,7 +28,7 @@ export const config = {
     superAdminPassword: process.env.SUPERADMIN_PASS,
   },
   recaptcha: {
-    secret: process.env.RECAPTCHA_SECRET, //6LfgFeEZAAAAADVSFhvvtLcBTeg04nkuGawJl4sh for LOCALHOST test 6LcS98QZAAAAAN9eTUofGsaAttRhzCVI_CsNPSXG production
+    secret: process.env.RECAPTCHA_SECRET,
   },
   mailchimp: {
     secret: process.env.MAILCHIMP_SECRET,
