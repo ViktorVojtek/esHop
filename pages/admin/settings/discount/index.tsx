@@ -1,7 +1,11 @@
 import React from 'react';
 
+import { withAuthSync } from '../../../../app-data/lib/auth';
+import { PageProps } from '../../Types/Page.types';
 import DiscountContent from '../../../../app-data/components/pages/admin/settings/discount';
 
-const DiscountPage: () => JSX.Element = () => <DiscountContent />;
+const DiscountPage: (props: PageProps) => JSX.Element = ({ role }) => (
+  <DiscountContent role={role} />
+);
 
-export default DiscountPage;
+export default withAuthSync(DiscountPage);

@@ -285,8 +285,8 @@ export const LOGIN_USER_MUTATION = gql`
       email
       firstName
       lastName
+      role
       token
-      tokenExpiresIn
     }
   }
 `;

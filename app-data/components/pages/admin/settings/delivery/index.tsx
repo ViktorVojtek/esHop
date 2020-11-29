@@ -14,11 +14,13 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const DeliveryPageContent: () => JSX.Element = () => {
+const DeliveryPageContent: (props: { role: number }) => JSX.Element = ({
+  role,
+}) => {
   const classes = useStyles();
 
   return (
-    <Layout pageTitle="Delivery methods settings">
+    <Layout pageTitle="Delivery methods settings" role={role}>
       <Paper className={classes.paper}>
         <Form />
       </Paper>

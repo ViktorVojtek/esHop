@@ -1,7 +1,8 @@
+import { Request, Response, NextFunction } from 'express';
 import { config } from '../../config';
 
-export default async (req, res) => {
-  const { email, fname, lname, tel } = req.body;
+export const subscribeRoute: (req: Request, res: Response, next: NextFunction) => Promise<any> = async (req, res, next) => {
+  const { body: { email, fname, lname, tel } } = req;
 
   const { mailchimp } = config;
 
@@ -37,8 +38,9 @@ export default async (req, res) => {
         error: `Nastala chyba`,
       });
     }
+  
     return res.status(201).json({ error: '' });
   } catch (error) {
-    return res.status(500).json({ error: error.message || error.toString() });
+    return next(error);
   }
 };

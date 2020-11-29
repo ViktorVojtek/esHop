@@ -3,7 +3,7 @@ import { Button, Table } from 'reactstrap';
 import { useQuery } from '@apollo/react-hooks';
 import { PAYMENT_METHODES_QUERY } from '../../../../../../../graphql/query';
 
-export default (): JSX.Element => {
+const PaymentMethods: () => JSX.Element = () => {
   const { loading, error, data } = useQuery(PAYMENT_METHODES_QUERY);
 
   if (loading) {
@@ -55,3 +55,5 @@ export default (): JSX.Element => {
     <p>Neboli vytvorené žiadne spôsoby platby.</p>
   );
 };
+
+export default PaymentMethods;

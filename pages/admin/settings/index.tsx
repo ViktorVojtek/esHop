@@ -18,6 +18,7 @@ import SubCategorySubmitForm from '../../../app-data/components/pages/admin/sett
 import SubCategories from '../../../app-data/components/pages/admin/settings/subcategory/components/SubCategories';
 
 import { withAuthSync } from '../../../app-data/lib/auth';
+import { PageProps } from '../Types/Page.types';
 
 const CurrencyIcon = styled(CurrencyEuro)`
   color: #000;
@@ -45,7 +46,7 @@ const SaleIcon = styled(BurstSale)`
   height: 20px;
 `;
 
-const SettingsPage: () => JSX.Element = () => (
+const SettingsPage: (props: PageProps) => JSX.Element = ({ role }) => (
   <>
     <Head>
       <title>esHop App | Settings</title>

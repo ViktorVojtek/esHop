@@ -34,11 +34,7 @@ const LogIn: FC = () => {
       const email = form.email.value;
       const password = form.password.value;
 
-      const {
-        data: {
-          loginUser: { _id, firstName, lastName, token },
-        },
-      } = await loginUserMutate({
+      const { data } = await loginUserMutate({
         variables: {
           userLoginInput: {
             email,
@@ -47,10 +43,15 @@ const LogIn: FC = () => {
         },
       });
 
+      const {
+        loginUser: { _id, firstName, lastName, role, token },
+      } = data;
+
       login({
         _id,
         firstName,
         lastName,
+        role,
         token,
       });
     } catch (err) {

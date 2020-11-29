@@ -2,19 +2,16 @@ import React, { FC } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/react-hooks';
-import { Row, Col } from 'reactstrap';
 
 import { PRODUCT_QUERY } from '../../../../app-data/graphql/query';
 
 import { withAuthSync } from '../../../../app-data/lib/auth';
 
 import Layout from '../../../../app-data/shared/components/Layout/Admin.material.layout';
-// import LhsNav from '../../../../app-data/shared/components/LhsNav';
-
 import ProductForm from '../../../../app-data/components/pages/admin/products/ProductForm/mui';
-// import Product from '../../../../app-data/shared/types/Product.types';
+import { PageProps } from '../../Types/Page.types';
 
-const UpdateProduct: FC = () => {
+const UpdateProduct: (props: PageProps) => JSX.Element = ({ role }) => {
   const router = useRouter();
   const { query } = router;
 
@@ -39,7 +36,7 @@ const UpdateProduct: FC = () => {
         <title>esHop App | Upraviť produkt</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>{' '}
-      <Layout pageTitle="Product - Update">
+      <Layout pageTitle="Product - Update" role={role}>
         <ProductForm updateProductData={product} update />
       </Layout>
     </>
