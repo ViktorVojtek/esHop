@@ -52,6 +52,7 @@ export interface IState {
   productsToShow: number;
   allowEnvelope: boolean;
   customer: Customer;
+  loyalityProduct: object;
 }
 
 export interface IAction {

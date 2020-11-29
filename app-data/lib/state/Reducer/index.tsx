@@ -100,6 +100,11 @@ const Reducer = (state: IState, action: IAction) => {
         ...state,
         giftCards,
       };
+    case 'ADD_LOYALITY_PRODUCT':
+      return {
+        ...state,
+        loyalityProduct: action.payload,
+      };
     case 'ADD_TO_GIFT_CARDS':
       newGiftCards = [...state.giftCards];
       newGiftCards = [...state.giftCards, action.payload];

@@ -29,7 +29,6 @@ import {
 } from './types/ProductFill.types';
 import ServiceUI from '../ServicesFill';
 import { formatPrice } from '../../../../../../../shared/helpers/formatters';
-import Service from '../../../../../../../shared/types/Service.types';
 const ProductTitle: React.FC<IProductTitle> = ({ id, title }) => (
   <Link href={{ pathname: '/eshop/product', query: { id } }}>
     <a>

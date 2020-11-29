@@ -4,9 +4,6 @@ import { Row } from 'reactstrap';
 import Product from '../../../../../shared/types/Product.types';
 import PaginationComponent from 'react-reactstrap-pagination';
 
-// Graphql Query def
-import { PRODUCTS_QUERY } from '../../../../../graphql/query';
-
 // Global state management context
 import { Context } from '../../../../../lib/state/Store';
 
@@ -15,7 +12,6 @@ import ProductFill from './components/ProductsFill';
 
 import { VariantOfProduct } from '../../../../../shared/types/Store.types';
 import Service from '../../../../../shared/types/Service.types';
-import { copySync } from 'fs-extra';
 
 interface IProductsProps {
   products: Product[] | Service[];
