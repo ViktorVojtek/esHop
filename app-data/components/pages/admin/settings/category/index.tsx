@@ -15,11 +15,13 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const CategoryPageContent: () => JSX.Element = () => {
+const CategoryPageContent: (props: { role: number }) => JSX.Element = ({
+  role,
+}) => {
   const classes = useStyles();
 
   return (
-    <Layout pageTitle="Category settings">
+    <Layout pageTitle="Category settings" role={role}>
       <Paper className={classes.paper}>
         <Form />
       </Paper>

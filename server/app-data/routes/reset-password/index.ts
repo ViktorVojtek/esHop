@@ -1,65 +1,60 @@
-import { Request, Response } from 'express';
-import Customer from '../../db/models/Customer';
+import { Request, Response, NextFunction } from 'express';
+import Customer, { ICustomer } from '../../db/models/Customer';
 import crypto from 'crypto';
 import nodemailer from 'nodemailer';
 
-export default async (req: Request, res: Response) => {
-  console.log(req.body.email);
+const mailTransporter = nodemailer.createTransport({
+  host: 'smtp.websupport.sk',
+  port: 465, // 587,
+  secure: true, // true, // ssl
+  auth: {
+    user: process.env.EMAIL_LOGIN, // generated ethereal user
+    pass: process.env.EMAIL_PASS, // generated ethereal password
+  },
+});
 
+export const resetPasswordRoute = async (req: Request, res: Response, next: NextFunction) => {
+  const { body: email } = req
   const domain: string =
     process.env.NODE_ENV === 'production'
       ? 'eshop.kupelecks.sk'
       : 'localhost:3016';
 
-  Customer.findOne({ email: req.body.email }, function (err, user) {
-    console.log(user);
-    if (!user) {
-      return res
+  const customer: ICustomer = await Customer.findOne({ email });
+
+  if (!customer) {
+    return res
         .status(404)
         .send({ msg: 'We were unable to find a user for this token.' });
-    }
+  }
 
-    const date = Date.now() + 86400000;
-    const token = crypto.randomBytes(16).toString('hex');
+  const oneDay: number = 24 * 60 * 60 * 1000;
+  const date: number = Date.now() + oneDay;
+  const token: string = crypto.randomBytes(16).toString('hex');
 
-    user.resetPasswordToken = token;
-    user.resetPasswordExpires = new Date(date);
+  customer.resetPasswordToken = token;
+  customer.resetPasswordExpires = new Date(date);
 
-    user.save(function (err) {
-      if (err) {
-        return res.status(500).send({ msg: err.message });
-      }
+  try {
+    await customer.save();
 
-      // Send the email
-      let transporter = nodemailer.createTransport({
-        host: 'smtp.websupport.sk',
-        port: 465, // 587,
-        secure: true, // true, // ssl
-        auth: {
-          user: 'eshop@kupelecks.sk', // generated ethereal user
-          pass: 'Cyp147.?riaN20ck12', // generated ethereal password
-        },
-      });
-      var mailOptions = {
-        from: 'eshop@kupelecks.sk',
-        to: user.email,
-        subject: 'Žiadosť o zmenu hesla',
-        text:
-          'Dobrý deň,\n\n' +
-          'požiadali ste o obnovu hesla. Nové heslo si nastavíte kliknutím na adresu: \nhttp://' +
-          domain +
-          '/change-password/?token=' +
-          user.resetPasswordToken +
-          '.\n',
-      };
-      transporter.sendMail(mailOptions, function (err) {
-        if (err) {
-          return res.status(500).send({ msg: err.message });
-        }
-        res
-          .status(200)
-          .send('A reset password email has been sent to ' + user.email + '.');
-      });
-    });
-  });
+    const mailOptions = {
+      from: 'eshop@kupelecks.sk',
+      to: email,
+      subject: 'Žiadosť o zmenu hesla',
+      text:
+        'Dobrý deň,\n\n' +
+        'požiadali ste o obnovu hesla. Nové heslo si nastavíte kliknutím na adresu: \nhttp://' +
+        domain +
+        '/change-password/?token=' +
+        token +
+        '.\n',
+    };
+
+    await mailTransporter.sendMail(mailOptions);
+
+    res.send('A reset password email has been sent to ' + email + '.');
+  } catch(error) {
+    return next(error);
+  }
 };

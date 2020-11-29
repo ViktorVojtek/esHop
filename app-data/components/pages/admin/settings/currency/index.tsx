@@ -15,11 +15,13 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const CurrencyPageContent = () => {
+const CurrencyPageContent: (props: { role: number }) => JSX.Element = ({
+  role,
+}) => {
   const classes = useStyles();
 
   return (
-    <Layout pageTitle="Crrency settings">
+    <Layout pageTitle="Crrency settings" role={role}>
       <Paper className={classes.paper}>
         <Form />
       </Paper>

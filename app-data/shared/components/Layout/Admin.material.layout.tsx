@@ -19,7 +19,7 @@ import {
 import { logout } from '../../../lib/auth';
 import LHS from '../LhsNav/drawerLhsNav';
 
-const drawerWidth = 240;
+const drawerWidth: number = 240;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -61,17 +61,14 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface Props {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
   window?: () => Window;
   children?: ReactNode;
   pageTitle: string;
+  role?: number;
 }
 
 export default function ResponsiveDrawer(props: Props) {
-  const { children, pageTitle, window } = props;
+  const { children, pageTitle, window, role } = props;
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -111,7 +108,6 @@ export default function ResponsiveDrawer(props: Props) {
         </Toolbar>
       </AppBar>
       <nav className={classes.drawer} aria-label="mailbox folders">
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Hidden smUp implementation="css">
           <Drawer
             container={container}
@@ -126,7 +122,7 @@ export default function ResponsiveDrawer(props: Props) {
               keepMounted: true, // Better open performance on mobile.
             }}
           >
-            <LHS />
+            <LHS role={role} />
           </Drawer>
         </Hidden>
         <Hidden xsDown implementation="css">
@@ -137,7 +133,7 @@ export default function ResponsiveDrawer(props: Props) {
             variant="permanent"
             open
           >
-            <LHS />
+            <LHS role={role} />
           </Drawer>
         </Hidden>
       </nav>

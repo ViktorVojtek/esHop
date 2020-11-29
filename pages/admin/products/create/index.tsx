@@ -3,14 +3,15 @@ import Head from 'next/head';
 import { withAuthSync } from '../../../../app-data/lib/auth';
 import Layout from '../../../../app-data/shared/components/Layout/Admin.material.layout';
 import Form from '../../../../app-data/components/pages/admin/products/ProductForm/mui';
+import { PageProps } from '../../Types/Page.types';
 
-const ProductCreate: () => JSX.Element = () => (
+const ProductCreate: (props: PageProps) => JSX.Element = ({ role }) => (
   <>
     <Head>
       <title>esHop App | Pridať produkt</title>
       <link rel="icon" href="/favicon.ico" />
     </Head>{' '}
-    <Layout pageTitle="Product - Create">
+    <Layout pageTitle="Product - Create" role={role}>
       <Form />
     </Layout>
   </>

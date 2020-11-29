@@ -92,7 +92,7 @@ const menuItems2 = [
   },
 ];
 
-export default () => {
+const LHS: (props: { role?: number }) => JSX.Element = ({ role }) => {
   const classes = useStyles();
   const listMenuItems1 = getListMenuItems(menuItems1);
   const listMenuItems2 = getListMenuItems(menuItems2);
@@ -107,13 +107,17 @@ export default () => {
         </ListItem>
         {listMenuItems1}
       </List>
-      <List>
-        <ListItem>
-          <Typography>Nastavenia</Typography>
-        </ListItem>
-      </List>
-      <Divider />
-      <List>{listMenuItems2}</List>
+      {role < 1 && (
+        <>
+          <List>
+            <ListItem>
+              <Typography>Nastavenia</Typography>
+            </ListItem>
+          </List>
+          <Divider />
+          <List>{listMenuItems2}</List>
+        </>
+      )}
     </>
   );
 };
@@ -136,3 +140,5 @@ function getListMenuItems(
     </Link>
   ));
 }
+
+export default LHS;

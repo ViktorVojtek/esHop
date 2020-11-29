@@ -49,6 +49,7 @@ export default async (
     hashAlgorithm: 'ver2',
     encoding: 'utf-8',
   };
+
   try {
     res.json(data);
   } catch (err) {

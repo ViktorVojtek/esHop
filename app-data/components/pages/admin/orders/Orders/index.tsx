@@ -105,7 +105,8 @@ const OrdersList: FC<IOrders> = ({ orders }) => {
             invoiceId,
           } = args;
           const date = new Date(created_at.slice(0, 10) * 1000);
-          console.log(paymentStatus);
+          // console.log(paymentStatus);
+
           return (
             <StyledTableRow key={index}>
               <TableCell component="td" scope="row">

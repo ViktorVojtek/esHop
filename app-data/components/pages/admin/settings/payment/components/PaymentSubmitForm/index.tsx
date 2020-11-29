@@ -5,7 +5,7 @@ import { CREATE_PAYMENT_MUTATION } from '../../../../../../../graphql/mutation';
 import { PAYMENT_METHODES_QUERY } from '../../../../../../../graphql/query';
 import { Context } from '../../../../../../../lib/state/Store';
 
-export default () => {
+const PaymentSubmitForm: () => JSX.Element = () => {
   const { dispatch } = useContext(Context);
   const [mutate] = useMutation(CREATE_PAYMENT_MUTATION, {
     refetchQueries: [{ query: PAYMENT_METHODES_QUERY }],
@@ -48,3 +48,5 @@ export default () => {
     </Form>
   );
 };
+
+export default PaymentSubmitForm;

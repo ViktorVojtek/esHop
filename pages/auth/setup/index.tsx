@@ -1,13 +1,10 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { FC, useState, useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useMutation } from '@apollo/react-hooks';
-import { REGISTER_USER_MUTATION } from '../../../app-data/graphql/mutation';
-
 import { Context } from '../../../app-data/lib/state/Store';
-
+import { REGISTER_USER_MUTATION } from '../../../app-data/graphql/mutation';
 import RegisterForm from '../../../app-data/shared/components/RegisterForm';
 
-const Register: FC = () => {
+const SetupPage: () => JSX.Element = () => {
   const [errorMessage, setErrorMessage] = useState<string>('');
   const { dispatch } = useContext(Context);
   const [registerUserMutate] = useMutation(REGISTER_USER_MUTATION);
@@ -34,12 +31,12 @@ const Register: FC = () => {
       await registerUserMutate({
         variables: {
           userRegInput: {
-            admin: false,
+            admin: true,
             email,
             firstName,
             lastName,
             password,
-            role: 1,
+            role: 0,
           },
         },
       });
@@ -57,4 +54,4 @@ const Register: FC = () => {
   );
 };
 
-export default Register;
+export default SetupPage;

@@ -1,7 +1,5 @@
-import express, { Express, NextFunction, Request, Response } from 'express';
-// import * as createLocaleMiddleware from 'express-locale';
+import express, { Express } from 'express';
 import { ApolloServer } from 'apollo-server-express';
-// import bodyParser from 'body-parser';
 import helmet from 'helmet';
 import nextjsApp from 'next';
 import cors from 'cors';
@@ -10,19 +8,22 @@ import typeDefs from './app-data/graphql/typeDefs';
 import resolvers from './app-data/graphql/resolvers';
 import db from './app-data/db';
 
-import paymentRoute from './app-data/routes/payment';
-import subscribeRoute from './app-data/routes/subscribe';
-import omegaRoute from './app-data/routes/invoice-omega';
-import confirmationRoute from './app-data/routes/confirmation';
-import resendRoute from './app-data/routes/resend';
-import resetPassword from './app-data/routes/reset-password';
-import orders from './app-data/routes/orders';
-import invoices from './app-data/routes/invoices';
+import {
+  confirmationRoute,
+  invoiceRoute,
+  omegaRoute,
+  orderRoute,
+  paymentRoute,
+  resendRoute,
+  resetPasswordRoute,
+  setupRoute,
+  subscribeRoute
+} from './app-data/routes';
 
-const dev = process.env.NODE_ENV !== 'production';
+const dev: boolean = process.env.NODE_ENV !== 'production';
 const nextApp = nextjsApp({ dev });
 const handle = nextApp.getRequestHandler();
-const port = 3016;
+const port: number = 3016;
 
 const App: () => Promise<void> = async () => {
   try {
@@ -35,16 +36,10 @@ const App: () => Promise<void> = async () => {
       cors(),
       express.urlencoded({ extended: true, limit: '10mb' }),
       express.json({ limit: '10mb' })
-      // bodyParser.json({ limit: '50mb', extended: true }),
-      // bodyParser.urlencoded({ limit: '50mb' })
-      /* createLocaleMiddleware({
-        priority: ['default', 'accept-language'],
-        default: 'sk-SK',
-      }) */
     );
 
     const server = new ApolloServer({
-      context: async ({ req }) => ({ token: req.headers['x-access-token'] }),
+      context: ({ req }) => ({ token: req.headers['x-access-token'] }),
       typeDefs,
       resolvers,
       introspection: true,
@@ -68,9 +63,10 @@ const App: () => Promise<void> = async () => {
     app.use('/payment', paymentRoute);
     app.use('/confirmation', confirmationRoute);
     app.use('/resend', resendRoute);
-    app.use('/reset-password', resetPassword);
-    app.use('/static/orders/*', orders);
-    app.use('/static/invoice/*', invoices);
+    app.use('/reset-password', resetPasswordRoute);
+    app.use('/static/orders/*', orderRoute);
+    app.use('/static/invoice/*', invoiceRoute);
+    app.use('/auth/setup', setupRoute);
     app.all('*', (req, res) => handle(req, res));
 
     app.listen({ port });

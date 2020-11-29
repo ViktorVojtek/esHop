@@ -6,22 +6,26 @@ import cookie from 'js-cookie';
 
 import { ILogin } from './TS/auth.interface';
 
-export const login: (data: ILogin) => void = ({
+export type LoginType = ILogin;
+
+export const login: (data: LoginType) => void = ({
   _id,
   firstName,
   lastName,
+  role,
   token,
 }) => {
   cookie.set('token', token, { expires: 0.33 }); // 1 stands for a day (24h), 0.33 stands aprox. for 8h
   cookie.set('userId', _id);
   cookie.set('firstName', firstName);
   cookie.set('lastName', lastName);
+  cookie.set('role', `${role}`);
 
   Router.push('/admin');
 };
 
-export const auth: (ctx: any) => string = (ctx) => {
-  const { token } = nextCookie(ctx);
+export const auth: (ctx: any) => { token: string; role: number } = (ctx) => {
+  const { token, role } = nextCookie(ctx);
 
   // If there's no token, it means the user is not logged in.
   if (!token) {
@@ -33,7 +37,7 @@ export const auth: (ctx: any) => string = (ctx) => {
     }
   }
 
-  return token;
+  return { token, role: +role };
 };
 
 export const logout: () => void = () => {
@@ -42,6 +46,7 @@ export const logout: () => void = () => {
   cookie.remove('firstName');
   cookie.remove('lastName');
   cookie.remove('userEmail');
+  cookie.remove('role');
 
   // to support logging out from all windows
   window.localStorage.setItem('logout', `${Date.now()}`);
@@ -69,13 +74,13 @@ export const withAuthSync = (WrappedComponent: any) => {
   };
 
   Wrapper.getInitialProps = async (ctx) => {
-    const token = auth(ctx);
+    const { token, role } = auth(ctx);
 
     const componentProps =
       WrappedComponent.getInitialProps &&
       (await WrappedComponent.getInitialProps(ctx));
 
-    return { ...componentProps, token };
+    return { ...componentProps, token, role };
   };
 
   return Wrapper;

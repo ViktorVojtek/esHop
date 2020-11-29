@@ -15,11 +15,13 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const SubcategoryContentPage: () => JSX.Element = () => {
+const SubcategoryContentPage: (props: { role: number }) => JSX.Element = ({
+  role,
+}) => {
   const classes = useStyles();
 
   return (
-    <Layout pageTitle="Subcategory settings">
+    <Layout pageTitle="Subcategory settings" role={role}>
       <Paper className={classes.paper}>
         <Form />
       </Paper>

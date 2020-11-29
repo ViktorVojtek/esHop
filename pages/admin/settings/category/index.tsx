@@ -1,7 +1,11 @@
 import React from 'react';
 
+import { withAuthSync } from '../../../../app-data/lib/auth';
+import { PageProps } from '../../Types/Page.types';
 import PageContent from '../../../../app-data/components/pages/admin/settings/category';
 
-const CategoryPage: () => JSX.Element = () => <PageContent />;
+const CategoryPage: (props: PageProps) => JSX.Element = ({ role }) => (
+  <PageContent role={role} />
+);
 
-export default CategoryPage;
+export default withAuthSync(CategoryPage);

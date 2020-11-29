@@ -4,7 +4,7 @@ import { useQuery, useMutation } from '@apollo/react-hooks';
 import { SERVICES_QUERY } from '../../../../../graphql/query';
 import { REMOVE_SERVICE_MUTATION } from '../../../../../graphql/mutation';
 
-export default () => {
+const List: () => JSX.Element = () => {
   const { loading, error, data } = useQuery(SERVICES_QUERY);
   const [removeService] = useMutation(REMOVE_SERVICE_MUTATION, {
     refetchQueries: [{ query: SERVICES_QUERY }],
@@ -56,3 +56,5 @@ export default () => {
     <p>No services has been found.</p>
   );
 };
+
+export default List;

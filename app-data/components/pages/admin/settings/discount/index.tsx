@@ -15,11 +15,13 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const DiscountContentPage: () => JSX.Element = () => {
+const DiscountContentPage: (props: { role: number }) => JSX.Element = ({
+  role,
+}) => {
   const classes = useStyles();
 
   return (
-    <Layout pageTitle="Discount settings">
+    <Layout pageTitle="Discount settings" role={role}>
       <Paper className={classes.paper}>
         <Form />
       </Paper>

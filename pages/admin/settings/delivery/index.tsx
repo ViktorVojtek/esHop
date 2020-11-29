@@ -1,7 +1,11 @@
 import React from 'react';
 
+import { withAuthSync } from '../../../../app-data/lib/auth';
+import { PageProps } from '../../Types/Page.types';
 import PageContent from '../../../../app-data/components/pages/admin/settings/delivery';
 
-const DeliveryPage = () => <PageContent />;
+const DeliveryPage: (props: PageProps) => JSX.Element = ({ role }) => (
+  <PageContent role={role} />
+);
 
-export default DeliveryPage;
+export default withAuthSync(DeliveryPage);

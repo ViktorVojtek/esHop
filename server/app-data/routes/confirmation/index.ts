@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import Customer from '../../db/models/Customer';
 import TokenSchema from '../../db/models/TokenSchema';
 
-export default async (req: Request, res: Response) => {
+export const confirmationRoute = (req: Request, res: Response) => {
   console.log(req.query.token.toString());
   TokenSchema.findOne({ token: req.query.token.toString() }, function (
     err,
