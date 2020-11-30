@@ -94,7 +94,7 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
 
     dispatch({
       type: 'ADD_TO_CART',
-      payload: { id, variant: { count: variant.count, title: variant.title } },
+      payload: { id, variant, isEnvelopeSize, title },
     });
   };
 

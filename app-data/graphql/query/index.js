@@ -140,6 +140,44 @@ export const PRODUCTS_QUERY = gql`
   }
 `;
 
+export const PRODUCTS_BY_IDS_QUERY = gql`
+  query productsByIds($ids: [String]) {
+    productsByIds(ids: $ids) {
+      _id
+      category {
+        id
+        title
+      }
+      dateCreated
+      dateModified
+      modifiedByUserId
+      isEnvelopeSize
+      subCategory {
+        id
+        title
+      }
+      title
+      variants {
+        default
+        description
+        discount
+        inStock
+        images {
+          path
+          size
+          title
+        }
+        price {
+          currency
+          value
+        }
+        title
+        productCode
+      }
+    }
+  }
+`;
+
 export const LOYALITY_PRODUCTS_QUERY = gql`
   query loyalityProducts {
     loyalityProducts {

@@ -8,6 +8,9 @@ import {
 import { Context } from '../Store';
 import { useStorage } from '../../util/app.util';
 import cookie from 'js-cookie';
+import { useQuery } from '@apollo/react-hooks';
+import { PRODUCTS_BY_IDS_QUERY } from '../../../graphql/query';
+import CustomSpinner from '../../../shared/components/CustomSpinner/CustomerSpinner';
 
 const storage: Storage = useStorage();
 let newCart: CartProduct[] = [];
@@ -79,15 +82,9 @@ const Reducer = (state: IState, action: IAction) => {
         cart: newCart,
       };
     case 'SET_CART':
-      const cart: CartProduct[] = storage
-        ? storage.getItem('cart')
-          ? JSON.parse(storage.getItem('cart'))
-          : []
-        : [];
-
       return {
         ...state,
-        cart,
+        cart: action.payload,
       };
     case 'SET_LOYALITY_PRODUCT':
       const loyalityProduct = storage
@@ -212,8 +209,39 @@ export const withSetCart = <P extends object>(
 ): FC<P> => ({ ...props }) => {
   const { dispatch } = useContext(Context);
 
+  let cart: CartProduct[] = storage
+    ? storage.getItem('cart')
+      ? JSON.parse(storage.getItem('cart'))
+      : []
+    : [];
+  let ids: String[] = [];
+  cart.length > 0 &&
+    cart.forEach((item) => {
+      ids.push(item.id);
+    });
+  const { error, loading, data } = useQuery(PRODUCTS_BY_IDS_QUERY, {
+    variables: { ids },
+  });
+  if (data) {
+    const { productsByIds } = data;
+    cart.forEach((item) => {
+      productsByIds.map((e) => {
+        if (item.id === e._id) {
+          e.variants.map((variant) => {
+            if (item.variant.title === variant.title) {
+              if (item.variant.price.value !== variant.price.value) {
+                console.log('nerovna sa');
+                item.variant.price.value = variant.price.value;
+              }
+            }
+          });
+        }
+      });
+    });
+  }
+
   useEffect(() => {
-    dispatch({ type: 'SET_CART', payload: null });
+    dispatch({ type: 'SET_CART', payload: cart });
     dispatch({ type: 'SET_GIFTCARD', payload: null });
     dispatch({ type: 'SET_LOYALITY_PRODUCT', payload: null });
     dispatch({
@@ -225,7 +253,7 @@ export const withSetCart = <P extends object>(
         token: cookie.get('customerToken'),
       },
     });
-  }, []);
+  }, [data]);
 
   return <Component {...props} />;
 };

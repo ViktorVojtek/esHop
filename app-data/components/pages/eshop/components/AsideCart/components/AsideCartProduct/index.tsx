@@ -71,13 +71,7 @@ const AsideCartProduct: FC<ICartProductTableRow> = ({
 
       dispatch({
         type: 'ADD_TO_CART',
-        payload: {
-          id,
-          variant: {
-            count: prodItemVariant.count,
-            title: prodItemVariant.title,
-          },
-        },
+        payload: { id, variant: prodItemVariant },
       });
     };
 

@@ -17,6 +17,7 @@ const rootTypeDefs = gql`
     paymentMethode(id: String!): Payment
     paymentMethodes: [Payment]
     products(categoryId: String, subCategoryId: String): [Product]
+    productsByIds(ids: [String]): [Product]
     loyalityProducts: [LoyalityProduct]
     product(id: String!): Product
     service(id: String!): Service

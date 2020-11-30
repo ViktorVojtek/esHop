@@ -15,6 +15,7 @@ import order from './query/Order';
 import orders from './query/Orders';
 import paymentMethode from './query/PaymentMethode';
 import paymentMethodes from './query/PaymentMethodes';
+import productsByIds from './query/ProductsByIds';
 import products from './query/Products';
 import product from './query/Product';
 import subCategories from './query/SubCategories';
@@ -99,6 +100,8 @@ const resolvers = {
     paymentMethode: async (root: any, args: { id: string }, ctx: any) =>
       paymentMethode(root, args, ctx),
     paymentMethodes: async () => paymentMethodes(),
+    productsByIds: async (root: any, args: any, ctx: any) =>
+      productsByIds(root, args, ctx),
     products: async (root: any, args: any, ctx: any) =>
       products(root, args, ctx),
     product: async (root: any, args: any, ctx: any) => product(root, args, ctx),
