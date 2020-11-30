@@ -92,11 +92,9 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
   const handleAddProductToCart: (data: IProductToCartData) => void = (data) => {
     const { id, variant, isEnvelopeSize, title } = data;
 
-    console.log(variant);
-
     dispatch({
       type: 'ADD_TO_CART',
-      payload: { id, variant, isEnvelopeSize, title },
+      payload: { id, variant: { count: variant.count, title: variant.title } },
     });
   };
 

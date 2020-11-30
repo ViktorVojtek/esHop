@@ -24,6 +24,14 @@ export type GiftCard = {
   text: string;
 };
 
+export type LoyalityProduct = {
+  costPoints: number;
+  discount?: number;
+  isDiscount: boolean;
+  image: string;
+  title: string;
+};
+
 export type CartProduct = {
   id: string;
   variant: VariantOfProduct;
@@ -52,7 +60,7 @@ export interface IState {
   productsToShow: number;
   allowEnvelope: boolean;
   customer: Customer;
-  loyalityProduct: object;
+  loyalityProduct: LoyalityProduct;
 }
 
 export interface IAction {

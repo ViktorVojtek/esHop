@@ -24,7 +24,7 @@ const initialState: IState = {
     isVerified: false,
     marketing: false,
   },
-  loyalityProduct: {},
+  loyalityProduct: null,
 };
 
 export const Context = createContext<{

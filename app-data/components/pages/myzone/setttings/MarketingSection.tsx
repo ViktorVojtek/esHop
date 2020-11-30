@@ -22,7 +22,6 @@ type IMarketingSection = {
 
 const MarketingSection: FC<IMarketingSection> = ({ id, customer }) => {
   const [isMarketing, setIsMarketing] = useState(customer.marketing);
-  console.log(isMarketing);
 
   const { enqueueSnackbar } = useSnackbar();
 

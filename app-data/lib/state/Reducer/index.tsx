@@ -89,6 +89,17 @@ const Reducer = (state: IState, action: IAction) => {
         ...state,
         cart,
       };
+    case 'SET_LOYALITY_PRODUCT':
+      const loyalityProduct = storage
+        ? storage.getItem('loyalityProduct')
+          ? JSON.parse(storage.getItem('loyalityProduct'))
+          : null
+        : null;
+
+      return {
+        ...state,
+        loyalityProduct,
+      };
     case 'SET_GIFTCARD':
       const giftCards: GiftCard[] = storage
         ? storage.getItem('giftCards')
@@ -101,6 +112,9 @@ const Reducer = (state: IState, action: IAction) => {
         giftCards,
       };
     case 'ADD_LOYALITY_PRODUCT':
+      if (storage) {
+        storage.setItem('loyalityProduct', JSON.stringify(action.payload));
+      }
       return {
         ...state,
         loyalityProduct: action.payload,
@@ -201,6 +215,7 @@ export const withSetCart = <P extends object>(
   useEffect(() => {
     dispatch({ type: 'SET_CART', payload: null });
     dispatch({ type: 'SET_GIFTCARD', payload: null });
+    dispatch({ type: 'SET_LOYALITY_PRODUCT', payload: null });
     dispatch({
       type: 'SET_CUSTOMER',
       payload: {

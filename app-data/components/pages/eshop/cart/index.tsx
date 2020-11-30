@@ -26,7 +26,7 @@ const CartEmpty: () => JSX.Element = () => (
 
 const CartBodyComponent: FC = () => {
   const {
-    state: { cart, giftCards },
+    state: { cart, giftCards, loyalityProduct },
     state,
     dispatch,
   } = useContext(Context);
@@ -59,14 +59,22 @@ const CartBodyComponent: FC = () => {
       sum += item.price;
     });
 
+    if (loyalityProduct && loyalityProduct.isDiscount) {
+      sum = sum - sum * (loyalityProduct.discount / 100);
+    }
+
     dispatch({ type: 'SET_TOTAL_SUM', payload: sum });
     setAllowEnvelope();
-  }, [cart, giftCards]);
+  }, [cart, giftCards, loyalityProduct]);
 
   return (
     <Wrapper>
       {cart.length > 0 || giftCards.length > 0 ? (
-        <CartContent data={cart} giftCards={giftCards} />
+        <CartContent
+          data={cart}
+          giftCards={giftCards}
+          loyalityProduct={loyalityProduct}
+        />
       ) : (
         <CartEmpty />
       )}

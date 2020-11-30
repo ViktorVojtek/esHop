@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/react-hooks';
 import { Paper, Typography } from '@material-ui/core';
+import { useSnackbar } from 'notistack';
 import React, { FC, useCallback, useContext } from 'react';
 import { Button, Col, Row } from 'reactstrap';
 import { LOYALITY_PRODUCTS_QUERY } from '../../../../graphql/query';
@@ -13,17 +14,16 @@ type IProducts = {
 };
 
 type ILoyalityProduct = {
-  product: {
-    costPoints: number;
-    discount?: number;
-    isDiscount: boolean;
-    image: string;
-    title: string;
-  };
+  costPoints: number;
+  discount?: number;
+  isDiscount: boolean;
+  image: string;
+  title: string;
 };
 
 const Products = (props: IProducts) => {
   const { customer } = props;
+  const { enqueueSnackbar } = useSnackbar();
   const { dispatch, state } = useContext(Context);
   const { error, loading, data } = useQuery(LOYALITY_PRODUCTS_QUERY, {
     fetchPolicy: 'network-only',
@@ -38,18 +38,29 @@ const Products = (props: IProducts) => {
   }
 
   const { loyalityProducts } = data;
+  const { loyalityProduct, cart, giftCards } = state;
 
   const handleAddToCart = (product) => {
-    console.log(product);
-    dispatch({
-      type: 'ADD_LOYALITY_PRODUCT',
-      payload: product,
-    });
+    if (loyalityProduct === null && (cart.length > 0 || giftCards.length > 0)) {
+      dispatch({
+        type: 'ADD_LOYALITY_PRODUCT',
+        payload: product,
+      });
+      enqueueSnackbar(`Úspešne pridané: ${product.title}`, {
+        variant: 'success',
+      });
+    } else if (cart.length === 0 && giftCards.length === 0) {
+      return enqueueSnackbar(`Košík je prázdny`, {
+        variant: 'error',
+      });
+    } else {
+      enqueueSnackbar(`Nie je možné kombinovať zľavy`, {
+        variant: 'error',
+      });
+    }
   };
 
-  console.log(state);
-
-  const Product = (props: ILoyalityProduct) => {
+  const Product = (props) => {
     const { product } = props;
     const { title, costPoints } = product;
     return (

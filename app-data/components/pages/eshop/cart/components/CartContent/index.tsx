@@ -5,15 +5,26 @@ import { H2, TH, TR, H4 } from '../../styles/cart.style';
 import CartProductTableRow from './components/CartProductTable';
 import GiftCardTableRow from './components/GiftCardTable';
 import BillingForm from './components/BillingForm';
+import LoyalityProduct from './components/LoyalityProduct';
 
 interface ICartContent {
   data: any[];
   giftCards: any[];
+  loyalityProduct: {
+    discount?: number;
+    isDiscount?: boolean;
+    title?: string;
+  };
 }
-const CartContent: FC<ICartContent> = ({ data, giftCards }) => (
+const CartContent: FC<ICartContent> = ({
+  data,
+  giftCards,
+  loyalityProduct,
+}) => (
   <Container>
     <H2>Nákupný košík</H2>
     <H4 className="mb-4">1. Položky v košíku</H4>
+    {loyalityProduct && <LoyalityProduct loyalityProduct={loyalityProduct} />}
     {data.length > 0 && (
       <div className="table-responsive">
         <Table className="mb-5" hover>
