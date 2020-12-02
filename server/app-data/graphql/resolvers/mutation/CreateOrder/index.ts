@@ -32,8 +32,7 @@ const orderCreated = fs.readFileSync(
 function sendMailNotification(
   from: string,
   to: string,
-  orderData: any,
-  giftCards: any
+  orderData: any
 ): Promise<void> {
   return new Promise(async (resolve, reject) => {
     try {
@@ -77,21 +76,25 @@ function sendMailNotification(
         city: orderData.city,
         state: orderData.state,
         phone: orderData.phone,
-        deliveryMethod: orderData.deliveryMethode,
-        paymentMethod: orderData.paymentMethode,
+        deliveryMethode: orderData.deliveryMethode,
+        paymentMethode: orderData.paymentMethode,
         products: orderData.products ? orderData.products : [],
         totalPriceWithoutVat: formatPrice(orderData.totalPriceWithoutVat),
         totalPriceVat: formatPrice(orderData.totalPriceVat),
         totalPrice: formatPrice(orderData.totalPrice),
         isBankovyPrevod: orderData.paymentMethod === 'Bankový prevod',
-        giftCards: giftCards ? giftCards : [],
+        giftCards: orderData.giftCards ? orderData.giftCards : [],
         areProducts: orderData.products.length > 0,
-        areGiftCards: giftCards.length > 0,
+        areGiftCards: orderData.giftCards.length > 0,
         isCompany: orderData.companyName != '',
         companyName: orderData.companyName,
         companyVatNum: orderData.companyVatNum,
         companyDVATNum: orderData.companyDVATNum,
         companyDTAXNum: orderData.companyDTAXNum,
+        isLoyalityProduct: orderData.loyalityProduct ? true : false,
+        loyalityProduct: orderData.loyalityProduct,
+        deliveryPrice: orderData.deliveryPrice,
+        paymentPrice: orderData.paymentPrice,
       };
 
       const orderMailToSend = templateOrderMail(replacement);
@@ -103,8 +106,6 @@ function sendMailNotification(
         subject: 'Červený Kláštor | Vaša objednávka bola prijatá', // Subject line
         html: orderMailToSend, // html body
       });
-
-      console.log('Message sent: %s', info.messageId);
       resolve();
     } catch (err) {
       reject(err);
@@ -194,6 +195,10 @@ const createOrder: (
     isDeliveryAddress: readyData.optionalAddress != '',
     areProducts: readyData.products.length > 0,
     areGiftCards: giftCards.length > 0,
+    isLoyalityProduct: readyData.loyalityProduct ? true : false,
+    loyalityProduct: readyData.loyalityProduct,
+    deliveryPrice: formatPrice(readyData.deliveryPrice),
+    paymentPrice: formatPrice(readyData.paymentPrice),
   };
 
   var options = {
@@ -212,31 +217,37 @@ const createOrder: (
   };
   await pdf.create(document, options);
 
-  await sendMailNotification(
-    'info@codebrothers.sk',
-    readyData.email,
-    readyData,
-    giftCards
-  );
+  await sendMailNotification('info@codebrothers.sk', readyData.email, pdfData);
 
-  const { userId } = readyData;
+  const { email } = readyData;
 
-  if (userId) {
+  if (email) {
     const customerExist: ICustomer = await Customer.findOne({
-      _id: mongoose.Types.ObjectId(userId),
+      email: email,
     });
 
-    // if(!customerExist) {
-    //   throw new ModError(404, 'Customer does not exist');
-    // }
+    if (customerExist) {
+      if (readyData.loyalityProduct) {
+        const custData = customerExist.toObject();
+        const updatedCustData = {
+          ...custData,
+          customerPoints:
+            custData.customerPoints -
+            readyData.loyalityProduct.costPoints +
+            updatedData.totalPrice * 100,
+        };
+        await Customer.findByIdAndUpdate(customerExist._id, updatedCustData);
+      } else {
+        const custData = customerExist.toObject();
+        const updatedCustData = {
+          ...custData,
+          customerPoints:
+            custData.customerPoints + updatedData.totalPrice * 100,
+        };
 
-    const custData = customerExist.toObject();
-    const updatedCustData = {
-      ...custData,
-      customerPoints: custData.customerPoints + updatedData.totalPrice * 100,
-    };
-
-    await Customer.findByIdAndUpdate(userId, updatedCustData);
+        await Customer.findByIdAndUpdate(customerExist._id, updatedCustData);
+      }
+    }
   }
   const { __v, ...result } = newOrder.toObject();
 

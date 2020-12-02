@@ -44,6 +44,10 @@ export const logout: () => void = () => {
   cookie.remove('customerLName');
   let isMyZone = Router.pathname.includes('moja-zona');
 
+  // remove loyality product
+
+  window.localStorage.removeItem('loyalityProduct');
+
   // to support logging out from all windows
   window.localStorage.setItem('logout', `${Date.now()}`);
 

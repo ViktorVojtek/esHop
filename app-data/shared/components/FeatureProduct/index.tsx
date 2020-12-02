@@ -26,6 +26,9 @@ import {
   ActionPrice,
 } from '../../../components/pages/eshop/components/ProductDetail/styles/productDetail.style';
 import { formatPrice } from '../../helpers/formatters';
+import { DiscountRibbon } from '../Ribbon/DiscountRibbon';
+import { NewProductRibbon } from '../Ribbon/NewProductRibbon';
+import { RibbonHolder } from '../Ribbon/RibbonHolder';
 
 const FeatureProduct: FC<IProductUI> = ({
   product: { _id, variants, subCategory, title },
@@ -78,6 +81,12 @@ const FeatureProduct: FC<IProductUI> = ({
       <Link href={{ pathname: '/eshop/product', query: { id: _id } }}>
         <StyledCartLink>Ihneď kúpiť</StyledCartLink>
       </Link>
+      <RibbonHolder>
+        {variants[0].discount > 0 && (
+          <DiscountRibbon text={`ZĽAVA ${variants[0].discount} %`} />
+        )}
+        <NewProductRibbon text="Novinka" />
+      </RibbonHolder>
     </ProductItem>
   </Col>
 );
@@ -87,6 +96,7 @@ const FeaturecProductsFill: React.FC<IProductsFillProps> = ({
 }) => {
   const elements: JSX.Element[] = products.slice(0, 8).map((item: Product) => {
     const { _id } = item;
+    console.log(products);
 
     return <FeatureProduct product={item} addProduct={addProduct} key={_id} />;
   });

@@ -114,6 +114,7 @@ export const ButtonLink = styled.a`
   transition: all 0.3s ease-out;
   display: block;
   text-align: center;
+  cursor: pointer;
   &:hover {
     background-color: #00aeef;
   }

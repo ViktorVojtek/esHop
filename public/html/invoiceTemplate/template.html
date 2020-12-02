@@ -58,6 +58,12 @@
       p {
         font-size: 14px;
       }
+      h5 {
+        font-size: 16px;
+      }
+      h6{
+        font-size: 14px;
+      }
 
       #project {
         float: left;
@@ -215,7 +221,7 @@
     </header>
     <main>
       {{#if areProducts}}
-      <p style="margin: 0;margin-bottom: 20px;">Produkty</p>
+      <h5 style="margin: 0;margin-bottom: 20px;">Produkty</h5>
       <table
         autosize="1"
         style="word-wrap: break-word; table-layout: fixed; width: 100%"
@@ -376,7 +382,7 @@
       </table>
       {{/if}}
       {{#if areGiftCards}}
-      <p style="margin: 0;margin-bottom: 20px;">Darčekové poukážky</p>
+      <h5 style="margin: 0;margin-bottom: 20px;">Darčekové poukážky</h5>
       <table
         autosize="1"
         style="word-wrap: break-word; table-layout: fixed; width: 100%"
@@ -538,6 +544,15 @@
         {{/each}}
       </table>
       {{/if}}
+      {{#if isLoyalityProduct}}
+      <h6 style="margin-top: 16px;margin: 0;font-weight: bold">Vernostný program: {{loyalityProduct.title}}</h6>
+      {{/if}}
+      <h6 style="margin-top: 16px;margin-bottom: 8px;">Doprava:</h6>
+      <p style="margin: 0">Spôsob dopravy: {{this.deliveryMethode}}</p>
+      <p style="margin: 0">Cena dopravy: {{this.deliveryPrice}} €</p>
+      <h6 style="margin-top: 16px;margin-bottom: 12px;">Platba:</h6>
+      <p style="margin: 0">Spôsob platby: {{this.paymentMethode}}</p>
+      <p style="margin: 0">Cena platby: {{this.paymentPrice}} €</p>
       <p>&nbsp;</p>
       <table style="border-collapse: collapse; width: 60%">
         <tbody>

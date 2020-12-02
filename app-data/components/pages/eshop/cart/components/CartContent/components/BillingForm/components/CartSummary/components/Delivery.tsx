@@ -38,7 +38,7 @@ interface IProps {
 export default (props: IProps) => {
   const { data: orderData, handleData } = props;
   const {
-    state: { cart, allowEnvelope, giftCards },
+    state: { cart, allowEnvelope, giftCards, loyalityProduct },
     dispatch,
   } = useContext(Context);
   const { error, loading, data } = useQuery(DELIVERY_METHODS_QUERY);
@@ -68,8 +68,6 @@ export default (props: IProps) => {
 
     event.currentTarget.checked = true;
 
-    sum += currentValue;
-
     cart.forEach((item: any) => {
       if (item.variant.discount && item.variant.discount > 0) {
         sum +=
@@ -85,11 +83,19 @@ export default (props: IProps) => {
       sum += item.price;
     });
 
+    if (loyalityProduct && loyalityProduct.isDiscount) {
+      sum = sum - sum * (loyalityProduct.discount / 100);
+    }
+
+    sum += currentValue;
+
     document.querySelectorAll('.payment-data-input').forEach((item) => {
       if ((item as HTMLInputElement).checked) {
         sum += +item.getAttribute('data-value') as number;
       }
     });
+
+    sum = Math.round(sum * 100) / 100;
 
     handleData({
       ...orderData,

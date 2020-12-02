@@ -57,10 +57,6 @@ const BillingInfo: (props: IProps) => JSX.Element = (props) => {
     phone,
     email,
     message,
-    deliveryMethode,
-    deliveryPrice,
-    paymentMethode,
-    totalPrice,
   } = data;
 
   return (

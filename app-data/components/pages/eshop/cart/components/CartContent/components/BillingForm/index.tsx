@@ -31,8 +31,10 @@ interface IData {
   deliveryMethode: string;
   deliveryPrice: number;
   paymentMethode: string;
+  paymentPrice: number;
   totalPrice: number;
   products: string[];
+  loyalityProduct: object;
 }
 const initialOrderData: IData = {
   userId: '',
@@ -56,8 +58,10 @@ const initialOrderData: IData = {
   deliveryMethode: '',
   deliveryPrice: 0,
   paymentMethode: '',
+  paymentPrice: 0,
   totalPrice: 0,
   products: [],
+  loyalityProduct: null,
 };
 
 const BillingForm: FC = () => {
@@ -67,11 +71,10 @@ const BillingForm: FC = () => {
   const [cardPay, setCardPay] = useState(null);
   const [mutate] = useMutation(CREATE_ORDER_MUTATION);
 
-  const { cart, customer, giftCards } = state;
+  const { cart, customer, giftCards, loyalityProduct } = state;
 
   useEffect(() => {
     const products = cart.concat(giftCards as any);
-    // const productsIDS = products.map(({ id }) => id as string);
 
     const productsToBuy = products.map((item: any) => {
       let result: any;
@@ -99,8 +102,9 @@ const BillingForm: FC = () => {
       ...orderData,
       userId: customer && customer.userId ? customer.userId : '',
       products: productsToBuy,
+      loyalityProduct,
     });
-  }, [cart, giftCards]);
+  }, [cart, giftCards, loyalityProduct]);
 
   const handleSubmitForm: (
     event: React.FormEvent<HTMLFormElement>
@@ -144,6 +148,7 @@ const BillingForm: FC = () => {
         const respJson = await paymentResponse.json();
         setCardPay(respJson);
       } else {
+        console.log(loyalityProduct);
         await mutate({
           variables: {
             data: orderData,
@@ -161,8 +166,6 @@ const BillingForm: FC = () => {
   const handleOrderData = (data: IData) => {
     setOrderData(data);
   };
-
-  // console.log(orderData);
 
   return (
     <>

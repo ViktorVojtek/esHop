@@ -16,7 +16,8 @@ const Wrapper = styled.div`
   border: 1px solid #4caf50;
   background-color: #81c784;
   border-radius: 4px;
-  padding: 16px;
+  padding: 8px 16px;
+  border-radius: 4px;
   margin-bottom: 16px;
   display: flex;
   justify-content: space-between;
@@ -34,7 +35,7 @@ const Span = styled.span`
 `;
 
 export const CloseCircleIcon = styled(CloseCircle)`
-  width: 36px;
+  width: 28px;
   color: white;
   cursor: pointer;
 `;

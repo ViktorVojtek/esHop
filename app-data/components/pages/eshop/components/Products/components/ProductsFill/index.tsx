@@ -29,6 +29,9 @@ import {
 } from './types/ProductFill.types';
 import ServiceUI from '../ServicesFill';
 import { formatPrice } from '../../../../../../../shared/helpers/formatters';
+import { DiscountRibbon } from '../../../../../../../shared/components/Ribbon/DiscountRibbon';
+import { RibbonHolder } from '../../../../../../../shared/components/Ribbon/RibbonHolder';
+
 const ProductTitle: React.FC<IProductTitle> = ({ id, title }) => (
   <Link href={{ pathname: '/eshop/product', query: { id } }}>
     <a>
@@ -119,6 +122,11 @@ const ProductUI: React.FC<IProductUI> = ({
             Vložiť do košíka
           </StyledCartBtn>
         )}
+        <RibbonHolder>
+          {variants[0].discount > 0 && (
+            <DiscountRibbon text={`ZĽAVA ${variants[0].discount} %`} />
+          )}
+        </RibbonHolder>
       </ProductItem>
     </Col>
   );

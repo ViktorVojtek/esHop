@@ -8,26 +8,38 @@ import {
 
 export const Wrapper = styled.div`
   margin-top: 150px;
-  margin-bottom: 150px;
+  margin-bottom: 60px;
   min-height: calc(100vh - 425px);
 `;
 
 export const CloseCircleIcon = styled(CloseCircle)`
-  width: 42px;
+  width: 36px;
   color: #00aeeff8;
   cursor: pointer;
+  transition: all 0.3s ease-out;
+  &:hover {
+    transform: scale(1.2);
+  }
 `;
 export const PlusCircleIcon = styled(PlusCircle)`
-  width: 42px;
+  width: 36px;
   color: #00aeeff8;
   cursor: pointer;
   user-select: none;
+  transition: all 0.3s ease-out;
+  &:hover {
+    transform: scale(1.2);
+  }
 `;
 export const MinusCircleIcon = styled(MinusCircle)`
-  width: 42px;
+  width: 36px;
   color: #00aeeff8;
   cursor: pointer;
   user-select: none;
+  transition: all 0.3s ease-out;
+  &:hover {
+    transform: scale(1.2);
+  }
 `;
 
 export const EmptyCart = styled(CartArrowDown)`

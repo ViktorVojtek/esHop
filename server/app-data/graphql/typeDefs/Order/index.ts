@@ -54,6 +54,7 @@ const Order = gql`
     optionalState: String
     optionalPostalCode: String
     paymentMethode: String
+    paymentPrice: Float
     paymentStatus: Int
     phone: String
     postalCode: String
@@ -61,6 +62,7 @@ const Order = gql`
     status: Int
     totalPrice: Float
     products: [Object]
+    loyalityProduct: Object
   }
 
   type Order {
@@ -86,6 +88,7 @@ const Order = gql`
     optionalState: String
     optionalPostalCode: String
     paymentMethode: String
+    paymentPrice: String
     paymentStatus: Int
     phone: String
     postalCode: String
@@ -93,6 +96,7 @@ const Order = gql`
     status: Int
     totalPrice: Float
     products: [Object]
+    loyalityProduct: Object
   }
 `;
 

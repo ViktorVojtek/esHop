@@ -20,6 +20,7 @@ export interface IOrder extends Document {
   optionalCity: string;
   optionalPostalCode: string;
   paymentMethode: string;
+  paymentPrice: number;
   paymentStatus: number;
   phone: string;
   postalCode: string;
@@ -29,6 +30,7 @@ export interface IOrder extends Document {
   totalPrice: number;
   orderId: string;
   products: any[];
+  loyalityProduct: Object;
 }
 
 const OrderSchema = new mongoose.Schema({
@@ -57,6 +59,10 @@ const OrderSchema = new mongoose.Schema({
   optionalCity: String,
   optionalPostalCode: String,
   paymentMethode: String,
+  paymentPrice: {
+    default: 0,
+    type: Number,
+  },
   paymentStatus: {
     default: 0,
     type: Number,
@@ -72,6 +78,7 @@ const OrderSchema = new mongoose.Schema({
   totalPrice: Number,
   orderId: String,
   products: [Object],
+  loyalityProduct: Object,
 });
 
 export default mongoose.model<IOrder>('Order', OrderSchema);

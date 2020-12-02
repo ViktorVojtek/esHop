@@ -20,6 +20,7 @@ const SuccessOrderPage: () => JSX.Element = () => {
       storage.removeItem('cart');
       storage.removeItem('giftCards');
       storage.removeItem('cartTotalSum');
+      storage.removeItem('loyalityProduct');
     }
   });
 

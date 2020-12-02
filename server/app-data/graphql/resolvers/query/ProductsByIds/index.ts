@@ -7,13 +7,11 @@ const productsByIds: (
   args: any,
   ctx: any
 ) => Promise<IProduct[]> = async (root, { ids }, ctx) => {
-  console.log('ids' + ids);
   const result = await Product.find({ _id: { $in: ids } });
 
   if (!result) {
     throw new ModError(404, 'Product not exist');
   }
-  console.log(result);
   return result;
 };
 

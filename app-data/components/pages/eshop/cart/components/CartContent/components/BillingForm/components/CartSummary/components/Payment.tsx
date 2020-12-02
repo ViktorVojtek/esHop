@@ -25,6 +25,7 @@ interface IData {
   message: string;
   deliveryMethode: string;
   paymentMethode: string;
+  paymentPrice: number;
   totalPrice: number;
   products: string[];
 }
@@ -36,7 +37,7 @@ interface IProps {
 export default (props: IProps) => {
   const { data: orderData, handleData } = props;
   const {
-    state: { cart, cartTotalSum, giftCards },
+    state: { cart, giftCards, loyalityProduct },
     dispatch,
   } = useContext(Context);
   const { error, loading, data } = useQuery(PAYMENT_METHODES_QUERY);
@@ -66,8 +67,6 @@ export default (props: IProps) => {
 
     event.currentTarget.checked = true;
 
-    sum += currentValue;
-
     cart.forEach((item: any) => {
       if (item.variant.discount && item.variant.discount > 0) {
         sum +=
@@ -83,16 +82,25 @@ export default (props: IProps) => {
       sum += item.price;
     });
 
+    if (loyalityProduct && loyalityProduct.isDiscount) {
+      sum = sum - sum * (loyalityProduct.discount / 100);
+    }
+
+    sum += currentValue;
+
     document.querySelectorAll('.delivery-data-input').forEach((item) => {
       if ((item as HTMLInputElement).checked) {
         sum += +item.getAttribute('data-value') as number;
       }
     });
 
+    sum = Math.round(sum * 100) / 100;
+
     handleData({
       ...orderData,
       totalPrice: sum,
       paymentMethode: event.currentTarget.id,
+      paymentPrice: currentValue,
     });
     dispatch({
       type: 'SET_TOTAL_SUM',
