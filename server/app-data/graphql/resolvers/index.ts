@@ -94,7 +94,7 @@ const resolvers = {
     loyalityProducts: async (root: any, args: any, ctx: any) =>
       loyalityProducts(root, args, ctx),
     order: async (root: any, args: any, ctx: any) => order(root, args, ctx),
-    orders: async (root: any, args: { id?: string }, ctx: any) =>
+    orders: async (root: any, args: { email?: string }, ctx: any) =>
       orders(root, args, ctx),
 
     paymentMethode: async (root: any, args: { id: string }, ctx: any) =>

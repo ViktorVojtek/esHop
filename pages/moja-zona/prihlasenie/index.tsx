@@ -53,7 +53,7 @@ const LogIn: FC = () => {
         return;
       }
       const form = event.currentTarget;
-      const email = form.email.value;
+      const emailLogin = form.email.value;
       const password = form.password.value;
 
       const recaptchaToken = await executeRecaptcha('login');
@@ -63,7 +63,7 @@ const LogIn: FC = () => {
       const response = await loginUserMutate({
         variables: {
           customerData: {
-            email,
+            email: emailLogin,
             password,
             recaptchaToken,
           },
@@ -72,13 +72,14 @@ const LogIn: FC = () => {
 
       const {
         data: {
-          logInCustomer: { _id, firstName, lastName, token },
+          logInCustomer: { _id, firstName, lastName, token, email },
         },
       } = response;
 
       login({
         _id,
         firstName,
+        email,
         lastName,
         token,
       });

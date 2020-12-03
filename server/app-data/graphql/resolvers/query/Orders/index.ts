@@ -2,17 +2,17 @@ import Order, { IOrder } from '../../../../db/models/Order';
 
 const orders: (
   root: any,
-  args: { id?: string },
+  args: { email?: string },
   ctx: any
 ) => Promise<IOrder[]> = async (root, args, ctx) => {
-  const { id } = args;
+  const { email } = args;
 
   const orderItems =
-    id && id.length > 0
-      ? (await Order.find({ userId: id })) || []
+    email && email.length > 0
+      ? (await Order.find({ email: email })) || []
       : (await Order.find()) || [];
 
-  return orderItems;
+  return orderItems.reverse();
 };
 
 export default orders;

@@ -45,13 +45,13 @@ const LoginRegisterModal: FC<ILoginRegisterModal> = ({
       event.preventDefault();
 
       const form = event.currentTarget;
-      const email = form.email.value;
+      const emailLogin = form.email.value;
       const password = form.password.value;
       const recaptchaToken = await executeRecaptcha('login');
       const response = await loginUser({
         variables: {
           customerData: {
-            email,
+            email: emailLogin,
             password,
             recaptchaToken,
           },
@@ -60,7 +60,7 @@ const LoginRegisterModal: FC<ILoginRegisterModal> = ({
 
       const {
         data: {
-          logInCustomer: { _id, firstName, lastName, token },
+          logInCustomer: { _id, firstName, lastName, token, email },
         },
       } = response;
 
@@ -69,6 +69,7 @@ const LoginRegisterModal: FC<ILoginRegisterModal> = ({
         firstName,
         lastName,
         token,
+        email,
       });
     } catch (err) {
       console.log(err);
@@ -110,7 +111,7 @@ const LoginRegisterModal: FC<ILoginRegisterModal> = ({
                 }}
               >
                 <P>
-                  <Link href="moja-zona/registracia">
+                  <Link href="/moja-zona/registracia">
                     <RegisterButton>Zaregistrujte sa</RegisterButton>
                   </Link>
                 </P>

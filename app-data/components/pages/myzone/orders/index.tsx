@@ -24,16 +24,16 @@ import CustomSpinner from '../../../../shared/components/CustomSpinner/CustomerS
 import MobileTable from './MobileTable';
 
 type IOrders = {
-  id: string;
+  email: string;
 };
 
-const Orders: FC<IOrders> = ({ id }) => {
+const Orders: FC<IOrders> = ({ email }) => {
   const classes = useStyles2();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const { error, loading, data } = useQuery(ORDER_QUERY, {
-    variables: { id: id },
+    variables: { email: email },
     fetchPolicy: 'network-only',
   });
 

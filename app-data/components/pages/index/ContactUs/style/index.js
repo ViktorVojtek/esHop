@@ -6,12 +6,7 @@ import {
 } from '@styled-icons/entypo-social';
 
 export const Wrapper = styled.div`
-  margin-top: 4rem;
-  padding: 2rem;
-  @media (max-width: 768px) {
-    padding-left: 0;
-    padding-right: 0;
-  }
+  margin-top: 120px;
 `;
 
 export const SocialHolder = styled.div`
@@ -58,9 +53,10 @@ export const Youtube = styled(YoutubeWithCircle)`
 `;
 
 export const H3 = styled.h3`
-  font-size: 3.75rem;
+  font-size: 2rem;
   color: rgb(21, 24, 31);
-  text-align: left;
+  text-align: center;
+  margin-bottom: 2rem;
   @media (max-width: 768px) {
     text-align: center;
   }
@@ -69,19 +65,22 @@ export const H3 = styled.h3`
 export const P = styled.p`
   color: rgb(132, 136, 148);
   font-size: 0.875rem;
-  text-align: left;
-  margin: 0;
-  margin-top: 1.5rem;
-  @media (max-width: 768px) {
+  text-align: center;
+  margin-bottom: 0;
+  s @media (max-width: 768px) {
     text-align: center;
   }
+`;
+
+export const CustomLinkHolder = styled.div`
+  margin-bottom: 0.5rem;
 `;
 
 export const CustomLink = styled.a`
   font-weight: bold;
   font-size: 1rem;
   text-align: left;
-  color: #262b39 !important;
+  color: #01aeef !important;
   cursor: pointer;
   text-decoration: none !important;
   position: relative;
@@ -93,7 +92,7 @@ export const CustomLink = styled.a`
     height: 2px;
     bottom: -6px;
     left: 0px;
-    background-color: #262b39;
+    background-color: #01aeef;
     visibility: hidden;
     -webkit-transform: scaleX(0);
     transform: scaleX(0);
@@ -105,4 +104,37 @@ export const CustomLink = styled.a`
     -webkit-transform: scaleX(1);
     transform: scaleX(1);
   }
+`;
+
+export const Circle = styled.div`
+  position: absolute;
+  top: -50px;
+  width: 100px;
+  height: 100px;
+  border-radius: 60px;
+  border: 3px solid white;
+  background-color: #01aeef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: calc(50% - 50px);
+  transition: transform 0.3s ease-out;
+`;
+
+export const Card = styled.div`
+  width: 100%;
+  max-width: 800px;
+  position: relative;
+  transition: box-shadow 0.3s;
+  border: 1px solid #cecece;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 60px 0px;
+  top: -60px;
+  position: relative;
+  background-color: white;
+  height: 100%;
+  margin: 0 auto;
 `;

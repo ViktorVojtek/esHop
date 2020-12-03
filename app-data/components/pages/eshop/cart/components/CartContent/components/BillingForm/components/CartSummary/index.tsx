@@ -27,6 +27,7 @@ interface IData {
   deliveryMethode: string;
   deliveryPrice: number;
   paymentMethode: string;
+  paymentPrice: number;
   totalPrice: number;
   products: string[];
 }

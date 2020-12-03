@@ -314,8 +314,8 @@ export const CUSTOMER_QUERY = gql`
 `;
 
 export const ORDER_QUERY = gql`
-  query orders($id: String) {
-    orders(id: $id) {
+  query orders($email: String) {
+    orders(email: $email) {
       _id
       status
       products

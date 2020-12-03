@@ -7,6 +7,7 @@ const order: (root: any, args: any, ctx: any) => Promise<IOrder> = async (
   { _id },
   ctx
 ) => {
+  console.log(_id);
   const orderExist = await Order.findOne({ _id: mongoose.Types.ObjectId(_id) });
 
   if (!orderExist) {

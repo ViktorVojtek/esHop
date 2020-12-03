@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { withAuthSync } from '../../../app-data/lib/auth';
 import Layout from '../../../app-data/shared/components/Layout/Admin.material.layout';
 import CustomersList from '../../../app-data/components/pages/admin/customers';
-import { PageProps } from '../Types/Page.types';
+import { PageProps } from '../../../app-data/shared/types/Page.types';
 
 const Customers: (props: PageProps) => JSX.Element = ({ role }) => (
   <>

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "nodemon",
-    "build": "next build && tsc --project tsconfig.server.json",
+    "build": "NODE_OPTIONS=--max_old_space_size=4096 next build && tsc --project tsconfig.server.json",
     "start": "next start",
     "production": "NODE_ENV=production forever start ./dist/eshop.js",
     "prettier-watch": "onchange '**/*.js' -- prettier --write {{changed}}"

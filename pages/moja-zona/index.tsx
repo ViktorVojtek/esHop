@@ -21,6 +21,7 @@ const Home: () => JSX.Element = () => {
   const classes = useStyles1();
   const name = `${cookie.get('customerFName')} ${cookie.get('customerLName')}`;
   const id = cookie.get('customerId');
+  const email = cookie.get('customerEmail');
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
@@ -54,7 +55,7 @@ const Home: () => JSX.Element = () => {
                 <Tab icon={<Settings />} label="Nastavenia" />
               </Tabs>
             </Paper>
-            {value === 0 && <Orders id={id} />}
+            {value === 0 && <Orders email={email} />}
             {value === 1 && <Points id={id} />}
             {value === 2 && <SettingsPage id={id} />}
           </Container>

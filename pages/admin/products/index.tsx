@@ -5,7 +5,7 @@ import { Button } from 'reactstrap';
 import { withAuthSync } from '../../../app-data/lib/auth';
 import Layout from '../../../app-data/shared/components/Layout/Admin.material.layout';
 import ProductList from '../../../app-data/components/pages/admin/products/ProductList';
-import { PageProps } from '../Types/Page.types';
+import { PageProps } from '../../../app-data/shared/types/Page.types';
 
 const Products: (props: PageProps) => JSX.Element = ({ role }) => (
   <>

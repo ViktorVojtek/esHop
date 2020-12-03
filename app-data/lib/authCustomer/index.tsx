@@ -3,13 +3,13 @@ import React, { useEffect, useContext } from 'react';
 import Router from 'next/router';
 import nextCookie from 'next-cookies';
 import cookie from 'js-cookie';
-import { Context } from '../state/Store';
 
 import { ILogin } from './TS/auth.interface';
 
 export const login: (data: ILogin) => void = ({
   _id,
   firstName,
+  email,
   lastName,
   token,
 }) => {
@@ -17,6 +17,7 @@ export const login: (data: ILogin) => void = ({
   cookie.set('customerId', _id);
   cookie.set('customerFName', firstName);
   cookie.set('customerLName', lastName);
+  cookie.set('customerEmail', email);
   let isMyZone = Router.pathname.includes('moja-zona');
   isMyZone ? Router.push('/moja-zona') : Router.reload();
 };
@@ -42,6 +43,7 @@ export const logout: () => void = () => {
   cookie.remove('customerId');
   cookie.remove('customerFName');
   cookie.remove('customerLName');
+  cookie.remove('customerEmail');
   let isMyZone = Router.pathname.includes('moja-zona');
 
   // remove loyality product

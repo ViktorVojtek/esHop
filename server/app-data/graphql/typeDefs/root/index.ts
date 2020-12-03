@@ -12,7 +12,7 @@ const rootTypeDefs = gql`
     deliveryMethods: [Delivery]
     discount(id: String!): Discount
     discounts: [Discount]
-    orders(id: String): [Order]
+    orders(email: String): [Order]
     order: Order
     paymentMethode(id: String!): Payment
     paymentMethodes: [Payment]

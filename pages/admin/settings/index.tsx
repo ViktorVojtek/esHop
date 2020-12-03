@@ -18,7 +18,7 @@ import SubCategorySubmitForm from '../../../app-data/components/pages/admin/sett
 import SubCategories from '../../../app-data/components/pages/admin/settings/subcategory/components/SubCategories';
 
 import { withAuthSync } from '../../../app-data/lib/auth';
-import { PageProps } from '../Types/Page.types';
+import { PageProps } from '../../../app-data/shared/types/Page.types';
 
 const CurrencyIcon = styled(CurrencyEuro)`
   color: #000;

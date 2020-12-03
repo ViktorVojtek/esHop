@@ -4,4 +4,4 @@ export type ILogin = {
   lastName: string;
   role: number;
   token: string;
-}
+};

@@ -9,7 +9,7 @@ import { withAuthSync } from '../../../../app-data/lib/auth';
 
 import Layout from '../../../../app-data/shared/components/Layout/Admin.material.layout';
 import ProductForm from '../../../../app-data/components/pages/admin/products/ProductForm/mui';
-import { PageProps } from '../../Types/Page.types';
+import { PageProps } from '../../../../app-data/shared/types/Page.types';
 
 const UpdateProduct: (props: PageProps) => JSX.Element = ({ role }) => {
   const router = useRouter();
