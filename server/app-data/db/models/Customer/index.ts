@@ -12,6 +12,9 @@ export interface ICustomer extends Document {
   resetPasswordToken: string;
   resetPasswordExpires: Date;
   role?: number;
+  company?: Object;
+  billingAddress?: Object;
+  deliveryAddress?: Object;
 }
 
 const CustomerSchema = new mongoose.Schema({
@@ -37,6 +40,56 @@ const CustomerSchema = new mongoose.Schema({
   role: {
     default: 1,
     type: Number,
+  },
+  company: {
+    ico: {
+      default: '',
+      type: String,
+    },
+    dic: {
+      default: '',
+      type: String,
+    },
+    icdph: {
+      default: '',
+      type: String,
+    },
+  },
+  billingAddress: {
+    address: {
+      default: '',
+      type: String,
+    },
+    city: {
+      default: '',
+      type: String,
+    },
+    postalCode: {
+      default: '',
+      type: String,
+    },
+    state: {
+      default: '',
+      type: String,
+    },
+  },
+  deliveryAddress: {
+    address: {
+      default: '',
+      type: String,
+    },
+    city: {
+      default: '',
+      type: String,
+    },
+    postalCode: {
+      default: '',
+      type: String,
+    },
+    state: {
+      default: '',
+      type: String,
+    },
   },
 });
 

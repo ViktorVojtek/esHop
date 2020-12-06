@@ -16,7 +16,8 @@ export const H2 = styled.h3`
 `;
 
 export const H6 = styled.h6`
-  margin-top: 32px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 `;
 
 export const PDF = styled(FilePdf)`

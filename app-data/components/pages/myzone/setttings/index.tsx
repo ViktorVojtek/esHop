@@ -24,6 +24,7 @@ import { useSnackbar } from 'notistack';
 import MarketingSection from './MarketingSection';
 import { Paper } from '@material-ui/core';
 import CustomSpinner from '../../../../shared/components/CustomSpinner/CustomerSpinner';
+import PersonalInfo from './PersonalInfo';
 
 type ISettings = {
   id: string;
@@ -115,35 +116,7 @@ const Settings: FC<ISettings> = ({ id }) => {
     <>
       <Row className="mb-4 mt-4">
         <Col md={6}>
-          <H2 className="mb-4">Osobné údaje</H2>
-          <Paper elevation={3} style={{ padding: '16px 16px 32px 16px' }}>
-            <Row>
-              <Col md="auto">
-                <P>
-                  <strong>Meno:</strong> <span>{customer.firstName}</span>
-                </P>
-                <P>
-                  <strong>Priezvisko:</strong> <span>{customer.lastName}</span>
-                </P>
-              </Col>
-              <Col md="auto">
-                <P>
-                  <strong>Email:</strong> <span>{customer.email}</span>
-                </P>
-                <P>
-                  <strong>Tel:</strong> <span>{customer.tel}</span>
-                </P>
-              </Col>
-            </Row>
-            <MarketingSection id={id} customer={customer} />
-            <H6 className="mt-4">Zrušenie účtu:</H6>
-            <Button
-              style={{ background: 'red', border: 'none' }}
-              onClick={toggle}
-            >
-              Zrušiť účet
-            </Button>
-          </Paper>
+          <PersonalInfo id={id} customer={customer} toggle={toggle} />
         </Col>
         <Col md={6}>
           <H2 className="mb-4">Zmena hesla</H2>

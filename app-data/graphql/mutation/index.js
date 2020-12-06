@@ -333,7 +333,7 @@ export const LOGIN_CUSTOMER_MUTATION = gql`
 `;
 
 export const UPDATE_CUSTOMER_MUTATION = gql`
-  mutation updateCustomer($id: String!, $customerData: CustomerRegInput!) {
+  mutation updateCustomer($id: String!, $customerData: CustomerUpdateInput!) {
     updateCustomer(id: $id, customerData: $customerData) {
       _id
       customerPoints

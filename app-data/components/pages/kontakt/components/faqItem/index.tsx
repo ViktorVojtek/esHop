@@ -40,6 +40,7 @@ const H5 = styled.h5`
   font-weight: normal;
   user-select: none;
   color: #01aeef;
+  font-size: 1.15rem;
   margin: 0;
   @media (max-width: 768px) {
     text-align: left;

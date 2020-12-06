@@ -32,7 +32,7 @@ const rootTypeDefs = gql`
     removeCategory(_id: String!): String
 
     createCustomer(customerData: CustomerRegInput!): Customer
-    updateCustomer(id: String!, customerData: CustomerRegInput!): Customer
+    updateCustomer(id: String!, customerData: CustomerUpdateInput!): Customer
     logInCustomer(customerData: CustomerLoginInput!): CustomerLogged
     removeCustomer(id: String!): String
     changeCustomerPassword(token: String!, password: String!): Customer

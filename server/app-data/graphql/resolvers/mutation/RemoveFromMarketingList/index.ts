@@ -5,12 +5,6 @@ export default async (root: any, args: any, ctx: any) => {
   try {
     const { email } = args;
 
-    console.log(email);
-
-    const newUserData = {
-      email,
-    };
-
     const userExist = await MarketingList.findOne({ email });
 
     await Customer.updateOne({ email }, { marketing: false });

@@ -16,16 +16,19 @@ export default gql`
     role: Int
   }
 
-  type Customer {
+  input CustomerUpdateInput {
     _id: String!
-    customerPoints: Float
     email: String
     tel: String
-    isVerified: Boolean
     firstName: String
-    marketing: String
     lastName: String
-    role: Int!
+    password: String
+    company: CompanyInput
+    billingAddress: AddressInput
+    deliveryAddress: AddressInput
+    customerPoints: Float
+    isVerified: Boolean
+    marketing: Boolean
   }
 
   type CustomerLogged {
@@ -38,5 +41,46 @@ export default gql`
     role: Int!
     token: String!
     tokenExpiresIn: Float
+  }
+
+  type Company {
+    ico: String
+    dic: String
+    icdph: String
+  }
+
+  type Address {
+    address: String
+    city: String
+    postalCode: String
+    state: String
+  }
+
+  input CompanyInput {
+    ico: String
+    dic: String
+    icdph: String
+  }
+
+  input AddressInput {
+    address: String
+    city: String
+    postalCode: String
+    state: String
+  }
+
+  type Customer {
+    _id: String!
+    customerPoints: Float
+    email: String
+    tel: String
+    isVerified: Boolean
+    firstName: String
+    marketing: String
+    lastName: String
+    role: Int!
+    company: Company
+    billingAddress: Address
+    deliveryAddress: Address
   }
 `;

@@ -309,6 +309,21 @@ export const CUSTOMER_QUERY = gql`
       lastName
       customerPoints
       marketing
+      company {
+        ico
+        dic
+        icdph
+      }
+      billingAddress {
+        address
+        postalCode
+        city
+      }
+      deliveryAddress {
+        address
+        postalCode
+        city
+      }
     }
   }
 `;
