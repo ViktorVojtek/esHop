@@ -1,4 +1,4 @@
-import React, { FC, useContext, useEffect } from 'react';
+import React, { FC, useContext, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Container } from 'reactstrap';
 
@@ -27,7 +27,6 @@ const CartEmpty: () => JSX.Element = () => (
 const CartBodyComponent: FC = () => {
   const {
     state: { cart, giftCards, loyalityProduct },
-    state,
     dispatch,
   } = useContext(Context);
 

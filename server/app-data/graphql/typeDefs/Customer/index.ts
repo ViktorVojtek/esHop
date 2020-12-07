@@ -23,12 +23,21 @@ export default gql`
     firstName: String
     lastName: String
     password: String
-    company: CompanyInput
-    billingAddress: AddressInput
-    deliveryAddress: AddressInput
     customerPoints: Float
     isVerified: Boolean
     marketing: Boolean
+    companyDTAXNum: String
+    companyDVATNum: String
+    companyName: String
+    companyVatNum: String
+    address: String
+    city: String
+    postalCode: String
+    state: String
+    optionalAddress: String
+    optionalCity: String
+    optionalPostalCode: String
+    optionalState: String
   }
 
   type CustomerLogged {
@@ -43,32 +52,6 @@ export default gql`
     tokenExpiresIn: Float
   }
 
-  type Company {
-    ico: String
-    dic: String
-    icdph: String
-  }
-
-  type Address {
-    address: String
-    city: String
-    postalCode: String
-    state: String
-  }
-
-  input CompanyInput {
-    ico: String
-    dic: String
-    icdph: String
-  }
-
-  input AddressInput {
-    address: String
-    city: String
-    postalCode: String
-    state: String
-  }
-
   type Customer {
     _id: String!
     customerPoints: Float
@@ -79,8 +62,17 @@ export default gql`
     marketing: String
     lastName: String
     role: Int!
-    company: Company
-    billingAddress: Address
-    deliveryAddress: Address
+    companyDTAXNum: String
+    companyDVATNum: String
+    companyName: String
+    companyVatNum: String
+    address: String
+    city: String
+    postalCode: String
+    state: String
+    optionalAddress: String
+    optionalCity: String
+    optionalPostalCode: String
+    optionalState: String
   }
 `;

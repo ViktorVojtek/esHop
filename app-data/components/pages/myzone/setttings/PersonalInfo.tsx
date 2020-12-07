@@ -2,12 +2,13 @@ import {
   FormControl,
   FormControlLabel,
   FormLabel,
+  makeStyles,
   Paper,
   Switch,
   TextField,
 } from '@material-ui/core';
 import { useSnackbar } from 'notistack';
-import React, { FC, useState } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import { useMutation } from 'react-apollo';
 import { Button, Col, Row } from 'reactstrap';
 import { H2, H6, P } from '../mojaZona';
@@ -17,6 +18,7 @@ import {
   UPDATE_CUSTOMER_MUTATION,
 } from '../../../../graphql/mutation';
 import { CUSTOMER_QUERY } from '../../../../graphql/query';
+import { Context } from '../../../../lib/state/Store';
 
 export type ICustomer = {
   email: string;
@@ -24,23 +26,18 @@ export type ICustomer = {
   firstName: string;
   lastName: string;
   marketing: boolean;
-  company?: {
-    ico?: string;
-    dic?: string;
-    icdph?: string;
-  };
-  billingAddress?: {
-    address?: string;
-    city?: string;
-    postalCode?: string;
-    state?: string;
-  };
-  deliveryAddress?: {
-    address?: string;
-    city?: string;
-    postalCode?: string;
-    state?: string;
-  };
+  companyDTAXNum?: string;
+  companyDVATNum?: string;
+  companyName?: string;
+  companyVatNum?: string;
+  address?: string;
+  city?: string;
+  postalCode?: string;
+  state?: string;
+  optionalAddress?: string;
+  optionalCity?: string;
+  optionalPostalCode?: string;
+  optionalState?: string;
 };
 
 type IPersonalInfo = {
@@ -50,6 +47,7 @@ type IPersonalInfo = {
 };
 
 const PersonalInfo: FC<IPersonalInfo> = ({ id, customer, toggle }) => {
+  const classes = useStyles();
   const [customerData, setCustomerData] = useState(customer);
 
   const { enqueueSnackbar } = useSnackbar();
@@ -64,53 +62,6 @@ const PersonalInfo: FC<IPersonalInfo> = ({ id, customer, toggle }) => {
     refetchQueries: [{ query: CUSTOMER_QUERY, variables: { id: id } }],
   });
 
-  const handleRemoveFromMarketing: () => Promise<void> = async () => {
-    try {
-      await removeFromMarketingList({
-        variables: {
-          email: customer.email,
-        },
-      });
-      enqueueSnackbar(`Odstránenie prebehlo úspešne`, {
-        variant: 'success',
-      });
-    } catch (err) {
-      enqueueSnackbar(`Nastala neočakávaná chyba`, {
-        variant: 'error',
-      });
-    }
-  };
-
-  const handleAddToMarketing: () => Promise<void> = async () => {
-    try {
-      await addToMarketingList({
-        variables: {
-          marketingListData: {
-            email: customer.email,
-            tel: customer.tel,
-            firstName: customer.firstName,
-            lastName: customer.lastName,
-          },
-        },
-      });
-      enqueueSnackbar(`Súhlas prebehol úspešne.`, {
-        variant: 'success',
-      });
-    } catch (err) {
-      enqueueSnackbar(`Nastala neočakávaná chyba`, {
-        variant: 'error',
-      });
-    }
-  };
-
-  /*const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const checked = event.target.checked;
-    if (!checked) {
-      return handleRemoveFromMarketing();
-    }
-    handleAddToMarketing();
-  };*/
-
   const handleChangeMarketing = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -121,46 +72,13 @@ const PersonalInfo: FC<IPersonalInfo> = ({ id, customer, toggle }) => {
     });
   };
 
-  const handleChangeCompany = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     const name = event.target.name;
 
     setCustomerData({
       ...customerData,
-      company: {
-        ...customerData.company,
-        [name]: value,
-      },
-    });
-  };
-
-  const handleChangeBillingAddress = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const value = event.target.value;
-    const name = event.target.name;
-
-    setCustomerData({
-      ...customerData,
-      billingAddress: {
-        ...customerData.billingAddress,
-        [name]: value,
-      },
-    });
-  };
-
-  const handleChangeDeliveryAddress = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const value = event.target.value;
-    const name = event.target.name;
-
-    setCustomerData({
-      ...customerData,
-      deliveryAddress: {
-        ...customerData.deliveryAddress,
-        [name]: value,
-      },
+      [name]: value,
     });
   };
 
@@ -205,189 +123,190 @@ const PersonalInfo: FC<IPersonalInfo> = ({ id, customer, toggle }) => {
       });
     }
   };
-
-  console.log(customerData);
   return (
     <>
       <H2 className="mb-4">Osobné údaje</H2>
       <Paper elevation={3} style={{ padding: '16px 16px 32px 16px' }}>
         <H6>Kontaktné údaje:</H6>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className={classes.root}>
           <Row>
-            <Col md={6} xs={12}>
+            <Col lg={3} md={6} xs={12}>
               <TextField
                 disabled
                 id="firstName"
                 name="firstName"
                 label="Meno"
                 value={customerData.firstName}
-                style={{ marginBottom: '.5rem' }}
                 fullWidth
+                variant="outlined"
               />
             </Col>
-            <Col md={6} xs={12}>
+            <Col lg={3} md={6} xs={12}>
               <TextField
                 disabled
                 id="lastName"
                 name="lastName"
-                label="Meno"
+                label="Priezvisko"
                 value={customerData.lastName}
-                style={{ marginBottom: '.5rem' }}
                 fullWidth
+                variant="outlined"
               />
             </Col>
-            <Col md={6} xs={12}>
+            <Col lg={3} md={6} xs={12}>
               <TextField
                 disabled
                 id="email"
                 name="email"
                 label="Email"
                 value={customerData.email}
-                style={{ marginBottom: '.5rem' }}
                 fullWidth
+                variant="outlined"
               />
             </Col>
-            <Col md={6} xs={12}>
+            <Col lg={3} md={6} xs={12}>
               <TextField
                 disabled
                 id="tel"
                 name="tel"
                 label="Telefón"
                 value={customerData.tel}
-                style={{ marginBottom: '.5rem' }}
                 fullWidth
+                variant="outlined"
               />
             </Col>
           </Row>
           <H6>Údaje o firme:</H6>
           <Row>
-            <Col md={6} xs={12}>
+            <Col lg={3} md={6} xs={12}>
+              <TextField
+                id="companyName"
+                name="companyName"
+                label="Názov spoločnosti"
+                value={customerData.companyName ? customerData.companyName : ''}
+                fullWidth
+                onChange={handleChange}
+                variant="outlined"
+              />
+            </Col>
+            <Col lg={3} md={6} xs={12}>
               <TextField
                 id="ico"
-                name="ico"
+                name="companyVatNum"
                 label="IČO"
-                value={customerData.company.ico}
-                style={{ marginBottom: '.5rem' }}
+                value={
+                  customerData.companyVatNum ? customerData.companyVatNum : ''
+                }
                 fullWidth
-                onChange={handleChangeCompany}
+                onChange={handleChange}
+                variant="outlined"
               />
             </Col>
-            <Col md={6} xs={12}>
+            <Col lg={3} md={6} xs={12}>
               <TextField
                 id="dic"
-                name="dic"
+                name="companyDVATNum"
                 label="DIČ"
-                value={customerData.company.dic}
-                style={{ marginBottom: '.5rem' }}
+                value={
+                  customerData.companyDVATNum ? customerData.companyDVATNum : ''
+                }
                 fullWidth
-                onChange={handleChangeCompany}
+                onChange={handleChange}
+                variant="outlined"
               />
             </Col>
-            <Col md={6} xs={12}>
+            <Col lg={3} md={6} xs={12}>
               <TextField
                 id="icdph"
-                name="icdph"
+                name="companyDTAXNum"
                 label="IČ DPH"
-                value={customerData.company.icdph}
-                style={{ marginBottom: '.5rem' }}
+                value={
+                  customerData.companyDTAXNum ? customerData.companyDTAXNum : ''
+                }
                 fullWidth
-                onChange={handleChangeCompany}
+                onChange={handleChange}
+                variant="outlined"
               />
             </Col>
           </Row>
           <H6>Fakturačná adresa:</H6>
           <Row>
-            <Col md={6} xs={12}>
+            <Col lg={3} md={6} xs={12}>
               <TextField
                 id="billingAddress"
                 name="address"
                 label="Adresa"
-                value={
-                  customerData.billingAddress.address
-                    ? customerData.billingAddress.address
-                    : ''
-                }
-                style={{ marginBottom: '.5rem' }}
+                value={customerData.address ? customerData.address : ''}
                 fullWidth
-                onChange={handleChangeBillingAddress}
+                onChange={handleChange}
+                variant="outlined"
               />
             </Col>
-            <Col md={6} xs={12}>
+            <Col lg={3} md={6} xs={12}>
               <TextField
                 id="billingCity"
                 name="city"
                 label="Mesto"
-                value={
-                  customerData.billingAddress.city
-                    ? customerData.billingAddress.city
-                    : ''
-                }
-                style={{ marginBottom: '.5rem' }}
+                value={customerData.city ? customerData.city : ''}
                 fullWidth
-                onChange={handleChangeBillingAddress}
+                onChange={handleChange}
+                variant="outlined"
               />
             </Col>
-            <Col md={6} xs={12}>
+            <Col lg={3} md={6} xs={12}>
               <TextField
                 id="billingPostalCode"
                 name="postalCode"
                 label="PSČ"
-                value={
-                  customerData.billingAddress.postalCode
-                    ? customerData.billingAddress.postalCode
-                    : ''
-                }
-                style={{ marginBottom: '.5rem' }}
+                value={customerData.postalCode ? customerData.postalCode : ''}
                 fullWidth
-                onChange={handleChangeBillingAddress}
+                onChange={handleChange}
+                variant="outlined"
               />
             </Col>
           </Row>
           <H6>Adresa dodania:</H6>
           <Row>
-            <Col md={6} xs={12}>
+            <Col lg={3} md={6} xs={12}>
               <TextField
                 id="deliveryAddress"
-                name="address"
+                name="optionalAddress"
                 label="Adresa"
                 value={
-                  customerData.deliveryAddress.address
-                    ? customerData.deliveryAddress.address
+                  customerData.optionalAddress
+                    ? customerData.optionalAddress
                     : ''
                 }
-                style={{ marginBottom: '.5rem' }}
                 fullWidth
-                onChange={handleChangeDeliveryAddress}
+                onChange={handleChange}
+                variant="outlined"
               />
             </Col>
-            <Col md={6} xs={12}>
+            <Col lg={3} md={6} xs={12}>
               <TextField
                 id="deliveryCity"
-                name="city"
+                name="optionalCity"
                 label="Mesto"
                 value={
-                  customerData.deliveryAddress.city
-                    ? customerData.deliveryAddress.city
-                    : ''
+                  customerData.optionalCity ? customerData.optionalCity : ''
                 }
-                style={{ marginBottom: '.5rem' }}
                 fullWidth
-                onChange={handleChangeDeliveryAddress}
+                onChange={handleChange}
+                variant="outlined"
               />
             </Col>
-            <Col md={6} xs={12}>
+            <Col lg={3} md={6} xs={12}>
               <TextField
                 id="deliveryPostalCode"
-                name="postalCode"
+                name="optionalPostalCode"
                 label="PSČ"
                 value={
-                  customerData.deliveryAddress.postalCode
-                    ? customerData.deliveryAddress.postalCode
+                  customerData.optionalPostalCode
+                    ? customerData.optionalPostalCode
                     : ''
                 }
-                style={{ marginBottom: '.5rem' }}
                 fullWidth
-                onChange={handleChangeDeliveryAddress}
+                onChange={handleChange}
+                variant="outlined"
               />
             </Col>
           </Row>
@@ -425,3 +344,12 @@ const PersonalInfo: FC<IPersonalInfo> = ({ id, customer, toggle }) => {
 };
 
 export default PersonalInfo;
+
+const useStyles = makeStyles({
+  root: {
+    '& .MuiTextField-root': {
+      margin: '.25rem',
+      marginBottom: '.75rem',
+    },
+  },
+});

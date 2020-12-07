@@ -12,9 +12,18 @@ export interface ICustomer extends Document {
   resetPasswordToken: string;
   resetPasswordExpires: Date;
   role?: number;
-  company?: Object;
-  billingAddress?: Object;
-  deliveryAddress?: Object;
+  companyDTAXNum?: string;
+  companyDVATNum?: string;
+  companyName?: string;
+  companyVatNum?: string;
+  address?: string;
+  city?: string;
+  postalCode?: string;
+  state?: string;
+  optionalAddress?: string;
+  optionalCity?: string;
+  optionalPostalCode?: string;
+  optionalState?: string;
 }
 
 const CustomerSchema = new mongoose.Schema({
@@ -41,56 +50,18 @@ const CustomerSchema = new mongoose.Schema({
     default: 1,
     type: Number,
   },
-  company: {
-    ico: {
-      default: '',
-      type: String,
-    },
-    dic: {
-      default: '',
-      type: String,
-    },
-    icdph: {
-      default: '',
-      type: String,
-    },
-  },
-  billingAddress: {
-    address: {
-      default: '',
-      type: String,
-    },
-    city: {
-      default: '',
-      type: String,
-    },
-    postalCode: {
-      default: '',
-      type: String,
-    },
-    state: {
-      default: '',
-      type: String,
-    },
-  },
-  deliveryAddress: {
-    address: {
-      default: '',
-      type: String,
-    },
-    city: {
-      default: '',
-      type: String,
-    },
-    postalCode: {
-      default: '',
-      type: String,
-    },
-    state: {
-      default: '',
-      type: String,
-    },
-  },
+  companyDTAXNum: String,
+  companyDVATNum: String,
+  companyName: String,
+  companyVatNum: String,
+  address: String,
+  city: String,
+  postalCode: String,
+  state: String,
+  optionalAddress: String,
+  optionalCity: String,
+  optionalPostalCode: String,
+  optionalState: String,
 });
 
 export default mongoose.model<ICustomer>('Customer', CustomerSchema);

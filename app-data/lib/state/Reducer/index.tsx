@@ -10,10 +10,10 @@ import { useStorage } from '../../util/app.util';
 import cookie from 'js-cookie';
 import { useQuery } from '@apollo/react-hooks';
 import {
+  CUSTOMER_QUERY,
   LOYALITY_PRODUCTS_QUERY,
   PRODUCTS_BY_IDS_QUERY,
 } from '../../../graphql/query';
-import CustomSpinner from '../../../shared/components/CustomSpinner/CustomerSpinner';
 
 const storage: Storage = useStorage();
 let newCart: CartProduct[] = [];
@@ -204,7 +204,8 @@ const Reducer = (state: IState, action: IAction) => {
 export const withSetCart = <P extends object>(
   Component: React.ComponentType<P>
 ): FC<P> => ({ ...props }) => {
-  const { dispatch } = useContext(Context);
+  const { dispatch, state } = useContext(Context);
+  const { customer } = state;
 
   let cart: CartProduct[] = storage
     ? storage.getItem('cart')
@@ -255,6 +256,7 @@ export const withSetCart = <P extends object>(
       });
     }
   }
+  const user = getUser(customer.userId);
 
   useEffect(() => {
     dispatch({ type: 'SET_CART', payload: cart });
@@ -263,13 +265,15 @@ export const withSetCart = <P extends object>(
     dispatch({
       type: 'SET_CUSTOMER',
       payload: {
+        ...user,
+        phone: user ? user.tel : '',
         firstName: cookie.get('customerFName'),
         lastName: cookie.get('customerLName'),
         userId: cookie.get('customerId'),
         token: cookie.get('customerToken'),
       },
     });
-  }, [data, loyalityProducts]);
+  }, [data, loyalityProducts, user]);
 
   return <Component {...props} />;
 };
@@ -282,5 +286,18 @@ function getLoyalityProducts() {
   if (data) {
     const { loyalityProducts } = data;
     return loyalityProducts;
+  }
+  return;
+}
+
+function getUser(id: string) {
+  const { error, loading, data } = useQuery(CUSTOMER_QUERY, {
+    variables: { id: id },
+    skip: id === undefined || id === '',
+    fetchPolicy: 'network-only',
+  });
+  if (data) {
+    const { customer } = data;
+    return customer;
   }
 }

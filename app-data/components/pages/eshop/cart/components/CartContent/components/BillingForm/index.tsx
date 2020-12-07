@@ -9,6 +9,7 @@ import { ButtonAddrRemove } from '../../../../styles/cart.style';
 import Loading from '../../../../../../../../shared/components/Loading';
 import Router from 'next/router';
 import PayCardForm from './components/PayCardForm';
+
 interface IData {
   userId?: string;
   firstName: string;
@@ -73,6 +74,9 @@ const BillingForm: FC = () => {
 
   const { cart, customer, giftCards, loyalityProduct } = state;
 
+  console.log(orderData);
+  console.log(customer);
+
   useEffect(() => {
     const products = cart.concat(giftCards as any);
 
@@ -97,14 +101,61 @@ const BillingForm: FC = () => {
 
       return result;
     });
-
     handleOrderData({
       ...orderData,
+      firstName:
+        customer && customer.firstName
+          ? customer.firstName
+          : orderData.firstName,
+      lastName:
+        customer && customer.lastName ? customer.lastName : orderData.lastName,
+      email: customer && customer.email ? customer.email : orderData.email,
+      phone: customer && customer.tel ? customer.tel : orderData.phone,
+      companyName:
+        customer && customer.companyName
+          ? customer.companyName
+          : orderData.companyName,
+      companyVatNum:
+        customer && customer.companyVatNum
+          ? customer.companyVatNum
+          : orderData.companyVatNum,
+      companyDTAXNum:
+        customer && customer.companyDTAXNum
+          ? customer.companyDTAXNum
+          : orderData.companyDTAXNum,
+      companyDVATNum:
+        customer && customer.companyDVATNum
+          ? customer.companyDVATNum
+          : orderData.companyDVATNum,
+      address:
+        customer && customer.address ? customer.address : orderData.address,
+      city: customer && customer.city ? customer.city : orderData.city,
+      postalCode:
+        customer && customer.postalCode
+          ? customer.postalCode
+          : orderData.postalCode,
+      state: customer && customer.state ? customer.state : orderData.state,
+      optionalAddress:
+        customer && customer.optionalAddress
+          ? customer.optionalAddress
+          : orderData.optionalAddress,
+      optionalCity:
+        customer && customer.optionalCity
+          ? customer.optionalCity
+          : orderData.optionalCity,
+      optionalPostalCode:
+        customer && customer.optionalPostalCode
+          ? customer.optionalPostalCode
+          : orderData.optionalPostalCode,
+      optionalState:
+        customer && customer.optionalState
+          ? customer.optionalState
+          : orderData.optionalState,
       userId: customer && customer.userId ? customer.userId : '',
       products: productsToBuy,
       loyalityProduct,
     });
-  }, [cart, giftCards, loyalityProduct]);
+  }, [cart, giftCards, loyalityProduct, customer]);
 
   const handleSubmitForm: (
     event: React.FormEvent<HTMLFormElement>
@@ -148,7 +199,6 @@ const BillingForm: FC = () => {
         const respJson = await paymentResponse.json();
         setCardPay(respJson);
       } else {
-        console.log(loyalityProduct);
         await mutate({
           variables: {
             data: orderData,

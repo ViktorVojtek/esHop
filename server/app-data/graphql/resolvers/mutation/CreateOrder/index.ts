@@ -82,7 +82,7 @@ function sendMailNotification(
         totalPriceWithoutVat: formatPrice(orderData.totalPriceWithoutVat),
         totalPriceVat: formatPrice(orderData.totalPriceVat),
         totalPrice: formatPrice(orderData.totalPrice),
-        isBankovyPrevod: orderData.paymentMethod === 'Bankový prevod',
+        isBankovyPrevod: orderData.paymentMethode === 'Bankový prevod',
         giftCards: orderData.giftCards ? orderData.giftCards : [],
         areProducts: orderData.products.length > 0,
         areGiftCards: orderData.giftCards.length > 0,

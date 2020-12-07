@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Col, Row, FormGroup, Input, Label, Collapse } from 'reactstrap';
 
 import countryData from './data/country.data.json';
@@ -34,12 +34,50 @@ interface IProps {
 }
 
 const BillingInfo: (props: IProps) => JSX.Element = (props) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isOpenAdress, setIsOpenAdress] = useState(false);
   const { data, handleData } = props;
+  const [isOpen, setIsOpen] = useState(!!data.companyName);
+  const [isOpenAdress, setIsOpenAdress] = useState(!!data.optionalAddress);
 
-  const toggle = () => setIsOpen(!isOpen);
   const toggleAdress = () => setIsOpenAdress(!isOpenAdress);
+
+  const handleToggleCompany = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const checked = event.target.checked;
+    if (checked) {
+      setIsOpen(true);
+      return;
+    }
+    setIsOpen(false);
+    handleData({
+      ...data,
+      companyDTAXNum: '',
+      companyDVATNum: '',
+      companyName: '',
+      companyVatNum: '',
+    });
+  };
+
+  const handleToggleOptionalAddress = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const checked = event.target.checked;
+    if (checked) {
+      setIsOpenAdress(true);
+      return;
+    }
+    setIsOpenAdress(false);
+    handleData({
+      ...data,
+      optionalAddress: '',
+      optionalCity: '',
+      optionalPostalCode: '',
+      optionalState: '',
+    });
+  };
+
+  useEffect(() => {
+    setIsOpen(!!data.companyName);
+    setIsOpenAdress(!!data.optionalAddress);
+  }, [data.companyName, data.optionalAddress]);
 
   const {
     address,
@@ -106,7 +144,12 @@ const BillingInfo: (props: IProps) => JSX.Element = (props) => {
       </Row>
       <FormGroup check className="mb-3">
         <Label check>
-          <Input type="checkbox" onClick={toggle} /> Som podnikateľ (PO, SZČO)
+          <Input
+            checked={isOpen}
+            type="checkbox"
+            onChange={handleToggleCompany}
+          />{' '}
+          Som podnikateľ (PO, SZČO)
         </Label>
       </FormGroup>
       <Collapse isOpen={isOpen}>
@@ -274,8 +317,12 @@ const BillingInfo: (props: IProps) => JSX.Element = (props) => {
       </FormGroup>
       <FormGroup check className="mb-3">
         <Label check>
-          <Input type="checkbox" onClick={toggleAdress} /> Dodacia adresa je iná
-          ako fakturačná ?
+          <Input
+            checked={isOpenAdress}
+            type="checkbox"
+            onChange={handleToggleOptionalAddress}
+          />{' '}
+          Dodacia adresa je iná ako fakturačná ?
         </Label>
       </FormGroup>
       <Collapse isOpen={isOpenAdress}>

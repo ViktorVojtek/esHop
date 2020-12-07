@@ -307,7 +307,7 @@ export default async (
         giftCards,
         areProducts: readyData.products.length > 0,
         areGiftCards: giftCards.length > 0,
-        isLoyalityProduct: readyData.loyalityProduct.title ? true : false,
+        isLoyalityProduct: readyData.loyalityProduct ? true : false,
         loyalityProduct: readyData.loyalityProduct,
         deliveryPrice: formatPrice(readyData.deliveryPrice),
         paymentPrice: formatPrice(readyData.paymentPrice),

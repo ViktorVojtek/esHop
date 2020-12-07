@@ -21,7 +21,6 @@ import Router from 'next/router';
 import cookie from 'js-cookie';
 import { Danger } from '../../../../shared/components/LoginRegisterModal/styles';
 import { useSnackbar } from 'notistack';
-import MarketingSection from './MarketingSection';
 import { Paper } from '@material-ui/core';
 import CustomSpinner from '../../../../shared/components/CustomSpinner/CustomerSpinner';
 import PersonalInfo from './PersonalInfo';
@@ -115,7 +114,7 @@ const Settings: FC<ISettings> = ({ id }) => {
   return (
     <>
       <Row className="mb-4 mt-4">
-        <Col md={6}>
+        <Col md={12}>
           <PersonalInfo id={id} customer={customer} toggle={toggle} />
         </Col>
         <Col md={6}>

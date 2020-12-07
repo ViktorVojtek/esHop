@@ -45,6 +45,20 @@ export type Customer = {
   userId: string;
   token: string;
   marketing: boolean;
+  companyDTAXNum: string;
+  companyDVATNum: string;
+  companyName: string;
+  companyVatNum: string;
+  address: string;
+  city: string;
+  postalCode: string;
+  state: string;
+  optionalAddress: string;
+  optionalCity: string;
+  optionalPostalCode: string;
+  optionalState: string;
+  tel: string;
+  email: string;
 };
 
 export interface IState {
