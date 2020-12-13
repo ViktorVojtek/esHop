@@ -110,7 +110,7 @@ const OrdersList: FC<IOrders> = ({ orders }) => {
           return (
             <StyledTableRow key={index}>
               <TableCell component="td" scope="row">
-                {index + 1}
+                {orderId}
               </TableCell>
               <TableCell component="td" scope="row">
                 {`${firstName} ${lastName}`}

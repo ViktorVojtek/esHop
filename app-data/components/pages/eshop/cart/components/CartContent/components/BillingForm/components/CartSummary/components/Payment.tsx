@@ -4,6 +4,13 @@ import { Context } from '../../../../../../../../../../../lib/state/Store';
 import { PAYMENT_METHODES_QUERY } from '../../../../../../../../../../../graphql/query';
 import { Col, Row, FormGroup, Input, Label } from 'reactstrap';
 import { formatPrice } from '../../../../../../../../../../../shared/helpers/formatters';
+import {
+  FormControl,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+} from '@material-ui/core';
+import { H4 } from '../../../../../../../styles/cart.style';
 
 interface IData {
   firstName: string;
@@ -24,6 +31,7 @@ interface IData {
   email: string;
   message: string;
   deliveryMethode: string;
+  deliveryPrice: number;
   paymentMethode: string;
   paymentPrice: number;
   totalPrice: number;
@@ -37,7 +45,7 @@ interface IProps {
 export default (props: IProps) => {
   const { data: orderData, handleData } = props;
   const {
-    state: { cart, giftCards, loyalityProduct },
+    state: { cart, giftCards, loyalityProduct, cartTotalSum },
     dispatch,
   } = useContext(Context);
   const { error, loading, data } = useQuery(PAYMENT_METHODES_QUERY);
@@ -50,22 +58,13 @@ export default (props: IProps) => {
     return null;
   }
 
-  const handleChangePayment: (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => void = (event) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let sum: number = 0;
-    const currentValue: number = parseFloat(
-      event.currentTarget.getAttribute('data-value')
-    );
-    const deliveryEls: NodeListOf<HTMLInputElement> = document.querySelectorAll(
-      '.payment-data-input'
-    );
-
-    deliveryEls.forEach((item: HTMLInputElement) => {
-      item.checked = false;
+    const currentMethod = paymentMethodes.find((item) => {
+      if (item.title === (event.target as HTMLInputElement).value) {
+        return true;
+      }
     });
-
-    event.currentTarget.checked = true;
 
     cart.forEach((item: any) => {
       if (item.variant.discount && item.variant.discount > 0) {
@@ -85,22 +84,13 @@ export default (props: IProps) => {
     if (loyalityProduct && loyalityProduct.isDiscount) {
       sum = sum - sum * (loyalityProduct.discount / 100);
     }
-
-    sum += currentValue;
-
-    document.querySelectorAll('.delivery-data-input').forEach((item) => {
-      if ((item as HTMLInputElement).checked) {
-        sum += +item.getAttribute('data-value') as number;
-      }
-    });
-
-    sum = Math.round(sum * 100) / 100;
-
+    sum += orderData.deliveryPrice;
+    sum += currentMethod.value;
     handleData({
       ...orderData,
       totalPrice: sum,
-      paymentMethode: event.currentTarget.id,
-      paymentPrice: currentValue,
+      paymentMethode: currentMethod.title,
+      paymentPrice: currentMethod.value,
     });
     dispatch({
       type: 'SET_TOTAL_SUM',
@@ -110,50 +100,55 @@ export default (props: IProps) => {
 
   const { paymentMethodes } = data;
 
-  const paymentMethodsEl: JSX.Element[] =
+  const paymentMethodsEl: JSX.Element =
     paymentMethodes && paymentMethodes.length > 0 ? (
-      paymentMethodes.map(
-        (
-          {
-            _id,
-            title,
-            value,
-          }: {
-            _id: string;
-            title: string;
-            value: number;
-          },
-          i: number
-        ) => {
-          return (
-            <Row form key={_id}>
-              <Col md={6}>
-                <FormGroup>
-                  <FormGroup check>
-                    <Label htmlFor={title.toLowerCase()}>
-                      <Input
-                        type="radio"
-                        name="paymentMethods"
-                        id={title.toLowerCase()}
-                        className="payment-data-input"
-                        onChange={handleChangePayment}
-                        data-value={value}
-                        required
-                      />{' '}
-                      {title}
-                    </Label>
-                  </FormGroup>
-                </FormGroup>
-              </Col>
-              <Col md={6}>
-                <p className="text-right">
-                  {value === 0 ? 'Zadarmo' : `${formatPrice(value)} €`}
-                </p>
-              </Col>
-            </Row>
-          );
-        }
-      )
+      <FormControl style={{ width: '100%' }} component="fieldset">
+        <RadioGroup
+          aria-label="paymentMethods"
+          name="paymentMethods"
+          value={orderData.paymentMethode}
+          onChange={handleChange}
+        >
+          {paymentMethodes.map(
+            (
+              {
+                _id,
+                title,
+                value,
+              }: {
+                _id: string;
+                title: string;
+                value: number;
+              },
+              i: number
+            ) => {
+              return (
+                <div
+                  key={_id}
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    width: '100%',
+                    alignItems: 'center',
+                  }}
+                >
+                  <FormControlLabel
+                    value={title}
+                    control={<Radio color="primary" required />}
+                    label={title}
+                  />
+                  <p
+                    className="text-right"
+                    style={{ margin: '0', fontWeight: 'bold' }}
+                  >
+                    {value === 0 ? 'Zadarmo' : `${formatPrice(value)} €`}
+                  </p>
+                </div>
+              );
+            }
+          )}
+        </RadioGroup>
+      </FormControl>
     ) : (
       <Row form>
         <Col>
@@ -164,7 +159,7 @@ export default (props: IProps) => {
 
   return (
     <>
-      <h5 className="mb-4">Zvoľte spôsob platby</h5>
+      <H4 className="mb-4">Spôsob platby</H4>
       {paymentMethodsEl}
     </>
   );

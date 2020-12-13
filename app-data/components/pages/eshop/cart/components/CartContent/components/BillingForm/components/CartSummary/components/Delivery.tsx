@@ -5,6 +5,13 @@ import { DELIVERY_METHODS_QUERY } from '../../../../../../../../../../../graphql
 import { Col, Row, FormGroup, Input, Label } from 'reactstrap';
 import { formatPrice } from '../../../../../../../../../../../shared/helpers/formatters';
 import { CartProduct } from '../../../../../../../../../../../shared/types/Store.types';
+import {
+  FormControl,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+} from '@material-ui/core';
+import { H4 } from '../../../../../../../styles/cart.style';
 
 interface IData {
   firstName: string;
@@ -27,6 +34,7 @@ interface IData {
   deliveryMethode: string;
   deliveryPrice: number;
   paymentMethode: string;
+  paymentPrice: number;
   totalPrice: number;
   products: string[];
 }
@@ -51,22 +59,13 @@ export default (props: IProps) => {
     return null;
   }
 
-  const handleChangeDelivery: (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => void = (event) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let sum: number = 0;
-    const currentValue: number = parseFloat(
-      event.currentTarget.getAttribute('data-value')
-    );
-    const deliveryEls: NodeListOf<HTMLInputElement> = document.querySelectorAll(
-      '.delivery-data-input'
-    );
-
-    deliveryEls.forEach((item: HTMLInputElement) => {
-      item.checked = false;
+    const currentMethod = deliveryMethods.find((item) => {
+      if (item.title === (event.target as HTMLInputElement).value) {
+        return true;
+      }
     });
-
-    event.currentTarget.checked = true;
 
     cart.forEach((item: any) => {
       if (item.variant.discount && item.variant.discount > 0) {
@@ -86,22 +85,13 @@ export default (props: IProps) => {
     if (loyalityProduct && loyalityProduct.isDiscount) {
       sum = sum - sum * (loyalityProduct.discount / 100);
     }
-
-    sum += currentValue;
-
-    document.querySelectorAll('.payment-data-input').forEach((item) => {
-      if ((item as HTMLInputElement).checked) {
-        sum += +item.getAttribute('data-value') as number;
-      }
-    });
-
-    sum = Math.round(sum * 100) / 100;
-
+    sum += orderData.paymentPrice;
+    sum += currentMethod.value;
     handleData({
       ...orderData,
       totalPrice: sum,
-      deliveryMethode: event.currentTarget.id,
-      deliveryPrice: currentValue,
+      deliveryMethode: currentMethod.title,
+      deliveryPrice: currentMethod.value,
     });
     dispatch({
       type: 'SET_TOTAL_SUM',
@@ -111,64 +101,66 @@ export default (props: IProps) => {
 
   const { deliveryMethods } = data;
 
-  const deliveryMethodsEl: JSX.Element[] =
+  const deliveryMethodsEl: JSX.Element =
     deliveryMethods && deliveryMethods.length > 0 ? (
-      deliveryMethods.map(
-        (
-          {
-            _id,
-            title,
-            value,
-            isEnvelopeSize,
-          }: {
-            _id: string;
-            title: string;
-            value: number;
-            isEnvelopeSize: boolean;
-          },
-          i: number
-        ) => {
-          return (
-            <Row form key={_id}>
-              <Col md={6}>
-                <FormGroup required>
-                  <FormGroup check>
-                    <Label htmlFor={title.toLowerCase()}>
-                      {isEnvelopeSize ? (
-                        <Input
-                          type="radio"
-                          name="deliveryMethods"
-                          id={title.toLowerCase()}
-                          className="delivery-data-input"
-                          onChange={handleChangeDelivery}
-                          data-value={value}
-                          disabled={allowEnvelope ? false : true}
-                        />
-                      ) : (
-                        <Input
-                          type="radio"
-                          name="deliveryMethods"
-                          id={title.toLowerCase()}
-                          className="delivery-data-input"
-                          onChange={handleChangeDelivery}
-                          data-value={value}
-                          required
-                        />
-                      )}{' '}
-                      {title}
-                    </Label>
-                  </FormGroup>
-                </FormGroup>
-              </Col>
-              <Col md={6}>
-                <p className="text-right">
-                  {value === 0 ? 'Zadarmo' : `${formatPrice(value)} €`}
-                </p>
-              </Col>
-            </Row>
-          );
-        }
-      )
+      <FormControl style={{ width: '100%' }} component="fieldset">
+        <RadioGroup
+          aria-label="deliveryMethods"
+          name="deliveryMethods"
+          value={orderData.deliveryMethode}
+          onChange={handleChange}
+        >
+          {deliveryMethods.map(
+            (
+              {
+                _id,
+                title,
+                value,
+                isEnvelopeSize,
+              }: {
+                _id: string;
+                title: string;
+                value: number;
+                isEnvelopeSize: boolean;
+              },
+              i: number
+            ) => {
+              return (
+                <div
+                  key={_id}
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    width: '100%',
+                    alignItems: 'center',
+                  }}
+                >
+                  {isEnvelopeSize ? (
+                    <FormControlLabel
+                      value={title}
+                      disabled={allowEnvelope ? false : true}
+                      control={<Radio color="primary" required />}
+                      label={title}
+                    />
+                  ) : (
+                    <FormControlLabel
+                      value={title}
+                      control={<Radio color="primary" required />}
+                      label={title}
+                    />
+                  )}{' '}
+                  <p
+                    className="text-right"
+                    style={{ margin: '0', fontWeight: 'bold' }}
+                  >
+                    {value === 0 ? 'Zadarmo' : `${formatPrice(value)} €`}
+                  </p>
+                </div>
+              );
+            }
+          )}
+        </RadioGroup>
+      </FormControl>
     ) : (
       <Row form>
         <Col>
@@ -179,7 +171,7 @@ export default (props: IProps) => {
 
   return (
     <>
-      <h5 className="mb-4">Zvoľte spôsob doručenia</h5>
+      <H4 className="mb-4">Spôsob dopravy</H4>
       {deliveryMethodsEl}
     </>
   );

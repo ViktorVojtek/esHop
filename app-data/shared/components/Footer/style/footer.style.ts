@@ -4,7 +4,7 @@ import { Home } from '@styled-icons/evaicons-solid';
 export const Wrapper: StyledComponent<'div', any, {}, never> = styled.div`
   width: 100%;
   margin-top: 64px;
-  z-index: 1030;
+  z-index: 998;
   position: absolute;
 `;
 

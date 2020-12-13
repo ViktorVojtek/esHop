@@ -69,11 +69,7 @@ const CartBodyComponent: FC = () => {
   return (
     <Wrapper>
       {cart.length > 0 || giftCards.length > 0 ? (
-        <CartContent
-          data={cart}
-          giftCards={giftCards}
-          loyalityProduct={loyalityProduct}
-        />
+        <CartContent />
       ) : (
         <CartEmpty />
       )}

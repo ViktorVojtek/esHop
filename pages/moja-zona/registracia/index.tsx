@@ -185,7 +185,7 @@ const Register: FC = () => {
 
           <FormGroup className="mb-2" check>
             <Label check>
-              <Input type="checkbox" required /> Som starší ako 16 rokov.
+              <Input type="checkbox" required /> Som starší ako 16 rokov
             </Label>
           </FormGroup>
           <FormGroup className="mb-2" check>

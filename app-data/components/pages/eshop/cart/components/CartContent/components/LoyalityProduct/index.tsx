@@ -4,7 +4,7 @@ import { Row, Col } from 'reactstrap';
 import { CloseCircle } from '@styled-icons/evaicons-solid';
 import { Context } from '../../../../../../../../lib/state/Store';
 
-type ILoyalityProduct = {
+export type ILoyalityProduct = {
   loyalityProduct: {
     discount?: number;
     isDiscount?: boolean;

@@ -17,8 +17,9 @@ import {
   resendRoute,
   resetPasswordRoute,
   setupRoute,
-  subscribeRoute
+  subscribeRoute,
 } from './app-data/routes';
+import path from 'path';
 
 const dev: boolean = process.env.NODE_ENV !== 'production';
 const nextApp = nextjsApp({ dev });
@@ -54,7 +55,6 @@ const App: () => Promise<void> = async () => {
     });
 
     server.applyMiddleware({ app, path: '/api' });
-
     await db();
     // await setup();
 
@@ -65,6 +65,7 @@ const App: () => Promise<void> = async () => {
     app.use('/resend', resendRoute);
     app.use('/reset-password', resetPasswordRoute);
     app.use('/static/orders/*', orderRoute);
+
     app.use('/static/invoice/*', invoiceRoute);
     app.use('/auth/setup', setupRoute);
     app.all('*', (req, res) => handle(req, res));

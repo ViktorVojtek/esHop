@@ -31,8 +31,7 @@ const Reducer = (state: IState, action: IAction) => {
             newCart[i].id === action.payload.id &&
             newCart[i].variant.title === action.payload.variant.title
           ) {
-            newCart[i].variant.count =
-              newCart[i].variant.count + action.payload.variant.count;
+            newCart[i].variant.count = action.payload.variant.count;
             productExist = true;
             break;
           }

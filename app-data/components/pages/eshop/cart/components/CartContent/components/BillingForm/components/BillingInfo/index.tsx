@@ -1,8 +1,28 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Col, Row, FormGroup, Input, Label, Collapse } from 'reactstrap';
-
-import countryData from './data/country.data.json';
-import { H4, H5 } from '../../../../../../styles/cart.style';
+import React, { useState, useEffect } from 'react';
+import {
+  TextValidator,
+  ValidatorForm,
+  SelectValidator,
+} from 'react-material-ui-form-validator';
+import { Col, Row, Collapse } from 'reactstrap';
+import { ButtonsHolder, H4 } from '../../../../../../styles/cart.style';
+import SummaryPrice from '../../../SummaryPrice';
+import { Button } from '../../../../../../../../../../shared/design';
+import {
+  FormControlLabel,
+  Checkbox,
+  makeStyles,
+  MenuItem,
+} from '@material-ui/core';
+import { countryData } from '../../../../../../../../../../shared/helpers/countryData';
+import CartSummary from '../CartSummary';
+import { useMutation } from '@apollo/react-hooks';
+import {
+  ADD_TO_MARKETING_LIST,
+  REGISTER_CUSTOMER_MUTATION,
+} from '../../../../../../../../../../graphql/mutation';
+import ErrorMessage from '../../../../../../../../../../shared/components/ErrorMessage';
+import { Customer } from '../../../../../../../../../../shared/types/Store.types';
 
 interface IData {
   firstName: string;
@@ -15,29 +35,55 @@ interface IData {
   postalCode: string;
   city: string;
   state: string;
-  optionalState: string;
   optionalAddress: string;
   optionalPostalCode: string;
   optionalCity: string;
+  optionalState: string;
   phone: string;
   email: string;
   message: string;
   deliveryMethode: string;
   deliveryPrice: number;
   paymentMethode: string;
+  paymentPrice: number;
   totalPrice: number;
   products: string[];
 }
 interface IProps {
   data?: IData;
   handleData?: (data: IData) => void;
+  handleSubmitForm: (event: React.FormEvent<HTMLFormElement>) => Promise<void>;
+  handlePrevStep: () => void;
+  registerInfo: {
+    registerRequest: boolean;
+    password: string;
+    repeatPassword: string;
+    subscribe: boolean;
+    marketing: boolean;
+  };
+  setRegisterInfo: any;
+  customer: Customer;
 }
 
 const BillingInfo: (props: IProps) => JSX.Element = (props) => {
-  const { data, handleData } = props;
+  const {
+    data,
+    handleData,
+    handleSubmitForm,
+    handlePrevStep,
+    registerInfo,
+    setRegisterInfo,
+    customer,
+  } = props;
   const [isOpen, setIsOpen] = useState(!!data.companyName);
   const [isOpenAdress, setIsOpenAdress] = useState(!!data.optionalAddress);
+  const [isRegisterRequest, setIsRegisterRequest] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const classes = useStyles();
 
+  const [registerUserMutate] = useMutation(REGISTER_CUSTOMER_MUTATION);
+  const [addToMarketingList] = useMutation(ADD_TO_MARKETING_LIST);
   const toggleAdress = () => setIsOpenAdress(!isOpenAdress);
 
   const handleToggleCompany = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,6 +100,37 @@ const BillingInfo: (props: IProps) => JSX.Element = (props) => {
       companyName: '',
       companyVatNum: '',
     });
+  };
+
+  useEffect(() => {
+    if (isRegisterRequest) {
+      ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
+        if (value !== registerInfo.password) {
+          return false;
+        }
+        return true;
+      });
+      ValidatorForm.addValidationRule('isPasswordRequired', (value) => {
+        if (value.length < 1) return false;
+        return true;
+      });
+    }
+  }, [isRegisterRequest, registerInfo]);
+
+  const handleToggleRegisterRequest = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const checked = event.target.checked;
+    if (checked) {
+      setIsRegisterRequest(true);
+      setRegisterInfo({ ...registerInfo, registerRequest: true });
+
+      return;
+    }
+    setIsRegisterRequest(false);
+    setRegisterInfo({ ...registerInfo, registerRequest: false });
+    ValidatorForm.removeValidationRule('isPasswordMatch');
+    ValidatorForm.removeValidationRule('isPasswordRequired');
   };
 
   const handleToggleOptionalAddress = (
@@ -79,6 +156,58 @@ const BillingInfo: (props: IProps) => JSX.Element = (props) => {
     setIsOpenAdress(!!data.optionalAddress);
   }, [data.companyName, data.optionalAddress]);
 
+  const handleSubmit: (
+    event: React.FormEvent<HTMLFormElement>
+  ) => Promise<void> = async (event) => {
+    event.preventDefault();
+    if (registerInfo.registerRequest) {
+      try {
+        await registerUserMutate({
+          variables: {
+            customerData: {
+              email: data.email,
+              tel: data.phone,
+              firstName: data.firstName,
+              lastName: data.lastName,
+              password: registerInfo.password,
+            },
+          },
+        });
+        if (registerInfo.subscribe) {
+          await fetch('/subscribe', {
+            body: JSON.stringify({
+              email: data.email,
+              fname: data.firstName,
+              lname: data.lastName,
+              tel: data.phone,
+            }),
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            method: 'POST',
+          });
+        }
+        if (registerInfo.marketing) {
+          const response = await addToMarketingList({
+            variables: {
+              marketingListData: {
+                email: data.email,
+                firstName: data.firstName,
+                lastName: data.lastName,
+                tel: data.phone,
+              },
+            },
+          });
+        }
+      } catch (err) {
+        setIsError(true);
+        setErrorMessage('Používateľ už existuje!');
+      }
+    }
+
+    handleSubmitForm(event);
+  };
+
   const {
     address,
     city,
@@ -92,385 +221,536 @@ const BillingInfo: (props: IProps) => JSX.Element = (props) => {
     optionalAddress,
     optionalPostalCode,
     optionalCity,
+    optionalState,
     phone,
+    state,
     email,
     message,
   } = data;
 
   return (
-    <Col md={6}>
-      <H4 className="mb-5">2. Fakturačné údaje</H4>
-      <Row form>
+    <ValidatorForm onSubmit={handleSubmit} className={classes.root}>
+      <Row>
         <Col md={6}>
-          <FormGroup>
-            <Label htmlFor="firstName">Meno *</Label>
-            <Input
-              type="text"
-              name="firstName"
-              id="firstName"
-              value={firstName || ''}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                const firstName = event.currentTarget.value;
-
-                handleData({
-                  ...data,
-                  firstName,
-                });
-              }}
-              required
-            />
-          </FormGroup>
-        </Col>
-        <Col md={6}>
-          <FormGroup>
-            <Label htmlFor="lName">Priezvisko *</Label>
-            <Input
-              type="text"
-              name="lName"
-              id="lName"
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                const lastName = event.currentTarget.value;
-
-                handleData({
-                  ...data,
-                  lastName,
-                });
-              }}
-              value={lastName || ''}
-              required
-            />
-          </FormGroup>
-        </Col>
-      </Row>
-      <FormGroup check className="mb-3">
-        <Label check>
-          <Input
-            checked={isOpen}
-            type="checkbox"
-            onChange={handleToggleCompany}
-          />{' '}
-          Som podnikateľ (PO, SZČO)
-        </Label>
-      </FormGroup>
-      <Collapse isOpen={isOpen}>
-        <FormGroup>
-          <Label htmlFor="companyTitle">Názov spoločnosti</Label>
-          <Input
-            type="text"
-            name="companyTitle"
-            id="companyTitle"
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              const companyName = event.currentTarget.value;
-
-              handleData({
-                ...data,
-                companyName,
-              });
-            }}
-            value={companyName || ''}
-          />
-        </FormGroup>
-        <Row form>
-          <Col md={6}>
-            <FormGroup>
-              <Label htmlFor="companyId">IČO</Label>
-              <Input
-                type="text"
-                name="companyId"
-                id="companyId"
+          <Row>
+            <Col xs={12}>
+              <H4 className="mb-4">Fakturačné údaje</H4>
+            </Col>
+            <Col md={6}>
+              <TextValidator
+                label="Meno*"
+                variant="outlined"
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  const companyVatNum = event.currentTarget.value;
+                  const firstName = event.currentTarget.value;
 
                   handleData({
                     ...data,
-                    companyVatNum,
+                    firstName,
                   });
                 }}
-                value={companyVatNum || ''}
+                name="firstName"
+                value={firstName || ''}
+                validators={['required']}
+                errorMessages={['Povinné pole']}
+                fullWidth
               />
-            </FormGroup>
-          </Col>
-          <Col md={6}>
-            <FormGroup>
-              <Label htmlFor="VATID">DIČ</Label>
-              <Input
-                type="text"
-                name="VATID"
-                id="VATID"
+            </Col>
+            <Col md={6}>
+              <TextValidator
+                label="Priezvisko*"
+                variant="outlined"
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  const companyDVATNum = event.currentTarget.value;
+                  const lastName = event.currentTarget.value;
 
                   handleData({
                     ...data,
-                    companyDVATNum,
+                    lastName,
                   });
                 }}
-                value={companyDVATNum || ''}
+                name="lName"
+                value={lastName || ''}
+                validators={['required']}
+                errorMessages={['Povinné pole']}
+                fullWidth
               />
-            </FormGroup>
-          </Col>
-          <Col md={6}>
-            <FormGroup>
-              <Label htmlFor="VATID">IČ DPH</Label>
-              <Input
-                type="text"
-                name="TAXID"
-                id="TAXID"
+            </Col>
+            <Col md={6}>
+              <TextValidator
+                label="Telefón*"
+                variant="outlined"
+                type="tel"
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  const companyDTAXNum = event.currentTarget.value;
+                  const phone = event.currentTarget.value;
 
                   handleData({
                     ...data,
-                    companyDTAXNum,
+                    phone,
                   });
                 }}
-                value={companyDTAXNum || ''}
+                name="phone"
+                value={phone}
+                validators={['required']}
+                errorMessages={['Povinné pole']}
+                fullWidth
               />
-            </FormGroup>
-          </Col>
-        </Row>
-      </Collapse>
-      <FormGroup>
-        <Label>Adresa *</Label>
-        <Input
-          type="text"
-          nam="street"
-          id="street"
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            const address = event.currentTarget.value;
-
-            handleData({
-              ...data,
-              address,
-            });
-          }}
-          value={address || ''}
-          required
-        />
-      </FormGroup>
-      <Row form>
-        <Col md={6}>
-          <FormGroup>
-            <Label htmlFor="postCode">PSČ *</Label>
-            <Input
-              type="text"
-              name="postCode"
-              id="postCode"
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                const postalCode = event.currentTarget.value;
-
-                handleData({
-                  ...data,
-                  postalCode,
-                });
-              }}
-              value={postalCode || ''}
-              required
-            />
-          </FormGroup>
-        </Col>
-        <Col md={6}>
-          <FormGroup>
-            <Label htmlFor="city">Mesto *</Label>
-            <Input
-              type="text"
-              name="city"
-              id="city"
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                const city = event.currentTarget.value;
-
-                handleData({
-                  ...data,
-                  city,
-                });
-              }}
-              value={city || ''}
-              required
-            />
-          </FormGroup>
-        </Col>
-      </Row>
-      <FormGroup>
-        <Label htmlFor="country">Štát *</Label>
-        <Input
-          type="select"
-          name="country"
-          id="country"
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            const state = event.currentTarget.value;
-
-            handleData({
-              ...data,
-              state,
-            });
-          }}
-          defaultValue={'SK'}
-          required
-        >
-          <option value={0}>Zvoľte štát</option>
-          {countryData.map((item) => (
-            <option value={item.value} key={item.value}>
-              {item.text}
-            </option>
-          ))}
-        </Input>
-      </FormGroup>
-      <FormGroup check className="mb-3">
-        <Label check>
-          <Input
-            checked={isOpenAdress}
-            type="checkbox"
-            onChange={handleToggleOptionalAddress}
-          />{' '}
-          Dodacia adresa je iná ako fakturačná ?
-        </Label>
-      </FormGroup>
-      <Collapse isOpen={isOpenAdress}>
-        {isOpenAdress && (
-          <>
-            <FormGroup>
-              <Label>Adresa dodania</Label>
-              <Input
-                type="text"
-                nam="street"
-                id="streetDelivery"
-                required
+            </Col>
+            <Col md={6}>
+              <TextValidator
+                label="Email*"
+                variant="outlined"
+                type="email"
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  const optionalAddress = event.currentTarget.value;
+                  const email = event.currentTarget.value;
 
                   handleData({
                     ...data,
-                    optionalAddress,
+                    email,
                   });
                 }}
-                value={optionalAddress || ''}
+                name="email"
+                value={email}
+                validators={['required', 'matchRegexp:^.{1,}@[^.]{1,}']}
+                errorMessages={['Povinné pole', 'Neplatná emailová adresa']}
+                fullWidth
               />
-            </FormGroup>
-            <Row form>
-              <Col md={6}>
-                <FormGroup>
-                  <Label htmlFor="postCodeDelivery">PSČ</Label>
-                  <Input
-                    type="text"
-                    name="postCode"
-                    id="postCodeDelivery"
-                    required
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                      const optionalPostalCode = event.currentTarget.value;
+            </Col>
+          </Row>
+          <Row>
+            <Col md={6}>
+              <TextValidator
+                label="Adresa*"
+                variant="outlined"
+                name="address"
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                  const address = event.currentTarget.value;
 
-                      handleData({
-                        ...data,
-                        optionalPostalCode,
-                      });
-                    }}
-                    value={optionalPostalCode || ''}
+                  handleData({
+                    ...data,
+                    address,
+                  });
+                }}
+                value={address || ''}
+                validators={['required']}
+                errorMessages={['Povinné pole']}
+                fullWidth
+              />
+            </Col>
+            <Col md={6}>
+              <TextValidator
+                label="PSČ*"
+                variant="outlined"
+                name="postalCode"
+                id="postalCode"
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                  const postalCode = event.currentTarget.value;
+
+                  handleData({
+                    ...data,
+                    postalCode,
+                  });
+                }}
+                value={postalCode || ''}
+                validators={['required', 'matchRegexp:^\\d{5}$']}
+                errorMessages={['Povinné pole', 'Nesprávny formát PSČ']}
+                fullWidth
+              />
+            </Col>
+            <Col md={6}>
+              <TextValidator
+                label="Mesto*"
+                variant="outlined"
+                name="city"
+                id="city"
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                  const city = event.currentTarget.value;
+
+                  handleData({
+                    ...data,
+                    city,
+                  });
+                }}
+                value={city || ''}
+                validators={['required']}
+                errorMessages={['Povinné pole']}
+                fullWidth
+              />
+            </Col>
+            <Col md={6}>
+              <SelectValidator
+                label="Zvoľte štát*"
+                variant="outlined"
+                name="state"
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                  const country = event.target.value;
+
+                  handleData({
+                    ...data,
+                    state: country,
+                  });
+                }}
+                value={state || ''}
+                validators={['required']}
+                errorMessages={['Povinné pole']}
+                fullWidth
+                SelectProps={{ MenuProps: { disableScrollLock: true } }}
+              >
+                {countryData.map((item) => (
+                  <MenuItem value={item.code} key={item.code}>
+                    {item.name}
+                  </MenuItem>
+                ))}
+              </SelectValidator>
+            </Col>
+            <Col xs={12}>
+              <TextValidator
+                multiline
+                name="message"
+                label="Správa"
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                  const message = event.currentTarget.value;
+
+                  handleData({
+                    ...data,
+                    message,
+                  });
+                }}
+                value={message || ''}
+                variant="outlined"
+                fullWidth
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={isOpen}
+                    onChange={handleToggleCompany}
+                    name="isCompany"
+                    color="primary"
                   />
-                </FormGroup>
+                }
+                label="Som podnikateľ (PO, SZČO)"
+              />
+            </Col>
+          </Row>
+          <Collapse isOpen={isOpen} className="w-100">
+            <Row>
+              <Col md={6}>
+                <TextValidator
+                  label="Názov spoločnosti"
+                  variant="outlined"
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                    const companyName = event.currentTarget.value;
+
+                    handleData({
+                      ...data,
+                      companyName,
+                    });
+                  }}
+                  name="companyName"
+                  value={companyName}
+                  fullWidth
+                />
               </Col>
               <Col md={6}>
-                <FormGroup>
-                  <Label htmlFor="cityDelivery">Mesto</Label>
-                  <Input
-                    type="text"
-                    name="city"
-                    id="cityDelivery"
-                    required
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                      const optionalCity = event.currentTarget.value;
+                <TextValidator
+                  label="IČO"
+                  variant="outlined"
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                    const companyVatNum = event.currentTarget.value;
 
-                      handleData({
-                        ...data,
-                        optionalCity,
-                      });
-                    }}
-                    value={optionalCity || ''}
-                  />
-                </FormGroup>
+                    handleData({
+                      ...data,
+                      companyVatNum,
+                    });
+                  }}
+                  name="companyVatNum"
+                  value={companyVatNum}
+                  validators={['matchRegexp:^\\d{8}$']}
+                  errorMessages={['Nesprávny formát IČO']}
+                  fullWidth
+                />
+              </Col>
+              <Col md={6}>
+                <TextValidator
+                  label="DIČ"
+                  variant="outlined"
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                    const companyDVATNum = event.currentTarget.value;
+
+                    handleData({
+                      ...data,
+                      companyDVATNum,
+                    });
+                  }}
+                  name="companyDVATNum"
+                  value={companyDVATNum}
+                  validators={['matchRegexp:^\\d{10}$']}
+                  errorMessages={['Nesprávny formát DIČ']}
+                  fullWidth
+                />
+              </Col>
+              <Col md={6}>
+                <TextValidator
+                  label="IČ DPH"
+                  variant="outlined"
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                    const companyDTAXNum = event.currentTarget.value;
+
+                    handleData({
+                      ...data,
+                      companyDTAXNum,
+                    });
+                  }}
+                  name="companyDTAXNum"
+                  value={companyDTAXNum}
+                  validators={['matchRegexp:^(SK){0,1}[0-9]{10}$']}
+                  errorMessages={['Nesprávny formát IČ DPH']}
+                  fullWidth
+                />
               </Col>
             </Row>
-            <FormGroup>
-              <Label htmlFor="countryDelivery">Štát</Label>
-              <Input
-                type="select"
-                name="country"
-                id="countryDelivery"
-                required
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  const optionalState = event.currentTarget.value;
+          </Collapse>
+          <Row>
+            <Col xs={12}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={isOpenAdress}
+                    onChange={handleToggleOptionalAddress}
+                    name="isDeliveryAddress"
+                    color="primary"
+                  />
+                }
+                label="Dodacia adresa je iná ako fakturačná"
+              />
+            </Col>
+          </Row>
+          <Collapse isOpen={isOpenAdress}>
+            <Row>
+              <Col md={6}>
+                <TextValidator
+                  label="Adresa dodania*"
+                  variant="outlined"
+                  name="address"
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                    const optionalAddress = event.currentTarget.value;
 
-                  handleData({
-                    ...data,
-                    optionalState,
-                  });
-                }}
-                defaultValue={0}
-              >
-                <option value={0}>Zvoľte štát</option>
-                {countryData.map((item) => (
-                  <option value={item.value} key={item.value}>
-                    {item.text}
-                  </option>
-                ))}
-              </Input>
-            </FormGroup>
-          </>
-        )}
-      </Collapse>
-      <FormGroup>
-        <Label htmlFor="phone">Telefónne číslo *</Label>
-        <Input
-          type="tel"
-          name="phone"
-          id="phone"
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            const phone = event.currentTarget.value;
+                    handleData({
+                      ...data,
+                      optionalAddress,
+                    });
+                  }}
+                  value={optionalAddress || ''}
+                  fullWidth
+                />
+              </Col>
+              <Col md={6}>
+                <TextValidator
+                  label="PSČ"
+                  variant="outlined"
+                  name="postalCode"
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                    const optionalPostalCode = event.currentTarget.value;
 
-            handleData({
-              ...data,
-              phone,
-            });
-          }}
-          value={phone || ''}
-          required
-        />
-      </FormGroup>
-      <FormGroup>
-        <Label htmlFor="email">Email *</Label>
-        <Input
-          type="email"
-          name="email"
-          id="email"
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            const email = event.currentTarget.value;
+                    handleData({
+                      ...data,
+                      optionalPostalCode,
+                    });
+                  }}
+                  value={optionalPostalCode || ''}
+                  validators={['matchRegexp:^\\d{5}$']}
+                  errorMessages={['Nesprávny formát PSČ']}
+                  fullWidth
+                />
+              </Col>
+              <Col md={6}>
+                <TextValidator
+                  label="Mesto"
+                  variant="outlined"
+                  name="city"
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                    const optionalCity = event.currentTarget.value;
 
-            handleData({
-              ...data,
-              email,
-            });
-          }}
-          value={email || ''}
-          required
-        />
-      </FormGroup>
-      <FormGroup>
-        <Label htmlFor="message">Správa</Label>
-        <Input
-          type="textarea"
-          name="message"
-          id="message"
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            const message = event.currentTarget.value;
+                    handleData({
+                      ...data,
+                      optionalCity,
+                    });
+                  }}
+                  value={optionalCity || ''}
+                  fullWidth
+                />
+              </Col>
+              <Col md={6}>
+                <SelectValidator
+                  label="Zvoľte štát*"
+                  variant="outlined"
+                  name="state"
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                    const optionalState = event.target.value;
 
-            handleData({
-              ...data,
-              message,
-            });
-          }}
-          value={message || ''}
-        />
-      </FormGroup>{' '}
-    </Col>
+                    handleData({
+                      ...data,
+                      optionalState,
+                    });
+                  }}
+                  value={optionalState || ''}
+                  fullWidth
+                  SelectProps={{ MenuProps: { disableScrollLock: true } }}
+                >
+                  {countryData.map((item) => (
+                    <MenuItem value={item.code} key={item.code}>
+                      {item.name}
+                    </MenuItem>
+                  ))}
+                </SelectValidator>
+              </Col>
+            </Row>
+          </Collapse>
+          {!customer.token && (
+            <Row>
+              <Col xs={12}>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={isRegisterRequest}
+                      onChange={handleToggleRegisterRequest}
+                      name="isRegisterRequest"
+                      color="primary"
+                    />
+                  }
+                  label="Chcem sa zaregistrovať"
+                />
+              </Col>
+            </Row>
+          )}
+          <Collapse isOpen={isRegisterRequest}>
+            <Row className="mt-2">
+              <Col md={6}>
+                <TextValidator
+                  label="Heslo*"
+                  variant="outlined"
+                  name="password"
+                  type="password"
+                  validators={isRegisterRequest ? ['isPasswordRequired'] : []}
+                  errorMessages={['Povinné pole']}
+                  inputProps={{
+                    autoComplete: 'new-password',
+                    form: {
+                      autoComplete: 'off',
+                    },
+                  }}
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                    const password = event.currentTarget.value;
+
+                    setRegisterInfo({
+                      ...registerInfo,
+                      password,
+                    });
+                  }}
+                  value={registerInfo.password || ''}
+                  fullWidth
+                />
+              </Col>
+              <Col md={6}>
+                <TextValidator
+                  label="Zopakovať Heslo*"
+                  variant="outlined"
+                  name="repeatPassword"
+                  type="password"
+                  inputProps={{
+                    autoComplete: 'new-password',
+                    form: {
+                      autoComplete: 'off',
+                    },
+                  }}
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                    const password = event.currentTarget.value;
+
+                    setRegisterInfo({
+                      ...registerInfo,
+                      repeatPassword: password,
+                    });
+                  }}
+                  validators={isRegisterRequest ? ['isPasswordMatch'] : []}
+                  errorMessages={['Hesla sa nezhodujú']}
+                  value={registerInfo.repeatPassword || ''}
+                  fullWidth
+                />
+              </Col>
+              <Col xs={12}>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={registerInfo.subscribe}
+                      onChange={(
+                        event: React.ChangeEvent<HTMLInputElement>
+                      ) => {
+                        const checked = event.currentTarget.checked;
+
+                        setRegisterInfo({
+                          ...registerInfo,
+                          subscribe: checked,
+                        });
+                      }}
+                      name="subscribe"
+                      color="primary"
+                    />
+                  }
+                  label="Súhlasím so zasielaním noviniek"
+                />
+              </Col>
+              <Col xs={12}>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={registerInfo.marketing}
+                      onChange={(
+                        event: React.ChangeEvent<HTMLInputElement>
+                      ) => {
+                        const checked = event.currentTarget.checked;
+
+                        setRegisterInfo({
+                          ...registerInfo,
+                          marketing: checked,
+                        });
+                      }}
+                      name="subscribe"
+                      color="primary"
+                    />
+                  }
+                  label="Súhlasím s používaním emailu na marketingové účely"
+                />
+              </Col>
+            </Row>
+          </Collapse>
+          <ErrorMessage message={errorMessage} open={isError} />
+        </Col>
+        <Col md={6}>
+          <CartSummary data={data} handleData={handleData} />
+        </Col>
+      </Row>
+      <SummaryPrice />
+      <ButtonsHolder>
+        <Button type="button" onClick={handlePrevStep} className="mr-auto">
+          Späť
+        </Button>
+        <Button type="submit" className="ml-auto">
+          Objednať teraz
+        </Button>
+      </ButtonsHolder>
+    </ValidatorForm>
   );
 };
 
 export default BillingInfo;
+
+const useStyles = makeStyles({
+  root: {
+    '& .MuiFormControl-root': {
+      marginBottom: '1rem',
+    },
+  },
+});

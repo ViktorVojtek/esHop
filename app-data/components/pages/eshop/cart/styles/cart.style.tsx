@@ -5,16 +5,30 @@ import {
   PlusCircle,
   MinusCircle,
 } from '@styled-icons/evaicons-solid';
+import { colors } from '../../../../../shared/design';
 
 export const Wrapper = styled.div`
   margin-top: 150px;
   margin-bottom: 60px;
   min-height: calc(100vh - 425px);
+  @media (max-width: 768px) {
+    margin-top: 120px;
+    margin-bottom: 0px;
+  }
+  @media (max-width: 576px) {
+    margin-top: 100px;
+  }
+`;
+
+export const ButtonsHolder = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 `;
 
 export const CloseCircleIcon = styled(CloseCircle)`
   width: 36px;
-  color: #00aeeff8;
+  color: ${colors.primary};
   cursor: pointer;
   transition: all 0.3s ease-out;
   &:hover {
@@ -23,7 +37,7 @@ export const CloseCircleIcon = styled(CloseCircle)`
 `;
 export const PlusCircleIcon = styled(PlusCircle)`
   width: 36px;
-  color: #00aeeff8;
+  color: ${colors.primary};
   cursor: pointer;
   user-select: none;
   transition: all 0.3s ease-out;
@@ -33,7 +47,7 @@ export const PlusCircleIcon = styled(PlusCircle)`
 `;
 export const MinusCircleIcon = styled(MinusCircle)`
   width: 36px;
-  color: #00aeeff8;
+  color: ${colors.primary};
   cursor: pointer;
   user-select: none;
   transition: all 0.3s ease-out;
@@ -50,12 +64,18 @@ export const EmptyCart = styled(CartArrowDown)`
 `;
 
 export const H2 = styled.h2`
-  padding: 0 0 3rem 0;
+  padding-bottom: 0.5rem;
+  margin: 0 0 3rem 0;
   text-align: center;
   font-weight: 600;
 `;
 export const H4 = styled.h4`
   font-weight: 600;
+  text-transform: uppercase;
+  font-size: 1.15rem;
+  @media (max-width: 768px) {
+    margin-top: 1rem;
+  }
 `;
 export const H5 = styled.h5`
   font-weight: 500;
@@ -64,7 +84,7 @@ export const TH = styled.th`
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: #00aeef;
+  background-color: ${colors.primary};
   font-size: 1rem;
   font-weight: 500;
   color: white;

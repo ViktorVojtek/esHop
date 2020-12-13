@@ -50,69 +50,10 @@ const CartSummary: (props: IProps) => JSX.Element = (props) => {
   }, [cartTotalSum]);
 
   return (
-    <Col md={6}>
-      <H4 className="mb-5">3. Súhrn košíka</H4>
-      <Row form>
-        <Col md={6} className="border-top border-bottom pt-3 pb-1 mb-3">
-          <p>Spolu:</p>
-        </Col>
-        <Col md={6} className="border-top border-bottom pt-3 pb-1 mb-3">
-          <p className="text-right">{formatPrice(cartTotalSum)} €</p>
-        </Col>
-      </Row>
+    <>
       <Delivery data={data} handleData={handleData} />
       <Payment data={data} handleData={handleData} />
-      <Row form>
-        <Col md={6} className="mt-3 mb-3">
-          Použiť zľavový kód:
-        </Col>
-        <Col md={6} className="mt-3 mb-3">
-          <Row>
-            <Col>
-              <Input type="text" name="discountCode" id="discountCode" />
-            </Col>
-            <Col>
-              <Button
-                type="button"
-                onClick={() => console.log('Discount')}
-                className="w-100"
-              >
-                Použiť
-              </Button>
-            </Col>
-          </Row>
-        </Col>
-      </Row>
-      <Row form>
-        <Col md={6} className="border-top  pt-3">
-          <p>Spolu bez DPH:</p>
-        </Col>
-        <Col md={6} className="border-top pt-3">
-          <p className="text-right">{formatPrice(cartTotalSum / 1.2)} €</p>
-        </Col>
-      </Row>
-      <Row form>
-        <Col md={6} className="border-top  pt-3">
-          <p>DPH (20%):</p>
-        </Col>
-        <Col md={6} className="border-top pt-3">
-          <p className="text-right">
-            {formatPrice(cartTotalSum - cartTotalSum / 1.2)} €
-          </p>
-        </Col>
-      </Row>
-      <Row form>
-        <Col md={6} className="border-top border-bottom pt-3">
-          <p className="font-weight-bold">Spolu s DPH:</p>
-        </Col>
-        <Col md={6} className="border-top border-bottom pt-3">
-          <p className="text-right font-weight-bold">
-            {formatPrice(cartTotalSum)} €
-          </p>
-        </Col>
-        <p className="text-left mt-2 mb-0 w-100">* Povinné pole</p>
-      </Row>
-    </Col>
+    </>
   );
 };
 

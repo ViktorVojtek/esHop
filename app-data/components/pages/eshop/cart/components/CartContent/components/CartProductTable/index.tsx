@@ -1,4 +1,4 @@
-import React, { FC, useContext, useEffect } from 'react';
+import React, { ChangeEvent, FC, useContext, useEffect } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 
 import { Context } from '../../../../../../../../lib/state/Store';
@@ -12,6 +12,7 @@ import {
 } from '../../../../styles/cart.style';
 import { ProductImage } from '../../../../../../../../shared/types/Product.types';
 import { formatPrice } from '../../../../../../../../shared/helpers/formatters';
+import { TextField } from '@material-ui/core';
 
 interface ICartProductTableRow {
   id: string;
@@ -51,41 +52,27 @@ const CartProductTableRow: FC<ICartProductTableRow> = ({
       price: { value: itemPrice, currency: currency },
     } = variants.filter((variant: any) => variant.title === variantTitle).pop();
 
-    const handleAddProduct: (id: string) => void = (id) => {
+    const handleCount = (
+      event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+      id: string
+    ): void => {
       const cartItemData = cart
         .filter(
           (item: any) =>
             item.id === id && item.variant.title === prodVariantTitle
         )
         .pop();
-
-      const prodItemVariant = {
-        ...cartItemData.variant,
-        count: 1,
-      };
+      let productCount;
+      if (event.target.value && parseInt(event.target.value) > 0) {
+        if (parseInt(event.target.value) > 100) {
+          productCount = 100;
+        } else productCount = parseInt(event.target.value);
+      } else productCount = 1;
+      cartItemData.variant.count = productCount;
 
       dispatch({
         type: 'ADD_TO_CART',
-        payload: { id, variant: prodItemVariant },
-      });
-    };
-
-    const handleRemoveProduct: (id: string) => void = (id) => {
-      const cartItemData = cart
-        .filter(
-          (item: any) =>
-            item.id === id && item.variant.title === prodVariantTitle
-        )
-        .pop();
-
-      const prodItemVariant = {
-        ...cartItemData.variant,
-        count: cartItemData.variant.count - 1,
-      };
-
-      dispatch({
-        type: 'REMOVE_FROM_CART',
-        payload: { id, variant: prodItemVariant },
+        payload: { id, variant: cartItemData.variant },
       });
     };
 
@@ -121,19 +108,26 @@ const CartProductTableRow: FC<ICartProductTableRow> = ({
         </TD>
         <TD>{prodVariantTitle}</TD>
         <TD>{`${formatPrice(calculatedItemPrice)} ${currency}`}</TD>
-        <TD>{count}</TD>
+        <TD>
+          <TextField
+            variant="outlined"
+            type="number"
+            value={count}
+            onChange={(event) => handleCount(event, id)}
+            inputProps={{
+              min: '1',
+              max: '100',
+              step: '1',
+              style: {
+                padding: '12px',
+              },
+            }}
+          />
+        </TD>
         <TD>
           {`${formatPrice(
             Math.round(count * calculatedItemPrice * 100) / 100
           )} ${currency}`}{' '}
-        </TD>
-        <TD>
-          <MinusCircleIcon onClick={() => handleRemoveProduct(id)}>
-            -
-          </MinusCircleIcon>{' '}
-          <PlusCircleIcon onClick={() => handleAddProduct(id)}>
-            +
-          </PlusCircleIcon>
         </TD>
         <TD>
           <CloseCircleIcon onClick={() => handleRemoveAllProducts(id)} />
