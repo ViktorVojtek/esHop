@@ -3,7 +3,6 @@ import Customer from '../../db/models/Customer';
 import TokenSchema from '../../db/models/TokenSchema';
 
 export const confirmationRoute = (req: Request, res: Response) => {
-  console.log(req.query.token.toString());
   TokenSchema.findOne({ token: req.query.token.toString() }, function (
     err,
     token
@@ -14,9 +13,7 @@ export const confirmationRoute = (req: Request, res: Response) => {
         .redirect('/verifikacia-uctu?message=neplatny-token');
 
     // If we found a token, find a matching user
-    console.log(token._userId);
     Customer.findOne({ _id: token._userId }, function (err, user) {
-      console.log(user);
       if (!user)
         return res
           .status(400)

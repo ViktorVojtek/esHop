@@ -7,7 +7,7 @@ const createDiscount: (
   ctx: any
 ) => Promise<IDiscount> = async (root, { code, value }, ctx) => {
   try {
-    const exist: IDiscount = await Discount.findOne({ value });
+    const exist: IDiscount = await Discount.findOne({ code });
 
     if (exist) {
       throw new ModError(409, 'Item allready exist.');

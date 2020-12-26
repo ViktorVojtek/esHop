@@ -17,6 +17,7 @@ const QuestionHolder = styled.div`
 
 const Chevron = styled(ChevronDown)<{ open: boolean }>`
   color: #01aeef;
+  min-width: 32px;
   width: 32px;
   transition: all 0.3s ease-out;
   transform: ${(props) => (props.open ? 'rotateX(180deg)' : 'rotateX(0)')};

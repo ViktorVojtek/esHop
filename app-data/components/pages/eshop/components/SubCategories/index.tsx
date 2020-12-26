@@ -30,7 +30,7 @@ const SubCategoriesAside: FC<ISubCategoriesAside> = ({
   }
 
   if (loading) {
-    return <Spinner color="primary" />;
+    return <></>;
   }
 
   const subCategoriesArray: any = data.subCategories;

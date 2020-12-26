@@ -1,5 +1,6 @@
 import styled, { StyledComponent } from 'styled-components';
 import { Home } from '@styled-icons/evaicons-solid';
+import { colors } from '../../../design';
 
 export const Wrapper: StyledComponent<'div', any, {}, never> = styled.div`
   width: 100%;
@@ -52,7 +53,7 @@ export const Links = styled.div`
   }
 `;
 export const A = styled.a`
-  color: #00aeef !important;
+  color: ${colors.primary} !important;
   cursor: pointer;
   font-weight: bold;
   &:hover {

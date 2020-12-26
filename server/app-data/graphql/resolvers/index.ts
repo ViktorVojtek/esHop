@@ -10,6 +10,7 @@ import deliveryMethode from './query/DeliveryMethode';
 import deliveryMethods from './query/DeliveryMethods';
 import discount from './query/Discount';
 import discounts from './query/Discounts';
+import freeDeliveries from './query/FreeDelivery';
 import loyalityProducts from './query/LoyalityProduct';
 import order from './query/Order';
 import orders from './query/Orders';
@@ -73,6 +74,14 @@ import removeSubCategory from './mutation/RemoveSubCategory';
 import addToMarketingList from './mutation/AddToMarketingList';
 import removeFromMarketingList from './mutation/RemoveFromMarketingList';
 
+import sendOrderEmail from './mutation/SendOrderEmail';
+
+import validateDiscount from './mutation/ValidateDiscount';
+
+import createFreeDelivery from './mutation/CreateFreeDelivery';
+import updateFreeDelivery from './mutation/UpdateFreeDelivery';
+import removeFreeDelivery from './mutation/RemoveFreeDelivery';
+
 const resolvers = {
   Object: ObjectScalarType,
   Query: {
@@ -114,6 +123,7 @@ const resolvers = {
     subCategories: async (root: any, args: any, ctx: any) =>
       subCategories(root, args, ctx),
     users: async (root: any, args: any, ctx: any) => users(root, args, ctx),
+    freeDeliveries: async () => freeDeliveries(),
   },
   Mutation: {
     createCategory: async (root: any, args: any, ctx: any) =>
@@ -202,6 +212,19 @@ const resolvers = {
       addToMarketingList(root, args, ctx),
     removeFromMarketingList: async (root: any, args: any, ctx: any) =>
       removeFromMarketingList(root, args, ctx),
+
+    sendOrderEmail: async (root: any, args: any, ctx: any) =>
+      sendOrderEmail(root, args, ctx),
+
+    validateDiscount: async (root: any, args: any, ctx: any) =>
+      validateDiscount(root, args, ctx),
+
+    createFreeDelivery: async (root: any, args: any, ctx: any) =>
+      createFreeDelivery(root, args, ctx),
+    updateFreeDelivery: async (root: any, args: any, ctx: any) =>
+      updateFreeDelivery(root, args, ctx),
+    removeFreeDelivery: async (root: any, args: any, ctx: any) =>
+      removeFreeDelivery(root, args, ctx),
   },
 };
 

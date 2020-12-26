@@ -42,8 +42,6 @@ const createLoyalityProduct: (
 
     const { __v, ...result } = newProduct.toObject();
 
-    console.log(result);
-
     return result;
   } catch (err) {
     throw new Error(err);

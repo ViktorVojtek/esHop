@@ -17,7 +17,7 @@ const CategoriesAside: FC = () => {
   }
 
   if (loading) {
-    return <Spinner color="primary" />;
+    return <></>;
   }
 
   const { categories } = data;

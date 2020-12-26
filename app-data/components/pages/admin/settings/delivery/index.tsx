@@ -20,7 +20,7 @@ const DeliveryPageContent: (props: { role: number }) => JSX.Element = ({
   const classes = useStyles();
 
   return (
-    <Layout pageTitle="Delivery methods settings" role={role}>
+    <Layout pageTitle="Nastavenie doručenia" role={role}>
       <Paper className={classes.paper}>
         <Form />
       </Paper>

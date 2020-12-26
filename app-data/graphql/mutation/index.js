@@ -384,6 +384,21 @@ export const REMOVE_CUSTOMER_MUTATION = gql`
   }
 `;
 
+export const SEND_ORDER_EMAIL = gql`
+  mutation sendOrderEmail($id: String!) {
+    sendOrderEmail(id: $id)
+  }
+`;
+
+export const VALIDATE_DISCOUNT_MUTATION = gql`
+  mutation validateDiscount($code: String!) {
+    validateDiscount(code: $code) {
+      code
+      value
+    }
+  }
+`;
+
 export const SET_CURRENCY_MUTATION = gql`
   mutation setCurrency($currencyInput: CurrencyInput!) {
     setCurrency(currencyInput: $currencyInput) {
@@ -431,5 +446,35 @@ export const ADD_TO_MARKETING_LIST = gql`
 export const REMOVE_FROM_MARKETING_LIST = gql`
   mutation removeFromMarketingList($email: String!) {
     removeFromMarketingList(email: $email)
+  }
+`;
+
+export const CREATE_FREEDELIVERY_MUTATION = gql`
+  mutation createFreeDelivery($value: String!) {
+    createFreeDelivery(value: $value) {
+      _id
+      value
+    }
+  }
+`;
+
+export const UPDATE_FREEDELIVERY_MUTATION = gql`
+  mutation updateFreeDelivery($id: String!, $value: String!) {
+    updateFreeDelivery(id: $id, value: $value) {
+      _id
+      value
+    }
+  }
+`;
+
+export const REMOVE_FREEDELIVERY_MUTATION = gql`
+  mutation removeFreeDelivery($id: String!) {
+    removeFreeDelivery(id: $id)
+  }
+`;
+
+export const REMOVE_LOYALITY_PRODUCT_MUTATION = gql`
+  mutation removeLoyalityProduct($id: String!) {
+    removeLoyalityProduct(id: $id)
   }
 `;

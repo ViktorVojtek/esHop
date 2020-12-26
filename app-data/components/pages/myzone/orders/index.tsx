@@ -25,9 +25,10 @@ import MobileTable from './MobileTable';
 
 type IOrders = {
   email: string;
+  id: string;
 };
 
-const Orders: FC<IOrders> = ({ email }) => {
+const Orders: FC<IOrders> = ({ email, id }) => {
   const classes = useStyles2();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -131,7 +132,7 @@ const Orders: FC<IOrders> = ({ email }) => {
                   </TableCell>
                   <TableCell>
                     <Link
-                      href={`/static/orders/order-${row.orderId}.pdf?user=${row.userId}`}
+                      href={`/static/orders/order-${row.orderId}.pdf?user=${id}`}
                     >
                       <a target="_blank">
                         <PDF></PDF>
@@ -141,7 +142,7 @@ const Orders: FC<IOrders> = ({ email }) => {
                   {row.invoiceId ? (
                     <TableCell>
                       <Link
-                        href={`/static/invoice/invoice-${row.invoiceId}.pdf?user=${row.userId}`}
+                        href={`/static/invoice/invoice-${row.invoiceId}.pdf?user=${id}`}
                       >
                         <a target="_blank">
                           <PDF></PDF>
@@ -195,7 +196,7 @@ const Orders: FC<IOrders> = ({ email }) => {
                   )
                 : orders
               ).map((row) => (
-                <MobileTable key={row.orderId} row={row} />
+                <MobileTable key={row.orderId} row={row} id={id} />
               ))}
             </TableBody>
           </Table>

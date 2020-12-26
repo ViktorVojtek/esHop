@@ -1,4 +1,5 @@
 import styled, { createGlobalStyle } from 'styled-components';
+import { colors } from '../design';
 
 export { default as Reset } from './lib/reset.style';
 export { Container, Col, Row } from './lib/grid.style';
@@ -85,7 +86,7 @@ export default createGlobalStyle`
    }
    @font-face {
     font-family: Engagement-Regular;
-    src: url(/static/fonts/Engagement-Regular.ttf);
+    src: url(/fonts/Engagement-Regular.ttf);
     font-display: swap;
     font-style: cursive;
    }
@@ -162,30 +163,12 @@ export default createGlobalStyle`
   .pagination{
     .active{
       button{
-        background-color:#00aeefb8 !important;
-        border-color: #00aeefb8 !important;
+        background-color:${colors.primary} !important;
+        border-color: ${colors.primary} !important;
       }
     }
   }
   .dropdown{
-    .dropdown-toggle{
-      background-color: #00aeefb8 !important;
-      font-family: MuseoSans-300;
-      border: none !important;
-      transition: all .3s ease-out;
-      width: 100%;
-      &:hover{
-        background-color: #00aeef;
-      }
-      &:focus{
-        background-color: #00aeef;
-        box-shadow: none !important;
-      }
-      &:active{
-        background-color: #00aeef;
-        box-shadow: none;
-      }
-    }
     .dropdown-menu{
       width: 100%;
     }
@@ -450,7 +433,7 @@ export default createGlobalStyle`
     }
   }
   .cookies{
-    padding: 1rem 2rem;
+    padding: 1rem 0rem;
   }
   .mobile-text-center{
     @media(max-width: 768px){

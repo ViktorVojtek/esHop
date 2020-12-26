@@ -21,6 +21,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { Context } from '../../../../../lib/state/Store';
 
 import { ButtonSubCategory, ButtonCategory, Buttons } from './style';
+import { DropdownToggleItem } from '../../../../../shared/design/dropdown';
 
 interface ICategory {
   title: string;
@@ -42,7 +43,7 @@ const Category: FC<ICategory> = ({ title, id }) => {
   }
 
   if (loading) {
-    return <Spinner color="primary" />;
+    return <></>;
   }
 
   const subCategoriesArray: any = data.subCategories;
@@ -68,7 +69,7 @@ const Category: FC<ICategory> = ({ title, id }) => {
   return (
     <>
       <Dropdown isOpen={isOpen} toggle={toggle}>
-        <DropdownToggle caret>{title}</DropdownToggle>
+        <DropdownToggleItem caret>{title}</DropdownToggleItem>
         <DropdownMenu>
           <DropdownItem onClick={() => handleSetActiveCategory(id)}>
             Všetko

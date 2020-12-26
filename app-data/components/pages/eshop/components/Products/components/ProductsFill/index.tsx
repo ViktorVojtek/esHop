@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { Col } from 'reactstrap';
 import { useIsClient } from '../../../../../../../lib/util/app.util';
@@ -13,8 +13,6 @@ import {
   ProductBody,
   StyledProductTitle,
   StyledShortDescription,
-  StyledCartLink,
-  StyledCartBtn,
   EyeDetail,
   ActionPrice,
   Del,
@@ -31,6 +29,7 @@ import ServiceUI from '../ServicesFill';
 import { formatPrice } from '../../../../../../../shared/helpers/formatters';
 import { DiscountRibbon } from '../../../../../../../shared/components/Ribbon/DiscountRibbon';
 import { RibbonHolder } from '../../../../../../../shared/components/Ribbon/RibbonHolder';
+import { ProductButton } from '../../../../../../../shared/design';
 
 const ProductTitle: React.FC<IProductTitle> = ({ id, title }) => (
   <Link href={{ pathname: '/eshop/product', query: { id } }}>
@@ -112,15 +111,15 @@ const ProductUI: React.FC<IProductUI> = ({
         </div>
         {variants.length > 1 ? (
           <Link href={{ pathname: '/eshop/product', query: { id: _id } }}>
-            <StyledCartLink>Vložiť do košíka</StyledCartLink>
+            <ProductButton>Vložiť do košíka</ProductButton>
           </Link>
         ) : (
-          <StyledCartBtn
+          <ProductButton
             type="button"
             onClick={() => (isClient ? handleAddProductToCart() : null)}
           >
             Vložiť do košíka
-          </StyledCartBtn>
+          </ProductButton>
         )}
         <RibbonHolder>
           {variants[0].discount > 0 && (

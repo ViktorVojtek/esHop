@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { DownArrow } from '@styled-icons/boxicons-regular';
+import { DropdownToggle } from 'reactstrap';
+import { colors } from '../../../../shared/design';
 
 export const Wrapper = styled.div`
   width: 100vw;

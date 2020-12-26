@@ -34,8 +34,6 @@ export const resetPasswordRoute = async (
     },
   });
 
-  console.log(mailTransporter);
-
   const oneDay: number = 24 * 60 * 60 * 1000;
   const date: number = Date.now() + oneDay;
   const token: string = crypto.randomBytes(16).toString('hex');

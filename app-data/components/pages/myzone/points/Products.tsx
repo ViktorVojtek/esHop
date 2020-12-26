@@ -38,15 +38,19 @@ const Products = (props: IProducts) => {
   }
 
   const { loyalityProducts } = data;
-  const { loyalityProduct, cart, giftCards } = state;
+  const { loyalityProduct, cart, giftCards, coupon } = state;
 
   const handleAddToCart = (product) => {
-    if (loyalityProduct === null && (cart.length > 0 || giftCards.length > 0)) {
+    if (
+      loyalityProduct === null &&
+      coupon === null &&
+      (cart.length > 0 || giftCards.length > 0)
+    ) {
       dispatch({
         type: 'ADD_LOYALITY_PRODUCT',
         payload: product,
       });
-      enqueueSnackbar(`Úspešne pridané: ${product.title}`, {
+      return enqueueSnackbar(`Úspešne pridané: ${product.title}`, {
         variant: 'success',
       });
     } else if (cart.length === 0 && giftCards.length === 0) {

@@ -20,6 +20,7 @@ import { useMutation } from '@apollo/react-hooks';
 import {
   ADD_TO_MARKETING_LIST,
   REGISTER_CUSTOMER_MUTATION,
+  UPDATE_CUSTOMER_MUTATION,
 } from '../../../../../../../../../../graphql/mutation';
 import ErrorMessage from '../../../../../../../../../../shared/components/ErrorMessage';
 import { Customer } from '../../../../../../../../../../shared/types/Store.types';
@@ -84,6 +85,7 @@ const BillingInfo: (props: IProps) => JSX.Element = (props) => {
 
   const [registerUserMutate] = useMutation(REGISTER_CUSTOMER_MUTATION);
   const [addToMarketingList] = useMutation(ADD_TO_MARKETING_LIST);
+  const [updateCustomer] = useMutation(UPDATE_CUSTOMER_MUTATION);
   const toggleAdress = () => setIsOpenAdress(!isOpenAdress);
 
   const handleToggleCompany = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -162,7 +164,7 @@ const BillingInfo: (props: IProps) => JSX.Element = (props) => {
     event.preventDefault();
     if (registerInfo.registerRequest) {
       try {
-        await registerUserMutate({
+        const user = await registerUserMutate({
           variables: {
             customerData: {
               email: data.email,
@@ -199,13 +201,62 @@ const BillingInfo: (props: IProps) => JSX.Element = (props) => {
             },
           });
         }
+        updateCustomer({
+          variables: {
+            customerData: {
+              _id: user.data.createCustomer._id,
+              firstName: data.firstName,
+              lastName: data.lastName,
+              companyName: data.companyName,
+              companyVatNum: data.companyVatNum,
+              companyDVATNum: data.companyDVATNum,
+              companyDTAXNum: data.companyDTAXNum,
+              address: data.address,
+              postalCode: data.postalCode,
+              city: data.city,
+              state: data.state,
+              optionalAddress: data.optionalAddress,
+              optionalPostalCode: data.optionalPostalCode,
+              optionalCity: data.optionalCity,
+              optionalState: data.optionalState,
+              tel: data.phone,
+              email: data.email,
+            },
+            id: user.data.createCustomer._id,
+          },
+        });
+        handleSubmitForm(event);
       } catch (err) {
         setIsError(true);
         setErrorMessage('Používateľ už existuje!');
       }
+    } else {
+      if (customer.token) {
+        await updateCustomer({
+          variables: {
+            customerData: {
+              _id: customer.userId,
+              companyName: data.companyName,
+              companyVatNum: data.companyVatNum,
+              companyDVATNum: data.companyDVATNum,
+              companyDTAXNum: data.companyDTAXNum,
+              address: data.address,
+              postalCode: data.postalCode,
+              city: data.city,
+              state: data.state,
+              optionalAddress: data.optionalAddress,
+              optionalPostalCode: data.optionalPostalCode,
+              optionalCity: data.optionalCity,
+              optionalState: data.optionalState,
+            },
+            id: customer.userId,
+          },
+        });
+      }
+      handleSubmitForm(event);
     }
 
-    handleSubmitForm(event);
+    //handleSubmitForm(event);
   };
 
   const {

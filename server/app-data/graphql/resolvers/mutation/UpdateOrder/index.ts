@@ -222,7 +222,6 @@ export default async (
         invoiceId = result.invoiceId;
       } else {
         invoiceId = await calculateInvoiceId();
-        console.log({ invoiceId });
       }
 
       await Order.findOneAndUpdate(
@@ -311,6 +310,7 @@ export default async (
         loyalityProduct: readyData.loyalityProduct,
         deliveryPrice: formatPrice(readyData.deliveryPrice),
         paymentPrice: formatPrice(readyData.paymentPrice),
+        isCoupon: readyData.coupon ? true : false,
       };
 
       const document = {

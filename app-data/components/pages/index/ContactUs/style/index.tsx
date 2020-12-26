@@ -7,6 +7,7 @@ import {
 import { PhoneAlt, Envelope } from '@styled-icons/fa-solid';
 import { Whatsapp, Viber } from '@styled-icons/fa-brands';
 import { HelpCircle } from '@styled-icons/boxicons-regular';
+import { colors } from '../../../../../shared/design';
 
 export const Wrapper = styled.div`
   margin-top: 32px;
@@ -22,36 +23,36 @@ export const SocialHolder = styled.div`
 `;
 
 export const Facebook = styled(FacebookWithCircle)`
-  color: #00aeefb8;
+  color: ${colors.primary};
   width: 52px;
   height: 52px;
   margin-right: 12px;
   cursor: pointer;
   transition: all 0.4s ease-out;
   &:hover {
-    color: #00aeef;
+    color: ${colors.primaryHover};
   }
 `;
 export const Instagram = styled(InstagramWithCircle)`
-  color: #00aeefb8;
+  color: ${colors.primary};
   width: 52px;
   height: 52px;
   margin-right: 12px;
   cursor: pointer;
   transition: all 0.4s ease-out;
   &:hover {
-    color: #00aeef;
+    color: ${colors.primaryHover};
   }
 `;
 export const Youtube = styled(YoutubeWithCircle)`
-  color: #00aeefb8;
+  color: ${colors.primary};
   width: 52px;
   height: 52px;
   margin-right: 12px;
   cursor: pointer;
   transition: all 0.4s ease-out;
   &:hover {
-    color: #00aeef;
+    color: ${colors.primaryHover};
   }
 `;
 
@@ -66,7 +67,7 @@ export const H3 = styled.h3`
 `;
 
 export const P = styled.p`
-  color: rgb(132, 136, 148);
+  color: ${colors.primary};
   font-size: 1rem;
   text-align: left;
   margin-bottom: 0;
@@ -84,7 +85,7 @@ export const CustomLink = styled.a`
   font-weight: bold;
   font-size: 1rem;
   text-align: left;
-  color: #01aeef !important;
+  color: ${colors.primary} !important;
   cursor: pointer;
   text-decoration: none !important;
   position: relative;
@@ -96,7 +97,7 @@ export const CustomLink = styled.a`
     height: 2px;
     bottom: -6px;
     left: 0px;
-    background-color: #01aeef;
+    background-color: ${colors.primary};
     visibility: hidden;
     -webkit-transform: scaleX(0);
     transform: scaleX(0);
@@ -119,22 +120,22 @@ export const Item = styled.div`
 
 export const PhoneIcon = styled(PhoneAlt)`
   width: 28px;
-  color: #00aeef;
+  color: ${colors.primary};
 `;
 
 export const EnvelopeIcon = styled(Envelope)`
   width: 28px;
-  color: #00aeef;
+  color: ${colors.primary};
 `;
 
 export const WhatsappIcon = styled(Whatsapp)`
   width: 28px;
-  color: #00aeef;
+  color: ${colors.primary};
 `;
 
 export const ViberIcon = styled(Viber)`
   width: 28px;
-  color: #00aeef;
+  color: ${colors.primary};
 `;
 
 export const HelpCircleIcon = styled(HelpCircle)`

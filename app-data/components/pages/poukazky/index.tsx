@@ -3,15 +3,12 @@ import { Form, FormGroup, Container, Row, Col, Input } from 'reactstrap';
 import PoukazkaTypes from './components/PoukazkaTypes';
 import StayType from './components/StayType';
 import MoneyType from './components/MoneyType';
-import RestaurantType from './components/RestaurantType';
 import {
-  H1,
   Wrapper,
   H4,
   RadioColorGroup,
   RadioColorInput,
   ColorLabel,
-  AddToCart,
   Preview,
   PreviewHolder,
   PrednaStranaText,
@@ -23,6 +20,7 @@ import { Context } from '../../../lib/state/Store';
 import Link from 'next/link';
 import ProductModal from '../../../shared/components/ProductModal';
 import Summary from './components/Summary';
+import { ProductButton } from '../../../shared/design';
 
 type ServiceData = {
   title: string;
@@ -224,7 +222,7 @@ const PoukazkyPage: () => JSX.Element = () => {
                 </PreviewHolder>
               </Col>
             </Row>
-            <AddToCart type="submit">Pridať do košíka</AddToCart>
+            <ProductButton type="submit">Pridať do košíka</ProductButton>
           </>
         </Form>
       </Container>

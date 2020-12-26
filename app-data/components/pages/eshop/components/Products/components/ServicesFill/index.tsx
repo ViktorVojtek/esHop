@@ -12,12 +12,12 @@ import {
   Price,
   Del,
   ActionPrice,
-  StyledCartLink,
   StyledProductTitle,
 } from '../ProductsFill/styles/products.style';
 import Link from 'next/link';
 import { formatPrice } from '../../../../../../../shared/helpers/formatters';
 import { IProductTitle } from '../ProductsFill/types/ProductFill.types';
+import { ProductButton } from '../../../../../../../shared/design';
 
 type IServiceUI = {
   product: Service;
@@ -70,7 +70,7 @@ const ServiceUI: FC<IServiceUI> = ({
             )}
           </PriceHolder>
           <Link href={{ pathname: '/rezervacia' }}>
-            <StyledCartLink>Rezervovať</StyledCartLink>
+            <ProductButton>Rezervovať</ProductButton>
           </Link>
         </ProductBody>
       </ProductItem>

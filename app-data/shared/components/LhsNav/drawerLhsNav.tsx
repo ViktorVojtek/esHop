@@ -13,6 +13,7 @@ import EuroOutlinedIcon from '@material-ui/icons/EuroOutlined';
 import ScatterPlotOutlinedIcon from '@material-ui/icons/ScatterPlotOutlined';
 import FormatListNumberedOutlinedIcon from '@material-ui/icons/FormatListNumberedOutlined';
 import GroupOutlinedIcon from '@material-ui/icons/GroupOutlined';
+import LocalShippingIcon from '@material-ui/icons/LocalShipping';
 import MailboxOutlinedIcon from '@material-ui/icons/MarkunreadMailboxOutlined';
 import TrendingDownOutlinedIcon from '@material-ui/icons/TrendingDownOutlined';
 import PaymentOutlinedIcon from '@material-ui/icons/PaymentOutlined';
@@ -89,6 +90,11 @@ const menuItems2 = [
     href: '/admin/settings/discount',
     title: 'Zľavy',
     iconComponent: TrendingDownOutlinedIcon,
+  },
+  {
+    href: '/admin/settings/freedelivery',
+    title: 'Doprava zdarma',
+    iconComponent: LocalShippingIcon,
   },
 ];
 

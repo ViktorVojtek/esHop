@@ -29,6 +29,7 @@ import { formatPrice } from '../../helpers/formatters';
 import { DiscountRibbon } from '../Ribbon/DiscountRibbon';
 import { NewProductRibbon } from '../Ribbon/NewProductRibbon';
 import { RibbonHolder } from '../Ribbon/RibbonHolder';
+import { ProductButton } from '../../design';
 
 const FeatureProduct: FC<IProductUI> = ({
   product: { _id, variants, subCategory, title },
@@ -79,7 +80,7 @@ const FeatureProduct: FC<IProductUI> = ({
         </ProductBody>
       </div>
       <Link href={{ pathname: '/eshop/product', query: { id: _id } }}>
-        <StyledCartLink>Ihneď kúpiť</StyledCartLink>
+        <ProductButton>Ihneď kúpiť</ProductButton>
       </Link>
       <RibbonHolder>
         {variants[0].discount > 0 && (

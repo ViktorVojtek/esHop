@@ -1,15 +1,8 @@
 import React, { FC, Dispatch, SetStateAction } from 'react';
-import {
-  H2,
-  MoneyIcon,
-  ProceduresIcon,
-  Card,
-  Circle,
-  P,
-  CreateCard,
-} from './styles';
+import { H2, MoneyIcon, ProceduresIcon, Card, Circle, P } from './styles';
 import { Row, Col } from 'reactstrap';
 import AnchorLink from 'react-anchor-link-smooth-scroll';
+import { Button } from '../../../../../shared/design';
 
 interface IPoukazky {
   getActiveType: Dispatch<SetStateAction<number>>;
@@ -21,7 +14,11 @@ const PoukazkaTypes: FC<IPoukazky> = ({ getActiveType }) => {
   };
   return (
     <Row className="justify-content-center">
-      <Col md="4" className="mobile-card">
+      <Col
+        md="4"
+        className="mobile-card"
+        onClick={() => handleSetActiveCategory(2)}
+      >
         <Card>
           <Circle>
             <MoneyIcon />
@@ -33,14 +30,21 @@ const PoukazkaTypes: FC<IPoukazky> = ({ getActiveType }) => {
           <P>Urobte radosť blízkym</P>
           <div className="mt-4">
             <AnchorLink offset={() => 120} href="#voucherContent">
-              <CreateCard onClick={() => handleSetActiveCategory(2)}>
+              <Button
+                style={{ margin: '0 auto', display: 'block' }}
+                onClick={() => handleSetActiveCategory(2)}
+              >
                 Vytvoriť poukážku
-              </CreateCard>
+              </Button>
             </AnchorLink>
           </div>
         </Card>
       </Col>
-      <Col md="4" className="mobile-card">
+      <Col
+        md="4"
+        className="mobile-card"
+        onClick={() => handleSetActiveCategory(0)}
+      >
         <Card>
           <Circle>
             <ProceduresIcon />
@@ -52,9 +56,12 @@ const PoukazkaTypes: FC<IPoukazky> = ({ getActiveType }) => {
           <P>Urobte radosť blízkym</P>
           <div className="mt-4">
             <AnchorLink offset={() => 120} href="#voucherContent">
-              <CreateCard onClick={() => handleSetActiveCategory(0)}>
+              <Button
+                style={{ margin: '0 auto', display: 'block' }}
+                onClick={() => handleSetActiveCategory(0)}
+              >
                 Vytvoriť poukážku
-              </CreateCard>
+              </Button>
             </AnchorLink>
           </div>
         </Card>

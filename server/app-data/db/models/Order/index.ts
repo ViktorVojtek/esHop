@@ -31,6 +31,7 @@ export interface IOrder extends Document {
   orderId: string;
   products: any[];
   loyalityProduct: Object;
+  coupon: number;
 }
 
 const OrderSchema = new mongoose.Schema({
@@ -79,6 +80,7 @@ const OrderSchema = new mongoose.Schema({
   orderId: String,
   products: [Object],
   loyalityProduct: Object,
+  coupon: Number,
 });
 
 export default mongoose.model<IOrder>('Order', OrderSchema);

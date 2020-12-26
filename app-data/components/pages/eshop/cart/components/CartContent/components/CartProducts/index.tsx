@@ -3,11 +3,12 @@ import CartProductTableRow from '../CartProductTable';
 import GiftCardTableRow from '../GiftCardTable';
 import LoyalityProduct, { ILoyalityProduct } from '../LoyalityProduct';
 import { TH, TR, H4 } from '../../../../styles/cart.style';
-import { Table } from 'reactstrap';
+import { Row, Table } from 'reactstrap';
 import {
   CartProduct,
   GiftCard,
 } from '../../../../../../../../shared/types/Store.types';
+import Coupon from '../Coupon';
 
 type ICartContent = {
   data: any;
@@ -22,7 +23,9 @@ const CartProducts: FC<ICartContent> = ({
 }) => {
   return (
     <>
-      {loyalityProduct && <LoyalityProduct loyalityProduct={loyalityProduct} />}
+      <Row>
+        <Coupon />
+      </Row>
       {data.length > 0 && (
         <div className="table-responsive">
           <Table className="mb-5" hover>

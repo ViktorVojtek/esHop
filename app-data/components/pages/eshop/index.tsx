@@ -25,16 +25,10 @@ import {
 import { useQuery } from '@apollo/react-hooks';
 import Link from 'next/link';
 
-import SubPageBackground from '../../../shared/components/SubPageBackground';
 import CategoriesAside from './components/Categories';
 import Products from './components/Products';
 
-import {
-  Wrapper,
-  StyledModalBtn,
-  StyledModalLink,
-  H3,
-} from './styles/eshoppage';
+import { Wrapper, StyledModalBtn, StyledModalLink } from './styles/eshoppage';
 import { PRODUCTS_QUERY, SERVICES_QUERY } from '../../../graphql/query';
 import { Context } from '../../../lib/state/Store';
 import {
@@ -44,6 +38,8 @@ import {
   sortByPriceMax,
 } from '../../../shared/helpers';
 import Product from '../../../shared/types/Product.types';
+import CustomSpinner from '../../../shared/components/CustomSpinner/CustomerSpinner';
+import { DropdownToggleItem } from '../../../shared/design/dropdown';
 
 const EshopPage: FC = () => {
   const queryMultiple = () => {
@@ -85,9 +81,6 @@ const EshopPage: FC = () => {
   if (error) {
     return <>{error.message}</>;
   }
-  if (loading) {
-    return <Spinner color="primary" />;
-  }
 
   const filterByCategory = (products: Product[]) => {
     let newProducts = products.filter(
@@ -120,7 +113,7 @@ const EshopPage: FC = () => {
             <Row>
               <Col md="6" className="mb-2">
                 <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-                  <DropdownToggle caret>Zoradit podľa</DropdownToggle>
+                  <DropdownToggleItem caret>Zoradit podľa</DropdownToggleItem>
                   <DropdownMenu>
                     <DropdownItem
                       onClick={() =>
@@ -174,6 +167,7 @@ const EshopPage: FC = () => {
               Maybe in the future Products component will use the following prop:
               setProductsCount={setProductsCount}
             */}
+            {loading && <CustomSpinner />}
             <Products
               products={filteredProducts}
               toggleModal={toggleModal}

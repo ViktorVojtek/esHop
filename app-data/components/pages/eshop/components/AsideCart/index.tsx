@@ -13,7 +13,7 @@ const CartEmpty: () => JSX.Element = () => (
 
 const CartAside: FC = () => {
   const {
-    state: { cart, cartTotalSum, giftCards, loyalityProduct },
+    state: { cart, cartTotalSum, giftCards, loyalityProduct, coupon },
     dispatch,
   } = useContext(Context);
 
@@ -38,9 +38,12 @@ const CartAside: FC = () => {
     if (loyalityProduct && loyalityProduct.isDiscount) {
       sum = sum - sum * (loyalityProduct.discount / 100);
     }
+    if (coupon && coupon.value) {
+      sum = sum - sum * (coupon.value / 100);
+    }
 
     dispatch({ type: 'SET_TOTAL_SUM', payload: sum });
-  }, [cart, giftCards]);
+  }, [cart, giftCards, coupon, loyalityProduct]);
 
   return (
     <div>

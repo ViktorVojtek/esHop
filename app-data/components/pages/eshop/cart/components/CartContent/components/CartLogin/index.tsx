@@ -11,15 +11,22 @@ const Tab = styled.div`
   justify-content: space-between;
   width: 100%;
   background-color: ${colors.primary};
-  padding: 1rem 0.75rem;
+  padding: 8px 16px;
   border-radius: 4px;
   cursor: pointer;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  &:hover {
+    background-color: ${colors.primaryHover};
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+      0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+  }
 `;
 
 const P = styled.p`
   text-transform: uppercase;
   color: white;
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: bold;
   margin: 0;
 `;

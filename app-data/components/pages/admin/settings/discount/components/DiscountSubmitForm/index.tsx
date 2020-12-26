@@ -1,4 +1,4 @@
-import React, { FC, useContext, useState, useRef } from 'react';
+import React, { FC, useContext, useState, useRef, ChangeEvent } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import {
   Button,
@@ -32,7 +32,7 @@ const DiscountSubmitForm: FC = () => {
 
     const code = codex;
     const value: number = parseInt(discountValRef.current.value, 10);
-
+    console.log(codex);
     try {
       await createDiscount({ variables: { code, value } });
     } catch ({ message }) {
@@ -62,14 +62,17 @@ const DiscountSubmitForm: FC = () => {
     return result;
   };
 
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) =>
+    setCodex(event.target.value);
+
   return (
     <Form onSubmit={handleSubmitData} inline>
       <Button type="button" onClick={handleRandomString} className="mr-3">
-        Generate
+        Generovať
       </Button>
 
       <FormGroup>
-        <Input type="text" disabled value={codex} />
+        <Input type="text" onChange={handleChange} value={codex} />
       </FormGroup>
       <InputGroup className="ml-sm-2 mr-sm-2">
         <Input
@@ -85,7 +88,7 @@ const DiscountSubmitForm: FC = () => {
       </InputGroup>
 
       <Button type="submit" color="primary" className="ml-auto mr-3">
-        Submit
+        Pridať
       </Button>
     </Form>
   );

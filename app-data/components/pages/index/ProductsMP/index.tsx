@@ -23,9 +23,6 @@ const ProductsMP: () => JSX.Element = () => {
   if (error) {
     return <>{error.message}</>;
   }
-  if (loading) {
-    return <Spinner color="primary" />;
-  }
 
   return (
     <Container fluid>

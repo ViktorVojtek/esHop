@@ -2,7 +2,6 @@ const pdf = require('pdf-creator-node');
 const path = require('path');
 const fs = require('fs');
 const handlebars = require('handlebars');
-import mongoose from 'mongoose';
 import nodemailer from 'nodemailer';
 import Customer, { ICustomer } from '../../../../db/models/Customer';
 import Order, { IOrder } from '../../../../db/models/Order';
@@ -95,6 +94,8 @@ function sendMailNotification(
         loyalityProduct: orderData.loyalityProduct,
         deliveryPrice: orderData.deliveryPrice,
         paymentPrice: orderData.paymentPrice,
+        isCoupon: orderData.coupon ? true : false,
+        coupon: orderData.coupon,
       };
 
       const orderMailToSend = templateOrderMail(replacement);
@@ -106,6 +107,7 @@ function sendMailNotification(
         subject: 'Červený Kláštor | Vaša objednávka bola prijatá', // Subject line
         html: orderMailToSend, // html body
       });
+
       resolve();
     } catch (err) {
       reject(err);
@@ -124,6 +126,7 @@ const createOrder: (
   let createdAt: string = new Date().toLocaleDateString('sk-SK');
   let totalPriceWithoutVat = 0;
   let totalPriceVat = 0;
+  let totalPrice = 0;
 
   if (!orderIdIn) {
     orderId = await calculateOrderId();
@@ -135,6 +138,7 @@ const createOrder: (
   totalPriceWithoutVat = Math.round(totalPriceWithoutVat * 100) / 100;
   totalPriceVat = data.totalPrice - data.totalPrice / 1.2;
   totalPriceVat = Math.round(totalPriceVat * 100) / 100;
+  totalPrice = Math.round(data.totalPrice * 100) / 100;
 
   updatedData = {
     ...data,
@@ -142,11 +146,15 @@ const createOrder: (
     createdAt,
     totalPriceWithoutVat,
     totalPriceVat,
+    totalPrice: totalPrice,
   };
 
   const newOrder: IOrder = new Order(updatedData);
-
-  await Order.create(newOrder);
+  try {
+    await Order.create(newOrder);
+  } catch (err) {
+    throw err;
+  }
 
   const filteredProducts = updatedData.products.filter(
     (product) => product.variant !== undefined
@@ -199,6 +207,7 @@ const createOrder: (
     loyalityProduct: readyData.loyalityProduct,
     deliveryPrice: formatPrice(readyData.deliveryPrice),
     paymentPrice: formatPrice(readyData.paymentPrice),
+    isCoupon: readyData.coupon ? true : false,
   };
 
   var options = {
@@ -216,8 +225,22 @@ const createOrder: (
     ),
   };
   await pdf.create(document, options);
-
-  await sendMailNotification('info@codebrothers.sk', readyData.email, pdfData);
+  if (
+    !(
+      data.paymentMethode.toLowerCase().indexOf('card') > -1 ||
+      data.paymentMethode.toLowerCase().indexOf('kart') > -1
+    )
+  ) {
+    try {
+      await sendMailNotification(
+        'info@codebrothers.sk',
+        readyData.email,
+        pdfData
+      );
+    } catch (err) {
+      throw err;
+    }
+  }
 
   const { email } = readyData;
 

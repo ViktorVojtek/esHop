@@ -30,7 +30,8 @@ const Layout: FC<ILayout> = ({ children }) => {
             color: '#00aeef',
             fontSize: '16px',
             borderTop: '1px solid #00aeef',
-            padding: '0rem 2rem',
+            padding: '0rem 1rem',
+            alignItems: 'center',
           }}
           buttonStyle={{
             background: '#00aeef',

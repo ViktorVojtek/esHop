@@ -10,22 +10,22 @@ const removeLoyalityProduct: (
   root: any,
   args: any,
   ctx: any
-) => Promise<string> = async (root, { _id }, ctx) => {
+) => Promise<string> = async (root, { id }, ctx) => {
   try {
     const { superSecret } = config;
     await verifyToken(ctx, superSecret);
 
     const productExist: ILoyalityProduct = await LoyalityProduct.findOne({
-      _id: mongoose.Types.ObjectId(_id),
+      _id: mongoose.Types.ObjectId(id),
     });
 
     if (!productExist) {
       throw new ModError(404, 'Product not exist');
     }
 
-    await LoyalityProduct.deleteOne({ _id: mongoose.Types.ObjectId(_id) });
+    await LoyalityProduct.deleteOne({ _id: mongoose.Types.ObjectId(id) });
 
-    return `Product with _id: ${_id} has been successfuly removed`;
+    return `Product with _id: ${id} has been successfuly removed`;
   } catch (err) {
     throw new Error(err);
   }

@@ -16,6 +16,7 @@ import {
 
 import { ITelItem } from './TS/ContactUs.interface';
 import Link from 'next/link';
+import { colors } from '../../../../shared/design';
 
 const ContactItemCol: FC<ITelItem> = ({ email, tel, title, customHref }) => (
   <CustomLinkHolder>
@@ -31,7 +32,6 @@ const ContactUs = () => (
   <Wrapper className="mobile-text-center">
     <Container>
       <Row>
-        <H3 className="w-100">Kontaktujte nás</H3>
         <Col lg={3} md={6} xs={12}>
           <Item>
             <PhoneIcon />
@@ -80,7 +80,9 @@ const ContactUs = () => (
         <P style={{ padding: '16px', textAlign: 'center' }}>
           V prípade nejasností navštívte stránku{' '}
           <Link href="/kontakt">
-            <a style={{ color: '#01aeef', fontWeight: 'bold' }}>pomoc</a>
+            <a style={{ color: `${colors.primary}`, fontWeight: 'bold' }}>
+              pomoc
+            </a>
           </Link>
           . Nájdete tam základné informácie ako používať našu stránku, ako si
           objednať, ako sa prihlásiť a pod.

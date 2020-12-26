@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Bed, Spa, MoneyBillAlt } from '@styled-icons/fa-solid';
 import { RestaurantMenu } from '@styled-icons/material';
+import { colors } from '../../../../../../shared/design';
 
 export const H2 = styled.h2`
   font-size: 1.5rem;
@@ -22,7 +23,7 @@ export const Circle = styled.div`
   height: 100px;
   border-radius: 60px;
   border: 3px solid white;
-  background-color: #01aeef;
+  background-color: ${colors.primary};
   display: flex;
   align-items: center;
   justify-content: center;

@@ -1,5 +1,7 @@
+import mongoose from 'mongoose';
 import { Request, Response, NextFunction } from 'express';
 import path from 'path';
+import Customer, { ICustomer } from '../../db/models/Customer';
 import Order, { IOrder } from '../../db/models/Order';
 
 const pathUrl = path.join(__dirname, '../../../../static/orders');
@@ -24,10 +26,16 @@ export const orderRoute: (
       if (!order) {
         return res.redirect('/404');
       }
+      const { email } = order;
+      const customer: ICustomer = await Customer.findOne({
+        _id: mongoose.Types.ObjectId(user as string),
+      });
 
-      const { userId } = order;
+      if (!customer) {
+        return res.redirect('/404');
+      }
 
-      if (userId === user) {
+      if (email === customer.email) {
         return send();
       } else {
         return res.redirect('/404');

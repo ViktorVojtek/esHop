@@ -556,6 +556,26 @@
       <p>&nbsp;</p>
       <table style="border-collapse: collapse; width: 60%">
         <tbody>
+          {{#if isCoupon}}
+          <tr>
+            <td
+              style="
+                border: 1px solid #ddd;
+                padding: 8px;
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                background-color: lightgray;
+                color: black;
+              "
+            >
+              Zľava:
+            </td>
+            <td style="border: 1px solid #ddd; padding: 8px;">
+              {{this.coupon}} %
+            </td>
+          </tr>
+          {{/if}}
           <tr>
             <td
               style="

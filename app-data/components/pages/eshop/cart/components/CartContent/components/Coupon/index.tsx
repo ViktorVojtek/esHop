@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Col, Collapse } from 'reactstrap';
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
 import styled from 'styled-components';
@@ -6,6 +6,10 @@ import { Button, colors } from '../../../../../../../../shared/design';
 import { ChevronDown } from '@styled-icons/boxicons-regular';
 import ErrorMessage from '../../../../../../../../shared/components/ErrorMessage';
 import { makeStyles } from '@material-ui/core';
+import { useMutation } from 'react-apollo';
+import { VALIDATE_DISCOUNT_MUTATION } from '../../../../../../../../graphql/mutation';
+import { Context } from '../../../../../../../../lib/state/Store';
+import { scrollBottom } from '../../../../../../../../shared/helpers/scrollBottom';
 
 const Tab = styled.div`
   display: flex;
@@ -13,15 +17,22 @@ const Tab = styled.div`
   justify-content: space-between;
   width: 100%;
   background-color: ${colors.primary};
-  padding: 1rem 0.75rem;
+  padding: 8px 16px;
   border-radius: 4px;
   cursor: pointer;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  &:hover {
+    background-color: ${colors.primaryHover};
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+      0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+  }
 `;
 
 const P = styled.p`
   text-transform: uppercase;
   color: white;
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: bold;
   margin: 0;
 `;
@@ -43,16 +54,21 @@ const Arrow = styled(ChevronDown)<ArrowProps>`
 `;
 
 const Coupon = (): JSX.Element => {
+  const {
+    state: { loyalityProduct, coupon },
+    dispatch,
+  } = useContext(Context);
   const [errorMessage, setErrorMessage] = useState('');
-  const [coupon, setCoupon] = useState('');
+  const [couponCode, setCouponCode] = useState('');
   const classes = useStyles();
   const [isOpen, setIsOpen] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [validateCoupon] = useMutation(VALIDATE_DISCOUNT_MUTATION);
 
   const toggle = () => setIsOpen(!isOpen);
 
   const handleChange = (event) => {
-    setCoupon(event.target.value);
+    setCouponCode(event.target.value);
   };
 
   const handleSubmitCoupon: (
@@ -60,7 +76,21 @@ const Coupon = (): JSX.Element => {
   ) => Promise<void> = async (event) => {
     event.preventDefault();
     try {
-      console.log('kupon');
+      if (loyalityProduct) {
+        setIsError(true);
+        setErrorMessage('Nie je možné kombinovať zľavy');
+        return;
+      }
+      const {
+        data: { validateDiscount },
+      } = await validateCoupon({ variables: { code: couponCode } });
+      console.log(validateDiscount);
+      dispatch({
+        type: 'ADD_COUPON',
+        payload: { code: validateDiscount.code, value: validateDiscount.value },
+      });
+      scrollBottom();
+      setIsError(false);
     } catch (err) {
       setIsError(true);
       setErrorMessage('Neplatný kupón');
@@ -82,15 +112,14 @@ const Coupon = (): JSX.Element => {
             variant="outlined"
             type="text"
             name="coupon"
-            value={coupon}
+            value={couponCode}
             fullWidth
             onChange={handleChange}
           />
+          <ErrorMessage message={errorMessage} open={isError} />
           <Button style={{ marginTop: '.5rem' }} type="submit">
             Použiť
           </Button>
-
-          <ErrorMessage message={errorMessage} open={isError} />
         </ValidatorForm>
       </Collapse>
     </Col>

@@ -55,7 +55,7 @@ const Home: () => JSX.Element = () => {
                 <Tab icon={<Settings />} label="Nastavenia" />
               </Tabs>
             </Paper>
-            {value === 0 && <Orders email={email} />}
+            {value === 0 && <Orders email={email} id={id} />}
             {value === 1 && <Points id={id} />}
             {value === 2 && <SettingsPage id={id} />}
           </Container>

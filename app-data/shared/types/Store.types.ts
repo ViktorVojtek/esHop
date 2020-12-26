@@ -32,6 +32,11 @@ export type LoyalityProduct = {
   title: string;
 };
 
+export type Coupon = {
+  code: string;
+  value: number;
+};
+
 export type CartProduct = {
   id: string;
   variant: VariantOfProduct;
@@ -75,6 +80,8 @@ export interface IState {
   allowEnvelope: boolean;
   customer: Customer;
   loyalityProduct: LoyalityProduct;
+  coupon: Coupon;
+  freeDelivery: number;
 }
 
 export interface IAction {

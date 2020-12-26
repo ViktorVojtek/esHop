@@ -4,12 +4,15 @@ import styled from 'styled-components';
 import { formatPrice } from '../../../../../../../../shared/helpers/formatters';
 import { colors } from '../../../../../../../../shared/design';
 import { Col, Row } from 'reactstrap';
+import LoyalityProduct from '../LoyalityProduct';
+import CouponItem from '../CouponItem';
 
 const Wrapper = styled.div`
   margin-top: 36px;
   border-top: 3px solid ${colors.primary};
   width: 100%;
-  padding: 16px;
+  padding-top: 16px;
+  padding-bottom: 16px;
   @media (max-width: 768px) {
     margin-top: 16px;
   }
@@ -42,15 +45,19 @@ const TotalSum = styled.p`
 
 const SummaryPrice = (): JSX.Element => {
   const {
-    state: { cartTotalSum },
+    state: { cartTotalSum, loyalityProduct, coupon },
   } = useContext(Context);
   return (
     <Wrapper>
       <Row>
         <Col md={12} lg={6}>
-          <p className="text-left mt-2 mb-0 w-100">* Povinné pole</p>
+          <p className="text-left mt-0 mb-2 w-100">* Povinné pole</p>
         </Col>
         <Col md={12} lg={6}>
+          {loyalityProduct && (
+            <LoyalityProduct loyalityProduct={loyalityProduct} />
+          )}
+          {coupon && <CouponItem value={coupon.value} />}
           <Holder>
             <P style={{ fontWeight: 'bold' }}>K úhrade:</P>
             <TotalSum>{formatPrice(cartTotalSum)} €</TotalSum>

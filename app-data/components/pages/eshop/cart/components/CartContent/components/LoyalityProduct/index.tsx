@@ -1,8 +1,8 @@
 import React, { FC, useContext } from 'react';
 import styled from 'styled-components';
-import { Row, Col } from 'reactstrap';
 import { CloseCircle } from '@styled-icons/evaicons-solid';
 import { Context } from '../../../../../../../../lib/state/Store';
+import { colors } from '../../../../../../../../shared/design';
 
 export type ILoyalityProduct = {
   loyalityProduct: {
@@ -14,7 +14,7 @@ export type ILoyalityProduct = {
 
 const Wrapper = styled.div`
   border: 1px solid #4caf50;
-  background-color: #81c784;
+  background-color: ${colors.success};
   border-radius: 4px;
   padding: 8px 16px;
   border-radius: 4px;
@@ -22,6 +22,13 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  &:hover {
+    background-color: ${colors.success};
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+      0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+  }
 `;
 
 const H6 = styled.h6`
@@ -51,16 +58,12 @@ const LoyalityProduct: FC<ILoyalityProduct> = (props: ILoyalityProduct) => {
     });
   }
   return (
-    <Row>
-      <Col md="6">
-        <Wrapper>
-          <H6>
-            Vernostná zľava: <Span>{title}</Span>
-          </H6>
-          <CloseCircleIcon onClick={removeLoyalityProduct} />
-        </Wrapper>
-      </Col>
-    </Row>
+    <Wrapper>
+      <H6>
+        Vernostná zľava: <Span>{title}</Span>
+      </H6>
+      <CloseCircleIcon onClick={removeLoyalityProduct} />
+    </Wrapper>
   );
 };
 

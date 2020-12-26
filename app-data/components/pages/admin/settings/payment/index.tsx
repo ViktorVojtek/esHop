@@ -19,7 +19,7 @@ const PaymentConent: (props: { role: number }) => JSX.Element = ({ role }) => {
   const classes = useStyles();
 
   return (
-    <Layout pageTitle="Payment settings" role={role}>
+    <Layout pageTitle="Nastavenie platieb" role={role}>
       <Paper className={classes.root}>
         <Form />
       </Paper>

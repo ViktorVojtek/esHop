@@ -2,9 +2,8 @@ import React, { useContext, useEffect } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { Context } from '../../../../../../../../../../../lib/state/Store';
 import { DELIVERY_METHODS_QUERY } from '../../../../../../../../../../../graphql/query';
-import { Col, Row, FormGroup, Input, Label } from 'reactstrap';
+import { Col, Row } from 'reactstrap';
 import { formatPrice } from '../../../../../../../../../../../shared/helpers/formatters';
-import { CartProduct } from '../../../../../../../../../../../shared/types/Store.types';
 import {
   FormControl,
   FormControlLabel,
@@ -43,10 +42,17 @@ interface IProps {
   handleData?: (data: IData) => void;
 }
 
-export default (props: IProps) => {
+const Delivery = (props: IProps) => {
   const { data: orderData, handleData } = props;
   const {
-    state: { cart, allowEnvelope, giftCards, loyalityProduct },
+    state: {
+      cart,
+      allowEnvelope,
+      giftCards,
+      loyalityProduct,
+      coupon,
+      freeDelivery,
+    },
     dispatch,
   } = useContext(Context);
   const { error, loading, data } = useQuery(DELIVERY_METHODS_QUERY);
@@ -59,13 +65,8 @@ export default (props: IProps) => {
     return null;
   }
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const getSum = (): number => {
     let sum: number = 0;
-    const currentMethod = deliveryMethods.find((item) => {
-      if (item.title === (event.target as HTMLInputElement).value) {
-        return true;
-      }
-    });
 
     cart.forEach((item: any) => {
       if (item.variant.discount && item.variant.discount > 0) {
@@ -85,13 +86,32 @@ export default (props: IProps) => {
     if (loyalityProduct && loyalityProduct.isDiscount) {
       sum = sum - sum * (loyalityProduct.discount / 100);
     }
+    if (coupon && coupon.value) {
+      sum = sum - sum * (coupon.value / 100);
+    }
     sum += orderData.paymentPrice;
-    sum += currentMethod.value;
+    return sum;
+  };
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    let sum = getSum();
+
+    const currentMethod = deliveryMethods.find((item) => {
+      if (item.title === (event.target as HTMLInputElement).value) {
+        return true;
+      }
+    });
+
+    if (sum < freeDelivery) {
+      sum += currentMethod.value;
+    }
+    console.log(orderData);
+    console.log(sum < freeDelivery ? currentMethod.value : 0);
     handleData({
       ...orderData,
       totalPrice: sum,
       deliveryMethode: currentMethod.title,
-      deliveryPrice: currentMethod.value,
+      deliveryPrice: sum < freeDelivery ? currentMethod.value : 0,
     });
     dispatch({
       type: 'SET_TOTAL_SUM',
@@ -153,7 +173,13 @@ export default (props: IProps) => {
                     className="text-right"
                     style={{ margin: '0', fontWeight: 'bold' }}
                   >
-                    {value === 0 ? 'Zadarmo' : `${formatPrice(value)} €`}
+                    {value === 0
+                      ? 'Zadarmo'
+                      : freeDelivery !== null
+                      ? getSum() < freeDelivery
+                        ? `${formatPrice(value)} €`
+                        : 'Zadarmo'
+                      : `${formatPrice(value)} €`}
                   </p>
                 </div>
               );
@@ -176,3 +202,5 @@ export default (props: IProps) => {
     </>
   );
 };
+
+export default Delivery;

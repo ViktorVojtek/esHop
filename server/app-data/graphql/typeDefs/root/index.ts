@@ -24,6 +24,7 @@ const rootTypeDefs = gql`
     services: [Service]
     subCategories(categoryId: String): [SubCategory]
     users: [User]
+    freeDeliveries: [FreeDelivery]
   }
 
   type Mutation {
@@ -70,6 +71,10 @@ const rootTypeDefs = gql`
     updateProduct(_id: String!, productInput: ProductInput!): Product
     removeProduct(_id: String!): String
 
+    sendOrderEmail(id: String!): String
+
+    validateDiscount(code: String!): Discount
+
     createLoyalityProduct(
       loyalityProductInput: LoyalityProductInput!
     ): LoyalityProduct
@@ -77,7 +82,7 @@ const rootTypeDefs = gql`
       _id: String!
       loyalityProductInput: LoyalityProductInput!
     ): LoyalityProduct
-    removeLoyalityProduct(_id: String!): String
+    removeLoyalityProduct(id: String!): String
 
     createSubCategory(categoryId: String!, title: String!): SubCategory
     removeSubCategory(_id: String!): String
@@ -88,6 +93,10 @@ const rootTypeDefs = gql`
 
     addToMarketingList(marketingListData: MarketingListInput!): MarketingList
     removeFromMarketingList(email: String!): String
+
+    createFreeDelivery(value: String!): FreeDelivery
+    updateFreeDelivery(id: String!, value: String!): FreeDelivery
+    removeFreeDelivery(id: String!): String
   }
 
   schema {

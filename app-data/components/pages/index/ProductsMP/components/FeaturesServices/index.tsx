@@ -26,10 +26,6 @@ const FeaturesProducts: FC<IFeaturesProducts> = ({ category }) => {
   if (error) {
     return <>{error.message}</>;
   }
-  if (loading) {
-    return <Spinner color="primary" />;
-  }
-
   return (
     <Container>
       <H3>Vybrané služby</H3>

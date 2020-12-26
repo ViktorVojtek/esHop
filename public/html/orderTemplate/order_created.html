@@ -1119,6 +1119,13 @@
                               <tr>
                                 <td style="background-color:#EEEEEE;border:solid white 20px;vertical-align:top;padding-top:20px;padding-bottom:20px;">
                                   <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="" width="100%">
+                                    {{#if isCoupon}}
+                                      <tr>
+                                        <td align="right" style="background:#EEEEEE;font-size:0px;padding:10px 25px;padding-bottom:10px;word-break:break-word;">
+                                          <div style="font-family:Arial;font-size:18px;font-weight:600;line-height:20px;text-align:right;color:#777777;">Zľava: {{coupon}} %</div>
+                                        </td>
+                                      </tr>
+                                    {{/if}}
                                     <tr>
                                       <td align="right" style="background:#EEEEEE;font-size:0px;padding:10px 25px;padding-bottom:10px;word-break:break-word;">
                                         <div style="font-family:Arial;font-size:18px;font-weight:600;line-height:20px;text-align:right;color:#777777;">Celkom spolu (bez DPH): {{totalPriceWithoutVat}} €</div>

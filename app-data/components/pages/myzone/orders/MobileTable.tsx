@@ -22,10 +22,11 @@ import {
 
 type IProps = {
   row: any;
+  id: string;
 };
 
 const MobileTable = (props: IProps) => {
-  const { row } = props;
+  const { row, id } = props;
   const [open, setOpen] = useState(false);
 
   function getDate(created_at: any) {
@@ -75,7 +76,7 @@ const MobileTable = (props: IProps) => {
             </P>
             <div style={{ display: 'flex' }}>
               <P className="mr-4">Objednávka</P>
-              <Link href={`/static/orders/order-${row.orderId}.pdf`}>
+              <Link href={`/static/orders/order-${row.orderId}.pdf?user=${id}`}>
                 <a target="_blank">
                   <PDF></PDF>
                 </a>
@@ -84,7 +85,9 @@ const MobileTable = (props: IProps) => {
             {row.invoiceId && (
               <div style={{ display: 'flex' }}>
                 <P className="mr-4">Faktúra</P>
-                <Link href={`/static/invoice/invoice-${row.invoiceId}.pdf`}>
+                <Link
+                  href={`/static/invoice/invoice-${row.invoiceId}.pdf?user=${id}`}
+                >
                   <a target="_blank">
                     <PDF></PDF>
                   </a>

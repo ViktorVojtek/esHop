@@ -7,8 +7,6 @@ import { useRouter } from 'next/router';
 import { Nav, NavItem, NavLink, NavbarBrand, Row, Col } from 'reactstrap';
 import { ILinkItem } from '../Navigation/Site/TS/Navigation.interface';
 import { MenuIcon, HomeIcon, Wrapper, Logo, H2 } from './styles';
-import CategoriesAside from '../../../components/pages/eshop/components/Categories';
-import AsideCart from '../../../components/pages/eshop/components/AsideCart';
 
 const useStyles = makeStyles({
   list: {

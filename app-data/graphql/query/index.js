@@ -23,6 +23,15 @@ export const CURRENCIES_QUERY = gql`
   }
 `;
 
+export const FREEDELIVERY_QUERY = gql`
+  query freeDeliveries {
+    freeDeliveries {
+      _id
+      value
+    }
+  }
+`;
+
 export const DELIVERY_METHODE_QUERY = gql`
   query deliveryMethode($id: String!) {
     deliveryMethode(id: $id) {

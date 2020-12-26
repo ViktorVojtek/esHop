@@ -39,6 +39,8 @@ const initialState: IState = {
     tel: '',
   },
   loyalityProduct: null,
+  coupon: null,
+  freeDelivery: null,
 };
 
 export const Context = createContext<{

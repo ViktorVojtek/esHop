@@ -9,12 +9,12 @@ import { Button } from '../../../../../../shared/design';
 import { scrollTop } from '../../../../../../shared/helpers';
 import { IData } from '../../../../../../shared/types/Cart.types';
 
-import { ButtonsHolder, H2, H4 } from '../../styles/cart.style';
+import { H2 } from '../../styles/cart.style';
 import BillingInfo from './components/BillingForm/components/BillingInfo';
 import PayCardForm from './components/BillingForm/components/PayCardForm';
 import CartLogin from './components/CartLogin';
 import CartProducts from './components/CartProducts';
-import Coupon from './components/Coupon';
+import FreeDeliveryItem from './components/FreeDeliveryItem';
 import SummaryPrice from './components/SummaryPrice';
 
 const initialOrderData: IData = {
@@ -43,6 +43,7 @@ const initialOrderData: IData = {
   totalPrice: 0,
   products: [],
   loyalityProduct: null,
+  coupon: null,
 };
 
 const steps = {
@@ -67,7 +68,14 @@ const CartContent: FC = () => {
   const [cartStep, setCartStep] = useState(0);
   const [orderData, setOrderData] = useState(initialOrderData);
 
-  const { cart, customer, giftCards, loyalityProduct } = state;
+  const {
+    cart,
+    customer,
+    giftCards,
+    loyalityProduct,
+    coupon,
+    freeDelivery,
+  } = state;
 
   useEffect(() => {
     if (router.query.checkout !== undefined) {
@@ -164,8 +172,9 @@ const CartContent: FC = () => {
       userId: customer && customer.userId ? customer.userId : '',
       products: productsToBuy,
       loyalityProduct,
+      coupon: coupon ? coupon.value : null,
     });
-  }, [cart, giftCards, loyalityProduct, customer]);
+  }, [cart, giftCards, loyalityProduct, customer, coupon]);
 
   const handleOrderData = (data: IData) => {
     setOrderData(data);
@@ -176,7 +185,6 @@ const CartContent: FC = () => {
   ) => Promise<void> = async (event) => {
     event.preventDefault();
     setLoader(true);
-
     try {
       const paymentMTD = orderData.paymentMethode;
 
@@ -247,7 +255,7 @@ const CartContent: FC = () => {
           <H2>Pokladňa</H2>
           <Row className="mb-2">
             {!customer.token && <CartLogin />}
-            <Coupon />
+            {freeDelivery && <FreeDeliveryItem value={freeDelivery} />}
           </Row>
           <BillingInfo
             handleSubmitForm={handleSubmitForm}

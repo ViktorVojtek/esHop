@@ -5,9 +5,10 @@ import {
   HandHoldingHeart,
   Leaf,
 } from '@styled-icons/fa-solid';
+import { colors } from '../../../../../../../shared/design';
 
 export const ServiceHolder = styled.div`
-  background-color: #00aeef;
+  background-color: ${colors.primary};
   padding: 2rem 0rem;
 `;
 
@@ -16,6 +17,9 @@ export const ServiceTitle = styled.h5`
   text-transform: uppercase;
   font-weight: 600;
   font-size: 1.15rem;
+  @media (max-width: 1200px) {
+    font-size: 1rem;
+  }
 `;
 export const ServiceText = styled.p`
   color: white;

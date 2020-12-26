@@ -63,6 +63,7 @@ const Order = gql`
     totalPrice: Float
     products: [Object]
     loyalityProduct: Object
+    coupon: Float
   }
 
   type Order {
@@ -97,6 +98,7 @@ const Order = gql`
     totalPrice: Float
     products: [Object]
     loyalityProduct: Object
+    coupon: Float
   }
 `;
 

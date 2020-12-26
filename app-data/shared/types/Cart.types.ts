@@ -24,4 +24,5 @@ export interface IData {
   totalPrice: number;
   products: string[];
   loyalityProduct: object;
+  coupon?: number;
 }

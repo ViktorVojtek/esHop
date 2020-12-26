@@ -11,6 +11,7 @@ import cookie from 'js-cookie';
 import { useQuery } from '@apollo/react-hooks';
 import {
   CUSTOMER_QUERY,
+  FREEDELIVERY_QUERY,
   LOYALITY_PRODUCTS_QUERY,
   PRODUCTS_BY_IDS_QUERY,
 } from '../../../graphql/query';
@@ -112,6 +113,11 @@ const Reducer = (state: IState, action: IAction) => {
         ...state,
         loyalityProduct: action.payload,
       };
+    case 'ADD_COUPON':
+      return {
+        ...state,
+        coupon: action.payload,
+      };
     case 'ADD_TO_GIFT_CARDS':
       newGiftCards = [...state.giftCards];
       newGiftCards = [...state.giftCards, action.payload];
@@ -195,6 +201,11 @@ const Reducer = (state: IState, action: IAction) => {
         ...state,
         customer: action.payload,
       };
+    case 'SET_FREEDELIVERY':
+      return {
+        ...state,
+        freeDelivery: action.payload,
+      };
     default:
       return state;
   }
@@ -257,10 +268,13 @@ export const withSetCart = <P extends object>(
   }
   const user = getUser(customer.userId);
 
+  const freeDeliveryValue = getFreeDelivery();
+
   useEffect(() => {
     dispatch({ type: 'SET_CART', payload: cart });
     dispatch({ type: 'SET_GIFTCARD', payload: null });
     dispatch({ type: 'SET_LOYALITY_PRODUCT', payload: loyalityProduct });
+    dispatch({ type: 'SET_FREEDELIVERY', payload: freeDeliveryValue });
     dispatch({
       type: 'SET_CUSTOMER',
       payload: {
@@ -272,7 +286,7 @@ export const withSetCart = <P extends object>(
         token: cookie.get('customerToken'),
       },
     });
-  }, [data, loyalityProducts, user]);
+  }, [data, loyalityProducts, user, freeDeliveryValue]);
 
   return <Component {...props} />;
 };
@@ -298,5 +312,18 @@ function getUser(id: string) {
   if (data) {
     const { customer } = data;
     return customer;
+  }
+}
+
+function getFreeDelivery() {
+  const { data } = useQuery(FREEDELIVERY_QUERY, {
+    fetchPolicy: 'network-only',
+  });
+  if (data) {
+    const { freeDeliveries } = data;
+    if (freeDeliveries.length > 0) {
+      return freeDeliveries[0].value;
+    }
+    return null;
   }
 }

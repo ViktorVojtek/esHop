@@ -45,7 +45,7 @@ interface IProps {
 export default (props: IProps) => {
   const { data: orderData, handleData } = props;
   const {
-    state: { cart, giftCards, loyalityProduct, cartTotalSum },
+    state: { cart, giftCards, loyalityProduct, cartTotalSum, coupon },
     dispatch,
   } = useContext(Context);
   const { error, loading, data } = useQuery(PAYMENT_METHODES_QUERY);
@@ -84,8 +84,13 @@ export default (props: IProps) => {
     if (loyalityProduct && loyalityProduct.isDiscount) {
       sum = sum - sum * (loyalityProduct.discount / 100);
     }
+    if (coupon && coupon.value) {
+      sum = sum - sum * (coupon.value / 100);
+    }
     sum += orderData.deliveryPrice;
     sum += currentMethod.value;
+
+    console.log(orderData);
     handleData({
       ...orderData,
       totalPrice: sum,

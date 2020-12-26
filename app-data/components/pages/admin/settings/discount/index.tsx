@@ -21,7 +21,7 @@ const DiscountContentPage: (props: { role: number }) => JSX.Element = ({
   const classes = useStyles();
 
   return (
-    <Layout pageTitle="Discount settings" role={role}>
+    <Layout pageTitle="Nastavenie zľiav" role={role}>
       <Paper className={classes.paper}>
         <Form />
       </Paper>
