@@ -7,23 +7,20 @@ import {
 } from '../../../../styles/cart.style';
 import { Context } from '../../../../../../../../lib/state/Store';
 import { formatPrice } from '../../../../../../../../shared/helpers/formatters';
+import { ServiceData } from '../../../../../../../../shared/types/Store.types';
 
-type IService = {
-  title: string;
-  count: number;
-  price: number;
-};
-
-interface IGiftCardTableRow {
+type IGiftCardTableRow = {
   cardColor: string;
-  price: number;
+  priceValue: number;
   text: string;
+  services: ServiceData[];
+  totalPrice: number;
   id: number;
-  services: IService[];
-}
+};
 const GiftCardTableRow: FC<IGiftCardTableRow> = ({
   cardColor,
-  price,
+  priceValue,
+  totalPrice,
   text,
   id,
   services,
@@ -43,23 +40,19 @@ const GiftCardTableRow: FC<IGiftCardTableRow> = ({
       <TD>
         <Circle color={cardColor}></Circle>
       </TD>
-      {services.length > 0 ? (
-        <TD>
-          {services.map((item, i) => {
-            return (
-              <p
-                key={i}
-                className="w-100 mb-0"
-              >{`${item.title} ${item.count}x`}</p>
-            );
-          })}
-        </TD>
-      ) : (
-        <TD>{`Suma: ${formatPrice(price)} €`}</TD>
-      )}
-
+      <TD>
+        {services.map((item, i) => {
+          return (
+            <p
+              key={i}
+              className="w-100 mb-0"
+            >{`${item.title} ${item.count}x`}</p>
+          );
+        })}
+        {priceValue > 0 && `Suma: ${formatPrice(priceValue)} €`}
+      </TD>
       <TDtext>{text}</TDtext>
-      <TD>{`${formatPrice(price)} €`}</TD>
+      <TD>{`${formatPrice(totalPrice)} €`}</TD>
       <TD>
         <CloseCircleIcon
           onClick={() => handleRemoveGiftCard(id)}

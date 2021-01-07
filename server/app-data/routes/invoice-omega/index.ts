@@ -3,7 +3,10 @@ import { Request, Response } from 'express';
 const API_KEY: string = '7ecec41b-612a-4710-82f6-071f856419f4';
 const ESHOP_INV_API_URI: string = 'https://eshops.inteo.sk/api/v1/invoices';
 
-export const omegaRoute: (req: Request, res: Response) => Promise<Response<any>> = async (req, res) => {
+export const omegaRoute: (
+  req: Request,
+  res: Response
+) => Promise<Response<any>> = async (req, res) => {
   const {
     email,
     orderId,
@@ -46,7 +49,7 @@ export const omegaRoute: (req: Request, res: Response) => Promise<Response<any>>
       } else {
         product.name = 'Darčeková poukážka';
         product.count = 1;
-        product.unitPriceWithVat = formatGiftCardPrice(product.price);
+        product.unitPriceWithVat = formatGiftCardPrice(product.totalPrice);
         product.unitPriceWithVat =
           Math.round(product.unitPriceWithVat * 100) / 100;
         product.totalPriceWithVat = product.unitPriceWithVat;
@@ -58,7 +61,7 @@ export const omegaRoute: (req: Request, res: Response) => Promise<Response<any>>
       count: number;
       unitPriceWithVat: number;
       totalPriceWithVat: number;
-      };
+    };
 
     const deliveryProduct: deliveryProductType = {
       name: deliveryMethode,
@@ -67,7 +70,8 @@ export const omegaRoute: (req: Request, res: Response) => Promise<Response<any>>
       totalPriceWithVat: +deliveryPrice,
     };
     const finalProducts: any[] = [...products, deliveryProduct];
-    const clientHasDifferentPostalAddress: boolean = optionalAddress !== undefined;
+    const clientHasDifferentPostalAddress: boolean =
+      optionalAddress !== undefined;
     const senderIsVatPayer: boolean = companyDTAXNum !== undefined;
 
     const data = {
@@ -115,6 +119,8 @@ export const omegaRoute: (req: Request, res: Response) => Promise<Response<any>>
       isVatAccordingPayment: true,
       items: finalProducts,
     };
+
+    console.log(data);
 
     const response: globalThis.Response = await fetch(ESHOP_INV_API_URI, {
       body: JSON.stringify([data]),

@@ -97,6 +97,8 @@ const rootTypeDefs = gql`
     createFreeDelivery(value: String!): FreeDelivery
     updateFreeDelivery(id: String!, value: String!): FreeDelivery
     removeFreeDelivery(id: String!): String
+
+    sendRezervationEmail(rezervationData: RezervationDataInput): String
   }
 
   schema {

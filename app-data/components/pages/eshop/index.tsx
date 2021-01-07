@@ -36,6 +36,7 @@ import {
   sortByLetterDown,
   sortByLetterUp,
   sortByPriceMax,
+  sortActionProducts,
 } from '../../../shared/helpers';
 import Product from '../../../shared/types/Product.types';
 import CustomSpinner from '../../../shared/components/CustomSpinner/CustomerSpinner';
@@ -115,6 +116,16 @@ const EshopPage: FC = () => {
                 <Dropdown isOpen={dropdownOpen} toggle={toggle}>
                   <DropdownToggleItem caret>Zoradit podľa</DropdownToggleItem>
                   <DropdownMenu>
+                    <DropdownItem
+                      onClick={() =>
+                        sortActionProducts(
+                          filteredProducts,
+                          setFilteredProducts
+                        )
+                      }
+                    >
+                      Akciové
+                    </DropdownItem>
                     <DropdownItem
                       onClick={() =>
                         sortByPriceMin(filteredProducts, setFilteredProducts)

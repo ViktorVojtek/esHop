@@ -80,7 +80,7 @@ const Delivery = (props: IProps) => {
     });
 
     giftCards.forEach((item: any) => {
-      sum += item.price;
+      sum += item.totalPrice;
     });
 
     if (loyalityProduct && loyalityProduct.isDiscount) {
@@ -105,8 +105,6 @@ const Delivery = (props: IProps) => {
     if (sum < freeDelivery) {
       sum += currentMethod.value;
     }
-    console.log(orderData);
-    console.log(sum < freeDelivery ? currentMethod.value : 0);
     handleData({
       ...orderData,
       totalPrice: sum,

@@ -1,4 +1,4 @@
-import React, { FC, useContext, useEffect } from 'react';
+import React, { FC, useContext } from 'react';
 
 import { Context } from '../../../../../../../lib/state/Store';
 import {
@@ -11,18 +11,23 @@ import {
   Detail,
 } from './styles/asideCartProductStyle';
 import { formatPrice } from '../../../../../../../shared/helpers/formatters';
+import { ServiceData } from '../../../../../../../shared/types/Store.types';
 
 type IAsideCartGiftCards = {
   cardColor: string;
-  price: number;
+  priceValue: number;
   text: string;
+  services: ServiceData[];
+  totalPrice: number;
   id: number;
 };
 
 const AsideCartGiftCards: FC<IAsideCartGiftCards> = ({
   cardColor,
-  price,
+  priceValue,
   text,
+  services,
+  totalPrice,
   id,
 }) => {
   const { dispatch } = useContext(Context);
@@ -38,7 +43,7 @@ const AsideCartGiftCards: FC<IAsideCartGiftCards> = ({
       <HeadWrapper className="d-flex">
         <Detail>
           <Title>Darčeková poukážka</Title>
-          <DetailItem>{`Hodnota: ${formatPrice(price)} €`}</DetailItem>
+          <DetailItem>{`Cena: ${formatPrice(totalPrice)} €`}</DetailItem>
           <DetailItem>{`Venovanie: ${text}`}</DetailItem>
           <div className="d-flex align-items-center">
             <DetailItem>Farba poukážky:</DetailItem>

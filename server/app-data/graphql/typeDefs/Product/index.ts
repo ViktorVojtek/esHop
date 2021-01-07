@@ -28,6 +28,7 @@ const Product = gql`
     title: String!
     price: ProductPriceInput!
     productCode: String
+    bonus: String
   }
 
   input ProductInput {
@@ -62,6 +63,7 @@ const Product = gql`
     title: String
     price: ProductPrice
     productCode: String
+    bonus: String
   }
 
   type CategoryType {

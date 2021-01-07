@@ -106,6 +106,7 @@ export const PRODUCT_QUERY = gql`
         }
         title
         productCode
+        bonus
       }
     }
   }
@@ -144,6 +145,7 @@ export const PRODUCTS_QUERY = gql`
         }
         title
         productCode
+        bonus
       }
     }
   }
@@ -258,6 +260,7 @@ export const SERVICE_QUERY = gql`
       }
       video
       title
+      discount
     }
   }
 `;
@@ -288,6 +291,7 @@ export const SERVICES_QUERY = gql`
       }
       video
       title
+      discount
     }
   }
 `;

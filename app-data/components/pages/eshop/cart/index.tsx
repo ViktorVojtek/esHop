@@ -55,7 +55,7 @@ const CartBodyComponent: FC = () => {
     });
 
     giftCards.forEach((item: any) => {
-      sum += item.price;
+      sum += item.totalPrice;
     });
 
     if (loyalityProduct && loyalityProduct.isDiscount) {

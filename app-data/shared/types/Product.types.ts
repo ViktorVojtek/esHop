@@ -29,6 +29,7 @@ export type ProductVariant = {
   title: string;
   price: ProductPrice;
   productCode?: string;
+  bonus?: string;
 };
 
 type Product = {

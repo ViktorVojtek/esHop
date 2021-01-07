@@ -30,6 +30,7 @@ import { formatPrice } from '../../../../../../../shared/helpers/formatters';
 import { DiscountRibbon } from '../../../../../../../shared/components/Ribbon/DiscountRibbon';
 import { RibbonHolder } from '../../../../../../../shared/components/Ribbon/RibbonHolder';
 import { ProductButton } from '../../../../../../../shared/design';
+import { BonusRibbon } from '../../../../../../../shared/components/Ribbon/BonusRibbon';
 
 const ProductTitle: React.FC<IProductTitle> = ({ id, title }) => (
   <Link href={{ pathname: '/eshop/product', query: { id } }}>
@@ -125,6 +126,7 @@ const ProductUI: React.FC<IProductUI> = ({
           {variants[0].discount > 0 && (
             <DiscountRibbon text={`ZĽAVA ${variants[0].discount} %`} />
           )}
+          {variants[0].bonus && <BonusRibbon text={`Darček`} />}
         </RibbonHolder>
       </ProductItem>
     </Col>

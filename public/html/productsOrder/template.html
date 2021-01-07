@@ -393,7 +393,7 @@
         <tr>
           <td style="border: 1px solid #ddd; padding: 8px;">{{item.cardNumber}}</td>
           <td style="border: 1px solid #ddd; padding: 8px;">
-            {{item.price}} €
+            {{item.totalPrice}} €
           </td>
           <td style="border: 1px solid #ddd; padding: 8px;">
             {{item.text}}
@@ -403,8 +403,11 @@
           </td>
           <td style="border: 1px solid #ddd; padding: 8px;">
             {{#each services as |service index|}}
-            {{service.title}} {{service.count}} ks {{service.price}} </br>
+            {{service.title}} {{service.count}} ks {{service.price}} € </br>
             {{/each}}
+            {{#if isPriceValue}}
+            Suma: {{item.priceValue}} €
+            {{/if}}
           </td>
         </tr>
         {{/each}}

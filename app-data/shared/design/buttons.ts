@@ -14,7 +14,7 @@ export const Button = styled.button`
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
     box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
     border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-  font-weight: 500;
+  font-weight: bold;
   line-height: 1.75;
   border-radius: 4px;
   letter-spacing: 0.02857em;
@@ -27,10 +27,13 @@ export const Button = styled.button`
     box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
       0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
   }
+  &:disabled {
+    background-color: ${colors.disabled};
+  }
 `;
 
 export const ProductButton = styled.button`
-  display: block;
+  display: inline-flex;
   background-color: ${colors.primary};
   text-transform: uppercase;
   color: #fff;
@@ -55,5 +58,104 @@ export const ProductButton = styled.button`
     background-color: ${colors.primaryHover};
     box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
       0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+  }
+  &:disabled {
+    background-color: ${colors.disabled};
+  }
+`;
+
+export const GiftCardButton = styled.button`
+  display: inline-flex;
+  background-color: ${colors.primary};
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  font-family: MuseoSans-300;
+  text-transform: uppercase;
+  color: #fff !important;
+  padding: 0rem 1.5rem;
+  border-radius: 0.35rem;
+  outline: none !important;
+  border-radius: 6px;
+  border: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+  position: relative;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  letter-spacing: 0px;
+  user-select: none;
+  transition: all 0.3s ease-out;
+  &:hover {
+    background-color: ${colors.primaryHover};
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+      0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+  }
+  &:disabled {
+    background-color: ${colors.disabled};
+  }
+`;
+
+export const TextFieldButton = styled.button`
+  display: inline-flex;
+  align-items: center;
+  background-color: ${colors.primary};
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  font-family: MuseoSans-300;
+  text-transform: uppercase;
+  color: #fff !important;
+  padding: 0rem 1.5rem;
+  border-radius: 0.35rem;
+  outline: none !important;
+  border-radius: 6px;
+  border: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+  position: relative;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  letter-spacing: 0px;
+  user-select: none;
+  transition: all 0.3s ease-out;
+  &:hover {
+    background-color: ${colors.primaryHover};
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+      0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+  }
+  &:disabled {
+    background-color: ${colors.disabled};
+  }
+`;
+
+export const ButtonWithIcon = styled.button`
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: ${colors.primary};
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  font-family: MuseoSans-300;
+  text-transform: uppercase;
+  color: #fff !important;
+  padding: 12px 16px;
+  width: 100%;
+  border-radius: 0.35rem;
+  outline: none !important;
+  border-radius: 6px;
+  border: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+  position: relative;
+  letter-spacing: 0px;
+  user-select: none;
+  line-height: 24px;
+  transition: all 0.3s ease-out;
+  &:hover {
+    background-color: ${colors.primaryHover};
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+      0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+  }
+  &:disabled {
+    background-color: ${colors.disabled};
   }
 `;

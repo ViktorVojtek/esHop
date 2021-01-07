@@ -40,6 +40,7 @@ type ProductVariant = {
   title?: string;
   price?: ProductPrice;
   productCode?: string;
+  bonus?: string;
 };
 
 const Editor = dynamic(
@@ -330,6 +331,20 @@ const VariantProductData = (props) => {
                 value={variantData.inStock}
               />
             </FormControl>
+          </Grid>
+          <Grid item xs={4}>
+            <TextField
+              label="Bonus k produktu"
+              id="vBonus"
+              variant="outlined"
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                setVariantData({
+                  ...variantData,
+                  bonus: event.currentTarget.value,
+                });
+              }}
+              value={variantData.bonus}
+            />
           </Grid>
         </Grid>
         {''}

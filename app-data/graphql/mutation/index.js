@@ -478,3 +478,9 @@ export const REMOVE_LOYALITY_PRODUCT_MUTATION = gql`
     removeLoyalityProduct(id: $id)
   }
 `;
+
+export const SEND_REZERVATION_EMAIL = gql`
+  mutation sendRezervationEmail($rezervationData: RezervationDataInput!) {
+    sendRezervationEmail(rezervationData: $rezervationData)
+  }
+`;

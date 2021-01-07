@@ -102,7 +102,7 @@ function sendMailNotification(
 
       // send mail with defined transport object
       let info = await transporter.sendMail({
-        from: 'eshop@kupelecks.sk',
+        from: '"Eshop KúpeleCKS" <eshop@kupelecks.sk>',
         to, // list of receivers
         subject: 'Červený Kláštor | Vaša objednávka bola prijatá', // Subject line
         html: orderMailToSend, // html body
@@ -192,9 +192,21 @@ const createOrder: (
 
   giftCards.forEach((card, index) => {
     card.cardNumber = index + 1;
+    card.totalPrice = formatPrice(card.totalPrice);
     card.services.length > 0
       ? (card.areServices = true)
       : (card.areServices = false);
+    card.priceValue > 0
+      ? (card.isPriceValue = true)
+      : (card.isPriceValue = false);
+    if (card.services.length > 0) {
+      card.services.forEach((service) => {
+        service.price = formatPrice(service.price);
+      });
+    }
+    if (card.priceValue > 0) {
+      card.priceValue = formatPrice(card.priceValue);
+    }
   });
 
   const pdfData = {

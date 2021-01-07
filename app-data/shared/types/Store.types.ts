@@ -16,12 +16,22 @@ export type VariantOfProduct = {
   count: number;
   images: ProductImage[];
   productCode?: string;
+  bonus?: string;
+};
+
+export type ServiceData = {
+  title: string;
+  price: number;
+  count: number;
+  type?: string;
 };
 
 export type GiftCard = {
   cardColor: string;
-  price: number;
+  priceValue: number;
   text: string;
+  services: ServiceData[];
+  totalPrice: number;
 };
 
 export type LoyalityProduct = {

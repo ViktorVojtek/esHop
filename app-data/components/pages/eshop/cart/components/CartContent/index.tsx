@@ -230,6 +230,7 @@ const CartContent: FC = () => {
       setLoader(false);
     } catch (err) {
       setLoader(false);
+      console.log(err);
       router.push('/eshop/cart/neuspesna-objednavka');
     }
   };

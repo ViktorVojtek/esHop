@@ -82,6 +82,8 @@ import createFreeDelivery from './mutation/CreateFreeDelivery';
 import updateFreeDelivery from './mutation/UpdateFreeDelivery';
 import removeFreeDelivery from './mutation/RemoveFreeDelivery';
 
+import sendRezervationEmail from './mutation/RezervationEmail';
+
 const resolvers = {
   Object: ObjectScalarType,
   Query: {
@@ -215,6 +217,9 @@ const resolvers = {
 
     sendOrderEmail: async (root: any, args: any, ctx: any) =>
       sendOrderEmail(root, args, ctx),
+
+    sendRezervationEmail: async (root: any, args: any, ctx: any) =>
+      sendRezervationEmail(root, args, ctx),
 
     validateDiscount: async (root: any, args: any, ctx: any) =>
       validateDiscount(root, args, ctx),

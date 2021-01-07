@@ -84,7 +84,6 @@ const Coupon = (): JSX.Element => {
       const {
         data: { validateDiscount },
       } = await validateCoupon({ variables: { code: couponCode } });
-      console.log(validateDiscount);
       dispatch({
         type: 'ADD_COUPON',
         payload: { code: validateDiscount.code, value: validateDiscount.value },

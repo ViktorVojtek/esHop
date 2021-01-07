@@ -5,6 +5,7 @@ import React, {
   ChangeEvent,
   useEffect,
 } from 'react';
+import AnimatedShowMore from 'react-animated-show-more';
 import {
   Wrapper,
   Image,
@@ -12,8 +13,7 @@ import {
   TitleMobile,
   VariantTitle,
   Price,
-  Description,
-  StyledCartBtn,
+  DetailInfo,
   VariantOption,
   VariantsSelect,
   Input,
@@ -22,7 +22,6 @@ import {
   Del,
   Label,
   RelatedTitle,
-  Head,
 } from './styles/productDetail.style';
 import Link from 'next/link';
 import { useQuery } from '@apollo/react-hooks';
@@ -37,6 +36,9 @@ import { Context } from '../../../../../lib/state/Store';
 import { PRODUCTS_QUERY } from '../../../../../graphql/query';
 import RelatedProducts from '../../../../../shared/components/RelatedProducts';
 import { formatPrice } from '../../../../../shared/helpers/formatters';
+import { ProductButton } from '../../../../../shared/design';
+import { getLinesCount } from '../../../../../shared/helpers/getLinesCount';
+import DescriptionEl from './Description';
 
 interface IProductDetailProps {
   product: Product;
@@ -56,7 +58,6 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
   // hooks used in components
   const productCountRef = useRef(null);
   const [activeVariant, setActiveVariant] = useState(0);
-  const [modal, setModal] = useState(false);
   const [products, setProducts] = useState([]);
   const { dispatch } = useContext(Context);
 
@@ -75,10 +76,6 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
   }
   if (loading) {
     return <Spinner color="primary" />;
-  }
-
-  function renderDescription(description) {
-    return { __html: description };
   }
 
   const setRelatedProducts = (products: Product[]) => {
@@ -107,7 +104,6 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
     const { price, title, images, discount, productCode } = variants[
       activeVariant
     ];
-    console.log(variants[activeVariant]);
 
     handleAddProductToCart({
       id: _id,
@@ -134,22 +130,27 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
   return (
     <Wrapper>
       <Container>
-        <form onSubmit={handleSubmitProductToCart}>
-          <Row>
-            <Col md="6">
-              <TitleMobile className="mb-3">{title}</TitleMobile>
-              {variants[activeVariant].images.length > 0 ? (
-                <Image
-                  src={variants[activeVariant].images[0].path}
-                  alt={variants[activeVariant].title}
-                  className="mb-3"
-                />
-              ) : null}
-            </Col>
-            <Col md="6">
+        <Row>
+          <Col md="6">
+            <TitleMobile className="mb-3">{title}</TitleMobile>
+            {variants[activeVariant].images.length > 0 ? (
+              <Image
+                src={variants[activeVariant].images[0].path}
+                alt={variants[activeVariant].title}
+                className="mb-3"
+              />
+            ) : null}
+          </Col>
+          <Col md="6">
+            <DetailInfo>
               <Title>{title}</Title>
               {variants.length > 1 && (
                 <VariantTitle>{variants[activeVariant].title}</VariantTitle>
+              )}
+              {variants[activeVariant].bonus && (
+                <VariantTitle style={{ color: 'red', fontSize: '1.1rem' }}>
+                  {variants[activeVariant].bonus}
+                </VariantTitle>
               )}
               {variants[activeVariant].discount > 0 ? (
                 <Price>
@@ -173,42 +174,41 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
                   {variants[activeVariant].price.currency}
                 </Price>
               )}
-              {variants.length > 1 && (
-                <VariantsSelect
-                  id="variants"
-                  name="variants"
-                  onChange={(event: ChangeEvent<HTMLSelectElement>) => {
-                    const idx: number = event.currentTarget.selectedIndex;
+              <form onSubmit={handleSubmitProductToCart}>
+                {variants.length > 1 && (
+                  <>
+                    <VariantsSelect
+                      id="variants"
+                      name="variants"
+                      onChange={(event: ChangeEvent<HTMLSelectElement>) => {
+                        const idx: number = event.currentTarget.selectedIndex;
 
-                    handleSetActiveVariant(idx);
-                  }}
-                >
-                  {variantOptions}
-                </VariantsSelect>
-              )}
-              <Label className="mt-4">Počet</Label>
-              <Input
-                type="number"
-                className="mb-4"
-                defaultValue={1}
-                min={1}
-                step={1}
-                ref={productCountRef}
-              />
-              <StyledCartBtn type="submit">Vložiť do košíka</StyledCartBtn>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <Head>Popis produktu</Head>
-              <Description
-                dangerouslySetInnerHTML={renderDescription(
-                  variants[activeVariant].description
+                        handleSetActiveVariant(idx);
+                      }}
+                    >
+                      {variantOptions}
+                    </VariantsSelect>
+                  </>
                 )}
-              />
-            </Col>
-          </Row>
-        </form>
+                <div style={{ display: 'flex', alignItems: 'flex-end' }}>
+                  <div>
+                    <Label className="mt-2">Počet</Label>
+                    <Input
+                      type="number"
+                      defaultValue={1}
+                      min={1}
+                      step={1}
+                      ref={productCountRef}
+                    />
+                  </div>
+                  <ProductButton type="submit">Vložiť do košíka</ProductButton>
+                </div>
+              </form>
+              <VariantTitle className="mt-4">Popis produktu</VariantTitle>
+              <DescriptionEl variant={variants[activeVariant]} />
+            </DetailInfo>
+          </Col>
+        </Row>
       </Container>
       <Container>
         <RelatedTitle>Súvisiace produkty</RelatedTitle>

@@ -46,6 +46,38 @@ export function sortByLetterDown(
   setFilteredProducts(sortProducts.reverse());
 }
 
+export function sortActionProducts(
+  products: any[],
+  setFilteredProducts: React.Dispatch<any>
+) {
+  let actionProducts = [];
+  let otherProducts = [];
+  actionProducts = products.filter((product) => {
+    if (product.variants) {
+      if (product.variants[0].discount > 0) {
+        console.log(product.title);
+        return product;
+      }
+    } else if (product.discount > 0) {
+      console.log(product.title);
+      return product;
+    }
+  });
+  otherProducts = products.filter((product) => {
+    if (product.variants) {
+      if (product.variants[0].discount === 0) {
+        console.log(product.title);
+        return product;
+      }
+    } else if (product.discount === 0) {
+      console.log(product.title);
+      return product;
+    }
+  });
+  const allProducts = [...actionProducts, ...otherProducts];
+  setFilteredProducts(allProducts);
+}
+
 function getPrice(product: any) {
   let price = 0;
   if (product.variants !== undefined) {
@@ -53,7 +85,6 @@ function getPrice(product: any) {
       price =
         product.variants[0].price.value -
         (product.variants[0].price.value * product.variants[0].discount) / 100;
-      console.log(price);
     } else price = product.variants[0].price.value;
   } else {
     if (product.discount > 0) {

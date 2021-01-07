@@ -8,7 +8,7 @@ type IActionRibbon = {
 const RibbonElement = styled.div`
   font-size: 14px;
   text-transform: uppercase;
-  text-align: center;
+  text-align: left;
   font-weight: bold;
   text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.15);
   letter-spacing: 0px;

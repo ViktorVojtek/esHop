@@ -78,7 +78,7 @@ export default (props: IProps) => {
     });
 
     giftCards.forEach((item: any) => {
-      sum += item.price;
+      sum += item.totalPrice;
     });
 
     if (loyalityProduct && loyalityProduct.isDiscount) {
@@ -90,7 +90,6 @@ export default (props: IProps) => {
     sum += orderData.deliveryPrice;
     sum += currentMethod.value;
 
-    console.log(orderData);
     handleData({
       ...orderData,
       totalPrice: sum,

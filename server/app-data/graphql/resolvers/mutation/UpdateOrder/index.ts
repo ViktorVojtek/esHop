@@ -286,19 +286,30 @@ export default async (
       );
 
       giftCards.forEach((card, index) => {
-        card.price = Math.round(card.price * 100) / 100;
-        card.totalPriceWithoutVat = card.price / 1.2;
+        card.totalPrice = Math.round(card.totalPrice * 100) / 100;
+        card.totalPriceWithoutVat = card.totalPrice / 1.2;
         card.totalPriceWithoutVat =
           Math.round(card.totalPriceWithoutVat * 100) / 100;
-        card.totalPriceVat = card.price - card.price / 1.2;
+        card.totalPriceVat = card.totalPrice - card.totalPrice / 1.2;
         card.totalPriceVat = Math.round(card.totalPriceVat * 100) / 100;
-        card.price = formatPrice(card.price);
+        card.totalPrice = formatPrice(card.totalPrice);
         card.totalPriceWithoutVat = formatPrice(card.totalPriceWithoutVat);
         card.totalPriceVat = formatPrice(card.totalPriceVat);
         card.cardNumber = index + 1;
         card.services.length > 0
           ? (card.areServices = true)
           : (card.areServices = false);
+        card.priceValue > 0
+          ? (card.isPriceValue = true)
+          : (card.isPriceValue = false);
+        if (card.services.length > 0) {
+          card.services.forEach((service) => {
+            service.price = formatPrice(service.price);
+          });
+        }
+        if (card.priceValue > 0) {
+          card.priceValue = formatPrice(card.priceValue);
+        }
       });
 
       const pdfData = {

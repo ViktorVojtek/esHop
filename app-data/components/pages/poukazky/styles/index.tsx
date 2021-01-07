@@ -4,7 +4,7 @@ import { CloseCircle } from '@styled-icons/evaicons-solid';
 export const Wrapper = styled.div`
   width: 100vw;
   margin: 0 auto;
-  margin-top: 180px;
+  margin-top: 150px;
   min-height: calc(100vh - 337px);
 `;
 
@@ -48,11 +48,10 @@ export const ItemText = styled.h6`
   font-weight: bold;
 `;
 export const ItemTextProcedures = styled.h6`
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-family: MuseoSans-300;
-  color: #5e8796;
   font-weight: bold;
-  width: 100%;
+  text-align: left;
 `;
 
 export const H4 = styled.h4`
@@ -74,7 +73,15 @@ export const H1 = styled.h3`
 `;
 
 export const H3 = styled.h3`
-  font-size: 1.5 rem;
+  font-size: 1.5rem;
+  font-family: MuseoSans-300;
+  color: black;
+  font-weight: bold;
+  text-align: center;
+  margin: 64px 0 32px 0;
+`;
+export const H5 = styled.h5`
+  font-size: 1.5rem;
   font-family: MuseoSans-300;
   color: black;
   font-weight: bold;
@@ -163,8 +170,9 @@ export const Button = styled.button`
 
 export const InputHolder = styled.div`
   margin: 0 auto;
-  max-width: 600px;
+  max-width: 400px;
   margin-bottom: 2rem;
+  display: flex;
 `;
 
 export const Preview = styled.img`

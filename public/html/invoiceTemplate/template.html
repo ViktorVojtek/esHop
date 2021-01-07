@@ -403,7 +403,7 @@
             P.Č
           </td>
           <td
-            width="17%"
+            width="10%"
             style="
               border: 1px solid #ddd;
               padding: 8px;
@@ -415,20 +415,6 @@
             "
           >
             Názov
-          </td>
-          <td
-            width="8%"
-            style="
-              border: 1px solid #ddd;
-              padding: 8px;
-              padding-top: 12px;
-              padding-bottom: 12px;
-              text-align: left;
-              background-color: lightgray;
-              color: black;
-            "
-          >
-            Cena
           </td>
           <td
             width="15%"
@@ -445,7 +431,7 @@
             Text
           </td>
           <td
-            width="15%"
+            width="25%"
             style="
               border: 1px solid #ddd;
               padding: 8px;
@@ -520,15 +506,15 @@
             Darčeková poukážka
           </td>
           <td style="border: 1px solid #ddd; padding: 8px">
-            {{item.price}} €
-          </td>
-          <td style="border: 1px solid #ddd; padding: 8px">
             {{item.text}}
           </td>
           <td style="border: 1px solid #ddd; padding: 8px">
             {{#each services as |item index|}}
-            {{item.title}} {{item.count}} ks</br>
+            {{item.title}} {{item.count}} ks {{item.price}} €</br>
             {{/each}}
+            {{#if isPriceValue}}
+            Suma: {{item.priceValue}} €
+            {{/if}}
           </td>
           <td style="border: 1px solid #ddd; padding: 8px">
             {{item.totalPriceWithoutVat}} €
@@ -538,7 +524,7 @@
           </td>
           <td style="border: 1px solid #ddd; padding: 8px">20 %</td>
           <td style="border: 1px solid #ddd; padding: 8px">
-            {{item.price}} €
+            {{item.totalPrice}} €
           </td>
         </tr>
         {{/each}}

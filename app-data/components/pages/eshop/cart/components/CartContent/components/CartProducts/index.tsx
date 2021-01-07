@@ -72,12 +72,13 @@ const CartProducts: FC<ICartContent> = ({
               </TR>
             </thead>
             <tbody>
-              {giftCards.map((item: any, i: number) => (
+              {giftCards.map((item: GiftCard, i: number) => (
                 <GiftCardTableRow
                   cardColor={item.cardColor}
-                  price={item.price}
+                  totalPrice={item.totalPrice}
                   text={item.text}
                   services={item.services}
+                  priceValue={item.priceValue}
                   id={i}
                   key={i}
                 />

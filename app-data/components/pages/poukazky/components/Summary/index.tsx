@@ -1,78 +1,90 @@
 import React, { FC } from 'react';
-import { Span, P, Circle, Text, Remove } from '../../styles/index';
+import styled from 'styled-components';
+import {
+  H4,
+  PrednaStranaText,
+  Preview,
+  PreviewHolder,
+  PreviewTextHolder,
+} from '../../styles';
 import { formatPrice } from '../../../../../shared/helpers/formatters';
-
-type ServiceData = {
-  title: string;
-  price: number;
-  count: number;
-};
-
-type FormData = {
-  cardColor: string;
-  priceValue: number;
-  text: string;
-  services: ServiceData[];
-};
+import { IGiftCardData } from '../Stepper';
+import { Col, Row } from 'reactstrap';
+import {
+  List,
+  ListItem,
+  ListItemAvatar,
+  Avatar,
+  ListItemText,
+} from '@material-ui/core';
+import EuroIcon from '@material-ui/icons/Euro';
+import RoomServiceIcon from '@material-ui/icons/RoomService';
+import { getImageUrl } from '../../../../../shared/helpers';
 
 type IProductToCartData = {
-  formData: FormData;
-  setFormData: React.Dispatch<React.SetStateAction<FormData>>;
+  formData: IGiftCardData;
 };
 
-const Summary: FC<IProductToCartData> = ({ formData, setFormData }) => {
-  const { cardColor, priceValue, text, services } = formData;
+const H5 = styled.h5`
+  font-weight: bold;
+  padding-left: 16px;
+`;
 
-  const removeProcedure = (value: number) => {
-    let newServices = [...services];
-    newServices.splice(value, 1);
-    setFormData({
-      ...formData,
-      priceValue: getPrice(newServices),
-      services: newServices,
-    });
-  };
-  const getPrice = (items) => {
-    let price = 0;
-    for (let i = 0; i < items.length; i++) {
-      price += items[i].price * items[i].count;
-    }
-    return price;
-  };
+const Summary: FC<IProductToCartData> = ({ formData }) => {
+  const { cardColor, priceValue, text, services, totalPrice } = formData;
 
   return (
-    <>
-      <P className="d-flex mt-4">
-        Farba:
-        <Circle className="ml-2" color={cardColor} />
-      </P>
-      <P>
-        Venovanie: <Span className="ml-1">{text}</Span>
-      </P>
-      <P>Zvolené služby:</P>
-      {services.length > 0 ? (
+    <Row className="mt-4 mb-4">
+      <Col md={12}>
+        <H4 className="mb-4">Súhrn poukážky:</H4>
+      </Col>
+      <Col md={6}>
         <>
-          {services.map((item, i) => {
-            return (
-              <div key={i} className="d-flex">
-                <Text>{`${item.title} - `}</Text>
-                <Text className="ml-1">{`${formatPrice(item.price)} € x ${
-                  item.count
-                }`}</Text>
-                <Remove onClick={() => removeProcedure(i)} />
-              </div>
-            );
-          })}
+          <List>
+            {services.map((item, i) => {
+              return (
+                <ListItem key={i}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      <RoomServiceIcon />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText>{`${item.title} - ${formatPrice(
+                    item.price
+                  )} € x ${item.count}`}</ListItemText>
+                </ListItem>
+              );
+            })}
+            {priceValue > 0 && (
+              <ListItem>
+                <ListItemAvatar>
+                  <Avatar>
+                    <EuroIcon />
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText>{`Suma - ${formatPrice(
+                  priceValue
+                )} €`}</ListItemText>
+              </ListItem>
+            )}
+          </List>
+          <H5
+            style={{
+              marginTop: '12px',
+              marginRight: '12px',
+            }}
+          >{`Spolu: ${totalPrice} €`}</H5>
         </>
-      ) : (
-        <Text>Nemáte zvolené služby</Text>
-      )}
-
-      <P>
-        Cena:{' '}
-        <Span className="ml-1">{`${formatPrice(Number(priceValue))} €`}</Span>
-      </P>
-    </>
+      </Col>
+      <Col md={6} className="d-flex align-items-center">
+        <PreviewHolder>
+          <Preview src={getImageUrl[cardColor]} alt="poukazka" />
+          <PreviewTextHolder>
+            <PrednaStranaText colorText={cardColor}>{text}</PrednaStranaText>
+          </PreviewTextHolder>
+        </PreviewHolder>
+      </Col>
+    </Row>
   );
 };
 

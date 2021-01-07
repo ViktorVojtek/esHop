@@ -18,6 +18,8 @@ import Link from 'next/link';
 import { formatPrice } from '../../../../../../../shared/helpers/formatters';
 import { IProductTitle } from '../ProductsFill/types/ProductFill.types';
 import { ProductButton } from '../../../../../../../shared/design';
+import { RibbonHolder } from '../../../../../../../shared/components/Ribbon/RibbonHolder';
+import { DiscountRibbon } from '../../../../../../../shared/components/Ribbon/DiscountRibbon';
 
 type IServiceUI = {
   product: Service;
@@ -69,10 +71,13 @@ const ServiceUI: FC<IServiceUI> = ({
               </Price>
             )}
           </PriceHolder>
-          <Link href={{ pathname: '/rezervacia' }}>
+          <Link href={`/rezervacia?service=${title}`}>
             <ProductButton>Rezervovať</ProductButton>
           </Link>
         </ProductBody>
+        <RibbonHolder>
+          {discount > 0 && <DiscountRibbon text={`ZĽAVA ${discount} %`} />}
+        </RibbonHolder>
       </ProductItem>
     </Col>
   );

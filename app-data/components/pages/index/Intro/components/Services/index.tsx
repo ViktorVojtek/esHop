@@ -17,7 +17,6 @@ import {
 
 const Services: FC = () => {
   const freeDelivery = useFreeDelivery();
-  console.log(freeDelivery);
   return (
     <ServiceHolder>
       <Container>

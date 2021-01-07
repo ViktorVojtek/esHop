@@ -200,7 +200,7 @@ export default createGlobalStyle`
     background-size: cover;
     background-position: center center;
     @media(max-width: 1550px){
-      height: 500px;
+      height: 450px;
     }
     @media(max-width: 1200px){
       height: 400px;

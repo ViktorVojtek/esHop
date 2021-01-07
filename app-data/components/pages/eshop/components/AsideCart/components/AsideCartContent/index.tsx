@@ -53,13 +53,15 @@ const AsideCartContent: FC<ICartContent> = ({
           key={`${item.id}-${i}`}
         />
       ))}
-      {giftCards.map((item: any, i: number) => (
+      {giftCards.map((item: GiftCard, i: number) => (
         <AsideCartGiftCards
           id={i}
           cardColor={item.cardColor}
-          price={item.price}
+          totalPrice={item.totalPrice}
           text={item.text}
-          key={`${item.id}-${i}`}
+          priceValue={item.priceValue}
+          services={item.services}
+          key={i}
         />
       ))}
       <Link href="/eshop/cart">

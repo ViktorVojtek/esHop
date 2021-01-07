@@ -91,8 +91,6 @@ const CreateLoyalityProduct: FC = () => {
     setImages(newImagesArr);
   };
 
-  console.log(images);
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
