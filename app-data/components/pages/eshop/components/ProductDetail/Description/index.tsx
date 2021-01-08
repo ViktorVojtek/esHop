@@ -10,7 +10,7 @@ type descElType = {
 const ShadowOverlay = styled.div`
   background-image: linear-gradient(to bottom, transparent, #fff);
   position: absolute;
-  bottom: 60px;
+  bottom: 0;
   left: 0;
   width: 100%;
   height: 60px;
@@ -18,6 +18,7 @@ const ShadowOverlay = styled.div`
 
 const DescEl = styled.div<descElType>`
   overflow: hidden;
+  position: relative;
   max-height: ${({ height }) => (height ? `${height}px` : '100px')};
   transition: ${({ animationSpeed }) =>
     animationSpeed ? `max-height ${animationSpeed}ms linear` : '300ms'};

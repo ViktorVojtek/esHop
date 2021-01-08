@@ -5,7 +5,6 @@ import React, {
   ChangeEvent,
   useEffect,
 } from 'react';
-import AnimatedShowMore from 'react-animated-show-more';
 import {
   Wrapper,
   Image,

@@ -13,9 +13,7 @@ type IPermanentType = {
 };
 
 const PermanentType: FC<IPermanentType> = ({ formData, setFormData }) => {
-  const { error, loading, data } = useQuery(PRODUCTS_QUERY, {
-    variables: { subCategoryId: '5f09bb27a042284150f80632' },
-  });
+  const { error, loading, data } = useQuery(PRODUCTS_QUERY);
 
   if (error) {
     return <>{error.message}</>;
@@ -59,11 +57,13 @@ const PermanentType: FC<IPermanentType> = ({ formData, setFormData }) => {
 
   const procedury = products.map((item: Product) => {
     return (
-      <Permanents
-        key={item.title}
-        permanent={item}
-        addPermanent={addPermanent}
-      />
+      item.subCategory.title === 'Permanentky' && (
+        <Permanents
+          key={item.title}
+          permanent={item}
+          addPermanent={addPermanent}
+        />
+      )
     );
   });
 
