@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState, useCallback } from 'react';
-import { useQuery } from '@apollo/react-hooks';
+import styled from 'styled-components';
 import { Row } from 'reactstrap';
 import Product from '../../../../../shared/types/Product.types';
 import PaginationComponent from 'react-reactstrap-pagination';
@@ -12,6 +12,25 @@ import ProductFill from './components/ProductsFill';
 
 import { VariantOfProduct } from '../../../../../shared/types/Store.types';
 import Service from '../../../../../shared/types/Service.types';
+
+const PaginationWrapper = styled.div`
+  width: 100%;
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  @media (max-width: 576px) {
+    flex-direction: column;
+  }
+`;
+
+const P = styled.p`
+  font-weight: bold;
+  margin-right: 24px;
+  @media (max-width: 576px) {
+    margin-right: 0px;
+  }
+`;
 
 interface IProductsProps {
   products: Product[] | Service[];
@@ -100,8 +119,8 @@ const Products: React.FC<IProductsProps> = ({
         />
       </Row>
       <Row>
-        <div className="mt-4 w-100 d-flex justify-content-end align-items-center">
-          <p className="mr-4">{`Zobrazuje ${showenProducts} z ${totalItems}`}</p>
+        <PaginationWrapper>
+          <P>{`Zobrazuje ${showenProducts} z ${totalItems}`}</P>
           <PaginationComponent
             size="sm"
             totalItems={totalItems}
@@ -113,7 +132,7 @@ const Products: React.FC<IProductsProps> = ({
             lastPageText="Posledná"
             defaultActivePage={selectedPage}
           />
-        </div>
+        </PaginationWrapper>
       </Row>
     </>
   );

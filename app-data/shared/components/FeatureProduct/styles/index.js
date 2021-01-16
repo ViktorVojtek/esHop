@@ -14,6 +14,7 @@ export const ImageWrap = styled.div``;
 
 export const ProductImg = styled.img`
   width: 100%;
+  transition: all 0.4s ease-out;
 `;
 
 export const EyeDetail = styled(Eye)`

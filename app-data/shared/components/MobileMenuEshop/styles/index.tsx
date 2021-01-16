@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Menu } from '@styled-icons/boxicons-regular';
 import { Home } from '@styled-icons/evaicons-solid';
+import { colors } from '../../../design';
 
 export const MenuIcon = styled(Menu)`
   color: #00aeef;
@@ -13,6 +14,12 @@ export const HomeIcon = styled(Home)`
 
 export const Wrapper = styled.div`
   padding: 2rem;
+`;
+
+export const NavLink = styled.p`
+  color: ${colors.primary};
+  font-weight: bold;
+  font-size: 1.5rem;
 `;
 
 export const H2 = styled.h2`

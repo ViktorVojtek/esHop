@@ -97,6 +97,7 @@ const OrdersList: FC<IOrders> = ({ orders }) => {
             postalCode,
             totalPrice,
             paymentMethode,
+            deliveryMethode,
             paymentStatus,
             state,
             status,
@@ -139,6 +140,9 @@ const OrdersList: FC<IOrders> = ({ orders }) => {
               </TableCell>
               <TableCell component="td" scope="row">
                 {paymentMethode}
+              </TableCell>
+              <TableCell component="td" scope="row">
+                {deliveryMethode}
               </TableCell>
               <TableCell component="td" scope="row">
                 {paymentStatusBadge(paymentStatus)}
@@ -220,6 +224,7 @@ const OrdersList: FC<IOrders> = ({ orders }) => {
               <TableCell align="left">Spolu cena</TableCell>
               <TableCell align="left">Stav</TableCell>
               <TableCell align="left">Spôsob platby</TableCell>
+              <TableCell align="left">Spôsob doručenia</TableCell>
               <TableCell align="left">Stav Platby</TableCell>
               <TableCell align="left">Objednávka</TableCell>
               <TableCell align="left">Faktúra</TableCell>

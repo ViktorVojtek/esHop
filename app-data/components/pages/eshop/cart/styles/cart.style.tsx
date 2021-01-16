@@ -77,6 +77,10 @@ export const H4 = styled.h4`
     margin-top: 1rem;
   }
 `;
+export const ErrorText = styled.p`
+  color: red;
+  margin-bottom: 4px;
+`;
 export const H5 = styled.h5`
   font-weight: 500;
 `;

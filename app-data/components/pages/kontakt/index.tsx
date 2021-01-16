@@ -90,7 +90,7 @@ const KontaktPage = () => (
     <Container>
       <Row>
         <Col md="4" className="mobile-card">
-          <Card>
+          <Card data-aos="fade-up">
             <Circle>
               <img style={{ width: '24px' }} src="/icons/call.svg" />
             </Circle>
@@ -113,7 +113,7 @@ const KontaktPage = () => (
           </Card>
         </Col>
         <Col md="4" className="mobile-card">
-          <Card>
+          <Card data-aos="fade-up">
             <Circle>
               <img style={{ width: '24px' }} src="/icons/reception.svg" />
             </Circle>
@@ -135,7 +135,7 @@ const KontaktPage = () => (
           </Card>
         </Col>
         <Col md="4">
-          <Card>
+          <Card data-aos="fade-up">
             <Circle>
               <img style={{ width: '24px' }} src="/icons/pin.svg" />
             </Circle>

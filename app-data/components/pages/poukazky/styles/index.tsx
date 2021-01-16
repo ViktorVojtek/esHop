@@ -1,11 +1,15 @@
 import styled from 'styled-components';
 import { CloseCircle } from '@styled-icons/evaicons-solid';
+import { Paper } from '@material-ui/core';
 
 export const Wrapper = styled.div`
   width: 100vw;
   margin: 0 auto;
   margin-top: 150px;
   min-height: calc(100vh - 337px);
+  @media (max-width: 768px) {
+    margin-top: 120px;
+  }
 `;
 
 export const Remove = styled(CloseCircle)`
@@ -19,12 +23,51 @@ export const Remove = styled(CloseCircle)`
   }
 `;
 
+type StyledPaperProps = {
+  imgUrl: string;
+};
+
+export const StyledPaper = styled(Paper)<StyledPaperProps>`
+  margin-bottom: 24px;
+  background-image: ${({ imgUrl }) => (imgUrl ? `url('${imgUrl}')` : '')};
+  background-size: cover;
+  background-position: center;
+`;
+
 export const P = styled.p`
   font-size: 1rem;
   font-weight: bold;
-  margin-top: 0.5rem;
+  margin-top: 0;
   margin-bottom: 0.5rem;
   width: 100%;
+`;
+export const Item = styled.div`
+  padding: 24px 16px;
+  background: rgba(0, 0, 0, 0.2);
+`;
+export const ItemTextProcedures = styled.h6`
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-align: left;
+  margin-bottom: 0;
+`;
+export const Holder = styled.div`
+  border-radius: 4px;
+  background: rgba(255, 255, 255);
+  padding-left: 12px;
+  padding-right: 12px;
+`;
+export const Price = styled.span`
+  margin: 1rem 0rem;
+  font-weight: 600;
+  font-size: 1rem;
+`;
+export const ActionPrice = styled.span`
+  color: red;
+`;
+
+export const Del = styled.del`
+  font-size: 0.9rem;
 `;
 export const Text = styled.p`
   font-size: 1rem;
@@ -46,12 +89,6 @@ export const ItemText = styled.h6`
   font-family: MuseoSans-300;
   color: #5e8796;
   font-weight: bold;
-`;
-export const ItemTextProcedures = styled.h6`
-  font-size: 1.1rem;
-  font-family: MuseoSans-300;
-  font-weight: bold;
-  text-align: left;
 `;
 
 export const H4 = styled.h4`

@@ -57,7 +57,9 @@ const MobileTable = (props: IProps) => {
         <TableCell component="th" scope="row">
           {row.orderId}
         </TableCell>
-        <TableCell>{`${formatPrice(row.totalPrice)} €`}</TableCell>
+        <TableCell style={{ whiteSpace: 'nowrap' }}>{`${formatPrice(
+          row.totalPrice
+        )} €`}</TableCell>
         <TableCell align="left">{statusBadge(row.status)}</TableCell>
       </TableRow>
       <TableRow>
@@ -69,10 +71,10 @@ const MobileTable = (props: IProps) => {
               Vytvorená: <strong>{getDate(row.created_at)}</strong>
             </P>
             <P>
-              Doručenie: <strong>{row.deliveryMethode}</strong>
+              Spôsob dopravy: <strong>{row.deliveryMethode}</strong>
             </P>
             <P>
-              Platba: <strong>{row.paymentMethode}</strong>
+              Spôsob platby: <strong>{row.paymentMethode}</strong>
             </P>
             <div style={{ display: 'flex' }}>
               <P className="mr-4">Objednávka</P>

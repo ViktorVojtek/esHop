@@ -42,6 +42,10 @@ const CartProductTableRow: FC<ICartProductTableRow> = ({
       product: { title, variants: variants },
     } = data;
 
+    const comparedVariants = variants.filter(
+      (variant: any) => variant.title === variantTitle
+    );
+
     // product variant destructed as prodVariantTitle as it is variant title populated from product variants array
     const { title: prodVariantTitle } = variants
       .filter((variant: any) => variant.title === variantTitle)

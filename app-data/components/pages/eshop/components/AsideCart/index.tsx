@@ -1,6 +1,4 @@
 import React, { FC, useContext, useEffect } from 'react';
-import Link from 'next/link';
-import { Container } from 'reactstrap';
 
 import { Context } from '../../../../../lib/state/Store';
 import AsideCartContent from './components/AsideCartContent';

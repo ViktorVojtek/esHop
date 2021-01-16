@@ -4,6 +4,9 @@ import { FilePdf } from '@styled-icons/fa-solid';
 export const Wrapper = styled.div`
   margin-top: 160px;
   min-height: calc(100vh - 317px);
+  @media (max-width: 768px) {
+    margin-top: 120px;
+  }
 `;
 
 export const P = styled.p`

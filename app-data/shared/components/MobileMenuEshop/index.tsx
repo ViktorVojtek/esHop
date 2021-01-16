@@ -4,9 +4,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Nav, NavItem, NavLink, NavbarBrand, Row, Col } from 'reactstrap';
+import { Nav, NavItem, NavbarBrand } from 'reactstrap';
 import { ILinkItem } from '../Navigation/Site/TS/Navigation.interface';
-import { MenuIcon, HomeIcon, Wrapper, Logo, H2 } from './styles';
+import { MenuIcon, Wrapper, Logo, NavLink } from './styles';
 
 const useStyles = makeStyles({
   list: {
@@ -29,12 +29,7 @@ const CustomNavbarBrand = forwardRef(({ href, children }: FWRCBrand, ref) => (
 const LinkItem: FC<ILinkItem> = ({ href, title }) => (
   <NavItem>
     <Link href={href}>
-      <NavLink
-        className="text-uppercase letter-spacing-1 nav-link-main"
-        href={href}
-      >
-        {title}
-      </NavLink>
+      <NavLink className="text-uppercase letter-spacing-1">{title}</NavLink>
     </Link>
   </NavItem>
 );
@@ -78,7 +73,7 @@ export default function TemporaryDrawer() {
           <LinkItem href="/" title="Domov" />
           <LinkItem href="/eshop" title="Obchod" />
           <LinkItem href="/darcekove-poukazky" title="Darčekové poukážky" />
-          <LinkItem href="/" title="FAQ" />
+          <LinkItem href="/kontakt" title="FAQ" />
         </Nav>
       </>
     </Wrapper>

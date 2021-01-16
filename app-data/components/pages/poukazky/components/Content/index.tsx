@@ -1,5 +1,6 @@
 import React from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
+import AnchorLink from 'react-anchor-link-smooth-scroll';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import EuroIcon from '@material-ui/icons/Euro';
@@ -110,43 +111,69 @@ export default function Content(props: ContentProps) {
     <>
       <Row>
         <Col md={3}>
-          <ButtonWithIcon onClick={() => handleChangeTab(0)}>
-            <span>
-              <EuroIcon style={{ marginRight: '6px' }} />
-              Peniaze
-            </span>
-            <ControlPointIcon />
-          </ButtonWithIcon>
+          <AnchorLink offset={() => 100} href="#content">
+            <ButtonWithIcon
+              data-aos="fade-left"
+              className="mb-2"
+              onClick={() => handleChangeTab(0)}
+            >
+              <span>
+                <EuroIcon style={{ marginRight: '6px' }} />
+                Peniaze
+              </span>
+              <ControlPointIcon />
+            </ButtonWithIcon>
+          </AnchorLink>
         </Col>
         <Col md={3}>
-          <ButtonWithIcon onClick={() => handleChangeTab(1)}>
-            <span>
-              <RoomServiceIcon style={{ marginRight: '6px' }} />
-              Procedúry
-            </span>
-            <ControlPointIcon />
-          </ButtonWithIcon>
+          <AnchorLink offset={() => 100} href="#content">
+            <ButtonWithIcon
+              data-aos="fade-left"
+              className="mb-2"
+              onClick={() => handleChangeTab(1)}
+            >
+              <span>
+                <RoomServiceIcon style={{ marginRight: '6px' }} />
+                Procedúry
+              </span>
+              <ControlPointIcon />
+            </ButtonWithIcon>
+          </AnchorLink>
         </Col>
         <Col md={3}>
-          <ButtonWithIcon onClick={() => handleChangeTab(2)}>
-            <span>
-              <AirlineSeatIndividualSuiteIcon style={{ marginRight: '6px' }} />
-              Pobyty
-            </span>
-            <ControlPointIcon />
-          </ButtonWithIcon>
+          <AnchorLink offset={() => 100} href="#content">
+            <ButtonWithIcon
+              data-aos="fade-left"
+              className="mb-2"
+              onClick={() => handleChangeTab(2)}
+            >
+              <span>
+                <AirlineSeatIndividualSuiteIcon
+                  style={{ marginRight: '6px' }}
+                />
+                Pobyty
+              </span>
+              <ControlPointIcon />
+            </ButtonWithIcon>
+          </AnchorLink>
         </Col>
         <Col md={3}>
-          <ButtonWithIcon onClick={() => handleChangeTab(3)}>
-            <span>
-              <FeaturedPlayListIcon style={{ marginRight: '6px' }} />
-              Permanentky
-            </span>
-            <ControlPointIcon />
-          </ButtonWithIcon>
+          <AnchorLink offset={() => 100} href="#content">
+            <ButtonWithIcon
+              data-aos="fade-left"
+              className="mb-2"
+              onClick={() => handleChangeTab(3)}
+            >
+              <span>
+                <FeaturedPlayListIcon style={{ marginRight: '6px' }} />
+                Permanentky
+              </span>
+              <ControlPointIcon />
+            </ButtonWithIcon>
+          </AnchorLink>
         </Col>
         <Col md={6}>
-          <StyledPaper elevation={3}>
+          <StyledPaper data-aos="fade-right" elevation={3}>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <H6>Zvolený obsah poukážky</H6>
               <H6

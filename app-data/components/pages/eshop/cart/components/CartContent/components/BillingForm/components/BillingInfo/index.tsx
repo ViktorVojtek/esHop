@@ -4,6 +4,7 @@ import {
   ValidatorForm,
   SelectValidator,
 } from 'react-material-ui-form-validator';
+import { scroller, Element } from 'react-scroll';
 import { Col, Row, Collapse } from 'reactstrap';
 import { ButtonsHolder, H4 } from '../../../../../../styles/cart.style';
 import SummaryPrice from '../../../SummaryPrice';
@@ -66,6 +67,17 @@ interface IProps {
   customer: Customer;
 }
 
+type CartSummaryItemType = {
+  isEmpty: boolean;
+  errorMessage: string;
+};
+
+export type CartSummaryType = {
+  orderSent: boolean;
+  delivery: CartSummaryItemType;
+  payment: CartSummaryItemType;
+};
+
 const BillingInfo: (props: IProps) => JSX.Element = (props) => {
   const {
     data,
@@ -80,6 +92,17 @@ const BillingInfo: (props: IProps) => JSX.Element = (props) => {
   const [isOpenAdress, setIsOpenAdress] = useState(!!data.optionalAddress);
   const [isRegisterRequest, setIsRegisterRequest] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [cartSummary, setCartSummary] = useState<CartSummaryType>({
+    orderSent: false,
+    delivery: {
+      isEmpty: true,
+      errorMessage: 'Zvoľte spôsob dopravy',
+    },
+    payment: {
+      isEmpty: true,
+      errorMessage: 'Zvoľte spôsob platby',
+    },
+  });
   const [errorMessage, setErrorMessage] = useState('');
   const classes = useStyles();
 
@@ -153,6 +176,15 @@ const BillingInfo: (props: IProps) => JSX.Element = (props) => {
     });
   };
 
+  const handleErrorPersonalData = () => {
+    scroller.scrollTo('personalData', {
+      duration: 500,
+      delay: 50,
+      smooth: true,
+      offset: -120,
+    });
+  };
+
   useEffect(() => {
     setIsOpen(!!data.companyName);
     setIsOpenAdress(!!data.optionalAddress);
@@ -162,6 +194,26 @@ const BillingInfo: (props: IProps) => JSX.Element = (props) => {
     event: React.FormEvent<HTMLFormElement>
   ) => Promise<void> = async (event) => {
     event.preventDefault();
+    if (cartSummary.delivery.isEmpty) {
+      setCartSummary({ ...cartSummary, orderSent: true });
+      scroller.scrollTo('deliveryMethod', {
+        duration: 500,
+        delay: 50,
+        smooth: true,
+        offset: -120,
+      });
+      return;
+    }
+    if (cartSummary.payment.isEmpty) {
+      setCartSummary({ ...cartSummary, orderSent: true });
+      scroller.scrollTo('paymentMethod', {
+        duration: 500,
+        delay: 50,
+        smooth: true,
+        offset: -120,
+      });
+      return;
+    }
     if (registerInfo.registerRequest) {
       try {
         const user = await registerUserMutate({
@@ -280,12 +332,18 @@ const BillingInfo: (props: IProps) => JSX.Element = (props) => {
   } = data;
 
   return (
-    <ValidatorForm onSubmit={handleSubmit} className={classes.root}>
+    <ValidatorForm
+      onSubmit={handleSubmit}
+      className={classes.root}
+      onError={handleErrorPersonalData}
+    >
       <Row>
         <Col md={6}>
           <Row>
             <Col xs={12}>
-              <H4 className="mb-4">Fakturačné údaje</H4>
+              <Element name="personalData">
+                <H4 className="mb-4">Fakturačné údaje</H4>
+              </Element>
             </Col>
             <Col md={6}>
               <TextValidator
@@ -780,7 +838,12 @@ const BillingInfo: (props: IProps) => JSX.Element = (props) => {
           <ErrorMessage message={errorMessage} open={isError} />
         </Col>
         <Col md={6}>
-          <CartSummary data={data} handleData={handleData} />
+          <CartSummary
+            data={data}
+            handleData={handleData}
+            cartSummary={cartSummary}
+            setCartSummary={setCartSummary}
+          />
         </Col>
       </Row>
       <SummaryPrice />

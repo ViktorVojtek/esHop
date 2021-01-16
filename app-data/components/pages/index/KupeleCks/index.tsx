@@ -10,7 +10,7 @@ import {
 const KupeleCks = (): JSX.Element => (
   <Container fluid>
     <Row>
-      <Wrapper>
+      <Wrapper data-aos="fade-left">
         <a href="https://kupelecks.sk/" target="_blank">
           <DesktopImage
             src="/images/index/kupelecks.png"

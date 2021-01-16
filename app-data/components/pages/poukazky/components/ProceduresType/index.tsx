@@ -55,7 +55,8 @@ const ProceduresType: FC<IProceduresType> = ({ formData, setFormData }) => {
 
   const procedury = services.map((item: Service) => {
     return (
-      item.subCategory.title === 'Procedúry' && (
+      (item.subCategory.title === 'Liečebné procedúry' ||
+        'Relaxačné procedúry') && (
         <Procedures
           key={item.title}
           service={item}
@@ -65,7 +66,7 @@ const ProceduresType: FC<IProceduresType> = ({ formData, setFormData }) => {
     );
   });
 
-  return <Row>{procedury}</Row>;
+  return <Row id="content">{procedury}</Row>;
 };
 
 export default ProceduresType;

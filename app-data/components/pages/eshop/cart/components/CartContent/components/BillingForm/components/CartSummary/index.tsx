@@ -5,6 +5,7 @@ import { H4 } from '../../../../../../styles/cart.style';
 import Delivery from './components/Delivery';
 import Payment from './components/Payment';
 import { formatPrice } from '../../../../../../../../../../shared/helpers/formatters';
+import { CartSummaryType } from '../BillingInfo';
 
 interface IData {
   firstName: string;
@@ -34,13 +35,15 @@ interface IData {
 interface IProps {
   data?: IData;
   handleData?: (data: IData) => void;
+  setCartSummary: React.Dispatch<React.SetStateAction<CartSummaryType>>;
+  cartSummary: CartSummaryType;
 }
 
 const CartSummary: (props: IProps) => JSX.Element = (props) => {
   const {
     state: { cartTotalSum },
   } = useContext(Context);
-  const { data, handleData } = props;
+  const { data, handleData, cartSummary, setCartSummary } = props;
 
   useEffect(() => {
     handleData({
@@ -51,8 +54,18 @@ const CartSummary: (props: IProps) => JSX.Element = (props) => {
 
   return (
     <>
-      <Delivery data={data} handleData={handleData} />
-      <Payment data={data} handleData={handleData} />
+      <Delivery
+        data={data}
+        handleData={handleData}
+        cartSummary={cartSummary}
+        setCartSummary={setCartSummary}
+      />
+      <Payment
+        data={data}
+        handleData={handleData}
+        cartSummary={cartSummary}
+        setCartSummary={setCartSummary}
+      />
     </>
   );
 };

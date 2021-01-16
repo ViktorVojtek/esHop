@@ -56,6 +56,7 @@ const Reducer = (state: IState, action: IAction) => {
     case 'REMOVE_FROM_CART':
       if (state.cart.length > 0) {
         newCart = [...state.cart];
+        console.log(action.payload);
 
         for (let i: number = 0; i < newCart.length; i += 1) {
           if (
@@ -85,6 +86,9 @@ const Reducer = (state: IState, action: IAction) => {
         cart: newCart,
       };
     case 'SET_CART':
+      if (storage) {
+        storage.setItem('cart', JSON.stringify(action.payload));
+      }
       return {
         ...state,
         cart: action.payload,
@@ -232,9 +236,16 @@ export const withSetCart = <P extends object>(
   });
   if (data) {
     const { productsByIds } = data;
-    cart.forEach((item) => {
+    cart.forEach((item, i) => {
       productsByIds.map((e) => {
         if (item.id === e._id) {
+          const comparedVariants = e.variants.filter(
+            (variant: any) => variant.title === item.variant.title
+          );
+          console.log(i);
+          if (comparedVariants.length === 0) {
+            cart.splice(i, 1);
+          }
           e.variants.map((variant) => {
             if (item.variant.title === variant.title) {
               if (item.variant.price.value !== variant.price.value) {

@@ -67,7 +67,7 @@ const PermanentType: FC<IPermanentType> = ({ formData, setFormData }) => {
     );
   });
 
-  return <Row>{procedury}</Row>;
+  return <Row id="content">{procedury}</Row>;
 };
 
 export default PermanentType;

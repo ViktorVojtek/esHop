@@ -1,15 +1,22 @@
 import React, { useState, FC, ChangeEvent } from 'react';
 import styled from 'styled-components';
-import Service from '../../../../../shared/types/Service.types';
 import { Col, InputGroup, InputGroupAddon, Input } from 'reactstrap';
-import { ItemTextProcedures, Span, P } from '../../styles/index';
 import { formatPrice } from '../../../../../shared/helpers/formatters';
 import { TextFieldButton } from '../../../../../shared/design';
 import { useSnackbar } from 'notistack';
-import { Paper } from '@material-ui/core';
 import InfoPopover from '../InfoPopover';
 import Product from '../../../../../shared/types/Product.types';
 import { VariantsSelect } from '../../../eshop/components/ProductDetail/styles/productDetail.style';
+import {
+  ActionPrice,
+  Del,
+  Holder,
+  Item,
+  ItemTextProcedures,
+  P,
+  Price,
+  StyledPaper,
+} from '../../styles';
 
 type IItem = {
   title: string;
@@ -22,26 +29,9 @@ type IPermanents = {
   addPermanent: (item: IItem) => void;
 };
 
-const StyledPaper = styled(Paper)`
-  padding: 16px;
-  margin-bottom: 24px;
-`;
-
-const Price = styled.span`
-  margin: 1rem 0rem;
-  font-weight: 600;
-  font-size: 1rem;
-`;
-const ActionPrice = styled.span`
-  color: red;
-`;
-
-const Del = styled.del`
-  font-size: 0.9rem;
-`;
-
 const Bonus = styled.p`
   color: red;
+  margin-bottom: 0;
 `;
 
 const Permanents: FC<IPermanents> = ({ permanent, addPermanent }) => {
@@ -96,9 +86,17 @@ const Permanents: FC<IPermanents> = ({ permanent, addPermanent }) => {
       md="4"
       sm="6"
       xs="12"
-      className="d-flex justify-content-center flex-column"
+      data-aos="fade-left"
+      className="d-flex justify-content-between flex-column"
     >
-      <StyledPaper elevation={3}>
+      <Holder
+        className="w-100"
+        style={{
+          marginTop: '8px',
+          paddingTop: '8px',
+          marginBottom: '16px',
+        }}
+      >
         <div className="d-flex w-100 mb-2 ">
           <ItemTextProcedures>{title}</ItemTextProcedures>
           <InfoPopover html={variants[actualVariant].description} />
@@ -106,62 +104,69 @@ const Permanents: FC<IPermanents> = ({ permanent, addPermanent }) => {
         {variants[actualVariant].bonus && (
           <Bonus>{variants[actualVariant].bonus}</Bonus>
         )}
-        <VariantsSelect
-          id="variants"
-          name="variants"
-          style={{ maxWidth: '100%', marginBottom: '12px' }}
-          onChange={(event: ChangeEvent<HTMLSelectElement>) => {
-            const idx: number = event.currentTarget.selectedIndex;
+      </Holder>
+      <StyledPaper
+        imgUrl={variants[actualVariant].images[0].path}
+        elevation={3}
+      >
+        <Item>
+          <Holder style={{ marginBottom: '16px' }}>
+            <P style={{ paddingTop: '8px' }}>
+              Cena:{' '}
+              {variants[actualVariant].discount > 0 ? (
+                <Price>
+                  <Del>{`${formatPrice(
+                    variants[actualVariant].price.value
+                  )} €`}</Del>
+                  <ActionPrice className="ml-2">
+                    {formatPrice(
+                      variants[actualVariant].price.value -
+                        (variants[actualVariant].price.value *
+                          variants[actualVariant].discount) /
+                          100
+                    )}{' '}
+                    {`€`}
+                  </ActionPrice>
+                </Price>
+              ) : (
+                <Price>
+                  {formatPrice(variants[actualVariant].price.value)} {`€`}
+                </Price>
+              )}
+            </P>
+            <P style={{ paddingBottom: '8px' }}>
+              Cena spolu:{' '}
+              <Price>
+                {formatPrice(getPrice(variants[actualVariant]) * count)} {`€`}
+              </Price>
+            </P>
+          </Holder>
+          <VariantsSelect
+            id="variants"
+            name="variants"
+            style={{ maxWidth: '100%', marginBottom: '12px' }}
+            onChange={(event: ChangeEvent<HTMLSelectElement>) => {
+              const idx: number = event.currentTarget.selectedIndex;
 
-            handleSetActiveVariant(idx);
-          }}
-        >
-          {variantOptions}
-        </VariantsSelect>
-        <InputGroup>
-          <Input
-            placeholder="Počet"
-            type="number"
-            onChange={(e) => countInput(e)}
-            min={1}
-          />
-          <InputGroupAddon addonType="prepend">
-            <TextFieldButton type="button" onClick={AddService}>
-              Pridať
-            </TextFieldButton>
-          </InputGroupAddon>
-        </InputGroup>
-        <P style={{ marginTop: '16px' }}>
-          Cena:{' '}
-          {variants[actualVariant].discount > 0 ? (
-            <Price>
-              <Del>
-                {formatPrice(variants[actualVariant].price.value)}{' '}
-                {variants[actualVariant].price.currency}
-              </Del>
-              <ActionPrice className="ml-2">
-                {formatPrice(
-                  variants[actualVariant].price.value -
-                    (variants[actualVariant].price.value *
-                      variants[actualVariant].discount) /
-                      100
-                )}{' '}
-                {variants[actualVariant].price.currency}
-              </ActionPrice>
-            </Price>
-          ) : (
-            <Price>
-              {formatPrice(variants[actualVariant].price.value)}{' '}
-              {variants[actualVariant].price.currency}
-            </Price>
-          )}
-        </P>
-        <P>
-          Cena spolu:{' '}
-          <Price>
-            {formatPrice(getPrice(variants[actualVariant]) * count)} {`€`}
-          </Price>
-        </P>
+              handleSetActiveVariant(idx);
+            }}
+          >
+            {variantOptions}
+          </VariantsSelect>
+          <InputGroup>
+            <Input
+              placeholder="Počet"
+              type="number"
+              onChange={(e) => countInput(e)}
+              min={1}
+            />
+            <InputGroupAddon addonType="prepend">
+              <TextFieldButton type="button" onClick={AddService}>
+                Pridať
+              </TextFieldButton>
+            </InputGroupAddon>
+          </InputGroup>
+        </Item>
       </StyledPaper>
     </Col>
   );

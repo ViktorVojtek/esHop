@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import Link from 'next/link';
-
+import AOS from 'aos';
 import {
   Wrapper,
   Logo,
@@ -23,6 +23,9 @@ import {
 } from '../../../components/pages/index/ContactUs/style';
 const Footer: () => JSX.Element = () => {
   useEffect(() => {
+    AOS.init({
+      duration: 1000,
+    });
     ReactGA.initialize('UA-127305873-2');
     ReactGA.pageview(window.location.pathname + window.location.search);
   }, []);

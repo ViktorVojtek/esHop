@@ -37,7 +37,7 @@ const MoneyType: FC<IMoneyType> = ({ formData, setFormData }) => {
   };
 
   return (
-    <>
+    <div id="content">
       <InputHolder style={{ marginTop: '48px' }}>
         <TextField
           onChange={handleChange}
@@ -51,7 +51,7 @@ const MoneyType: FC<IMoneyType> = ({ formData, setFormData }) => {
         />
         <TextFieldButton onClick={setData}>Pridať</TextFieldButton>
       </InputHolder>
-    </>
+    </div>
   );
 };
 

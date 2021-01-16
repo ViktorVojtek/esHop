@@ -96,8 +96,8 @@ const Orders: FC<IOrders> = ({ email, id }) => {
                 <TableCell>Číslo objednávky</TableCell>
                 <TableCell align="left">Vytvorená</TableCell>
                 <TableCell align="left">Stav</TableCell>
-                <TableCell align="left">Doručenie</TableCell>
-                <TableCell align="left">Platba</TableCell>
+                <TableCell align="left">Spôsob dopravy</TableCell>
+                <TableCell align="left">Spôsob platby</TableCell>
                 <TableCell align="left">Cena spolu</TableCell>
                 <TableCell align="left">Objednávka</TableCell>
                 <TableCell align="left">Faktúra</TableCell>

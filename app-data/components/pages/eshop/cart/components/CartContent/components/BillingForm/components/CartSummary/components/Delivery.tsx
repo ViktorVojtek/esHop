@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react';
+import { Element } from 'react-scroll';
 import { useQuery } from '@apollo/react-hooks';
 import { Context } from '../../../../../../../../../../../lib/state/Store';
 import { DELIVERY_METHODS_QUERY } from '../../../../../../../../../../../graphql/query';
@@ -9,8 +10,10 @@ import {
   FormControlLabel,
   Radio,
   RadioGroup,
+  Theme,
 } from '@material-ui/core';
-import { H4 } from '../../../../../../../styles/cart.style';
+import { ErrorText, H4 } from '../../../../../../../styles/cart.style';
+import { CartSummaryType } from '../../BillingInfo';
 
 interface IData {
   firstName: string;
@@ -40,10 +43,12 @@ interface IData {
 interface IProps {
   data?: IData;
   handleData?: (data: IData) => void;
+  setCartSummary: React.Dispatch<React.SetStateAction<CartSummaryType>>;
+  cartSummary: CartSummaryType;
 }
 
 const Delivery = (props: IProps) => {
-  const { data: orderData, handleData } = props;
+  const { data: orderData, handleData, cartSummary, setCartSummary } = props;
   const {
     state: {
       cart,
@@ -95,6 +100,13 @@ const Delivery = (props: IProps) => {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let sum = getSum();
+    setCartSummary((prevState) => ({
+      ...prevState,
+      delivery: {
+        ...prevState.delivery,
+        isEmpty: false,
+      },
+    }));
 
     const currentMethod = deliveryMethods.find((item) => {
       if (item.title === (event.target as HTMLInputElement).value) {
@@ -157,13 +169,13 @@ const Delivery = (props: IProps) => {
                     <FormControlLabel
                       value={title}
                       disabled={allowEnvelope ? false : true}
-                      control={<Radio color="primary" required />}
+                      control={<Radio color="primary" />}
                       label={title}
                     />
                   ) : (
                     <FormControlLabel
                       value={title}
-                      control={<Radio color="primary" required />}
+                      control={<Radio color="primary" />}
                       label={title}
                     />
                   )}{' '}
@@ -194,10 +206,13 @@ const Delivery = (props: IProps) => {
     );
 
   return (
-    <>
+    <Element name="deliveryMethod">
       <H4 className="mb-4">Spôsob dopravy</H4>
+      {cartSummary.delivery.isEmpty && cartSummary.orderSent && (
+        <ErrorText>{cartSummary.delivery.errorMessage}</ErrorText>
+      )}
       {deliveryMethodsEl}
-    </>
+    </Element>
   );
 };
 

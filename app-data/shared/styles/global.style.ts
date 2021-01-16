@@ -35,6 +35,7 @@ export const LinkButton = styled.a`
 `;
 
 export default createGlobalStyle`
+@import url('https://unpkg.com/aos@3.0.0-beta.6/dist/aos.css') screen;
   @font-face {
     font-family: Franchise-CE;
     src: url("/static/fonts/Franchise-CE.otf");
@@ -381,7 +382,20 @@ export default createGlobalStyle`
     }
   }
   .product-image{
+    overflow: hidden;
+    border-radius: 4px;
     position: relative;
+    &:hover{
+      img{
+        transform: scale(1.15);
+      }
+      .detail{
+        background-color: rgba(0, 0, 0,0.05);
+        svg{
+          transform: scale(1);
+        }
+      }
+    }
     .detail{
       position: absolute;
       width: 100%;
@@ -391,12 +405,7 @@ export default createGlobalStyle`
       align-items: center;
       justify-content: center;
       transition: all .4s ease-out;
-      &:hover{
-        background-color: rgba(255, 255, 255, 0.4);
-        svg{
-          transform: scale(1);
-        }
-      }
+      overflow: hidden;
     }
   }
   .navbar-toggler{

@@ -61,7 +61,7 @@ const StaysType: FC<IStaysTypeType> = ({ formData, setFormData }) => {
     );
   });
 
-  return <Row>{pobyty}</Row>;
+  return <Row id="content">{pobyty}</Row>;
 };
 
 export default StaysType;

@@ -38,6 +38,8 @@ import { formatPrice } from '../../../../../shared/helpers/formatters';
 import { ProductButton } from '../../../../../shared/design';
 import { getLinesCount } from '../../../../../shared/helpers/getLinesCount';
 import DescriptionEl from './Description';
+import ProductDetailSkeleton from './Skeleton';
+import RelatedProductSkeleton from '../../../../../shared/components/RelatedProducts/Skeleton';
 
 interface IProductDetailProps {
   product: Product;
@@ -72,9 +74,6 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
 
   if (error) {
     return <>{error.message}</>;
-  }
-  if (loading) {
-    return <Spinner color="primary" />;
   }
 
   const setRelatedProducts = (products: Product[]) => {
@@ -211,7 +210,11 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
       </Container>
       <Container>
         <RelatedTitle>Súvisiace produkty</RelatedTitle>
-        <RelatedProducts products={products} />
+        {loading ? (
+          <RelatedProductSkeleton />
+        ) : (
+          <RelatedProducts products={products} />
+        )}
       </Container>
       <ProductModal
         message="Pokračujte v nákupe alebo do pokladne."

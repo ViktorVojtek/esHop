@@ -15,6 +15,7 @@ export const ImageWrap = styled.div``;
 export const ProductImg = styled.img`
   width: 100%;
   user-select: none;
+  transition: all 0.4s ease-out;
   @media (max-width: 568px) {
     width: 80%;
     margin: 0 auto;

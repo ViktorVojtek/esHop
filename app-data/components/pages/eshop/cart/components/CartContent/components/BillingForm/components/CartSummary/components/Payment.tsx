@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { useQuery } from '@apollo/react-hooks';
+import { Element } from 'react-scroll';
 import { Context } from '../../../../../../../../../../../lib/state/Store';
 import { PAYMENT_METHODES_QUERY } from '../../../../../../../../../../../graphql/query';
 import { Col, Row, FormGroup, Input, Label } from 'reactstrap';
@@ -10,7 +11,8 @@ import {
   Radio,
   RadioGroup,
 } from '@material-ui/core';
-import { H4 } from '../../../../../../../styles/cart.style';
+import { ErrorText, H4 } from '../../../../../../../styles/cart.style';
+import { CartSummaryType } from '../../BillingInfo';
 
 interface IData {
   firstName: string;
@@ -40,15 +42,18 @@ interface IData {
 interface IProps {
   data?: IData;
   handleData?: (data: IData) => void;
+  setCartSummary: React.Dispatch<React.SetStateAction<CartSummaryType>>;
+  cartSummary: CartSummaryType;
 }
 
 export default (props: IProps) => {
-  const { data: orderData, handleData } = props;
+  const { data: orderData, handleData, cartSummary, setCartSummary } = props;
   const {
     state: { cart, giftCards, loyalityProduct, cartTotalSum, coupon },
     dispatch,
   } = useContext(Context);
   const { error, loading, data } = useQuery(PAYMENT_METHODES_QUERY);
+  console.log(cartSummary);
 
   if (error) {
     return <>{error.message}</>;
@@ -60,6 +65,13 @@ export default (props: IProps) => {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let sum: number = 0;
+    setCartSummary((prevState) => ({
+      ...prevState,
+      payment: {
+        ...prevState.delivery,
+        isEmpty: false,
+      },
+    }));
     const currentMethod = paymentMethodes.find((item) => {
       if (item.title === (event.target as HTMLInputElement).value) {
         return true;
@@ -138,7 +150,7 @@ export default (props: IProps) => {
                 >
                   <FormControlLabel
                     value={title}
-                    control={<Radio color="primary" required />}
+                    control={<Radio color="primary" />}
                     label={title}
                   />
                   <p
@@ -162,9 +174,14 @@ export default (props: IProps) => {
     );
 
   return (
-    <>
-      <H4 className="mb-4">Spôsob platby</H4>
+    <Element name="paymentMethod">
+      <H4 className="mb-4" id="paymentContainer">
+        Spôsob platby
+      </H4>
+      {cartSummary.payment.isEmpty && cartSummary.orderSent && (
+        <ErrorText>{cartSummary.payment.errorMessage}</ErrorText>
+      )}
       {paymentMethodsEl}
-    </>
+    </Element>
   );
 };
