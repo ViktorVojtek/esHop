@@ -1,27 +1,37 @@
-import React, { ChangeEvent, FC, useContext, useEffect } from 'react';
+import React, { ChangeEvent, FC, useContext } from 'react';
 import { useQuery } from '@apollo/react-hooks';
-
 import { Context } from '../../../../../../../../lib/state/Store';
 import { PRODUCT_QUERY } from '../../../../../../../../graphql/query';
-import {
-  TD,
-  Image,
-  CloseCircleIcon,
-  PlusCircleIcon,
-  MinusCircleIcon,
-} from '../../../../styles/cart.style';
+import { Image, CloseCircleIcon } from '../../../../styles/cart.style';
 import { ProductImage } from '../../../../../../../../shared/types/Product.types';
 import { formatPrice } from '../../../../../../../../shared/helpers/formatters';
 import { TextField } from '@material-ui/core';
+import {
+  StyledPaper,
+  StyledPaperMobile,
+  ImageHolder,
+  InfoHolder,
+  Count,
+  MobileImage,
+  Price,
+  PriceHolder,
+  PriceAndActions,
+  TaxText,
+  TaxPrice,
+  Title,
+  Text,
+  BottomHolder,
+  TopHolder,
+} from '../style';
 
-interface ICartProductTableRow {
+interface ICartProduct {
   id: string;
   discount: number;
   count: number;
   variantTitle: string;
   image: ProductImage;
 }
-const CartProductTableRow: FC<ICartProductTableRow> = ({
+const CartProduct: FC<ICartProduct> = ({
   id,
   discount,
   count,
@@ -105,42 +115,108 @@ const CartProductTableRow: FC<ICartProductTableRow> = ({
         : itemPrice;
 
     return (
-      <tr>
-        <TD>
-          <Image src={image.path} alt={prodVariantTitle} />
-          {title}
-        </TD>
-        <TD>{prodVariantTitle}</TD>
-        <TD>{`${formatPrice(calculatedItemPrice)} ${currency}`}</TD>
-        <TD>
-          <TextField
-            variant="outlined"
-            type="number"
-            value={count}
-            onChange={(event) => handleCount(event, id)}
-            inputProps={{
-              min: '1',
-              max: '100',
-              step: '1',
-              style: {
-                padding: '12px',
-              },
-            }}
-          />
-        </TD>
-        <TD>
-          {`${formatPrice(
-            Math.round(count * calculatedItemPrice * 100) / 100
-          )} ${currency}`}{' '}
-        </TD>
-        <TD>
-          <CloseCircleIcon onClick={() => handleRemoveAllProducts(id)} />
-        </TD>
-      </tr>
+      <>
+        <StyledPaper elevation={2}>
+          <ImageHolder>
+            <Image src={image.path} alt={prodVariantTitle} />
+          </ImageHolder>
+          <InfoHolder>
+            <div>
+              <Title>{title}</Title>
+              {title !== prodVariantTitle && (
+                <Text style={{ fontWeight: 'bold' }}>{prodVariantTitle}</Text>
+              )}
+              <Text>{`Cena za kus: ${formatPrice(
+                calculatedItemPrice
+              )} ${currency}`}</Text>
+            </div>
+          </InfoHolder>
+          <Count>
+            <TextField
+              variant="outlined"
+              label="Počet"
+              type="number"
+              value={count}
+              onChange={(event) => handleCount(event, id)}
+              inputProps={{
+                min: '1',
+                max: '100',
+                step: '1',
+                style: {
+                  padding: '12px',
+                },
+              }}
+            />
+          </Count>
+          <PriceAndActions>
+            <PriceHolder>
+              <Price>
+                {`${formatPrice(
+                  Math.round(count * calculatedItemPrice * 100) / 100
+                )} ${currency}`}{' '}
+              </Price>
+              <TaxText>Cena bez DPH (20%)</TaxText>
+              <TaxPrice>
+                {`${formatPrice(
+                  Math.round(count * (calculatedItemPrice / 1.2) * 100) / 100
+                )} ${currency}`}{' '}
+              </TaxPrice>
+            </PriceHolder>
+            <CloseCircleIcon onClick={() => handleRemoveAllProducts(id)} />
+          </PriceAndActions>
+        </StyledPaper>
+        <StyledPaperMobile elevation={2}>
+          <TopHolder>
+            <MobileImage src={image.path} alt={prodVariantTitle} />
+            <div className="ml-4">
+              <Title>{title}</Title>
+              {title !== prodVariantTitle && (
+                <Text style={{ fontWeight: 'bold' }}>{prodVariantTitle}</Text>
+              )}
+              <Text>{`Cena za kus: ${formatPrice(
+                calculatedItemPrice
+              )} ${currency}`}</Text>
+            </div>
+            <CloseCircleIcon onClick={() => handleRemoveAllProducts(id)} />
+          </TopHolder>
+          <BottomHolder>
+            <Count>
+              <TextField
+                variant="outlined"
+                label="Počet"
+                type="number"
+                value={count}
+                onChange={(event) => handleCount(event, id)}
+                inputProps={{
+                  min: '1',
+                  max: '100',
+                  step: '1',
+                  style: {
+                    padding: '12px',
+                  },
+                }}
+              />
+            </Count>
+            <PriceHolder>
+              <Price>
+                {`${formatPrice(
+                  Math.round(count * calculatedItemPrice * 100) / 100
+                )} ${currency}`}{' '}
+              </Price>
+              <TaxText>Cena bez DPH (20%)</TaxText>
+              <TaxPrice>
+                {`${formatPrice(
+                  Math.round(count * (calculatedItemPrice / 1.2) * 100) / 100
+                )} ${currency}`}{' '}
+              </TaxPrice>
+            </PriceHolder>
+          </BottomHolder>
+        </StyledPaperMobile>
+      </>
     );
   }
 
   return null;
 };
 
-export default CartProductTableRow;
+export default CartProduct;

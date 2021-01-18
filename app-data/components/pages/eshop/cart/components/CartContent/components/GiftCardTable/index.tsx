@@ -1,13 +1,26 @@
 import React, { FC, useContext } from 'react';
-import {
-  TD,
-  Circle,
-  CloseCircleIcon,
-  TDtext,
-} from '../../../../styles/cart.style';
+import { Circle, CloseCircleIcon, Image } from '../../../../styles/cart.style';
 import { Context } from '../../../../../../../../lib/state/Store';
 import { formatPrice } from '../../../../../../../../shared/helpers/formatters';
 import { ServiceData } from '../../../../../../../../shared/types/Store.types';
+import {
+  StyledPaper,
+  StyledPaperMobile,
+  ImageHolder,
+  InfoHolder,
+  MobileImage,
+  Price,
+  PriceHolder,
+  PriceAndActions,
+  TaxText,
+  TaxPrice,
+  Title,
+  Text,
+  TopHolder,
+  ServicesHolder,
+  Venovanie,
+} from '../style';
+import { getImageUrl } from '../../../../../../../../shared/helpers';
 
 type IGiftCardTableRow = {
   cardColor: string;
@@ -35,30 +48,84 @@ const GiftCardTableRow: FC<IGiftCardTableRow> = ({
   };
 
   return (
-    <tr>
-      <TD>Darčeková poukážka</TD>
-      <TD>
-        <Circle color={cardColor}></Circle>
-      </TD>
-      <TD>
-        {services.map((item, i) => {
-          return (
-            <p
-              key={i}
-              className="w-100 mb-0"
-            >{`${item.title} ${item.count}x`}</p>
-          );
-        })}
-        {priceValue > 0 && `Suma: ${formatPrice(priceValue)} €`}
-      </TD>
-      <TDtext>{text}</TDtext>
-      <TD>{`${formatPrice(totalPrice)} €`}</TD>
-      <TD>
-        <CloseCircleIcon
-          onClick={() => handleRemoveGiftCard(id)}
-        ></CloseCircleIcon>
-      </TD>
-    </tr>
+    <>
+      <StyledPaper elevation={2}>
+        <ImageHolder>
+          <Image src={getImageUrl[cardColor]} alt="poukazka" />
+        </ImageHolder>
+        <InfoHolder>
+          <div>
+            <Title>Darčeková poukážka</Title>
+            <Venovanie>{`Venovanie: ${text}`}</Venovanie>
+          </div>
+        </InfoHolder>
+        <ServicesHolder>
+          {priceValue > 0 && (
+            <Text className="w-100 mb-0">{`Peniaze - ${formatPrice(
+              priceValue
+            )} €`}</Text>
+          )}
+          {services.map((item, i) => {
+            return (
+              <Text key={i} className="w-100 mb-0">{`${item.title} ${
+                item.count
+              }x - ${formatPrice(item.count * item.price)} €`}</Text>
+            );
+          })}
+        </ServicesHolder>
+        <PriceAndActions>
+          <PriceHolder>
+            <Price>
+              {`${formatPrice(Math.round(totalPrice * 100) / 100)} €`}{' '}
+            </Price>
+            <TaxText>Cena bez DPH (20%)</TaxText>
+            <TaxPrice>
+              {`${formatPrice(Math.round((totalPrice / 1.2) * 100) / 100)} €`}{' '}
+            </TaxPrice>
+          </PriceHolder>
+          <CloseCircleIcon onClick={() => handleRemoveGiftCard(id)} />
+        </PriceAndActions>
+      </StyledPaper>
+      <StyledPaperMobile>
+        <TopHolder>
+          <div>
+            <Title>Darčeková poukážka</Title>
+            <MobileImage
+              style={{ minWidth: '120px', marginBottom: '.5rem' }}
+              src={getImageUrl[cardColor]}
+              alt="poukazka"
+            />
+          </div>
+          <CloseCircleIcon onClick={() => handleRemoveGiftCard(id)} />
+        </TopHolder>
+        <Venovanie>{`Venovanie: ${text}`}</Venovanie>
+        <ServicesHolder>
+          {priceValue > 0 && (
+            <Text className="w-100 mb-0">{`Peniaze - ${formatPrice(
+              priceValue
+            )} €`}</Text>
+          )}
+          {services.map((item, i) => {
+            return (
+              <Text key={i} className="w-100 mb-0">{`${item.title} ${
+                item.count
+              }x - ${formatPrice(item.count * item.price)} €`}</Text>
+            );
+          })}
+        </ServicesHolder>
+        <PriceAndActions>
+          <PriceHolder>
+            <Price>
+              {`${formatPrice(Math.round(totalPrice * 100) / 100)} €`}{' '}
+            </Price>
+            <TaxText>Cena bez DPH (20%)</TaxText>
+            <TaxPrice>
+              {`${formatPrice(Math.round((totalPrice / 1.2) * 100) / 100)} €`}{' '}
+            </TaxPrice>
+          </PriceHolder>
+        </PriceAndActions>
+      </StyledPaperMobile>
+    </>
   );
 };
 

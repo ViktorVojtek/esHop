@@ -53,7 +53,6 @@ export default (props: IProps) => {
     dispatch,
   } = useContext(Context);
   const { error, loading, data } = useQuery(PAYMENT_METHODES_QUERY);
-  console.log(cartSummary);
 
   if (error) {
     return <>{error.message}</>;

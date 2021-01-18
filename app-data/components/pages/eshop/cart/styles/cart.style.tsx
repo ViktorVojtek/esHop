@@ -6,6 +6,7 @@ import {
   MinusCircle,
 } from '@styled-icons/evaicons-solid';
 import { colors } from '../../../../../shared/design';
+import CloseIcon from '@material-ui/icons/Close';
 
 export const Wrapper = styled.div`
   margin-top: 150px;
@@ -26,13 +27,17 @@ export const ButtonsHolder = styled.div`
   width: 100%;
 `;
 
-export const CloseCircleIcon = styled(CloseCircle)`
-  width: 36px;
+export const CloseCircleIcon = styled(CloseIcon)`
+  min-width: 42px;
+  max-width: 42px;
   color: ${colors.primary};
   cursor: pointer;
-  transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out !important;
   &:hover {
     transform: scale(1.2);
+  }
+  @media (max-width: 768px) {
+    margin-left: auto;
   }
 `;
 export const PlusCircleIcon = styled(PlusCircle)`
@@ -99,8 +104,8 @@ export const TH = styled.th`
 export const Circle = styled.div<ICircle>`
   border-radius: 128px;
   background-color: ${({ color }) => (color ? `${color}` : 'black')};
-  width: 40px;
-  height: 40px;
+  width: 24px;
+  height: 24px;
 `;
 
 export const TR = styled.tr`
@@ -120,7 +125,7 @@ export const TDtext = styled.td`
   min-width: 180px;
 `;
 export const Image = styled.img`
-  width: 40px;
+  width: 100%;
   margin-right: 0.5rem;
 `;
 export const ButtonAddrRemove = styled.button`

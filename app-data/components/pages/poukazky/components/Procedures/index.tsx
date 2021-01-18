@@ -80,7 +80,7 @@ const Procedures: FC<IProcedures> = ({ service, addProcedure }) => {
         <ItemTextProcedures>{service.title}</ItemTextProcedures>
         <InfoPopover html={service.html} />
       </Holder>
-      <StyledPaper imgUrl={service.img.path} elevation={3}>
+      <StyledPaper elevation={3}>
         <Item>
           <Holder style={{ marginBottom: '16px' }}>
             <P style={{ paddingTop: '8px' }}>

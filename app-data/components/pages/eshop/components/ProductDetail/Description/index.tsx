@@ -62,7 +62,6 @@ const DescriptionEl = (props: DescriptionElType) => {
 
   const toggle = () => {
     if (!isOpen) {
-      console.log(descriptionElement.current);
       if (descriptionElement.current) {
         setHeight(descriptionElement.current.offsetHeight);
         setIsOpen(true);

@@ -56,7 +56,6 @@ const Reducer = (state: IState, action: IAction) => {
     case 'REMOVE_FROM_CART':
       if (state.cart.length > 0) {
         newCart = [...state.cart];
-        console.log(action.payload);
 
         for (let i: number = 0; i < newCart.length; i += 1) {
           if (
@@ -242,7 +241,6 @@ export const withSetCart = <P extends object>(
           const comparedVariants = e.variants.filter(
             (variant: any) => variant.title === item.variant.title
           );
-          console.log(i);
           if (comparedVariants.length === 0) {
             cart.splice(i, 1);
           }

@@ -51,7 +51,7 @@ const Navigation: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { state } = useContext(Context);
 
-  const { cart } = state;
+  const { cart, giftCards } = state;
   const toggle: () => void = () => setIsOpen(!isOpen);
 
   return (
@@ -89,7 +89,7 @@ const Navigation: FC = () => {
           <CartWrapper>
             <Link href="/eshop/cart">
               <a>
-                <CartIcon /> <span>{cart.length}</span>
+                <CartIcon /> <span>{cart.length + giftCards.length}</span>
               </a>
             </Link>
           </CartWrapper>

@@ -55,22 +55,18 @@ export function sortActionProducts(
   actionProducts = products.filter((product) => {
     if (product.variants) {
       if (product.variants[0].discount > 0) {
-        console.log(product.title);
         return product;
       }
     } else if (product.discount > 0) {
-      console.log(product.title);
       return product;
     }
   });
   otherProducts = products.filter((product) => {
     if (product.variants) {
       if (product.variants[0].discount === 0) {
-        console.log(product.title);
         return product;
       }
     } else if (product.discount === 0) {
-      console.log(product.title);
       return product;
     }
   });

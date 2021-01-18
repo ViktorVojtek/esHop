@@ -105,10 +105,7 @@ const Permanents: FC<IPermanents> = ({ permanent, addPermanent }) => {
           <Bonus>{variants[actualVariant].bonus}</Bonus>
         )}
       </Holder>
-      <StyledPaper
-        imgUrl={variants[actualVariant].images[0].path}
-        elevation={3}
-      >
+      <StyledPaper elevation={3}>
         <Item>
           <Holder style={{ marginBottom: '16px' }}>
             <P style={{ paddingTop: '8px' }}>

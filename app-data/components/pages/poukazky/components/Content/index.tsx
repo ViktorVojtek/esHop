@@ -112,11 +112,7 @@ export default function Content(props: ContentProps) {
       <Row>
         <Col md={3}>
           <AnchorLink offset={() => 100} href="#content">
-            <ButtonWithIcon
-              data-aos="fade-left"
-              className="mb-2"
-              onClick={() => handleChangeTab(0)}
-            >
+            <ButtonWithIcon className="mb-2" onClick={() => handleChangeTab(0)}>
               <span>
                 <EuroIcon style={{ marginRight: '6px' }} />
                 Peniaze
@@ -127,11 +123,7 @@ export default function Content(props: ContentProps) {
         </Col>
         <Col md={3}>
           <AnchorLink offset={() => 100} href="#content">
-            <ButtonWithIcon
-              data-aos="fade-left"
-              className="mb-2"
-              onClick={() => handleChangeTab(1)}
-            >
+            <ButtonWithIcon className="mb-2" onClick={() => handleChangeTab(1)}>
               <span>
                 <RoomServiceIcon style={{ marginRight: '6px' }} />
                 Procedúry
@@ -142,11 +134,7 @@ export default function Content(props: ContentProps) {
         </Col>
         <Col md={3}>
           <AnchorLink offset={() => 100} href="#content">
-            <ButtonWithIcon
-              data-aos="fade-left"
-              className="mb-2"
-              onClick={() => handleChangeTab(2)}
-            >
+            <ButtonWithIcon className="mb-2" onClick={() => handleChangeTab(2)}>
               <span>
                 <AirlineSeatIndividualSuiteIcon
                   style={{ marginRight: '6px' }}
@@ -159,11 +147,7 @@ export default function Content(props: ContentProps) {
         </Col>
         <Col md={3}>
           <AnchorLink offset={() => 100} href="#content">
-            <ButtonWithIcon
-              data-aos="fade-left"
-              className="mb-2"
-              onClick={() => handleChangeTab(3)}
-            >
+            <ButtonWithIcon className="mb-2" onClick={() => handleChangeTab(3)}>
               <span>
                 <FeaturedPlayListIcon style={{ marginRight: '6px' }} />
                 Permanentky
@@ -173,11 +157,11 @@ export default function Content(props: ContentProps) {
           </AnchorLink>
         </Col>
         <Col md={6}>
-          <StyledPaper data-aos="fade-right" elevation={3}>
+          <StyledPaper elevation={3}>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <H6>Zvolený obsah poukážky</H6>
               <H6
-                style={{ marginRight: '15px' }}
+                style={{ marginRight: '15px', whiteSpace: 'nowrap' }}
               >{`Spolu: ${totalPrice} €`}</H6>
             </div>
             <>
@@ -242,7 +226,7 @@ export default function Content(props: ContentProps) {
                     marginRight: '12px',
                   }}
                 >
-                  Obsah darčekovej poukážky je prádzny.
+                  Obsah darčekovej poukážky je prázdny.
                 </H6>
               )}
             </>

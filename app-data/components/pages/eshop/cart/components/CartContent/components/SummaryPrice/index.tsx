@@ -68,7 +68,7 @@ const SummaryPrice = (): JSX.Element => {
             <P>{formatPrice(cartTotalSum / 1.2)} €</P>
           </Holder>
           <Holder>
-            <P>DPH:</P>
+            <P>DPH (20%):</P>
             <P>{formatPrice(cartTotalSum - cartTotalSum / 1.2)} €</P>
           </Holder>
         </Col>

@@ -23,8 +23,6 @@ const PermanentType: FC<IPermanentType> = ({ formData, setFormData }) => {
     return <CustomSpinner />;
   }
 
-  console.log(data);
-
   const { products } = data;
 
   const getPrice = (items) => {

@@ -54,9 +54,10 @@ const ProceduresType: FC<IProceduresType> = ({ formData, setFormData }) => {
   };
 
   const procedury = services.map((item: Service) => {
+    console.log(item.subCategory.title);
     return (
       (item.subCategory.title === 'Liečebné procedúry' ||
-        'Relaxačné procedúry') && (
+        item.subCategory.title === 'Relaxačné procedúry') && (
         <Procedures
           key={item.title}
           service={item}

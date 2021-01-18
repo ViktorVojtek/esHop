@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { CloseCircle } from '@styled-icons/evaicons-solid';
 import { Paper } from '@material-ui/core';
+import { colors } from '../../../../shared/design';
 
 export const Wrapper = styled.div`
   width: 100vw;
@@ -22,16 +23,9 @@ export const Remove = styled(CloseCircle)`
     transform: scale(1.1);
   }
 `;
-
-type StyledPaperProps = {
-  imgUrl: string;
-};
-
-export const StyledPaper = styled(Paper)<StyledPaperProps>`
+export const StyledPaper = styled(Paper)`
   margin-bottom: 24px;
-  background-image: ${({ imgUrl }) => (imgUrl ? `url('${imgUrl}')` : '')};
-  background-size: cover;
-  background-position: center;
+  border-left: 6px solid ${colors.primary};
 `;
 
 export const P = styled.p`
@@ -43,7 +37,6 @@ export const P = styled.p`
 `;
 export const Item = styled.div`
   padding: 24px 16px;
-  background: rgba(0, 0, 0, 0.2);
 `;
 export const ItemTextProcedures = styled.h6`
   font-size: 1.25rem;
