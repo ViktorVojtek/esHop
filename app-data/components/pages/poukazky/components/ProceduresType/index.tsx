@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/react-hooks';
 import React, { FC } from 'react';
+import { Element } from 'react-scroll';
 import { Row } from 'reactstrap';
 import { SERVICES_QUERY } from '../../../../../graphql/query';
 import CustomSpinner from '../../../../../shared/components/CustomSpinner/CustomerSpinner';
@@ -54,7 +55,6 @@ const ProceduresType: FC<IProceduresType> = ({ formData, setFormData }) => {
   };
 
   const procedury = services.map((item: Service) => {
-    console.log(item.subCategory.title);
     return (
       (item.subCategory.title === 'Liečebné procedúry' ||
         item.subCategory.title === 'Relaxačné procedúry') && (
@@ -67,7 +67,11 @@ const ProceduresType: FC<IProceduresType> = ({ formData, setFormData }) => {
     );
   });
 
-  return <Row id="content">{procedury}</Row>;
+  return (
+    <Element name="content">
+      <Row id="content">{procedury}</Row>
+    </Element>
+  );
 };
 
 export default ProceduresType;

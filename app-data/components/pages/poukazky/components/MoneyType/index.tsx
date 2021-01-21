@@ -1,4 +1,5 @@
 import React, { useState, FC, ChangeEvent } from 'react';
+import { Element } from 'react-scroll';
 import { H3, H5, InputHolder } from '../../styles/index';
 import { InputAdornment, TextField } from '@material-ui/core';
 import { TextFieldButton } from '../../../../../shared/design';
@@ -37,7 +38,7 @@ const MoneyType: FC<IMoneyType> = ({ formData, setFormData }) => {
   };
 
   return (
-    <div id="content">
+    <Element name="content">
       <InputHolder style={{ marginTop: '48px' }}>
         <TextField
           onChange={handleChange}
@@ -51,7 +52,7 @@ const MoneyType: FC<IMoneyType> = ({ formData, setFormData }) => {
         />
         <TextFieldButton onClick={setData}>Pridať</TextFieldButton>
       </InputHolder>
-    </div>
+    </Element>
   );
 };
 

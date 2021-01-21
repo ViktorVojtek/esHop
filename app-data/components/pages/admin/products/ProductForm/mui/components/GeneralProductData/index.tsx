@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import CategorySelector from '../CategorySelector';
 import SubcategorySelector from '../SubCategorySelector';
+import { Button } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -22,9 +23,11 @@ const useStyles = makeStyles((theme: Theme) =>
 interface IProps {
   productData: any;
   setProductData: any;
+  update?: boolean;
+  handleCreateProduct?: () => Promise<void>;
 }
 export default (props: IProps): JSX.Element => {
-  const { productData, setProductData } = props;
+  const { productData, setProductData, update, handleCreateProduct } = props;
   const classes = useStyles();
 
   // Component did mount
@@ -36,10 +39,28 @@ export default (props: IProps): JSX.Element => {
   return (
     <Paper className={classes.paperBlock}>
       <Grid container>
-        <Grid item xs={6}>
-          <Typography variant="h6" component="h3">
-            Základné vlastnosti produktu
-          </Typography>
+        <Grid item xs={12}>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              width: '100%',
+            }}
+          >
+            <Typography variant="h6" component="h3">
+              Základné vlastnosti produktu
+            </Typography>
+            {update && (
+              <Button
+                color="primary"
+                variant="contained"
+                type="button"
+                onClick={handleCreateProduct}
+              >
+                Upraviť
+              </Button>
+            )}
+          </div>
           <FormControl margin="normal">
             <TextField
               id="title"
@@ -73,18 +94,20 @@ export default (props: IProps): JSX.Element => {
               label="Veľkosť pre poštový list"
             />
           </FormControl>
-          <CategorySelector
-            productData={productData}
-            setProductData={setProductData}
-          />
-          {productData.category.id ? (
-            <SubcategorySelector
+          <Grid item xs={6}>
+            <CategorySelector
               productData={productData}
               setProductData={setProductData}
             />
-          ) : (
-            <div />
-          )}
+            {productData.category.id ? (
+              <SubcategorySelector
+                productData={productData}
+                setProductData={setProductData}
+              />
+            ) : (
+              <div />
+            )}
+          </Grid>
         </Grid>
       </Grid>
     </Paper>

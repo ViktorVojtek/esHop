@@ -22,14 +22,24 @@ import AddIcon from '@material-ui/icons/Add';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import Carousel from '@brainhubeu/react-carousel';
 import ImagePreview from './components/ImagePreview';
-import { EditorState, convertToRaw } from 'draft-js';
+import VariantItemCard from './components/VariantCardItem';
+import {
+  EditorState,
+  convertToRaw,
+  ContentState,
+  convertFromHTML,
+} from 'draft-js';
 //import { Editor } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
 import {
   ProductImage,
   ProductPrice,
 } from '../../../../../../../../shared/types/Product.types';
-import { Button } from '@material-ui/core';
+import { Button, InputLabel, MenuItem, Select } from '@material-ui/core';
+import { useSnackbar } from 'notistack';
+import { useMutation } from '@apollo/react-hooks';
+import { UPDATE_PRODUCT_MUTATION } from '../../../../../../../../graphql/mutation';
+import { PRODUCTS_QUERY } from '../../../../../../../../graphql/query';
 
 type ProductVariant = {
   description?: string;
@@ -48,7 +58,7 @@ const Editor = dynamic(
   { ssr: false }
 );
 
-const VariantProductData = (props) => {
+const UpdateVariantProductData = (props) => {
   const initialVariantData = {
     title: '',
     description: '',
@@ -58,18 +68,150 @@ const VariantProductData = (props) => {
     price: { value: 0, currency: '€' },
     productCode: '',
   };
-  const { productData, setProductData } = props;
+  const { productData, setProductData, update } = props;
+  const { variants } = productData;
+  const [updateActual, setUpdateActual] = useState<boolean>(true);
   const classes = useStyles();
+  const { enqueueSnackbar } = useSnackbar();
+  const [updateProduct] = useMutation(UPDATE_PRODUCT_MUTATION, {
+    refetchQueries: [{ query: PRODUCTS_QUERY }],
+  });
+  const [activeVariant, setActiveVariant] = useState<number>(0);
   const [variantData, setVariantData] = useState<ProductVariant>(
-    initialVariantData
+    variants[activeVariant]
+      ? {
+          title: variants[activeVariant].title
+            ? variants[activeVariant].title
+            : '',
+          description: variants[activeVariant].description
+            ? variants[activeVariant].description
+            : '',
+          inStock: variants[activeVariant].inStock
+            ? variants[activeVariant].inStock
+            : 0,
+          images: variants[activeVariant].images
+            ? variants[activeVariant].images
+            : [],
+          discount: variants[activeVariant].discount
+            ? variants[activeVariant].discount
+            : 0,
+          price: variants[activeVariant].price.value
+            ? { value: variants[activeVariant].price.value, currency: '€' }
+            : { value: 0, currency: '€' },
+          productCode: variants[activeVariant].productCode
+            ? variants[activeVariant].productCode
+            : '',
+        }
+      : initialVariantData
   );
-  const [editorState, setEditorState] = useState(EditorState.createEmpty());
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState(variantData.images);
+  const oldDesc = variants[activeVariant]
+    ? variants[activeVariant].description
+    : '';
+  const blocksFromHtml = convertFromHTML(oldDesc);
+  const [editorState, setEditorState] = useState(
+    variants[activeVariant] &&
+      variants[activeVariant].description &&
+      updateActual
+      ? EditorState.createWithContent(
+          ContentState.createFromBlockArray(
+            blocksFromHtml.contentBlocks,
+            blocksFromHtml.entityMap
+          )
+        )
+      : EditorState.createEmpty()
+  );
   //const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
   useEffect(() => {
     return () => {};
   }, []);
+
+  const handleCreateProduct = async () => {
+    try {
+      const {
+        _id,
+        dateCreated,
+        dateModified,
+        modifiedByUserId,
+        ...restData
+      } = productData as any;
+      let dataToUpdate = {};
+      if (updateActual) {
+        console.log('som tu');
+        restData.variants[activeVariant] = variantData;
+        dataToUpdate = restData;
+      }
+      if (!updateActual) {
+        console.log('druhy update');
+        dataToUpdate = {
+          ...restData,
+          variants: [...variants, variantData],
+        };
+      }
+
+      await updateProduct({
+        variables: { _id, productInput: dataToUpdate },
+      });
+      enqueueSnackbar('Produkt bol úspešne upravený', {
+        variant: 'success',
+      });
+      setProductData({ ...dataToUpdate, _id });
+    } catch (err) {
+      enqueueSnackbar('Nastala chyba', {
+        variant: 'error',
+      });
+      console.log(err.message);
+    }
+  };
+
+  const handleRemoveVariant = async (idx: number) => {
+    try {
+      const {
+        _id,
+        dateCreated,
+        dateModified,
+        modifiedByUserId,
+        ...restData
+      } = productData as any;
+      const dataToUpdate = {
+        ...restData,
+        variants: [
+          ...restData.variants.slice(0, idx),
+          ...restData.variants.slice(idx + 1),
+        ],
+      };
+      console.log(dataToUpdate);
+      await updateProduct({
+        variables: { _id, productInput: dataToUpdate },
+      });
+      enqueueSnackbar('Produkt bol úspešne upravený', {
+        variant: 'success',
+      });
+      setProductData({ ...dataToUpdate, _id });
+      setActiveVariant(0);
+    } catch (err) {
+      enqueueSnackbar('Nastala chyba', {
+        variant: 'error',
+      });
+      console.log(err.message);
+    }
+  };
+
+  const handleSetActiveVariant = (value: number) => {
+    setActiveVariant(value);
+    setVariantData(variants[value]);
+    setImages(variants[value].images);
+    const blocksFromHtml = convertFromHTML(variants[value].description);
+    setEditorState(
+      EditorState.createWithContent(
+        ContentState.createFromBlockArray(
+          blocksFromHtml.contentBlocks,
+          blocksFromHtml.entityMap
+        )
+      )
+    );
+  };
 
   const onEditorStateChange = (state: EditorState) => {
     let description = draftToHtml(convertToRaw(state.getCurrentContent()));
@@ -143,21 +285,21 @@ const VariantProductData = (props) => {
     });
   };
 
-  const handleAddVariantToProd: () => void = () => {
-    setProductData({
-      ...productData,
-      variants: [...productData.variants, variantData],
-    });
+  const handleChangeVariant = (
+    event: React.ChangeEvent<{ value: unknown }>
+  ) => {
+    handleSetActiveVariant(event.target.value as number);
   };
 
-  const handleRemoveVariant: (idx: number) => void = (idx) => {
-    setProductData({
-      ...productData,
-      variants: [
-        ...productData.variants.slice(0, idx),
-        ...productData.variants.slice(idx + 1),
-      ],
-    });
+  const handleUpdateVariant = () => {
+    setUpdateActual(true);
+    handleSetActiveVariant(0);
+  };
+  const handleCreateNewVariant = () => {
+    setUpdateActual(false);
+    setVariantData(initialVariantData);
+    setEditorState(EditorState.createEmpty());
+    setImages([]);
   };
 
   const disabled: boolean = checkVariantAddBtnDisabled(variantData);
@@ -165,6 +307,54 @@ const VariantProductData = (props) => {
   return (
     <>
       <Paper className={classes.paperBlock}>
+        <div>
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Typography variant="h6" component="h3">
+              Variant produktu
+            </Typography>
+            <div style={{ display: 'flex' }}>
+              <Button
+                variant="contained"
+                color="primary"
+                className={classes.button}
+                onClick={handleUpdateVariant}
+              >
+                Upraviť aktuálny
+              </Button>
+              <Button
+                variant="contained"
+                color="primary"
+                className={classes.button}
+                onClick={handleCreateNewVariant}
+              >
+                Vytvoriť nový
+              </Button>
+            </div>
+          </div>
+          {updateActual && (
+            <FormControl
+              variant="outlined"
+              className={`${classes.formControl}`}
+            >
+              <InputLabel id="variant-select-label">Zvoľte variant</InputLabel>
+              <Select
+                labelId="variant-select-label"
+                id="variant-select"
+                value={activeVariant}
+                onChange={handleChangeVariant}
+                label="Zvoľte variant"
+              >
+                {variants.map((variant: any, index: number) => {
+                  return (
+                    <MenuItem key={index} value={index}>
+                      {variant.title}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </FormControl>
+          )}
+        </div>
         <FormControl margin="normal">
           <TextField
             label="Názov variantu"
@@ -343,37 +533,30 @@ const VariantProductData = (props) => {
             <Typography align="center">Náhľad obrázku</Typography>
           </Paper>
         )}
-        <Box>
-          <Typography align="right">
-            <Tooltip title="Add new variant">
-              <span>
-                <Fab
-                  color="primary"
-                  aria-label="add"
-                  onClick={handleAddVariantToProd}
-                  disabled={disabled}
-                >
-                  <AddIcon />
-                </Fab>
-              </span>
-            </Tooltip>
-          </Typography>
-        </Box>
+        <Button
+          onClick={handleCreateProduct}
+          color="primary"
+          variant="contained"
+          className={classes.right}
+        >
+          {updateActual ? 'Upraviť' : 'Vytvoriť'}
+        </Button>
       </Paper>
       {''}
-      {productData.variants && productData.variants.length > 0 && (
+      {productData.variants && productData.variants.length > 0 && !update && (
         <>
           <Typography variant="h5" component="h3">
             Varianty produktu
           </Typography>
           <Grid container>
             {productData.variants.map((item: any, i: number) => {
-              console.log(item);
               return (
                 <Grid item md={3} xs={12} key={i}>
                   <DetailWrapper elevation={2}>
                     <ImageTitleWrapper>
-                      <DetailImage src={images[0].base64} />
+                      <DetailImage
+                        src={item.images[0].base64 || item.images[0].path}
+                      />
                       <div style={{ marginLeft: '1rem' }}>
                         <DetailTitle>{item.title}</DetailTitle>
                         <DetailText>{`Kód produktu: ${item.productCode}`}</DetailText>
@@ -444,4 +627,4 @@ function bytesToSize(bytes: number): string {
   return `${Math.round(bytes / 1024 ** c)} ${sizes[c]}`;
 }
 
-export default VariantProductData;
+export default UpdateVariantProductData;

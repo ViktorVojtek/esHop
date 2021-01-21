@@ -18,6 +18,8 @@ import {
   CREATE_PRODUCT_MUTATION,
   UPDATE_PRODUCT_MUTATION,
 } from '../../../../../../graphql/mutation';
+import { useSnackbar } from 'notistack';
+import UpdateVariantProductData from './components/UpdateVariantProductData';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -60,6 +62,7 @@ interface IProductForm {
 }
 const ProductStepper = ({ update, updateProductData }: IProductForm) => {
   const classes = useStyles();
+  const { enqueueSnackbar } = useSnackbar();
   const [activeStep, setActiveStep] = useState(0);
   const [productData, setProductData] = useState(initialProductData);
   const [backdropOpen, toggleBackdrop] = useState(false);
@@ -76,7 +79,7 @@ const ProductStepper = ({ update, updateProductData }: IProductForm) => {
     }
   }, [updateProductData]);
 
-  const steps = getSteps();
+  const steps = update ? getUpdateSteps() : getSteps();
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -95,8 +98,6 @@ const ProductStepper = ({ update, updateProductData }: IProductForm) => {
 
   const handleCreateProduct = async () => {
     try {
-      toggleBackdrop(true);
-
       if (updateProductData) {
         const {
           _id,
@@ -106,19 +107,23 @@ const ProductStepper = ({ update, updateProductData }: IProductForm) => {
           ...restData
         } = productData as any;
 
-        console.log(restData);
-
         await updateProduct({
           variables: { _id, productInput: restData },
         });
+        enqueueSnackbar('Produkt bol úspešne upravený', {
+          variant: 'success',
+        });
       } else {
+        toggleBackdrop(true);
         await createProduct({ variables: { productInput: productData } });
+        setProductData(initialProductData);
+        toggleBackdrop(false);
+        setActiveStep(0);
       }
-
-      setProductData(initialProductData);
-      toggleBackdrop(false);
-      setActiveStep(0);
     } catch (err) {
+      enqueueSnackbar('Nastala chyba', {
+        variant: 'error',
+      });
       console.log(err.message);
     }
   };
@@ -126,7 +131,8 @@ const ProductStepper = ({ update, updateProductData }: IProductForm) => {
   const activeStepContent = getStepContent(
     activeStep,
     productData,
-    setProductData
+    setProductData,
+    update
   );
 
   const disabled: boolean = checkStepBtnDisabled(activeStep, productData);
@@ -136,58 +142,77 @@ const ProductStepper = ({ update, updateProductData }: IProductForm) => {
       <Backdrop open={backdropOpen}>
         <CircularProgress color="primary" />
       </Backdrop>
-      <div className={classes.root}>
-        <Stepper activeStep={activeStep} alternativeLabel>
-          {steps.map((label) => (
-            <Step key={label}>
-              <StepLabel>{label}</StepLabel>
-            </Step>
-          ))}
-        </Stepper>
-        <div>
-          {activeStep === steps.length ? (
-            <div>
-              <Typography className={classes.instructions}>
-                Produkt bol vytvorený.
-              </Typography>
-              <Button onClick={handleReset}>Reset</Button>
-            </div>
-          ) : (
-            <div>
-              <div className={classes.stepContent}>
-                <div>{activeStepContent}</div>
-              </div>
+      {!update ? (
+        <div className={classes.root}>
+          <Stepper activeStep={activeStep} alternativeLabel>
+            {steps.map((label) => (
+              <Step key={label}>
+                <StepLabel>{label}</StepLabel>
+              </Step>
+            ))}
+          </Stepper>
+          <div>
+            {activeStep === steps.length ? (
               <div>
-                <Button
-                  disabled={activeStep === 0}
-                  onClick={handleBack}
-                  className={classes.backButton}
-                >
-                  <Typography>Späť</Typography>
-                </Button>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={() => {
-                    if (activeStep === steps.length - 1) {
-                      handleCreateProduct();
-                    } else {
-                      handleNext();
-                    }
-                  }}
-                  disabled={disabled}
-                >
-                  <Typography>
-                    {activeStep === steps.length - 1
-                      ? 'Vytvoriť'
-                      : 'Pokračovať'}
-                  </Typography>
-                </Button>
+                <Typography className={classes.instructions}>
+                  Produkt bol vytvorený.
+                </Typography>
+                <Button onClick={handleReset}>Reset</Button>
               </div>
-            </div>
-          )}
+            ) : (
+              <div>
+                <div className={classes.stepContent}>
+                  <div>{activeStepContent}</div>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                  <Button
+                    disabled={activeStep === 0}
+                    onClick={handleBack}
+                    className={classes.backButton}
+                  >
+                    <Typography>Späť</Typography>
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => {
+                      if (activeStep === steps.length - 1) {
+                        handleCreateProduct();
+                      } else {
+                        handleNext();
+                      }
+                    }}
+                    disabled={disabled}
+                  >
+                    <Typography>
+                      {activeStep === steps.length - 1
+                        ? 'Vytvoriť'
+                        : 'Pokračovať'}
+                    </Typography>
+                  </Button>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
-      </div>
+      ) : (
+        <>
+          {productData.variants.length > 0 && (
+            <>
+              <GeneralProductData
+                productData={productData}
+                setProductData={setProductData}
+                update={update}
+                handleCreateProduct={handleCreateProduct}
+              />
+              <UpdateVariantProductData
+                productData={productData}
+                setProductData={setProductData}
+              />
+            </>
+          )}
+        </>
+      )}
     </>
   );
 };
@@ -221,12 +246,26 @@ function getSteps(): string[] {
     'Kontrola produktu',
   ];
 }
-function getStepContent(stepIndex: number, data: any, handler: any) {
+function getUpdateSteps(): string[] {
+  return ['Základné vlastnosti produktu', 'Úprava variantov produktu'];
+}
+function getStepContent(
+  stepIndex: number,
+  data: any,
+  handler: any,
+  update: boolean
+) {
   switch (stepIndex) {
     case 0:
       return <GeneralProductData productData={data} setProductData={handler} />;
     case 1:
-      return <VariantProductData productData={data} setProductData={handler} />;
+      return (
+        <VariantProductData
+          productData={data}
+          setProductData={handler}
+          update={update}
+        />
+      );
     case 2:
       return <ProductResult productData={data} setProductData={handler} />;
     default:

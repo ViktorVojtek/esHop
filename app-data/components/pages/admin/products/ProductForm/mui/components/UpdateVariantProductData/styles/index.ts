@@ -21,6 +21,10 @@ export const useStyles = makeStyles((theme: Theme) =>
         background: 'red',
       },
     },
+    right: {
+      marginLeft: 'auto',
+      display: 'block',
+    },
     select: {
       marginTop: '.5rem',
     },

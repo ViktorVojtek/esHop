@@ -68,7 +68,7 @@ const ProductUI: React.FC<IProductUI> = ({
         <div>
           <ImageWrap>
             {variants[0].images.length > 0 ? (
-              <Link href={{ pathname: '/eshop/product', query: { id: _id } }}>
+              <Link href={{ pathname: `/eshop/product/${title}` }}>
                 <a>
                   <div className="product-image">
                     <ProductImg
@@ -111,7 +111,7 @@ const ProductUI: React.FC<IProductUI> = ({
           </ProductBody>
         </div>
         {variants.length > 1 ? (
-          <Link href={{ pathname: '/eshop/product', query: { id: _id } }}>
+          <Link href={{ pathname: `/eshop/product/${title}` }}>
             <ProductButton>Vložiť do košíka</ProductButton>
           </Link>
         ) : (

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-scroll';
 import AnchorLink from 'react-anchor-link-smooth-scroll';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
@@ -111,7 +112,7 @@ export default function Content(props: ContentProps) {
     <>
       <Row>
         <Col md={3}>
-          <AnchorLink offset={() => 100} href="#content">
+          <Link to="content" smooth={true} offset={-100} duration={500}>
             <ButtonWithIcon className="mb-2" onClick={() => handleChangeTab(0)}>
               <span>
                 <EuroIcon style={{ marginRight: '6px' }} />
@@ -119,10 +120,10 @@ export default function Content(props: ContentProps) {
               </span>
               <ControlPointIcon />
             </ButtonWithIcon>
-          </AnchorLink>
+          </Link>
         </Col>
         <Col md={3}>
-          <AnchorLink offset={() => 100} href="#content">
+          <Link to="content" smooth={true} offset={-100} duration={500}>
             <ButtonWithIcon className="mb-2" onClick={() => handleChangeTab(1)}>
               <span>
                 <RoomServiceIcon style={{ marginRight: '6px' }} />
@@ -130,10 +131,10 @@ export default function Content(props: ContentProps) {
               </span>
               <ControlPointIcon />
             </ButtonWithIcon>
-          </AnchorLink>
+          </Link>
         </Col>
         <Col md={3}>
-          <AnchorLink offset={() => 100} href="#content">
+          <Link to="content" smooth={true} offset={-100} duration={500}>
             <ButtonWithIcon className="mb-2" onClick={() => handleChangeTab(2)}>
               <span>
                 <AirlineSeatIndividualSuiteIcon
@@ -143,10 +144,10 @@ export default function Content(props: ContentProps) {
               </span>
               <ControlPointIcon />
             </ButtonWithIcon>
-          </AnchorLink>
+          </Link>
         </Col>
         <Col md={3}>
-          <AnchorLink offset={() => 100} href="#content">
+          <Link to="content" smooth={true} offset={-100} duration={500}>
             <ButtonWithIcon className="mb-2" onClick={() => handleChangeTab(3)}>
               <span>
                 <FeaturedPlayListIcon style={{ marginRight: '6px' }} />
@@ -154,7 +155,7 @@ export default function Content(props: ContentProps) {
               </span>
               <ControlPointIcon />
             </ButtonWithIcon>
-          </AnchorLink>
+          </Link>
         </Col>
         <Col md={6}>
           <StyledPaper elevation={3}>

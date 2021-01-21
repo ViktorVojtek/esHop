@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/react-hooks';
+import { Element } from 'react-scroll';
 import React, { FC } from 'react';
 import { Row } from 'reactstrap';
 import { PRODUCTS_QUERY } from '../../../../../graphql/query';
@@ -65,7 +66,11 @@ const PermanentType: FC<IPermanentType> = ({ formData, setFormData }) => {
     );
   });
 
-  return <Row id="content">{procedury}</Row>;
+  return (
+    <Element name="content">
+      <Row>{procedury}</Row>
+    </Element>
+  );
 };
 
 export default PermanentType;

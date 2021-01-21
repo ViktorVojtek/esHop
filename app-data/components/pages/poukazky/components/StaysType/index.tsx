@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/react-hooks';
 import React, { FC } from 'react';
+import { Element } from 'react-scroll';
 import { Row } from 'reactstrap';
 import { SERVICES_QUERY } from '../../../../../graphql/query';
 import CustomSpinner from '../../../../../shared/components/CustomSpinner/CustomerSpinner';
@@ -61,7 +62,11 @@ const StaysType: FC<IStaysTypeType> = ({ formData, setFormData }) => {
     );
   });
 
-  return <Row id="content">{pobyty}</Row>;
+  return (
+    <Element name="content">
+      <Row id="content">{pobyty}</Row>
+    </Element>
+  );
 };
 
 export default StaysType;
