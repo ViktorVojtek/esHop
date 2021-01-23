@@ -32,6 +32,7 @@ type Service = {
   subCategory: ServiceSubCategory;
   title: string;
   video?: string;
+  slug: string;
 };
 
 export default Service;

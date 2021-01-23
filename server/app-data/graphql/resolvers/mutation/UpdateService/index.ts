@@ -3,25 +3,12 @@ import Service, { IService } from '../../../../db/models/Service';
 import { storeFile } from '../../utils';
 import ModError from '../../utils/error';
 
-export default async (
+const updateService: (
   root: any,
-  args: {
-    _id: string;
-    serviceInput: {
-      category: object;
-      html: string;
-      img: object;
-      price: number;
-      subCategory: object;
-      title: string;
-      video: string;
-    };
-  },
+  args: any,
   ctx: any
-): Promise<IService> => {
+) => Promise<IService> = async (root, { _id, serviceInput }, ctx) => {
   try {
-    const { _id, serviceInput } = args;
-
     const serviceExist: IService = await Service.findOne({
       _id: mongoose.Types.ObjectId(_id),
     });
@@ -53,6 +40,7 @@ export default async (
 
       serviceData.img = imageData;
     }
+    console.log(serviceData);
 
     const updatedService = await Service.findOneAndUpdate(
       {
@@ -68,6 +56,7 @@ export default async (
           subCategory: serviceData.subCategory,
           title: serviceData.title,
           video: serviceData.video,
+          slug: serviceData.slug,
         },
       }
     );
@@ -79,3 +68,5 @@ export default async (
     throw new Error(err.message);
   }
 };
+
+export default updateService;

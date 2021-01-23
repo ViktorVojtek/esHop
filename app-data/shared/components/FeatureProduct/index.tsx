@@ -32,7 +32,7 @@ import { RibbonHolder } from '../Ribbon/RibbonHolder';
 import { ProductButton } from '../../design';
 
 const FeatureProduct: FC<IProductUI> = ({
-  product: { _id, variants, subCategory, title },
+  product: { _id, variants, subCategory, title, slug },
   addProduct,
 }) => (
   <Col lg="3" sm="6" xs="12" className="mb-4" key={_id}>
@@ -40,7 +40,7 @@ const FeatureProduct: FC<IProductUI> = ({
       <div>
         <ImageWrap>
           {variants[0].images.length > 0 ? (
-            <Link href={{ pathname: '/eshop/product', query: { id: _id } }}>
+            <Link href={{ pathname: `/eshop/produkt/${slug}` }}>
               <a>
                 <div className="product-image">
                   <ProductImg src={variants[0].images[0].path} alt={title} />
@@ -79,7 +79,7 @@ const FeatureProduct: FC<IProductUI> = ({
           </PriceHolder>
         </ProductBody>
       </div>
-      <Link href={{ pathname: '/eshop/product', query: { id: _id } }}>
+      <Link href={{ pathname: `/eshop/produkt/${slug}` }}>
         <ProductButton>Ihneď kúpiť</ProductButton>
       </Link>
       <RibbonHolder>

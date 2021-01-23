@@ -9,6 +9,7 @@ export interface IService extends Document {
   subCategory: object;
   video: string;
   title: string;
+  slug: string;
 }
 
 const ServiceSchema = new mongoose.Schema({
@@ -20,6 +21,7 @@ const ServiceSchema = new mongoose.Schema({
   subCategory: Object,
   video: String,
   title: String,
+  slug: String,
 });
 
 export default mongoose.model<IService>('Service', ServiceSchema);

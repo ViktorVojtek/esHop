@@ -12,6 +12,7 @@ export default async (
       price: number;
       subCategory: object;
       title: string;
+      slug: string;
       video: string;
     };
   },

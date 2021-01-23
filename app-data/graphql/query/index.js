@@ -73,6 +73,78 @@ export const DISCOUNTS_QUERY = gql`
   }
 `;
 
+export const SERVICE_BY_SLUG_QUERY = gql`
+  query serviceBySlug($slug: String!) {
+    serviceBySlug(slug: $slug) {
+      _id
+      category {
+        id
+        title
+      }
+      html
+      img {
+        path
+        ext
+        imgId
+        size
+        title
+      }
+      price {
+        currency
+        value
+      }
+      subCategory {
+        id
+        title
+      }
+      video
+      title
+      slug
+      discount
+    }
+  }
+`;
+
+export const PRODUCT_BY_SLUG_QUERY = gql`
+  query productBySlug($slug: String!) {
+    productBySlug(slug: $slug) {
+      _id
+      category {
+        id
+        title
+      }
+      dateCreated
+      dateModified
+      modifiedByUserId
+      isEnvelopeSize
+      subCategory {
+        id
+        title
+      }
+      title
+      slug
+      variants {
+        default
+        description
+        discount
+        inStock
+        images {
+          path
+          size
+          title
+        }
+        price {
+          currency
+          value
+        }
+        title
+        productCode
+        bonus
+      }
+    }
+  }
+`;
+
 export const PRODUCT_QUERY = gql`
   query product($id: String!) {
     product(id: $id) {
@@ -90,6 +162,7 @@ export const PRODUCT_QUERY = gql`
         title
       }
       title
+      slug
       variants {
         default
         description
@@ -129,6 +202,7 @@ export const PRODUCTS_QUERY = gql`
         title
       }
       title
+      slug
       variants {
         default
         description
@@ -168,6 +242,7 @@ export const PRODUCTS_BY_IDS_QUERY = gql`
         title
       }
       title
+      slug
       variants {
         default
         description
@@ -246,7 +321,6 @@ export const SERVICE_QUERY = gql`
       img {
         path
         ext
-        imgId
         size
         title
       }
@@ -260,6 +334,7 @@ export const SERVICE_QUERY = gql`
       }
       video
       title
+      slug
       discount
     }
   }
@@ -291,6 +366,7 @@ export const SERVICES_QUERY = gql`
       }
       video
       title
+      slug
       discount
     }
   }

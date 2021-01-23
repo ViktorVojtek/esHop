@@ -52,7 +52,10 @@ export const Price = styled.p`
 export const ActionPrice = styled.span`
   color: ${colors.primary};
 `;
-
+export const NotInStock = styled.p`
+  color: ${colors.error};
+  font-size: 0.9rem;
+`;
 export const Del = styled.del`
   font-size: 1.25rem;
 `;

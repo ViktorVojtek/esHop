@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { Button } from 'reactstrap';
@@ -11,12 +11,22 @@ import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import TextField from '@material-ui/core/TextField';
 import toBase64 from '../../../../../shared/helpers/toBase64';
 import { bytesToSize } from '../../../../../shared/helpers/formatters';
-import { EditorState, convertToRaw } from 'draft-js';
+import {
+  EditorState,
+  convertToRaw,
+  convertFromHTML,
+  ContentState,
+} from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import CategorySelector from '../../../admin/products/ProductForm/mui/components/CategorySelector';
 import SubcategorySelector from '../../../admin/products/ProductForm/mui/components/SubCategorySelector';
-import { CREATE_SERVICE_MUTATION } from '../../../../../graphql/mutation';
+import {
+  CREATE_SERVICE_MUTATION,
+  UPDATE_SERVICE_MUTATION,
+} from '../../../../../graphql/mutation';
 import { SERVICES_QUERY } from '../../../../../graphql/query';
+import slugify from 'slugify';
+import { useSnackbar } from 'notistack';
 
 const Editor = dynamic(
   () => import('react-draft-wysiwyg').then((mod) => mod.Editor, Editor),
@@ -56,6 +66,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 type initialDataType = {
   title: string;
+  slug: string;
   category: any;
   discount: number;
   html: string;
@@ -70,6 +81,7 @@ type initialDataType = {
 
 const initialData: initialDataType = {
   title: '',
+  slug: '',
   category: {
     id: '',
     title: '',
@@ -88,20 +100,45 @@ const initialData: initialDataType = {
   video: '',
 };
 
-export default () => {
+interface IServiceForm {
+  update?: boolean;
+  updateServiceData?: any;
+}
+
+const ServiceForm = (props: IServiceForm) => {
+  const { update, updateServiceData } = props;
   const classes = useStyles();
-  const [data, populateData] = useState(initialData);
+  const { enqueueSnackbar } = useSnackbar();
+  const [data, setData] = useState(initialData);
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [createService] = useMutation(CREATE_SERVICE_MUTATION, {
     refetchQueries: [{ query: SERVICES_QUERY }],
   });
+  const [updateService] = useMutation(UPDATE_SERVICE_MUTATION, {
+    refetchQueries: [{ query: SERVICES_QUERY }],
+  });
   const htmlForm = useRef(null);
+
+  useEffect(() => {
+    if (updateServiceData) {
+      setData(updateServiceData);
+      const blocksFromHtml = convertFromHTML(updateServiceData.html);
+      setEditorState(
+        EditorState.createWithContent(
+          ContentState.createFromBlockArray(
+            blocksFromHtml.contentBlocks,
+            blocksFromHtml.entityMap
+          )
+        )
+      );
+    }
+  }, [updateServiceData]);
 
   const onEditorStateChange = (state: EditorState) => {
     let description = draftToHtml(convertToRaw(state.getCurrentContent()));
 
     setEditorState(state);
-    populateData({
+    setData({
       ...data,
       html: description,
     });
@@ -122,7 +159,7 @@ export default () => {
       base64: b64,
     };
 
-    populateData({
+    setData({
       ...data,
       img: imgData,
     });
@@ -134,11 +171,25 @@ export default () => {
     e.preventDefault();
 
     try {
-      console.log('Submitting data');
-      console.log(data);
+      if (update) {
+        const { _id, ...restData } = data as any;
 
-      await createService({ variables: { serviceInput: data } });
+        await updateService({
+          variables: { _id, serviceInput: restData },
+        });
+        enqueueSnackbar('Služba bola úspešne upravená', {
+          variant: 'success',
+        });
+      } else {
+        await createService({ variables: { serviceInput: data } });
+        enqueueSnackbar('Služba bola úspešne vytvorená', {
+          variant: 'success',
+        });
+      }
     } catch (err) {
+      enqueueSnackbar('Nastala chyba', {
+        variant: 'error',
+      });
       console.log(err);
     }
   };
@@ -149,19 +200,31 @@ export default () => {
         <TextField
           label="Názov služby"
           required
+          value={data.title}
           onChange={(
             e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
           ) => {
-            populateData({
+            setData({
               ...data,
               title: e.currentTarget.value as string,
+              slug: slugify(e.currentTarget.value as string).toLowerCase(),
             });
           }}
         />
       </FormControl>
-      <CategorySelector productData={data} setProductData={populateData} />
+      <FormControl margin="normal" fullWidth>
+        <TextField
+          id="slug"
+          label="URL produktu"
+          variant="standard"
+          value={data.slug || ''}
+          required
+          disabled
+        />
+      </FormControl>
+      <CategorySelector productData={data} setProductData={setData} />
       {data.category.id ? (
-        <SubcategorySelector productData={data} setProductData={populateData} />
+        <SubcategorySelector productData={data} setProductData={setData} />
       ) : (
         <div />
       )}
@@ -170,6 +233,13 @@ export default () => {
         wrapperClassName="description-wrapper"
         editorClassName="description-editor"
         onEditorStateChange={onEditorStateChange}
+      />
+      <p className="mb-2">Náhľad </p>
+      <textarea
+        disabled
+        value={draftToHtml(convertToRaw(editorState.getCurrentContent()))}
+        rows={4}
+        className="w-100"
       />
       <FormControl className={classes.fieldRow}>
         <input
@@ -204,8 +274,9 @@ export default () => {
               type="number"
               label="Cena"
               required
+              value={data.price.value}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                populateData({
+                setData({
                   ...data,
                   price: {
                     currency: '€',
@@ -225,8 +296,9 @@ export default () => {
               type="number"
               label="Zľava"
               required
+              value={data.discount}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                populateData({
+                setData({
                   ...data,
                   discount: +event.currentTarget.value as number,
                 });
@@ -242,8 +314,9 @@ export default () => {
         <TextField
           type="text"
           label="Video"
+          value={data.video}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            populateData({
+            setData({
               ...data,
               video: event.currentTarget.value as string,
             });
@@ -252,9 +325,11 @@ export default () => {
       </FormControl>
       <FormControl className={classes.fieldRow}>
         <Button color="primary" type="submit">
-          Vytvoriť
+          {update ? 'Upraviť' : 'Vytvoriť'}
         </Button>
       </FormControl>
     </form>
   );
 };
+
+export default ServiceForm;

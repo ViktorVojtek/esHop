@@ -62,6 +62,7 @@ const updateProduct: (
           isEnvelopeSize: productData.isEnvelopeSize,
           subCategory: productData.subCategory,
           title: productData.title,
+          slug: productData.slug,
           variants: productData.variants,
         },
       },

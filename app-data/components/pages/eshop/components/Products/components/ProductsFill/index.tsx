@@ -41,7 +41,7 @@ const ProductTitle: React.FC<IProductTitle> = ({ id, title }) => (
 );
 
 const ProductUI: React.FC<IProductUI> = ({
-  product: { _id, variants, subCategory, title, isEnvelopeSize },
+  product: { _id, variants, subCategory, title, isEnvelopeSize, slug },
   addProduct,
   toggleModal,
 }) => {
@@ -68,7 +68,7 @@ const ProductUI: React.FC<IProductUI> = ({
         <div>
           <ImageWrap>
             {variants[0].images.length > 0 ? (
-              <Link href={{ pathname: `/eshop/product/${title}` }}>
+              <Link href={{ pathname: `/eshop/produkt/${slug}` }}>
                 <a>
                   <div className="product-image">
                     <ProductImg
@@ -111,7 +111,7 @@ const ProductUI: React.FC<IProductUI> = ({
           </ProductBody>
         </div>
         {variants.length > 1 ? (
-          <Link href={{ pathname: `/eshop/product/${title}` }}>
+          <Link href={{ pathname: `/eshop/produkt/${slug}` }}>
             <ProductButton>Vložiť do košíka</ProductButton>
           </Link>
         ) : (

@@ -22,6 +22,7 @@ import { Context } from '../../../../../lib/state/Store';
 
 import { ButtonSubCategory, ButtonCategory, Buttons } from './style';
 import { DropdownToggleItem } from '../../../../../shared/design/dropdown';
+import { useRouter } from 'next/router';
 
 interface ICategory {
   title: string;
@@ -31,8 +32,8 @@ interface ICategory {
 const Category: FC<ICategory> = ({ title, id }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
+  const router = useRouter();
   const { state, dispatch } = useContext(Context);
-  const { subCategory } = state;
 
   const { loading, error, data } = useQuery(SUBCATEGORIES_QUERY, {
     variables: { categoryId: id || '' },
@@ -48,7 +49,11 @@ const Category: FC<ICategory> = ({ title, id }) => {
 
   const subCategoriesArray: any = data.subCategories;
 
-  const handleSetActiveSubCategory: (id: string) => void = (id) => {
+  const handleSetActiveSubCategory: (id: string, title: string) => void = (
+    id,
+    title
+  ) => {
+    router.push({ pathname: '/eshop', query: { subcategory: title } });
     dispatch({ type: 'SET_SUBCATEGORY', payload: id });
   };
   const handleSetActiveCategory: (id: string) => void = (id) => {
@@ -59,7 +64,7 @@ const Category: FC<ICategory> = ({ title, id }) => {
     ({ _id, signFlag, title }) => (
       <DropdownItem
         key={signFlag}
-        onClick={() => handleSetActiveSubCategory(_id)}
+        onClick={() => handleSetActiveSubCategory(_id, title)}
       >
         {title}
       </DropdownItem>

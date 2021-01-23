@@ -25,8 +25,8 @@ type IServiceUI = {
   product: Service;
 };
 
-const ProductTitle: React.FC<IProductTitle> = ({ id, title }) => (
-  <Link href={{ pathname: '/eshop/product', query: { id } }}>
+const ProductTitle: React.FC<IProductTitle> = ({ id, title, slug }) => (
+  <Link href={{ pathname: `/eshop/sluzba/${slug}` }}>
     <a>
       <StyledProductTitle>{title}</StyledProductTitle>
     </a>
@@ -34,13 +34,13 @@ const ProductTitle: React.FC<IProductTitle> = ({ id, title }) => (
 );
 
 const ServiceUI: FC<IServiceUI> = ({
-  product: { _id, subCategory, title, img, discount, price },
+  product: { _id, subCategory, title, img, discount, price, slug },
 }) => {
   return (
     <Col lg="3" sm="6" key={_id}>
       <ProductItem>
         <ImageWrap>
-          <Link href={{ pathname: '/eshop/service', query: { id: _id } }}>
+          <Link href={{ pathname: `/eshop/sluzba/${slug}` }}>
             <a>
               <div className="product-image">
                 <ProductImg src={img.path} alt={title} />
@@ -52,7 +52,7 @@ const ServiceUI: FC<IServiceUI> = ({
           </Link>
         </ImageWrap>{' '}
         <ProductBody>
-          <ProductTitle id={_id} title={title} />
+          <ProductTitle id={_id} title={title} slug={slug} />
           <StyledShortDescription>{subCategory.title}</StyledShortDescription>
           <PriceHolder>
             {discount > 0 ? (

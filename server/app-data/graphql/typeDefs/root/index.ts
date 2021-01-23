@@ -20,7 +20,9 @@ const rootTypeDefs = gql`
     productsByIds(ids: [String]): [Product]
     loyalityProducts: [LoyalityProduct]
     product(id: String!): Product
+    productBySlug(slug: String!): Product
     service(id: String!): Service
+    serviceBySlug(slug: String!): Service
     services: [Service]
     subCategories(categoryId: String): [SubCategory]
     users: [User]

@@ -10,6 +10,7 @@ export interface IProduct extends Document {
   subCategory: Object;
   isEnvelopeSize: Boolean;
   title: string;
+  slug: string;
   variants: any[];
 }
 const ProductSchema = new mongoose.Schema({
@@ -31,6 +32,7 @@ const ProductSchema = new mongoose.Schema({
     default: false,
   },
   title: String,
+  slug: String,
   variants: [Object],
 });
 

@@ -3,6 +3,7 @@ import { Button, ListGroup, ListGroupItem, Col, Row } from 'reactstrap';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { SERVICES_QUERY } from '../../../../../graphql/query';
 import { REMOVE_SERVICE_MUTATION } from '../../../../../graphql/mutation';
+import Link from 'next/link';
 
 const List: () => JSX.Element = () => {
   const { loading, error, data } = useQuery(SERVICES_QUERY);
@@ -37,6 +38,18 @@ const List: () => JSX.Element = () => {
                   <p>{title}</p>
                 </Col>
                 <Col className="d-flex justify-content-end">
+                  <Link
+                    href={{
+                      pathname: '/admin/services/update',
+                      query: { id: _id },
+                    }}
+                  >
+                    <a>
+                      <Button color="primary" style={{ marginRight: '.5rem' }}>
+                        Upraviť
+                      </Button>
+                    </a>
+                  </Link>{' '}
                   <Button
                     color="danger"
                     onClick={() => handleRemoveService(_id)}

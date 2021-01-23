@@ -37,6 +37,7 @@ const Product = gql`
     isEnvelopeSize: Boolean
     subCategory: CategoryTypeInput
     title: String
+    slug: String
     variants: [ProductVariantInput]
   }
 
@@ -82,6 +83,7 @@ const Product = gql`
     modifiedByUserId: String
     subCategory: CategoryType
     title: String
+    slug: String
     variants: [ProductVariant]
   }
 `;

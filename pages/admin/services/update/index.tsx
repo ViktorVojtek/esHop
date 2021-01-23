@@ -3,19 +3,19 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/react-hooks';
 
-import { PRODUCT_QUERY } from '../../../../app-data/graphql/query';
+import { SERVICE_QUERY } from '../../../../app-data/graphql/query';
 
 import { withAuthSync } from '../../../../app-data/lib/auth';
 
 import Layout from '../../../../app-data/shared/components/Layout/Admin.material.layout';
-import ProductForm from '../../../../app-data/components/pages/admin/products/ProductForm/mui';
 import { PageProps } from '../../../../app-data/shared/types/Page.types';
+import ServiceForm from '../../../../app-data/components/pages/admin/services/Form';
 
-const UpdateProduct: (props: PageProps) => JSX.Element = ({ role }) => {
+const UpdateService: (props: PageProps) => JSX.Element = ({ role }) => {
   const router = useRouter();
   const { query } = router;
 
-  const { error, loading, data } = useQuery(PRODUCT_QUERY, {
+  const { error, loading, data } = useQuery(SERVICE_QUERY, {
     variables: { id: query.id },
     fetchPolicy: 'network-only',
   });
@@ -28,19 +28,19 @@ const UpdateProduct: (props: PageProps) => JSX.Element = ({ role }) => {
     return <>{error.message}</>;
   }
 
-  const { product } = data;
+  const { service } = data;
 
   return (
     <>
       <Head>
-        <title>esHop App | Upraviť produkt</title>
+        <title>esHop App | Upraviť službu</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>{' '}
-      <Layout pageTitle="Produkt - Úprava produktu" role={role}>
-        <ProductForm updateProductData={product} update />
+      <Layout pageTitle="Služba - Úprava služby" role={role}>
+        <ServiceForm updateServiceData={service} update />
       </Layout>
     </>
   );
 };
 
-export default withAuthSync(UpdateProduct);
+export default withAuthSync(UpdateService);

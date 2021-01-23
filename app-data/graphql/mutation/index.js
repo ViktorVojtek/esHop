@@ -260,6 +260,14 @@ export const UPDATE_PRODUCT_MUTATION = gql`
   }
 `;
 
+export const UPDATE_SERVICE_MUTATION = gql`
+  mutation updateService($_id: String!, $serviceInput: ServiceInput!) {
+    updateService(_id: $_id, serviceInput: $serviceInput) {
+      title
+    }
+  }
+`;
+
 export const REMOVE_PRODUCT_MUTATION = gql`
   mutation removeProduct($_id: String!) {
     removeProduct(_id: $_id)

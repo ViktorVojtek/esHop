@@ -19,6 +19,7 @@ export interface IProductsFillProps {
 export interface IProductTitle {
   id: string;
   title: string;
+  slug?: string;
 }
 
 export interface IProductUI extends Omit<IProductsFillProps, 'products'> {

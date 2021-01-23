@@ -8,21 +8,16 @@ import {
   ImageTitleWrapper,
 } from './styles';
 import dynamic from 'next/dynamic';
-import Box from '@material-ui/core/Box';
-import Fab from '@material-ui/core/Fab';
 import FormControl from '@material-ui/core/FormControl';
 import IconButton from '@material-ui/core/IconButton';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import Tooltip from '@material-ui/core/Tooltip';
 import TextField from '@material-ui/core/TextField';
-import AddIcon from '@material-ui/icons/Add';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import Carousel from '@brainhubeu/react-carousel';
 import ImagePreview from './components/ImagePreview';
-import VariantItemCard from './components/VariantCardItem';
 import {
   EditorState,
   convertToRaw,
@@ -166,6 +161,11 @@ const UpdateVariantProductData = (props) => {
   };
 
   const handleRemoveVariant = async (idx: number) => {
+    if (productData.variants.length === 1) {
+      return enqueueSnackbar('Nie je možné odstrániť posledný variant.', {
+        variant: 'error',
+      });
+    }
     try {
       const {
         _id,

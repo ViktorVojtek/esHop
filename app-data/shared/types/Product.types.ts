@@ -42,6 +42,7 @@ type Product = {
   modifiedByUserId?: string;
   subCategory?: ProductCategory;
   title: string;
+  slug: string;
   variants?: ProductVariant[];
   isEnvelopeSize: boolean;
 };

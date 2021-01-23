@@ -28,6 +28,7 @@ export default gql`
     price: ServicePriceInput
     video: String
     title: String
+    slug: String
   }
 
   type ServiceCategory {
@@ -58,5 +59,6 @@ export default gql`
     subCategory: ServiceCategory
     video: String
     title: String
+    slug: String
   }
 `;

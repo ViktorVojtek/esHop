@@ -44,6 +44,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const initialProductData = {
   title: '',
+  slug: '',
   category: {
     id: '',
     title: '',

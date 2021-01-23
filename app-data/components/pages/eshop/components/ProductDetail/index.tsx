@@ -21,6 +21,7 @@ import {
   Del,
   Label,
   RelatedTitle,
+  NotInStock,
 } from './styles/productDetail.style';
 import Link from 'next/link';
 import { useQuery } from '@apollo/react-hooks';
@@ -99,7 +100,7 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
     event.preventDefault();
 
     const count: number = +productCountRef.current.value as number;
-    const { price, title, images, discount, productCode } = variants[
+    const { price, title, images, discount, productCode, inStock } = variants[
       activeVariant
     ];
 
@@ -151,7 +152,7 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
                 </VariantTitle>
               )}
               {variants[activeVariant].discount > 0 ? (
-                <Price>
+                <Price style={{ marginBottom: '.25rem' }}>
                   <Del>
                     {formatPrice(variants[activeVariant].price.value)}{' '}
                     {variants[activeVariant].price.currency}
@@ -171,6 +172,9 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
                   {formatPrice(variants[activeVariant].price.value)}{' '}
                   {variants[activeVariant].price.currency}
                 </Price>
+              )}
+              {variants[activeVariant].inStock < 1 && (
+                <NotInStock>Produkt nie je dostupný na sklade!</NotInStock>
               )}
               <form onSubmit={handleSubmitProductToCart}>
                 {variants.length > 1 && (

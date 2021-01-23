@@ -30,13 +30,13 @@ type RelatedProductsType = {
 };
 
 const RelatedProducts: FC<RelatedProductType> = ({
-  product: { _id, variants, subCategory, title },
+  product: { _id, variants, subCategory, title, slug },
 }) => (
   <Col lg="3" md="6" sm="12" className="mb-4" key={_id}>
     <ProductItem>
       <ImageWrap>
         {variants[0].images.length > 0 ? (
-          <Link href={{ pathname: '/eshop/product', query: { id: _id } }}>
+          <Link href={{ pathname: `/eshop/produkt/${slug}` }}>
             <a>
               <div className="product-image">
                 <ProductImg src={variants[0].images[0].path} alt={title} />
@@ -73,7 +73,7 @@ const RelatedProducts: FC<RelatedProductType> = ({
             </Price>
           )}
         </PriceHolder>
-        <Link href={{ pathname: '/eshop/product', query: { id: _id } }}>
+        <Link href={{ pathname: `/eshop/produkt/${slug}` }}>
           <StyledCartLink>Ihneď kúpiť</StyledCartLink>
         </Link>
       </ProductBody>

@@ -32,8 +32,8 @@ type RelatedServicesType = {
   services: Service[];
 };
 
-const ProductTitle: React.FC<IProductTitle> = ({ id, title }) => (
-  <Link href={{ pathname: '/eshop/product', query: { id } }}>
+const ProductTitle: React.FC<IProductTitle> = ({ id, title, slug }) => (
+  <Link href={{ pathname: `/eshop/sluzba/${slug}` }}>
     <a>
       <StyledProductTitle>{title}</StyledProductTitle>
     </a>
@@ -41,12 +41,12 @@ const ProductTitle: React.FC<IProductTitle> = ({ id, title }) => (
 );
 
 const RelatedService: FC<RelatedServiceType> = ({
-  service: { _id, title, subCategory, html, img, price, video, discount },
+  service: { _id, title, subCategory, html, img, price, video, discount, slug },
 }) => (
   <Col lg="3" md="6" sm="12" className="mb-4" key={_id}>
     <ProductItem>
       <ImageWrap>
-        <Link href={{ pathname: '/eshop/service', query: { id: _id } }}>
+        <Link href={{ pathname: `/eshop/sluzba/${slug}` }}>
           <a>
             <div className="product-image">
               <ProductImg src={img.path} alt={title} />

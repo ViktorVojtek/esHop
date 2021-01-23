@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import slugify from 'slugify';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -70,10 +71,12 @@ export default (props: IProps): JSX.Element => {
                 setProductData({
                   ...productData,
                   title: event.currentTarget.value as string,
+                  slug: slugify(
+                    event.currentTarget.value as string
+                  ).toLowerCase(),
                 });
               }}
-              defaultValue={undefined}
-              value={productData.title || ''}
+              value={productData.title}
               required
             />
           </FormControl>
@@ -94,6 +97,18 @@ export default (props: IProps): JSX.Element => {
               label="Veľkosť pre poštový list"
             />
           </FormControl>
+          <Grid item xs={6}>
+            <FormControl margin="normal" fullWidth>
+              <TextField
+                id="slug"
+                label="URL produktu"
+                variant="standard"
+                value={productData.slug || ''}
+                required
+                disabled
+              />
+            </FormControl>
+          </Grid>
           <Grid item xs={6}>
             <CategorySelector
               productData={productData}
