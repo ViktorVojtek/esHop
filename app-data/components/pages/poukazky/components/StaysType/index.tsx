@@ -1,12 +1,14 @@
 import { useQuery } from '@apollo/react-hooks';
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
+import { SwiperSlide } from 'swiper/react';
 import { Element } from 'react-scroll';
-import { Row } from 'reactstrap';
 import { SERVICES_QUERY } from '../../../../../graphql/query';
 import CustomSpinner from '../../../../../shared/components/CustomSpinner/CustomerSpinner';
 import Service from '../../../../../shared/types/Service.types';
 import Stays from '../Stays';
 import { IGiftCardData } from '../Stepper';
+import SwiperCarousel from '../Swiper';
+import { StyledElement } from '../../styles';
 
 type IStaysTypeType = {
   setFormData: React.Dispatch<React.SetStateAction<IGiftCardData>>;
@@ -14,6 +16,7 @@ type IStaysTypeType = {
 };
 
 const StaysType: FC<IStaysTypeType> = ({ formData, setFormData }) => {
+  const [slidesPerView, setSlidesPerView] = useState(4);
   const { loading, error, data } = useQuery(SERVICES_QUERY);
 
   if (error) {
@@ -54,18 +57,25 @@ const StaysType: FC<IStaysTypeType> = ({ formData, setFormData }) => {
     });
   };
 
-  const pobyty = services.map((item: Service) => {
+  const pobytyArray = services.filter(
+    (item: Service) => item.subCategory.title === 'Pobyty'
+  );
+
+  const pobyty = pobytyArray.map((item: Service) => {
     return (
-      item.subCategory.title === 'Pobyty' && (
-        <Stays key={item.title} service={item} addProcedure={addProcedure} />
-      )
+      <SwiperSlide key={item.title}>
+        <Stays service={item} addProcedure={addProcedure} />
+      </SwiperSlide>
     );
   });
+  console.log(pobyty.length);
 
   return (
-    <Element name="content">
-      <Row id="content">{pobyty}</Row>
-    </Element>
+    <StyledElement name="content">
+      <SwiperCarousel customLoop={pobytyArray > slidesPerView}>
+        {pobyty}
+      </SwiperCarousel>
+    </StyledElement>
   );
 };
 

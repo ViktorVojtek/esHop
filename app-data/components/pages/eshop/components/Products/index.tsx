@@ -34,7 +34,6 @@ const P = styled.p`
 
 interface IProductsProps {
   products: Product[] | Service[];
-  toggleModal: () => void;
   compareString: string;
 }
 interface IProductToCartData {
@@ -45,11 +44,7 @@ interface IProductToCartData {
   title: string;
 }
 const productsCount = 16;
-const Products: React.FC<IProductsProps> = ({
-  products,
-  toggleModal,
-  compareString,
-}) => {
+const Products: React.FC<IProductsProps> = ({ products, compareString }) => {
   const [pageSize, setPageSize] = useState(productsCount);
   const [selectedPage, setSelectedPage] = useState(1);
   const [paginationProducts, setPaginationProducts] = useState([]);
@@ -115,7 +110,6 @@ const Products: React.FC<IProductsProps> = ({
         <ProductFill
           products={paginationProducts}
           addProduct={handleAddProductToCart}
-          toggleModal={toggleModal}
         />
       </Row>
       <Row>

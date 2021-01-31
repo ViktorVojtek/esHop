@@ -11,6 +11,8 @@ import { useSnackbar } from 'notistack';
 import Apperance from '../Apperance';
 import Summary from '../Summary';
 import { Context } from '../../../../../lib/state/Store';
+import { StepButton } from '@material-ui/core';
+import { scrollTop } from '../../../../../shared/helpers';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -46,7 +48,8 @@ export type IGiftCardData = {
   totalPrice: number;
 };
 
-const StyledStepLabel = styled(StepLabel)`
+const StyledStepButton = styled(StepButton)`
+  outline: none !important;
   .MuiStepIcon-active {
     color: ${colors.primary} !important;
   }
@@ -61,6 +64,9 @@ export default function GiftCardStepper() {
   const { dispatch } = useContext(Context);
   const { enqueueSnackbar } = useSnackbar();
   const [activeStep, setActiveStep] = useState(0);
+  const [completed, setCompleted] = React.useState<{ [k: number]: boolean }>(
+    {}
+  );
   const steps = getSteps();
   const [formData, setFormData] = useState<IGiftCardData>({
     cardColor: '#00aeef',
@@ -69,6 +75,24 @@ export default function GiftCardStepper() {
     services: [],
     totalPrice: 0,
   });
+
+  const handleStep = (step: number) => () => {
+    if (step === 1 || step === 2) {
+      if (formData.priceValue === 0 && formData.services.length < 1) {
+        return enqueueSnackbar(`Obsah poukážky je prázdny`, {
+          variant: 'error',
+        });
+      }
+    }
+    if (step === 2) {
+      if (formData.text === '') {
+        return enqueueSnackbar(`Zadajte venovanie`, {
+          variant: 'error',
+        });
+      }
+    }
+    setActiveStep(step);
+  };
 
   const handleNext = () => {
     if (activeStep === 0) {
@@ -101,10 +125,27 @@ export default function GiftCardStepper() {
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    scrollTop();
+  };
+  const handleComplete = () => {
+    const newCompleted = completed;
+    newCompleted[activeStep] = true;
+    setCompleted(newCompleted);
+    handleNext();
   };
 
   const handleReset = () => {
     setActiveStep(0);
+  };
+  const totalSteps = () => {
+    return steps.length;
+  };
+
+  const completedSteps = () => {
+    return Object.keys(completed).length;
+  };
+  const isLastStep = () => {
+    return activeStep === totalSteps() - 1;
   };
 
   const handleAddGiftCard: (data: IGiftCardData) => void = (data) => {
@@ -129,10 +170,15 @@ export default function GiftCardStepper() {
 
   return (
     <div className={classes.root}>
-      <Stepper activeStep={activeStep} alternativeLabel>
-        {steps.map((label) => (
+      <Stepper activeStep={activeStep} nonLinear alternativeLabel>
+        {steps.map((label, index) => (
           <Step key={label}>
-            <StyledStepLabel>{label}</StyledStepLabel>
+            <StyledStepButton
+              onClick={handleStep(index)}
+              completed={completed[index]}
+            >
+              {label}
+            </StyledStepButton>
           </Step>
         ))}
       </Stepper>

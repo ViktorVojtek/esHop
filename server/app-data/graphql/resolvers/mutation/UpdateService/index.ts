@@ -40,7 +40,6 @@ const updateService: (
 
       serviceData.img = imageData;
     }
-    console.log(serviceData);
 
     const updatedService = await Service.findOneAndUpdate(
       {

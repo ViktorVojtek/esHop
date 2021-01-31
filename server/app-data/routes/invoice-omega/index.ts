@@ -120,8 +120,6 @@ export const omegaRoute: (
       items: finalProducts,
     };
 
-    console.log(data);
-
     const response: globalThis.Response = await fetch(ESHOP_INV_API_URI, {
       body: JSON.stringify([data]),
       headers: {

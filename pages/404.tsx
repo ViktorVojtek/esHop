@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   width: 100vw;
   margin: 0 auto;
   margin-top: 160px;
-  min-height: calc(100vh - 317px);
+  min-height: calc(100vh - 693px);
 `;
 const Icon = styled(MessageRoundedError)`
   color: #00aeef;

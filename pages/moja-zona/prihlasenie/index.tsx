@@ -58,8 +58,6 @@ const LogIn: FC = () => {
 
       const recaptchaToken = await executeRecaptcha('login');
 
-      console.log(recaptchaToken);
-
       const response = await loginUserMutate({
         variables: {
           customerData: {

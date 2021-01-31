@@ -86,7 +86,11 @@ const rootTypeDefs = gql`
     ): LoyalityProduct
     removeLoyalityProduct(id: String!): String
 
-    createSubCategory(categoryId: String!, title: String!): SubCategory
+    createSubCategory(subCategoryInput: SubCategoryInput): SubCategory
+    updateSubCategory(
+      _id: String!
+      subCategoryInput: SubCategoryInput
+    ): SubCategory
     removeSubCategory(_id: String!): String
 
     createService(serviceInput: ServiceInput!): Service

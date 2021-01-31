@@ -1,6 +1,7 @@
 import * as jwt from 'jsonwebtoken';
 import * as path from 'path';
 import { writeFile, mkdirp, unlink, remove } from 'fs-extra';
+var rimraf = require('rimraf');
 import Invoices from '../../../db/models/Invoices';
 import Order from '../../../db/models/Order';
 import { config } from '../../../config/index';
@@ -84,6 +85,7 @@ export const storeFile: (fileData: any) => Promise<string | Error> = (
       __dirname,
       `../../../../../static/products/${dirName}`
     );
+    rimraf.sync(dir);
     const filePath: string = `${dir}/${fileName.toLowerCase()}.${extNorm}`;
 
     mkdirp(dir, (dirErr) => {

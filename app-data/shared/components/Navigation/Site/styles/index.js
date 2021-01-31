@@ -1,13 +1,15 @@
 import styled from 'styled-components';
-import { User } from '@styled-icons/boxicons-regular';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
-export const Login = styled(User)`
+export const Login = styled(AccountCircleIcon)`
   color: red;
-  width: 36px;
+  width: 36px !important;
+  height: 36px !important;
   margin-left: 1rem;
   cursor: pointer;
   @media (max-width: 576px) {
-    width: 26px;
+    width: 26px !important;
+    height: 26px !important;
   }
 `;
 

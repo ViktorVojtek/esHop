@@ -181,28 +181,11 @@ const EshopPage: FC = () => {
             {loading && <CustomSpinner />}
             <Products
               products={filteredProducts}
-              toggleModal={toggleModal}
               compareString={compareString}
             />
           </Col>
         </Row>
       </Container>
-      <div>
-        <Modal isOpen={modal} toggle={toggleModal}>
-          <ModalHeader toggle={toggleModal}>
-            Produkt bol pridaný do košíka
-          </ModalHeader>
-          <ModalBody>Pokračujte v nákupe alebo do pokladne.</ModalBody>
-          <ModalFooter>
-            <Link href="eshop/cart">
-              <StyledModalLink color="primary">Do pokladne</StyledModalLink>
-            </Link>
-            <StyledModalBtn color="secondary" onClick={toggleModal}>
-              Nakupovať
-            </StyledModalBtn>
-          </ModalFooter>
-        </Modal>
-      </div>
     </Wrapper>
   );
 };

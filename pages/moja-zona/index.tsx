@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Head from 'next/head';
 import { withAuthSyncCustomer } from '../../app-data/lib/authCustomer';
 import Layout from '../../app-data/shared/components/Layout/Site.layout';
@@ -16,6 +16,18 @@ import { makeStyles, Paper, Tab, Tabs } from '@material-ui/core';
 import ShoppingCart from '@material-ui/icons/ShoppingCart';
 import CardGiftcard from '@material-ui/icons/CardGiftcard';
 import Settings from '@material-ui/icons/Settings';
+import { useRouter } from 'next/router';
+
+const toValues = {
+  objednavky: 0,
+  'vernostny-program': 1,
+  nastavenia: 2,
+};
+const fromValues = {
+  0: 'objednavky',
+  1: 'vernostny-program',
+  2: 'nastavenia',
+};
 
 const Home: () => JSX.Element = () => {
   const classes = useStyles1();
@@ -23,9 +35,20 @@ const Home: () => JSX.Element = () => {
   const id = cookie.get('customerId');
   const email = cookie.get('customerEmail');
   const [value, setValue] = React.useState(0);
+  const router = useRouter();
+  const { tab } = router.query;
 
+  useEffect(() => {
+    if (tab === undefined) {
+      return;
+    }
+    setValue(toValues[tab as string]);
+  }, [router]);
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
+    router.push({
+      query: { tab: `${fromValues[newValue]}` },
+    });
   };
   return (
     <>

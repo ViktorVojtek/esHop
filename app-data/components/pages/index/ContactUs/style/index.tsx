@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import {
-  FacebookWithCircle,
-  InstagramWithCircle,
-  YoutubeWithCircle,
-} from '@styled-icons/entypo-social';
+  InstagramSquare,
+  FacebookSquare,
+  YoutubeSquare,
+} from '@styled-icons/fa-brands';
 import { PhoneAlt, Envelope } from '@styled-icons/fa-solid';
 import { Whatsapp, Viber } from '@styled-icons/fa-brands';
 import { HelpCircle } from '@styled-icons/boxicons-regular';
@@ -16,16 +16,16 @@ export const Wrapper = styled.div`
 export const SocialHolder = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   @media (max-width: 992px) {
     margin-top: 1rem;
   }
 `;
 
-export const Facebook = styled(FacebookWithCircle)`
+export const Facebook = styled(FacebookSquare)`
   color: ${colors.primary};
-  width: 52px;
-  height: 52px;
+  min-width: 36px;
+  width: 36px;
   margin-right: 12px;
   cursor: pointer;
   transition: all 0.4s ease-out;
@@ -33,10 +33,10 @@ export const Facebook = styled(FacebookWithCircle)`
     color: ${colors.primaryHover};
   }
 `;
-export const Instagram = styled(InstagramWithCircle)`
+export const Instagram = styled(InstagramSquare)`
   color: ${colors.primary};
-  width: 52px;
-  height: 52px;
+  min-width: 36px;
+  width: 36px;
   margin-right: 12px;
   cursor: pointer;
   transition: all 0.4s ease-out;
@@ -44,10 +44,10 @@ export const Instagram = styled(InstagramWithCircle)`
     color: ${colors.primaryHover};
   }
 `;
-export const Youtube = styled(YoutubeWithCircle)`
+export const Youtube = styled(YoutubeSquare)`
   color: ${colors.primary};
-  width: 52px;
-  height: 52px;
+  min-width: 36px;
+  width: 36px;
   margin-right: 12px;
   cursor: pointer;
   transition: all 0.4s ease-out;

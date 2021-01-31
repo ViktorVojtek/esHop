@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { storeFile } from '../../utils';
 import { config } from '../../../../config';
 import Category, { ICategory } from '../../../../db/models/Category';
 import SubCategory, { ISubCategory } from '../../../../db/models/SubCategory';
@@ -9,10 +10,17 @@ const createSubCategory: (
   root: any,
   args: any,
   ctx: any
-) => Promise<ISubCategory> = async (root, { categoryId, title }, ctx) => {
+) => Promise<ISubCategory> = async (root, { subCategoryInput }, ctx) => {
   try {
     const { superSecret } = config;
     await verifyToken(ctx, superSecret);
+
+    const {
+      image,
+      categoryId,
+      title,
+      ...restSubCategoryData
+    } = subCategoryInput;
 
     const categoryExist: ICategory = await Category.findOne({
       _id: mongoose.Types.ObjectId(categoryId),
@@ -27,15 +35,34 @@ const createSubCategory: (
       throw new ModError(403, 'Subcategory allready exist.');
     }
 
-    const subCategoryData = {
-      categoryId,
-      title,
-      signFlag: title.toUpperCase().replace(/ /g, '_'),
-    };
+    const subCategoryData: ISubCategory = new SubCategory(restSubCategoryData);
 
-    const newSubCategory: ISubCategory = new SubCategory(subCategoryData);
+    if (image && (image as any).base64) {
+      const vId = `${subCategoryData._id}-${title.toUpperCase()}`;
 
-    await SubCategory.create(newSubCategory);
+      const fileData = {
+        fileName: (image as any).title,
+        fileBase64Data: (subCategoryData as any).base64,
+        dirName: vId,
+        extension: (image as any).ext,
+      };
+
+      const imgPath = await storeFile(fileData);
+
+      const { base64, ...restImgData } = image as any;
+      const imageData = {
+        ...restImgData,
+        path: imgPath,
+      };
+
+      subCategoryData.image = imageData;
+    }
+
+    subCategoryData.title = title;
+    subCategoryData.signFlag = title.toUpperCase().replace(/ /g, '_');
+    subCategoryData.categoryId = categoryId;
+
+    const newSubCategory = await SubCategory.create(subCategoryData);
 
     const { __v, ...result } = newSubCategory.toObject();
 

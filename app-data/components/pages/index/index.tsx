@@ -11,8 +11,8 @@ const MainPage: () => JSX.Element = () => (
     <Intro />
     <ProductsMP />
     {/*<Doctors />*/}
-    <KupeleCks />
-    <ContactUs />
+    {/*<KupeleCks />*/}
+    {/*<ContactUs />*/}
   </>
 );
 

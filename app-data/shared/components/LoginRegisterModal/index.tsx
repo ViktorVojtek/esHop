@@ -11,11 +11,12 @@ import {
 import { useMutation } from '@apollo/react-hooks';
 import Link from 'next/link';
 
-import { StyledModalBtn, RegisterButton, P, Danger } from './styles/index';
+import { RegisterButton, P, Danger } from './styles/index';
 import { LOGIN_CUSTOMER_MUTATION } from '../../../graphql/mutation';
 import { login } from '../../../lib/authCustomer';
 import ForgetPasswordModal from '../ForgetPasswordModal';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
+import { Button } from '../../design';
 
 interface ILoginRegisterModal {
   loginModal: boolean;
@@ -122,7 +123,9 @@ const LoginRegisterModal: FC<ILoginRegisterModal> = ({
                 </P>
               </div>
               {badLogin && <Danger>Nesprávne meno alebo heslo</Danger>}
-              <StyledModalBtn type="submit">Prihlásiť</StyledModalBtn>
+              <Button style={{ marginLeft: 'auto' }} type="submit">
+                Prihlásiť
+              </Button>
             </Form>
           </ModalBody>
         </>

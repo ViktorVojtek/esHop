@@ -1,8 +1,6 @@
-import React, { useState, FC } from 'react';
+import React, { FC } from 'react';
 import Service from '../../../../../shared/types/Service.types';
-import { Col, InputGroup, InputGroupAddon, Input } from 'reactstrap';
 import { formatPrice } from '../../../../../shared/helpers/formatters';
-import { TextFieldButton } from '../../../../../shared/design';
 import { useSnackbar } from 'notistack';
 import InfoPopover from '../InfoPopover';
 import {
@@ -10,11 +8,13 @@ import {
   Del,
   Holder,
   Item,
-  ItemTextProcedures,
+  IconsHolder,
   P,
   Price,
   StyledPaper,
+  OverFlow,
 } from '../../styles';
+import { CartPlusIcon } from '../../../../../shared/design/icons';
 
 type IItem = {
   title: string;
@@ -28,13 +28,7 @@ type IProcedures = {
 };
 
 const Procedures: FC<IProcedures> = ({ service, addProcedure }) => {
-  const [count, setCount] = useState(0);
   const { enqueueSnackbar } = useSnackbar();
-
-  const countInput = (e) => {
-    let count = e.currentTarget.value;
-    count === '' ? setCount(0) : setCount(count);
-  };
   function getPrice(variant): number {
     if (variant.discount > 0) {
       return (
@@ -43,88 +37,55 @@ const Procedures: FC<IProcedures> = ({ service, addProcedure }) => {
     } else return variant.price.value;
   }
 
-  const AddService = () => {
-    if (count <= 0) {
-      return enqueueSnackbar(`Počet musí byť väčší ako 0`, {
-        variant: 'error',
-      });
-    }
+  const addService = () => {
     const item: IItem = {
       title: service.title,
       price: getPrice(service),
-      count: count,
+      count: 1,
     };
     addProcedure(item);
-    enqueueSnackbar(`Pridané: ${service.title} ${count}x`, {
+    enqueueSnackbar(`Pridané: ${service.title}`, {
       variant: 'success',
     });
   };
 
   //const toggle = () => setEnabled(!enabled);
   return (
-    <Col
-      md="4"
-      sm="6"
-      xs="12"
-      data-aos="fade-left"
-      className="d-flex justify-content-center flex-column"
-    >
-      <Holder
-        className="d-flex w-100"
-        style={{
-          marginTop: '8px',
-          paddingTop: '8px',
-          marginBottom: '16px',
-        }}
-      >
-        <ItemTextProcedures>{service.title}</ItemTextProcedures>
-        <InfoPopover html={service.html} />
-      </Holder>
-      <StyledPaper elevation={3}>
-        <Item>
-          <Holder style={{ marginBottom: '16px' }}>
-            <P style={{ paddingTop: '8px' }}>
-              Cena:{' '}
-              {service.discount > 0 ? (
-                <Price>
-                  <Del>{`${formatPrice(service.price.value)} €`}</Del>
-                  <ActionPrice className="ml-2">
-                    {formatPrice(
-                      service.price.value -
-                        (service.price.value * service.discount) / 100
-                    )}{' '}
-                    {`€`}
-                  </ActionPrice>
-                </Price>
-              ) : (
-                <Price>
-                  {formatPrice(service.price.value)} {`€`}
-                </Price>
-              )}
-            </P>
-            <P style={{ paddingBottom: '8px' }}>
-              Cena spolu:{' '}
+    <StyledPaper elevation={3} url={service.img.path}>
+      <OverFlow />
+      <Item>
+        <Holder style={{ marginBottom: '16px' }}>
+          <P className="mb-0">{service.title}</P>
+          <P>
+            {service.discount > 0 ? (
               <Price>
-                {formatPrice(getPrice(service) * count)} {`€`}
+                <Del>{`${formatPrice(service.price.value)} €`}</Del>
+                <ActionPrice className="ml-2">
+                  {formatPrice(
+                    service.price.value -
+                      (service.price.value * service.discount) / 100
+                  )}{' '}
+                  {`€`}
+                </ActionPrice>
               </Price>
-            </P>
-          </Holder>
-          <InputGroup>
-            <Input
-              placeholder="Počet"
-              type="number"
-              onChange={(e) => countInput(e)}
-              min={1}
+            ) : (
+              <Price>
+                {formatPrice(service.price.value)} {`€`}
+              </Price>
+            )}
+          </P>
+          <IconsHolder>
+            <InfoPopover color="white" size={30} html={service.html} />
+            <CartPlusIcon
+              style={{ marginLeft: '24px' }}
+              color="white"
+              size={30}
+              onClick={addService}
             />
-            <InputGroupAddon addonType="prepend">
-              <TextFieldButton type="button" onClick={AddService}>
-                Pridať
-              </TextFieldButton>
-            </InputGroupAddon>
-          </InputGroup>
-        </Item>
-      </StyledPaper>
-    </Col>
+          </IconsHolder>
+        </Holder>
+      </Item>
+    </StyledPaper>
   );
 };
 

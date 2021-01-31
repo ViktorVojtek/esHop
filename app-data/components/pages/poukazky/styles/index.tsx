@@ -2,6 +2,11 @@ import styled from 'styled-components';
 import { CloseCircle } from '@styled-icons/evaicons-solid';
 import { Paper } from '@material-ui/core';
 import { colors } from '../../../../shared/design';
+import { Element } from 'react-scroll';
+
+export const StyledElement = styled(Element)`
+  position: relative;
+`;
 
 export const Wrapper = styled.div`
   width: 100vw;
@@ -23,20 +28,50 @@ export const Remove = styled(CloseCircle)`
     transform: scale(1.1);
   }
 `;
-export const StyledPaper = styled(Paper)`
+type StyledPaperProps = {
+  url?: string;
+};
+export const StyledPaper = styled(Paper)<StyledPaperProps>`
   margin-bottom: 24px;
-  border-left: 6px solid ${colors.primary};
+  background-image: ${({ url }) => (url ? `url('${url}')` : '')};
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 80vh;
+  max-height: 380px;
+  position: relative;
+`;
+export const OverFlow = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: linear-gradient(
+    0deg,
+    rgb(0 0 0 / 0.5) 25%,
+    rgba(255, 255, 255, 0) 100%
+  );
+`;
+
+export const IconsHolder = styled.div`
+  display: flex;
+  align-item: center;
+  justify-content: center;
 `;
 
 export const P = styled.p`
   font-size: 1rem;
-  font-weight: bold;
   margin-top: 0;
   margin-bottom: 0.5rem;
   width: 100%;
+  color: white;
+  user-select: none;
 `;
 export const Item = styled.div`
-  padding: 24px 16px;
+  bottom: 20px;
+  position: absolute;
+  text-align: center;
+  width: 100%;
 `;
 export const ItemTextProcedures = styled.h6`
   font-size: 1.25rem;
@@ -45,18 +80,17 @@ export const ItemTextProcedures = styled.h6`
   margin-bottom: 0;
 `;
 export const Holder = styled.div`
-  border-radius: 4px;
-  background: rgba(255, 255, 255);
   padding-left: 12px;
   padding-right: 12px;
 `;
 export const Price = styled.span`
   margin: 1rem 0rem;
-  font-weight: 600;
   font-size: 1rem;
+  color: white;
 `;
 export const ActionPrice = styled.span`
-  color: red;
+  color: white;
+  font-weight: bold;
 `;
 
 export const Del = styled.del`
@@ -124,80 +158,6 @@ export const RadioColorGroup = styled.div`
   display: flex;
 `;
 
-export const NumberLabel = styled.label`
-  font-size: 1.25rem;
-  font-family: MuseoSans-300;
-  color: black;
-`;
-export const AddToCart = styled.button`
-  background-color: #00aeefb8;
-  font-family: MuseoSans-300;
-  text-transform: uppercase;
-  color: #fff !important;
-  padding: 1rem 1.5rem;
-  border-radius: 0.35rem;
-  outline: none !important;
-  border-radius: 6px;
-  border: none;
-  font-size: 0.875rem;
-  font-weight: 600;
-  position: relative;
-  margin-top: 1rem;
-  margin-bottom: 2.2rem;
-  letter-spacing: 0px;
-  user-select: none;
-  transition: all 0.3s ease-out;
-  &:hover {
-    background-color: #00aeef;
-  }
-`;
-
-export const AddButton = styled.button`
-  background-color: #00aeefb8;
-  font-family: MuseoSans-300;
-  text-transform: uppercase;
-  color: #fff !important;
-  padding: 0rem 1.5rem;
-  border-radius: 0.35rem;
-  outline: none !important;
-  border-radius: 6px;
-  border: none;
-  font-size: 0.875rem;
-  font-weight: 600;
-  position: relative;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-  letter-spacing: 0px;
-  user-select: none;
-  transition: all 0.3s ease-out;
-  &:hover {
-    background-color: #00aeef;
-  }
-`;
-
-export const Button = styled.button`
-  background-color: #00aeefb8;
-  font-family: MuseoSans-300;
-  text-transform: uppercase;
-  color: #fff !important;
-  padding: 1rem 1.5rem;
-  border-radius: 0.35rem;
-  outline: none !important;
-  border-radius: 6px;
-  border: none;
-  font-size: 0.875rem;
-  font-weight: 600;
-  position: relative;
-  margin-top: 1rem;
-  letter-spacing: 0px;
-  user-select: none;
-  transition: all 0.3s ease-out;
-  width: 45%;
-  &:hover {
-    background-color: #00aeef;
-  }
-`;
-
 export const InputHolder = styled.div`
   margin: 0 auto;
   max-width: 400px;
@@ -261,79 +221,6 @@ export const PreviewTextHolder = styled.div`
   top: 0;
   right: 0;
 `;
-export const PreviewTextHolderBack = styled.div`
-  position: absolute;
-  width: 65%;
-  height: 50%;
-  display: flex;
-  align-items: center;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 0;
-`;
-
-export const Label = styled.label<IPhotoRightItem>`
-  background-image: ${({ imageUrl }) => (imageUrl ? `url(${imageUrl})` : '0')};
-  cursor: pointer;
-  background-size: contain;
-  background-repeat: no-repeat;
-  display: inline-block;
-  width: 100%;
-  padding-top: 35%;
-  -webkit-transition: all 100ms ease-in;
-  -moz-transition: all 100ms ease-in;
-  transition: all 100ms ease-in;
-  -webkit-filter: grayscale(1);
-  -moz-filter: grayscale(1);
-  filter: grayscale(1);
-  &:hover {
-    -webkit-filter: grayscale(0);
-    -moz-filter: grayscale(0);
-    filter: grayscale(0);
-  }
-`;
-export const ColorLabel = styled.label<IColor>`
-  background-color: ${({ colorButton }) =>
-    colorButton ? `${colorButton}` : 'black'};
-  cursor:pointer;
-  display:inline-block;
-  width: 60px;
-  height: 60px;
-  margin-right: 1rem;
-  border-radius: 36px;
-  transition: all .3s ease-out;
-  &:hover{
-    transform: scale(1.15);
-  }
-}
-`;
-export const RadioColorInput = styled.input`
-  margin: 0;
-  padding: 0;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-`;
-
-export const RadioInput = styled.input`
-  margin: 0;
-  padding: 0;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  &:active {
-    & ~ ${Label} {
-      opacity: 1;
-    }
-  }
-  &:checked {
-    & ~ ${Label} {
-      -webkit-filter: none;
-      -moz-filter: none;
-      filter: none;
-    }
-  }
-`;
 
 export const StyledModalLink = styled.a`
   background-color: #00aeefb8;
@@ -357,25 +244,20 @@ export const StyledModalLink = styled.a`
     background-color: #00aeef;
   }
 `;
-export const StyledCartLink = styled.a`
-  background-color: #00aeefb8;
-  text-transform: uppercase;
-  color: #fff !important;
-  padding: 1rem 1.5rem;
-  border-radius: 0.35rem;
-  transition: all 0.3s ease-out;
-  cursor: pointer;
-  letter-spacing: 0px;
-  font-weight: 600;
-  margin-top: 1rem;
-  display: inline-block;
-  user-select: none;
-  width: 45%;
-  text-align: center;
-  &:hover {
-    background-color: #00aeef;
-  }
+
+export const BonusBadge = styled.div`
+  position: absolute;
+  padding: 4px 6px;
+  top: 16px;
+  right: 0;
+  font-size: 0.75rem;
+  background-color: red;
+  color: white;
+  border-radius: 4px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
 `;
+
 interface IPhotoRightItem {
   imageUrl?: string;
 }

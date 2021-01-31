@@ -1,9 +1,8 @@
-import React, { FC, ReactNode, useState, useContext, forwardRef } from 'react';
+import React, { FC, ReactNode, forwardRef } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { Nav, NavItem, NavbarBrand } from 'reactstrap';
 import { ILinkItem } from '../Navigation/Site/TS/Navigation.interface';
 import { MenuIcon, Wrapper, Logo, NavLink } from './styles';
@@ -45,8 +44,6 @@ export default function TemporaryDrawer() {
     right: false,
   });
 
-  const router = useRouter();
-
   const toggleDrawer = (anchor: Anchor, open: boolean) => (
     event: React.KeyboardEvent | React.MouseEvent
   ) => {
@@ -73,7 +70,7 @@ export default function TemporaryDrawer() {
           <LinkItem href="/" title="Domov" />
           <LinkItem href="/eshop" title="Obchod" />
           <LinkItem href="/darcekove-poukazky" title="Darčekové poukážky" />
-          <LinkItem href="/kontakt" title="FAQ" />
+          <LinkItem href="/kontakt" title="Kontakt" />
         </Nav>
       </>
     </Wrapper>

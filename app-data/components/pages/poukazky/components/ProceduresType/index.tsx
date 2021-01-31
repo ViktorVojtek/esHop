@@ -1,12 +1,14 @@
 import { useQuery } from '@apollo/react-hooks';
 import React, { FC } from 'react';
+import { SwiperSlide } from 'swiper/react';
 import { Element } from 'react-scroll';
-import { Row } from 'reactstrap';
 import { SERVICES_QUERY } from '../../../../../graphql/query';
 import CustomSpinner from '../../../../../shared/components/CustomSpinner/CustomerSpinner';
 import Service from '../../../../../shared/types/Service.types';
 import Procedures from '../Procedures';
 import { IGiftCardData } from '../Stepper';
+import SwiperCarousel from '../Swiper';
+import { StyledElement } from '../../styles';
 
 type IProceduresType = {
   setFormData: React.Dispatch<React.SetStateAction<IGiftCardData>>;
@@ -54,23 +56,22 @@ const ProceduresType: FC<IProceduresType> = ({ formData, setFormData }) => {
     });
   };
 
-  const procedury = services.map((item: Service) => {
+  const proceduryArray = services.filter((item: Service) =>
+    item.subCategory.title.includes('rocedúry')
+  );
+
+  const procedury = proceduryArray.map((item: Service) => {
     return (
-      (item.subCategory.title === 'Liečebné procedúry' ||
-        item.subCategory.title === 'Relaxačné procedúry') && (
-        <Procedures
-          key={item.title}
-          service={item}
-          addProcedure={addProcedure}
-        />
-      )
+      <SwiperSlide key={item.title}>
+        <Procedures service={item} addProcedure={addProcedure} />
+      </SwiperSlide>
     );
   });
 
   return (
-    <Element name="content">
-      <Row id="content">{procedury}</Row>
-    </Element>
+    <StyledElement name="content">
+      <SwiperCarousel>{procedury}</SwiperCarousel>
+    </StyledElement>
   );
 };
 

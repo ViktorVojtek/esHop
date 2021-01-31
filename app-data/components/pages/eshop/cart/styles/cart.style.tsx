@@ -11,7 +11,6 @@ import CloseIcon from '@material-ui/icons/Close';
 export const Wrapper = styled.div`
   margin-top: 150px;
   margin-bottom: 60px;
-  min-height: calc(100vh - 425px);
   @media (max-width: 768px) {
     margin-top: 120px;
     margin-bottom: 0px;

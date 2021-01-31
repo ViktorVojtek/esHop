@@ -85,7 +85,7 @@ const Navigation: FC = () => {
             </CustomNavbarBrand>
           </Link>
         </div>
-        <div className="d-flex">
+        <div className="d-flex align-items-center">
           <CartWrapper>
             <Link href="/eshop/cart">
               <a>

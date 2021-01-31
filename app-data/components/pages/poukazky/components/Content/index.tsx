@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-scroll';
-import AnchorLink from 'react-anchor-link-smooth-scroll';
+import { scroller } from 'react-scroll';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import EuroIcon from '@material-ui/icons/Euro';
@@ -28,6 +27,7 @@ import {
 import DeleteIcon from '@material-ui/icons/Delete';
 import { Col, Row } from 'reactstrap';
 import PermanentType from '../PermanentType';
+import useViewport from '../../../../../shared/helpers/useViewport';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -37,6 +37,21 @@ const useStyles = makeStyles(() =>
         left: '100%',
         backgroundColor: 'white',
         animation: `$grow 0.5s ease-in-out forwards`,
+      },
+      '& .MuiListItem-gutters': {
+        paddingLeft: '0',
+      },
+      '& .MuiListItemAvatar-root': {
+        minWidth: '40px',
+      },
+      '& .MuiAvatar-root': {
+        width: '32px',
+        height: '32px',
+        marginRight: '4px',
+      },
+      '& .MuiSvgIcon-root': {
+        width: '20px',
+        height: '20px',
       },
     },
     '@keyframes grow': {
@@ -53,18 +68,69 @@ const useStyles = makeStyles(() =>
 const StyledPaper = styled(Paper)`
   margin-top: 16px;
   margin-bottom: 32px;
-  padding-top: 16px;
-  padding-bottom: 8px;
+  padding: 16px 20px;
   width: 100%;
   color: black;
+  border-left: 6px solid ${colors.primary};
 `;
 const H6 = styled.h6`
   font-weight: bold;
-  padding-left: 16px;
+  margin: 0;
+`;
+const P = styled.p`
+  margin: 0;
+`;
+
+const Items = styled.div`
+  display: flex;
+  width: 100%;
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+const ItemsSm = styled.div`
+  display: none;
+  width: 100%;
+  @media (max-width: 768px) {
+    display: block;
+  }
+`;
+
+type ItemProps = {
+  width?: number;
+  align?: 'left' | 'right';
+};
+
+const HeaderItem = styled.h6<ItemProps>`
+  width: ${({ width }) => (width ? `${width}%` : '25%')};
+  text-align: ${({ align }) => (align ? `${align}` : 'left')};
+  font-weight: bold;
+  padding-bottom: 4px;
+  border-bottom: solid 1px black;
+`;
+
+const BodyItem = styled.h6<ItemProps>`
+  width: ${({ width }) => (width ? `${width}%` : '25%')};
+  text-align: ${({ align }) => (align ? `${align}` : 'left')};
+  display: flex;
+  align-items: center;
+  margin: 0;
+`;
+
+const BodyItemSm = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
 `;
 
 const StyledAvatar = styled(Avatar)`
   background-color: ${colors.primary} !important;
+`;
+
+const StyledIconButton = styled(IconButton)`
+  @media (max-width: 768px) {
+    display: none !important;
+  }
 `;
 
 type ContentProps = {
@@ -78,8 +144,13 @@ export default function Content(props: ContentProps) {
   const { formData, setFormData } = props;
   const { services, priceValue, totalPrice } = formData;
 
+  const { width } = useViewport();
+
   const handleChangeTab = (newValue: number) => {
     setValue(newValue);
+    if (width < 769) {
+      handleScroll();
+    }
   };
 
   const getPrice = (items) => {
@@ -88,6 +159,15 @@ export default function Content(props: ContentProps) {
       price += items[i].price * items[i].count;
     }
     return price;
+  };
+
+  const handleScroll = () => {
+    scroller.scrollTo('content', {
+      duration: 500,
+      delay: 50,
+      smooth: true,
+      offset: -120,
+    });
   };
 
   const removeProcedure = (value: number) => {
@@ -111,111 +191,152 @@ export default function Content(props: ContentProps) {
   return (
     <>
       <Row>
-        <Col md={3}>
-          <Link to="content" smooth={true} offset={-100} duration={500}>
-            <ButtonWithIcon className="mb-2" onClick={() => handleChangeTab(0)}>
-              <span>
-                <EuroIcon style={{ marginRight: '6px' }} />
-                Peniaze
-              </span>
-              <ControlPointIcon />
-            </ButtonWithIcon>
-          </Link>
+        <Col md={3} xs={6}>
+          <ButtonWithIcon className="mb-2" onClick={() => handleChangeTab(0)}>
+            <EuroIcon style={{ marginRight: '6px' }} />
+            <span>Peniaze</span>
+          </ButtonWithIcon>
         </Col>
-        <Col md={3}>
-          <Link to="content" smooth={true} offset={-100} duration={500}>
-            <ButtonWithIcon className="mb-2" onClick={() => handleChangeTab(1)}>
-              <span>
-                <RoomServiceIcon style={{ marginRight: '6px' }} />
-                Procedúry
-              </span>
-              <ControlPointIcon />
-            </ButtonWithIcon>
-          </Link>
+        <Col md={3} xs={6}>
+          <ButtonWithIcon className="mb-2" onClick={() => handleChangeTab(1)}>
+            <RoomServiceIcon style={{ marginRight: '6px' }} />
+            <span>Procedúry</span>
+          </ButtonWithIcon>
         </Col>
-        <Col md={3}>
-          <Link to="content" smooth={true} offset={-100} duration={500}>
-            <ButtonWithIcon className="mb-2" onClick={() => handleChangeTab(2)}>
-              <span>
-                <AirlineSeatIndividualSuiteIcon
-                  style={{ marginRight: '6px' }}
-                />
-                Pobyty
-              </span>
-              <ControlPointIcon />
-            </ButtonWithIcon>
-          </Link>
+        <Col md={3} xs={6}>
+          <ButtonWithIcon className="mb-2" onClick={() => handleChangeTab(2)}>
+            <AirlineSeatIndividualSuiteIcon style={{ marginRight: '6px' }} />
+            <span>Pobyty</span>
+          </ButtonWithIcon>
         </Col>
-        <Col md={3}>
-          <Link to="content" smooth={true} offset={-100} duration={500}>
-            <ButtonWithIcon className="mb-2" onClick={() => handleChangeTab(3)}>
-              <span>
-                <FeaturedPlayListIcon style={{ marginRight: '6px' }} />
-                Permanentky
-              </span>
-              <ControlPointIcon />
-            </ButtonWithIcon>
-          </Link>
+        <Col md={3} xs={6}>
+          <ButtonWithIcon className="mb-2" onClick={() => handleChangeTab(3)}>
+            <FeaturedPlayListIcon style={{ marginRight: '6px' }} />
+            <span>Permanentky</span>
+          </ButtonWithIcon>
         </Col>
-        <Col md={6}>
+        <Col md={12}>
           <StyledPaper elevation={3}>
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Items>
+              <HeaderItem width={40}>Zvolený obsah poukážky</HeaderItem>
+              <HeaderItem width={20}>Množstvo</HeaderItem>
+              <HeaderItem>Jednotková cena</HeaderItem>
+              <HeaderItem width={15}>Cena spolu</HeaderItem>
+              <HeaderItem width={5} />
+            </Items>
+            <ItemsSm>
               <H6>Zvolený obsah poukážky</H6>
-              <H6
-                style={{ marginRight: '15px', whiteSpace: 'nowrap' }}
-              >{`Spolu: ${totalPrice} €`}</H6>
-            </div>
+            </ItemsSm>
             <>
               {priceValue || services.length > 0 ? (
                 <List className={classes.root}>
                   {services.map((item, i) => {
                     return (
                       <ListItem key={i}>
-                        <ListItemAvatar>
-                          <StyledAvatar>
-                            {item.type === 'procedura' && <RoomServiceIcon />}
-                            {item.type === 'pobyt' && (
-                              <AirlineSeatIndividualSuiteIcon />
-                            )}
-                            {item.type === 'permanentka' && (
-                              <FeaturedPlayListIcon />
-                            )}
-                          </StyledAvatar>
-                        </ListItemAvatar>
-                        <ListItemText>{`${item.title} - ${formatPrice(
-                          item.price
-                        )} € x ${item.count}`}</ListItemText>
-                        <ListItemSecondaryAction>
-                          <IconButton
-                            edge="end"
-                            aria-label="delete"
-                            onClick={() => removeProcedure(i)}
-                          >
-                            <DeleteIcon />
-                          </IconButton>
-                        </ListItemSecondaryAction>
+                        <Items>
+                          <BodyItem width={40}>
+                            <ListItemAvatar>
+                              <StyledAvatar>
+                                {item.type === 'procedura' && (
+                                  <RoomServiceIcon />
+                                )}
+                                {item.type === 'pobyt' && (
+                                  <AirlineSeatIndividualSuiteIcon />
+                                )}
+                                {item.type === 'permanentka' && (
+                                  <FeaturedPlayListIcon />
+                                )}
+                              </StyledAvatar>
+                            </ListItemAvatar>
+                            <ListItemText>{item.title}</ListItemText>
+                          </BodyItem>
+                          <BodyItem width={20}>{`${item.count} x`}</BodyItem>
+                          <BodyItem>{`${formatPrice(item.price)} €`}</BodyItem>
+                          <BodyItem width={15}>
+                            {`${formatPrice(item.price * item.count)} €`}
+                          </BodyItem>
+                        </Items>
+                        <ItemsSm>
+                          <BodyItemSm>
+                            <div style={{ width: '100%' }}>
+                              <BodyItemSm
+                                style={{ justifyContent: 'space-between' }}
+                              >
+                                <H6>{item.title}</H6>
+                                <IconButton
+                                  edge="end"
+                                  aria-label="delete"
+                                  onClick={() => removeProcedure(i)}
+                                >
+                                  <DeleteIcon />
+                                </IconButton>
+                              </BodyItemSm>
+                              <P>
+                                Počet: <span>{`${item.count} x`}</span>
+                              </P>
+                              <P>
+                                Jednotková cena:{' '}
+                                <span>{`${formatPrice(item.price)} €`}</span>
+                              </P>
+                              <P>
+                                Cena spolu:{' '}
+                                <span>{`${formatPrice(
+                                  item.count * item.price
+                                )} €`}</span>
+                              </P>
+                            </div>
+                          </BodyItemSm>
+                        </ItemsSm>
+                        <StyledIconButton
+                          edge="end"
+                          aria-label="delete"
+                          onClick={() => removeProcedure(i)}
+                        >
+                          <DeleteIcon />
+                        </StyledIconButton>
                       </ListItem>
                     );
                   })}
                   {priceValue > 0 && (
                     <ListItem>
-                      <ListItemAvatar>
-                        <StyledAvatar>
-                          <EuroIcon />
-                        </StyledAvatar>
-                      </ListItemAvatar>
-                      <ListItemText>{`Suma - ${formatPrice(
-                        priceValue
-                      )} €`}</ListItemText>
-                      <ListItemSecondaryAction>
-                        <IconButton
-                          edge="end"
-                          aria-label="delete"
-                          onClick={() => removePriceValue()}
-                        >
-                          <DeleteIcon />
-                        </IconButton>
-                      </ListItemSecondaryAction>
+                      <Items>
+                        <BodyItem width={40}>
+                          <ListItemAvatar>
+                            <StyledAvatar>
+                              <EuroIcon />
+                            </StyledAvatar>
+                          </ListItemAvatar>
+                          <ListItemText>Suma</ListItemText>
+                        </BodyItem>
+                        <BodyItem width={20}>1 x</BodyItem>
+                        <BodyItem>{`${formatPrice(priceValue)} €`}</BodyItem>
+                        <BodyItem width={15}>
+                          {`${formatPrice(priceValue)} €`}
+                        </BodyItem>
+                      </Items>
+                      <ItemsSm>
+                        <BodyItemSm style={{ justifyContent: 'space-between' }}>
+                          <H6>Suma</H6>
+                          <IconButton
+                            edge="end"
+                            aria-label="delete"
+                            onClick={() => removePriceValue()}
+                          >
+                            <DeleteIcon />
+                          </IconButton>
+                        </BodyItemSm>
+                        <BodyItemSm>Počet: 1 x</BodyItemSm>
+                        <BodyItemSm>
+                          {`Cena spolu: ${formatPrice(priceValue)} €`}
+                        </BodyItemSm>
+                      </ItemsSm>
+                      <StyledIconButton
+                        edge="end"
+                        aria-label="delete"
+                        onClick={() => removePriceValue()}
+                      >
+                        <DeleteIcon />
+                      </StyledIconButton>
                     </ListItem>
                   )}
                 </List>
@@ -230,6 +351,19 @@ export default function Content(props: ContentProps) {
                   Obsah darčekovej poukážky je prázdny.
                 </H6>
               )}
+              <H6
+                style={{
+                  textAlign: 'right',
+                  marginTop: '12px',
+                  textTransform: 'uppercase',
+                }}
+              >
+                Spolu:{' '}
+                <span style={{ marginLeft: '12px' }}>
+                  {formatPrice(totalPrice)}
+                </span>{' '}
+                €
+              </H6>
             </>
           </StyledPaper>
         </Col>

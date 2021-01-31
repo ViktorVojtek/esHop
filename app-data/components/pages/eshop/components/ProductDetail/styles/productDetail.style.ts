@@ -22,7 +22,6 @@ export const Head = styled.h2`
 
 export const Title = styled.h4`
   color: black;
-  font-weight: bold;
   font-size: 1.8rem;
   display: block;
   @media (max-width: 768px) {
@@ -40,7 +39,6 @@ export const TitleMobile = styled.h4`
 `;
 export const VariantTitle = styled.h6`
   color: ${colors.primary};
-  font-weight: bold;
   font-size: 1.25rem;
 `;
 
@@ -153,6 +151,9 @@ export const StyledModalLink = styled.a`
 export const DetailInfo = styled.div`
   padding: 2rem;
   padding-bottom: 0;
+  @media (max-width: 576px) {
+    padding: 0;
+  }
 `;
 
 export const TextArea = styled.div`

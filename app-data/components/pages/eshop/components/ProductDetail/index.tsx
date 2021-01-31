@@ -16,7 +16,6 @@ import {
   VariantOption,
   VariantsSelect,
   Input,
-  StyledModalLink,
   ActionPrice,
   Del,
   Label,
@@ -26,8 +25,15 @@ import {
 import Link from 'next/link';
 import { useQuery } from '@apollo/react-hooks';
 
-import { Container, Row, Col, Spinner } from 'reactstrap';
-import ProductModal from '../../../../../shared/components/ProductModal';
+import {
+  Container,
+  Row,
+  Col,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+} from 'reactstrap';
 // Types
 import Product from '../../../../../shared/types/Product.types';
 import { VariantOfProduct } from '../../../../../shared/types/Store.types';
@@ -36,11 +42,78 @@ import { Context } from '../../../../../lib/state/Store';
 import { PRODUCTS_QUERY } from '../../../../../graphql/query';
 import RelatedProducts from '../../../../../shared/components/RelatedProducts';
 import { formatPrice } from '../../../../../shared/helpers/formatters';
-import { ProductButton } from '../../../../../shared/design';
-import { getLinesCount } from '../../../../../shared/helpers/getLinesCount';
+import { Button, colors, ProductButton } from '../../../../../shared/design';
 import DescriptionEl from './Description';
-import ProductDetailSkeleton from './Skeleton';
 import RelatedProductSkeleton from '../../../../../shared/components/RelatedProducts/Skeleton';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import styled from 'styled-components';
+
+const StyledModalBody = styled.div`
+  display: flex;
+  @media (max-width: 576px) {
+    flex-direction: column;
+    align-items: center;
+  }
+`;
+const ModalProductInfo = styled.div`
+  margin-left: 24px;
+  @media (max-width: 576px) {
+    margin-left: 0;
+  }
+`;
+const ModalTitle = styled.h6`
+  color: black;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin: 0;
+`;
+const ModalText = styled.p`
+  color: black;
+  font-size: 0.95rem;
+  margin: 0;
+`;
+const ModalTextSmall = styled.p`
+  color: #4a4a4a;
+  font-size: 0.85rem;
+  margin: 0;
+`;
+const ModalTextBigger = styled.p`
+  color: black;
+  font-size: 1.1rem;
+  margin: 0;
+`;
+const ModalImage = styled.img`
+  width: 150px;
+  max-width: 50%;
+  margin-bottom: 16px;
+`;
+
+const ModalButton = styled(Button)`
+  @media (max-width: 576px) {
+    font-size: 0.85rem;
+  }
+`;
+
+const StyledShoppingCartIcon = styled(ShoppingCartIcon)`
+  color: white;
+  @media (max-width: 330px) {
+    display: none !important;
+  }
+`;
+
+const StyledProductButton = styled(ProductButton)`
+  @media (max-width: 576px) {
+    display: block;
+  }
+`;
+
+const Holder = styled.div`
+  display: flex;
+  alignitems: 'flex-end';
+  @media (max-width: 576px) {
+    flex-direction: column;
+  }
+`;
 
 interface IProductDetailProps {
   product: Product;
@@ -61,6 +134,7 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
   const productCountRef = useRef(null);
   const [activeVariant, setActiveVariant] = useState(0);
   const [products, setProducts] = useState([]);
+  const [modal, setModal] = useState(false);
   const { dispatch } = useContext(Context);
 
   const { error, loading, data } = useQuery(PRODUCTS_QUERY, {
@@ -76,6 +150,8 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
   if (error) {
     return <>{error.message}</>;
   }
+
+  const toggleModal = () => setModal(!modal);
 
   const setRelatedProducts = (products: Product[]) => {
     const filteredProducts = products.filter((item) => item._id !== _id);
@@ -117,7 +193,7 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
       isEnvelopeSize,
       title: mainTitle,
     });
-    dispatch({ type: 'SET_PRODUCT_MODAL', payload: true });
+    toggleModal();
   };
 
   const variantOptions: JSX.Element[] = variants.map(({ title }) => (
@@ -192,7 +268,7 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
                     </VariantsSelect>
                   </>
                 )}
-                <div style={{ display: 'flex', alignItems: 'flex-end' }}>
+                <Holder>
                   <div>
                     <Label className="mt-2">Počet</Label>
                     <Input
@@ -203,8 +279,10 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
                       ref={productCountRef}
                     />
                   </div>
-                  <ProductButton type="submit">Vložiť do košíka</ProductButton>
-                </div>
+                  <StyledProductButton type="submit">
+                    Vložiť do košíka
+                  </StyledProductButton>
+                </Holder>
               </form>
               <VariantTitle className="mt-4">Popis produktu</VariantTitle>
               <DescriptionEl variant={variants[activeVariant]} />
@@ -220,31 +298,99 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
           <RelatedProducts products={products} />
         )}
       </Container>
-      <ProductModal
-        message="Pokračujte v nákupe alebo do pokladne."
-        title="Produkt bol pridaný do košíka"
-      >
-        <Link href="cart">
-          <StyledModalLink
-            onClick={() =>
-              dispatch({ type: 'SET_PRODUCT_MODAL', payload: false })
-            }
-            color="primary"
+      <div>
+        <Modal isOpen={modal} toggle={toggleModal}>
+          <ModalHeader
+            style={{ width: '100%', padding: '.5rem 1rem' }}
+            toggle={toggleModal}
           >
-            Do pokladne
-          </StyledModalLink>
-        </Link>
-        <Link href="/eshop">
-          <StyledModalLink
-            onClick={() =>
-              dispatch({ type: 'SET_PRODUCT_MODAL', payload: false })
-            }
-            color="primary"
+            Váš tovar bol úspešne pridaný do košíka
+          </ModalHeader>
+          <ModalBody>
+            <StyledModalBody>
+              {variants[0].images.length > 0 ? (
+                <ModalImage
+                  src={variants[0].images[0].path}
+                  alt={variants[0].title}
+                />
+              ) : null}
+              <ModalProductInfo>
+                <ModalTitle>{title}</ModalTitle>
+                <ModalTextSmall style={{ marginBottom: '1rem' }}>
+                  {subCategory.title}
+                </ModalTextSmall>
+                {variants[activeVariant].discount > 0 ? (
+                  <ModalText>
+                    {formatPrice(
+                      variants[activeVariant].price.value -
+                        (variants[activeVariant].price.value *
+                          variants[0].discount) /
+                          100
+                    )}{' '}
+                    {variants[activeVariant].price.currency}
+                  </ModalText>
+                ) : (
+                  <ModalText>
+                    {formatPrice(variants[activeVariant].price.value)}{' '}
+                    {variants[activeVariant].price.currency}
+                  </ModalText>
+                )}
+                <ModalTextSmall>Cena vrátane DPH 20%</ModalTextSmall>
+                <ModalText style={{ marginBottom: '1rem' }}>
+                  Počet:{' '}
+                  <span>
+                    {productCountRef.current && productCountRef.current.value}
+                  </span>
+                </ModalText>
+                <ModalTextBigger>
+                  Cena spolu:{' '}
+                  {productCountRef.current && (
+                    <span>
+                      {variants[activeVariant].discount > 0 ? (
+                        <span>
+                          {formatPrice(
+                            (variants[activeVariant].price.value -
+                              (variants[activeVariant].price.value *
+                                variants[0].discount) /
+                                100) *
+                              productCountRef.current.value
+                          )}{' '}
+                          {variants[activeVariant].price.currency}
+                        </span>
+                      ) : (
+                        <span>
+                          {formatPrice(
+                            variants[activeVariant].price.value *
+                              productCountRef.current.value
+                          )}{' '}
+                          {variants[activeVariant].price.currency}
+                        </span>
+                      )}
+                    </span>
+                  )}
+                </ModalTextBigger>
+              </ModalProductInfo>
+            </StyledModalBody>
+          </ModalBody>
+          <ModalFooter
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              padding: '.75rem 0',
+            }}
           >
-            Nakupovať
-          </StyledModalLink>
-        </Link>
-      </ProductModal>
+            <ModalButton color="secondary" onClick={toggleModal}>
+              Nakupovať
+            </ModalButton>
+            <Link href="/eshop/cart">
+              <ModalButton color="primary">
+                <StyledShoppingCartIcon style={{ marginRight: '4px' }} />
+                Do pokladne
+              </ModalButton>
+            </Link>
+          </ModalFooter>
+        </Modal>
+      </div>
     </Wrapper>
   );
 };

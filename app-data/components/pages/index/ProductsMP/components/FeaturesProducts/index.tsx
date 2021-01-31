@@ -29,8 +29,7 @@ const FeaturesProducts: FC<IFeaturesProducts> = ({ category }) => {
 
   return (
     <Container>
-      <H3>Vybrané produkty</H3>
-      <Row>
+      <Row style={{ marginTop: '4rem' }}>
         <FeaturecProductsFill products={products} addProduct={null} />
       </Row>
     </Container>

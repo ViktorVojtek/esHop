@@ -13,7 +13,6 @@ export interface IProductToCartData {
 export interface IProductsFillProps {
   products: any;
   addProduct: (data: IProductToCartData) => void;
-  toggleModal?: () => void;
 }
 
 export interface IProductTitle {

@@ -1,12 +1,14 @@
 import { useQuery } from '@apollo/react-hooks';
 import { Element } from 'react-scroll';
 import React, { FC } from 'react';
-import { Row } from 'reactstrap';
 import { PRODUCTS_QUERY } from '../../../../../graphql/query';
 import CustomSpinner from '../../../../../shared/components/CustomSpinner/CustomerSpinner';
 import Product from '../../../../../shared/types/Product.types';
 import Permanents from '../Permanents';
 import { IGiftCardData } from '../Stepper';
+import SwiperCarousel from '../Swiper';
+import { SwiperSlide } from 'swiper/react';
+import { StyledElement } from '../../styles';
 
 type IPermanentType = {
   setFormData: React.Dispatch<React.SetStateAction<IGiftCardData>>;
@@ -54,22 +56,42 @@ const PermanentType: FC<IPermanentType> = ({ formData, setFormData }) => {
     });
   };
 
-  const procedury = products.map((item: Product) => {
-    return (
-      item.subCategory.title === 'Permanentky' && (
-        <Permanents
-          key={item.title}
-          permanent={item}
-          addPermanent={addPermanent}
-        />
-      )
-    );
+  const permanentkyArray = products.filter(
+    (item: Product) => item.subCategory.title === 'Permanentky'
+  );
+
+  const procedury = permanentkyArray.map((item: Product) => {
+    if (item.variants.length === 1) {
+      return (
+        <SwiperSlide key={item.title}>
+          <Permanents
+            variant={0}
+            permanent={item}
+            addPermanent={addPermanent}
+          />
+        </SwiperSlide>
+      );
+    } else {
+      const fields: JSX.Element[] = [];
+      for (let i = 0; i < item.variants.length; i++) {
+        fields.push(
+          <SwiperSlide key={item.variants[i].title}>
+            <Permanents
+              variant={i}
+              permanent={item}
+              addPermanent={addPermanent}
+            />
+          </SwiperSlide>
+        );
+      }
+      return fields;
+    }
   });
 
   return (
-    <Element name="content">
-      <Row>{procedury}</Row>
-    </Element>
+    <StyledElement name="content">
+      <SwiperCarousel>{procedury}</SwiperCarousel>
+    </StyledElement>
   );
 };
 

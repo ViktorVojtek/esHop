@@ -39,7 +39,7 @@ const MoneyType: FC<IMoneyType> = ({ formData, setFormData }) => {
 
   return (
     <Element name="content">
-      <InputHolder style={{ marginTop: '48px' }}>
+      <InputHolder style={{ marginTop: '24px' }}>
         <TextField
           onChange={handleChange}
           type="number"

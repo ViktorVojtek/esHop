@@ -1,22 +1,22 @@
 import React, { useState, FC, ChangeEvent } from 'react';
 import styled from 'styled-components';
-import { Col, InputGroup, InputGroupAddon, Input } from 'reactstrap';
 import { formatPrice } from '../../../../../shared/helpers/formatters';
-import { TextFieldButton } from '../../../../../shared/design';
 import { useSnackbar } from 'notistack';
 import InfoPopover from '../InfoPopover';
 import Product from '../../../../../shared/types/Product.types';
-import { VariantsSelect } from '../../../eshop/components/ProductDetail/styles/productDetail.style';
 import {
   ActionPrice,
   Del,
   Holder,
+  IconsHolder,
   Item,
-  ItemTextProcedures,
+  OverFlow,
   P,
   Price,
   StyledPaper,
+  BonusBadge,
 } from '../../styles';
+import { CartPlusIcon } from '../../../../../shared/design/icons';
 
 type IItem = {
   title: string;
@@ -27,23 +27,18 @@ type IItem = {
 type IPermanents = {
   permanent: Product;
   addPermanent: (item: IItem) => void;
+  variant: number;
 };
 
-const Bonus = styled.p`
-  color: red;
-  margin-bottom: 0;
-`;
-
-const Permanents: FC<IPermanents> = ({ permanent, addPermanent }) => {
+const Permanents: FC<IPermanents> = ({
+  permanent,
+  addPermanent,
+  variant = 0,
+}) => {
   const [count, setCount] = useState(0);
-  const [actualVariant, setActualVariant] = useState(0);
+  const [actualVariant, setActualVariant] = useState(variant);
   const { enqueueSnackbar } = useSnackbar();
   const { variants, title } = permanent;
-
-  const countInput = (e) => {
-    let count = e.currentTarget.value;
-    count === '' ? setCount(0) : setCount(count);
-  };
 
   function getPrice(variant): number {
     if (variant.discount > 0) {
@@ -53,16 +48,11 @@ const Permanents: FC<IPermanents> = ({ permanent, addPermanent }) => {
     } else return variant.price.value;
   }
 
-  const AddService = () => {
-    if (count <= 0) {
-      return enqueueSnackbar(`Počet musí byť väčší ako 0`, {
-        variant: 'error',
-      });
-    }
+  const addService = () => {
     const item: IItem = {
       title: variants[actualVariant].title,
       price: getPrice(variants[actualVariant]),
-      count: count,
+      count: 1,
     };
     addPermanent(item);
     enqueueSnackbar(`Pridané: ${title} ${count}x`, {
@@ -70,102 +60,56 @@ const Permanents: FC<IPermanents> = ({ permanent, addPermanent }) => {
     });
   };
 
-  const handleSetActiveVariant = (idx: number) => {
-    setActualVariant(idx);
-  };
-
-  const variantOptions: JSX.Element[] = variants.map(({ title }) => (
-    <option key={title} value={title}>
-      {title}
-    </option>
-  ));
-
-  //const toggle = () => setEnabled(!enabled);
   return (
-    <Col
-      md="4"
-      sm="6"
-      xs="12"
-      data-aos="fade-left"
-      className="d-flex justify-content-between flex-column"
-    >
-      <Holder
-        className="w-100"
-        style={{
-          marginTop: '8px',
-          paddingTop: '8px',
-          marginBottom: '16px',
-        }}
-      >
-        <div className="d-flex w-100 mb-2 ">
-          <ItemTextProcedures>{title}</ItemTextProcedures>
-          <InfoPopover html={variants[actualVariant].description} />
-        </div>
-        {variants[actualVariant].bonus && (
-          <Bonus>{variants[actualVariant].bonus}</Bonus>
-        )}
-      </Holder>
-      <StyledPaper elevation={3}>
-        <Item>
-          <Holder style={{ marginBottom: '16px' }}>
-            <P style={{ paddingTop: '8px' }}>
-              Cena:{' '}
-              {variants[actualVariant].discount > 0 ? (
-                <Price>
-                  <Del>{`${formatPrice(
-                    variants[actualVariant].price.value
-                  )} €`}</Del>
-                  <ActionPrice className="ml-2">
-                    {formatPrice(
-                      variants[actualVariant].price.value -
-                        (variants[actualVariant].price.value *
-                          variants[actualVariant].discount) /
-                          100
-                    )}{' '}
-                    {`€`}
-                  </ActionPrice>
-                </Price>
-              ) : (
-                <Price>
-                  {formatPrice(variants[actualVariant].price.value)} {`€`}
-                </Price>
-              )}
-            </P>
-            <P style={{ paddingBottom: '8px' }}>
-              Cena spolu:{' '}
-              <Price>
-                {formatPrice(getPrice(variants[actualVariant]) * count)} {`€`}
-              </Price>
-            </P>
-          </Holder>
-          <VariantsSelect
-            id="variants"
-            name="variants"
-            style={{ maxWidth: '100%', marginBottom: '12px' }}
-            onChange={(event: ChangeEvent<HTMLSelectElement>) => {
-              const idx: number = event.currentTarget.selectedIndex;
+    <StyledPaper elevation={3} url={variants[actualVariant].images[0].path}>
+      <OverFlow />
+      {variants[actualVariant].bonus && (
+        <BonusBadge>{variants[actualVariant].bonus}</BonusBadge>
+      )}
+      <Item>
+        <Holder style={{ marginBottom: '16px' }}>
+          <P className="mb-0">{title}</P>
+          <P className="mb-0">{variants[actualVariant].title}</P>
 
-              handleSetActiveVariant(idx);
-            }}
-          >
-            {variantOptions}
-          </VariantsSelect>
-          <InputGroup>
-            <Input
-              placeholder="Počet"
-              type="number"
-              onChange={(e) => countInput(e)}
-              min={1}
-            />
-            <InputGroupAddon addonType="prepend">
-              <TextFieldButton type="button" onClick={AddService}>
-                Pridať
-              </TextFieldButton>
-            </InputGroupAddon>
-          </InputGroup>
-        </Item>
-      </StyledPaper>
-    </Col>
+          <P style={{ paddingTop: '8px' }}>
+            Cena:{' '}
+            {variants[actualVariant].discount > 0 ? (
+              <Price>
+                <Del>{`${formatPrice(
+                  variants[actualVariant].price.value
+                )} €`}</Del>
+                <ActionPrice className="ml-2">
+                  {formatPrice(
+                    variants[actualVariant].price.value -
+                      (variants[actualVariant].price.value *
+                        variants[actualVariant].discount) /
+                        100
+                  )}{' '}
+                  {`€`}
+                </ActionPrice>
+              </Price>
+            ) : (
+              <Price>
+                {formatPrice(variants[actualVariant].price.value)} {`€`}
+              </Price>
+            )}
+          </P>
+        </Holder>
+        <IconsHolder>
+          <InfoPopover
+            color="white"
+            size={30}
+            html={variants[actualVariant].description}
+          />
+          <CartPlusIcon
+            style={{ marginLeft: '24px' }}
+            color="white"
+            size={30}
+            onClick={addService}
+          />
+        </IconsHolder>
+      </Item>
+    </StyledPaper>
   );
 };
 

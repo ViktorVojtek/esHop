@@ -8,6 +8,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '@brainhubeu/react-carousel/lib/style.css';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
+import 'swiper/swiper.min.css';
+import 'swiper/components/navigation/navigation.min.css';
+import 'swiper/components/pagination/pagination.min.css';
+
 import Style from '../app-data/shared/styles/global.style';
 // Material UI support
 import { ThemeProvider } from '@material-ui/core/styles';
@@ -52,6 +56,8 @@ const MyApp = (props) => {
         <ApolloProvider client={apollo}>
           <Store>
             <Style />
+            {/*Production: 6LcS98QZAAAAAG6FfstRw_BF7BwFknxp-e-0Ra6-*/}
+            {/*Local: 6LfgFeEZAAAAAD2fNYXGUjpI_Yu1c65XODYxgoyY*/}
             <GoogleReCaptchaProvider reCaptchaKey="6LfgFeEZAAAAAD2fNYXGUjpI_Yu1c65XODYxgoyY">
               <SnackbarProvider
                 maxSnack={3}

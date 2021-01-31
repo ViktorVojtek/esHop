@@ -37,7 +37,7 @@ const updateProduct: (
         const { images } = variants[i];
 
         if (images && images.length > 0 && images[0].base64) {
-          const vId = `${productData._id}-${variants[i].title.toUpperCase()}`;
+          const vId = `${_id}-${variants[i].title.toUpperCase()}`;
 
           imagesData = await getVariantImagesPaths(images, vId);
         } else {

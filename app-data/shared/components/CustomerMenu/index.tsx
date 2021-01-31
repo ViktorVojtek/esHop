@@ -1,24 +1,76 @@
 import React, { useContext, useState } from 'react';
-import {
-  DropdownToggle,
-  Dropdown,
-  DropdownMenu,
-  DropdownItem,
-} from 'reactstrap';
 import { Context } from '../../../lib/state/Store';
 import { Login } from '../Navigation/Site/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Link from 'next/link';
 import { logout } from '../../../lib/authCustomer';
-
 import LoginRegisterModal from '../LoginRegisterModal';
+import {
+  Drawer,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+} from '@material-ui/core';
+import styled from 'styled-components';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import CloseIcon from '@material-ui/icons/Close';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import CardGiftcard from '@material-ui/icons/CardGiftcard';
+import Settings from '@material-ui/icons/Settings';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+
+const useStyles = makeStyles({
+  list: {
+    width: 250,
+    '& .MuiListItemIcon-root': {
+      minWidth: '36px',
+    },
+  },
+});
+
+const StyledAccountCircleIcon = styled(AccountCircleIcon)`
+  color: red;
+  width: 36px !important;
+  height: 36px !important;
+  margin-left: 12px;
+  transition: all 0.3s ease-out !important;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.1);
+  }
+`;
+const StyledCloseIcon = styled(CloseIcon)`
+  color: rgba(0, 0, 0, 0.54);
+  margin: 8px;
+  margin-left: auto;
+`;
+const StyledShoppingCartIcon = styled(ShoppingCartIcon)`
+  color: rgba(0, 0, 0, 0.54);
+`;
+const StyledCardGiftcard = styled(CardGiftcard)`
+  color: rgba(0, 0, 0, 0.54);
+`;
+const StyledSettings = styled(Settings)`
+  color: rgba(0, 0, 0, 0.54);
+`;
+const StyledExitToAppIcon = styled(ExitToAppIcon)`
+  color: rgba(0, 0, 0, 0.54);
+`;
 
 const CustomerMenu = () => {
   const { state } = useContext(Context);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-
+  const classes = useStyles();
   const [loginModal, setLoginModal] = useState(false);
+  const [open, setOpen] = React.useState(false);
 
-  const toggleCustomer = () => setDropdownOpen((prevState) => !prevState);
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
 
   const { customer } = state;
   return (
@@ -26,25 +78,49 @@ const CustomerMenu = () => {
       <div>
         {customer.token ? (
           <>
-            <Dropdown isOpen={dropdownOpen} toggle={toggleCustomer}>
-              <DropdownToggle
-                tag="span"
-                data-toggle="dropdown"
-                aria-expanded={dropdownOpen}
-                className="d-block"
-              >
-                <Login />
-                <span className="cursor-pointer hideMobile">
-                  {customer.firstName} {customer.lastName}
-                </span>
-              </DropdownToggle>
-              <DropdownMenu>
-                <DropdownItem>
-                  <Link href="/moja-zona">Moja zóna</Link>
-                </DropdownItem>
-                <DropdownItem onClick={logout}>Odhlásenie</DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
+            <StyledAccountCircleIcon onClick={handleDrawerOpen} />
+            <Drawer
+              disableScrollLock
+              anchor="right"
+              open={open}
+              onClose={handleDrawerClose}
+            >
+              <StyledCloseIcon onClick={handleDrawerClose} />
+              <div role="presentation" className={classes.list}>
+                <List>
+                  <Link href="/moja-zona?tab=objednavky">
+                    <ListItem button onClick={handleDrawerClose}>
+                      <ListItemIcon>
+                        <StyledShoppingCartIcon />
+                      </ListItemIcon>
+                      <ListItemText primary="Objednávky" />
+                    </ListItem>
+                  </Link>
+                  <Link href="/moja-zona?tab=vernostny-program">
+                    <ListItem button onClick={handleDrawerClose}>
+                      <ListItemIcon>
+                        <StyledCardGiftcard />
+                      </ListItemIcon>
+                      <ListItemText primary="Vernostný program" />
+                    </ListItem>
+                  </Link>
+                  <Link href="/moja-zona?tab=nastavenia">
+                    <ListItem button onClick={handleDrawerClose}>
+                      <ListItemIcon>
+                        <StyledSettings />
+                      </ListItemIcon>
+                      <ListItemText primary="Nastavenia" />
+                    </ListItem>
+                  </Link>
+                  <ListItem button onClick={logout}>
+                    <ListItemIcon>
+                      <StyledExitToAppIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Odhlásenie" />
+                  </ListItem>
+                </List>
+              </div>
+            </Drawer>
           </>
         ) : (
           <Login onClick={() => setLoginModal(true)} />
@@ -60,3 +136,20 @@ const CustomerMenu = () => {
 };
 
 export default CustomerMenu;
+
+/*<Dropdown isOpen={dropdownOpen} toggle={toggleCustomer}>
+              <DropdownToggle
+                tag="span"
+                data-toggle="dropdown"
+                aria-expanded={dropdownOpen}
+                className="d-block"
+              >
+                <Login />
+              </DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem>
+                  <Link href="/moja-zona">Moja zóna</Link>
+                </DropdownItem>
+                <DropdownItem onClick={logout}>Odhlásenie</DropdownItem>
+              </DropdownMenu>
+            </Dropdown>*/

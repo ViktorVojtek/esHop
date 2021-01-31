@@ -58,10 +58,12 @@ function renderDescription(description) {
 
 type InfoPopoverProps = {
   html: string;
+  color?: string;
+  size?: number;
 };
 
 const InfoPopover = (props: InfoPopoverProps) => {
-  const { html } = props;
+  const { html, color, size } = props;
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
@@ -92,10 +94,7 @@ const InfoPopover = (props: InfoPopoverProps) => {
 
   return (
     <div>
-      <InfoIcon
-        onClick={handleOpen}
-        style={{ marginLeft: '8px', cursor: 'pointer' }}
-      />
+      <InfoIcon onClick={handleOpen} color={color} size={size} />
       <Dialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
