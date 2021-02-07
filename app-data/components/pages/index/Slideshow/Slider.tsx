@@ -46,6 +46,12 @@ const ContentImage = styled.img`
     opacity: 0;
   }
 `;
+const ContentImage2 = styled.img`
+  cursor: pointer;
+  position: absolute;
+  width: 100%;
+  transition: opacity 0.5s ease-out;
+`;
 
 const ContentImageFade = styled.img`
   cursor: pointer;
@@ -99,13 +105,67 @@ const ButtonsHolder = styled.div`
   }
 `;
 
+const slide1 = (
+  <SwiperSlide>
+    <Wrapper img="/images/slide1.jpg">
+      <ContentWrapper>
+        <ContentText>
+          <Heading>Zháňate valentínsky darček na poslednú chvíľu?</Heading>
+          <Text>
+            Vyberte si spomedzi našich pobytov, procedúr či produktov. Vložte
+            venovanie, vyberte motív a o zvyšok sa postaráme my.
+          </Text>
+          <ButtonsHolder style={{ display: 'flex' }}>
+            <Link href="/darcekove-poukazky">
+              <Button>Vytvoriť poukážku</Button>
+            </Link>
+            <Link href="/eshop">
+              <Button className="ml-4">Nakupovať</Button>
+            </Link>
+          </ButtonsHolder>
+        </ContentText>
+        <ContentImagesHolder>
+          <ContentImageFade src="/images/poukazky2.png" />
+          <ContentImage src="/images/poukazky1.png" />
+        </ContentImagesHolder>
+      </ContentWrapper>
+    </Wrapper>
+  </SwiperSlide>
+);
+
+const slide2 = (
+  <SwiperSlide>
+    <Wrapper img="/images/slide2.jpg">
+      <ContentWrapper>
+        <ContentText>
+          <Heading>Odišli ste bez suveníra? Nezúfajte.</Heading>
+          <Text>
+            Vyberte si spomedzi niekoľkých príchutí našich kúpeľných oblátok a
+            doneste si kúsok nás k Vám domov.
+          </Text>
+          <div style={{ display: 'flex' }}>
+            <Link href="/darcekove-poukazky">
+              <Button>Vytvoriť poukážku</Button>
+            </Link>
+            <Link href="/eshop">
+              <Button className="ml-4">Nakupovať</Button>
+            </Link>
+          </div>
+        </ContentText>
+        <ContentImagesHolder>
+          <ContentImage2 src="/images/products1.png" />
+        </ContentImagesHolder>
+      </ContentWrapper>
+    </Wrapper>
+  </SwiperSlide>
+);
+
 export const Slider = () => {
   return (
     <Swiper
       slidesPerView={1}
       spaceBetween={0}
-      centeredSlides
-      loop={true}
+      allowTouchMove={false}
       autoplay={{
         delay: 10000,
         disableOnInteraction: true,
@@ -115,55 +175,8 @@ export const Slider = () => {
         nextEl: '.swiper-button-next',
       }}
     >
-      <SwiperSlide>
-        <Wrapper img="/images/slide1.jpg">
-          <ContentWrapper>
-            <ContentText>
-              <Heading>Zháňate valentínsky darček na poslednú chvíľu?</Heading>
-              <Text>
-                Vyberte si spomedzi našich pobytov, procedúr či produktov.
-                Vložte venovanie, vyberte motív a o zvyšok sa postaráme my.
-              </Text>
-              <ButtonsHolder style={{ display: 'flex' }}>
-                <Link href="/darcekove-poukazky">
-                  <Button>Vytvoriť poukážku</Button>
-                </Link>
-                <Link href="/eshop">
-                  <Button className="ml-4">Nakupovať</Button>
-                </Link>
-              </ButtonsHolder>
-            </ContentText>
-            <ContentImagesHolder>
-              <ContentImageFade src="/images/poukazky2.png" />
-              <ContentImage src="/images/poukazky1.png" />
-            </ContentImagesHolder>
-          </ContentWrapper>
-        </Wrapper>
-      </SwiperSlide>
-      <SwiperSlide>
-        <Wrapper img="/images/slide2.jpg">
-          <ContentWrapper>
-            <ContentText>
-              <Heading>Odišli ste bez suveníra? Nezúfajte.</Heading>
-              <Text>
-                Vyberte si spomedzi niekoľkých príchutí našich kúpeľných oblátok
-                a doneste si kúsok nás k Vám domov.
-              </Text>
-              <div style={{ display: 'flex' }}>
-                <Link href="/darcekove-poukazky">
-                  <Button>Vytvoriť poukážku</Button>
-                </Link>
-                <Link href="/eshop">
-                  <Button className="ml-4">Nakupovať</Button>
-                </Link>
-              </div>
-            </ContentText>
-            <ContentImagesHolder>
-              <ContentImage src="/images/products1.png" />
-            </ContentImagesHolder>
-          </ContentWrapper>
-        </Wrapper>
-      </SwiperSlide>
+      {slide1}
+      {slide2}
     </Swiper>
   );
 };

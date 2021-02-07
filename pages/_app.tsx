@@ -43,12 +43,26 @@ const MyApp = (props) => {
   return (
     <>
       <Head>
-        <title>{pageTitle || 'Červený kláštor obchod'}</title>
+        <title>
+          {pageTitle || 'Eshop - KÚPELE ČERVENÝ KLÁŠTOR Smerdžonka'}
+        </title>
         {/* Use minimum-scale=1 to enable GPU rasterization */}
         <meta
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
         />
+        <meta
+          name="description"
+          content="Sme nový kúpeľný obchod s cieľom priniesť Vám našu nezabudnuteľnú atmosféru priamo domov prostredníctvom tradičných kúpeľných oblátok, kozmetiky, suvenírov, darčekových poukážok a veľa iných produktov."
+        />
+        <meta
+          property="og:image"
+          content="https://eshop.kupelecks.sk/images/slide1.jpg"
+        />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:width" content="2200" />
+        <meta property="og:image:height" content="1238" />
+        <meta property="og:image:alt" content="Wellness pobyt romantika" />
       </Head>
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}

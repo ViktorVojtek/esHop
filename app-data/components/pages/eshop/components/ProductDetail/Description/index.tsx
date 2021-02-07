@@ -74,7 +74,7 @@ const DescriptionEl = (props: DescriptionElType) => {
 
   return (
     <>
-      <DescEl height={height} animationSpeed={300}>
+      <DescEl className="mt-4" height={height} animationSpeed={300}>
         <P
           ref={descriptionElement}
           dangerouslySetInnerHTML={renderDescription(variant.description)}

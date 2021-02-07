@@ -26,7 +26,7 @@ const faq = [
   {
     question: 'Je na nákup v e-shope potrebná registrácia?',
     answer:
-      'Nie, registrácia v  našom e-shope nie je povinná, no odporúčame ju. Je pre vás pohodlnejšie sa registrovať a ušetriť si čas vyplňovaným všetkých povinných údajov. ',
+      'Nie, registrácia v  našom e-shope nie je povinná, no odporúčame ju. Je pre vás pohodlnejšie sa registrovať, ušetriť si čas vyplňovaným všetkých povinných údajov a naplno využívať náš vernostný program. ',
   },
   {
     question: 'Aké spôsoby platby akceptujete?',
@@ -52,7 +52,7 @@ const faq = [
     question:
       'V objednávke som zadal/a platbu bankovým prevodom, ale údaje k platbe mi neprišli. Ako mám postupovať?',
     answer:
-      'Údaje k platbe nájdete v e-maile potvrdzujúcom prijatie Vašej objednávky. Číslo účtu pre platbu je....................., ako variabilný symbol uveďte číslo Vašej objednávky. Pokiaľ si nie ste istý/á, aké údaje máte pri platbe zadať, kontaktujte prosím tel.číslo ......',
+      'Údaje k platbe nájdete v e-maile potvrdzujúcom prijatie Vašej objednávky. IBAN pre platbu je SK8102000000004309858257, ako variabilný symbol uveďte číslo Vašej objednávky. Pokiaľ si nie ste istý/á, aké údaje máte pri platbe zadať, kontaktujte prosím tel.číslo +421 911 338 828',
   },
   {
     question: 'Kedy bude moja reklamácia vybavená? ',
@@ -165,15 +165,23 @@ const KontaktPage = () => (
           </Card>
         </Col>
       </Row>
-      <Row>
+      <Row id="faq">
         <Col>
           <H2
             style={{ borderTop: '1px solid #cecece', paddingTop: '32px' }}
-            id="faq"
             className="w-100 mt-4 mb-4"
           >
             ČASTO KLADENÉ OTÁZKY
           </H2>
+          <p>
+            V rubrike FAQ nájdete odpovede na najčastejšie kladené otázky
+            týkajúce sa nákupov na www.eshop.kupelecks.sk V prípade, že ste
+            nižšie nenašli odpoveď, nevadí! Napíšte nám e-mail na:
+            <a href="mailto: eshop@kupelecks.sk"> eshop@kupelecks.sk</a> alebo
+            nás kontaktujte telefonicky na{' '}
+            <a href="tel: eshop@kupelecks.sk">+421 911 338 828</a> v pracovné
+            dni od <strong>08:00 - 17:00</strong> hod.
+          </p>
           {faq.map((item, i) => (
             <FaqItem key={i} question={item.question} answer={item.answer} />
           ))}

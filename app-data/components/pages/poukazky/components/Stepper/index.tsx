@@ -288,7 +288,9 @@ export default function GiftCardStepper() {
           {activeStep === 1 && (
             <Apperance formData={formData} setFormData={setFormData} />
           )}
-          {activeStep === 2 && <Summary formData={formData} />}
+          {activeStep === 2 && (
+            <Summary formData={formData} setFormData={setFormData} />
+          )}
           <div
             style={{
               width: '100%',
@@ -314,7 +316,7 @@ export default function GiftCardStepper() {
       <Modal isOpen={isModal} toggle={toggleModal}>
         <ModalHeader
           style={{ width: '100%', padding: '.5rem 1rem' }}
-          toggle={toggleModal}
+          toggle={handleReset}
         >
           Darčeková poukážka bola úspešne pridaná do košíka
         </ModalHeader>

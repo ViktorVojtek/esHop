@@ -1,5 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { config } from '../../config';
+import { validateHuman } from '../../graphql/resolvers/utils';
+import ModError from '../../graphql/resolvers/utils/error';
 
 export const subscribeRoute: (
   req: Request,
@@ -7,16 +9,22 @@ export const subscribeRoute: (
   next: NextFunction
 ) => Promise<any> = async (req, res, next) => {
   const {
-    body: { email, fname, lname, tel },
+    body: { email, fname, lname, tel, recaptchaToken },
   } = req;
 
   const { mailchimp } = config;
+  if (recaptchaToken) {
+    const human = await validateHuman(recaptchaToken);
+
+    if (!human) {
+      throw new ModError(400, 'You are robot!');
+    }
+  }
 
   try {
     const API_KEY = mailchimp.secret;
     const LIST_ID = '447d8cc287';
     const DATACENTER = API_KEY.split('-')[1];
-    console.log({ API_KEY, LIST_ID, DATACENTER });
 
     const data = {
       email_address: email,

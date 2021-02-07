@@ -146,6 +146,7 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({
   const productCountRef = useRef(null);
   const [activeVariant, setActiveVariant] = useState(0);
   const [products, setProducts] = useState([]);
+  const [subCategories, setSubCategories] = useState([]);
   const [modal, setModal] = useState(false);
   const { dispatch } = useContext(Context);
 
@@ -155,8 +156,8 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({
   useEffect(() => {
     if (data) {
       let { products } = data;
-      console.log(data);
       setRelatedProducts(products.products);
+      setSubCategories(products.subCategories);
     }
   }, [data]);
 
@@ -288,11 +289,14 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({
             <DetailInfo>
               <Title>{title}</Title>
               {variants.length > 1 && (
-                <VariantTitle>{variants[activeVariant].title}</VariantTitle>
+                <VariantTitle style={{ color: 'black' }}>
+                  <span style={{ color: 'black' }}>Variant: </span>
+                  {variants[activeVariant].title}
+                </VariantTitle>
               )}
               {variants[activeVariant].bonus && (
                 <VariantTitle style={{ color: 'red', fontSize: '1.1rem' }}>
-                  {variants[activeVariant].bonus}
+                  {`Bonus: ${variants[activeVariant].bonus}`}
                 </VariantTitle>
               )}
               {variants[activeVariant].discount > 0 ? (
@@ -328,6 +332,7 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({
                         <VariantsSelect
                           id="variants"
                           name="variants"
+                          className="mt-2"
                           onChange={(event: ChangeEvent<HTMLSelectElement>) => {
                             const idx: number =
                               event.currentTarget.selectedIndex;
@@ -350,19 +355,21 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({
                           ref={productCountRef}
                         />
                       </div>
-                      <StyledProductButton type="submit">
-                        Vložiť do košíka
-                      </StyledProductButton>
-
-                      {subCategory.forGiftCard && (
-                        <StyledProductButton
-                          style={{ marginRight: '8px' }}
-                          onClick={handleAddProductToGiftCard}
-                        >
-                          Vytvoriť poukážku
-                        </StyledProductButton>
-                      )}
                     </Holder>
+
+                    <StyledProductButton type="submit" className="mr-2">
+                      Vložiť do košíka
+                    </StyledProductButton>
+
+                    {subCategory.forGiftCard && (
+                      <StyledProductButton
+                        type="button"
+                        style={{ marginRight: '8px' }}
+                        onClick={handleAddProductToGiftCard}
+                      >
+                        Vytvoriť poukážku
+                      </StyledProductButton>
+                    )}
                   </form>
                 ) : (
                   <>
@@ -402,7 +409,6 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({
                   </>
                 )}
               </ButtonsHolder>
-              <VariantTitle className="mt-4">Popis produktu</VariantTitle>
               <DescriptionEl variant={variants[activeVariant]} />
             </DetailInfo>
           </Col>
@@ -413,7 +419,7 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({
         {loading ? (
           <RelatedProductSkeleton />
         ) : (
-          <RelatedProducts products={products} />
+          <RelatedProducts subCategories={subCategories} products={products} />
         )}
       </Container>
       <div>

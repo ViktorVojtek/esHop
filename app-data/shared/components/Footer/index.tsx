@@ -44,8 +44,9 @@ const Footer: () => JSX.Element = () => {
                 <StyledLocation />
               </IconHolder>
               <TextBlock>
-                <Text>Červený Kláštor 147</Text>
-                <Text>059 06 Červený Kláštor</Text>
+                <Text>AMICUS RELAX, s.r.o.</Text>
+                <Text>Popradská 6</Text>
+                <Text>064 01 Stará Ľubovňa</Text>
               </TextBlock>
             </TextWithIcon>
             <TextWithIcon>
@@ -55,9 +56,6 @@ const Footer: () => JSX.Element = () => {
               <TextBlock>
                 <StyledLink href="tel:+421 911 338 828">
                   +421 911 338 828
-                </StyledLink>
-                <StyledLink href="tel:+421 914 338 829">
-                  +421 914 338 829
                 </StyledLink>
               </TextBlock>
             </TextWithIcon>
@@ -79,7 +77,7 @@ const Footer: () => JSX.Element = () => {
                 href="https://kupelecks.sk/o-nas/#historia-a-sucasnost"
                 target="_blank"
               >
-                O spoločnosti
+                O kúpeloch
               </StyledLink>
               <Link href="/pravidla-ochrany-osobnych-udajov">
                 <StyledLink>Pravidlá ochrany osobných údajov</StyledLink>
@@ -95,10 +93,10 @@ const Footer: () => JSX.Element = () => {
           <Col md={3} sm={6}>
             <Title>Obchod</Title>
             <TextBlock>
-              <Link href="/kontakt">
+              <Link href="/kontakt#faq">
                 <StyledLink>Často kladené otázky</StyledLink>
               </Link>
-              <Link href="/moja-zona?vernostny-program">
+              <Link href="/moja-zona?tab=vernostny-program">
                 <StyledLink>Vernostný program</StyledLink>
               </Link>
               <Link href="/moja-zona">

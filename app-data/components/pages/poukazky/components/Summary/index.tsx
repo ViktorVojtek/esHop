@@ -25,6 +25,7 @@ import CardGiftcardOutlinedIcon from '@material-ui/icons/CardGiftcardOutlined';
 
 type IProductToCartData = {
   formData: IGiftCardData;
+  setFormData: React.Dispatch<React.SetStateAction<IGiftCardData>>;
 };
 
 const H5 = styled.h5`
@@ -94,7 +95,8 @@ const Summary: FC<IProductToCartData> = ({ formData }) => {
     for (let i = 0; i < formData.services.length; i++) {
       price += formData.services[i].price * formData.services[i].count;
     }
-    formData.totalPrice = price + formData.priceValue;
+    price = price + formData.priceValue;
+    formData.totalPrice = price;
   }
 
   return (

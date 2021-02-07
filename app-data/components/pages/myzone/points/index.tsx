@@ -30,7 +30,12 @@ const Points: FC<IPoints> = ({ id }) => {
 
   return (
     <div style={{ marginTop: '36px', marginBottom: '36px' }}>
-      <H2 className="mt4 text-center">Vernostný program</H2>
+      <H2 className="text-center">Vernostný program</H2>
+      <p className=" mt-4 text-center">Obdarujte seba a svojich blízkych</p>
+      <p className="text-center">
+        Staňte sa členom vernostného programu Smerdžonka klub a využite
+        jedinečné zľavy, výhody a bonusy
+      </p>
       <P className="mt-4 text-center mb-4">
         <strong>Počet bodov: </strong>
         <span

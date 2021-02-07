@@ -18,8 +18,6 @@ export default async (root: any, { customerData }, ctx: any) => {
 
     const human = await validateHuman(recaptchaToken);
 
-    console.log(human);
-
     if (!human) {
       throw new ModError(400, 'You are robot!');
     }

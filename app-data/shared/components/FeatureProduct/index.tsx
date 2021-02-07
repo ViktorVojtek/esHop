@@ -34,9 +34,7 @@ import { ProductsSkeleton } from '../../../components/pages/eshop/components/Pro
 import { useQuery } from 'react-apollo';
 import { SUBCATEGORIES_QUERY } from '../../../graphql/query';
 import { StyledProductTitle } from '../../../components/pages/eshop/components/Products/components/ProductsFill/styles/products.style';
-import { scrollTop } from '../../helpers';
 import { useRouter } from 'next/router';
-import product from '../../../../server/app-data/graphql/resolvers/query/Product';
 
 const ProductTitle: React.FC<IProductTitle> = ({ slug, title }) => {
   return (
