@@ -14,6 +14,9 @@ const updateSubCategory: (
     const { superSecret } = config;
     await verifyToken(ctx, superSecret);
 
+    console.log(_id);
+    console.log(subCategoryInput);
+
     const subCategoryExist: ISubCategory = await SubCategory.findOne({
       _id: mongoose.Types.ObjectId(_id),
     });

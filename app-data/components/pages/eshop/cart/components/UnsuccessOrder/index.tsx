@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Container } from 'reactstrap';
 import Link from 'next/link';
+import { fonts } from '../../../../../../shared/design';
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -37,7 +38,7 @@ export const P = styled.p`
 
 export const ButtonLink = styled.a`
   background-color: #00aeefb8;
-  font-family: MuseoSans-300;
+  font-family: ${fonts.primary}
   text-transform: uppercase;
   color: #fff !important;
   padding: 1rem 1.5rem;

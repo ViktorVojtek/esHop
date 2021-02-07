@@ -36,68 +36,24 @@ export const LinkButton = styled.a`
 
 export default createGlobalStyle`
 @import url('https://unpkg.com/aos@3.0.0-beta.6/dist/aos.css') screen;
-  @font-face {
-    font-family: Franchise-CE;
-    src: url("/static/fonts/Franchise-CE.otf");
-    font-display: swap;
-    font-style: normal;
-    font-weight: 600;
-  }
-  @font-face {
-    font-family: MuseoSans-Thin;
-    src: url("/public/fonts/MuseoSans-100.otf");
-    font-display: swap;
-    font-style: normal;
-    font-weight: 100;
-   }
-   @font-face {
-    font-family: MuseoSans-Thin-Italic;
-    src: url(/public/fonts/MuseoSans-100Italic.otf);
-    font-display: swap;
-    font-style: italic;
-    font-weight: 100;
-   }
-   @font-face {
-    font-family: MuseoSans-300;
-    src: url("/static/fonts/MuseoSans-300.otf");
-    font-display: swap;
-    font-style: normal;
-    font-weight: 300;
-   }
-   @font-face {
-    font-family: MuseoSans-Normal-Italic;
-    src: url(/public/fonts/MuseoSans-300Italic.otf);
-    font-display: swap;
-    font-style: italic;
-    font-weight: 300;
-   }
-   @font-face {
-    font-family: MuseoSans-500;
-    src: url(/public/fonts/MuseoSans-500.otf);
-    font-display: swap;
-    font-style: normal;
-    font-weight: 500;
-   }
-   @font-face {
-    font-family: MuseoSans-700;
-    src: url(/fonts/MuseoSans-700.otf);
-    font-display: swap;
-    font-style: normal;
-    font-weight: 700;
-   }
-   @font-face {
-    font-family: MuseoSans-500-Italic;
-    src: url(/public/fonts/MuseoSans-500Italic.otf);
-    font-display: swap;
-    font-style: italic;
-    font-weight: 500;
-   }
-   @font-face {
-    font-family: Engagement-Regular;
-    src: url(/fonts/Engagement-Regular.ttf);
-    font-display: swap;
-    font-style: cursive;
-   }
+
+@font-face {
+  font-family: Franchise-CE;
+  src: url("/static/fonts/Franchise-CE.otf");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 600;
+}
+ @font-face {
+  font-family: Engagement-Regular;
+  src: url(/fonts/Engagement-Regular.ttf);
+  font-display: swap;
+  font-style: cursive;
+ }
+
+ *{
+   outline: none !important;
+ }
 
    .modal-open {
     overflow-y: scroll;
@@ -110,7 +66,11 @@ export default createGlobalStyle`
       margin: 0px 10px;
     }
  }
-
+  #mainPageNavigation{
+    @media(max-width: 992px){
+      display:none;
+    }
+  }
    #navigation{
      display: block;
      box-shadow: -1px -1px 10px 3px #e6e6e6;
@@ -148,7 +108,7 @@ export default createGlobalStyle`
    }
 
   * {
-    font-family: MuseoSans-300;
+    font-family: 'Open Sans', sans-serif;
   }
   .admin * {
     font-family:Roboto;
@@ -161,7 +121,6 @@ export default createGlobalStyle`
     .modal-title{
       color: black;
       font-size: 1.25rem;
-      font-family: MuseoSans-300;
       font-weight: bold;
       width: 100%;
       text-align: center;
@@ -284,6 +243,33 @@ export default createGlobalStyle`
       padding: 0.75rem 2rem !important;
     }
   }
+
+  .navbar-main{
+    padding: 0.25rem 7rem !important;
+    background-color: transparent !important;
+    box-shadow: none;
+    transition: all .3s ease-out;
+    @media(max-width: 1550px){
+      padding: 0.25rem 4rem !important;
+    }
+    @media(max-width: 992px){
+      padding: 0.25rem 2rem !important;
+    }
+    .nav-link-main{
+      color: white !important;
+    }
+  }
+  .navbar-main.active{
+    background-color: #FFFFFF !important;
+    box-shadow: -1px -1px 10px 2px #e6e6e6;
+    .nav-link-main{
+      color: #5e8796 !important;
+    }
+  }
+  
+  .navbar-brand{
+    margin-right: 0 !important;
+  }
   .navbar-collapse{
     justify-content: flex-end;
     @media(max-width: 768px){
@@ -366,7 +352,7 @@ export default createGlobalStyle`
   .nav-link-main{
     position: relative;
     transition: transform .5s cubic-bezier(1,.25,0,.75) 0s;
-    font-family: MuseoSans-300;
+    font-family: 'Open Sans', sans-serif;
     color: #5e8796 !important;
     &:before {
       content: "";
@@ -393,9 +379,11 @@ export default createGlobalStyle`
   .product-image{
     overflow: hidden;
     border-radius: 4px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
     position: relative;
     &:hover{
-      img{
+      .product-image-background{
         transform: scale(1.15);
       }
       .detail{

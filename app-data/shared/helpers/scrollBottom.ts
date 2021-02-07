@@ -1,6 +1,6 @@
 export const scrollBottom = () => {
   window.scrollTo({
-    top: window.innerHeight,
+    top: document.body.scrollHeight,
     behavior: 'smooth',
   });
 };

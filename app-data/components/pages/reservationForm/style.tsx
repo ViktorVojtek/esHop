@@ -63,7 +63,6 @@ export const CustomLink = styled.a`
 
 export const P = styled.p`
   font-size: 1rem;
-  font-family: MuseoSans-300;
   color: black;
   font-weight: bold;
 `;

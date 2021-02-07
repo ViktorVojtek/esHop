@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { fonts } from '../../../../../../../../shared/design';
 
 export const AsideCartWrapper = styled.div`
   @media (max-width: 992px) {
@@ -40,7 +41,7 @@ export const Title = styled.h6`
 
 export const Button = styled.button`
   background-color: #00aeefb8;
-  font-family: MuseoSans-300;
+  font-family: ${fonts.primary}
   text-transform: uppercase;
   color: #fff !important;
   padding: 0.75rem 1rem;
@@ -91,7 +92,7 @@ export const TotalText = styled.p<SpanType>`
 
 export const ButtonLink = styled.a`
   background-color: #00aeefb8;
-  font-family: MuseoSans-300;
+  font-family: ${fonts.primary}
   text-transform: uppercase;
   color: #fff !important;
   padding: 1rem 1.5rem;

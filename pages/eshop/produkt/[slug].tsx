@@ -23,7 +23,13 @@ const ProductDetailPage: React.FC = () => {
     return <Error statusCode={404} />;
   }
 
-  return <ProductDetail product={data.productBySlug} />;
+  if (data) {
+    console.log(data);
+  }
+
+  const { product, subCategory } = data.productBySlug;
+
+  return <ProductDetail product={product} subCategory={subCategory} />;
 };
 
 export default ProductDetailPage;

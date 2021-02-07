@@ -44,7 +44,8 @@ const CartProducts: FC<ICartContent> = ({
         <>
           {giftCards.map((item: GiftCard, i: number) => (
             <GiftCardTableRow
-              cardColor={item.cardColor}
+              giftCardTitle={item.giftCardTitle}
+              giftCardImageUrl={item.giftCardImageUrl}
               totalPrice={item.totalPrice}
               text={item.text}
               services={item.services}

@@ -10,7 +10,6 @@ export const Wrapper = styled.div`
 `;
 
 export const P = styled.p`
-  font-family: MuseoSans-300;
   margin-top: 1rem;
 `;
 

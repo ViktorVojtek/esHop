@@ -56,7 +56,7 @@ const ProductList: FC = () => {
     }
   };
 
-  const { products } = data;
+  const { products } = data.products;
 
   const productItems: JSX.Element[] = products.map(
     ({ title, _id, variants, subCategory }) => (

@@ -5,7 +5,7 @@ import {
   PlusCircle,
   MinusCircle,
 } from '@styled-icons/evaicons-solid';
-import { colors } from '../../../../../shared/design';
+import { colors, fonts } from '../../../../../shared/design';
 import CloseIcon from '@material-ui/icons/Close';
 
 export const Wrapper = styled.div`
@@ -153,7 +153,7 @@ export const ButtonAddrRemove = styled.button`
 
 export const ButtonLink = styled.a`
   background-color: #00aeefb8;
-  font-family: MuseoSans-300;
+  font-family: ${fonts.primary}
   text-transform: uppercase;
   color: #fff !important;
   padding: 1rem 1.5rem;

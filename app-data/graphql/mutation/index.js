@@ -116,8 +116,31 @@ export const CREATE_DISCOUNT_MUTATION = gql`
 `;
 
 export const CREATE_SUBCATEGORY_MUTATION = gql`
-  mutation createSubCategory($categoryId: String!, $title: String!) {
-    createSubCategory(categoryId: $categoryId, title: $title) {
+  mutation createSubCategory($subCategoryInput: SubCategoryInput) {
+    createSubCategory(subCategoryInput: $subCategoryInput) {
+      _id
+      categoryId
+      signFlag
+      title
+    }
+  }
+`;
+
+export const CREATE_GIFTCARD_MUTATION = gql`
+  mutation createGiftCard($giftCardInput: GiftCardInput) {
+    createGiftCard(giftCardInput: $giftCardInput) {
+      _id
+      title
+    }
+  }
+`;
+
+export const UPDATE_SUBCATEGORY_MUTATION = gql`
+  mutation updateSubCategory(
+    $_id: String!
+    $subCategoryInput: SubCategoryInput
+  ) {
+    updateSubCategory(_id: $_id, subCategoryInput: $subCategoryInput) {
       _id
       categoryId
       signFlag
@@ -188,40 +211,6 @@ export const CREATE_LOYALITY_PRODUCT_MUTATION = gql`
   }
 `;
 
-export const CREATE_SERVICE_MUTATION = gql`
-  mutation createService($serviceInput: ServiceInput!) {
-    createService(serviceInput: $serviceInput) {
-      title
-      img {
-        path
-        ext
-        imgId
-        size
-        title
-      }
-      category {
-        id
-        title
-      }
-      price {
-        currency
-        value
-      }
-      subCategory {
-        id
-        title
-      }
-      html
-    }
-  }
-`;
-
-export const REMOVE_SERVICE_MUTATION = gql`
-  mutation removeService($_id: String!) {
-    removeService(_id: $_id)
-  }
-`;
-
 export const UPDATE_PRODUCT_MUTATION = gql`
   mutation updateProduct($_id: String!, $productInput: ProductInput!) {
     updateProduct(_id: $_id, productInput: $productInput) {
@@ -256,14 +245,6 @@ export const UPDATE_PRODUCT_MUTATION = gql`
         title
         productCode
       }
-    }
-  }
-`;
-
-export const UPDATE_SERVICE_MUTATION = gql`
-  mutation updateService($_id: String!, $serviceInput: ServiceInput!) {
-    updateService(_id: $_id, serviceInput: $serviceInput) {
-      title
     }
   }
 `;
@@ -436,6 +417,12 @@ export const REMOVE_CURRENCY_MUTATION = gql`
 export const REMOVE_SUBCATEGORY_MUTATION = gql`
   mutation removeSubCategory($_id: String!) {
     removeSubCategory(_id: $_id)
+  }
+`;
+
+export const REMOVE_GIFTCARD_MUTATION = gql`
+  mutation removeGiftCard($_id: String!) {
+    removeGiftCard(_id: $_id)
   }
 `;
 

@@ -73,73 +73,58 @@ export const DISCOUNTS_QUERY = gql`
   }
 `;
 
-export const SERVICE_BY_SLUG_QUERY = gql`
-  query serviceBySlug($slug: String!) {
-    serviceBySlug(slug: $slug) {
-      _id
-      category {
-        id
-        title
-      }
-      html
-      img {
-        path
-        ext
-        imgId
-        size
-        title
-      }
-      price {
-        currency
-        value
-      }
-      subCategory {
-        id
-        title
-      }
-      video
-      title
-      slug
-      discount
-    }
-  }
-`;
-
 export const PRODUCT_BY_SLUG_QUERY = gql`
   query productBySlug($slug: String!) {
     productBySlug(slug: $slug) {
-      _id
-      category {
-        id
+      product {
+        _id
+        category {
+          id
+          title
+        }
+        dateCreated
+        dateModified
+        modifiedByUserId
+        isEnvelopeSize
+        subCategory {
+          id
+          title
+        }
         title
+        slug
+        variants {
+          default
+          description
+          discount
+          inStock
+          images {
+            path
+            size
+            title
+          }
+          price {
+            currency
+            value
+          }
+          title
+          productCode
+          bonus
+        }
       }
-      dateCreated
-      dateModified
-      modifiedByUserId
-      isEnvelopeSize
       subCategory {
-        id
+        _id
+        categoryId
+        signFlag
         title
-      }
-      title
-      slug
-      variants {
-        default
-        description
-        discount
-        inStock
-        images {
+        image {
           path
           size
           title
         }
-        price {
-          currency
-          value
-        }
-        title
-        productCode
-        bonus
+        forSale
+        forReservation
+        forGiftCard
+        forGiftBasket
       }
     }
   }
@@ -188,38 +173,55 @@ export const PRODUCT_QUERY = gql`
 export const PRODUCTS_QUERY = gql`
   query products($categoryId: String, $subCategoryId: String) {
     products(categoryId: $categoryId, subCategoryId: $subCategoryId) {
-      _id
-      category {
-        id
+      products {
+        _id
+        category {
+          id
+          title
+        }
+        dateCreated
+        dateModified
+        modifiedByUserId
+        isEnvelopeSize
+        subCategory {
+          id
+          title
+        }
         title
+        slug
+        variants {
+          default
+          description
+          discount
+          inStock
+          images {
+            path
+            size
+            title
+          }
+          price {
+            currency
+            value
+          }
+          title
+          productCode
+          bonus
+        }
       }
-      dateCreated
-      dateModified
-      modifiedByUserId
-      isEnvelopeSize
-      subCategory {
-        id
+      subCategories {
+        _id
+        categoryId
+        signFlag
         title
-      }
-      title
-      slug
-      variants {
-        default
-        description
-        discount
-        inStock
-        images {
+        image {
           path
           size
           title
         }
-        price {
-          currency
-          value
-        }
-        title
-        productCode
-        bonus
+        forSale
+        forReservation
+        forGiftCard
+        forGiftBasket
       }
     }
   }
@@ -285,6 +287,29 @@ export const SUBCATEGORIES_QUERY = gql`
       categoryId
       signFlag
       title
+      image {
+        path
+        size
+        title
+      }
+      forSale
+      forReservation
+      forGiftCard
+      forGiftBasket
+    }
+  }
+`;
+
+export const GIFTCARDS_QUERY = gql`
+  query giftCards {
+    giftCards {
+      _id
+      title
+      image {
+        path
+        size
+        title
+      }
     }
   }
 `;
@@ -305,69 +330,6 @@ export const PAYMENT_METHODES_QUERY = gql`
       _id
       title
       value
-    }
-  }
-`;
-
-export const SERVICE_QUERY = gql`
-  query service($id: String!) {
-    service(id: $id) {
-      _id
-      category {
-        id
-        title
-      }
-      html
-      img {
-        path
-        ext
-        size
-        title
-      }
-      price {
-        currency
-        value
-      }
-      subCategory {
-        id
-        title
-      }
-      video
-      title
-      slug
-      discount
-    }
-  }
-`;
-
-export const SERVICES_QUERY = gql`
-  query services {
-    services {
-      _id
-      category {
-        id
-        title
-      }
-      html
-      img {
-        path
-        ext
-        imgId
-        size
-        title
-      }
-      price {
-        currency
-        value
-      }
-      subCategory {
-        id
-        title
-      }
-      video
-      title
-      slug
-      discount
     }
   }
 `;

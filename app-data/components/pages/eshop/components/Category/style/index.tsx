@@ -1,8 +1,9 @@
 import styled from 'styled-components';
+import { fonts } from '../../../../../../shared/design';
 
 export const ButtonCategory = styled.button`
   background-color: #00aeefb8;
-  font-family: MuseoSans-300;
+  font-family: ${fonts.primary}
   text-transform: uppercase;
   color: #FFF !important;
   padding: 1rem 1.5rem;
@@ -24,7 +25,7 @@ export const ButtonCategory = styled.button`
 
 export const ButtonSubCategory = styled.a`
   background-color: #00aeefb8;
-  font-family: MuseoSans-300;
+  font-family: ${fonts.primary}
   text-transform: uppercase;
   color: #FFF !important;
   padding: 0.8rem 0.8rem;

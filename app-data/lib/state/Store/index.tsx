@@ -41,6 +41,7 @@ const initialState: IState = {
   loyalityProduct: null,
   coupon: null,
   freeDelivery: null,
+  subCategoriesList: [],
 };
 
 export const Context = createContext<{

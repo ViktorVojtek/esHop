@@ -19,7 +19,7 @@ import TrendingDownOutlinedIcon from '@material-ui/icons/TrendingDownOutlined';
 import PaymentOutlinedIcon from '@material-ui/icons/PaymentOutlined';
 import RateReviewOutlinedIcon from '@material-ui/icons/RateReviewOutlined';
 import RedeemOutlinedIcon from '@material-ui/icons/RedeemOutlined';
-import SettingsApplicationsOutlinedIcon from '@material-ui/icons/SettingsApplicationsOutlined';
+import CardGiftcardOutlinedIcon from '@material-ui/icons/CardGiftcardOutlined';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -44,9 +44,9 @@ const menuItems1 = [
     iconComponent: ScatterPlotOutlinedIcon,
   },
   {
-    href: '/admin/services',
-    title: 'Služby',
-    iconComponent: SettingsApplicationsOutlinedIcon,
+    href: '/admin/gift-cards',
+    title: 'Darčekové poukážky',
+    iconComponent: CardGiftcardOutlinedIcon,
   },
   {
     href: '/admin/loyality-program',

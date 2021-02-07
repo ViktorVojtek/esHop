@@ -56,7 +56,8 @@ const AsideCartContent: FC<ICartContent> = ({
       {giftCards.map((item: GiftCard, i: number) => (
         <AsideCartGiftCards
           id={i}
-          cardColor={item.cardColor}
+          giftCardTitle={item.giftCardTitle}
+          giftCardImageUrl={item.giftCardImageUrl}
           totalPrice={item.totalPrice}
           text={item.text}
           priceValue={item.priceValue}

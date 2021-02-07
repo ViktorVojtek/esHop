@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
 import { Context } from '../../../lib/state/Store';
-import { Login } from '../Navigation/Site/styles';
 import { makeStyles } from '@material-ui/core/styles';
 import Link from 'next/link';
 import { logout } from '../../../lib/authCustomer';
@@ -29,8 +28,24 @@ const useStyles = makeStyles({
   },
 });
 
-const StyledAccountCircleIcon = styled(AccountCircleIcon)`
-  color: red;
+type AccountIconProps = {
+  iconColor?: string;
+};
+
+export const Login = styled(AccountCircleIcon)<AccountIconProps>`
+  color: ${({ iconColor }) => (iconColor ? iconColor : 'red')};
+  width: 36px !important;
+  height: 36px !important;
+  margin-left: 1rem;
+  cursor: pointer;
+  @media (max-width: 576px) {
+    width: 26px !important;
+    height: 26px !important;
+  }
+`;
+
+const StyledAccountCircleIcon = styled(AccountCircleIcon)<AccountIconProps>`
+  color: ${({ iconColor }) => (iconColor ? iconColor : 'red')};
   width: 36px !important;
   height: 36px !important;
   margin-left: 12px;
@@ -58,7 +73,12 @@ const StyledExitToAppIcon = styled(ExitToAppIcon)`
   color: rgba(0, 0, 0, 0.54);
 `;
 
-const CustomerMenu = () => {
+type CustomerMenuProps = {
+  color?: string;
+};
+
+const CustomerMenu = (props: CustomerMenuProps) => {
+  const { color } = props;
   const { state } = useContext(Context);
   const classes = useStyles();
   const [loginModal, setLoginModal] = useState(false);
@@ -78,7 +98,10 @@ const CustomerMenu = () => {
       <div>
         {customer.token ? (
           <>
-            <StyledAccountCircleIcon onClick={handleDrawerOpen} />
+            <StyledAccountCircleIcon
+              iconColor={color}
+              onClick={handleDrawerOpen}
+            />
             <Drawer
               disableScrollLock
               anchor="right"
@@ -123,7 +146,7 @@ const CustomerMenu = () => {
             </Drawer>
           </>
         ) : (
-          <Login onClick={() => setLoginModal(true)} />
+          <Login iconColor={color} onClick={() => setLoginModal(true)} />
         )}
       </div>
 
@@ -136,20 +159,3 @@ const CustomerMenu = () => {
 };
 
 export default CustomerMenu;
-
-/*<Dropdown isOpen={dropdownOpen} toggle={toggleCustomer}>
-              <DropdownToggle
-                tag="span"
-                data-toggle="dropdown"
-                aria-expanded={dropdownOpen}
-                className="d-block"
-              >
-                <Login />
-              </DropdownToggle>
-              <DropdownMenu>
-                <DropdownItem>
-                  <Link href="/moja-zona">Moja zóna</Link>
-                </DropdownItem>
-                <DropdownItem onClick={logout}>Odhlásenie</DropdownItem>
-              </DropdownMenu>
-            </Dropdown>*/

@@ -226,12 +226,14 @@ const CartContent: FC = () => {
           },
         });
         router.push('/eshop/cart/uspesna-objednavka');
+        scrollTop();
       }
       setLoader(false);
     } catch (err) {
       setLoader(false);
       console.log(err);
       router.push('/eshop/cart/neuspesna-objednavka');
+      scrollTop();
     }
   };
 

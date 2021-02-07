@@ -1,6 +1,6 @@
 import Product from '../../../../../../../../shared/types/Product.types';
 import { VariantOfProduct } from '../../../../../../../../shared/types/Store.types';
-import Service from '../../../../../../../../shared/types/Service.types';
+import { SubCategoryType } from '../../../../../../admin/settings/subcategory';
 
 export interface IProductToCartData {
   id: string;
@@ -13,14 +13,16 @@ export interface IProductToCartData {
 export interface IProductsFillProps {
   products: any;
   addProduct: (data: IProductToCartData) => void;
+  subCategories: SubCategoryType[];
 }
 
 export interface IProductTitle {
-  id: string;
   title: string;
   slug?: string;
 }
 
-export interface IProductUI extends Omit<IProductsFillProps, 'products'> {
+export interface IProductUI {
   product: Product;
+  subCategoriesList: SubCategoryType[];
+  addProduct: (data: IProductToCartData) => void;
 }

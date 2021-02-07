@@ -1,3 +1,4 @@
+import { SubCategoryType } from '../../components/pages/admin/settings/subcategory';
 import { ProductPrice } from './Product.types';
 
 export type ProductImage = {
@@ -27,7 +28,8 @@ export type ServiceData = {
 };
 
 export type GiftCard = {
-  cardColor: string;
+  giftCardTitle: string;
+  giftCardImageUrl: string;
   priceValue: number;
   text: string;
   services: ServiceData[];
@@ -92,6 +94,7 @@ export interface IState {
   loyalityProduct: LoyalityProduct;
   coupon: Coupon;
   freeDelivery: number;
+  subCategoriesList: SubCategoryType[] | [];
 }
 
 export interface IAction {

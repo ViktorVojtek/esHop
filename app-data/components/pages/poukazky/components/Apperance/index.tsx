@@ -12,11 +12,27 @@ import { IGiftCardData } from '../Stepper';
 import { Paper, TextField } from '@material-ui/core';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import { colors } from '../../../../../shared/design';
-import { getImageUrl } from '../../../../../shared/helpers';
+import { useQuery } from 'react-apollo';
+import { GIFTCARDS_QUERY } from '../../../../../graphql/query';
+import { GiftCardType } from '../../../admin/gift-cards';
+import { Element } from 'react-scroll';
 
 const Img = styled.img`
   width: 100%;
   cursor: pointer;
+`;
+
+const HelperText = styled.p`
+  color: rgba(0, 0, 0, 0.54);
+  margin: 0;
+  font-size: 0.75rem;
+  margin-top: 3px;
+  text-align: left;
+  font-weight: 400;
+  line-height: 1.66;
+  letter-spacing: 0.03333em;
+  margin-left: 14px;
+  margin-right: 14px;
 `;
 const StyledPaper = styled(Paper)`
   margin-bottom: 15px;
@@ -25,7 +41,7 @@ const StyledPaper = styled(Paper)`
   justify-content: flex-end;
 `;
 type StyledCheckProps = {
-  isOpen: boolean;
+  isActive: boolean;
 };
 
 const StyledCheck = styled(CheckCircleIcon)<StyledCheckProps>`
@@ -34,7 +50,7 @@ const StyledCheck = styled(CheckCircleIcon)<StyledCheckProps>`
   min-width: 48px;
   min-height: 48px;
   margin: 12px 12px 0px 0px;
-  transform: ${(props) => (props.isOpen ? 'scale(1)' : 'scale(0)')};
+  transform: ${(props) => (props.isActive ? 'scale(1)' : 'scale(0)')};
   transition: all 0.3s ease-out !important;
 `;
 
@@ -45,7 +61,20 @@ type ApperanceProps = {
 
 const Apperance = (props: ApperanceProps) => {
   const { formData, setFormData } = props;
-  const [color, setColor] = useState(formData.cardColor);
+  const [giftCardTitle, setGiftCardTitle] = useState(
+    formData.giftCardTitle || ''
+  );
+  const { error, loading, data } = useQuery(GIFTCARDS_QUERY);
+
+  if (loading) {
+    return <>loading</>;
+  }
+
+  if (error) {
+    return <>{error.message}</>;
+  }
+
+  const { giftCards } = data;
 
   const handleChangeTextArea = (event) => {
     setFormData({
@@ -54,56 +83,38 @@ const Apperance = (props: ApperanceProps) => {
     });
   };
 
-  const handleSetColor = (color: string) => {
-    setColor(color);
+  const handleSetGiftCardTitle = (giftCard: GiftCardType) => {
+    setGiftCardTitle(giftCard.title);
     setFormData({
       ...formData,
-      cardColor: color,
+      giftCardTitle: giftCard.title,
+      giftCardImageUrl: giftCard.image.path,
     });
   };
   return (
     <Row className="mt-4 mb-4">
       <Col md={12}>
-        <H4 className="mb-4">Zvoľte farbu poukážky:</H4>
+        <H4 className="mb-4">Zvoľte motív poukážky:</H4>
       </Col>
-      <Col md={6}>
-        <StyledPaper elevation={3}>
-          <Img
-            src="/images/poukazky/poukazka_modra.png"
-            onClick={() => handleSetColor('#00aeef')}
-          />
-          <StyledCheck isOpen={color === '#00aeef'} />
-        </StyledPaper>
-      </Col>
-      <Col md={6}>
-        <StyledPaper elevation={3}>
-          <Img
-            src="/images/poukazky/poukazka_cervena.png"
-            onClick={() => handleSetColor('#ff0000')}
-          />
-          <StyledCheck isOpen={color === '#ff0000'} />
-        </StyledPaper>
-      </Col>
-      <Col md={6}>
-        <StyledPaper elevation={3}>
-          <Img
-            src="/images/poukazky/poukazka_zlta.png"
-            onClick={() => handleSetColor('#FBC200')}
-          />
-          <StyledCheck isOpen={color === '#FBC200'} />
-        </StyledPaper>
-      </Col>
-      <Col md={6}>
-        <StyledPaper elevation={3}>
-          <Img
-            src="/images/poukazky/poukazka_zelena.png"
-            onClick={() => handleSetColor('#00BF0B')}
-          />
-          <StyledCheck isOpen={color === '#00BF0B'} />
-        </StyledPaper>
-      </Col>
+      {giftCards && giftCards.length > 0 && (
+        <>
+          {giftCards.map((giftCard) => (
+            <Col md={6} className="mb-2" key={giftCard.title}>
+              <StyledPaper elevation={3}>
+                <Img
+                  src={giftCard.image.path}
+                  onClick={() => handleSetGiftCardTitle(giftCard)}
+                />
+                <StyledCheck isActive={giftCardTitle === giftCard.title} />
+              </StyledPaper>
+            </Col>
+          ))}
+        </>
+      )}
       <Col md="12" className="mt-4 mb-4">
-        <H4>Zadajte Vaše venovanie:</H4>
+        <Element name="dedication">
+          <H4>Zadajte Vaše venovanie:</H4>
+        </Element>
       </Col>
       <Col md={6} className="mb-4">
         <TextField
@@ -120,15 +131,19 @@ const Apperance = (props: ApperanceProps) => {
           }}
         />
       </Col>
-      <Col md={6} className="d-flex align-items-center">
-        <PreviewHolder>
-          <Preview src={getImageUrl[color]} alt="poukazka" />
+      <Col md={6}>
+        <PreviewHolder elevation={4}>
+          <Preview src="/images/skica.jpg" alt="poukazka" />
           <PreviewTextHolder>
-            <PrednaStranaText colorText={color}>
+            <PrednaStranaText colorText="black">
               {formData.text}
             </PrednaStranaText>
           </PreviewTextHolder>
         </PreviewHolder>
+        <HelperText>
+          * Vizuálna podoba má ukážkový charakter. Text bude prispôsobený
+          dizajnu poukážky.
+        </HelperText>
       </Col>
     </Row>
   );

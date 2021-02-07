@@ -1,17 +1,14 @@
-import React, { useContext, useEffect, useState, useCallback } from 'react';
-import styled from 'styled-components';
-import { Row } from 'reactstrap';
-import Product from '../../../../../shared/types/Product.types';
+import React, { useContext, useEffect, useState } from 'react';
 import PaginationComponent from 'react-reactstrap-pagination';
-
+import { Row } from 'reactstrap';
+import styled from 'styled-components';
 // Global state management context
 import { Context } from '../../../../../lib/state/Store';
-
+import Product from '../../../../../shared/types/Product.types';
+import { VariantOfProduct } from '../../../../../shared/types/Store.types';
+import { SubCategoryType } from '../../../admin/settings/subcategory';
 // Component fullfill the filtered products
 import ProductFill from './components/ProductsFill';
-
-import { VariantOfProduct } from '../../../../../shared/types/Store.types';
-import Service from '../../../../../shared/types/Service.types';
 
 const PaginationWrapper = styled.div`
   width: 100%;
@@ -33,8 +30,9 @@ const P = styled.p`
 `;
 
 interface IProductsProps {
-  products: Product[] | Service[];
+  products: Product[];
   compareString: string;
+  subCategories: SubCategoryType[];
 }
 interface IProductToCartData {
   id: string;
@@ -44,7 +42,11 @@ interface IProductToCartData {
   title: string;
 }
 const productsCount = 16;
-const Products: React.FC<IProductsProps> = ({ products, compareString }) => {
+const Products: React.FC<IProductsProps> = ({
+  products,
+  compareString,
+  subCategories,
+}) => {
   const [pageSize, setPageSize] = useState(productsCount);
   const [selectedPage, setSelectedPage] = useState(1);
   const [paginationProducts, setPaginationProducts] = useState([]);
@@ -110,6 +112,7 @@ const Products: React.FC<IProductsProps> = ({ products, compareString }) => {
         <ProductFill
           products={paginationProducts}
           addProduct={handleAddProductToCart}
+          subCategories={subCategories}
         />
       </Row>
       <Row>

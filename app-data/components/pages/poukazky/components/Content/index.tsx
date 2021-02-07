@@ -1,19 +1,3 @@
-import React from 'react';
-import styled from 'styled-components';
-import { scroller } from 'react-scroll';
-import Paper from '@material-ui/core/Paper';
-import { makeStyles } from '@material-ui/core/styles';
-import EuroIcon from '@material-ui/icons/Euro';
-import RoomServiceIcon from '@material-ui/icons/RoomService';
-import FeaturedPlayListIcon from '@material-ui/icons/FeaturedPlayList';
-import AirlineSeatIndividualSuiteIcon from '@material-ui/icons/AirlineSeatIndividualSuite';
-import { ButtonWithIcon, colors } from '../../../../../shared/design';
-import MoneyType from '../MoneyType';
-import { IGiftCardData } from '../Stepper';
-import ProceduresType from '../ProceduresType';
-import StaysType from '../StaysType';
-import { formatPrice } from '../../../../../shared/helpers/formatters';
-import ControlPointIcon from '@material-ui/icons/ControlPoint';
 import {
   Avatar,
   createStyles,
@@ -21,13 +5,23 @@ import {
   List,
   ListItem,
   ListItemAvatar,
-  ListItemSecondaryAction,
   ListItemText,
 } from '@material-ui/core';
+import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@material-ui/core/styles';
+import CardGiftcardOutlinedIcon from '@material-ui/icons/CardGiftcardOutlined';
 import DeleteIcon from '@material-ui/icons/Delete';
+import EuroIcon from '@material-ui/icons/Euro';
+import React from 'react';
+import { scroller } from 'react-scroll';
 import { Col, Row } from 'reactstrap';
-import PermanentType from '../PermanentType';
+import styled from 'styled-components';
+import { colors } from '../../../../../shared/design';
+import { formatPrice } from '../../../../../shared/helpers/formatters';
 import useViewport from '../../../../../shared/helpers/useViewport';
+import { CategoryMenu } from '../CategoryMenu';
+import { ItemsChooser } from '../ItemsChooser';
+import { IGiftCardData } from '../Stepper';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -140,14 +134,14 @@ type ContentProps = {
 
 export default function Content(props: ContentProps) {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [category, setCategory] = React.useState<string>('Suma');
   const { formData, setFormData } = props;
   const { services, priceValue, totalPrice } = formData;
 
   const { width } = useViewport();
 
-  const handleChangeTab = (newValue: number) => {
-    setValue(newValue);
+  const handleChangeCategory = (category: string) => {
+    setCategory(category);
     if (width < 769) {
       handleScroll();
     }
@@ -190,31 +184,11 @@ export default function Content(props: ContentProps) {
 
   return (
     <>
+      <CategoryMenu
+        category={category}
+        handleChangeCategory={handleChangeCategory}
+      />
       <Row>
-        <Col md={3} xs={6}>
-          <ButtonWithIcon className="mb-2" onClick={() => handleChangeTab(0)}>
-            <EuroIcon style={{ marginRight: '6px' }} />
-            <span>Peniaze</span>
-          </ButtonWithIcon>
-        </Col>
-        <Col md={3} xs={6}>
-          <ButtonWithIcon className="mb-2" onClick={() => handleChangeTab(1)}>
-            <RoomServiceIcon style={{ marginRight: '6px' }} />
-            <span>Procedúry</span>
-          </ButtonWithIcon>
-        </Col>
-        <Col md={3} xs={6}>
-          <ButtonWithIcon className="mb-2" onClick={() => handleChangeTab(2)}>
-            <AirlineSeatIndividualSuiteIcon style={{ marginRight: '6px' }} />
-            <span>Pobyty</span>
-          </ButtonWithIcon>
-        </Col>
-        <Col md={3} xs={6}>
-          <ButtonWithIcon className="mb-2" onClick={() => handleChangeTab(3)}>
-            <FeaturedPlayListIcon style={{ marginRight: '6px' }} />
-            <span>Permanentky</span>
-          </ButtonWithIcon>
-        </Col>
         <Col md={12}>
           <StyledPaper elevation={3}>
             <Items>
@@ -237,15 +211,7 @@ export default function Content(props: ContentProps) {
                           <BodyItem width={40}>
                             <ListItemAvatar>
                               <StyledAvatar>
-                                {item.type === 'procedura' && (
-                                  <RoomServiceIcon />
-                                )}
-                                {item.type === 'pobyt' && (
-                                  <AirlineSeatIndividualSuiteIcon />
-                                )}
-                                {item.type === 'permanentka' && (
-                                  <FeaturedPlayListIcon />
-                                )}
+                                <CardGiftcardOutlinedIcon />
                               </StyledAvatar>
                             </ListItemAvatar>
                             <ListItemText>{item.title}</ListItemText>
@@ -368,19 +334,11 @@ export default function Content(props: ContentProps) {
           </StyledPaper>
         </Col>
       </Row>
-
-      {value === 0 && (
-        <MoneyType formData={formData} setFormData={setFormData} />
-      )}
-      {value === 1 && (
-        <ProceduresType formData={formData} setFormData={setFormData} />
-      )}
-      {value === 2 && (
-        <StaysType formData={formData} setFormData={setFormData} />
-      )}
-      {value === 3 && (
-        <PermanentType formData={formData} setFormData={setFormData} />
-      )}
+      <ItemsChooser
+        category={category}
+        formData={formData}
+        setFormData={setFormData}
+      />
     </>
   );
 }

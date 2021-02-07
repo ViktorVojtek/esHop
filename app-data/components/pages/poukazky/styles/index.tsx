@@ -113,14 +113,12 @@ export const Span = styled.span`
 `;
 export const ItemText = styled.h6`
   font-size: 1.5rem;
-  font-family: MuseoSans-300;
   color: #5e8796;
   font-weight: bold;
 `;
 
 export const H4 = styled.h4`
   font-size: 1.25rem;
-  font-family: MuseoSans-300;
   color: black;
   font-weight: bold;
 `;
@@ -138,7 +136,6 @@ export const H1 = styled.h3`
 
 export const H3 = styled.h3`
   font-size: 1.5rem;
-  font-family: MuseoSans-300;
   color: black;
   font-weight: bold;
   text-align: center;
@@ -146,7 +143,6 @@ export const H3 = styled.h3`
 `;
 export const H5 = styled.h5`
   font-size: 1.5rem;
-  font-family: MuseoSans-300;
   color: black;
   font-weight: bold;
   text-align: center;
@@ -169,7 +165,7 @@ export const Preview = styled.img`
   width: 100%;
 `;
 
-export const PreviewHolder = styled.div`
+export const PreviewHolder = styled(Paper)`
   position: relative;
   overflow: hidden;
 `;
@@ -179,7 +175,6 @@ export const PrednaStranaText = styled.p<IColorText>`
   font-family: 'Engagement-Regular';
   color: ${({ colorText }) => (colorText ? `${colorText}` : 'black')};
   text-align: center;
-  padding-right: 10%;
   line-height: 2rem;
   white-space: pre-wrap;
   word-break: break-word;
@@ -213,7 +208,8 @@ export const PrednaStranaText = styled.p<IColorText>`
 
 export const PreviewTextHolder = styled.div`
   position: absolute;
-  width: 65%;
+  width: 100%;
+  padding: 16px;
   height: 100%;
   display: flex;
   align-items: center;

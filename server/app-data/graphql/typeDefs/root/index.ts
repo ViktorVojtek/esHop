@@ -3,6 +3,16 @@ import { gql } from 'apollo-server-express';
 const rootTypeDefs = gql`
   scalar Object
 
+  type ProductWithSubCategory {
+    product: Product
+    subCategory: SubCategory
+  }
+
+  type ProductsWithSubcategories {
+    products: [Product]
+    subCategories: [SubCategory]
+  }
+
   type Query {
     categories: [Category]
     currencies: [Currency]
@@ -12,15 +22,19 @@ const rootTypeDefs = gql`
     deliveryMethods: [Delivery]
     discount(id: String!): Discount
     discounts: [Discount]
+    giftCards: [GiftCard]
     orders(email: String): [Order]
     order: Order
     paymentMethode(id: String!): Payment
     paymentMethodes: [Payment]
-    products(categoryId: String, subCategoryId: String): [Product]
+    products(
+      categoryId: String
+      subCategoryId: String
+    ): ProductsWithSubcategories
     productsByIds(ids: [String]): [Product]
     loyalityProducts: [LoyalityProduct]
     product(id: String!): Product
-    productBySlug(slug: String!): Product
+    productBySlug(slug: String!): ProductWithSubCategory
     service(id: String!): Service
     serviceBySlug(slug: String!): Service
     services: [Service]
@@ -33,6 +47,9 @@ const rootTypeDefs = gql`
     createCategory(title: String!): Category
     updateCategory(_id: String!, title: String!): Category
     removeCategory(_id: String!): String
+
+    createGiftCard(giftCardInput: GiftCardInput): GiftCard
+    removeGiftCard(_id: String!): String
 
     createCustomer(customerData: CustomerRegInput!): Customer
     updateCustomer(id: String!, customerData: CustomerUpdateInput!): Customer

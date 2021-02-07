@@ -6,27 +6,27 @@ import {
   WithStyles,
   withStyles,
 } from '@material-ui/core';
-import React, { useState } from 'react';
 import Dialog from '@material-ui/core/Dialog';
-import MuiDialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import CloseIcon from '@material-ui/icons/Close';
-import { InfoIcon } from '../../../../shared/design/icons';
-import { Button } from '../../../../shared/design';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { Button, fonts } from '../../../../shared/design';
+import { InfoIcon } from '../../../../shared/design/icons';
 
 const Text = styled.div`
-  font-family: MuseoSans-300 !important;
+  font-family: ${fonts.primary} !important;
   p {
-    font-family: MuseoSans-300 !important;
+    font-family: ${fonts.primary} !important;
     span {
-      font-family: MuseoSans-300 !important;
+      font-family: ${fonts.primary} !important;
     }
   }
   li {
     span {
-      font-family: MuseoSans-300 !important;
+      font-family: ${fonts.primary} !important;
     }
   }
 `;

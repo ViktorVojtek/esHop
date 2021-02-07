@@ -20,10 +20,10 @@ import {
   ServicesHolder,
   Venovanie,
 } from '../style';
-import { getImageUrl } from '../../../../../../../../shared/helpers';
 
 type IGiftCardTableRow = {
-  cardColor: string;
+  giftCardTitle: string;
+  giftCardImageUrl: string;
   priceValue: number;
   text: string;
   services: ServiceData[];
@@ -31,7 +31,8 @@ type IGiftCardTableRow = {
   id: number;
 };
 const GiftCardTableRow: FC<IGiftCardTableRow> = ({
-  cardColor,
+  giftCardTitle,
+  giftCardImageUrl,
   priceValue,
   totalPrice,
   text,
@@ -51,7 +52,7 @@ const GiftCardTableRow: FC<IGiftCardTableRow> = ({
     <>
       <StyledPaper elevation={2}>
         <ImageHolder>
-          <Image src={getImageUrl[cardColor]} alt="poukazka" />
+          <Image src={giftCardImageUrl} alt={giftCardTitle} />
         </ImageHolder>
         <InfoHolder>
           <div>
@@ -92,7 +93,7 @@ const GiftCardTableRow: FC<IGiftCardTableRow> = ({
             <Title>Darčeková poukážka</Title>
             <MobileImage
               style={{ minWidth: '120px', marginBottom: '.5rem' }}
-              src={getImageUrl[cardColor]}
+              src={giftCardImageUrl}
               alt="poukazka"
             />
           </div>

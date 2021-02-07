@@ -431,6 +431,20 @@
             Text
           </td>
           <td
+            width="10%"
+            style="
+              border: 1px solid #ddd;
+              padding: 8px;
+              padding-top: 12px;
+              padding-bottom: 12px;
+              text-align: left;
+              background-color: lightgray;
+              color: black;
+            "
+          >
+            Motív
+          </td>
+          <td
             width="25%"
             style="
               border: 1px solid #ddd;
@@ -445,7 +459,7 @@
             Služby
           </td>
           <td
-            width="10%"
+            width="5%"
             style="
               border: 1px solid #ddd;
               padding: 8px;
@@ -459,7 +473,7 @@
             BEZ DPH
           </td>
           <td
-            width="10%"
+            width="5%"
             style="
               border: 1px solid #ddd;
               padding: 8px;
@@ -507,6 +521,9 @@
           </td>
           <td style="border: 1px solid #ddd; padding: 8px">
             {{item.text}}
+          </td>
+          <td style="border: 1px solid #ddd; padding: 8px">
+            {{item.giftCardTitle}}
           </td>
           <td style="border: 1px solid #ddd; padding: 8px">
             {{#each services as |item index|}}

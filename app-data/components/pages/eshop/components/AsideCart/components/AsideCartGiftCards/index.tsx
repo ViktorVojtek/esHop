@@ -14,7 +14,8 @@ import { formatPrice } from '../../../../../../../shared/helpers/formatters';
 import { ServiceData } from '../../../../../../../shared/types/Store.types';
 
 type IAsideCartGiftCards = {
-  cardColor: string;
+  giftCardTitle: string;
+  giftCardImageUrl: string;
   priceValue: number;
   text: string;
   services: ServiceData[];
@@ -23,7 +24,8 @@ type IAsideCartGiftCards = {
 };
 
 const AsideCartGiftCards: FC<IAsideCartGiftCards> = ({
-  cardColor,
+  giftCardTitle,
+  giftCardImageUrl,
   priceValue,
   text,
   services,
@@ -43,12 +45,13 @@ const AsideCartGiftCards: FC<IAsideCartGiftCards> = ({
       <HeadWrapper className="d-flex">
         <Detail>
           <Title>Darčeková poukážka</Title>
+          <img
+            style={{ width: '100%', marginBottom: '16px' }}
+            src={giftCardImageUrl}
+            alt={giftCardTitle}
+          />
           <DetailItem>{`Cena: ${formatPrice(totalPrice)} €`}</DetailItem>
           <DetailItem>{`Venovanie: ${text}`}</DetailItem>
-          <div className="d-flex align-items-center">
-            <DetailItem>Farba poukážky:</DetailItem>
-            <Circle className="ml-2" color={cardColor} />
-          </div>
         </Detail>
       </HeadWrapper>
       <div className="d-flex justify-content-between">

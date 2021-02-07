@@ -14,6 +14,7 @@ import {
   FREEDELIVERY_QUERY,
   LOYALITY_PRODUCTS_QUERY,
   PRODUCTS_BY_IDS_QUERY,
+  SUBCATEGORIES_QUERY,
 } from '../../../graphql/query';
 
 const storage: Storage = useStorage();
@@ -126,6 +127,7 @@ const Reducer = (state: IState, action: IAction) => {
       newGiftCards = [...state.giftCards, action.payload];
       if (storage) {
         storage.setItem('giftCards', JSON.stringify(newGiftCards));
+        storage.removeItem('giftCard');
       }
       return {
         ...state,

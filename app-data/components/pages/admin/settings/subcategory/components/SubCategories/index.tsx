@@ -1,11 +1,20 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useQuery, useMutation } from '@apollo/react-hooks';
-import { Button, Table } from 'reactstrap';
+import { Table } from 'reactstrap';
 import {
   CATEGORIES_QUERY,
   SUBCATEGORIES_QUERY,
 } from '../../../../../../../graphql/query';
 import { REMOVE_SUBCATEGORY_MUTATION } from '../../../../../../../graphql/mutation';
+import { Button } from '@material-ui/core';
+import styled from 'styled-components';
+import { SubCategoryType } from '../..';
+import { scrollTop } from '../../../../../../../shared/helpers';
+
+const DeleteButton = styled(Button)`
+  background-color: red !important;
+  color: white !important;
+`;
 
 const useCategories = (QUERY) => {
   const [categories, setCategories] = useState(null);
@@ -20,8 +29,15 @@ const useCategories = (QUERY) => {
   return categories;
 };
 
-const SubCategories: FC = () => {
+type SubCategoriesProps = {
+  setAction?: React.Dispatch<React.SetStateAction<'create' | 'update'>>;
+  action?: 'create' | 'update';
+  handleSetSubCategoryToUpdate?: (subCategory: SubCategoryType) => void;
+};
+
+const SubCategories = (props: SubCategoriesProps) => {
   const categoriesData = useCategories(CATEGORIES_QUERY);
+  const { action, setAction, handleSetSubCategoryToUpdate } = props;
 
   const { error, loading, data } = useQuery(SUBCATEGORIES_QUERY);
   const [removeSubcategory] = useMutation(REMOVE_SUBCATEGORY_MUTATION, {
@@ -44,6 +60,12 @@ const SubCategories: FC = () => {
     }
   };
 
+  const handleSetUpdate = (subCategory: SubCategoryType) => {
+    handleSetSubCategoryToUpdate(subCategory);
+    setAction('update');
+    scrollTop();
+  };
+
   const { subCategories } = data;
 
   const categoriesAndSubsTable: JSX.Element[] =
@@ -58,13 +80,21 @@ const SubCategories: FC = () => {
                       <td>{i < 1 ? i + j + 1 : j + 1}</td>
                       <td></td>
                       <td>{subItem.title}</td>
-                      <td className="text-right">
+                      <td className="text-right d-flex justify-content-end">
                         <Button
-                          color="danger"
+                          variant="contained"
+                          className="mr-2"
+                          color="primary"
+                          onClick={() => handleSetUpdate(subItem)}
+                        >
+                          Upraviť
+                        </Button>
+                        <DeleteButton
+                          variant="contained"
                           onClick={() => handleRemoveItem(subItem._id)}
                         >
                           Odstrániť
-                        </Button>
+                        </DeleteButton>
                       </td>
                     </tr>
                   )

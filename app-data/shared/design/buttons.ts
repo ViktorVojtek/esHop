@@ -1,9 +1,13 @@
 import styled from 'styled-components';
 import { colors } from './colors';
 
-export const Button = styled.button`
+type ButtonProps = {
+  color?: string;
+};
+
+export const Button = styled.button<ButtonProps>`
   display: block;
-  background-color: ${colors.primary};
+  background-color: ${({ color }) => (color ? color : colors.primary)};
   text-transform: uppercase;
   color: #fff;
   box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
@@ -33,7 +37,6 @@ export const Button = styled.button`
 `;
 
 export const ProductButton = styled.button`
-  display: inline-flex;
   background-color: ${colors.primary};
   text-transform: uppercase;
   color: #fff;
@@ -69,7 +72,6 @@ export const GiftCardButton = styled.button`
   background-color: ${colors.primary};
   box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
     0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
-  font-family: MuseoSans-300;
   text-transform: uppercase;
   color: #fff !important;
   padding: 0rem 1.5rem;
@@ -101,7 +103,6 @@ export const TextFieldButton = styled.button`
   background-color: ${colors.primary};
   box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
     0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
-  font-family: MuseoSans-300;
   text-transform: uppercase;
   color: #fff !important;
   padding: 0rem 1.5rem;
@@ -133,7 +134,6 @@ export const ButtonWithIcon = styled.button`
   background-color: ${colors.primary};
   box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
     0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
-  font-family: MuseoSans-300;
   text-transform: uppercase;
   color: #fff !important;
   padding: 12px 16px;

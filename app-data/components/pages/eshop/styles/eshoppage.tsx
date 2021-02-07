@@ -62,7 +62,6 @@ export const StyledModalLink = styled.a`
 
 export const StyledModalBtn = styled.button`
   background-color: #00aeefb8;
-  font-family: MuseoSans-300;
   text-transform: uppercase;
   color: #fff !important;
   padding: 1rem 1.5rem;

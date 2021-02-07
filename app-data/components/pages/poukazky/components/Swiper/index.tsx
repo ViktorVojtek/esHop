@@ -1,10 +1,9 @@
-import React, { useRef } from 'react';
+import React from 'react';
+import styled from 'styled-components';
 import SwiperCore, { Navigation, Pagination } from 'swiper';
 import { Swiper } from 'swiper/react';
 import { getSlidesPerView } from '../../../../../shared/helpers/getSlidesPerView';
 import useViewport from '../../../../../shared/helpers/useViewport';
-import styled from 'styled-components';
-import { Button } from '../../../../../shared/design';
 
 SwiperCore.use([Navigation, Pagination]);
 
@@ -12,6 +11,7 @@ type SwiperCarouselProps = {
   customLoop?: boolean;
   customLoopFillGroupWithBlank?: boolean;
   customNavigation?: boolean;
+  productsCount?: number;
   children: any;
 };
 
@@ -63,21 +63,21 @@ const StyledArrowNext = styled(Chevron)`
 `;
 
 const SwiperCarousel = (props: SwiperCarouselProps) => {
-  const { width } = useViewport();
-
-  const slidesCount = getSlidesPerView(width);
   const {
     customLoop = true,
     customLoopFillGroupWithBlank = true,
     customNavigation = true,
   } = props;
+  const { width } = useViewport();
+
+  const slidesCount = getSlidesPerView(width);
   return (
     <>
       <Swiper
+        observer
         tag={SwiperWrapper}
         slidesPerView={slidesCount}
         spaceBetween={30}
-        loop={customLoop}
         direction={slidesCount > 1 ? 'horizontal' : 'horizontal'}
         pagination={{ clickable: true }}
         centeredSlides
@@ -85,9 +85,12 @@ const SwiperCarousel = (props: SwiperCarouselProps) => {
           prevEl: '.swiper-button-prev',
           nextEl: '.swiper-button-next',
         }}
-        observer={true}
-        observeParents={true}
-        parallax={true}
+        onInit={(swiper) => {
+          swiper.slideTo(Math.round(swiper.slides.length / 2) - 1);
+        }}
+        onUpdate={(swiper) => {
+          swiper.slideTo(Math.round(swiper.slides.length / 2) - 1);
+        }}
       >
         {props.children}
       </Swiper>

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { Button } from '../../../../../../shared/design';
+import { Button, fonts } from '../../../../../../shared/design';
 
 type descElType = {
   height: number;
@@ -25,16 +25,16 @@ const DescEl = styled.div<descElType>`
 `;
 
 const P = styled.p`
-  font-family: MuseoSans-300 !important;
+  font-family: ${fonts.primary} !important;
   p {
-    font-family: MuseoSans-300 !important;
+    font-family: ${fonts.primary} !important;
     span {
-      font-family: MuseoSans-300 !important;
+      font-family: ${fonts.primary} !important;
     }
   }
   li {
     span {
-      font-family: MuseoSans-300 !important;
+      font-family: ${fonts.primary} !important;
     }
   }
 `;

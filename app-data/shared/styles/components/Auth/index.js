@@ -16,7 +16,6 @@ export const Form = styled.form`
 
 export const H4 = styled.h4`
   font-size: 2rem;
-  font-family: MuseoSans-300;
   color: black;
   font-weight: bold;
   margin-bottom: 1.5rem;
@@ -25,7 +24,6 @@ export const H4 = styled.h4`
 
 export const Button = styled.button`
   background-color: #00aeefb8;
-  font-family: MuseoSans-300;
   text-transform: uppercase;
   color: #fff !important;
   padding: 1rem 1.5rem;
@@ -48,7 +46,6 @@ export const Button = styled.button`
 
 export const ButtonLink = styled.a`
   background-color: #00aeefb8;
-  font-family: MuseoSans-300;
   text-transform: uppercase;
   color: #fff !important;
   padding: 1rem 1.5rem;
@@ -110,7 +107,6 @@ export const H1 = styled.h2`
 `;
 
 export const RegisterButton = styled.a`
-  font-family: MuseoSans-300;
   color: #00aeef !important;
   text-decoration: none;
   font-size: 1rem;
@@ -120,6 +116,4 @@ export const RegisterButton = styled.a`
   }
 `;
 
-export const P = styled.p`
-  font-family: MuseoSans-300;
-`;
+export const P = styled.p``;

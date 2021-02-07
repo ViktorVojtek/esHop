@@ -7,7 +7,10 @@ export interface IProduct extends Document {
   dateModified: Date;
   deleted: boolean;
   modifiedByUserId: string;
-  subCategory: Object;
+  subCategory: {
+    id: string;
+    title: string;
+  };
   isEnvelopeSize: Boolean;
   title: string;
   slug: string;

@@ -10,14 +10,17 @@ import Footer from '../Footer';
 import CookieConsent, { Cookies } from 'react-cookie-consent';
 import Link from 'next/link';
 import cookie from 'js-cookie';
+import { useRouter } from 'next/router';
+import MainPageNav from '../Navigation/MainPageNav';
 
 const Layout: FC<ILayout> = ({ children }) => {
+  const router = useRouter();
   const cookieAllowed = cookie.get('cookieAllowed');
 
   const setCookieAllowed = () => cookie.set('cookieAllowed', 'true');
   return (
     <>
-      <Navigation />
+      {router.pathname === '/' ? <MainPageNav /> : <Navigation />}
       <div>{children}</div>
       <Footer />
       {!cookieAllowed && (

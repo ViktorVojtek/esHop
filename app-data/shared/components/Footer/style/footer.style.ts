@@ -83,7 +83,6 @@ export const ScrollTop = styled(Home)`
 `;
 
 export const Title = styled.h6`
-  font-family: MuseoSans-700;
   text-transform: uppercase;
   font-weight: bold;
   font-size: 1rem;
@@ -95,14 +94,12 @@ export const Title = styled.h6`
 export const Text = styled.p`
   margin-bottom: 4px;
   width: 100%;
-  font-weight: bold;
   font-size: 0.9rem;
 `;
 
 export const StyledLink = styled.a`
   font-size: 1rem;
   display: block;
-  font-weight: bold;
   font-size: 0.9rem;
   margin-bottom: 4px;
   color: black !important;

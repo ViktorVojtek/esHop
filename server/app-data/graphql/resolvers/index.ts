@@ -86,6 +86,9 @@ import updateFreeDelivery from './mutation/UpdateFreeDelivery';
 import removeFreeDelivery from './mutation/RemoveFreeDelivery';
 
 import sendRezervationEmail from './mutation/RezervationEmail';
+import createGiftCard from './mutation/CreateGiftCard';
+import removeGiftCard from './mutation/RemoveGiftCard';
+import giftCards from './query/GiftCards';
 
 const resolvers = {
   Object: ObjectScalarType,
@@ -128,6 +131,8 @@ const resolvers = {
       serviceBySlug(root, args, ctx),
     services: async (root: any, args: any, ctx: any) =>
       services(root, args, ctx),
+
+    giftCards: async () => giftCards(),
 
     subCategories: async (root: any, args: any, ctx: any) =>
       subCategories(root, args, ctx),
@@ -205,6 +210,11 @@ const resolvers = {
       updateSubCategory(root, args, ctx),
     removeSubCategory: async (root: any, args: any, ctx: any) =>
       removeSubCategory(root, args, ctx),
+
+    createGiftCard: async (root: any, args: any, ctx: any) =>
+      createGiftCard(root, args, ctx),
+    removeGiftCard: async (root: any, args: any, ctx: any) =>
+      removeGiftCard(root, args, ctx),
 
     createService: async (root: any, args: any, ctx: any) =>
       createService(root, args, ctx),

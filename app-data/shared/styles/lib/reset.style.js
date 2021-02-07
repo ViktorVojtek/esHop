@@ -32,39 +32,32 @@ export default createGlobalStyle`
 
     h1 {
     font-size: 2.5rem;
-    font-family:MuseoSans-500;
     }
 
     h2 {
     font-size: 2rem;
-    font-family:MuseoSans-500;
     }
 
     h3 {
     font-size: 1.375rem;
-    font-family:MuseoSans-500;
     }
 
     h4 {
     font-size: 1.125rem;
-    font-family:MuseoSans-500;
     }
 
     h5 {
     font-size: 1rem;
-    font-family:MuseoSans-500;
     }
 
     h6 {
     font-size: 0.875rem;
-    font-family:MuseoSans-500;
     }
 
     p {
     font-size: 1.125rem;
     font-weight: 200;
     line-height: 1.8;
-    font-family:MuseoSans-Normal;
     }
 
     .font-light {

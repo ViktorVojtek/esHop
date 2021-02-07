@@ -5,7 +5,6 @@ import { useQuery } from '@apollo/react-hooks';
 import { CATEGORIES_QUERY } from '../../../../graphql/query';
 
 import FeaturesProducts from './components/FeaturesProducts';
-import FeaturesServices from './components/FeaturesServices';
 
 const ProductsMP: () => JSX.Element = () => {
   const [category, setCategory] = useState([]);
@@ -29,7 +28,6 @@ const ProductsMP: () => JSX.Element = () => {
       {category.length > 0 ? (
         <>
           <FeaturesProducts category={category[0]._id} />
-          {/*<FeaturesServices category={category[1]._id} />*/}
         </>
       ) : null}
     </Container>

@@ -43,7 +43,7 @@ const MyApp = (props) => {
   return (
     <>
       <Head>
-        <title>{pageTitle || 'Červený kláštor shop'}</title>
+        <title>{pageTitle || 'Červený kláštor obchod'}</title>
         {/* Use minimum-scale=1 to enable GPU rasterization */}
         <meta
           name="viewport"

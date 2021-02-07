@@ -6,4 +6,5 @@ export const colors = {
   error: '#d32f2f',
   success: '#43a047',
   bonus: '#ffc107',
+  text: '#000',
 };

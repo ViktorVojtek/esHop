@@ -1,5 +1,4 @@
 import Product from '../types/Product.types';
-import Service from '../types/Service.types';
 
 export function sortByPriceMin(
   products: any,

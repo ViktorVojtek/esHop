@@ -42,7 +42,7 @@ const createSubCategory: (
 
       const fileData = {
         fileName: (image as any).title,
-        fileBase64Data: (subCategoryData as any).base64,
+        fileBase64Data: (image as any).base64,
         dirName: vId,
         extension: (image as any).ext,
       };

@@ -5,10 +5,16 @@ import { ShoppingCartOutline } from 'styled-icons/evaicons-outline';
 import { CartWrapper } from '../Navigation/Site/styles';
 import Link from 'next/link';
 import { Context } from '../../../lib/state/Store';
+import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 
-const CartIcon = styled(ShoppingCartOutline)`
-  color: red;
-  width: 36px;
+type CartIconProps = {
+  iconColor?: string;
+};
+
+const CartIcon = styled(ShoppingBasketIcon)<CartIconProps>`
+  color: ${({ iconColor }) => (iconColor ? iconColor : 'red')};
+  width: 34px !important;
+  height: 34px !important;
 `;
 
 const fadeIn = keyframes`
@@ -72,9 +78,10 @@ type ShoppingCartType = {
 
 type CartPopoverType = {
   target: string;
+  color?: string;
 };
 
-const CartPopover: FC<CartPopoverType> = ({ target }) => {
+const CartPopover: FC<CartPopoverType> = ({ target, color }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const { state } = useContext(Context);
@@ -88,7 +95,8 @@ const CartPopover: FC<CartPopoverType> = ({ target }) => {
       >
         <Link href="/eshop/cart">
           <a>
-            <CartIcon /> <span>{cart.length + giftCards.length}</span>
+            <CartIcon iconColor={color} />{' '}
+            <span>{cart.length + giftCards.length}</span>
           </a>
         </Link>
         <ShopingCart isOpen={isOpen} onMouseLeave={() => setIsOpen(false)}>

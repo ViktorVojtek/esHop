@@ -4,7 +4,6 @@ import { colors } from './colors';
 
 export const DropdownToggleItem = styled(DropdownToggle)`
   background-color: ${colors.primary};
-  font-family: MuseoSans-300;
   border: none !important;
   transition: all 0.3s ease-out;
   width: 100%;

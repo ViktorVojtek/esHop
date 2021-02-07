@@ -47,6 +47,13 @@ import DescriptionEl from './Description';
 import RelatedProductSkeleton from '../../../../../shared/components/RelatedProducts/Skeleton';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import styled from 'styled-components';
+import { SubCategoryType } from '../../../admin/settings/subcategory';
+import { useRouter } from 'next/router';
+
+const ButtonsHolder = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+`;
 
 const StyledModalBody = styled.div`
   display: flex;
@@ -117,6 +124,7 @@ const Holder = styled.div`
 
 interface IProductDetailProps {
   product: Product;
+  subCategory: SubCategoryType;
 }
 interface IProductToCartData {
   id: string;
@@ -126,11 +134,15 @@ interface IProductToCartData {
   title: string;
 }
 
-const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
+const ProductDetailBody: React.FC<IProductDetailProps> = ({
+  product,
+  subCategory,
+}) => {
   // product prop destruct
-  const { _id, variants, title, subCategory, isEnvelopeSize } = product;
+  const { _id, variants, title, isEnvelopeSize } = product;
   const mainTitle = title;
   // hooks used in components
+  const router = useRouter();
   const productCountRef = useRef(null);
   const [activeVariant, setActiveVariant] = useState(0);
   const [products, setProducts] = useState([]);
@@ -138,12 +150,13 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
   const { dispatch } = useContext(Context);
 
   const { error, loading, data } = useQuery(PRODUCTS_QUERY, {
-    variables: { subCategoryId: subCategory.id },
+    variables: { subCategoryId: subCategory._id },
   });
   useEffect(() => {
     if (data) {
       let { products } = data;
-      setRelatedProducts(products);
+      console.log(data);
+      setRelatedProducts(products.products);
     }
   }, [data]);
 
@@ -169,6 +182,61 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
       payload: { id, variant, isEnvelopeSize, title },
     });
   };
+
+  function getPrice(variant): number {
+    if (variant.discount > 0) {
+      return (
+        variant.price.value - (variant.price.value * variant.discount) / 100
+      );
+    } else return variant.price.value;
+  }
+
+  function handleAddProductToGiftCard() {
+    const giftCard = {
+      title:
+        title === variants[activeVariant].title
+          ? title
+          : `${title}, ${variants[activeVariant].title}`,
+      price: getPrice(variants[activeVariant]),
+      count: 1,
+      type: 'product',
+      id: product._id,
+      variantTitle: variants[activeVariant].title,
+      variantNumber: activeVariant,
+    };
+    let storedGiftCard = JSON.parse(window.localStorage.getItem('giftCard'));
+    if (storedGiftCard) {
+      const sameArray = storedGiftCard.services.filter(
+        (item) => item.title === giftCard.title
+      );
+      const diffArray = storedGiftCard.services.filter(
+        (item) => item.title !== giftCard.title
+      );
+      if (sameArray.length > 0) {
+        let mergeCount = Number(giftCard.count) + Number(sameArray[0].count);
+        giftCard.count = mergeCount;
+      }
+      giftCard.type = 'produkt';
+      const newArray = [...diffArray, giftCard];
+      storedGiftCard = {
+        ...storedGiftCard,
+        services: newArray,
+      };
+      window.localStorage.setItem('giftCard', JSON.stringify(storedGiftCard));
+    } else {
+      storedGiftCard = {
+        giftCardTitle: '',
+        giftCardImageUrl: '',
+        priceValue: 0,
+        text: '',
+        services: [giftCard],
+        totalPrice: 0,
+      };
+      window.localStorage.setItem('giftCard', JSON.stringify(storedGiftCard));
+    }
+
+    router.push('/darcekove-poukazky');
+  }
 
   const handleSubmitProductToCart: (
     event: React.FormEvent<HTMLFormElement>
@@ -252,38 +320,88 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
               {variants[activeVariant].inStock < 1 && (
                 <NotInStock>Produkt nie je dostupný na sklade!</NotInStock>
               )}
-              <form onSubmit={handleSubmitProductToCart}>
-                {variants.length > 1 && (
-                  <>
-                    <VariantsSelect
-                      id="variants"
-                      name="variants"
-                      onChange={(event: ChangeEvent<HTMLSelectElement>) => {
-                        const idx: number = event.currentTarget.selectedIndex;
+              <ButtonsHolder>
+                {subCategory.forSale ? (
+                  <form onSubmit={handleSubmitProductToCart}>
+                    {variants.length > 1 && (
+                      <>
+                        <VariantsSelect
+                          id="variants"
+                          name="variants"
+                          onChange={(event: ChangeEvent<HTMLSelectElement>) => {
+                            const idx: number =
+                              event.currentTarget.selectedIndex;
 
-                        handleSetActiveVariant(idx);
+                            handleSetActiveVariant(idx);
+                          }}
+                        >
+                          {variantOptions}
+                        </VariantsSelect>
+                      </>
+                    )}
+                    <Holder>
+                      <div>
+                        <Label className="mt-2">Počet</Label>
+                        <Input
+                          type="number"
+                          defaultValue={1}
+                          min={1}
+                          step={1}
+                          ref={productCountRef}
+                        />
+                      </div>
+                      <StyledProductButton type="submit">
+                        Vložiť do košíka
+                      </StyledProductButton>
+
+                      {subCategory.forGiftCard && (
+                        <StyledProductButton
+                          style={{ marginRight: '8px' }}
+                          onClick={handleAddProductToGiftCard}
+                        >
+                          Vytvoriť poukážku
+                        </StyledProductButton>
+                      )}
+                    </Holder>
+                  </form>
+                ) : (
+                  <>
+                    {variants.length > 1 && (
+                      <div className="w-100 mt-2">
+                        <VariantsSelect
+                          id="variants"
+                          name="variants"
+                          onChange={(event: ChangeEvent<HTMLSelectElement>) => {
+                            const idx: number =
+                              event.currentTarget.selectedIndex;
+
+                            handleSetActiveVariant(idx);
+                          }}
+                        >
+                          {variantOptions}
+                        </VariantsSelect>
+                      </div>
+                    )}
+
+                    {subCategory.forGiftCard && (
+                      <StyledProductButton
+                        style={{ marginRight: '8px' }}
+                        onClick={handleAddProductToGiftCard}
+                      >
+                        Vytvoriť poukážku
+                      </StyledProductButton>
+                    )}
+                    <Link
+                      href={{
+                        pathname: `/rezervacia`,
+                        query: { service: title },
                       }}
                     >
-                      {variantOptions}
-                    </VariantsSelect>
+                      <StyledProductButton>Rezervovať</StyledProductButton>
+                    </Link>
                   </>
                 )}
-                <Holder>
-                  <div>
-                    <Label className="mt-2">Počet</Label>
-                    <Input
-                      type="number"
-                      defaultValue={1}
-                      min={1}
-                      step={1}
-                      ref={productCountRef}
-                    />
-                  </div>
-                  <StyledProductButton type="submit">
-                    Vložiť do košíka
-                  </StyledProductButton>
-                </Holder>
-              </form>
+              </ButtonsHolder>
               <VariantTitle className="mt-4">Popis produktu</VariantTitle>
               <DescriptionEl variant={variants[activeVariant]} />
             </DetailInfo>
@@ -379,14 +497,12 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({ product }) => {
               padding: '.75rem 0',
             }}
           >
-            <ModalButton color="secondary" onClick={toggleModal}>
-              Nakupovať
-            </ModalButton>
+            <Button onClick={toggleModal}>Nakupovať</Button>
             <Link href="/eshop/cart">
-              <ModalButton color="primary">
+              <Button>
                 <StyledShoppingCartIcon style={{ marginRight: '4px' }} />
                 Do pokladne
-              </ModalButton>
+              </Button>
             </Link>
           </ModalFooter>
         </Modal>

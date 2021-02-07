@@ -14,6 +14,7 @@ import RezervationData from './RezervationData';
 import Service from './Service';
 import SubCategory from './SubCategory';
 import User from './User';
+import GiftCard from './GiftCard';
 
 const typeDefs = [
   Category,
@@ -22,6 +23,7 @@ const typeDefs = [
   DeliveryMethode,
   Discount,
   FreeDelivery,
+  GiftCard,
   LoyalityProduct,
   MarketingList,
   root,

@@ -24,7 +24,6 @@ export const Fade = styled.div`
 `;
 
 export const H1 = styled.h1`
-  font-family: MuseoSans-300;
   font-weight: bold;
   color: white;
 `;

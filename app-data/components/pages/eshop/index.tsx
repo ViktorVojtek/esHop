@@ -1,24 +1,11 @@
-import React, {
-  useState,
-  FC,
-  useEffect,
-  useContext,
-  useCallback,
-  useRef,
-} from 'react';
+import React, { useState, FC, useEffect, useContext, useRef } from 'react';
 import {
   Container,
   Row,
   Col,
   Dropdown,
-  DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Spinner,
   FormGroup,
   Input,
 } from 'reactstrap';
@@ -28,8 +15,8 @@ import Link from 'next/link';
 import CategoriesAside from './components/Categories';
 import Products from './components/Products';
 
-import { Wrapper, StyledModalBtn, StyledModalLink } from './styles/eshoppage';
-import { PRODUCTS_QUERY, SERVICES_QUERY } from '../../../graphql/query';
+import { Wrapper } from './styles/eshoppage';
+import { PRODUCTS_QUERY } from '../../../graphql/query';
 import { Context } from '../../../lib/state/Store';
 import {
   sortByPriceMin,
@@ -41,49 +28,48 @@ import {
 import Product from '../../../shared/types/Product.types';
 import CustomSpinner from '../../../shared/components/CustomSpinner/CustomerSpinner';
 import { DropdownToggleItem } from '../../../shared/design/dropdown';
+import { SubCategoryType } from '../admin/settings/subcategory';
 
 const EshopPage: FC = () => {
   const queryMultiple = () => {
     const res1 = useQuery(PRODUCTS_QUERY);
-    const res2 = useQuery(SERVICES_QUERY);
-    return [res1, res2];
+    return [res1];
   };
   const [
     { error: error, loading: loading, data: productsData },
-    { error: error2, loading: loading2, data: servicesData },
   ] = queryMultiple();
   const { state, dispatch } = useContext(Context);
   const { category, subCategory } = state;
+  const [subCategoriesDTO, setSubCategoriesDTO] = useState<SubCategoryType[]>(
+    []
+  );
   const searchInput = useRef(null);
   const [compareString, setCompareString] = useState('');
 
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [modal, setModal] = useState(false);
-
-  const toggleModal = () => setModal(!modal);
 
   const toggle = () => setDropdownOpen((prevState) => !prevState);
 
   useEffect(() => {
-    if (productsData && servicesData) {
-      const { products } = productsData;
-      const { services } = servicesData;
-      let allProducts = products.concat(services);
+    if (productsData) {
+      const { products, subCategories } = productsData.products;
+      setSubCategoriesDTO(subCategories);
 
       if (subCategory === '' && category !== '') {
-        filterByCategory(allProducts);
+        filterByCategory(products);
       } else if (subCategory !== '') {
-        filterBySubCategory(allProducts);
-      } else setFilteredProducts(allProducts);
+        filterBySubCategory(products);
+      } else setFilteredProducts(products);
     }
-  }, [subCategory, category, productsData, servicesData]);
+  }, [subCategory, category, productsData]);
 
   if (error) {
     return <>{error.message}</>;
   }
 
   const filterByCategory = (products: Product[]) => {
+    console.log(products);
     let newProducts = products.filter(
       (product: any) => product.category.id === category
     );
@@ -102,7 +88,6 @@ const EshopPage: FC = () => {
 
   return (
     <Wrapper>
-      {/*<SubPageBackground title="" imageUrl="/images/eshop/background.png" />*/}
       <Container>
         <Row className="d-flex justify-content-between mb-4">
           <Col sm="6">
@@ -173,15 +158,11 @@ const EshopPage: FC = () => {
           </Col>
         </Row>
         <Row>
-          <Col className="mt-3">
-            {/*
-              Maybe in the future Products component will use the following prop:
-              setProductsCount={setProductsCount}
-            */}
-            {loading && <CustomSpinner />}
+          <Col>
             <Products
               products={filteredProducts}
               compareString={compareString}
+              subCategories={subCategoriesDTO}
             />
           </Col>
         </Row>
