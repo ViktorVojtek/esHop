@@ -157,6 +157,7 @@ export const PRODUCT_QUERY = gql`
           path
           size
           title
+          ext
         }
         price {
           currency

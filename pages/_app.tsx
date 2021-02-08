@@ -12,6 +12,8 @@ import 'swiper/swiper.min.css';
 import 'swiper/components/navigation/navigation.min.css';
 import 'swiper/components/pagination/pagination.min.css';
 
+import 'react-image-gallery/styles/css/image-gallery.css';
+
 import Style from '../app-data/shared/styles/global.style';
 // Material UI support
 import { ThemeProvider } from '@material-ui/core/styles';
@@ -72,7 +74,7 @@ const MyApp = (props) => {
             <Style />
             {/*Production: 6LcS98QZAAAAAG6FfstRw_BF7BwFknxp-e-0Ra6-*/}
             {/*Local: 6LfgFeEZAAAAAD2fNYXGUjpI_Yu1c65XODYxgoyY*/}
-            <GoogleReCaptchaProvider reCaptchaKey="6LfgFeEZAAAAAD2fNYXGUjpI_Yu1c65XODYxgoyY">
+            <GoogleReCaptchaProvider reCaptchaKey="6LcS98QZAAAAAG6FfstRw_BF7BwFknxp-e-0Ra6-">
               <SnackbarProvider
                 maxSnack={3}
                 anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}

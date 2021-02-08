@@ -29,17 +29,23 @@ export const Title = styled.h4`
   }
 `;
 export const TitleMobile = styled.h4`
-  color: #5e8796;
+  color: black;
   font-weight: bold;
+  text-align: center;
+  margin: 16px 0;
   font-size: 1.5rem;
   display: none;
   @media (max-width: 768px) {
     display: block;
+    margin-top: 0px;
   }
 `;
 export const VariantTitle = styled.h6`
   color: ${colors.primary};
   font-size: 1.25rem;
+  @media (max-width: 768px) {
+    margin-top: 16px;
+  }
 `;
 
 export const Price = styled.p`

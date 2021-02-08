@@ -1,54 +1,52 @@
+import { useQuery } from '@apollo/react-hooks';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, {
-  useState,
-  useContext,
-  useRef,
   ChangeEvent,
+  useContext,
   useEffect,
+  useRef,
+  useState,
 } from 'react';
 import {
-  Wrapper,
-  Image,
-  Title,
-  TitleMobile,
-  VariantTitle,
-  Price,
-  DetailInfo,
-  VariantOption,
-  VariantsSelect,
-  Input,
-  ActionPrice,
-  Del,
-  Label,
-  RelatedTitle,
-  NotInStock,
-} from './styles/productDetail.style';
-import Link from 'next/link';
-import { useQuery } from '@apollo/react-hooks';
-
-import {
-  Container,
-  Row,
   Col,
+  Container,
   Modal,
-  ModalHeader,
   ModalBody,
   ModalFooter,
+  ModalHeader,
+  Row,
 } from 'reactstrap';
+import styled from 'styled-components';
+import { PRODUCTS_QUERY } from '../../../../../graphql/query';
+import { Context } from '../../../../../lib/state/Store';
+import RelatedProducts from '../../../../../shared/components/RelatedProducts';
+import RelatedProductSkeleton from '../../../../../shared/components/RelatedProducts/Skeleton';
+import { Button, ProductButton } from '../../../../../shared/design';
+import { formatPrice } from '../../../../../shared/helpers/formatters';
 // Types
 import Product from '../../../../../shared/types/Product.types';
 import { VariantOfProduct } from '../../../../../shared/types/Store.types';
-
-import { Context } from '../../../../../lib/state/Store';
-import { PRODUCTS_QUERY } from '../../../../../graphql/query';
-import RelatedProducts from '../../../../../shared/components/RelatedProducts';
-import { formatPrice } from '../../../../../shared/helpers/formatters';
-import { Button, colors, ProductButton } from '../../../../../shared/design';
-import DescriptionEl from './Description';
-import RelatedProductSkeleton from '../../../../../shared/components/RelatedProducts/Skeleton';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import styled from 'styled-components';
 import { SubCategoryType } from '../../../admin/settings/subcategory';
-import { useRouter } from 'next/router';
+import DescriptionEl from './Description';
+import { ImageGallery, ImageItem } from './ImageGallery';
+import {
+  ActionPrice,
+  Del,
+  DetailInfo,
+  Input,
+  Label,
+  NotInStock,
+  Price,
+  RelatedTitle,
+  Title,
+  TitleMobile,
+  VariantOption,
+  VariantsSelect,
+  VariantTitle,
+  Wrapper,
+} from './styles/productDetail.style';
 
 const ButtonsHolder = styled.div`
   display: flex;
@@ -278,11 +276,13 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({
           <Col md="6">
             <TitleMobile className="mb-3">{title}</TitleMobile>
             {variants[activeVariant].images.length > 0 ? (
-              <Image
-                src={variants[activeVariant].images[0].path}
-                alt={variants[activeVariant].title}
-                className="mb-3"
-              />
+              <>
+                {variants[activeVariant].images.length === 1 ? (
+                  <ImageItem url={variants[activeVariant].images[0].path} />
+                ) : (
+                  <ImageGallery images={variants[activeVariant].images} />
+                )}
+              </>
             ) : null}
           </Col>
           <Col md="6">

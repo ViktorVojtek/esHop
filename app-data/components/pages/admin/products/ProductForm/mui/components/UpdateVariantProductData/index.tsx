@@ -122,6 +122,8 @@ const UpdateVariantProductData = (props) => {
     return () => {};
   }, []);
 
+  console.log(variantData);
+
   const handleCreateProduct = async () => {
     try {
       const {
@@ -144,6 +146,8 @@ const UpdateVariantProductData = (props) => {
           variants: [...variants, variantData],
         };
       }
+
+      console.log(dataToUpdate);
 
       await updateProduct({
         variables: { _id, productInput: dataToUpdate },
@@ -264,10 +268,7 @@ const UpdateVariantProductData = (props) => {
     setImages(newImagesArr);
     setVariantData({
       ...variantData,
-      images:
-        (variantData as any).images && (variantData as any).images.length > 0
-          ? [...(variantData as any).images, ...newImagesArr]
-          : newImagesArr,
+      images: newImagesArr,
     });
   };
 
@@ -551,12 +552,14 @@ const UpdateVariantProductData = (props) => {
           <Grid container>
             {productData.variants.map((item: any, i: number) => {
               return (
-                <Grid item md={3} xs={12} key={i}>
+                <Grid item md={12} xs={12} key={i}>
                   <DetailWrapper elevation={2}>
                     <ImageTitleWrapper>
-                      <DetailImage
-                        src={item.images[0].base64 || item.images[0].path}
-                      />
+                      {item.images[0] && (
+                        <DetailImage
+                          src={item.images[0].base64 || item.images[0].path}
+                        />
+                      )}
                       <div style={{ marginLeft: '1rem' }}>
                         <DetailTitle>{item.title}</DetailTitle>
                         <DetailText>{`Kód produktu: ${item.productCode}`}</DetailText>

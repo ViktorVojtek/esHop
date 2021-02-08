@@ -1,16 +1,19 @@
 /* eslint-disable no-underscore-dangle */
 import mongoose from 'mongoose';
-import uniqid from 'uniqid';
+var fs = require('fs');
 import Product, { IProduct } from '../../../../db/models/Product';
 import { config } from '../../../../config';
 import { verifyToken, storeFile, getVariantImagesPaths } from '../../utils';
 import ModError from '../../utils/error';
+var rimraf = require('rimraf');
+import * as path from 'path';
 
 const updateProduct: (
   root: any,
   args: any,
   ctx: any
 ) => Promise<IProduct> = async (root, { _id, productInput }, ctx) => {
+  const dir: string = path.resolve(__dirname, `../../../../../..`);
   try {
     const { superSecret } = config;
     await verifyToken(ctx, superSecret);
@@ -36,14 +39,15 @@ const updateProduct: (
       if (variants[i].images && variants[i].images.length > 0) {
         const { images } = variants[i];
 
-        if (images && images.length > 0 && images[0].base64) {
-          const vId = `${_id}-${variants[i].title.toUpperCase()}`;
-
-          imagesData = await getVariantImagesPaths(images, vId);
-        } else {
-          imagesData = productExist.variants[i].images;
+        for (let j = 0; j < images.length; j++) {
+          if (images[j].base64) {
+            const vId = `${_id}-${variants[i].title.toUpperCase()}`;
+            const imageData = await getVariantImagesPaths([images[j]], vId);
+            imagesData.push(imageData[0]);
+          } else {
+            imagesData.push(images[j]);
+          }
         }
-
         resultVariant.images = imagesData;
       }
 
