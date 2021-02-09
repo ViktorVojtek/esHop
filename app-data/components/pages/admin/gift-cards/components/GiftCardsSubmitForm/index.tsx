@@ -48,8 +48,6 @@ const GiftCardSubmitForm = (): JSX.Element => {
   ) => Promise<void> = async (event) => {
     event.preventDefault();
 
-    console.log('submitujem');
-
     try {
       await createGiftCard({
         variables: { giftCardInput: giftCardFormData },

@@ -18,7 +18,7 @@ const SwiperWrapper = styled.div`
 `;
 
 const Chevron = styled.div`
-color: ${colors.primary}
+  color: ${colors.primary};
   &:before {
     border-style: solid;
     border-width: 4px 4px 0 0;
@@ -72,8 +72,6 @@ SwiperCore.use([Thumbs, Navigation]);
 export const ImageGallerySwiper = (props: ImageGallerySwiperProps) => {
   // store thumbs swiper instance
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
-
-  console.log(thumbsSwiper);
 
   return (
     <>

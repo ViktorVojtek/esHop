@@ -24,7 +24,7 @@ const Product = gql`
     description: String
     inStock: Int
     images: [ProductImageInput]
-    discount: Int
+    discount: Float
     title: String!
     price: ProductPriceInput!
     productCode: String
@@ -57,7 +57,7 @@ const Product = gql`
   type ProductVariant {
     default: Boolean
     description: String
-    discount: Int
+    discount: Float
     itemsInStock: Int
     images: [ProductImage]
     inStock: Int

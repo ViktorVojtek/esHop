@@ -1,10 +1,14 @@
 import React from 'react';
 import { Button, Table } from 'reactstrap';
-import { useQuery } from '@apollo/react-hooks';
+import { useMutation, useQuery } from '@apollo/react-hooks';
 import { PAYMENT_METHODES_QUERY } from '../../../../../../../graphql/query';
+import { REMOVE_PAYMENT_METHODE_MUTATION } from '../../../../../../../graphql/mutation';
 
 const PaymentMethods: () => JSX.Element = () => {
   const { loading, error, data } = useQuery(PAYMENT_METHODES_QUERY);
+  const [removePaymentMethode] = useMutation(REMOVE_PAYMENT_METHODE_MUTATION, {
+    refetchQueries: [{ query: PAYMENT_METHODES_QUERY }],
+  });
 
   if (loading) {
     return <>Loading</>;
@@ -12,6 +16,14 @@ const PaymentMethods: () => JSX.Element = () => {
   if (error) {
     return <>{error.message}</>;
   }
+
+  const handleRemoveItem: (_id: string) => Promise<void> = async (_id) => {
+    try {
+      await removePaymentMethode({ variables: { id: _id } });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const { paymentMethodes } = data;
 
@@ -32,7 +44,9 @@ const PaymentMethods: () => JSX.Element = () => {
                 <td>{title}</td>
                 <td>{value}</td>
                 <td className="text-right">
-                  <Button color="danger">Odstrániť</Button>
+                  <Button color="danger" onClick={() => handleRemoveItem(_id)}>
+                    Odstrániť
+                  </Button>
                 </td>
               </tr>
             );

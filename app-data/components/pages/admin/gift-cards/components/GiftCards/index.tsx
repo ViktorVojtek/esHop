@@ -52,7 +52,6 @@ const GiftCards = () => {
   return giftCards && giftCards.length > 0 ? (
     <GiftCardsHolder>
       {giftCards.map((giftCard: GiftCardType) => {
-        console.log(giftCard);
         return (
           <StyledPaper elevation={3} key={giftCard.title}>
             <TitleHolder>

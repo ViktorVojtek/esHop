@@ -100,8 +100,6 @@ const SubCategoryUpdateForm = (
     event: React.FormEvent<HTMLFormElement>
   ) => Promise<void> = async (event) => {
     event.preventDefault();
-    console.log(subCategory._id);
-    console.log(subCategoryFormData);
     try {
       await updateSubCategory({
         variables: {

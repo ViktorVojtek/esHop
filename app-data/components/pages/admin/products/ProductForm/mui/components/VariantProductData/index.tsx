@@ -368,7 +368,6 @@ const VariantProductData = (props) => {
           </Typography>
           <Grid container>
             {productData.variants.map((item: any, i: number) => {
-              console.log(item);
               return (
                 <Grid item md={3} xs={12} key={i}>
                   <DetailWrapper elevation={2}>

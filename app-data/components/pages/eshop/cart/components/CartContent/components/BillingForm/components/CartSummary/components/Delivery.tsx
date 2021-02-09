@@ -70,6 +70,8 @@ const Delivery = (props: IProps) => {
     return null;
   }
 
+  console.log(cartSummary);
+
   const getSum = (): number => {
     let sum: number = 0;
 
@@ -114,14 +116,18 @@ const Delivery = (props: IProps) => {
       }
     });
 
-    if (sum < freeDelivery) {
+    console.log(freeDelivery);
+
+    if (sum < freeDelivery || !freeDelivery) {
       sum += currentMethod.value;
     }
+    console.log(sum);
     handleData({
       ...orderData,
       totalPrice: sum,
       deliveryMethode: currentMethod.title,
-      deliveryPrice: sum < freeDelivery ? currentMethod.value : 0,
+      deliveryPrice:
+        !freeDelivery || sum < freeDelivery ? currentMethod.value : 0,
     });
     dispatch({
       type: 'SET_TOTAL_SUM',

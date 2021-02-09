@@ -67,9 +67,7 @@ function sendMailNotification(to: string, orderData: any): Promise<void> {
         products: orderData.products ? orderData.products : [],
         totalPriceWithoutVat: formatPrice(orderData.totalPriceWithoutVat),
         totalPriceVat: formatPrice(orderData.totalPriceVat),
-        totalPrice: formatPrice(
-          Math.round(orderData.totalPrice.totalPriceWithoutVat * 100) / 100
-        ),
+        totalPrice: formatPrice(Math.round(orderData.totalPrice * 100) / 100),
         isBankovyPrevod: orderData.paymentMethode === 'Bankový prevod',
         giftCards: orderData.giftCards ? orderData.giftCards : [],
         areProducts: orderData.products.length > 0,

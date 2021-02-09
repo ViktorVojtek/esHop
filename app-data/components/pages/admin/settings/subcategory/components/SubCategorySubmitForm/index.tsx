@@ -107,8 +107,6 @@ const SubCategorySubmitForm = (
 
   const { categories } = data;
 
-  console.log(subCategoryFormData);
-
   const handleChangeCategory = (
     event: React.ChangeEvent<{ value: unknown }>
   ) => {

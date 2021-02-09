@@ -122,8 +122,6 @@ const UpdateVariantProductData = (props) => {
     return () => {};
   }, []);
 
-  console.log(variantData);
-
   const handleCreateProduct = async () => {
     try {
       const {
@@ -135,19 +133,15 @@ const UpdateVariantProductData = (props) => {
       } = productData as any;
       let dataToUpdate = {};
       if (updateActual) {
-        console.log('som tu');
         restData.variants[activeVariant] = variantData;
         dataToUpdate = restData;
       }
       if (!updateActual) {
-        console.log('druhy update');
         dataToUpdate = {
           ...restData,
           variants: [...variants, variantData],
         };
       }
-
-      console.log(dataToUpdate);
 
       await updateProduct({
         variables: { _id, productInput: dataToUpdate },
@@ -185,7 +179,6 @@ const UpdateVariantProductData = (props) => {
           ...restData.variants.slice(idx + 1),
         ],
       };
-      console.log(dataToUpdate);
       await updateProduct({
         variables: { _id, productInput: dataToUpdate },
       });

@@ -69,7 +69,6 @@ const EshopPage: FC = () => {
   }
 
   const filterByCategory = (products: Product[]) => {
-    console.log(products);
     let newProducts = products.filter(
       (product: any) => product.category.id === category
     );

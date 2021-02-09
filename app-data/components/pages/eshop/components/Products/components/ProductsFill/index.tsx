@@ -269,7 +269,9 @@ const ProductUI = forwardRef<HTMLAnchorElement & HTMLDivElement, IProductUI>(
           </ActionHolder>
           <RibbonHolder>
             {variants[0].discount > 0 && (
-              <DiscountRibbon text={`ZĽAVA ${variants[0].discount} %`} />
+              <DiscountRibbon
+                text={`ZĽAVA ${Math.round(variants[0].discount)} %`}
+              />
             )}
             {variants[0].bonus && <BonusRibbon text={`+Bonus`} />}
           </RibbonHolder>

@@ -1,9 +1,9 @@
 import { useMutation } from '@apollo/react-hooks';
 import { useRouter } from 'next/router';
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useContext, useEffect, useState } from 'react';
 import { Container, Row } from 'reactstrap';
 import { CREATE_ORDER_MUTATION } from '../../../../../../graphql/mutation';
-import { useStore } from '../../../../../../lib/state/Store';
+import { Context, useStore } from '../../../../../../lib/state/Store';
 import Loading from '../../../../../../shared/components/Loading';
 import { Button } from '../../../../../../shared/design';
 import { scrollTop } from '../../../../../../shared/helpers';
@@ -55,6 +55,7 @@ const steps = {
 const CartContent: FC = () => {
   const { state } = useStore();
   const router = useRouter();
+  const { dispatch } = useContext(Context);
   const [registerInfo, setRegisterInfo] = useState({
     registerRequest: false,
     password: '',
@@ -83,6 +84,8 @@ const CartContent: FC = () => {
     }
   }, []);
 
+  console.log(orderData);
+
   const handleNextStep = () => {
     if (cartStep === 0) {
       router.push('/eshop/cart?checkout');
@@ -90,7 +93,48 @@ const CartContent: FC = () => {
     scrollTop();
     setCartStep((prevState) => prevState + 1);
   };
+
+  const getSum = (): number => {
+    let sum: number = 0;
+
+    cart.forEach((item: any) => {
+      if (item.variant.discount && item.variant.discount > 0) {
+        sum +=
+          item.variant.count *
+          (item.variant.price.value -
+            item.variant.price.value * (item.variant.discount / 100));
+      } else {
+        sum += item.variant.count * item.variant.price.value;
+      }
+    });
+
+    giftCards.forEach((item: any) => {
+      sum += item.totalPrice;
+    });
+
+    if (loyalityProduct && loyalityProduct.isDiscount) {
+      sum = sum - sum * (loyalityProduct.discount / 100);
+    }
+    if (coupon && coupon.value) {
+      sum = sum - sum * (coupon.value / 100);
+    }
+    sum += orderData.paymentPrice;
+    return sum;
+  };
+
   const handlePrevStep = () => {
+    if (cartStep === 1) {
+      setOrderData({
+        ...orderData,
+        deliveryMethode: '',
+        deliveryPrice: 0,
+      });
+      const sum = getSum();
+      dispatch({
+        type: 'SET_TOTAL_SUM',
+        payload: sum, // currentValue === 0 ? sum : cartTotalSum + currentValue,
+      });
+    }
     scrollTop();
     setCartStep((prevState) => prevState - 1);
   };

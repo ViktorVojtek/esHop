@@ -12,8 +12,6 @@ import 'swiper/swiper.min.css';
 import 'swiper/components/navigation/navigation.min.css';
 import 'swiper/components/pagination/pagination.min.css';
 
-import 'react-image-gallery/styles/css/image-gallery.css';
-
 import Style from '../app-data/shared/styles/global.style';
 // Material UI support
 import { ThemeProvider } from '@material-ui/core/styles';

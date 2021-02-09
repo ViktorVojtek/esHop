@@ -261,6 +261,12 @@ export const REMOVE_DELIVERY_METHODE_MUTATION = gql`
   }
 `;
 
+export const REMOVE_PAYMENT_METHODE_MUTATION = gql`
+  mutation removePaymentMethode($id: String!) {
+    removePaymentMethode(id: $id)
+  }
+`;
+
 export const REMOVE_DISCOUNT_MUTATION = gql`
   mutation removeDiscount($id: String!) {
     removeDiscount(id: $id)
