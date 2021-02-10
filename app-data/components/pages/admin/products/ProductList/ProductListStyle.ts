@@ -7,6 +7,7 @@ export const ProductItem = styled.div`
   align-items: center;
   justify-content: space-between;
   padding-bottom: 2rem;
+  position: relative;
 `;
 
 export const ProductImg = styled.img`
@@ -66,4 +67,12 @@ export const ActionHolder = styled.div`
   display: flex;
   font-size: 0.8rem;
   justify-content: space-evenly;
+`;
+
+export const ImageSize = styled.p`
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 100;
+  font-weight: bold;
 `;

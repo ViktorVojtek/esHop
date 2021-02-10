@@ -19,6 +19,7 @@ import {
   ActionPrice,
   Del,
   ActionHolder,
+  ImageSize,
 } from './ProductListStyle';
 import { formatPrice } from '../../../../../shared/helpers/formatters';
 
@@ -62,6 +63,7 @@ const ProductList: FC = () => {
     ({ title, _id, variants, subCategory }) => (
       <Col lg="3" md="6" key={_id}>
         <ProductItem>
+          <ImageSize>{variants[0].images[0].size}</ImageSize>
           {variants[0].images[0].path && (
             <div className="product-image">
               <ProductImg

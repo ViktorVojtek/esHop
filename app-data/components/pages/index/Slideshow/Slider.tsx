@@ -1,11 +1,11 @@
 import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Autoplay } from 'swiper';
+import SwiperCore, { Autoplay, Pagination } from 'swiper';
 import Link from 'next/link';
 import { Button } from '../../../../shared/design';
 
-SwiperCore.use([Autoplay]);
+SwiperCore.use([Autoplay, Pagination]);
 
 type WrapperProps = {
   img: string;
@@ -126,7 +126,9 @@ const slide1 = (
         </ContentText>
         <ContentImagesHolder>
           <ContentImageFade src="/images/poukazky2.png" />
-          <ContentImage src="/images/poukazky1.png" />
+          <Link href="/darcekove-poukazky">
+            <ContentImage src="/images/poukazky1.png" />
+          </Link>
         </ContentImagesHolder>
       </ContentWrapper>
     </Wrapper>
@@ -153,7 +155,9 @@ const slide2 = (
           </div>
         </ContentText>
         <ContentImagesHolder>
-          <ContentImage2 src="/images/products1.png" />
+          <Link href="/eshop">
+            <ContentImage2 src="/images/products1.png" />
+          </Link>
         </ContentImagesHolder>
       </ContentWrapper>
     </Wrapper>
@@ -165,7 +169,8 @@ export const Slider = () => {
     <Swiper
       slidesPerView={1}
       spaceBetween={0}
-      allowTouchMove={false}
+      allowTouchMove={true}
+      pagination={{ clickable: true }}
       autoplay={{
         delay: 10000,
         disableOnInteraction: true,

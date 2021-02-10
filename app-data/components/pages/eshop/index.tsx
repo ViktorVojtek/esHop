@@ -29,6 +29,7 @@ import Product from '../../../shared/types/Product.types';
 import CustomSpinner from '../../../shared/components/CustomSpinner/CustomerSpinner';
 import { DropdownToggleItem } from '../../../shared/design/dropdown';
 import { SubCategoryType } from '../admin/settings/subcategory';
+import { ProductsSkeleton } from './components/Products/components/ProductsSkeleton';
 
 const EshopPage: FC = () => {
   const queryMultiple = () => {
@@ -38,6 +39,7 @@ const EshopPage: FC = () => {
   const [
     { error: error, loading: loading, data: productsData },
   ] = queryMultiple();
+
   const { state, dispatch } = useContext(Context);
   const { category, subCategory } = state;
   const [subCategoriesDTO, setSubCategoriesDTO] = useState<SubCategoryType[]>(
@@ -156,6 +158,7 @@ const EshopPage: FC = () => {
             </Row>
           </Col>
         </Row>
+        {loading && <ProductsSkeleton />}
         <Row>
           <Col>
             <Products
