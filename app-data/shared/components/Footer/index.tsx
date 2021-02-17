@@ -13,6 +13,8 @@ import {
   StyledLink,
   TextBlock,
   Text,
+  IconsHolder,
+  Image,
 } from './style/footer.style';
 import { Container, Row, Col } from 'reactstrap';
 import MessengerCustomerChat from 'react-messenger-customer-chat';
@@ -147,6 +149,14 @@ const Footer: () => JSX.Element = () => {
               </a>
             </SocialHolder>
           </Col>
+        </Row>
+        <Row>
+          <IconsHolder>
+            <Image src="/ecard_icons/VUB_ecard_logo.png" />
+            <Image src="/ecard_icons/mc_securecode_logo.png" />
+            <Image src="/ecard_icons/ms_acc_opt_70_3x.png" />
+            <Image src="/ecard_icons/verified-by-visa.png" />
+          </IconsHolder>
         </Row>
       </Container>
       <MessengerCustomerChat pageId="105435127984415" appId="273865083851723" />

@@ -110,7 +110,7 @@ const slide1 = (
     <Wrapper img="/images/slide1.jpg">
       <ContentWrapper>
         <ContentText>
-          <Heading>Zháňate valentínsky darček na poslednú chvíľu?</Heading>
+          <Heading>Zháňate darček na poslednú chvíľu?</Heading>
           <Text>
             Vyberte si spomedzi našich pobytov, procedúr či produktov. Vložte
             venovanie, vyberte motív a o zvyšok sa postaráme my.

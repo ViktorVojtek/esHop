@@ -138,3 +138,15 @@ export const IconHolder = styled.div`
   width: 20px;
   margin-right: 4px;
 `;
+
+export const IconsHolder = styled.div`
+  margin-top: 32px;
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  align-items: center;
+`;
+
+export const Image = styled.img`
+  max-width: 80px;
+`;

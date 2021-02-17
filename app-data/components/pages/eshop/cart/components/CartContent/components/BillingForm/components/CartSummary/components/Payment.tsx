@@ -181,6 +181,7 @@ export default (props: IProps) => {
         <ErrorText>{cartSummary.payment.errorMessage}</ErrorText>
       )}
       {paymentMethodsEl}
+      <img style={{ maxWidth: '100%' }} src="/ecard_icons/all_cards.png" />
     </Element>
   );
 };

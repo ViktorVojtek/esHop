@@ -8,9 +8,9 @@ import {
 } from '@material-ui/core';
 import Link from 'next/link';
 import Step from '@material-ui/core/Step';
+import ReactGA from 'react-ga';
 import Stepper from '@material-ui/core/Stepper';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 import { useSnackbar } from 'notistack';
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
@@ -25,7 +25,6 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { formatPrice } from '../../../../../shared/helpers/formatters';
 import EuroIcon from '@material-ui/icons/Euro';
-import { scrollBottom } from '../../../../../shared/helpers/scrollBottom';
 import { scroller } from 'react-scroll';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -115,7 +114,7 @@ const ModalImage = styled.img`
 `;
 
 function getSteps() {
-  return ['Zvoľte obsah poukážky', 'Vzhľad a venovanie', 'Súhrn poukážky'];
+  return ['Vzhľad a venovanie', 'Zvoľte obsah poukážky', 'Súhrn poukážky'];
 }
 
 export default function GiftCardStepper() {
@@ -162,14 +161,18 @@ export default function GiftCardStepper() {
   }, [formData]);
 
   const handleStep = (step: number) => () => {
-    if (step === 1 || step === 2) {
+    if (step === 2) {
       if (formData.priceValue === 0 && formData.services.length < 1) {
         return enqueueSnackbar(`Obsah poukážky je prázdny`, {
           variant: 'error',
         });
       }
+      ReactGA.event({
+        category: 'GiftCards',
+        action: 'Products choose',
+      });
     }
-    if (step === 2) {
+    if (step === 1) {
       if (formData.text === '') {
         scroller.scrollTo('dedication', {
           duration: 500,
@@ -186,19 +189,33 @@ export default function GiftCardStepper() {
           variant: 'error',
         });
       }
+      ReactGA.event({
+        category: 'GiftCards',
+        action: 'Products choose',
+      });
+    }
+    if (step === 3) {
+      ReactGA.event({
+        category: 'GiftCards',
+        action: 'Summary view',
+      });
     }
     setActiveStep(step);
   };
 
   const handleNext = () => {
-    if (activeStep === 0) {
+    if (activeStep === 1) {
       if (formData.priceValue === 0 && formData.services.length < 1) {
         return enqueueSnackbar(`Obsah poukážky je prázdny`, {
           variant: 'error',
         });
       }
+      ReactGA.event({
+        category: 'GiftCards',
+        action: 'Products choose',
+      });
     }
-    if (activeStep === 1) {
+    if (activeStep === 0) {
       if (formData.text === '') {
         return enqueueSnackbar(`Zadajte venovanie`, {
           variant: 'error',
@@ -209,8 +226,16 @@ export default function GiftCardStepper() {
           variant: 'error',
         });
       }
+      ReactGA.event({
+        category: 'GiftCards',
+        action: 'Apperance view',
+      });
     }
     if (activeStep === 2) {
+      ReactGA.event({
+        category: 'GiftCards',
+        action: 'Summary view',
+      });
       toggleModal();
       return handleSubmit();
     }
@@ -283,10 +308,10 @@ export default function GiftCardStepper() {
       <div>
         <div>
           {activeStep === 0 && (
-            <Content formData={formData} setFormData={setFormData} />
+            <Apperance formData={formData} setFormData={setFormData} />
           )}
           {activeStep === 1 && (
-            <Apperance formData={formData} setFormData={setFormData} />
+            <Content formData={formData} setFormData={setFormData} />
           )}
           {activeStep === 2 && (
             <Summary formData={formData} setFormData={setFormData} />

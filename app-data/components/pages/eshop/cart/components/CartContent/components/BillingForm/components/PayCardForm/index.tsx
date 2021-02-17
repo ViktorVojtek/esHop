@@ -50,7 +50,7 @@ const PayCardForm: (props: IPayCardForm) => JSX.Element = (props) => {
       <form
         method="post"
         ref={form}
-        action="https://testsecurepay.eway2pay.com/fim/est3dgate"
+        action="https://vub.eway2pay.com/fim/est3dgate"
       >
         <input type="hidden" name="clientid" value={clientid} />
         <input type="hidden" name="storetype" value={storetype} />
