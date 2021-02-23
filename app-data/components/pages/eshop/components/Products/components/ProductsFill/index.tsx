@@ -8,6 +8,7 @@ import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import styled from 'styled-components';
 import { useIsClient } from '../../../../../../../lib/util/app.util';
 import { BonusRibbon } from '../../../../../../../shared/components/Ribbon/BonusRibbon';
+import { CovidRibbon } from '../../../../../../../shared/components/Ribbon/CovidRibbon';
 import { DiscountRibbon } from '../../../../../../../shared/components/Ribbon/DiscountRibbon';
 import { RibbonHolder } from '../../../../../../../shared/components/Ribbon/RibbonHolder';
 import { Button } from '../../../../../../../shared/design';
@@ -267,13 +268,16 @@ const ProductUI = forwardRef<HTMLAnchorElement & HTMLDivElement, IProductUI>(
               </>
             )}
           </ActionHolder>
-          <RibbonHolder>
+          <RibbonHolder stickLeft>
             {variants[0].discount > 0 && (
               <DiscountRibbon
                 text={`ZĽAVA ${Math.round(variants[0].discount)} %`}
               />
             )}
             {variants[0].bonus && <BonusRibbon text={`+Bonus`} />}
+            {subCategoryObject.covidWarranty && (
+              <CovidRibbon text="Covid-19 garancia" />
+            )}
           </RibbonHolder>
         </ProductItem>
         <div>

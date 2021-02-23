@@ -28,13 +28,14 @@ import {
 } from './styles/index';
 import { formatPrice } from '../../helpers/formatters';
 import { DiscountRibbon } from '../Ribbon/DiscountRibbon';
-import { NewProductRibbon } from '../Ribbon/NewProductRibbon';
 import { RibbonHolder } from '../Ribbon/RibbonHolder';
 import { ProductsSkeleton } from '../../../components/pages/eshop/components/Products/components/ProductsSkeleton';
 import { useQuery } from 'react-apollo';
 import { SUBCATEGORIES_QUERY } from '../../../graphql/query';
 import { StyledProductTitle } from '../../../components/pages/eshop/components/Products/components/ProductsFill/styles/products.style';
 import { useRouter } from 'next/router';
+import { BonusRibbon } from '../Ribbon/BonusRibbon';
+import { CovidRibbon } from '../Ribbon/CovidRibbon';
 
 const ProductTitle: React.FC<IProductTitle> = ({ slug, title }) => {
   return (
@@ -180,9 +181,14 @@ const FeatureProduct: FC<IProductUI> = ({
         </ActionHolder>
         <RibbonHolder>
           {variants[0].discount > 0 && (
-            <DiscountRibbon text={`ZĽAVA ${variants[0].discount} %`} />
+            <DiscountRibbon
+              text={`ZĽAVA ${Math.round(variants[0].discount)} %`}
+            />
           )}
-          <NewProductRibbon text="Novinka" />
+          {variants[0].bonus && <BonusRibbon text={`+Bonus`} />}
+          {subCategoryObject.covidWarranty && (
+            <CovidRibbon text="Covid-19 garancia" />
+          )}
         </RibbonHolder>
       </ProductItem>
     </Col>

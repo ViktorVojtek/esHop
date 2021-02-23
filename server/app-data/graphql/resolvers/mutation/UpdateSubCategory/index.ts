@@ -30,6 +30,7 @@ const updateSubCategory: (
       forSale,
       forGiftCard,
       forGiftBasket,
+      covidWarranty,
     } = subCategoryInput;
 
     let newImage = {};
@@ -66,6 +67,7 @@ const updateSubCategory: (
           forSale,
           forGiftCard,
           forGiftBasket,
+          covidWarranty,
         },
       },
       { new: true }

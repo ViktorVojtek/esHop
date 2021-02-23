@@ -30,10 +30,9 @@ import { useRouter } from 'next/router';
 import { ActionButton } from '../FeatureProduct/styles';
 import { RibbonHolder } from '../Ribbon/RibbonHolder';
 import { DiscountRibbon } from '../Ribbon/DiscountRibbon';
-import { NewProductRibbon } from '../Ribbon/NewProductRibbon';
-import { ProductsSkeleton } from '../../../components/pages/eshop/components/Products/components/ProductsSkeleton';
-import { SUBCATEGORIES_QUERY } from '../../../graphql/query';
 import { SubCategoryType } from '../../../components/pages/admin/settings/subcategory';
+import { BonusRibbon } from '../Ribbon/BonusRibbon';
+import { CovidRibbon } from '../Ribbon/CovidRibbon';
 
 const ProductTitle: React.FC<IProductTitle> = ({ slug, title }) => {
   return (
@@ -184,7 +183,10 @@ const RelatedProducts: FC<IRelatedProducts> = ({
           {variants[0].discount > 0 && (
             <DiscountRibbon text={`ZĽAVA ${variants[0].discount} %`} />
           )}
-          <NewProductRibbon text="Novinka" />
+          {variants[0].bonus && <BonusRibbon text={`+Bonus`} />}
+          {subCategoryObject.covidWarranty && (
+            <CovidRibbon text="Covid-19 garancia" />
+          )}
         </RibbonHolder>
       </ProductItem>
     </Col>

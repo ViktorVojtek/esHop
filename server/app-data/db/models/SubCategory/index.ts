@@ -9,6 +9,7 @@ export interface ISubCategory extends Document {
   forSale: Boolean;
   forGiftCard: Boolean;
   forGiftBasket: Boolean;
+  covidWarranty: Boolean;
 }
 
 const SubCategorySchema = new mongoose.Schema({
@@ -29,6 +30,10 @@ const SubCategorySchema = new mongoose.Schema({
     type: Boolean,
   },
   forGiftBasket: {
+    default: false,
+    type: Boolean,
+  },
+  covidWarranty: {
     default: false,
     type: Boolean,
   },

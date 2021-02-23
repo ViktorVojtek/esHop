@@ -26,6 +26,7 @@ export type SubCategoryType = {
   forSale: boolean;
   forGiftCard: boolean;
   forGiftBasket: boolean;
+  covidWarranty: boolean;
 };
 
 const SubcategoryContentPage: (props: { role: number }) => JSX.Element = ({

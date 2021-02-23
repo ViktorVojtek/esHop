@@ -9,6 +9,7 @@ const SubCategory = gql`
     forSale: Boolean
     forGiftCard: Boolean
     forGiftBasket: Boolean
+    covidWarranty: Boolean
   }
   input SubCategoryImageInput {
     base64: String
@@ -35,6 +36,7 @@ const SubCategory = gql`
     forSale: Boolean!
     forGiftCard: Boolean!
     forGiftBasket: Boolean!
+    covidWarranty: Boolean!
   }
 `;
 

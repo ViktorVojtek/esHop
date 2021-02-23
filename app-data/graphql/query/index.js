@@ -125,6 +125,7 @@ export const PRODUCT_BY_SLUG_QUERY = gql`
         forReservation
         forGiftCard
         forGiftBasket
+        covidWarranty
       }
     }
   }
@@ -223,6 +224,7 @@ export const PRODUCTS_QUERY = gql`
         forReservation
         forGiftCard
         forGiftBasket
+        covidWarranty
       }
     }
   }
@@ -297,6 +299,7 @@ export const SUBCATEGORIES_QUERY = gql`
       forReservation
       forGiftCard
       forGiftBasket
+      covidWarranty
     }
   }
 `;

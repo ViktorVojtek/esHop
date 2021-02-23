@@ -71,6 +71,7 @@ const SubCategorySubmitForm = (
     forSale: false,
     forGiftCard: false,
     forGiftBasket: false,
+    covidWarranty: false,
   });
   const [createSubCategory] = useMutation(CREATE_SUBCATEGORY_MUTATION, {
     refetchQueries: [{ query: SUBCATEGORIES_QUERY }],
@@ -233,6 +234,17 @@ const SubCategorySubmitForm = (
             />
           }
           label="Darčekové koše"
+        />
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={subCategoryFormData.covidWarranty}
+              onChange={handleCheckbox}
+              name="covidWarranty"
+              color="primary"
+            />
+          }
+          label="COVID-19 garancia"
         />
       </CheckboxWrapper>
       <div className="d-flex align-items-center">

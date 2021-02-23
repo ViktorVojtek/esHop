@@ -71,6 +71,7 @@ const SubCategoryUpdateForm = (
     forSale: subCategory.forSale || false,
     forGiftCard: subCategory.forGiftCard || false,
     forGiftBasket: subCategory.forGiftBasket || false,
+    covidWarranty: subCategory.covidWarranty || false,
   });
   const [updateSubCategory] = useMutation(UPDATE_SUBCATEGORY_MUTATION, {
     refetchQueries: [{ query: SUBCATEGORIES_QUERY }],
@@ -94,6 +95,7 @@ const SubCategoryUpdateForm = (
       forSale: subCategory.forSale || false,
       forGiftCard: subCategory.forGiftCard || false,
       forGiftBasket: subCategory.forGiftBasket || false,
+      covidWarranty: subCategory.covidWarranty || false,
     });
   }, [subCategory]);
   const handleSubmitSubCategoryData: (
@@ -247,6 +249,17 @@ const SubCategoryUpdateForm = (
             />
           }
           label="Darčekové koše"
+        />
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={subCategoryFormData.covidWarranty || false}
+              onChange={handleCheckbox}
+              name="covidWarranty"
+              color="primary"
+            />
+          }
+          label="COVID-19 garancia"
         />
       </CheckboxWrapper>
       <div className="d-flex align-items-center">

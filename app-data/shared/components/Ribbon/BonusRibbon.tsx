@@ -7,7 +7,7 @@ type IBonusRibbon = {
 };
 
 const RibbonElement = styled.div`
-  font-size: 14px;
+  font-size: 12px;
   text-transform: uppercase;
   text-align: left;
   font-weight: bold;
@@ -16,7 +16,7 @@ const RibbonElement = styled.div`
   display: block;
   background: ${colors.bonus};
   color: white;
-  padding: 6px 12px;
+  padding: 3px 8px;
   position: relative;
   -webkit-filter: drop-shadow(0 0.5rem 0.3em rgba(0, 0, 0, 0.5));
   transform: translate3d(0, 0, 0);
@@ -27,8 +27,8 @@ const RibbonElement = styled.div`
     width: 0;
     height: 0;
     border-right: 10px solid transparent;
-    border-bottom: 16px solid ${colors.bonus};
-    border-top: 16px solid ${colors.bonus};
+    border-bottom: 13px solid ${colors.bonus};
+    border-top: 13px solid ${colors.bonus};
     position: absolute;
     top: 0px;
     right: -10px;
