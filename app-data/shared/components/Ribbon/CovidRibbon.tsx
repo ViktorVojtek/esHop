@@ -94,7 +94,7 @@ export const CovidRibbon = (props: IBonusRibbon) => {
                 <strong>Garancia vrátenia peňazí</strong>
               </li>
               <li>
-                <strong>Garancia poskytnutia iného termínu</strong>
+                <strong>Garancia poskytnutia iného termínu pobytu</strong>
               </li>
               <li>
                 <strong>Garancia prednostného kontaktovania</strong>

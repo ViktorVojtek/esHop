@@ -13,7 +13,6 @@ import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import { useSnackbar } from 'notistack';
 import React, { useState } from 'react';
 import { Form } from 'reactstrap';
-import styled from 'styled-components';
 import { GiftCardType } from '../..';
 import { CREATE_GIFTCARD_MUTATION } from '../../../../../../graphql/mutation';
 import { GIFTCARDS_QUERY } from '../../../../../../graphql/query';
@@ -38,6 +37,8 @@ const GiftCardSubmitForm = (): JSX.Element => {
   const [giftCardFormData, setGiftCardFormData] = useState<GiftCardType>({
     title: '',
     image: {},
+    textColor: '',
+    borderColor: '',
   });
   const [createGiftCard] = useMutation(CREATE_GIFTCARD_MUTATION, {
     refetchQueries: [{ query: GIFTCARDS_QUERY }],
@@ -94,6 +95,32 @@ const GiftCardSubmitForm = (): JSX.Element => {
           setGiftCardFormData({
             ...giftCardFormData,
             title: event.currentTarget.value as string,
+          });
+        }}
+        className="mb-4"
+      />
+      <TextField
+        variant="outlined"
+        label="Farba textu"
+        fullWidth
+        required
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+          setGiftCardFormData({
+            ...giftCardFormData,
+            textColor: event.currentTarget.value as string,
+          });
+        }}
+        className="mb-4"
+      />
+      <TextField
+        variant="outlined"
+        label="Farba grafických prvkov"
+        fullWidth
+        required
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+          setGiftCardFormData({
+            ...giftCardFormData,
+            borderColor: event.currentTarget.value as string,
           });
         }}
         className="mb-4"

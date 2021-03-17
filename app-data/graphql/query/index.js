@@ -314,6 +314,8 @@ export const GIFTCARDS_QUERY = gql`
         size
         title
       }
+      textColor
+      borderColor
     }
   }
 `;

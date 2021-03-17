@@ -19,6 +19,8 @@ export type GiftCardType = {
   _id?: string;
   title: string;
   image: any;
+  textColor: string;
+  borderColor: string;
 };
 
 const GiftCardsContentPage: (props: { role: number }) => JSX.Element = ({

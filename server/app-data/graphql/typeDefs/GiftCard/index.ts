@@ -4,6 +4,8 @@ const GiftCard = gql`
   input GiftCardInput {
     title: String
     image: GiftCardImageInput
+    textColor: String
+    borderColor: String
   }
   input GiftCardImageInput {
     base64: String
@@ -24,6 +26,8 @@ const GiftCard = gql`
     _id: String!
     title: String!
     image: SubCategoryImage!
+    textColor: String!
+    borderColor: String!
   }
 `;
 

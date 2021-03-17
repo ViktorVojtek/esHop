@@ -18,6 +18,7 @@ import { ILinkItem } from './TS/Navigation.interface';
 import MobileMenuEshop from '../../../components/MobileMenuEshop';
 import CartPopover from '../../CartPopover';
 import CustomerMenu from '../../CustomerMenu';
+import { useRouter } from 'next/router';
 
 const CartIcon = styled(ShoppingCartOutline)`
   color: red;
@@ -35,11 +36,11 @@ type FWRCBrand = {
 const CustomNavbarBrand = forwardRef(({ href, children }: FWRCBrand, ref) => (
   <NavbarBrand href={href}>{children}</NavbarBrand>
 ));
-const LinkItem: FC<ILinkItem> = ({ href, title }) => (
+const LinkItem: FC<ILinkItem> = ({ href, title, className = '' }) => (
   <NavItem>
     <Link href={href}>
       <NavLink
-        className="text-uppercase letter-spacing-1 nav-link-main"
+        className={`text-uppercase letter-spacing-1 nav-link-main ${className}`}
         href={href}
       >
         {title}
@@ -50,9 +51,12 @@ const LinkItem: FC<ILinkItem> = ({ href, title }) => (
 const Navigation: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { state } = useContext(Context);
+  const router = useRouter();
 
   const { cart, giftCards } = state;
   const toggle: () => void = () => setIsOpen(!isOpen);
+
+  console.log(router.pathname.includes('eshop'));
 
   return (
     <>
@@ -67,9 +71,28 @@ const Navigation: FC = () => {
           <Collapse isOpen={isOpen} navbar>
             <Nav navbar>
               <LinkItem href="/" title="Domov" />
-              <LinkItem href="/eshop" title="Obchod" />
-              <LinkItem href="/darcekove-poukazky" title="Darčekové poukážky" />
-              <LinkItem href="/kontakt" title="Kontakt" />
+              <LinkItem
+                href="/eshop"
+                title="Obchod"
+                className={
+                  router.pathname.includes('eshop') && 'nav-link-main-active'
+                }
+              />
+              <LinkItem
+                href="/darcekove-poukazky"
+                title="Darčekové poukážky"
+                className={
+                  router.pathname.includes('darcekove') &&
+                  'nav-link-main-active'
+                }
+              />
+              <LinkItem
+                href="/kontakt"
+                title="Kontakt"
+                className={
+                  router.pathname.includes('kontakt') && 'nav-link-main-active'
+                }
+              />
               <CartPopover target="cartIcon" />
               <CustomerMenu />
             </Nav>

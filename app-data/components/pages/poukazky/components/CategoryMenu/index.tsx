@@ -36,15 +36,6 @@ export const CategoryMenu = (props: CategoryMenuProps): JSX.Element => {
 
   return (
     <Row>
-      <Col md={3} xs={6}>
-        <StyledButton
-          className="mb-2 w-100"
-          onClick={() => handleChangeCategory('Suma')}
-          active={category === 'Suma'}
-        >
-          Peniaze
-        </StyledButton>
-      </Col>
       {subCategories.map((subCategory: SubCategoryType) => {
         if (subCategory.forGiftCard) {
           return (
@@ -60,6 +51,15 @@ export const CategoryMenu = (props: CategoryMenuProps): JSX.Element => {
           );
         }
       })}
+      <Col md={3} xs={6}>
+        <StyledButton
+          className="mb-2 w-100"
+          onClick={() => handleChangeCategory('Suma')}
+          active={category === 'Suma'}
+        >
+          Peniaze
+        </StyledButton>
+      </Col>
     </Row>
   );
 };

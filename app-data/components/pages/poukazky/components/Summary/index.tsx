@@ -22,11 +22,20 @@ import EuroIcon from '@material-ui/icons/Euro';
 import { useQuery } from 'react-apollo';
 import { PRODUCTS_BY_IDS_QUERY } from '../../../../../graphql/query';
 import CardGiftcardOutlinedIcon from '@material-ui/icons/CardGiftcardOutlined';
+import { Ornament } from '../Apperance/Ornament';
 
 type IProductToCartData = {
   formData: IGiftCardData;
   setFormData: React.Dispatch<React.SetStateAction<IGiftCardData>>;
 };
+
+const OrnamentHolder = styled.div`
+  position: absolute;
+  bottom: 6px;
+  width: 50%;
+  margin-left: 50%;
+  transform: translateX(-50%);
+`;
 
 const H5 = styled.h5`
   font-weight: bold;
@@ -49,6 +58,8 @@ const HelperText = styled.p`
 const Summary: FC<IProductToCartData> = ({ formData }) => {
   const {
     giftCardImageUrl,
+    textColor,
+    borderColor,
     priceValue,
     text,
     services,
@@ -71,7 +82,6 @@ const Summary: FC<IProductToCartData> = ({ formData }) => {
 
   let price = 0;
   if (data) {
-    console.log(data);
     const { productsByIds } = data;
     formData.services.forEach((service, i) => {
       productsByIds.map((e) => {
@@ -147,9 +157,14 @@ const Summary: FC<IProductToCartData> = ({ formData }) => {
           <Preview src={giftCardImageUrl} alt="poukazka" />
         </PreviewHolder>
         <PreviewHolder elevation={4}>
-          <Preview src="/images/skica.jpg" alt="poukazka" />
+          <Preview src="/images/skica.png" alt="poukazka" />
+          <OrnamentHolder>
+            <Ornament color={borderColor ? borderColor : 'black'} />
+          </OrnamentHolder>
           <PreviewTextHolder>
-            <PrednaStranaText colorText="black">{text}</PrednaStranaText>
+            <PrednaStranaText colorText={textColor ? textColor : 'black'}>
+              {text}
+            </PrednaStranaText>
           </PreviewTextHolder>
         </PreviewHolder>
         <HelperText>

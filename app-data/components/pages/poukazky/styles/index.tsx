@@ -172,7 +172,7 @@ export const PreviewHolder = styled(Paper)`
 
 export const PrednaStranaText = styled.p<IColorText>`
   font-size: 2.5rem;
-  font-family: 'Engagement-Regular';
+  font-family: 'Parisienne', cursive;
   color: ${({ colorText }) => (colorText ? `${colorText}` : 'black')};
   text-align: center;
   line-height: 2rem;
@@ -210,7 +210,7 @@ export const PreviewTextHolder = styled.div`
   position: absolute;
   width: 100%;
   padding: 16px;
-  height: 100%;
+  height: calc(100% - 20px);
   display: flex;
   align-items: center;
   justify-content: center;

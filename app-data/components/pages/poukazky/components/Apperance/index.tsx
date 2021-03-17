@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Col, Row } from 'reactstrap';
 import {
@@ -16,10 +16,19 @@ import { useQuery } from 'react-apollo';
 import { GIFTCARDS_QUERY } from '../../../../../graphql/query';
 import { GiftCardType } from '../../../admin/gift-cards';
 import { Element } from 'react-scroll';
+import { Ornament } from './Ornament';
 
 const Img = styled.img`
   width: 100%;
   cursor: pointer;
+`;
+
+const OrnamentHolder = styled.div`
+  position: absolute;
+  bottom: 6px;
+  width: 50%;
+  margin-left: 50%;
+  transform: translateX(-50%);
 `;
 
 const HelperText = styled.p`
@@ -61,9 +70,7 @@ type ApperanceProps = {
 
 const Apperance = (props: ApperanceProps) => {
   const { formData, setFormData } = props;
-  const [giftCardTitle, setGiftCardTitle] = useState(
-    formData.giftCardTitle || ''
-  );
+
   const { error, loading, data } = useQuery(GIFTCARDS_QUERY);
 
   if (loading) {
@@ -76,6 +83,11 @@ const Apperance = (props: ApperanceProps) => {
 
   const { giftCards } = data;
 
+  const filteredActiveGiftCard = giftCards.filter(
+    (giftCard) => giftCard.title === formData.giftCardTitle
+  );
+  const activeGiftCard = filteredActiveGiftCard[0];
+
   const handleChangeTextArea = (event) => {
     setFormData({
       ...formData,
@@ -84,11 +96,12 @@ const Apperance = (props: ApperanceProps) => {
   };
 
   const handleSetGiftCardTitle = (giftCard: GiftCardType) => {
-    setGiftCardTitle(giftCard.title);
     setFormData({
       ...formData,
       giftCardTitle: giftCard.title,
       giftCardImageUrl: giftCard.image.path,
+      textColor: giftCard.textColor,
+      borderColor: giftCard.borderColor,
     });
   };
   return (
@@ -105,7 +118,9 @@ const Apperance = (props: ApperanceProps) => {
                   src={giftCard.image.path}
                   onClick={() => handleSetGiftCardTitle(giftCard)}
                 />
-                <StyledCheck isActive={giftCardTitle === giftCard.title} />
+                <StyledCheck
+                  isActive={formData.giftCardTitle === giftCard.title}
+                />
               </StyledPaper>
             </Col>
           ))}
@@ -133,9 +148,17 @@ const Apperance = (props: ApperanceProps) => {
       </Col>
       <Col md={6}>
         <PreviewHolder elevation={4}>
-          <Preview src="/images/skica.jpg" alt="poukazka" />
+          <Preview src="/images/skica.png" alt="poukazka" />
+          <OrnamentHolder>
+            <Ornament
+              color={activeGiftCard ? activeGiftCard.borderColor : 'black'}
+            />
+          </OrnamentHolder>
+
           <PreviewTextHolder>
-            <PrednaStranaText colorText="black">
+            <PrednaStranaText
+              colorText={activeGiftCard ? activeGiftCard.textColor : 'black'}
+            >
               {formData.text}
             </PrednaStranaText>
           </PreviewTextHolder>

@@ -258,6 +258,12 @@ export default createGlobalStyle`
     .nav-link-main{
       color: white !important;
     }
+    .nav-link-main-active{
+      color: #ff0000 !important;
+      &:before {
+        transform: scale(1,1);
+      }
+    }
   }
   .navbar-main.active{
     background-color: #FFFFFF !important;
@@ -376,6 +382,13 @@ export default createGlobalStyle`
       color: #ff0000 !important;
     }
   }
+  .nav-link-main-active{
+    color: #ff0000 !important;
+    &:before {
+      transform: scale(1,1);
+    }
+  }
+  
   .product-image{
     overflow: hidden;
     border-radius: 4px;

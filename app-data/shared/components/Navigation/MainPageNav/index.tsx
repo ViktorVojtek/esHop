@@ -49,11 +49,11 @@ type FWRCBrand = {
 const CustomNavbarBrand = forwardRef(({ href, children }: FWRCBrand, ref) => (
   <NavbarBrand href={href}>{children}</NavbarBrand>
 ));
-const LinkItem: FC<ILinkItem> = ({ href, title }) => (
+const LinkItem: FC<ILinkItem> = ({ href, title, className }) => (
   <NavItem>
     <Link href={href}>
       <NavLink
-        className="text-uppercase letter-spacing-1 nav-link-main"
+        className={`text-uppercase letter-spacing-1 nav-link-main ${className}`}
         href={href}
       >
         {title}
@@ -100,7 +100,11 @@ const MainPageNavigation: FC = () => {
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav navbar>
-              <LinkItem href="/" title="Domov" />
+              <LinkItem
+                className="nav-link-main-active"
+                href="/"
+                title="Domov"
+              />
               <LinkItem href="/eshop" title="Obchod" />
               <LinkItem href="/darcekove-poukazky" title="Darčekové poukážky" />
               <LinkItem href="/kontakt" title="Kontakt" />

@@ -59,6 +59,8 @@ type ServiceData = {
 export type IGiftCardData = {
   giftCardTitle: string;
   giftCardImageUrl: string;
+  textColor: string;
+  borderColor: string;
   priceValue: number;
   text: string;
   services: ServiceData[];
@@ -130,6 +132,8 @@ export default function GiftCardStepper() {
   const [formData, setFormData] = useState<IGiftCardData>({
     giftCardTitle: '',
     giftCardImageUrl: '',
+    textColor: '',
+    borderColor: '',
     priceValue: 0,
     text: '',
     services: [],
@@ -253,6 +257,8 @@ export default function GiftCardStepper() {
     setFormData({
       giftCardTitle: '',
       giftCardImageUrl: '',
+      textColor: '',
+      borderColor: '',
       priceValue: 0,
       text: '',
       services: [],
