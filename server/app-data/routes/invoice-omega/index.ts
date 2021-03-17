@@ -8,6 +8,7 @@ export const omegaRoute: (
   res: Response
 ) => Promise<Response<any>> = async (req, res) => {
   const {
+    invoiceId,
     email,
     orderId,
     totalPrice,
@@ -75,7 +76,7 @@ export const omegaRoute: (
     const senderIsVatPayer: boolean = companyDTAXNum !== undefined;
 
     const data = {
-      documentNumber: orderId,
+      documentNumber: `${invoiceId}`,
       numberingSequence: 'OFEsh',
       totalPriceWithVat: totalPrice,
       paymentType: `${paymentMethode}`,
@@ -118,6 +119,7 @@ export const omegaRoute: (
       clientNote: '',
       isVatAccordingPayment: true,
       items: finalProducts,
+      variableSymbol: `${orderId}`,
     };
 
     const response: globalThis.Response = await fetch(ESHOP_INV_API_URI, {

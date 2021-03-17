@@ -180,8 +180,8 @@ export const Slider = () => {
         nextEl: '.swiper-button-next',
       }}
     >
-      {slide1}
       {slide2}
+      {slide1}
     </Swiper>
   );
 };

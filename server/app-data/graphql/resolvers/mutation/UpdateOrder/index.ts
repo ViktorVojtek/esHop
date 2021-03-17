@@ -222,9 +222,10 @@ export default async (
         invoiceId = result.invoiceId;
       } else {
         invoiceId = await calculateInvoiceId();
+        result.invoiceId = invoiceId;
       }
 
-      await Order.findOneAndUpdate(
+      const order = await Order.findOneAndUpdate(
         {
           _id: mongoose.Types.ObjectId(_id),
         },
@@ -244,7 +245,8 @@ export default async (
       totalPriceWithoutVat = Math.round(totalPriceWithoutVat * 100) / 100;
       let totalPriceVat = result.totalPrice - result.totalPrice / 1.2;
       totalPriceVat = Math.round(totalPriceVat * 100) / 100;
-      const createdAt = new Date().toLocaleDateString('sk-SK');
+      const date = new Date();
+      const createdAt = date.toLocaleDateString('sk-SK');
 
       const readyData = {
         ...result,

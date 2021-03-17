@@ -11,6 +11,7 @@ export const UPDATE_ORDER_MUTATION = gql`
     updateOrder(_id: $_id, status: $status) {
       _id
       status
+      invoiceId
       products
       userId
       address

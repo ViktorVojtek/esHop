@@ -64,10 +64,10 @@ const Actions = ({ id }: { id: string }) => {
         variant: 'success',
       }
     );
-
     if (value === '2') {
       await fetch('/invoice-omega', {
         body: JSON.stringify({
+          invoiceId: order.invoiceId,
           orderId: order.orderId,
           email: order.email,
           totalPrice: order.totalPrice,
@@ -88,6 +88,7 @@ const Actions = ({ id }: { id: string }) => {
           companyDVATNum: order.companyDVATNum,
           companyName: order.companyName,
           companyVatNum: order.companyVatNum,
+          paymentPrice: order.paymentPrice,
         }),
         headers: {
           'Content-Type': 'application/json',
