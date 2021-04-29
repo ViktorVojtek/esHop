@@ -8,6 +8,17 @@ const Wrapper = styled.div`
   padding: 0;
   width: 100%;
   height: 100%;
+  margin-top: 98px;
+  position: relative;
+  @media (max-width: 1110px) {
+    margin-top: 108px;
+  }
+  @media (max-width: 992px) {
+    margin-top: 92px;
+  }
+  @media (max-width: 450px) {
+    margin-top: 80px;
+  }
 `;
 
 export const Slideshow = () => (

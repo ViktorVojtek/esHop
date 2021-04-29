@@ -1,67 +1,40 @@
 import styled from 'styled-components';
-import {
-  ShippingFast,
-  Gift,
-  HandHoldingHeart,
-  Leaf,
-} from '@styled-icons/fa-solid';
 import { colors } from '../../../../../../../shared/design';
 
 export const ServiceHolder = styled.div`
-  background-color: ${colors.primary};
   padding: 2rem 0rem;
+  margin-top: 32px;
 `;
 
 export const ServiceTitle = styled.h5`
-  color: white;
+  color: black;
   text-transform: uppercase;
-  font-weight: 600;
-  font-size: 1.15rem;
+  font-weight: 700;
+  font-size: 1rem;
+  margin-top: 16px;
+  text-align: center;
   @media (max-width: 1200px) {
     font-size: 1rem;
   }
 `;
 export const ServiceText = styled.p`
-  color: white;
+  color: black;
   text-align: center;
-  font-size: 1rem;
+  font-size: 0.9rem;
+  margin-bottom: 0;
 `;
 export const Service = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-export const ShippingFastIcon = styled(ShippingFast)`
-  color: white;
-  width: 60px;
-  margin: 1rem;
-  height: 60px;
-`;
-export const GiftIcon = styled(Gift)`
-  color: white;
-  width: 60px;
-  margin: 1rem;
-  height: 60px;
-`;
-export const HandHoldingHeartIcon = styled(HandHoldingHeart)`
-  color: white;
-  width: 60px;
-  margin: 1rem;
-  height: 60px;
-`;
-export const LeafIcon = styled(Leaf)`
-  color: white;
-  width: 60px;
-  margin: 1rem;
-  height: 60px;
+  padding: 16px;
+  border: 2px solid ${colors.primaryLight};
+  border-radius: 12px;
+  height: 100%;
 `;
 
-export const Divider = styled.div`
-  width: 60px;
-  height: 2px;
-  background-color: white;
-  margin: 0 auto;
-  display: block;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+export const ServiceIcon = styled.img`
+  width: 40px;
+  margin: 1rem;
+  height: 40px;
 `;

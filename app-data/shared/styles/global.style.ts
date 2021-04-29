@@ -90,9 +90,8 @@ export default createGlobalStyle`
       z-index: 999;
       background-color: white;
       width: 100%;
-      padding-top: .5rem;
-      padding-bottom: .5rem;
       box-shadow: -1px -1px 10px 3px #e6e6e6;
+      padding: 16px 32px;
     }
    }
    .hideMobile{
@@ -147,8 +146,8 @@ export default createGlobalStyle`
   }
   .nav-link{
     color: #5e8796;
-    font-weight: 600;
-    font-size: 0.8rem;
+    font-weight: 500;
+    font-size: 1rem;
     &:hover{
       color: rgb(24, 28, 39);
     }
@@ -245,18 +244,16 @@ export default createGlobalStyle`
   }
 
   .navbar-main{
-    padding: 0.25rem 7rem !important;
-    background-color: transparent !important;
+    padding: 20px 120px !important;
+    background-color: white;
     box-shadow: none;
     transition: all .3s ease-out;
-    @media(max-width: 1550px){
-      padding: 0.25rem 4rem !important;
-    }
-    @media(max-width: 992px){
-      padding: 0.25rem 2rem !important;
+    @media(max-width: 1300px){
+      padding: 20px 60px !important;
     }
     .nav-link-main{
-      color: white !important;
+      color: black !important;
+      margin-right: 16px;
     }
     .nav-link-main-active{
       color: #ff0000 !important;
@@ -268,9 +265,7 @@ export default createGlobalStyle`
   .navbar-main.active{
     background-color: #FFFFFF !important;
     box-shadow: -1px -1px 10px 2px #e6e6e6;
-    .nav-link-main{
-      color: #5e8796 !important;
-    }
+    padding: 10px 120px !important;
   }
   
   .navbar-brand{
@@ -381,6 +376,9 @@ export default createGlobalStyle`
     &:hover{
       color: #ff0000 !important;
     }
+    @media(max-width: 1300px){
+      font-size: 0.9rem;
+    }
   }
   .nav-link-main-active{
     color: #ff0000 !important;
@@ -397,11 +395,11 @@ export default createGlobalStyle`
     position: relative;
     &:hover{
       .product-image-background{
-        transform: scale(1.15);
+        transform: scale(1.075);
       }
       .detail{
         background-color: rgba(0, 0, 0,0.05);
-        svg{
+        svg, img{
           transform: scale(1);
         }
       }
@@ -559,5 +557,45 @@ Note: Beware of modifying this element as it can break the animations - you shou
 /* Styling of overlay */
 .bm-overlay {
   background: rgba(0, 0, 0, 0.3);
+}
+.custom-bullet-container{
+  .swiper-pagination-bullet, .swiper-pagination-bullet-active{
+    background-color: white !important;
+    width: 32px;
+    height: 32px;
+    opacity: 1;
+    cursor: pointer;
+    transition: transform .3s ease-out;
+  }
+  .swiper-pagination-bullet{
+    transform: scale(.4);
+    border: none;
+  }
+  .swiper-pagination-bullet-active{
+    transform: scale(1);
+    border: 3px solid white;
+    background-color: #9bd0eb !important;
+  }
+  .recipe-bullet{
+    background-color: white !important;
+  }
+}
+.description-editor{
+  border: 1px solid grey;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+.full-width{
+  @media(max-width: 992px){
+    max-width: 100%;
+    padding: 0;
+  }
+}
+.swiper-button-disabled {
+  opacity: 0.35;
+  cursor: auto;
+  pointer-events: none;
+  background: none;
+  border: 2px solid ${colors.primary};
 }
 `;

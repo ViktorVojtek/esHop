@@ -1,17 +1,12 @@
 import styled from 'styled-components';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { Paper } from '@material-ui/core';
-import { colors } from '../../../design';
-import CardGiftcardOutlinedIcon from '@material-ui/icons/CardGiftcardOutlined';
+import { colors } from '../../design';
 import { Col } from 'reactstrap';
 
 type ProductImgType = {
   url?: string;
 };
-
-export const StyledCardGiftcardOutlinedIcon = styled(CardGiftcardOutlinedIcon)`
-  color: ${colors.primary};
-  cursor: pointer;
-`;
 
 export const ActionHolder = styled.div`
   display: flex;
@@ -139,4 +134,44 @@ export const Del = styled.del`
 
 export const StyledCol = styled(Col)`
   margin-bottom: 32px;
+`;
+
+export const StyledModalBody = styled.div`
+  display: flex;
+  @media (max-width: 576px) {
+    flex-direction: column;
+    align-items: center;
+  }
+`;
+export const ModalProductInfo = styled.div`
+  margin-left: 24px;
+  @media (max-width: 576px) {
+    margin-left: 0;
+  }
+`;
+export const ModalTitle = styled.h6`
+  color: black;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin: 0;
+`;
+export const ModalText = styled.p`
+  color: black;
+  font-size: 0.95rem;
+  font-weight: bold;
+  margin: 0;
+`;
+export const ModalTextSmall = styled.p`
+  color: black;
+  font-size: 0.85rem;
+  margin: 0;
+`;
+export const ModalImage = styled.img`
+  width: 150px;
+  max-width: 50%;
+  margin-bottom: 16px;
+`;
+
+export const StyledShoppingCartIcon = styled(ShoppingCartIcon)`
+  color: white;
 `;

@@ -53,7 +53,7 @@ const LinkItem: FC<ILinkItem> = ({ href, title, className }) => (
   <NavItem>
     <Link href={href}>
       <NavLink
-        className={`text-uppercase letter-spacing-1 nav-link-main ${className}`}
+        className={`letter-spacing-1 nav-link-main ${className}`}
         href={href}
       >
         {title}
@@ -93,7 +93,7 @@ const MainPageNavigation: FC = () => {
           <LogoBackground>
             <Link href="/">
               <CustomNavbarBrand href="/">
-                <Logo src="/images/logo.png" alt="Červený kláštor" />
+                <Logo src="/icons/logo_CKSeshop.svg" alt="Červený kláštor" />
               </CustomNavbarBrand>
             </Link>
           </LogoBackground>
@@ -108,21 +108,18 @@ const MainPageNavigation: FC = () => {
               <LinkItem href="/eshop" title="Obchod" />
               <LinkItem href="/darcekove-poukazky" title="Darčekové poukážky" />
               <LinkItem href="/kontakt" title="Kontakt" />
-              <CartPopover
-                target="cartIcon"
-                color={isScrolled ? 'red' : 'white'}
-              />
-              <CustomerMenu color={isScrolled ? 'red' : 'white'} />
+              <CartPopover target="cartIcon" color="red" />
+              <CustomerMenu color="red" />
             </Nav>
           </Collapse>
         </Navbar>
       </Wrapper>
       <Wrapper id="mobileNavigation">
-        <div style={{ display: 'flex' }}>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
           <MobileMenuEshop />
           <Link href="/">
             <CustomNavbarBrand href="/">
-              <Logo src="/images/logo.png" alt="Červený kláštor" />
+              <Logo src="/icons/logo_CKSeshop.svg" alt="Červený kláštor" />
             </CustomNavbarBrand>
           </Link>
         </div>

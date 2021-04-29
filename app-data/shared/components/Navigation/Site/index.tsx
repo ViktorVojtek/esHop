@@ -40,7 +40,7 @@ const LinkItem: FC<ILinkItem> = ({ href, title, className = '' }) => (
   <NavItem>
     <Link href={href}>
       <NavLink
-        className={`text-uppercase letter-spacing-1 nav-link-main ${className}`}
+        className={`letter-spacing-1 nav-link-main ${className}`}
         href={href}
       >
         {title}

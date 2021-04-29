@@ -7,12 +7,8 @@ import {
   ServiceHolder,
   ServiceTitle,
   ServiceText,
-  ShippingFastIcon,
+  ServiceIcon,
   Service,
-  GiftIcon,
-  HandHoldingHeartIcon,
-  LeafIcon,
-  Divider,
 } from './styles';
 
 const Services: FC = () => {
@@ -21,21 +17,19 @@ const Services: FC = () => {
     <ServiceHolder>
       <Container>
         <Row>
-          <Col lg="3" md="6">
+          <Col lg="3" md="6" className="mb-4">
             <Service>
-              <GiftIcon />
+              <ServiceIcon src="/icons/gift.svg" />
               <ServiceTitle>Originálne balíčky</ServiceTitle>
-              <Divider />
               <ServiceText>
                 Produkty sú jednoducho a ekologicky balené.
               </ServiceText>
             </Service>
           </Col>
-          <Col lg="3" md="6">
+          <Col lg="3" md="6" className="mb-4">
             <Service>
-              <ShippingFastIcon />
+              <ServiceIcon src="/icons/delivery.svg" />
               <ServiceTitle>Výhodné doručenie</ServiceTitle>
-              <Divider />
               <ServiceText>
                 {freeDelivery
                   ? `Doručenie zdarma pri objednávke nad ${freeDelivery} €.`
@@ -43,21 +37,19 @@ const Services: FC = () => {
               </ServiceText>
             </Service>
           </Col>
-          <Col lg="3" md="6">
+          <Col lg="3" md="6" className="mb-4">
             <Service>
-              <HandHoldingHeartIcon />
+              <ServiceIcon src="/icons/heart.svg" />
               <ServiceTitle>Starostlivosť o Vás</ServiceTitle>
-              <Divider />
               <ServiceText>
                 Pomoc s výberom a vernostný program pre stálych zákazníkov.
               </ServiceText>
             </Service>
           </Col>
-          <Col lg="3" md="6">
+          <Col lg="3" md="6" className="mb-4">
             <Service>
-              <LeafIcon />
+              <ServiceIcon src="/icons/leaf.svg" />
               <ServiceTitle>Vyskúšajte v Pieninách</ServiceTitle>
-              <Divider />
               <ServiceText>
                 Našu krásnu prírodu a množstvo kvalitných služieb.
               </ServiceText>

@@ -19,17 +19,11 @@ export const Wrapper = styled.div`
 `;
 
 export const Logo = styled.img`
-  width: 220px;
+  width: 280px;
   @media (max-width: 1110px) {
-    width: 200px;
+    width: 232px;
   }
-  @media (max-width: 430px) {
-    width: 200px;
-  }
-  @media (max-width: 400px) {
-    width: 160px;
-  }
-  @media (max-width: 360px) {
+  @media (max-width: 450px) {
     width: 160px;
   }
 `;

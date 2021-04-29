@@ -28,7 +28,7 @@ const CustomNavbarBrand = forwardRef(({ href, children }: FWRCBrand, ref) => (
 const LinkItem: FC<ILinkItem> = ({ href, title }) => (
   <NavItem>
     <Link href={href}>
-      <NavLink className="text-uppercase letter-spacing-1">{title}</NavLink>
+      <NavLink className="letter-spacing-1">{title}</NavLink>
     </Link>
   </NavItem>
 );

@@ -28,29 +28,17 @@ const RibbonElement = styled.div`
   text-transform: uppercase;
   text-align: left;
   font-weight: bold;
-  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.15);
   letter-spacing: 0px;
   display: flex;
   align-items: center;
   color: white;
-  padding: 3px 8px;
+  padding: 6px 10px;
+  border-radius: 10px;
   position: relative;
-  -webkit-filter: drop-shadow(0 0.5rem 0.3em rgba(0, 0, 0, 0.5));
-  transform: translate3d(0, 0, 0);
-  background: linear-gradient(to bottom, ${colors.error} 0%, #d82929 100%);
+  background: #ff2525;
   line-height: 1.25rem;
   margin-bottom: 8px;
-  &:before {
-    content: '';
-    width: 0;
-    height: 0;
-    border-right: 10px solid transparent;
-    border-bottom: 13px solid #d82929;
-    border-top: 13px solid ${colors.error};
-    position: absolute;
-    top: 0px;
-    right: -10px;
-  }
+  margin-left: 10px;
 `;
 
 export const CovidRibbon = (props: IBonusRibbon) => {

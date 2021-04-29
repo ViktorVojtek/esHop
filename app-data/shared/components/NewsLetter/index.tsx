@@ -1,25 +1,86 @@
 import React, { useState } from 'react';
 import { Col, Container, Row } from 'reactstrap';
 import styled from 'styled-components';
-import { Button } from '../../design';
+import { Button, colors } from '../../design';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { useSnackbar } from 'notistack';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
 const Wrapper = styled.div`
   width: 100%;
+  background-color: ${colors.primaryLight};
+  margin-top: 32px;
+  display: flex;
+  padding: 32px 48px;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 12px;
+  @media (max-width: 992px) {
+    flex-direction: column;
+    text-align: center;
+    padding: 48px 24px;
+  }
+`;
+
+const StyledButton = styled(Button)`
+  color: ${colors.primary};
+  background: white;
+  box-shadow: none;
+  border-left: 1px solid lightgrey;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  transition: all 0.3s ease-out;
+  &:hover {
+    color: white;
+    background-color: ${colors.primary};
+  }
+`;
+
+const StyledValidatorForm = styled(ValidatorForm)`
+  width: 40%;
+  @media (max-width: 992px) {
+    width: 100%;
+    max-width: 500px;
+  }
+`;
+
+const StyledTextValidator = styled(TextValidator)`
+  input {
+    background: white;
+  }
+  fieldset {
+    border: white;
+  }
+  label {
+    color: black !important;
+  }
 `;
 
 const Holder = styled.div`
   display: flex;
-  max-width: 500px;
   margin: 0 auto;
 `;
 
 const Heading = styled.h5`
-  text-align: center;
-  padding: 16px;
-  margin-top: 16px;
+  color: ${colors.primary};
+  font-weight: bold;
+  font-size: 2.5rem;
+  width: 25%;
+  @media (max-width: 992px) {
+    width: 100%;
+    margin: 0;
+  }
+`;
+
+const Text = styled.p`
+  color: black;
+  font-weight: bold;
+  width: 25%;
+  margin: 0;
+  @media (max-width: 992px) {
+    width: 100%;
+    padding: 32px 0px;
+  }
 `;
 export const NewsLetter = () => {
   const { enqueueSnackbar } = useSnackbar();
@@ -63,15 +124,14 @@ export const NewsLetter = () => {
       <Row>
         <Col md={12}>
           <Wrapper>
-            <Heading>
-              Prihláste sa do kúpeľneho newslettera, kde môžete získať najnovšie
-              informácie o našich produktoch, službách a výhodách, ktoré Vám
-              ponúkame.
-            </Heading>
-            <ValidatorForm onSubmit={handleSubmitNewsLetter}>
+            <Heading>Newsletter</Heading>
+            <Text>
+              Najnovšie informácie o naších službách a výhodách, ktoré ponúkame.
+            </Text>
+            <StyledValidatorForm onSubmit={handleSubmitNewsLetter}>
               <Holder>
                 <div className="w-100">
-                  <TextValidator
+                  <StyledTextValidator
                     value={email}
                     validators={['required', 'matchRegexp:^.{1,}@[^.]{1,}']}
                     errorMessages={['Povinné pole', 'Neplatná emailová adresa']}
@@ -83,15 +143,15 @@ export const NewsLetter = () => {
                     }}
                   />
                 </div>
-                <Button
+                <StyledButton
                   disabled={disabled}
                   style={{ maxHeight: '55px' }}
                   type="submit"
                 >
-                  Odoberať
-                </Button>
+                  Prihlásiť
+                </StyledButton>
               </Holder>
-            </ValidatorForm>
+            </StyledValidatorForm>
           </Wrapper>
         </Col>
       </Row>

@@ -99,18 +99,19 @@ export const ProductBody = styled.div`
 `;
 
 export const StyledProductTitle = styled.h5`
-  text-align: left;
+  text-align: center;
   color: ${colors.text};
   user-select: none;
-  font-size: 1.1rem;
-
+  font-size: 1rem;
   font-weight: 600;
 `;
 
 export const StyledShortDescription = styled.p`
   color: #abb0b2;
-  text-align: left;
+  text-align: center;
   margin: 0;
+  font-size: 0.9rem;
+  color: black;
 `;
 
 export const PriceHolder = styled.div`

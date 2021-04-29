@@ -1,79 +1,112 @@
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Autoplay, Pagination } from 'swiper';
+import SwiperCore, { Autoplay, Pagination, Navigation } from 'swiper';
 import Link from 'next/link';
-import { Button } from '../../../../shared/design';
+import { Button, colors } from '../../../../shared/design';
+import { Container } from 'reactstrap';
 
-SwiperCore.use([Autoplay, Pagination]);
+SwiperCore.use([Autoplay, Pagination, Navigation]);
 
 type WrapperProps = {
   img: string;
 };
 
+const ArrowHolder = styled.div`
+  position: absolute;
+  z-index: 2;
+  bottom: 80px;
+  right: 15px;
+  width: 100px;
+  height: 100px;
+`;
+
+const BulletHolder = styled.div`
+  position: absolute;
+  z-index: 2;
+  top: 80px;
+  left: 15px;
+  @media (max-width: 992px) {
+    bottom: 26px;
+    right: 15px;
+    top: auto;
+    left: auto;
+  }
+`;
+
+const SwiperWrapper = styled.div``;
+
+const Chevron = styled.div`
+  background: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  &:before {
+    border-style: solid;
+    border-width: 3px 3px 0 0;
+    content: '';
+    display: inline-block;
+    height: 14px;
+    position: relative;
+    transform: rotate(-45deg);
+    vertical-align: top;
+    width: 14px;
+    color: ${colors.primary};
+  }
+  &:after {
+    content: '';
+  }
+  @media (max-width: 576px) {
+    display: none;
+  }
+`;
+
+const StyledArrowPrev = styled(Chevron)`
+  position: absolute;
+  right: 64px;
+  left: auto;
+  box-shadow: 3px 7px 20px 0px #00aeef61;
+
+  &:before {
+    left: 2px;
+    transform: rotate(-135deg);
+  }
+`;
+const StyledArrowNext = styled(Chevron)`
+  position: absolute;
+  right: 0px;
+  box-shadow: 3px 7px 20px 0px #00aeef61;
+  &:before {
+    right: 2px;
+    transform: rotate(45deg);
+  }
+`;
+
 const Wrapper = styled.div<WrapperProps>`
   width: 100vw;
-  height: 100vh;
-  min-height: 400px;
+  min-height: 600px;
   background-image: ${({ img }) => (img ? `url('${img}')` : '')};
   background-size: cover;
   background-position: center top;
   display: flex;
   align-items: center;
   justify-content: center;
-`;
-
-const ContentWrapper = styled.div`
-  width: calc(100% - 100px);
-  max-width: 1400px;
-  padding: 0 50px;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   @media (max-width: 992px) {
-    width: calc(100% - 40px);
-    padding: 0 20px;
+    padding: 32px 0px 64px 0px;
   }
 `;
 
 const ContentImage = styled.img`
   cursor: pointer;
-  position: absolute;
-  width: 100%;
-  transition: opacity 0.5s ease-out;
-  &:hover {
-    opacity: 0;
-  }
-`;
-const ContentImage2 = styled.img`
-  cursor: pointer;
-  position: absolute;
-  width: 100%;
-  transition: opacity 0.5s ease-out;
-`;
-
-const ContentImageFade = styled.img`
-  cursor: pointer;
-  position: absolute;
   width: 100%;
 `;
 const ContentImagesHolder = styled.div`
   position: relative;
   width: 50%;
-  max-width: 800px;
-  height: 270px;
-  @media (max-width: 1350px) {
-    height: 240px;
-  }
-  @media (max-width: 1200px) {
-    height: 210px;
-  }
-  @media (max-width: 1050px) {
-    height: 160px;
-  }
   @media (max-width: 992px) {
-    display: none;
+    margin-bottom: 64px;
+    width: 100%;
+    max-width: 500px;
   }
 `;
 
@@ -82,106 +115,171 @@ const ContentText = styled.div`
   max-width: 500px;
   @media (max-width: 992px) {
     width: 100%;
+    text-align: center;
   }
 `;
 
 const Heading = styled.h2`
-  color: white;
+  color: black;
+  font-size: 2.5rem;
+  font-weight: bold;
 `;
 
 const Text = styled.p`
-  color: white;
+  color: black;
   line-height: 1.5rem;
-  margin: 24px 0;
+  margin: 48px 0;
   @media (max-width: 992px) {
-    margin: 16px 0;
+    margin: 32px 0;
   }
 `;
 
 const ButtonsHolder = styled.div`
   display: flex;
-  @media (max-width: 576px) {
-    display: block;
+  @media (max-width: 992px) {
+    justify-content: center;
+  }
+`;
+
+const StyledButtonPrimary = styled(Button)`
+  width: 205px;
+  padding: 12px 24px;
+  box-shadow: 3px 7px 20px 0px #00aeefb0;
+  margin-right: 16px;
+`;
+
+const StyledButtonSecondary = styled(Button)`
+  width: 205px;
+  padding: 12px 24px;
+  box-shadow: none;
+  background: none;
+  border: 2px solid ${colors.primary};
+  color: ${colors.primary};
+`;
+
+const Content = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding-right: 15px;
+  padding-left: 15px;
+  @media (max-width: 992px) {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+`;
+
+const BulletContainer = styled(Container)`
+  position: relative;
+  @media (max-width: 992px) {
+    position: absolute;
+    bottom: 0;
+  }
+`;
+
+const ArrowContainer = styled(Container)`
+  position: relative;
+  @media (max-width: 992px) {
+    display: none;
   }
 `;
 
 const slide1 = (
   <SwiperSlide>
-    <Wrapper img="/images/slide1.jpg">
-      <ContentWrapper>
-        <ContentText>
-          <Heading>Zháňate darček na poslednú chvíľu?</Heading>
-          <Text>
-            Vyberte si spomedzi našich pobytov, procedúr či produktov. Vložte
-            venovanie, vyberte motív a o zvyšok sa postaráme my.
-          </Text>
-          <ButtonsHolder style={{ display: 'flex' }}>
+    <Wrapper img="/images/carousel_image1.png">
+      <Container>
+        <Content>
+          <ContentText>
+            <Heading>Zháňate darček na poslednú chvíľu?</Heading>
+            <Text>
+              <strong>
+                Vyberte si spomedzi našich pobytov, procedúr či produktov.
+              </strong>
+              <br /> Vložte venovanie, vyberte motív a o zvyšok sa postaráme my.
+            </Text>
+            <ButtonsHolder>
+              <Link href="/darcekove-poukazky">
+                <StyledButtonPrimary>Vytvoriť poukážku</StyledButtonPrimary>
+              </Link>
+              <Link href="/eshop">
+                <StyledButtonSecondary className="ml-4">
+                  Nakupovať
+                </StyledButtonSecondary>
+              </Link>
+            </ButtonsHolder>
+          </ContentText>
+          <ContentImagesHolder>
             <Link href="/darcekove-poukazky">
-              <Button>Vytvoriť poukážku</Button>
+              <ContentImage src="/images/poukazky1.png" />
             </Link>
-            <Link href="/eshop">
-              <Button className="ml-4">Nakupovať</Button>
-            </Link>
-          </ButtonsHolder>
-        </ContentText>
-        <ContentImagesHolder>
-          <ContentImageFade src="/images/poukazky2.png" />
-          <Link href="/darcekove-poukazky">
-            <ContentImage src="/images/poukazky1.png" />
-          </Link>
-        </ContentImagesHolder>
-      </ContentWrapper>
+          </ContentImagesHolder>
+        </Content>
+      </Container>
     </Wrapper>
   </SwiperSlide>
 );
 
 const slide2 = (
   <SwiperSlide>
-    <Wrapper img="/images/slide2.jpg">
-      <ContentWrapper>
-        <ContentText>
-          <Heading>Odišli ste bez suveníra? Nezúfajte.</Heading>
-          <Text>
-            Vyberte si spomedzi niekoľkých príchutí našich kúpeľných oblátok a
-            doneste si kúsok nás k Vám domov.
-          </Text>
-          <div style={{ display: 'flex' }}>
-            <Link href="/darcekove-poukazky">
-              <Button>Vytvoriť poukážku</Button>
-            </Link>
+    <Wrapper img="/images/carousel_image1.png">
+      <Container>
+        <Content>
+          <ContentText>
+            <Heading>Odišli ste bez suveníru? Nezúfajte.</Heading>
+            <Text>
+              Vyberte si spomedzi niekoľkých príchutí našich kúpeľných oblátok a
+              doneste si kúsok nás k Vám domov.
+            </Text>
+            <ButtonsHolder>
+              <Link href="/darcekove-poukazky">
+                <StyledButtonPrimary>Vytvoriť poukážku</StyledButtonPrimary>
+              </Link>
+              <Link href="/eshop">
+                <StyledButtonSecondary className="ml-4">
+                  Nakupovať
+                </StyledButtonSecondary>
+              </Link>
+            </ButtonsHolder>
+          </ContentText>
+          <ContentImagesHolder>
             <Link href="/eshop">
-              <Button className="ml-4">Nakupovať</Button>
+              <ContentImage src="/images/products1.png" />
             </Link>
-          </div>
-        </ContentText>
-        <ContentImagesHolder>
-          <Link href="/eshop">
-            <ContentImage2 src="/images/products1.png" />
-          </Link>
-        </ContentImagesHolder>
-      </ContentWrapper>
+          </ContentImagesHolder>
+        </Content>
+      </Container>
     </Wrapper>
   </SwiperSlide>
 );
 
 export const Slider = () => {
   return (
-    <Swiper
-      slidesPerView={1}
-      spaceBetween={0}
-      allowTouchMove={true}
-      pagination={{ clickable: true }}
-      autoplay={{
-        delay: 10000,
-        disableOnInteraction: true,
-      }}
-      navigation={{
-        prevEl: '.swiper-button-prev',
-        nextEl: '.swiper-button-next',
-      }}
-    >
-      {slide2}
-      {slide1}
-    </Swiper>
+    <>
+      <BulletContainer>
+        <BulletHolder className="custom-bullet-container"></BulletHolder>
+      </BulletContainer>
+      <Swiper
+        slidesPerView={1}
+        spaceBetween={0}
+        allowTouchMove={true}
+        pagination={{ el: '.custom-bullet-container', clickable: true }}
+        autoplay={{
+          delay: 100000,
+          disableOnInteraction: true,
+        }}
+        navigation={{
+          prevEl: '.swiper-button-prev',
+          nextEl: '.swiper-button-next',
+        }}
+      >
+        {slide2}
+        {slide1}
+      </Swiper>
+      <ArrowContainer>
+        <ArrowHolder>
+          <StyledArrowPrev className="swiper-button-prev" />
+          <StyledArrowNext className="swiper-button-next" />
+        </ArrowHolder>
+      </ArrowContainer>
+    </>
   );
 };

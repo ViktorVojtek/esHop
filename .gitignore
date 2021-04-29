@@ -26,6 +26,8 @@
 /static/orders/*
 !/static/orders/.gitkeep
 
+/static/loyality-products/*
+
 # misc
 .DS_Store
 .env*

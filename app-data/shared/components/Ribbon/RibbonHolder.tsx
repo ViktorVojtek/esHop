@@ -7,7 +7,7 @@ type WrapperOptions = {
 };
 
 const Wrapper = styled.div<WrapperOptions>`
-  left: ${({ stickLeft }) => (stickLeft ? `0px` : '15px')};
+  left: 15px;
   top: 12px;
   position: absolute;
   display: flex;

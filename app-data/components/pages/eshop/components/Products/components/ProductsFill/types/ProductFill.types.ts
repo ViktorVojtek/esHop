@@ -12,7 +12,7 @@ export interface IProductToCartData {
 
 export interface IProductsFillProps {
   products: any;
-  addProduct: (data: IProductToCartData) => void;
+  addProduct: (data?: IProductToCartData) => void;
   subCategories: SubCategoryType[];
 }
 
@@ -24,5 +24,5 @@ export interface IProductTitle {
 export interface IProductUI {
   product: Product;
   subCategoriesList: SubCategoryType[];
-  addProduct: (data: IProductToCartData) => void;
+  addProduct: (data?: IProductToCartData) => void;
 }
