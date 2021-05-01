@@ -54,12 +54,12 @@ function sendMailNotificationOrderSend(
     try {
       // create reusable transporter object using the default SMTP transport
       let transporter = nodemailer.createTransport({
-        host: 'smtp.websupport.sk',
+        host: process.env.EMAIL_HOST,
         port: 465, // 587,
         secure: true, // true, // ssl
         auth: {
-          user: 'eshop@kupelecks.sk', // generated ethereal user
-          pass: 'Cyp147.?riaN20ck12', // generated ethereal password
+          user: process.env.EMAIL_LOGIN, // generated ethereal user
+          pass: process.env.EMAIL_PASS, // generated ethereal password
         },
       });
 
@@ -98,12 +98,12 @@ function sendMailNotificationOrderSolved(
     try {
       // create reusable transporter object using the default SMTP transport
       let transporter = nodemailer.createTransport({
-        host: 'smtp.websupport.sk',
+        host: process.env.EMAIL_HOST,
         port: 465, // 587,
         secure: true, // true, // ssl
         auth: {
-          user: 'eshop@kupelecks.sk', // generated ethereal user
-          pass: 'Cyp147.?riaN20ck12', // generated ethereal password
+          user: process.env.EMAIL_LOGIN, // generated ethereal user
+          pass: process.env.EMAIL_PASS, // generated ethereal password
         },
       });
 
@@ -160,12 +160,12 @@ function sendMailNotificationOrderCanceled(
     try {
       // create reusable transporter object using the default SMTP transport
       let transporter = nodemailer.createTransport({
-        host: 'smtp.websupport.sk',
+        host: process.env.EMAIL_HOST,
         port: 465, // 587,
         secure: true, // true, // ssl
         auth: {
-          user: 'eshop@kupelecks.sk', // generated ethereal user
-          pass: 'Cyp147.?riaN20ck12', // generated ethereal password
+          user: process.env.EMAIL_LOGIN, // generated ethereal user
+          pass: process.env.EMAIL_PASS, // generated ethereal password
         },
       });
 
