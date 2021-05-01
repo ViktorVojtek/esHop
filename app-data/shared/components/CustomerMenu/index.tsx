@@ -28,12 +28,8 @@ const useStyles = makeStyles({
   },
 });
 
-type AccountIconProps = {
-  iconColor?: string;
-};
-
-export const Login = styled(AccountCircleIcon)<AccountIconProps>`
-  color: ${({ iconColor }) => (iconColor ? iconColor : 'red')};
+export const Login = styled(AccountCircleIcon)`
+  color: red;
   width: 36px !important;
   height: 36px !important;
   margin-left: 1rem;
@@ -44,8 +40,8 @@ export const Login = styled(AccountCircleIcon)<AccountIconProps>`
   }
 `;
 
-const StyledAccountCircleIcon = styled(AccountCircleIcon)<AccountIconProps>`
-  color: ${({ iconColor }) => (iconColor ? iconColor : 'red')};
+const StyledAccountCircleIcon = styled(AccountCircleIcon)`
+  color: red;
   width: 36px !important;
   height: 36px !important;
   margin-left: 12px;
@@ -73,12 +69,7 @@ const StyledExitToAppIcon = styled(ExitToAppIcon)`
   color: rgba(0, 0, 0, 0.54);
 `;
 
-type CustomerMenuProps = {
-  color?: string;
-};
-
-const CustomerMenu = (props: CustomerMenuProps) => {
-  const { color } = props;
+const CustomerMenu = () => {
   const { state } = useContext(Context);
   const classes = useStyles();
   const [loginModal, setLoginModal] = useState(false);
@@ -98,10 +89,7 @@ const CustomerMenu = (props: CustomerMenuProps) => {
       <div>
         {customer.token ? (
           <>
-            <StyledAccountCircleIcon
-              iconColor={color}
-              onClick={handleDrawerOpen}
-            />
+            <StyledAccountCircleIcon onClick={handleDrawerOpen} />
             <Drawer
               disableScrollLock
               anchor="right"
@@ -146,7 +134,7 @@ const CustomerMenu = (props: CustomerMenuProps) => {
             </Drawer>
           </>
         ) : (
-          <Login iconColor={color} onClick={() => setLoginModal(true)} />
+          <Login onClick={() => setLoginModal(true)} />
         )}
       </div>
 

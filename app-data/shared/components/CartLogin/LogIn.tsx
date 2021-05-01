@@ -12,6 +12,7 @@ import { P, RegisterButton } from '../../styles/components/Auth';
 import { Button } from '../../design';
 import ErrorMessage from '../ErrorMessage';
 import { makeStyles } from '@material-ui/core';
+import Link from 'next/link';
 
 const LogIn: FC = () => {
   const [errorMessage, setErrorMessage] = useState('');
@@ -114,6 +115,11 @@ const LogIn: FC = () => {
           onChange={handleChange}
         />
         <ErrorMessage message={errorMessage} open={isError} />
+        {errorMessage === 'Používateľ nie je verifikovaný!' && (
+          <Link href="/verifikovat-ucet">
+            <RegisterButton>Verifikovať účet</RegisterButton>
+          </Link>
+        )}
         <div
           style={{
             display: 'flex',

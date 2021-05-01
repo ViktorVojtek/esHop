@@ -66,13 +66,16 @@ function sendMailNotificationOrderSend(
       const templateOrderMail = handlebars.compile(order_send_html);
       var replacement = {
         orderId: orderData.orderId,
+        name: orderData.firstName,
+        surname: orderData.lastName,
+        isPersonalTakeout: orderData.deliveryMethode === 'Osobný odber',
       };
 
       const orderSendMailToSend = templateOrderMail(replacement);
 
       // send mail with defined transport object
       let info = await transporter.sendMail({
-        from: 'eshop@kupelecks.sk',
+        from: '"Eshop KúpeleCKS" <eshop@kupelecks.sk>',
         to, // list of receivers
         subject: 'Červený Kláštor | Vaša objednávka bola odoslaná', // Subject line
         html: orderSendMailToSend, // html body
@@ -108,13 +111,15 @@ function sendMailNotificationOrderSolved(
       var replacement = {
         orderId: orderData.orderId,
         invoiceId: orderData.invoiceId,
+        name: orderData.firstName,
+        surname: orderData.lastName,
       };
 
       const orderSolvedMailToSend = templateOrderSolvedMail(replacement);
 
       // send mail with defined transport object
       let info = await transporter.sendMail({
-        from: 'eshop@kupelecks.sk',
+        from: '"Eshop KúpeleCKS" <eshop@kupelecks.sk>',
         to, // list of receivers
         subject: 'Červený Kláštor | Vaša objednávka bola odoslaná', // Subject line
         html: orderSolvedMailToSend, // html body
@@ -124,6 +129,14 @@ function sendMailNotificationOrderSolved(
             path: path.join(
               __dirname,
               `../../../../../../static/invoice/invoice-${orderData.invoiceId}.pdf`
+            ),
+            contentType: 'application/pdf',
+          },
+          {
+            filename: `reklamacny_formular.pdf`,
+            path: path.join(
+              __dirname,
+              `../../../../../../public/reklamacny_formular.pdf`
             ),
             contentType: 'application/pdf',
           },
@@ -159,13 +172,15 @@ function sendMailNotificationOrderCanceled(
       const templateOrderMail = handlebars.compile(order_canceled_html);
       var replacement = {
         orderId: orderData.orderId,
+        name: orderData.firstName,
+        surname: orderData.lastName,
       };
 
       const orderSendMailToSend = templateOrderMail(replacement);
 
       // send mail with defined transport object
       let info = await transporter.sendMail({
-        from: 'eshop@kupelecks.sk',
+        from: '"Eshop KúpeleCKS" <eshop@kupelecks.sk>',
         to, // list of receivers
         subject: 'Červený Kláštor | Vaša objednávka bola zrušená', // Subject line
         html: orderSendMailToSend, // html body

@@ -11,6 +11,7 @@ import { Context } from '../../../../../../../lib/state/Store';
 import { GiftCard } from '../../../../../../../shared/types/Store.types';
 import AsideCartGiftCards from '../AsideCartGiftCards';
 import { formatPrice } from '../../../../../../../shared/helpers/formatters';
+import { Button } from '../../../../../../../shared/design';
 
 interface ICartContent {
   data: any[];
@@ -66,7 +67,7 @@ const AsideCartContent: FC<ICartContent> = ({
         />
       ))}
       <Link href="/eshop/cart">
-        <ButtonLink>Do pokladne</ButtonLink>
+        <Button className="mt-2 w-100">Do pokladne</Button>
       </Link>
     </>
   );

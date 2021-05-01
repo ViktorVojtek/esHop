@@ -266,6 +266,9 @@ export default createGlobalStyle`
     background-color: #FFFFFF !important;
     box-shadow: -1px -1px 10px 2px #e6e6e6;
     padding: 10px 120px !important;
+    @media(max-width: 1300px){
+      padding: 10px 60px !important;
+    }
   }
   
   .navbar-brand{
@@ -398,7 +401,7 @@ export default createGlobalStyle`
         transform: scale(1.075);
       }
       .detail{
-        background-color: rgba(0, 0, 0,0.05);
+        background-color: rgba(0, 0, 0,0.35);
         svg, img{
           transform: scale(1);
         }

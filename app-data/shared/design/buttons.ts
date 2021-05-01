@@ -12,7 +12,6 @@ export const Button = styled.button<ButtonProps>`
   color: #fff;
   box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
     0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
-  padding: 6px 16px;
   font-size: 0.875rem;
   box-sizing: border-box;
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
@@ -23,16 +22,55 @@ export const Button = styled.button<ButtonProps>`
   border-radius: 4px;
   letter-spacing: 0.02857em;
   text-transform: uppercase;
-  border: 0;
+  border: 2px solid ${colors.primary};
   cursor: pointer;
   text-decoration: none;
+  padding: 12px 24px;
   &:hover {
+    border: 2px solid ${colors.primaryHover};
     background-color: ${colors.primaryHover};
     box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
       0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
   }
   &:disabled {
-    background-color: ${colors.disabled};
+    pointer-events: none;
+    opacity: 0.5;
+  }
+`;
+
+export const SecondaryButton = styled.button<ButtonProps>`
+  display: block;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  font-size: 0.875rem;
+  box-sizing: border-box;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  font-weight: bold;
+  line-height: 1.75;
+  border-radius: 4px;
+  letter-spacing: 0.02857em;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 12px 24px;
+  box-shadow: none;
+  background: none;
+  border: 2px solid ${colors.primary};
+  color: ${colors.primary};
+  &:hover {
+    background-color: ${colors.primaryHover};
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+      0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+    color: #fff;
+    border-color: ${colors.primaryHover};
+  }
+  &:disabled {
+    background-color: white;
+    pointer-events: none;
+    opacity: 0.7;
   }
 `;
 

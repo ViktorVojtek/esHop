@@ -7,12 +7,8 @@ import Link from 'next/link';
 import { Context } from '../../../lib/state/Store';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 
-type CartIconProps = {
-  iconColor?: string;
-};
-
-const CartIcon = styled(ShoppingBasketIcon)<CartIconProps>`
-  color: ${({ iconColor }) => (iconColor ? iconColor : 'red')};
+const CartIcon = styled(ShoppingBasketIcon)`
+  color: red;
   width: 34px !important;
   height: 34px !important;
 `;
@@ -78,10 +74,9 @@ type ShoppingCartType = {
 
 type CartPopoverType = {
   target: string;
-  color?: string;
 };
 
-const CartPopover: FC<CartPopoverType> = ({ target, color }) => {
+const CartPopover: FC<CartPopoverType> = ({ target }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const { state } = useContext(Context);
@@ -89,19 +84,12 @@ const CartPopover: FC<CartPopoverType> = ({ target, color }) => {
 
   return (
     <>
-      <CartWrapper
-        onMouseEnter={() => setIsOpen(true)}
-        onMouseLeave={() => setIsOpen(false)}
-      >
+      <CartWrapper>
         <Link href="/eshop/cart">
           <a>
-            <CartIcon iconColor={color} />{' '}
-            <span>{cart.length + giftCards.length}</span>
+            <CartIcon /> <span>{cart.length + giftCards.length}</span>
           </a>
         </Link>
-        <ShopingCart isOpen={isOpen} onMouseLeave={() => setIsOpen(false)}>
-          <AsideCart />
-        </ShopingCart>
       </CartWrapper>
     </>
   );

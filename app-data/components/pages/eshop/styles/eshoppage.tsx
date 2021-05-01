@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 import { DownArrow } from '@styled-icons/boxicons-regular';
-import { DropdownToggle } from 'reactstrap';
+import { Col, DropdownToggle } from 'reactstrap';
 import { colors } from '../../../../shared/design';
 
 export const Wrapper = styled.div`
   width: 100vw;
   margin: 0 auto;
-  margin-top: 160px;
-  min-height: calc(100vh - 693px);
+  margin-top: 120px;
+  min-height: calc(100vh - 562px);
 `;
 
 export const H3 = styled.h2`
@@ -89,3 +89,52 @@ export const StyledModalBtn = styled.button`
 interface ICartIcon {
   isOpen?: Boolean;
 }
+
+export const ActionHolder = styled.div``;
+
+export const InputHolder = styled.div`
+  position: relative;
+  margin-bottom: 8px;
+`;
+
+export const SearchInput = styled.input`
+  border: transparent;
+  border-radius: 8px;
+  background: #f6f7f8;
+  color: black !important;
+  padding: 20px 20px;
+  width: 100%;
+  font-weight: 600;
+  font-size: 1rem;
+  &: focus {
+    outline: none;
+  }
+  &::placeholder {
+    color: black !important;
+  }
+`;
+export const InputIconHolder = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  width: 48px;
+  height: 48px;
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  border-radius: 8px;
+  pointer-events: none;
+`;
+
+export const InputIcon = styled.img`
+  width: 20px;
+`;
+
+export const FilterCol = styled(Col)`
+  position: relative;
+  top: -72px;
+  @media (max-width: 992px) {
+    top: 0;
+  }
+`;

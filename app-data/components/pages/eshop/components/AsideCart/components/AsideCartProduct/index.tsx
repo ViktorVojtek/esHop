@@ -9,12 +9,12 @@ import {
   P,
   Image,
   DetailItem,
-  Button,
   AsideCartWrapper,
   Title,
   Detail,
 } from './styles/asideCartProductStyle';
 import { formatPrice } from '../../../../../../../shared/helpers/formatters';
+import { Button, SecondaryButton } from '../../../../../../../shared/design';
 
 interface ICartProductTableRow {
   id: string;
@@ -127,8 +127,10 @@ const AsideCartProduct: FC<ICartProductTableRow> = ({
           </Detail>
         </HeadWrapper>
 
-        <div className="d-flex justify-content-between">
-          <Button onClick={() => handleRemoveProduct(id)}>Odobrať</Button>
+        <div className="d-flex justify-content-between mt-4">
+          <SecondaryButton onClick={() => handleRemoveProduct(id)}>
+            Odobrať
+          </SecondaryButton>
           <Button onClick={() => handleAddProduct(id)}>Pridať</Button>
         </div>
       </AsideCartWrapper>

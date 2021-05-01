@@ -12,7 +12,6 @@ import { Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import { BonusRibbon } from '../Ribbon/BonusRibbon';
 import { CovidRibbon } from '../Ribbon/CovidRibbon';
 import {
-  StyledCol,
   ProductBody,
   ProductImg,
   ProductItem,
@@ -35,7 +34,7 @@ import {
   StyledShoppingCartIcon,
 } from './style';
 import { useIsClient } from '../../../lib/util/app.util';
-import { Button } from '../../design';
+import { Button, SecondaryButton } from '../../design';
 
 const ProductTitle: React.FC<IProductTitle> = ({ slug, title }) => {
   return (
@@ -67,99 +66,95 @@ export const ProductUI: FC<ProductType> = ({
   const isClient = useIsClient();
   return (
     <>
-      <StyledCol lg={3} md={6} sm={12}>
-        <ProductItem elevation={0}>
-          <div className="w-100">
-            <ImageWrap>
-              {variants[0].images.length > 0 ? (
-                <Link href={{ pathname: `/eshop/produkt/${slug}` }}>
-                  <a>
-                    <div className="product-image">
-                      <ProductImg
-                        url={variants[0].images[0].path}
-                        className="product-image-background"
-                      />
-                      <div className="detail">
-                        <EyeDetail src="/icons/eye.svg" />
-                      </div>
+      <ProductItem elevation={0}>
+        <div className="w-100">
+          <ImageWrap>
+            {variants[0].images.length > 0 ? (
+              <Link href={{ pathname: `/eshop/produkt/${slug}` }}>
+                <a>
+                  <div className="product-image">
+                    <ProductImg
+                      url={variants[0].images[0].path}
+                      className="product-image-background"
+                    />
+                    <div className="detail">
+                      <EyeDetail src="/icons/eye.svg" />
                     </div>
-                  </a>
+                  </div>
+                </a>
+              </Link>
+            ) : null}
+          </ImageWrap>{' '}
+          <ProductBody>
+            <PriceHolder>
+              {variants[0].discount > 0 ? (
+                <Price>
+                  <Del>
+                    {formatPrice(variants[0].price.value)}{' '}
+                    {variants[0].price.currency}
+                  </Del>
+                  <ActionPrice className="ml-2">
+                    {formatPrice(
+                      variants[0].price.value -
+                        (variants[0].price.value * variants[0].discount) / 100
+                    )}{' '}
+                    {variants[0].price.currency}
+                  </ActionPrice>
+                </Price>
+              ) : (
+                <Price>
+                  <ActionPrice>
+                    {formatPrice(variants[0].price.value)}{' '}
+                    {variants[0].price.currency}
+                  </ActionPrice>
+                </Price>
+              )}
+            </PriceHolder>
+            <ProductTitle slug={slug} title={title} />
+            <StyledShortDescription>{subCategory.title}</StyledShortDescription>
+          </ProductBody>
+        </div>
+        <ActionHolder>
+          {subCategoryObject.forSale ? (
+            <>
+              {variants.length > 1 || addProduct === null ? (
+                <Link href={{ pathname: `/eshop/produkt/${slug}` }}>
+                  <ActionButton>Vložiť do košíka</ActionButton>
                 </Link>
-              ) : null}
-            </ImageWrap>{' '}
-            <ProductBody>
-              <PriceHolder>
-                {variants[0].discount > 0 ? (
-                  <Price>
-                    <Del>
-                      {formatPrice(variants[0].price.value)}{' '}
-                      {variants[0].price.currency}
-                    </Del>
-                    <ActionPrice className="ml-2">
-                      {formatPrice(
-                        variants[0].price.value -
-                          (variants[0].price.value * variants[0].discount) / 100
-                      )}{' '}
-                      {variants[0].price.currency}
-                    </ActionPrice>
-                  </Price>
-                ) : (
-                  <Price>
-                    <ActionPrice>
-                      {formatPrice(variants[0].price.value)}{' '}
-                      {variants[0].price.currency}
-                    </ActionPrice>
-                  </Price>
-                )}
-              </PriceHolder>
-              <ProductTitle slug={slug} title={title} />
-              <StyledShortDescription>
-                {subCategory.title}
-              </StyledShortDescription>
-            </ProductBody>
-          </div>
-          <ActionHolder>
-            {subCategoryObject.forSale ? (
-              <>
-                {variants.length > 1 || addProduct === null ? (
-                  <Link href={{ pathname: `/eshop/produkt/${slug}` }}>
-                    <ActionButton>Vložiť do košíka</ActionButton>
-                  </Link>
-                ) : (
-                  <ActionButton
-                    type="button"
-                    onClick={() => (isClient ? addProduct() : null)}
-                  >
-                    Vložiť do košíka
-                  </ActionButton>
-                )}
-              </>
-            ) : (
-              <>
-                <Link
-                  href={{ pathname: `/rezervacia`, query: { service: title } }}
+              ) : (
+                <ActionButton
+                  type="button"
+                  onClick={() => (isClient ? addProduct() : null)}
                 >
-                  <ActionButton>Rezervovať</ActionButton>
-                </Link>
-              </>
-            )}
-            {subCategoryObject.forGiftCard && (
-              <GiftCardButton onClick={addProductToGiftCard}>
-                Vytvoriť poukážku
-              </GiftCardButton>
-            )}
-          </ActionHolder>
-          <RibbonHolder stickLeft>
-            {subCategoryObject.covidWarranty && (
-              <CovidRibbon text="Covid-19 garancia" />
-            )}
-            {variants[0].bonus && <BonusRibbon text={`+Bonus`} />}
-          </RibbonHolder>
-          {variants[0].discount > 0 && (
-            <DiscountRibbon text={`- ${Math.round(variants[0].discount)} %`} />
+                  Vložiť do košíka
+                </ActionButton>
+              )}
+            </>
+          ) : (
+            <>
+              <Link
+                href={{ pathname: `/rezervacia`, query: { service: title } }}
+              >
+                <ActionButton>Rezervovať</ActionButton>
+              </Link>
+            </>
           )}
-        </ProductItem>
-      </StyledCol>
+          {subCategoryObject.forGiftCard && (
+            <GiftCardButton onClick={addProductToGiftCard}>
+              Vytvoriť poukážku
+            </GiftCardButton>
+          )}
+        </ActionHolder>
+        <RibbonHolder stickLeft>
+          {subCategoryObject.covidWarranty && (
+            <CovidRibbon text="Covid-19 garancia" />
+          )}
+          {variants[0].bonus && <BonusRibbon text={`+Bonus`} />}
+        </RibbonHolder>
+        {variants[0].discount > 0 && (
+          <DiscountRibbon text={`- ${Math.round(variants[0].discount)} %`} />
+        )}
+      </ProductItem>
       <div>
         <Modal isOpen={modal} toggle={toggleModal}>
           <ModalHeader
@@ -202,7 +197,7 @@ export const ProductUI: FC<ProductType> = ({
           <ModalFooter
             style={{ display: 'flex', justifyContent: 'space-between' }}
           >
-            <Button onClick={toggleModal}>Nakupovať</Button>
+            <SecondaryButton onClick={toggleModal}>Nakupovať</SecondaryButton>
             <Link href="eshop/cart">
               <Button>
                 <StyledShoppingCartIcon style={{ marginRight: '4px' }} />

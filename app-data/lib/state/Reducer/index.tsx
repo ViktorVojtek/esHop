@@ -14,8 +14,8 @@ import {
   FREEDELIVERY_QUERY,
   LOYALITY_PRODUCTS_QUERY,
   PRODUCTS_BY_IDS_QUERY,
-  SUBCATEGORIES_QUERY,
 } from '../../../graphql/query';
+import { useRouter } from 'next/router';
 
 const storage: Storage = useStorage();
 let newCart: CartProduct[] = [];
@@ -174,7 +174,7 @@ const Reducer = (state: IState, action: IAction) => {
       return {
         ...state,
         category: action.payload,
-        subCategory: '',
+        subCategory: { id: '', title: '' },
       };
     case 'SET_SUBCATEGORY':
       return {
@@ -220,6 +220,7 @@ export const withSetCart = <P extends object>(
   Component: React.ComponentType<P>
 ): FC<P> => ({ ...props }) => {
   const { dispatch, state } = useContext(Context);
+  const router = useRouter();
   const { customer } = state;
 
   let cart: CartProduct[] = storage

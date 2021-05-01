@@ -5,7 +5,8 @@ import { Container } from 'reactstrap';
 import { Context } from '../../../../lib/state/Store';
 import CartContent from './components/CartContent';
 import { CartProduct } from '../../../../shared/types/Store.types';
-import { ButtonLink, EmptyCart, Wrapper } from './styles/cart.style';
+import { EmptyCart, Wrapper } from './styles/cart.style';
+import { Button } from '../../../../shared/design';
 
 const CartEmpty: () => JSX.Element = () => (
   <Wrapper>
@@ -18,7 +19,7 @@ const CartEmpty: () => JSX.Element = () => (
         Vyzerá to, že ste si nepridali žiaden produkt do košíka.
       </h4>
       <Link href="/eshop">
-        <ButtonLink>Nakupovať</ButtonLink>
+        <Button style={{ margin: '0 auto' }}>Nakupovať</Button>
       </Link>{' '}
     </Container>
   </Wrapper>

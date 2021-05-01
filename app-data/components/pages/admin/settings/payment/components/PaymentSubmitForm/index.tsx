@@ -16,8 +16,6 @@ const PaymentSubmitForm: () => JSX.Element = () => {
   ) => Promise<void> = async (event) => {
     event.preventDefault();
 
-    console.log('Submit data');
-
     const title = (document.getElementById('title') as HTMLInputElement).value;
     const { value } = document.getElementById('value') as HTMLInputElement;
 

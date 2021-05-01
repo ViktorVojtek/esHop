@@ -103,7 +103,7 @@ export const StyledProductTitle = styled.h5`
   color: ${colors.text};
   user-select: none;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 700;
 `;
 
 export const StyledShortDescription = styled.p`

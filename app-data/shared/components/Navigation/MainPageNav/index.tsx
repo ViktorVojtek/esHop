@@ -108,8 +108,8 @@ const MainPageNavigation: FC = () => {
               <LinkItem href="/eshop" title="Obchod" />
               <LinkItem href="/darcekove-poukazky" title="Darčekové poukážky" />
               <LinkItem href="/kontakt" title="Kontakt" />
-              <CartPopover target="cartIcon" color="red" />
-              <CustomerMenu color="red" />
+              <CartPopover target="cartIcon" />
+              <CustomerMenu />
             </Nav>
           </Collapse>
         </Navbar>

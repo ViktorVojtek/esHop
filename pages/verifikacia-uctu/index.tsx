@@ -6,15 +6,16 @@ import { P, H2 } from '../../app-data/components/pages/myzone/mojaZona';
 import { Container, FormGroup, Input } from 'reactstrap';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
-import { Form, Button } from '../../app-data/shared/styles/components/Auth';
+import { Form } from '../../app-data/shared/styles/components/Auth';
 import ErrorMessage from '../../app-data/shared/components/ErrorMessage';
 import SuccessMessage from '../../app-data/shared/components/SucessMessage';
+import { Button } from '../../app-data/shared/design';
 
 export const Wrapper = styled.div`
   width: 100vw;
   margin: 0 auto;
   margin-top: 160px;
-  min-height: calc(100vh - 693px);
+  min-height: calc(100vh - 562px);
 `;
 
 const FormHolder = styled.div`
@@ -113,7 +114,9 @@ const EmailVerification: () => JSX.Element = () => {
                   <label htmlFor="email">Zadajte email</label>
                   <Input id="email" name="email" type="email" />
                 </FormGroup>
-                <Button type="submit">Odoslať</Button>
+                <Button className="w-100" type="submit">
+                  Odoslať
+                </Button>
               </Form>
 
               <ErrorMessage message={messages[messageId]} open={isError} />

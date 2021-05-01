@@ -4,6 +4,7 @@ import React, { forwardRef, useState } from 'react';
 import { Container, Row } from 'reactstrap';
 import { useIsClient } from '../../../../../../../lib/util/app.util';
 import { ProductUI } from '../../../../../../../shared/components/Product';
+import { StyledCol } from '../../../../../../../shared/components/Product/style';
 // Styled Components
 import { StyledProductTitle } from './styles/products.style';
 // type Product
@@ -107,14 +108,16 @@ const ProductUIItem = forwardRef<
 
   const toggleModal = () => setModal(!modal);
   return (
-    <ProductUI
-      product={product}
-      subCategoryObject={subCategoryObject}
-      addProduct={handleAddProductToCart}
-      addProductToGiftCard={handleAddProductToGiftCard}
-      modal={modal}
-      toggleModal={toggleModal}
-    />
+    <StyledCol lg={4} md={6} sm={12}>
+      <ProductUI
+        product={product}
+        subCategoryObject={subCategoryObject}
+        addProduct={handleAddProductToCart}
+        addProductToGiftCard={handleAddProductToGiftCard}
+        modal={modal}
+        toggleModal={toggleModal}
+      />
+    </StyledCol>
   );
 });
 const ProductsFill: React.FC<IProductsFillProps> = ({

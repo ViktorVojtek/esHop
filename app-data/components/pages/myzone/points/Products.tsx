@@ -1,11 +1,13 @@
 import { useQuery } from '@apollo/react-hooks';
 import { Paper, Typography } from '@material-ui/core';
 import { useSnackbar } from 'notistack';
-import React, { FC, useCallback, useContext } from 'react';
-import { Button, Col, Row } from 'reactstrap';
+import React, { useContext } from 'react';
+import { Col, Row } from 'reactstrap';
+import styled from 'styled-components';
 import { LOYALITY_PRODUCTS_QUERY } from '../../../../graphql/query';
 import { Context } from '../../../../lib/state/Store';
 import CustomSpinner from '../../../../shared/components/CustomSpinner/CustomerSpinner';
+import { Button } from '../../../../shared/design';
 import { P } from '../mojaZona';
 import AnimatedProgress from './AnimatedProgress';
 
@@ -20,6 +22,15 @@ type ILoyalityProduct = {
   image: string;
   title: string;
 };
+
+const StyledPaper = styled(Paper)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 32px 16px;
+  height: 100%;
+`;
 
 const Products = (props: IProducts) => {
   const { customer } = props;
@@ -69,33 +80,33 @@ const Products = (props: IProducts) => {
     const { title, costPoints } = product;
     return (
       <Col md={4} className="mb-4">
-        <Paper elevation={2} style={{ padding: '32px 16px' }}>
-          <Typography
-            color="primary"
-            variant="h6"
-            component="h6"
-            align="center"
-            style={{ padding: '0px 32px', paddingBottom: '48px' }}
-          >
-            {title}
-          </Typography>
-          <P className="text-center mb-0">{`${customer.customerPoints} / ${costPoints}`}</P>
-          <AnimatedProgress
-            value={customer.customerPoints}
-            divide={costPoints / 100}
-          />
-          <Button
-            style={{
-              backgroundColor: '#007bff',
-              margin: '0 auto',
-              display: 'block',
-            }}
-            disabled={!(customer.customerPoints >= costPoints)}
-            onClick={() => handleAddToCart(product)}
-          >
-            Pridať do košíka
-          </Button>
-        </Paper>
+        <StyledPaper elevation={2}>
+          <div>
+            <Typography
+              color="primary"
+              variant="h6"
+              component="h6"
+              align="center"
+              style={{ padding: '0px 32px', paddingBottom: '48px' }}
+            >
+              {title}
+            </Typography>
+            <P className="text-center mb-0">{`${customer.customerPoints} / ${costPoints}`}</P>
+          </div>
+          <div className="w-100">
+            <AnimatedProgress
+              value={customer.customerPoints}
+              divide={costPoints / 100}
+            />
+            <Button
+              disabled={!(customer.customerPoints >= costPoints)}
+              onClick={() => handleAddToCart(product)}
+              style={{ margin: '0 auto' }}
+            >
+              Pridať do košíka
+            </Button>
+          </div>
+        </StyledPaper>
       </Col>
     );
   };

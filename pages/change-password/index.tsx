@@ -6,22 +6,19 @@ import { P, H2 } from '../../app-data/components/pages/myzone/mojaZona';
 import { Container, FormGroup, Input, Label } from 'reactstrap';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
-import {
-  Form,
-  Button,
-  ButtonLink,
-} from '../../app-data/shared/styles/components/Auth';
+import { Form, ButtonLink } from '../../app-data/shared/styles/components/Auth';
 import { Danger } from '../../app-data/shared/components/LoginRegisterModal/styles';
 import { useMutation } from 'react-apollo';
 import { CHANGE_CUSTOMER_PASSWORD_MUTATION } from '../../app-data/graphql/mutation';
 import Link from 'next/link';
 import ErrorMessage from '../../app-data/shared/components/ErrorMessage';
+import { Button } from '../../app-data/shared/design';
 
 const Wrapper = styled.div`
   width: 100vw;
   margin: 0 auto;
   margin-top: 160px;
-  min-height: calc(100vh - 693px);
+  min-height: calc(100vh - 562px);
 `;
 
 const FormHolder = styled.div`
@@ -115,7 +112,7 @@ const ChangePassword: () => JSX.Element = () => {
                   </FormGroup>
                   {!isMatchPass && <Danger>Hesla sa nezhodujú</Danger>}
                   <ErrorMessage message="Neplatný token" open={error} />
-                  <Button type="submit" ref={submitEl}>
+                  <Button className="w-100 mt-4" type="submit" ref={submitEl}>
                     Odoslať
                   </Button>
                 </Form>

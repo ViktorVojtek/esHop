@@ -84,8 +84,14 @@ export interface IState {
   modal: boolean;
   menuOpen: boolean;
   error: boolean;
-  category: string;
-  subCategory: string;
+  category: {
+    id: string;
+    title: string;
+  };
+  subCategory: {
+    id: string;
+    title: string;
+  };
   giftCards: GiftCard[] | [];
   productsTotal: number;
   productsToShow: number;

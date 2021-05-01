@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PaginationComponent from 'react-reactstrap-pagination';
+import { Element } from 'react-scroll';
 import { Row } from 'reactstrap';
 import styled from 'styled-components';
 // Global state management context
@@ -41,7 +42,7 @@ interface IProductToCartData {
   isEnvelopeSize?: boolean;
   title: string;
 }
-const productsCount = 16;
+const productsCount = 12;
 const Products: React.FC<IProductsProps> = ({
   products,
   compareString,
@@ -109,11 +110,13 @@ const Products: React.FC<IProductsProps> = ({
   return (
     <>
       <Row>
-        <ProductFill
-          products={paginationProducts}
-          addProduct={handleAddProductToCart}
-          subCategories={subCategories}
-        />
+        <Element name="products">
+          <ProductFill
+            products={paginationProducts}
+            addProduct={handleAddProductToCart}
+            subCategories={subCategories}
+          />
+        </Element>
       </Row>
       <Row>
         <PaginationWrapper>

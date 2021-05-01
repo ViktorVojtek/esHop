@@ -1,4 +1,4 @@
-import React, { FC, useContext, useState } from 'react';
+import React, { FC } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { CUSTOMERS_QUERY } from '../../../../graphql/query';
 import { Table } from 'reactstrap';

@@ -68,12 +68,12 @@ const faq = [
   {
     question: 'Je možné tovar vymeniť?',
     answer:
-      'V prípade záujmu o výmeu tovaru vám odporúčame tovar vrátiť, vypísať Výmenný reklamačný formulár  a vytvoriť novú objednávku.',
+      'V prípade záujmu o výmeu tovaru vám odporúčame tovar vrátiť, vypísať <a href=/reklamacny-formular target=_blank>Výmenný reklamačný formulár</a>  a vytvoriť novú objednávku.',
   },
   {
     question: 'Je možné tovar/službu vrátiť?',
     answer:
-      'Zakúpený tovar alebo službu máte právo vrátiť alebo vymeniť do 14 dní. Balíček nám jednoducho odošlite poštou na adresu:  AMICUS RELAX, s.r.o., Popradská 6, 064 01 Stará Ľubovňa. Chceme vás upozorniť, že tovar musí byť nepoužitý, nepoškodený a v originálnom balení.<br> Do zásielky priložte vyplnený a podpísaný Formulár na odstpúenie od zmluvy, ktorý je vám k dispozícii tu. Vo formulári uveďte tovar, ktorý chcete vrátiť a číslo účtu (IBAN), kam máme finančné prostriedky vrátiť. Akonáhle tieto údaje od vás dostaneme, financie Vám vrátime čo najskôr, najneskôr však do 14 kalendárnych dní. <br> Odporúčame vám zásielku poslať ako doporučený balík s poistením na hodnotu tovaru (v prípade straty, alebo znehodnotenia balíka si ho budete môcť s podacím lístkom na pošte vyreklamovať).',
+      'Zakúpený tovar alebo službu máte právo vrátiť alebo vymeniť do 14 dní. Balíček nám jednoducho odošlite poštou na adresu:  AMICUS RELAX, s.r.o., Popradská 6, 064 01 Stará Ľubovňa. Chceme vás upozorniť, že tovar musí byť nepoužitý, nepoškodený a v originálnom balení.<br> Do zásielky priložte vyplnený a podpísaný <a href=/vzorovy-formular-na-odstupenie-od-zmluvy target=_blank>Formulár na odstpúenie od zmluvy</a>, ktorý je vám k dispozícii tu. Vo formulári uveďte tovar, ktorý chcete vrátiť a číslo účtu (IBAN), kam máme finančné prostriedky vrátiť. Akonáhle tieto údaje od vás dostaneme, financie Vám vrátime čo najskôr, najneskôr však do 14 kalendárnych dní. <br> Odporúčame vám zásielku poslať ako doporučený balík s poistením na hodnotu tovaru (v prípade straty, alebo znehodnotenia balíka si ho budete môcť s podacím lístkom na pošte vyreklamovať).',
   },
   {
     question: 'Aký je stav mojej objednávky?',

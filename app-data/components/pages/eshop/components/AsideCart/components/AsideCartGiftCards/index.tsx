@@ -3,15 +3,14 @@ import React, { FC, useContext } from 'react';
 import { Context } from '../../../../../../../lib/state/Store';
 import {
   HeadWrapper,
-  Circle,
   DetailItem,
-  Button,
   AsideCartWrapper,
   Title,
   Detail,
 } from './styles/asideCartProductStyle';
 import { formatPrice } from '../../../../../../../shared/helpers/formatters';
 import { ServiceData } from '../../../../../../../shared/types/Store.types';
+import { Button } from '../../../../../../../shared/design';
 
 type IAsideCartGiftCards = {
   giftCardTitle: string;

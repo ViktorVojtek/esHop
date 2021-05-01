@@ -176,19 +176,32 @@
                           <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
                             <tr>
                               <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                                <div style="font-family:Arial;font-size:16px;line-height:20px;text-align:left;color:#777777;">Dobrý deň.</div>
+                                <div style="font-family:Arial;font-size:16px;line-height:20px;text-align:left;color:#777777;">Dobrý deň pán/pani {{name}} {{surname}},</div>
                               </td>
                             </tr>
-                            <tr>
-                              <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                                <div style="font-family:Arial;font-size:16px;line-height:20px;text-align:left;color:#777777;">Vaša objednávka {{orderId}} bola dnes odoslaná a odovzdaná prepravnej spoločnosti. Prepravná spoločnosť Vám do e-mailu zašle sledovacie číslo zásielky, ktoré je možné sledovať až po spracovaní balíka v depe prepravnej spoločnosti, čo je po 18:00 hod. v deň odoslania.</div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                                <div style="font-family:Arial;font-size:16px;line-height:20px;text-align:left;color:#777777;">Kuriéra nie je možné žiadať ani o presný čas doručenia. Kuriér doručuje podľa presne stanoveného časového a miestneho harmonogramu, ktorého sa musí držať. V objednávke zadávate adresu, na ktorej si viete prevziať od kuriéra zásielku v čase od 8:00-18:00, pričom čas určuje kuriér. Kuriér doručuje na adresu len raz denne a na adresu sa v daný deň už nevracia.</div>
-                              </td>
-                            </tr>
+                            {{#if isPersonalTakeout}}
+                              <tr>
+                                <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                                  <div style="font-family:Arial;font-size:16px;line-height:20px;text-align:left;color:#777777;">máme pre vás skvelú správu. Vaša objednávka {{orderId}} je pripravená.</div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                                  <div style="font-family:Arial;font-size:16px;line-height:20px;text-align:left;color:#777777;">Osobný odber je možný v Kúpeľnej reštaurácii, Červený Kláštor 12, 059 06 Červený Kláštor alebo v Cestovnej agentúre DJK Tour, Popradská 6, 064 01 Stará Ľubovňa v čase Pondelok - Piatok: 9:00 - 18:00, Sobota: 10:00 - 12:00.</div>
+                                </td>
+                              </tr>
+                            {{else}}
+                              <tr>
+                                <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                                  <div style="font-family:Arial;font-size:16px;line-height:20px;text-align:left;color:#777777;">máme pre vás skvelú správu. Vaša objednávka {{orderId}} bola úspešne odovzdaná prepravnej spoločnosti a bude vám čoskoro doručená. Prepravná spoločnosť Vám do e-mailu zašle sledovacie číslo zásielky, ktoré je možné sledovať až po spracovaní balíka v depe prepravnej spoločnosti, čo je po 18:00 hod. v deň odoslania.</div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                                  <div style="font-family:Arial;font-size:16px;line-height:20px;text-align:left;color:#777777;">Kuriéra nie je možné žiadať ani o presný čas doručenia. Kuriér doručuje podľa presne stanoveného časového a miestneho harmonogramu, ktorého sa musí držať. V objednávke zadávate adresu, na ktorej si viete prevziať od kuriéra zásielku v čase od 8:00-18:00, pričom čas určuje kuriér. Kuriér doručuje na adresu len raz denne a na adresu sa v daný deň už nevracia.</div>
+                                </td>
+                              </tr>
+                            {{/if}}
                             <tr>
                               <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
                                 <div style="font-family:Arial;font-size:16px;line-height:20px;text-align:left;color:#777777;">Ak máte akékoľvek otázky týkajúce sa Vašej objednávky, prosím, kontaktujte nás na <a href="mailto: eshop@kupelecks.sk">eshop@kupelecks.sk</a> alebo telefonicky na +421 911 338 828 v čase Pondelok - Piatok: 08:00 - 17:00.</div>

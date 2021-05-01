@@ -38,39 +38,6 @@ export const Title = styled.h6`
   font-size: 1rem;
 `;
 
-export const Button = styled.button`
-  background-color: #00aeefb8;
-  font-family: ${fonts.primary}
-  text-transform: uppercase;
-  color: #fff !important;
-  padding: 0.75rem 1rem;
-  border-radius: 0.35rem;
-  outline: none !important;
-  border-radius: 6px;
-  border: none;
-  font-size: 0.875rem;
-  font-weight: 600;
-  position: relative;
-  margin-top: 1rem;
-  -webkit-letter-spacing: 0px;
-  -moz-letter-spacing: 0px;
-  -ms-letter-spacing: 0px;
-  letter-spacing: 0px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  -webkit-transition: all 0.3s ease-out;
-  transition: all 0.3s ease-out;
-  width: 45%;
-  &:hover {
-    background-color: #00aeef;
-  }
-  @media (max-width: 1200px) {
-    padding: 1rem 0.5rem;
-  }
-`;
-
 export const Total = styled.div`
   border-bottom: solid 1px #00aeef;
   padding: 0.5rem 0rem;

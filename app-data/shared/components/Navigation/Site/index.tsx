@@ -1,4 +1,11 @@
-import React, { FC, ReactNode, useState, useContext, forwardRef } from 'react';
+import React, {
+  FC,
+  ReactNode,
+  useState,
+  useContext,
+  forwardRef,
+  useEffect,
+} from 'react';
 import Link from 'next/link';
 import {
   Collapse,
@@ -50,21 +57,39 @@ const LinkItem: FC<ILinkItem> = ({ href, title, className = '' }) => (
 );
 const Navigation: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setScrolled] = React.useState(false);
   const { state } = useContext(Context);
   const router = useRouter();
 
   const { cart, giftCards } = state;
   const toggle: () => void = () => setIsOpen(!isOpen);
 
-  console.log(router.pathname.includes('eshop'));
+  const handleScroll = () => {
+    const offset = window.scrollY;
+    if (offset > 60) {
+      setScrolled(true);
+    } else {
+      setScrolled(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+  });
 
   return (
     <>
       <Wrapper id="navigation">
-        <Navbar color="light" light fixed="top" expand="lg">
+        <Navbar
+          color="light"
+          light
+          fixed="top"
+          expand="lg"
+          className={isScrolled ? 'navbar-main active' : 'navbar-main'}
+        >
           <Link href="/">
             <CustomNavbarBrand href="/">
-              <Logo src="/images/logo.png" alt="Červený kláštor" />
+              <Logo src="/icons/logo_CKSeshop.svg" alt="Červený kláštor" />
             </CustomNavbarBrand>
           </Link>
           <NavbarToggler onClick={toggle} />
@@ -104,7 +129,7 @@ const Navigation: FC = () => {
           <MobileMenuEshop />
           <Link href="/">
             <CustomNavbarBrand href="/">
-              <Logo src="/images/logo.png" alt="Červený kláštor" />
+              <Logo src="/icons/logo_CKSeshop.svg" alt="Červený kláštor" />
             </CustomNavbarBrand>
           </Link>
         </div>

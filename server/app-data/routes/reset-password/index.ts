@@ -1,8 +1,19 @@
+const path = require('path');
+const fs = require('fs');
+const handlebars = require('handlebars');
 import { Request, Response, NextFunction } from 'express';
 import Customer, { ICustomer } from '../../db/models/Customer';
 import crypto from 'crypto';
 import nodemailer from 'nodemailer';
 import { config } from '../../config';
+
+var reset_password_html = fs.readFileSync(
+  path.join(
+    __dirname,
+    `../../../../public/html/resetPassword/reset_password.html`
+  ),
+  'utf8'
+);
 
 export const resetPasswordRoute = async (
   req: Request,
@@ -44,20 +55,31 @@ export const resetPasswordRoute = async (
   try {
     await customer.save();
 
-    const mailOptions = {
-      from: 'eshop@kupelecks.sk',
-      to: email,
-      subject: 'Žiadosť o zmenu hesla',
-      text:
-        'Dobrý deň,\n\n' +
-        'požiadali ste o obnovu hesla. Nové heslo si nastavíte kliknutím na adresu: \nhttp://' +
-        domain +
-        '/change-password/?token=' +
-        token +
-        '.\n',
+    // Send the email
+    let transporter = nodemailer.createTransport({
+      host: 'smtp.websupport.sk',
+      port: 465, // 587,
+      secure: true, // true, // ssl
+      auth: {
+        user: 'eshop@kupelecks.sk', // generated ethereal user
+        pass: 'Cyp147.?riaN20ck12', // generated ethereal password
+      },
+    });
+
+    const templateResetPasswordMail = handlebars.compile(reset_password_html);
+    var replacement = {
+      url: `http://${domain}/change-password/?token=${token}`,
     };
 
-    await mailTransporter.sendMail(mailOptions);
+    const resetPasswordMailToSend = templateResetPasswordMail(replacement);
+
+    // send mail with defined transport object
+    transporter.sendMail({
+      from: '"Eshop KúpeleCKS" <eshop@kupelecks.sk>',
+      to: email, // list of receivers
+      subject: 'Červený Kláštor | Zmena hesla', // Subject line
+      html: resetPasswordMailToSend, // html body
+    });
 
     res.send('A reset password email has been sent to ' + email + '.');
   } catch (error) {

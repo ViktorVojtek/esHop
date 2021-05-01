@@ -26,6 +26,7 @@ const StyledButton = styled(Button)`
   color: ${colors.primary};
   background: white;
   box-shadow: none;
+  border: none;
   border-left: 1px solid lightgrey;
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
@@ -33,6 +34,10 @@ const StyledButton = styled(Button)`
   &:hover {
     color: white;
     background-color: ${colors.primary};
+    border: none;
+    border-left: 1px solid lightgrey;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
   }
 `;
 

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {
-  Button,
   Form,
   FormGroup,
   Input,
@@ -8,6 +7,7 @@ import {
   ModalBody,
   ModalHeader,
 } from 'reactstrap';
+import { Button } from '../../design';
 import ErrorMessage from '../ErrorMessage';
 import SuccessMessage from '../SucessMessage';
 

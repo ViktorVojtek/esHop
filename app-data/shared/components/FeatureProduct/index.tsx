@@ -1,6 +1,4 @@
 import React, { FC, useState } from 'react';
-
-import { Col } from 'reactstrap';
 import Link from 'next/link';
 
 import {
@@ -16,6 +14,7 @@ import { StyledProductTitle } from '../../../components/pages/eshop/components/P
 import { useRouter } from 'next/router';
 import { ProductUI } from '../Product';
 import Product from '../../types/Product.types';
+import { StyledCol } from '../Product/style';
 
 const ProductTitle: React.FC<IProductTitle> = ({ slug, title }) => {
   return (
@@ -95,17 +94,17 @@ const FeatureProduct: FC<IProductUI> = ({
     router.push('/darcekove-poukazky');
   }
 
-  subCategoryObject.covidWarranty = true;
-
   return (
-    <ProductUI
-      product={product}
-      subCategoryObject={subCategoryObject}
-      addProduct={addProduct}
-      addProductToGiftCard={handleAddProductToGiftCard}
-      modal={modal}
-      toggleModal={toggleModal}
-    />
+    <StyledCol lg={3} md={6} sm={12}>
+      <ProductUI
+        product={product}
+        subCategoryObject={subCategoryObject}
+        addProduct={addProduct}
+        addProductToGiftCard={handleAddProductToGiftCard}
+        modal={modal}
+        toggleModal={toggleModal}
+      />
+    </StyledCol>
   );
 };
 const FeaturecProductsFill: React.FC<IProductsFillProps> = ({

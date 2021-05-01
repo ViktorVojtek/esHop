@@ -6,16 +6,21 @@ import {
   Dropdown,
   DropdownMenu,
   DropdownItem,
-  FormGroup,
-  Input,
 } from 'reactstrap';
 import { useQuery } from '@apollo/react-hooks';
-import Link from 'next/link';
 
 import CategoriesAside from './components/Categories';
 import Products from './components/Products';
 
-import { Wrapper } from './styles/eshoppage';
+import {
+  ActionHolder,
+  FilterCol,
+  InputHolder,
+  InputIcon,
+  InputIconHolder,
+  SearchInput,
+  Wrapper,
+} from './styles/eshoppage';
 import { PRODUCTS_QUERY } from '../../../graphql/query';
 import { Context } from '../../../lib/state/Store';
 import {
@@ -26,12 +31,13 @@ import {
   sortActionProducts,
 } from '../../../shared/helpers';
 import Product from '../../../shared/types/Product.types';
-import CustomSpinner from '../../../shared/components/CustomSpinner/CustomerSpinner';
 import { DropdownToggleItem } from '../../../shared/design/dropdown';
 import { SubCategoryType } from '../admin/settings/subcategory';
 import { ProductsSkeleton } from './components/Products/components/ProductsSkeleton';
+import { BreadCrumb } from './components/BreadCrumb';
+import { ChevronDown } from './components/Category/CategoryIcons';
 
-const EshopPage: FC = () => {
+const EshopPage = () => {
   const queryMultiple = () => {
     const res1 = useQuery(PRODUCTS_QUERY);
     return [res1];
@@ -40,7 +46,7 @@ const EshopPage: FC = () => {
     { error: error, loading: loading, data: productsData },
   ] = queryMultiple();
 
-  const { state, dispatch } = useContext(Context);
+  const { state } = useContext(Context);
   const { category, subCategory } = state;
   const [subCategoriesDTO, setSubCategoriesDTO] = useState<SubCategoryType[]>(
     []
@@ -58,9 +64,9 @@ const EshopPage: FC = () => {
       const { products, subCategories } = productsData.products;
       setSubCategoriesDTO(subCategories);
 
-      if (subCategory === '' && category !== '') {
+      if (subCategory.id === '' && category.id !== '') {
         filterByCategory(products);
-      } else if (subCategory !== '') {
+      } else if (subCategory.id !== '') {
         filterBySubCategory(products);
       } else setFilteredProducts(products);
     }
@@ -72,13 +78,13 @@ const EshopPage: FC = () => {
 
   const filterByCategory = (products: Product[]) => {
     let newProducts = products.filter(
-      (product: any) => product.category.id === category
+      (product: any) => product.category.id === category.id
     );
     return setFilteredProducts(newProducts);
   };
   const filterBySubCategory = (products: Product[]) => {
     let newProducts = products.filter(
-      (product: Product) => product.subCategory.id === subCategory
+      (product: Product) => product.subCategory.id === subCategory.id
     );
     return setFilteredProducts(newProducts);
   };
@@ -90,77 +96,84 @@ const EshopPage: FC = () => {
   return (
     <Wrapper>
       <Container>
-        <Row className="d-flex justify-content-between mb-4">
-          <Col sm="6">
-            <Row>
-              <CategoriesAside />
-            </Row>
-          </Col>
-          <Col sm="6">
-            <Row>
-              <Col md="6" className="mb-2">
-                <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-                  <DropdownToggleItem caret>Zoradit podľa</DropdownToggleItem>
-                  <DropdownMenu>
-                    <DropdownItem
-                      onClick={() =>
-                        sortActionProducts(
-                          filteredProducts,
-                          setFilteredProducts
-                        )
-                      }
-                    >
-                      Akciové
-                    </DropdownItem>
-                    <DropdownItem
-                      onClick={() =>
-                        sortByPriceMin(filteredProducts, setFilteredProducts)
-                      }
-                    >
-                      Od najlacnejších
-                    </DropdownItem>
-                    <DropdownItem
-                      onClick={() =>
-                        sortByPriceMax(filteredProducts, setFilteredProducts)
-                      }
-                    >
-                      Od najdrahších
-                    </DropdownItem>
-                    <DropdownItem
-                      onClick={() =>
-                        sortByLetterUp(filteredProducts, setFilteredProducts)
-                      }
-                    >
-                      Vzostupne A-Z
-                    </DropdownItem>
-                    <DropdownItem
-                      onClick={() =>
-                        sortByLetterDown(filteredProducts, setFilteredProducts)
-                      }
-                    >
-                      Zostupne Z-A
-                    </DropdownItem>
-                  </DropdownMenu>
-                </Dropdown>
-              </Col>
-              <Col md="6" className="mb-2">
-                <FormGroup>
-                  <Input
-                    type="text"
-                    name="search"
-                    id="search"
-                    placeholder="Vyhľadávať"
-                    onChange={filterByName}
-                    innerRef={searchInput}
-                  />
-                </FormGroup>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-        {loading && <ProductsSkeleton />}
         <Row>
           <Col>
+            <BreadCrumb />
+          </Col>
+        </Row>
+        <ActionHolder>
+          <Row>
+            <Col lg={3}></Col>
+            <Col md={6}>
+              <InputHolder>
+                <SearchInput
+                  type="text"
+                  name="search"
+                  id="search"
+                  placeholder="Vyhľadať produkt"
+                  onChange={filterByName}
+                  ref={searchInput}
+                />
+                <InputIconHolder>
+                  <InputIcon src="/icons/lupa.svg" />
+                </InputIconHolder>
+              </InputHolder>
+            </Col>
+            <Col md={6} lg={3}>
+              <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+                <InputHolder>
+                  <DropdownToggleItem caret>Zoradit podľa</DropdownToggleItem>
+                  <InputIconHolder>
+                    <ChevronDown />
+                  </InputIconHolder>
+                </InputHolder>
+                <DropdownMenu>
+                  <DropdownItem
+                    onClick={() =>
+                      sortActionProducts(filteredProducts, setFilteredProducts)
+                    }
+                  >
+                    Akciové
+                  </DropdownItem>
+                  <DropdownItem
+                    onClick={() =>
+                      sortByPriceMin(filteredProducts, setFilteredProducts)
+                    }
+                  >
+                    Od najlacnejších
+                  </DropdownItem>
+                  <DropdownItem
+                    onClick={() =>
+                      sortByPriceMax(filteredProducts, setFilteredProducts)
+                    }
+                  >
+                    Od najdrahších
+                  </DropdownItem>
+                  <DropdownItem
+                    onClick={() =>
+                      sortByLetterUp(filteredProducts, setFilteredProducts)
+                    }
+                  >
+                    Vzostupne A-Z
+                  </DropdownItem>
+                  <DropdownItem
+                    onClick={() =>
+                      sortByLetterDown(filteredProducts, setFilteredProducts)
+                    }
+                  >
+                    Zostupne Z-A
+                  </DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+            </Col>
+          </Row>
+        </ActionHolder>
+        <Row>
+          <FilterCol lg={3}>
+            <CategoriesAside />
+          </FilterCol>
+          <Col lg={9} className="my-4">
+            {loading && <ProductsSkeleton />}
             <Products
               products={filteredProducts}
               compareString={compareString}

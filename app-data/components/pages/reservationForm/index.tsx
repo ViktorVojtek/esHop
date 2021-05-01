@@ -46,7 +46,6 @@ const ReservationForm: FC = () => {
     event: React.FormEvent<HTMLFormElement>
   ) => Promise<void> = async (event) => {
     event.preventDefault();
-    console.log('submit');
     try {
       const response = await sendRezervationEmail({
         variables: { rezervationData: formData },

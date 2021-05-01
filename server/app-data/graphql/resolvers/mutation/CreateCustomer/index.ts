@@ -1,3 +1,6 @@
+const path = require('path');
+const fs = require('fs');
+const handlebars = require('handlebars');
 import bcrypt from 'bcryptjs';
 import Customer from '../../../../db/models/Customer';
 import ModError from '../../utils/error';
@@ -5,6 +8,14 @@ import crypto from 'crypto';
 import nodemailer from 'nodemailer';
 import TokenSchema from '../../../../db/models/TokenSchema';
 var os = require('os');
+
+var verification_user_html = fs.readFileSync(
+  path.join(
+    __dirname,
+    `../../../../../../public/html/verificationTemplate/verification_user.html`
+  ),
+  'utf8'
+);
 
 export default async (root: any, args: any, ctx: any) => {
   try {
@@ -59,29 +70,22 @@ export default async (root: any, args: any, ctx: any) => {
           pass: 'Cyp147.?riaN20ck12', // generated ethereal password
         },
       });
-      var mailOptions = {
-        from: 'eshop@kupelecks.sk',
-        to: returnCustomerData.email,
-        subject: 'Potvrdenie registrácie účtu',
-        text:
-          'Dobrý deň,\n\n' +
-          'prosím verifikujte svoj účet kliknutím na adresu: \nhttp://' +
-          domain +
-          '/confirmation/?token=' +
-          token.token +
-          '.\n',
+
+      const templateVerificationMail = handlebars.compile(
+        verification_user_html
+      );
+      var replacement = {
+        url: `http://${domain}/confirmation/?token=${token.token}`,
       };
-      transporter.sendMail(mailOptions, function (err) {
-        if (err) {
-          return args.status(500).send({ msg: err.message });
-        }
-        args
-          .status(200)
-          .send(
-            'A verification email has been sent to ' +
-              returnCustomerData.email +
-              '.'
-          );
+
+      const verificationUserMailToSend = templateVerificationMail(replacement);
+
+      // send mail with defined transport object
+      transporter.sendMail({
+        from: '"Eshop KúpeleCKS" <eshop@kupelecks.sk>',
+        to: returnCustomerData.email, // list of receivers
+        subject: 'Červený Kláštor | Potvrdenie registrácie účtu', // Subject line
+        html: verificationUserMailToSend, // html body
       });
     });
 

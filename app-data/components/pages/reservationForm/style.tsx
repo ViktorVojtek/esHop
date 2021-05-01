@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
   width: 100vw;
   margin: 0 auto;
   margin-top: 140px;
-  min-height: calc(100vh - 693px);
+  min-height: calc(100vh - 562px);
 `;
 
 export const H1 = styled.h1`

@@ -8,7 +8,10 @@ import { scroller, Element } from 'react-scroll';
 import { Col, Row, Collapse } from 'reactstrap';
 import { ButtonsHolder, H4 } from '../../../../../../styles/cart.style';
 import SummaryPrice from '../../../SummaryPrice';
-import { Button } from '../../../../../../../../../../shared/design';
+import {
+  Button,
+  SecondaryButton,
+} from '../../../../../../../../../../shared/design';
 import {
   FormControlLabel,
   Checkbox,
@@ -848,9 +851,13 @@ const BillingInfo: (props: IProps) => JSX.Element = (props) => {
       </Row>
       <SummaryPrice />
       <ButtonsHolder>
-        <Button type="button" onClick={handlePrevStep} className="mr-auto">
+        <SecondaryButton
+          type="button"
+          onClick={handlePrevStep}
+          className="mr-auto"
+        >
           Späť
-        </Button>
+        </SecondaryButton>
         <Button type="submit" className="ml-auto">
           Objednať teraz
         </Button>

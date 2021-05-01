@@ -84,8 +84,6 @@ const CartContent: FC = () => {
     }
   }, []);
 
-  console.log(orderData);
-
   const handleNextStep = () => {
     if (cartStep === 0) {
       router.push('/eshop/cart?checkout');

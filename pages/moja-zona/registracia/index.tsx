@@ -22,13 +22,13 @@ import { withSetCart } from '../../../app-data/lib/state/Reducer';
 import {
   Wrapper,
   Form,
-  Button,
   RegisterButton,
   P,
   H4,
 } from '../../../app-data/shared/styles/components/Auth';
 import { Context } from '../../../app-data/lib/state/Store';
 import { Danger } from '../../../app-data/shared/components/LoginRegisterModal/styles';
+import { Button } from '../../../app-data/shared/design';
 
 const Register: FC = () => {
   const [userExist, setUserExist] = useState(false);
@@ -206,7 +206,9 @@ const Register: FC = () => {
               s používaním emailu na marketingové účely
             </Label>
           </FormGroup>
-          <Button type="submit">Registrovať</Button>
+          <Button className="w-100" type="submit">
+            Registrovať
+          </Button>
           <P className="mt-2">
             Už máte konto?{' '}
             <Link href="prihlasenie">

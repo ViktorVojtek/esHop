@@ -28,7 +28,7 @@ const ProductList: FC = () => {
   const [removeProduct] = useMutation(REMOVE_PRODUCT_MUTATION, {
     refetchQueries: [{ query: PRODUCTS_QUERY }],
   });
-  const { state, dispatch } = useContext(Context);
+  const { dispatch } = useContext(Context);
 
   const { loading, error, data } = useQuery(PRODUCTS_QUERY);
 

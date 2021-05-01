@@ -10,8 +10,14 @@ const initialState: IState = {
   modal: false,
   menuOpen: false,
   error: false,
-  category: '',
-  subCategory: '',
+  category: {
+    id: '',
+    title: '',
+  },
+  subCategory: {
+    id: '',
+    title: '',
+  },
   giftCards: [],
   productsTotal: 0,
   productsToShow: 0,

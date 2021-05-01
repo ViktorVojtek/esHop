@@ -21,6 +21,7 @@ const P = styled.p`
   margin: 0;
   margin-left: 16px;
   font-weight: bold;
+  color: white;
 `;
 
 type SuccessMessageType = {

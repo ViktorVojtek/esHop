@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Autoplay, Pagination, Navigation } from 'swiper';
 import Link from 'next/link';
-import { Button, colors } from '../../../../shared/design';
+import { Button, colors, SecondaryButton } from '../../../../shared/design';
 import { Container } from 'reactstrap';
 
 SwiperCore.use([Autoplay, Pagination, Navigation]);
@@ -142,14 +142,16 @@ const ButtonsHolder = styled.div`
 `;
 
 const StyledButtonPrimary = styled(Button)`
-  width: 205px;
+  width: 100%;
+  max-width: 210px;
   padding: 12px 24px;
   box-shadow: 3px 7px 20px 0px #00aeefb0;
   margin-right: 16px;
 `;
 
-const StyledButtonSecondary = styled(Button)`
-  width: 205px;
+const StyledButtonSecondary = styled(SecondaryButton)`
+  width: 100%;
+  max-width: 210px;
   padding: 12px 24px;
   box-shadow: none;
   background: none;

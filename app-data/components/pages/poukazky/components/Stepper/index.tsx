@@ -15,7 +15,7 @@ import { useSnackbar } from 'notistack';
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Context } from '../../../../../lib/state/Store';
-import { Button, colors } from '../../../../../shared/design';
+import { Button, colors, SecondaryButton } from '../../../../../shared/design';
 import { scrollTop } from '../../../../../shared/helpers';
 import Apperance from '../Apperance';
 import Content from '../Content';
@@ -266,9 +266,6 @@ export default function GiftCardStepper() {
     });
     setActiveStep(0);
   };
-  const totalSteps = () => {
-    return steps.length;
-  };
 
   const handleAddGiftCard: (data: IGiftCardData) => void = (data) => {
     const {
@@ -328,14 +325,15 @@ export default function GiftCardStepper() {
               display: 'flex',
               justifyContent: 'space-between',
             }}
+            className="pb-4"
           >
-            <Button
+            <SecondaryButton
               disabled={activeStep === 0}
               onClick={handleBack}
               className={classes.backButton}
             >
               Späť
-            </Button>
+            </SecondaryButton>
             <Button onClick={handleNext}>
               {activeStep === steps.length - 1
                 ? 'Pridať do košíka'
@@ -407,7 +405,7 @@ export default function GiftCardStepper() {
             padding: '.75rem 0',
           }}
         >
-          <Button onClick={handleReset}>Nakupovať</Button>
+          <SecondaryButton onClick={handleReset}>Nakupovať</SecondaryButton>
           <Link href="/eshop/cart">
             <Button>
               <StyledShoppingCartIcon style={{ marginRight: '4px' }} />

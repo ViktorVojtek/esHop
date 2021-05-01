@@ -30,6 +30,7 @@ import { SubCategoryType } from '../../../components/pages/admin/settings/subcat
 import { BonusRibbon } from '../Ribbon/BonusRibbon';
 import { CovidRibbon } from '../Ribbon/CovidRibbon';
 import { ProductUI } from '../Product';
+import { StyledCol } from '../Product/style';
 
 const ProductTitle: React.FC<IProductTitle> = ({ slug, title }) => {
   return (
@@ -109,12 +110,14 @@ const RelatedProducts: FC<IRelatedProducts> = ({
     router.push('/darcekove-poukazky');
   }
   return (
-    <ProductUI
-      product={product}
-      subCategoryObject={subCategoryObject}
-      addProduct={null}
-      addProductToGiftCard={handleAddProductToGiftCard}
-    />
+    <StyledCol lg={3} md={6} sm={12}>
+      <ProductUI
+        product={product}
+        subCategoryObject={subCategoryObject}
+        addProduct={null}
+        addProductToGiftCard={handleAddProductToGiftCard}
+      />
+    </StyledCol>
   );
 };
 type IRelatedProductsFill = {

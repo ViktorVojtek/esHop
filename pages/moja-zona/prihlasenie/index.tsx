@@ -10,7 +10,6 @@ import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import {
   Wrapper,
   Form,
-  Button,
   H4,
   RegisterButton,
   P,
@@ -19,6 +18,7 @@ import { login } from '../../../app-data/lib/authCustomer';
 import { Context } from '../../../app-data/lib/state/Store';
 import ErrorMessage from '../../../app-data/shared/components/ErrorMessage';
 import ForgetPasswordModal from '../../../app-data/shared/components/ForgetPasswordModal';
+import { Button } from '../../../app-data/shared/design';
 
 const LogIn: FC = () => {
   const [errorMessage, setErrorMessage] = useState('');
@@ -119,7 +119,16 @@ const LogIn: FC = () => {
           </div>
 
           <ErrorMessage message={errorMessage} open={isError} />
-          <Button type="submit">Prihlásiť</Button>
+          {errorMessage === 'Používateľ nie je verifikovaný!' && (
+            <div className="mb-4">
+              <Link href="/verifikacia-uctu">
+                <RegisterButton>Verifikovať účet</RegisterButton>
+              </Link>
+            </div>
+          )}
+          <Button className="w-100" type="submit">
+            Prihlásiť
+          </Button>
         </Form>
       </Wrapper>
       <ForgetPasswordModal setModal={setModal} modal={modal} />
