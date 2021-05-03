@@ -73,7 +73,7 @@ const faq = [
   {
     question: 'Je možné tovar/službu vrátiť?',
     answer:
-      'Zakúpený tovar alebo službu máte právo vrátiť alebo vymeniť do 14 dní. Balíček nám jednoducho odošlite poštou na adresu:  AMICUS RELAX, s.r.o., Popradská 6, 064 01 Stará Ľubovňa. Chceme vás upozorniť, že tovar musí byť nepoužitý, nepoškodený a v originálnom balení.<br> Do zásielky priložte vyplnený a podpísaný <a href=/vzorovy-formular-na-odstupenie-od-zmluvy target=_blank>Formulár na odstpúenie od zmluvy</a>, ktorý je vám k dispozícii tu. Vo formulári uveďte tovar, ktorý chcete vrátiť a číslo účtu (IBAN), kam máme finančné prostriedky vrátiť. Akonáhle tieto údaje od vás dostaneme, financie Vám vrátime čo najskôr, najneskôr však do 14 kalendárnych dní. <br> Odporúčame vám zásielku poslať ako doporučený balík s poistením na hodnotu tovaru (v prípade straty, alebo znehodnotenia balíka si ho budete môcť s podacím lístkom na pošte vyreklamovať).',
+      'Zakúpený tovar alebo službu máte právo vrátiť alebo vymeniť do 14 dní. Balíček nám jednoducho odošlite poštou na adresu:  AMICUS RELAX, s.r.o., Popradská 6, 064 01 Stará Ľubovňa. Chceme vás upozorniť, že tovar musí byť nepoužitý, nepoškodený a v originálnom balení.<br> Do zásielky priložte vyplnený a podpísaný <a href=/vzorovy-formular-na-odstupenie-od-zmluvy target=_blank>Formulár na odstúpenie od zmluvy</a>, ktorý je vám k dispozícii tu. Vo formulári uveďte tovar, ktorý chcete vrátiť a číslo účtu (IBAN), kam máme finančné prostriedky vrátiť. Akonáhle tieto údaje od vás dostaneme, financie Vám vrátime čo najskôr, najneskôr však do 14 kalendárnych dní. <br> Odporúčame vám zásielku poslať ako doporučený balík s poistením na hodnotu tovaru (v prípade straty, alebo znehodnotenia balíka si ho budete môcť s podacím lístkom na pošte vyreklamovať).',
   },
   {
     question: 'Aký je stav mojej objednávky?',
@@ -90,9 +90,9 @@ const KontaktPage = () => (
     <Container>
       <Row>
         <Col md="4" className="mobile-card">
-          <Card data-aos="fade-up">
+          <Card>
             <Circle>
-              <img style={{ width: '24px' }} src="/icons/call.svg" />
+              <img style={{ width: '40px' }} src="/icons/phone.svg" />
             </Circle>
             <H2 className="w-100">Kontakt</H2>
             <div className="mt-4">
@@ -106,16 +106,13 @@ const KontaktPage = () => (
                 <Span>Tel: </Span>
                 <A href="tel:+421911338828">+421 911 338 828</A>
               </ContactHolder>
-              <AnchorLink offset={() => 100} href="#faq">
-                <Smooth>Často kladené otázky</Smooth>
-              </AnchorLink>
             </div>
           </Card>
         </Col>
         <Col md="4" className="mobile-card">
-          <Card data-aos="fade-up">
+          <Card>
             <Circle>
-              <img style={{ width: '24px' }} src="/icons/reception.svg" />
+              <img style={{ width: '40px' }} src="/icons/rezervation.svg" />
             </Circle>
             <H2 className="w-100">Rezervácie</H2>
             <div className="mt-4">
@@ -135,15 +132,14 @@ const KontaktPage = () => (
           </Card>
         </Col>
         <Col md="4">
-          <Card data-aos="fade-up">
+          <Card>
             <Circle>
-              <img style={{ width: '24px' }} src="/icons/pin.svg" />
+              <img style={{ width: '40px' }} src="/icons/place.svg" />
             </Circle>
             <H2 className="w-100">Odberné miesto</H2>
             <div className="mt-4">
               <P>Cestovná agentúra DJK Tour</P>
-              <P>064 01 Stará Ľubovňa</P>
-              <P>Popradská 6</P>
+              <P>Popradská 6, 064 01 Stará Ľubovňa</P>
               <ContactHolder>
                 <Span>Email: </Span>
                 <A href="mailto:eshop@kupelecks.sk">eshop@kupelecks.sk</A>

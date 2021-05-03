@@ -34,7 +34,6 @@ export const P = styled.p`
   font-size: 1rem;
   padding: 1.5rem 0rem;
   line-height: 1.5;
-  font-weight: bold;
   text-align: center;
   @media (max-width: 768px) {
     text-align: center;

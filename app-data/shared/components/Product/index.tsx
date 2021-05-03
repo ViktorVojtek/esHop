@@ -118,31 +118,45 @@ export const ProductUI: FC<ProductType> = ({
           {subCategoryObject.forSale ? (
             <>
               {variants.length > 1 || addProduct === null ? (
-                <Link href={{ pathname: `/eshop/produkt/${slug}` }}>
-                  <ActionButton>Vložiť do košíka</ActionButton>
-                </Link>
+                <>
+                  <Link href={{ pathname: `/eshop/produkt/${slug}` }}>
+                    <ActionButton>Vložiť do košíka</ActionButton>
+                  </Link>
+                  {subCategoryObject.forGiftCard && (
+                    <GiftCardButton onClick={addProductToGiftCard}>
+                      Vytvoriť poukážku
+                    </GiftCardButton>
+                  )}
+                </>
               ) : (
-                <ActionButton
-                  type="button"
-                  onClick={() => (isClient ? addProduct() : null)}
-                >
-                  Vložiť do košíka
-                </ActionButton>
+                <>
+                  <ActionButton
+                    type="button"
+                    onClick={() => (isClient ? addProduct() : null)}
+                  >
+                    Vložiť do košíka
+                  </ActionButton>
+                  {subCategoryObject.forGiftCard && (
+                    <GiftCardButton onClick={addProductToGiftCard}>
+                      Vytvoriť poukážku
+                    </GiftCardButton>
+                  )}
+                </>
               )}
             </>
           ) : (
             <>
+              {subCategoryObject.forGiftCard && (
+                <ActionButton onClick={addProductToGiftCard}>
+                  Vytvoriť poukážku
+                </ActionButton>
+              )}
               <Link
                 href={{ pathname: `/rezervacia`, query: { service: title } }}
               >
-                <ActionButton>Rezervovať</ActionButton>
+                <GiftCardButton>Rezervovať</GiftCardButton>
               </Link>
             </>
-          )}
-          {subCategoryObject.forGiftCard && (
-            <GiftCardButton onClick={addProductToGiftCard}>
-              Vytvoriť poukážku
-            </GiftCardButton>
           )}
         </ActionHolder>
         <RibbonHolder stickLeft>

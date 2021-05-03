@@ -55,11 +55,22 @@
           .mj-outlook-group-fix { width:100% !important; }
         </style>
         <![endif]-->
+  <!--[if !mso]><!-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" type="text/css">
+  <style type="text/css">
+    @import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500,700);
+  </style>
+  <!--<![endif]-->
   <style type="text/css">
     @media only screen and (min-width:600px) {
       .mj-column-per-100 {
         width: 100% !important;
         max-width: 100%;
+      }
+
+      .mj-column-per-50 {
+        width: 50% !important;
+        max-width: 50%;
       }
     }
   </style>
@@ -89,7 +100,7 @@
       <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:white;background-color:white;width:100%;">
         <tbody>
           <tr>
-            <td style="border-top:20px solid #EEE;direction:ltr;font-size:0px;padding:20px 0;text-align:center;">
+            <td style="border-top:40px solid #EEE;direction:ltr;font-size:0px;padding:20px 0;text-align:center;">
               <!--[if mso | IE]>
                   <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                 
@@ -102,12 +113,12 @@
               <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
                 <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
                   <tr>
-                    <td align="left" style="font-size:0px;padding:0;padding-left:20px;word-break:break-word;">
+                    <td align="center" style="font-size:0px;padding:0;padding-left:20px;word-break:break-word;">
                       <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
                         <tbody>
                           <tr>
-                            <td style="width:280px;">
-                              <img height="auto" src="https://eshop.kupelecks.sk/images/logo.png" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="280" />
+                            <td style="width:220px;">
+                              <img height="auto" src="https://kupelecks.sk/wp-content/uploads/2018/09/logo-big.png" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="220">
                             </td>
                           </tr>
                         </tbody>
@@ -143,7 +154,7 @@
       <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:white;background-color:white;width:100%;">
         <tbody>
           <tr>
-            <td style="direction:ltr;font-size:0px;padding:0px 0px;text-align:center;">
+            <td style="direction:ltr;font-size:0px;padding:px 0px;text-align:center;">
               <!--[if mso | IE]>
                   <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                 
@@ -176,17 +187,17 @@
                           <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
                             <tr>
                               <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                                <div style="font-family:Arial;font-size:16px;line-height:20px;text-align:left;color:#777777;">Dobrý deň.</div>
+                                <div style="font-family:'Roboto', sans-serif;;font-size:16px;line-height:32px;text-align:left;color:#487688;">Dobrý deň pán/pani <strong>{{name}} {{surname}}</strong>,</div>
                               </td>
                             </tr>
                             <tr>
                               <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                                <div style="font-family:Arial;font-size:16px;line-height:20px;text-align:left;color:#777777;">Vaša objednávka {{orderId}} bola <strong>zrušená</strong> - buď na Vašu žiadosť, alebo nemáme kompletné informácie, ktoré potrebujeme na jej odoslanie a nepodarilo sa nám s Vami spojiť (emailom/telefonicky).</div>
+                                <div style="font-family:'Roboto', sans-serif;;font-size:16px;line-height:32px;text-align:left;color:#487688;">Vaša objednávka č. {{orderId}} bola <strong>zrušená</strong> - buď na Vašu žiadosť, alebo nemáme kompletné informácie, ktoré potrebujeme na jej odoslanie a nepodarilo sa nám s Vami spojiť (emailom/telefonicky).</div>
                               </td>
                             </tr>
                             <tr>
                               <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                                <div style="font-family:Arial;font-size:16px;line-height:20px;text-align:left;color:#777777;">Ak máte akékoľvek otázky týkajúce sa Vašej objednávky, prosím, kontaktujte nás na <a href="mailto: eshop@kupelecks.sk">eshop@kupelecks.sk</a> alebo telefonicky na +421 911 338 828 v čase Pondelok - Piatok: 08:00 - 17:00.</div>
+                                <div style="font-family:'Roboto', sans-serif;;font-size:16px;line-height:32px;text-align:left;color:#487688;">Ak máte akékoľvek otázky týkajúce sa Vašej objednávky, prosím, kontaktujte nás na <a class="link" href="mailto: eshop@kupelecks.sk" style="color: #00aeef; text-decoration: underline;">eshop@kupelecks.sk</a> alebo telefonicky na <a class="link" href="tel:+421 911 338 828" style="color: #00aeef; text-decoration: underline;">+421 911 338 828</a> v čase Pondelok - Piatok: 08:00 - 17:00.</div>
                               </td>
                             </tr>
                           </table>
@@ -256,13 +267,184 @@
                               </td>
                             </tr>
                             <tr>
-                              <td align="center" style="font-size:0px;padding:10px 25px;padding-bottom:10px;word-break:break-word;">
-                                <div style="font-family:Arial;font-size:16px;font-weight:40;line-height:20px;text-align:center;color:#777777;">Ďakujeme za dôveru a tešíme sa na Váš ďalší nákup.</div>
+                              <td align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                                <div style="font-family:'Roboto', sans-serif;;font-size:16px;font-weight:normal;line-height:32px;text-align:center;color:#487688;">Ďakujeme za dôveru a tešíme sa na Váš ďalší nákup.</div>
                               </td>
                             </tr>
                             <tr>
-                              <td align="center" style="font-size:0px;padding:10px 25px;padding-bottom:10px;word-break:break-word;">
-                                <div style="font-family:Arial;font-size:16px;font-weight:40;line-height:20px;text-align:center;color:#777777;">Prajeme Vám príjemný deň.</div>
+                              <td align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                                <div style="font-family:'Roboto', sans-serif;;font-size:16px;font-weight:normal;line-height:32px;text-align:center;color:#487688;">Prajeme Vám príjemný deň.</div>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                        <!--[if mso | IE]>
+            </td>
+          
+        </tr>
+      
+                  </table>
+                <![endif]-->
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!--[if mso | IE]>
+          </td>
+        </tr>
+      </table>
+      
+              </td>
+            </tr>
+          
+            <tr>
+              <td
+                 class="" width="800px"
+              >
+          
+      <table
+         align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:800px;" width="800"
+      >
+        <tr>
+          <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
+      <![endif]-->
+              <div style="background:#edf7fd;background-color:#edf7fd;margin:0px auto;max-width:800px;">
+                <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#edf7fd;background-color:#edf7fd;width:100%;">
+                  <tbody>
+                    <tr>
+                      <td style="border-bottom:40px solid #EEE;direction:ltr;font-size:0px;padding:0;padding-bottom:32px;padding-top:32px;text-align:center;">
+                        <!--[if mso | IE]>
+                  <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                
+        <tr>
+      
+            <td
+               class="" style="vertical-align:top;width:400px;"
+            >
+          <![endif]-->
+                        <div class="mj-column-per-50 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                          <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+                            <tr>
+                              <td align="left" style="font-size:0px;padding:0;padding-top:20px;padding-left:32px;word-break:break-word;">
+                                <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
+                                  <tbody>
+                                    <tr>
+                                      <td style="width:280px;">
+                                        <img height="auto" src="https://kupelecks.sk/wp-content/uploads/2018/09/logo-big.png" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="280">
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td align="left" style="font-size:0px;padding:10px 25px;padding-top:32px;padding-bottom:0;word-break:break-word;">
+                                <div style="font-family:'Roboto', sans-serif;;font-size:16px;font-weight:600;line-height:32px;text-align:left;color:#487688;">Červený Kláštor 147</div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td align="left" style="font-size:0px;padding:10px 25px;padding-top:0px;word-break:break-word;">
+                                <div style="font-family:'Roboto', sans-serif;;font-size:16px;font-weight:600;line-height:32px;text-align:left;color:#487688;">059 06 Červený Kláštor</div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td align="left" style="font-size:0px;padding:10px 25px;padding-top:16px;padding-bottom:0;word-break:break-word;">
+                                <div style="font-family:'Roboto', sans-serif;;font-size:16px;font-weight:600;line-height:32px;text-align:left;color:#487688;">Tel: +421 911 338 828</div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td align="left" style="font-size:0px;padding:10px 25px;padding-top:0px;word-break:break-word;">
+                                <div style="font-family:'Roboto', sans-serif;;font-size:16px;font-weight:normal;line-height:32px;text-align:left;color:#487688;">Email: eshop@kupelecks.sk</div>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                        <!--[if mso | IE]>
+            </td>
+          
+            <td
+               class="" style="vertical-align:top;width:400px;"
+            >
+          <![endif]-->
+                        <div class="mj-column-per-50 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                          <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+                            <tr>
+                              <td align="left" style="font-size:0px;padding:10px 25px;padding-top:20px;word-break:break-word;">
+                                <div style="font-family:'Roboto', sans-serif;;font-size:28px;font-weight:bold;line-height:32px;text-align:left;color:#487688;">Pridajte sa k nám!</div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+                                <!--[if mso | IE]>
+      <table
+         align="left" border="0" cellpadding="0" cellspacing="0" role="presentation"
+      >
+        <tr>
+      
+              <td>
+            <![endif]-->
+                                <table align="left" border="0" cellpadding="0" cellspacing="0" role="presentation" style="float:none;display:inline-table;">
+                                  <tr>
+                                    <td style="padding:4px;vertical-align:middle;">
+                                      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#3b5998;border-radius:3px;width:56px;">
+                                        <tr>
+                                          <td style="font-size:0;height:56px;vertical-align:middle;width:56px;">
+                                            <a href="https://www.facebook.com/KupeleCervenyKlastorSmerdzonka" target="_blank">
+                                              <img alt="Facebook" height="56" src="https://kupelecks.sk/wp-content/uploads/2018/09/FB.png" style="border-radius:3px;display:block;" width="56">
+                                            </a>
+                                          </td>
+                                        </tr>
+                                      </table>
+                                    </td>
+                                  </tr>
+                                </table>
+                                <!--[if mso | IE]>
+              </td>
+            
+              <td>
+            <![endif]-->
+                                <table align="left" border="0" cellpadding="0" cellspacing="0" role="presentation" style="float:none;display:inline-table;">
+                                  <tr>
+                                    <td style="padding:4px;vertical-align:middle;">
+                                      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#3f729b;border-radius:3px;width:56px;">
+                                        <tr>
+                                          <td style="font-size:0;height:56px;vertical-align:middle;width:56px;">
+                                            <a href="http://instagram.com/kupelecervenyklastorsmerdzonka" target="_blank">
+                                              <img alt="Instagram" height="56" src="https://kupelecks.sk/wp-content/uploads/2018/09/ig.png" style="border-radius:3px;display:block;" width="56">
+                                            </a>
+                                          </td>
+                                        </tr>
+                                      </table>
+                                    </td>
+                                  </tr>
+                                </table>
+                                <!--[if mso | IE]>
+              </td>
+            
+              <td>
+            <![endif]-->
+                                <table align="left" border="0" cellpadding="0" cellspacing="0" role="presentation" style="float:none;display:inline-table;">
+                                  <tr>
+                                    <td style="padding:4px;vertical-align:middle;">
+                                      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#EB3323;border-radius:3px;width:56px;">
+                                        <tr>
+                                          <td style="font-size:0;height:56px;vertical-align:middle;width:56px;">
+                                            <a href="https://www.youtube.com/channel/UCagE9AfD69zG7IOU9SMVgyg" target="_blank">
+                                              <img alt="Youtube" height="56" src="https://kupelecks.sk/wp-content/uploads/2018/09/ytb.png" style="border-radius:3px;display:block;" width="56">
+                                            </a>
+                                          </td>
+                                        </tr>
+                                      </table>
+                                    </td>
+                                  </tr>
+                                </table>
+                                <!--[if mso | IE]>
+              </td>
+            
+          </tr>
+        </table>
+      <![endif]-->
                               </td>
                             </tr>
                           </table>

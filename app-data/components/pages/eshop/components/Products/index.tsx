@@ -1,15 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react';
-import PaginationComponent from 'react-reactstrap-pagination';
 import { Element } from 'react-scroll';
-import { Row } from 'reactstrap';
+import { Col, Row } from 'reactstrap';
 import styled from 'styled-components';
 // Global state management context
 import { Context } from '../../../../../lib/state/Store';
+import { CustomPagination } from '../../../../../shared/components/Pagination';
+import { useSiteStyles } from '../../../../../shared/design/style';
 import Product from '../../../../../shared/types/Product.types';
 import { VariantOfProduct } from '../../../../../shared/types/Store.types';
 import { SubCategoryType } from '../../../admin/settings/subcategory';
 // Component fullfill the filtered products
 import ProductFill from './components/ProductsFill';
+import { ProductsSkeleton } from './components/ProductsSkeleton';
 
 const PaginationWrapper = styled.div`
   width: 100%;
@@ -34,6 +36,7 @@ interface IProductsProps {
   products: Product[];
   compareString: string;
   subCategories: SubCategoryType[];
+  loading: boolean;
 }
 interface IProductToCartData {
   id: string;
@@ -47,16 +50,30 @@ const Products: React.FC<IProductsProps> = ({
   products,
   compareString,
   subCategories,
+  loading,
 }) => {
-  const [pageSize, setPageSize] = useState(productsCount);
-  const [selectedPage, setSelectedPage] = useState(1);
-  const [paginationProducts, setPaginationProducts] = useState([]);
-  const [totalItems, setTotalItems] = useState(0);
-  const [showenProducts, setShowenProducts] = useState(0);
+  const styles = useSiteStyles();
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [productsToShow, setProductsToShow] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
   const {
     dispatch,
     state: { subCategory },
   } = useContext(Context);
+
+  useEffect(() => {
+    setFilteredProducts(products);
+  }, [products]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [subCategory]);
+
+  useEffect(() => {
+    setProductsToShow(
+      filteredProducts.slice((currentPage - 1) * 12, currentPage * 12)
+    );
+  }, [currentPage, filteredProducts]);
 
   const handleAddProductToCart: (data: IProductToCartData) => void = (data) => {
     const { id, variants, isEnvelopeSize, title } = data;
@@ -68,72 +85,37 @@ const Products: React.FC<IProductsProps> = ({
   /* const handleRemoveProductFromCart = (id: string) => {
     dispatch({ type: 'REMOVE_FROM_CART', payload: id });
   }; */
-  useEffect(() => {
-    setTotalItems(products.length);
-    setPaginationProducts(
-      products.slice(
-        (selectedPage - 1) * productsCount,
-        selectedPage * productsCount
-      )
-    );
-    let totalProducts = products.length;
-    let productsToShow = paginationProducts.length;
-    dispatch({ type: 'SET_PRODUCTS_TOTAL_COUNT', payload: { totalProducts } });
-    dispatch({
-      type: 'SET_PRODUCTS_TO_SHOW_COUNT',
-      payload: { productsToShow },
-    });
-  }, [products, selectedPage]);
 
-  useEffect(() => {
-    setSelectedPage(1);
-  }, [subCategory]);
-
-  useEffect(() => {
-    setShowenProducts(
-      paginationProducts.length + (selectedPage - 1) * productsCount
-    );
-  }, [paginationProducts]);
-
-  const handleSelected = (selectedPage: number) => {
-    setSelectedPage(selectedPage);
-  };
   useEffect(() => {
     let searchedProducts = [...products];
     let newArray = searchedProducts.filter((item) =>
       item.title.toLocaleLowerCase().includes(compareString.toLocaleLowerCase())
     );
-    setTotalItems(newArray.length);
-    setPaginationProducts(newArray);
+    setFilteredProducts(newArray);
   }, [compareString]);
 
   return (
     <>
-      <Row>
+      <Col lg={9} className="my-4">
+        {loading && <ProductsSkeleton />}
         <Element name="products">
           <ProductFill
-            products={paginationProducts}
+            products={productsToShow}
             addProduct={handleAddProductToCart}
             subCategories={subCategories}
           />
         </Element>
-      </Row>
-      <Row>
-        <PaginationWrapper>
-          <P>{`Zobrazuje ${showenProducts} z ${totalItems}`}</P>
-          <PaginationComponent
-            size="sm"
-            totalItems={totalItems}
-            pageSize={pageSize}
-            onSelect={handleSelected}
-            firstPageText="Prvá"
-            previousPageText="Dozadu"
-            nextPageText="Dopredu"
-            lastPageText="Posledná"
-            defaultActivePage={selectedPage}
+      </Col>
+      {filteredProducts.length > 12 && (
+        <div className="text-center w-100">
+          <CustomPagination
+            className={styles.paginationBlog}
+            pageCount={Math.ceil(filteredProducts.length / 12)}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
           />
-        </PaginationWrapper>
-      </Row>
+        </div>
+      )}
     </>
   );
 };

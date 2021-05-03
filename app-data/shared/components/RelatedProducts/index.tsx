@@ -110,7 +110,7 @@ const RelatedProducts: FC<IRelatedProducts> = ({
     router.push('/darcekove-poukazky');
   }
   return (
-    <StyledCol lg={3} md={6} sm={12}>
+    <StyledCol lg={3} sm={6} xs={12}>
       <ProductUI
         product={product}
         subCategoryObject={subCategoryObject}

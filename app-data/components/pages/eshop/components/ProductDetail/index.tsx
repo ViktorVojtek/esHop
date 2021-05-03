@@ -23,7 +23,11 @@ import { PRODUCTS_QUERY } from '../../../../../graphql/query';
 import { Context } from '../../../../../lib/state/Store';
 import RelatedProducts from '../../../../../shared/components/RelatedProducts';
 import RelatedProductSkeleton from '../../../../../shared/components/RelatedProducts/Skeleton';
-import { Button, ProductButton } from '../../../../../shared/design';
+import {
+  Button,
+  ProductButton,
+  SecondaryButton,
+} from '../../../../../shared/design';
 import { formatPrice } from '../../../../../shared/helpers/formatters';
 // Types
 import Product from '../../../../../shared/types/Product.types';
@@ -41,7 +45,6 @@ import {
   Price,
   RelatedTitle,
   Title,
-  TitleMobile,
   VariantOption,
   VariantsSelect,
   VariantTitle,
@@ -93,12 +96,6 @@ const ModalImage = styled.img`
   margin-bottom: 16px;
 `;
 
-const ModalButton = styled(Button)`
-  @media (max-width: 576px) {
-    font-size: 0.85rem;
-  }
-`;
-
 const StyledShoppingCartIcon = styled(ShoppingCartIcon)`
   color: white;
   @media (max-width: 330px) {
@@ -106,7 +103,14 @@ const StyledShoppingCartIcon = styled(ShoppingCartIcon)`
   }
 `;
 
-const StyledProductButton = styled(ProductButton)`
+const StyledProductButton = styled(Button)`
+  margin-top: 16px;
+  @media (max-width: 576px) {
+    display: block;
+  }
+`;
+const StyledProductSecondaryButton = styled(SecondaryButton)`
+  margin-top: 16px;
   @media (max-width: 576px) {
     display: block;
   }
@@ -274,7 +278,6 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({
       <Container>
         <Row>
           <Col md="6">
-            <TitleMobile className="mb-3">{title}</TitleMobile>
             {variants[activeVariant].images.length > 0 ? (
               <>
                 {variants[activeVariant].images.length === 1 ? (
@@ -324,7 +327,7 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({
               {variants[activeVariant].inStock < 1 && (
                 <NotInStock>Produkt nie je dostupný na sklade!</NotInStock>
               )}
-              <ButtonsHolder>
+              <>
                 {subCategory.forSale ? (
                   <form onSubmit={handleSubmitProductToCart}>
                     {variants.length > 1 && (
@@ -356,20 +359,21 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({
                         />
                       </div>
                     </Holder>
-
-                    <StyledProductButton type="submit" className="mr-2">
-                      Vložiť do košíka
-                    </StyledProductButton>
-
-                    {subCategory.forGiftCard && (
-                      <StyledProductButton
-                        type="button"
-                        style={{ marginRight: '8px' }}
-                        onClick={handleAddProductToGiftCard}
-                      >
-                        Vytvoriť poukážku
+                    <ButtonsHolder>
+                      <StyledProductButton type="submit" className="mr-2">
+                        Vložiť do košíka
                       </StyledProductButton>
-                    )}
+
+                      {subCategory.forGiftCard && (
+                        <StyledProductSecondaryButton
+                          type="button"
+                          style={{ marginRight: '8px' }}
+                          onClick={handleAddProductToGiftCard}
+                        >
+                          Vytvoriť poukážku
+                        </StyledProductSecondaryButton>
+                      )}
+                    </ButtonsHolder>
                   </form>
                 ) : (
                   <>
@@ -389,26 +393,28 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({
                         </VariantsSelect>
                       </div>
                     )}
-
-                    {subCategory.forGiftCard && (
-                      <StyledProductButton
-                        style={{ marginRight: '8px' }}
-                        onClick={handleAddProductToGiftCard}
+                    <ButtonsHolder>
+                      <Link
+                        href={{
+                          pathname: `/rezervacia`,
+                          query: { service: title },
+                        }}
                       >
-                        Vytvoriť poukážku
-                      </StyledProductButton>
-                    )}
-                    <Link
-                      href={{
-                        pathname: `/rezervacia`,
-                        query: { service: title },
-                      }}
-                    >
-                      <StyledProductButton>Rezervovať</StyledProductButton>
-                    </Link>
+                        <StyledProductButton style={{ marginRight: '8px' }}>
+                          Rezervovať
+                        </StyledProductButton>
+                      </Link>
+                      {subCategory.forGiftCard && (
+                        <StyledProductSecondaryButton
+                          onClick={handleAddProductToGiftCard}
+                        >
+                          Vytvoriť poukážku
+                        </StyledProductSecondaryButton>
+                      )}
+                    </ButtonsHolder>
                   </>
                 )}
-              </ButtonsHolder>
+              </>
               <DescriptionEl variant={variants[activeVariant]} />
             </DetailInfo>
           </Col>

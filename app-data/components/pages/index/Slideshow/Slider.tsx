@@ -66,7 +66,10 @@ const StyledArrowPrev = styled(Chevron)`
   right: 64px;
   left: auto;
   box-shadow: 3px 7px 20px 0px #00aeef61;
-
+  transition: transform 0.3s ease-out;
+  &:hover {
+    transform: scale(1.1);
+  }
   &:before {
     left: 2px;
     transform: rotate(-135deg);
@@ -76,6 +79,10 @@ const StyledArrowNext = styled(Chevron)`
   position: absolute;
   right: 0px;
   box-shadow: 3px 7px 20px 0px #00aeef61;
+  transition: transform 0.3s ease-out;
+  &:hover {
+    transform: scale(1.1);
+  }
   &:before {
     right: 2px;
     transform: rotate(45deg);

@@ -172,14 +172,12 @@ const EshopPage = () => {
           <FilterCol lg={3}>
             <CategoriesAside />
           </FilterCol>
-          <Col lg={9} className="my-4">
-            {loading && <ProductsSkeleton />}
-            <Products
-              products={filteredProducts}
-              compareString={compareString}
-              subCategories={subCategoriesDTO}
-            />
-          </Col>
+          <Products
+            loading={loading}
+            products={filteredProducts}
+            compareString={compareString}
+            subCategories={subCategoriesDTO}
+          />
         </Row>
       </Container>
     </Wrapper>

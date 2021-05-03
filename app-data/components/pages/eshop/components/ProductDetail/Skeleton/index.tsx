@@ -3,7 +3,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { Container, Row, Col } from 'reactstrap';
 import {
-  TitleMobile,
   DetailInfo,
   Title,
   Price,
@@ -20,9 +19,6 @@ const ProductDetailSkeleton = () => (
     <Container>
       <Row>
         <Col md="6">
-          <TitleMobile className="mb-3">
-            <Skeleton />
-          </TitleMobile>
           <StyledSkeleton variant="rect" className="w-100" height={0} />
         </Col>
         <Col md="6">

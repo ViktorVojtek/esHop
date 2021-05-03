@@ -72,7 +72,7 @@ const MyApp = (props) => {
             <Style />
             {/*Production: 6LcS98QZAAAAAG6FfstRw_BF7BwFknxp-e-0Ra6-*/}
             {/*Local: 6LfgFeEZAAAAAD2fNYXGUjpI_Yu1c65XODYxgoyY*/}
-            <GoogleReCaptchaProvider reCaptchaKey="6LfgFeEZAAAAAD2fNYXGUjpI_Yu1c65XODYxgoyY">
+            <GoogleReCaptchaProvider reCaptchaKey="6LcS98QZAAAAAG6FfstRw_BF7BwFknxp-e-0Ra6-">
               <SnackbarProvider
                 maxSnack={3}
                 anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}

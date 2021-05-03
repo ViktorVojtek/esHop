@@ -108,7 +108,7 @@ const ProductUIItem = forwardRef<
 
   const toggleModal = () => setModal(!modal);
   return (
-    <StyledCol lg={4} md={6} sm={12}>
+    <StyledCol lg={4} sm={6} xs={12}>
       <ProductUI
         product={product}
         subCategoryObject={subCategoryObject}
@@ -137,11 +137,7 @@ const ProductsFill: React.FC<IProductsFillProps> = ({
     );
   });
 
-  return (
-    <Container>
-      <Row>{elements}</Row>
-    </Container>
-  );
+  return <Row>{elements}</Row>;
 };
 
 export default ProductsFill;

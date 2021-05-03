@@ -1,23 +1,15 @@
 import styled from 'styled-components';
+import { colors } from '../../../../shared/design';
 
 export const H1 = styled.h1`
-  color: white;
-  text-align: center;
-  font-size: 64px;
-  text-transform: uppercase;
-  font-weight: bold;
-  margin: 0;
-  letter-spacing: 4px;
-  font-family: Franchise-CE;
-  position: absolute;
-  @media(max-width: 768px){
-    font-size: 42px;
-  }
+font-weight: 700;
+font-size: 2.5rem;
+margin-bottom: 36px;
 }
 `;
 
 export const H2 = styled.h4`
-  color: #a4a2a3;
+  color: ${colors.text};
   text-transform: uppercase;
   font-size: 1.25rem;
   font-weight: bold;
@@ -87,8 +79,8 @@ export const Circle = styled.div`
 export const Card = styled.div`
   position: relative;
   transition: box-shadow 0.3s;
-  border: 1px solid #cecece;
-  border-radius: 4px;
+  border: 2px solid ${colors.primaryLight};
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -97,12 +89,6 @@ export const Card = styled.div`
   position: relative;
   background-color: white;
   height: 100%;
-  &:hover {
-    box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
-    ${Circle} {
-      transform: scale(1.2);
-    }
-  }
 `;
 
 export const ImgHolder = styled.div`

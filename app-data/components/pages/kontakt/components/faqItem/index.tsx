@@ -2,6 +2,7 @@ import React, { useState, FC } from 'react';
 import styled from 'styled-components';
 import { Collapse } from 'reactstrap';
 import { ChevronDown } from '@styled-icons/boxicons-regular';
+import { colors } from '../../../../../shared/design';
 
 type IFaqItem = {
   question: string;
@@ -43,13 +44,14 @@ const H5 = styled.h5`
   color: #01aeef;
   font-size: 1.15rem;
   margin: 0;
+  font-weight: 600;
   @media (max-width: 768px) {
     text-align: left;
   }
 `;
 const Holder = styled.div`
   margin-bottom: 1rem;
-  border: 1px solid #cecece;
+  border: 2px solid ${colors.primaryLight};
   border-radius: 4px;
   transition: box-shadow 0.3s;
   cursor: pointer;
