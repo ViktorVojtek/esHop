@@ -23,6 +23,8 @@ import { PRODUCTS_QUERY } from '../../../../../graphql/query';
 import { Context } from '../../../../../lib/state/Store';
 import RelatedProducts from '../../../../../shared/components/RelatedProducts';
 import RelatedProductSkeleton from '../../../../../shared/components/RelatedProducts/Skeleton';
+import { VariantModal } from '../../../../../shared/components/VariantModal';
+import { VariantSelect } from '../../../../../shared/components/VariantSelect';
 import {
   Button,
   ProductButton,
@@ -150,6 +152,7 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({
   const [products, setProducts] = useState([]);
   const [subCategories, setSubCategories] = useState([]);
   const [modal, setModal] = useState(false);
+  const [variantDialog, setVariantDialog] = useState(false);
   const { dispatch } = useContext(Context);
 
   const { error, loading, data } = useQuery(PRODUCTS_QUERY, {
@@ -175,6 +178,7 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({
   };
   const handleSetActiveVariant: (i: number) => void = (i) => {
     setActiveVariant(i);
+    setVariantDialog(false);
   };
 
   const handleAddProductToCart: (data: IProductToCartData) => void = (data) => {
@@ -267,12 +271,6 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({
     toggleModal();
   };
 
-  const variantOptions: JSX.Element[] = variants.map(({ title }) => (
-    <VariantOption key={title} value={title}>
-      {title}
-    </VariantOption>
-  ));
-
   return (
     <Wrapper>
       <Container>
@@ -332,19 +330,10 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({
                   <form onSubmit={handleSubmitProductToCart}>
                     {variants.length > 1 && (
                       <>
-                        <VariantsSelect
-                          id="variants"
-                          name="variants"
-                          className="mt-2"
-                          onChange={(event: ChangeEvent<HTMLSelectElement>) => {
-                            const idx: number =
-                              event.currentTarget.selectedIndex;
-
-                            handleSetActiveVariant(idx);
-                          }}
-                        >
-                          {variantOptions}
-                        </VariantsSelect>
+                        <VariantSelect
+                          title={variants[activeVariant].title}
+                          onClick={setVariantDialog}
+                        />
                       </>
                     )}
                     <Holder>
@@ -379,18 +368,10 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({
                   <>
                     {variants.length > 1 && (
                       <div className="w-100 mt-2">
-                        <VariantsSelect
-                          id="variants"
-                          name="variants"
-                          onChange={(event: ChangeEvent<HTMLSelectElement>) => {
-                            const idx: number =
-                              event.currentTarget.selectedIndex;
-
-                            handleSetActiveVariant(idx);
-                          }}
-                        >
-                          {variantOptions}
-                        </VariantsSelect>
+                        <VariantSelect
+                          title={variants[activeVariant].title}
+                          onClick={setVariantDialog}
+                        />
                       </div>
                     )}
                     <ButtonsHolder>
@@ -518,6 +499,12 @@ const ProductDetailBody: React.FC<IProductDetailProps> = ({
             </Link>
           </ModalFooter>
         </Modal>
+        <VariantModal
+          isOpen={variantDialog}
+          setIsOpen={setVariantDialog}
+          variants={variants}
+          onClick={handleSetActiveVariant}
+        />
       </div>
     </Wrapper>
   );
