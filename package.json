@@ -59,7 +59,7 @@
     "jsonwebtoken": "^8.5.1",
     "mauerwerk": "^2.0.2",
     "mongoose": "^5.9.5",
-    "next": "^9.3.1",
+    "next": "^11.1.0",
     "next-cookies": "^2.0.3",
     "next-with-apollo": "^4.3.0",
     "node-fetch": "^2.6.1",
