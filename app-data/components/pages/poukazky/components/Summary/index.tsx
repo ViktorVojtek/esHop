@@ -94,6 +94,7 @@ const Summary: FC<IProductToCartData> = ({ formData }) => {
           }
           e.variants.map((variant) => {
             if (service.variantTitle === variant.title) {
+              service.discount = variant.discount;
               if (service.price !== variant.price.value) {
                 service.price = variant.price.value;
               }
@@ -103,7 +104,18 @@ const Summary: FC<IProductToCartData> = ({ formData }) => {
       });
     });
     for (let i = 0; i < formData.services.length; i++) {
-      price += formData.services[i].price * formData.services[i].count;
+      if (formData.services[i].discount && formData.services[i].discount > 0) {
+        price +=
+          formData.services[i].count *
+          (formData.services[i].price -
+            formData.services[i].price * (formData.services[i].discount / 100));
+        formData.services[i].price =
+          formData.services[i].count *
+          (formData.services[i].price -
+            formData.services[i].price * (formData.services[i].discount / 100));
+      } else {
+        price += formData.services[i].price * formData.services[i].count;
+      }
     }
     price = price + formData.priceValue;
     formData.totalPrice = price;

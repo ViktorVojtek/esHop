@@ -54,6 +54,7 @@ type ServiceData = {
   id: string;
   variantTitle: string;
   variantNumber: number;
+  discount: number;
 };
 
 export type IGiftCardData = {
@@ -393,7 +394,7 @@ export default function GiftCardStepper() {
               </List>
               <ModalTextSmall>Cena vrátane DPH 20%</ModalTextSmall>
               <ModalTextBigger>
-                Cena spolu: <span>{formData.totalPrice}</span>
+                Cena spolu: <span>{formatPrice(formData.totalPrice)} €</span>
               </ModalTextBigger>
             </ModalProductInfo>
           </StyledModalBody>

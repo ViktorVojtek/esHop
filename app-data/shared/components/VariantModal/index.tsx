@@ -7,6 +7,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { ProductVariant } from '../../types/Product.types';
 import styled from 'styled-components';
+import { formatPrice } from '../../helpers/formatters';
+import { colors } from '../../design';
 
 type VariantModalProps = {
   variants: ProductVariant[];
@@ -49,10 +51,30 @@ export const VariantModal = (props: VariantModalProps) => {
           <Container className="mt-4">
             <Row>
               {variants.map((variant, index) => (
-                <StyledCol md={6} sm={12} key={index}>
+                <StyledCol md={4} sm={12} key={index}>
                   <Item onClick={() => onClick(index)}>
                     <Image src={variant.images[0].path} alt="Variant image" />
                     <Title>{variant.title}</Title>
+                    {variant.discount > 0 ? (
+                      <Price style={{ marginBottom: '.25rem' }}>
+                        <Del>
+                          {formatPrice(variant.price.value)}{' '}
+                          {variant.price.currency}
+                        </Del>
+                        <ActionPrice className="ml-2">
+                          {formatPrice(
+                            variant.price.value -
+                              (variant.price.value * variant.discount) / 100
+                          )}{' '}
+                          {variant.price.currency}
+                        </ActionPrice>
+                      </Price>
+                    ) : (
+                      <Price>
+                        {formatPrice(variant.price.value)}{' '}
+                        {variant.price.currency}
+                      </Price>
+                    )}
                   </Item>
                 </StyledCol>
               ))}
@@ -111,4 +133,17 @@ const Title = styled.h2`
   font-size: 1rem;
   font-weight: bold;
   margin-top: 24px;
+`;
+
+export const Price = styled.p`
+  margin: 1rem 0rem;
+  font-weight: 600;
+  font-size: 1.25rem;
+  text-align: center;
+`;
+export const ActionPrice = styled.span`
+  color: ${colors.primary};
+`;
+export const Del = styled.del`
+  font-size: 1.25rem;
 `;

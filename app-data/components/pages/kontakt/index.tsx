@@ -95,6 +95,7 @@ const KontaktPage = () => (
               <img style={{ width: '40px' }} src="/icons/phone.svg" />
             </Circle>
             <H2 className="w-100">Kontakt</H2>
+            <p className="mt-2 mb-2">Informácie eshop</p>
             <div className="mt-4">
               <P>Červený Kláštor 147</P>
               <P>059 06 Červený Kláštor</P>
@@ -115,6 +116,7 @@ const KontaktPage = () => (
               <img style={{ width: '40px' }} src="/icons/rezervation.svg" />
             </Circle>
             <H2 className="w-100">Rezervácie</H2>
+            <p className="mt-2 mb-2">Informácie o pobytoch</p>
             <div className="mt-4">
               <P>Červený Kláštor 147</P>
               <P>059 06 Červený Kláštor</P>
@@ -137,6 +139,7 @@ const KontaktPage = () => (
               <img style={{ width: '40px' }} src="/icons/place.svg" />
             </Circle>
             <H2 className="w-100">Odberné miesto</H2>
+            <p className="mt-2 mb-2">Adresa vyzdvihnutia</p>
             <div className="mt-4">
               <P>Cestovná agentúra DJK Tour</P>
               <P>Popradská 6, 064 01 Stará Ľubovňa</P>

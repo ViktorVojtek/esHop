@@ -86,34 +86,22 @@ const ReservationForm: FC = () => {
                   alebo využite kontaktný formulár.
                 </P>
               </Col>
-              <Col md={6} xs={12}>
+              <Col md={12} xs={12}>
                 <Item elevation={3}>
                   <PhoneIcon />
                   <ContactItemCol
-                    tel="+421 911 338 828"
+                    tel="+421 914 338 829"
                     title="Infolinka rezervácie"
                   />
                 </Item>
               </Col>
-              <Col md={6} xs={12}>
+              <Col md={12} xs={12}>
                 <Item elevation={3}>
                   <EnvelopeIcon />
                   <ContactItemCol
-                    email="eshop@kupelecks.sk "
-                    title="eshop@kupelecks.sk "
+                    email="rezervacie@kupelecks.sk "
+                    title="rezervacie@kupelecks.sk "
                   />
-                </Item>
-              </Col>
-              <Col md={6} xs={12}>
-                <Item elevation={3}>
-                  <WhatsappIcon />
-                  <ContactItemCol tel="+421 911 338 828" title="Whatsapp" />
-                </Item>
-              </Col>
-              <Col md={6} xs={12}>
-                <Item elevation={3}>
-                  <ViberIcon />
-                  <ContactItemCol tel="+421 911 338 828" title="Viber" />
                 </Item>
               </Col>
             </Row>
